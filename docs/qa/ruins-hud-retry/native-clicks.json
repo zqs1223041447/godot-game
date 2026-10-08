@@ -1,0 +1,31 @@
+{
+  "display": ":98",
+  "method": "X11 XTest OS mouse events; private display contains only this smoke window",
+  "clicks": [
+    {
+      "case": "normal frames / pause success",
+      "sequence": 1,
+      "x": 505,
+      "y": 420
+    },
+    {
+      "case": "normal frames / death success",
+      "sequence": 2,
+      "x": 187,
+      "y": 331
+    },
+    {
+      "case": "normal frames / failure then retry",
+      "sequence": 3,
+      "x": 505,
+      "y": 420
+    },
+    {
+      "case": "normal frames / failure then retry",
+      "sequence": 4,
+      "x": 505,
+      "y": 420
+    }
+  ],
+  "exit_code": 0
+}

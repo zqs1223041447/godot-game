@@ -1,0 +1,12 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:364)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+godot-game: playable arena ready
+ERROR: normal frames / pause success: Normal HUD process advances countdown across real frames
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/ruins_hud_retry_test.gd:39)
+       [1] show_frames (res://tests/ruins_hud_retry_frames_smoke.gd:47)
+RUINS_HUD_NORMAL_FRAMES checks=42 failures=1 input=Native X11 XTest pointer motion/button press+release at actual control coordinates

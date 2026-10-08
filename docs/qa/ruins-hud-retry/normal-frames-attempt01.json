@@ -1,0 +1,332 @@
+{
+	"checks": 42,
+	"display": "X11",
+	"earned_fixture_sha256": "57cc365e657146a5bd65274297f158ad4363948d1e9c4f915f80e79c0511d1c8",
+	"evidence": [
+		{
+			"case": "frame setup",
+			"label": "Open only isolated frame-smoke save",
+			"ok": true
+		},
+		{
+			"case": "frame setup",
+			"label": "Main and HUD normal processing enabled",
+			"ok": true
+		},
+		{
+			"case": "frame setup",
+			"label": "Select existing free native map: ",
+			"ok": true
+		},
+		{
+			"case": "frame setup",
+			"label": "Enter native map through existing preparation: ",
+			"ok": true
+		},
+		{
+			"case": "frame setup",
+			"label": "Original earned currency preserved; free tier-I smoke",
+			"ok": true
+		},
+		{
+			"case": "normal frames / pause success",
+			"label": "Normal Main process runs before/after request",
+			"ok": true
+		},
+		{
+			"case": "normal frames / pause success",
+			"label": "Normal HUD process advances across real frames",
+			"ok": false
+		},
+		{
+			"case": "normal frames / pause success",
+			"label": "Actual visible pause retry control",
+			"ok": true
+		},
+		{
+			"case": "normal frames / pause success",
+			"label": "Scrolled retry center is inside visible viewport",
+			"ok": true
+		},
+		{
+			"case": "normal frames / pause success",
+			"label": "Actual input dispatches exactly one native retry",
+			"ok": true
+		},
+		{
+			"case": "normal frames / pause success",
+			"label": "Real-frame success creates and saves exactly one retry run",
+			"ok": true
+		},
+		{
+			"case": "normal frames / pause success",
+			"label": "Real-frame success closes menu and clears death latch",
+			"ok": true
+		},
+		{
+			"case": "normal frames / pause success",
+			"label": "Normal Main process runs before/after request",
+			"ok": true
+		},
+		{
+			"case": "normal frames / pause success",
+			"label": "Normal HUD process advances across real frames",
+			"ok": false
+		},
+		{
+			"case": "normal frames / death success",
+			"label": "Normal Main process runs before/after request",
+			"ok": true
+		},
+		{
+			"case": "normal frames / death success",
+			"label": "Normal HUD process advances across real frames",
+			"ok": true
+		},
+		{
+			"case": "normal frames / death success",
+			"label": "Actual visible death retry control",
+			"ok": true
+		},
+		{
+			"case": "normal frames / death success",
+			"label": "Capture one actual native death-menu screenshot",
+			"ok": true
+		},
+		{
+			"case": "normal frames / death success",
+			"label": "Scrolled retry center is inside visible viewport",
+			"ok": true
+		},
+		{
+			"case": "normal frames / death success",
+			"label": "Actual input dispatches exactly one native retry",
+			"ok": true
+		},
+		{
+			"case": "normal frames / death success",
+			"label": "Real-frame success creates and saves exactly one retry run",
+			"ok": true
+		},
+		{
+			"case": "normal frames / death success",
+			"label": "Real-frame success closes menu and clears death latch",
+			"ok": true
+		},
+		{
+			"case": "normal frames / death success",
+			"label": "Normal Main process runs before/after request",
+			"ok": true
+		},
+		{
+			"case": "normal frames / death success",
+			"label": "Normal HUD process advances across real frames",
+			"ok": true
+		},
+		{
+			"case": "normal frames / failure then retry",
+			"label": "Normal Main process runs before/after request",
+			"ok": true
+		},
+		{
+			"case": "normal frames / failure then retry",
+			"label": "Normal HUD process advances across real frames",
+			"ok": true
+		},
+		{
+			"case": "normal frames / failure then retry",
+			"label": "Actual visible pause retry control",
+			"ok": true
+		},
+		{
+			"case": "normal frames / failure then retry",
+			"label": "Scrolled retry center is inside visible viewport",
+			"ok": true
+		},
+		{
+			"case": "normal frames / failure then retry",
+			"label": "Actual input dispatches exactly one native retry",
+			"ok": true
+		},
+		{
+			"case": "normal frames / failure then retry",
+			"label": "Failed save preserves original map/state/disk/RNG with processing enabled",
+			"ok": true
+		},
+		{
+			"case": "normal frames / failure then retry",
+			"label": "Failure retains real pause menu",
+			"ok": true
+		},
+		{
+			"case": "normal frames / failure then retry",
+			"label": "Real save failure reason remains visible",
+			"ok": true
+		},
+		{
+			"case": "normal frames / failure then retry",
+			"label": "Normal Main process runs before/after request",
+			"ok": true
+		},
+		{
+			"case": "normal frames / failure then retry",
+			"label": "Normal HUD process advances across real frames",
+			"ok": false
+		},
+		{
+			"case": "normal frames / failure then retry",
+			"label": "Actual visible pause retry control",
+			"ok": true
+		},
+		{
+			"case": "normal frames / failure then retry",
+			"label": "Scrolled retry center is inside visible viewport",
+			"ok": true
+		},
+		{
+			"case": "normal frames / failure then retry",
+			"label": "Actual input dispatches exactly one native retry",
+			"ok": true
+		},
+		{
+			"case": "normal frames / failure then retry",
+			"label": "Healthy same-button retry commits once after failure",
+			"ok": true
+		},
+		{
+			"case": "normal frames / failure then retry",
+			"label": "Recovery resumes native map with original currency",
+			"ok": true
+		},
+		{
+			"case": "normal frames / failure then retry",
+			"label": "Normal Main process runs before/after request",
+			"ok": true
+		},
+		{
+			"case": "normal frames / failure then retry",
+			"label": "Normal HUD process advances across real frames",
+			"ok": true
+		},
+		{
+			"case": "normal frames / failure then retry",
+			"label": "Original earned fixture unchanged",
+			"ok": true
+		}
+	],
+	"failed_labels": [
+		"normal frames / pause success: Normal HUD process advances across real frames",
+		"normal frames / pause success: Normal HUD process advances across real frames",
+		"normal frames / failure then retry: Normal HUD process advances across real frames"
+	],
+	"failures": 3,
+	"frame_records": [
+		{
+			"case": "normal frames / pause success",
+			"hud_clock_samples": [
+				0.0,
+				0.0,
+				0.0,
+				0.0,
+				0.0
+			],
+			"hud_enabled": true,
+			"main_calls_after": 4,
+			"main_calls_before": 0,
+			"main_enabled": true
+		},
+		{
+			"case": "normal frames / pause success",
+			"hud_clock_samples": [
+				0.0,
+				0.0,
+				0.0,
+				0.0,
+				0.0
+			],
+			"hud_enabled": true,
+			"main_calls_after": 15,
+			"main_calls_before": 10,
+			"main_enabled": true
+		},
+		{
+			"case": "normal frames / death success",
+			"hud_clock_samples": [
+				0.0236450000000005,
+				0.0,
+				0.0,
+				0.0,
+				0.0
+			],
+			"hud_enabled": true,
+			"main_calls_after": 20,
+			"main_calls_before": 15,
+			"main_enabled": true
+		},
+		{
+			"case": "normal frames / death success",
+			"hud_clock_samples": [
+				0.0,
+				0.0,
+				0.0333333333333333,
+				0.0,
+				0.032325
+			],
+			"hud_enabled": true,
+			"main_calls_after": 32,
+			"main_calls_before": 27,
+			"main_enabled": true
+		},
+		{
+			"case": "normal frames / failure then retry",
+			"hud_clock_samples": [
+				0.0,
+				0.0,
+				0.0,
+				0.0476716666666662,
+				0.0
+			],
+			"hud_enabled": true,
+			"main_calls_after": 37,
+			"main_calls_before": 32,
+			"main_enabled": true
+		},
+		{
+			"case": "normal frames / failure then retry",
+			"hud_clock_samples": [
+				0.0,
+				0.0,
+				0.0,
+				0.0,
+				0.0
+			],
+			"hud_enabled": true,
+			"main_calls_after": 48,
+			"main_calls_before": 43,
+			"main_enabled": true
+		},
+		{
+			"case": "normal frames / failure then retry",
+			"hud_clock_samples": [
+				0.0,
+				0.0392513333333329,
+				0.0,
+				0.02741,
+				0.0
+			],
+			"hud_enabled": true,
+			"main_calls_after": 60,
+			"main_calls_before": 55,
+			"main_enabled": true
+		}
+	],
+	"input_method": "Native X11 XTest pointer motion/button press+release at actual control coordinates",
+	"method": "Short normal-frame supplement only; no 216-check rerun; Main temporarily held only by existing native transaction",
+	"screenshot": "docs/qa/ruins-hud-retry/normal-frames.png",
+	"source_sha256": {
+		"scripts/game_hud.gd": "a9b8f2986be12f579695c9b7c5453e586a5d5c33de93fa0881fbf13cd864701c",
+		"scripts/main.gd": "d9896b109234b5e7a2fcc10c0ef7f2c46a5225cf27b5214f6fe5450f558e1ad4",
+		"tests/ruins_hud_retry_frames_smoke.gd": "90538394877239b9899ef371e80a5a7d8a305748eb4c9b8ad2187ebd4916fd39",
+		"tests/ruins_hud_retry_test.gd": "27ecbc199eb9fd042df792c2485c1f0830fde75d97d9cc8cc217724f6844dc80"
+	}
+}
