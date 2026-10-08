@@ -2796,6 +2796,17 @@ func map_options()->Dictionary:
 		for id:String in MapCatalog.MAPS:options.tiers.append_array(NormalMaps.tiers(id,int(completed[id])))
 		options.cost_policy={"id":"normal_shards_v1","enabled":true,"label":"入图消耗背包校准碎片","affects_legacy_currency":true}
 	return options
+## Pure control preview; admission and pricing remain in the existing transactions.
+func map_modifier_availability(map_id: Variant, tier: Variant) -> Dictionary:
+	var testing := _is_test_profile()
+	var base: Dictionary = MapCompiler.compile(map_id, [], []) if testing else MapCompiler.compile_normal(map_id, tier, [], [])
+	if not base.ok: return base
+	var rows: Array[Dictionary] = []
+	for id: String in MapCatalog.SPECIAL:
+		var compiled: Dictionary = MapCompiler.compile(map_id, [], [id]) if testing else MapCompiler.compile_normal(map_id, tier, [], [id])
+		rows.append({"id": id, "name": MapCatalog.SPECIAL[id].name, "minimum_wave": MapCatalog.SPECIAL[id].minimum_wave,
+			"available": compiled.ok, "reason": compiled.reason})
+	return {"ok": true, "reason": "", "wave": base.profile.wave, "special_modifiers": rows}
 func _normal_start_reason()->String:
 	if _is_test_profile():return ""
 	var journey:Dictionary=state.normal_journey()

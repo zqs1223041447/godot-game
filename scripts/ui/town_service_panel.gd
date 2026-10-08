@@ -36,6 +36,11 @@ var _normal := {}
 var _special := {}
 var _map_summary: Label
 var _map_launch: Button
+var _map_prepare: Button
+var _map_gate_status: Label
+var _map_gate_cancel: Button
+var _map_gate_reason := ""
+var _map_ineligible_selected: Array[String] = []
 var _map_selection_dirty := false
 var _map_status_queued := false
 var _map_prepared_revision := -1
@@ -186,6 +191,7 @@ func _queue_map_status_refresh() -> void:
 func _refresh_map_status() -> void:
 	_map_status_queued = false
 	if not is_visible_in_tree() or _service != "map_device" or not is_instance_valid(_map_summary) or not is_instance_valid(_map_launch): return
+	_update_map_modifier_gates()
 	var draft: Dictionary = arena.map_draft()
 	if _map_selection_dirty:
 		_map_summary.text = "配置已更改 · 请准备地图"
@@ -195,11 +201,12 @@ func _refresh_map_status() -> void:
 			_map_summary.text += "\n入场 %d 校准碎片 · 完成奖励 %d" % [int(draft.get("cost", 0)), int(draft.get("completion_reward", 0))]
 			if not str(draft.get("reason", "")).is_empty(): _map_summary.text += "\n" + str(draft.reason)
 	# Currency updates never prepare changed controls or adopt an external draft.
-	_map_launch.disabled = _map_launch_pending or _map_selection_dirty or int(draft.revision) != _map_prepared_revision or not bool(draft.get("can_start", draft.valid))
+	_map_launch.disabled = _map_launch_pending or _map_selection_dirty or not _map_gate_reason.is_empty() or int(draft.revision) != _map_prepared_revision or not bool(draft.get("can_start", draft.valid))
 
 func _mark_map_selection_dirty() -> void:
 	arena.cancel_map_preparation()
 	_map_selection_dirty = true
+	_update_map_modifier_gates()
 	if is_instance_valid(_map_launch): _map_launch.disabled = true
 	_queue_map_status_refresh()
 
@@ -224,6 +231,11 @@ func open_service(id: String = "") -> void:
 func _clear() -> void:
 	_map_summary = null
 	_map_launch = null
+	_map_prepare = null
+	_map_gate_status = null
+	_map_gate_cancel = null
+	_map_gate_reason = ""
+	_map_ineligible_selected.clear()
 	_map_selection_dirty = false
 	_map_prepared_revision = -1
 	for child in _content.get_children():
@@ -345,10 +357,18 @@ func _build_map() -> void:
 			var check := CheckBox.new()
 			check.text = str(entry.name)
 			check.tooltip_text = str(entry.description)
+			if group == "special_modifiers": check.set_meta("gate_description", check.tooltip_text)
 			check.button_pressed = str(entry.id) in (draft.normal_ids if group == "normal_modifiers" else draft.special_ids)
 			_content.add_child(check)
 			if group == "normal_modifiers": _normal[str(entry.id)] = check
 			else: _special[str(entry.id)] = check
+	_map_gate_status = Label.new()
+	_map_gate_status.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_content.add_child(_map_gate_status)
+	_map_gate_cancel = Button.new()
+	_map_gate_cancel.text = "取消不适用的词缀选择"
+	_map_gate_cancel.pressed.connect(_cancel_ineligible_map_modifiers)
+	_content.add_child(_map_gate_cancel)
 	var summary := Label.new()
 	_map_summary = summary
 	_map_selection_dirty = false
@@ -360,6 +380,7 @@ func _build_map() -> void:
 	summary.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_content.add_child(summary)
 	var craft := Button.new()
+	_map_prepare = craft
 	craft.text = "制作地图 · 测试免费" if bool(arena.world_context().get("test_mode", false)) else "准备地图"
 	craft.pressed.connect(_craft_map)
 	_content.add_child(craft)
@@ -376,9 +397,45 @@ func _build_map() -> void:
 	_tier_select.item_selected.connect(func(_index: int): _mark_map_selection_dirty())
 	for check: CheckBox in _normal.values()+_special.values():
 		check.toggled.connect(func(_value: bool): _mark_map_selection_dirty())
+	_update_map_modifier_gates()
+
+func _update_map_modifier_gates() -> void:
+	if not is_instance_valid(_map_prepare) or not is_instance_valid(_map_select): return
+	var tier: int = int(_tier_select.get_selected_metadata()) if _tier_select.item_count > 0 else 1
+	var preview: Dictionary = arena.map_modifier_availability(str(_map_select.get_selected_metadata()), tier)
+	_map_ineligible_selected.clear()
+	_map_gate_reason = ""
+	if not preview.ok:
+		_map_gate_reason = str(preview.reason)
+		_map_gate_status.text = _map_gate_reason
+	else:
+		var invalid: PackedStringArray = []
+		for entry: Dictionary in preview.special_modifiers:
+			var check: CheckBox = _special[str(entry.id)]
+			check.disabled = not bool(entry.available)
+			check.text = "%s · 需要波次 %d%s" % [entry.name, int(entry.minimum_wave), "" if entry.available else " · 当前不可用"]
+			check.tooltip_text = str(check.get_meta("gate_description"))
+			check.tooltip_text += "\n需要波次 %d，当前波次 %d。" % [int(entry.minimum_wave), int(preview.wave)]
+			if not entry.available and check.button_pressed:
+				_map_ineligible_selected.append(str(entry.id))
+				invalid.append("%s（需要波次 %d）" % [entry.name, int(entry.minimum_wave)])
+		_map_gate_status.text = "当前挑战波次 %d" % int(preview.wave)
+		if not invalid.is_empty():
+			_map_gate_reason = "已选词缀不适用：%s。请提高档位、切换地图或取消不适用的选择后再准备。" % "、".join(invalid)
+			_map_gate_status.text += "\n" + _map_gate_reason
+	_map_gate_cancel.visible = not _map_ineligible_selected.is_empty()
+	_map_prepare.disabled = not _map_gate_reason.is_empty()
+	if not _map_gate_reason.is_empty(): _map_launch.disabled = true
+
+func _cancel_ineligible_map_modifiers() -> void:
+	# Only an explicit user action removes a retained, now-ineligible selection.
+	for id: String in _map_ineligible_selected.duplicate():
+		_special[id].button_pressed = false
 
 func _launch_map(revision: int) -> void:
 	if _map_launch_pending: return
+	_update_map_modifier_gates()
+	if _map_selection_dirty or not _map_gate_reason.is_empty(): return
 	_map_launch_pending = true
 	_map_launch.disabled = true
 	_map_launch.text = "准备地形…"
@@ -406,6 +463,10 @@ func _update_tiers(options: Dictionary, selected: int) -> void:
 		if int(entry.tier) == selected: _tier_select.select(index)
 
 func _craft_map() -> void:
+	_update_map_modifier_gates()
+	if not _map_gate_reason.is_empty():
+		_result({"ok": false, "reason": _map_gate_reason})
+		return
 	var normals: Array = []
 	var specials: Array = []
 	for id: String in _normal:
