@@ -138,6 +138,7 @@ func run() -> void:
 	check(lawful_roots and arena.ARENA.size == Vector2(3600, 2400) and arena.world_geometry().bounds == arena.ARENA,
 		"All 25 original root IDs, authored positions and standard spawn records occupy authoritative map geometry")
 	var layer: Node2D = arena.retained_actors
+	check(layer.set_hero_presentation({}).ok, "Explicit legacy selection clears the configured Main default before swap coverage")
 	layer.sync(arena)
 	var hero: Node2D = layer._hero
 	if not check(is_instance_valid(hero) and hero.position == arena.player_pos and hero.get_parent() == arena.world_depth
@@ -271,16 +272,18 @@ func run() -> void:
 		await finish()
 		return
 	pause_main()
-	check(layer._hero_presentation.is_empty() and layer._actors.is_empty() and arena.enemies.is_empty()
+	var default_definition: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(arena.DEFAULT_HERO_PRESENTATION_PATH))
+	var default_entry: Dictionary = Catalog.prepare_presentation(default_definition).entry
+	check(layer._hero_presentation.texture == default_entry.texture and layer._actors.is_empty() and arena.enemies.is_empty()
 		and arena.map_spawn_records().is_empty() and arena.world_context().normal_town,
-		"Map reset releases the layer's temporary selection together with the departed roster")
+		"Map reset replaces the temporary study with Main's default and releases the departed roster")
 	layer.sync(arena)
 	await process_frame
 	await process_frame
-	check(previous_hero.get_ref() == null and layer._hero._hero_presentation.is_empty() and layer._hero.atlas == legacy
-		and layer.hero_presentation_bounds() == legacy_bounds and arena.get_instance_id() == main_id
+	check(previous_hero.get_ref() == null and layer._hero.atlas.texture == default_entry.texture
+		and layer.hero_presentation_bounds() == default_entry.visual_bounds and arena.get_instance_id() == main_id
 		and not FileAccess.file_exists(arena.TOWN_TEST_BUILD_PATH),
-		"Town rebuild releases the old custom hero and uses legacy without creating a test profile or another Main")
+		"Town rebuild releases the old custom hero and uses Main's default without creating a test profile or another Main")
 	await finish()
 
 func finish() -> void:

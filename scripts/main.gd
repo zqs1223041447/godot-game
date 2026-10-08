@@ -7,6 +7,8 @@ const SpatialTargets = preload("res://scripts/combat/spatial_target_index.gd")
 const VisualCueRuntime = preload("res://scripts/visuals/combat_cues.gd")
 const Visuals = preload("res://scripts/visuals/arena_visuals.gd")
 const RetainedActors = preload("res://scripts/visuals/retained_actor_layer.gd")
+const DEFAULT_HERO_PRESENTATION_PATH := "res://assets/actors/ranger_v126.json"
+var _default_hero_presentation_definition: Dictionary = {}
 const ForegroundLayer = preload("res://scripts/visuals/foreground_arena_layer.gd")
 var world_depth: Node2D
 var dimensional_props: RefCounted
@@ -241,6 +243,19 @@ func _ready() -> void:
 	print("godot-game: playable arena ready")
 
 
+func _apply_default_hero_presentation() -> void:
+	# Code-only default. An empty path or unavailable/invalid asset keeps the
+	# original catalog hero; neither character saves nor game rules consult it.
+	if DEFAULT_HERO_PRESENTATION_PATH.is_empty(): return
+	if _default_hero_presentation_definition.is_empty():
+		if not FileAccess.file_exists(DEFAULT_HERO_PRESENTATION_PATH): return
+		var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(DEFAULT_HERO_PRESENTATION_PATH))
+		if not parsed is Dictionary: return
+		_default_hero_presentation_definition = parsed
+	var selected: Dictionary = retained_actors.set_hero_presentation(_default_hero_presentation_definition)
+	if not selected.ok: push_warning("Default hero presentation unavailable: " + str(selected.reason))
+
+
 func _configure_input() -> void:
 	var bindings := {
 		"move_left": [KEY_A, KEY_LEFT], "move_right": [KEY_D, KEY_RIGHT],
@@ -442,7 +457,9 @@ func restart_run(camp_plan: Dictionary = {}) -> void:
 	player_pos = Vector2(_camp_landmarks.entry) if _world_mode=="map" else ARENA.get_center()
 	player_facing = Vector2.RIGHT
 	enemies.clear()
-	if is_instance_valid(retained_actors): retained_actors.clear()
+	if is_instance_valid(retained_actors):
+		retained_actors.clear()
+		_apply_default_hero_presentation()
 	projectile_runtime.cancel_all(projectiles)
 	combat_trace.clear()
 	damage_trace.clear()
