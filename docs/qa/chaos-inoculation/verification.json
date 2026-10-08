@@ -1,0 +1,43 @@
+{
+  "baseline": "c74596e5a268000a4988d779c5517f712b55afe2",
+  "schema": 59,
+  "results": [
+    {
+      "name": "mechanism-03",
+      "checks": 111,
+      "failures": 0,
+      "timeout_seconds": 45
+    },
+    {
+      "name": "migration-03",
+      "checks": 77,
+      "failures": 0,
+      "timeout_seconds": 45
+    }
+  ],
+  "scope": "CI mechanism and adjacent frozen migration only; isolated legal fixtures, no full scenario matrix, model work or game export",
+  "delivery_sha256": {
+    "docs/reference/catalog.json": "9563e4082daf4e58617e4644ad6bfb2f4f24486e3e2685eb529c887c2bd59840",
+    "docs/reference/index.html": "15d34a0c80f238c7daf973398e8028e8e60f2a4e70ae8a95935413e0e890c19f",
+    "docs/reference/source-tree-coverage.json": "267e46c0fb340f0c5870d606155126d7029bedaf392e6e59f39391be2e8d693e",
+    "scripts/canonical_game_state.gd": "4a104546530eaf98e953800d40901a24ad6a9855fa22fc6ef9d5fb3ada261300",
+    "scripts/main.gd": "1aa5e6a6a46aeb897c7eaadbc0abb056a95fb7ec345df4e30f2b82ac9bdcabb3",
+    "scripts/mechanics/defense_rules.gd": "3d1790c45caa96b0cb4670395506fdedbf789e045113cb46bfc5afa17cd8790b",
+    "scripts/passives/source_stat_patterns.gd": "f0661c70f7b4a5d00ba955bf11916fbdbee13a60462136601de0d209eadfe679",
+    "scripts/passives/source_tree_localization.gd": "56c5919bdab612ba57aeee31858f3f04be4acad66fc4c3ba8e259743cfa439d8",
+    "scripts/passives/source_tree_runtime.gd": "5450c028bd5667c8088f7f0ad3c3390fea164ee3fdf74cfc636acf7d8e97c954",
+    "scripts/save/canonical_build_rules.gd": "63208b6c4c1bfbb34a9103126a16d44ba064bfc7ca339e5834159c2f9bcf03f4",
+    "scripts/save/canonical_build_store.gd": "dfd80d5c238f9eafa48a227e10d5b9d842e7fee20729cd91f925acfef47077fb",
+    "scripts/save/iron_will_migration.gd": "f6cb8952fade606d6474ec0e74775ddbc670aed401d4b616601ac1f5e3e1e879",
+    "tools/build_reference.py": "682f1dc9625d1869e476560ed031b058e457b0047b7f836778987609e74f3c89",
+    "scripts/save/chaos_inoculation_migration.gd": "05450d561990395851d53eb5497a5d3fd91491f76c9079f82626543afd54dc6c",
+    "tests/chaos_inoculation_test.gd": "65606b2514e8428f739bff7328d5eb64357e8785e81b98717a3f5a781587bbc1",
+    "tests/chaos_inoculation_migration_test.gd": "1bedd863c9350946acfdeb75d002bdd7ea976f3754656e2e1c6e4f274095ed25",
+    "tools/chaos_inoculation_reference.gd": "7ce96af7129819a442972668fd9932029d1cb0423be0024bbacfa03681041d94",
+    "tools/merge_chaos_inoculation_reference.py": "db248c935cc920ae3b8110a0f05cfc83aeb20f87ccb6f3f2b5b3d4fde07956bd",
+    "tools/verify_chaos_inoculation_reference.py": "2235c8c8ac53b98d539dbb777c2687b105a01e67e9ae7fb7c003ba471f883e5a",
+    "docs/qa/chaos-inoculation/schema58-oracle.json": "94ec048ef7ba7e467c8cd1070ea4c010e0b154a75d8e2a2adf095af0ac4e41f8",
+    "docs/qa/chaos-inoculation/schema58-town.json": "3e59338fad33209934eea151fe50e9869b656c51748e29c4209b9dc89707768f",
+    "docs/qa/chaos-inoculation/schema58-active.json": "82d5e5e47d5283b856af774d7f6695845dbdfd972177adec85fce41be71ccd68"
+  }
+}

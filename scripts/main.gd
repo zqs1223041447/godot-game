@@ -1964,7 +1964,15 @@ func hit_player_components(components: Variant, source_id: int = 0, delivery_tag
 		settlement=Defense.incoming_source_hit(components,_stats,shield,health,"player",shock_increase,mana,mana_ratio) if _stats.has("armour") else Defense.incoming_hit(components,{"fire_resistance":_stats.get("fire_resistance",0.0)},shield,health,"player",shock_increase,mana,mana_ratio)
 	else:
 		settlement=Defense.incoming_source_hit(components,_stats,shield,health,"player",shock_increase) if _stats.has("armour") else Defense.incoming_hit(components, {"fire_resistance": _stats.get("fire_resistance", 0.0)}, shield, health, "player",shock_increase)
-	if not settlement.ok or float(settlement.damage_total) <= 0.0:
+	if not settlement.ok: return false
+	if float(settlement.damage_total) <= 0.0:
+		# Keep the original chaos/mitigation ledger while retaining the existing
+		# zero-damage refusal: no attack admission, hurt window or recharge reset.
+		if settlement.get("chaos_immune", false) and float(settlement.raw_components.get("chaos", 0.0)) > 0.0:
+			var immune_record: Dictionary = settlement.duplicate(true)
+			immune_record.source_id = source_id
+			incoming_damage_trace.append(immune_record)
+			if incoming_damage_trace.size() > 32: incoming_damage_trace.pop_front()
 		return false
 	if delivery_tags.has("attack") and _stats.has("evasion"):
 		var accuracy := 100.0

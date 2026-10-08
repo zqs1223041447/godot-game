@@ -32,7 +32,8 @@ const ATTACK_ELEMENTAL_SAVE_VERSION:=55
 const ONE_WITH_NATURE_SAVE_VERSION:=56
 const IRON_GRIP_SAVE_VERSION:=57
 const IRON_WILL_SAVE_VERSION:=58
-const CURRENT_SAVE_VERSION:=IRON_WILL_SAVE_VERSION
+const CHAOS_INOCULATION_SAVE_VERSION:=59
+const CURRENT_SAVE_VERSION:=CHAOS_INOCULATION_SAVE_VERSION
 static var _contexts: Dictionary = {}
 static var _line_cache: Dictionary = {}
 static var _node_effect_cache: Dictionary = {}
@@ -61,7 +62,8 @@ static func _execution_policy(version:int)->int:
 	if version<ATTACK_ELEMENTAL_SAVE_VERSION:return COLD_AILMENT_DURATION_SAVE_VERSION
 	if version<ONE_WITH_NATURE_SAVE_VERSION:return ATTACK_ELEMENTAL_SAVE_VERSION
 	if version<IRON_GRIP_SAVE_VERSION:return ONE_WITH_NATURE_SAVE_VERSION
-	return IRON_GRIP_SAVE_VERSION if version<IRON_WILL_SAVE_VERSION else IRON_WILL_SAVE_VERSION
+	if version<IRON_WILL_SAVE_VERSION:return IRON_GRIP_SAVE_VERSION
+	return IRON_WILL_SAVE_VERSION if version<CHAOS_INOCULATION_SAVE_VERSION else CHAOS_INOCULATION_SAVE_VERSION
 
 
 static func _context(class_id: int, budget: int) -> Dictionary:
@@ -150,7 +152,7 @@ static func lines_for(id: String, mastery_effect: int = 0) -> Array:
 static func line_effect(line: String, save_version:int=CURRENT_SAVE_VERSION) -> Dictionary:
 	var policy:int=_execution_policy(save_version)
 	var key:="%d:%s"%[policy,line]
-	if not _line_cache.has(key): _line_cache[key] = Patterns.parse_line(line,policy>=SPATIAL_SAVE_VERSION,policy>=RECHARGE_SAVE_VERSION,policy>=RESOURCE_SAVE_VERSION,policy>=FLASK_SAVE_VERSION,policy>=CRITICAL_SAVE_VERSION,policy>=LEECH_SAVE_VERSION,policy>=FIRE_DOT_SAVE_VERSION,policy>=FASTER_BURN_SAVE_VERSION,policy>=MANA_GUARD_SAVE_VERSION,policy>=ELEMENTAL_RESISTANCE_CAP_SAVE_VERSION,policy>=RESOLUTE_TECHNIQUE_SAVE_VERSION,policy>=IRON_REFLEXES_SAVE_VERSION,policy>=ZEALOTS_OATH_SAVE_VERSION,policy>=PHYSICAL_FIRE_CONVERSION_SAVE_VERSION,policy>=PRECISE_TECHNIQUE_SAVE_VERSION,policy>=ELEMENTAL_CONVERSION_SAVE_VERSION,policy>=COLD_AILMENT_DURATION_SAVE_VERSION,policy>=ATTACK_ELEMENTAL_SAVE_VERSION,policy>=ONE_WITH_NATURE_SAVE_VERSION,policy>=IRON_GRIP_SAVE_VERSION,policy>=IRON_WILL_SAVE_VERSION)
+	if not _line_cache.has(key): _line_cache[key] = Patterns.parse_line(line,policy>=SPATIAL_SAVE_VERSION,policy>=RECHARGE_SAVE_VERSION,policy>=RESOURCE_SAVE_VERSION,policy>=FLASK_SAVE_VERSION,policy>=CRITICAL_SAVE_VERSION,policy>=LEECH_SAVE_VERSION,policy>=FIRE_DOT_SAVE_VERSION,policy>=FASTER_BURN_SAVE_VERSION,policy>=MANA_GUARD_SAVE_VERSION,policy>=ELEMENTAL_RESISTANCE_CAP_SAVE_VERSION,policy>=RESOLUTE_TECHNIQUE_SAVE_VERSION,policy>=IRON_REFLEXES_SAVE_VERSION,policy>=ZEALOTS_OATH_SAVE_VERSION,policy>=PHYSICAL_FIRE_CONVERSION_SAVE_VERSION,policy>=PRECISE_TECHNIQUE_SAVE_VERSION,policy>=ELEMENTAL_CONVERSION_SAVE_VERSION,policy>=COLD_AILMENT_DURATION_SAVE_VERSION,policy>=ATTACK_ELEMENTAL_SAVE_VERSION,policy>=ONE_WITH_NATURE_SAVE_VERSION,policy>=IRON_GRIP_SAVE_VERSION,policy>=IRON_WILL_SAVE_VERSION,policy>=CHAOS_INOCULATION_SAVE_VERSION)
 	return _line_cache[key].duplicate(true)
 
 
@@ -196,6 +198,7 @@ static func apply_stats(stats: Dictionary, candidate: Dictionary) -> Dictionary:
 			elif grant.stat == "precise_technique" and effect.status == "full" and id == "63620": result.precise_technique = 1.0
 			elif grant.stat == "iron_grip" and effect.status == "full" and id == "12926": result.iron_grip = 1.0
 			elif grant.stat == "iron_will" and effect.status == "full" and id == "50288": result.iron_will = 1.0
+			elif grant.stat == "chaos_inoculation" and effect.status == "full" and id == "11455": result.chaos_inoculation = 1.0
 			elif grant.stat == "physical_to_fire_conversion": result.physical_to_fire_conversion = float(result.get("physical_to_fire_conversion", 0.0)) + float(grant.value)
 			elif grant.stat in ["physical_to_cold_conversion", "physical_to_lightning_conversion", "cold_penetration", "lightning_penetration"] and effect.status == "full":
 				result[grant.stat] = float(result.get(grant.stat, 0.0)) + float(grant.value)
@@ -228,6 +231,8 @@ static func apply_stats(stats: Dictionary, candidate: Dictionary) -> Dictionary:
 		result.evasion = float(result.get("evasion",15.0)) * (1.0+float(result.get("evasion_increased",0.0))+floorf(float(result.dexterity)/5.0)*0.01)
 		result.armour = float(result.get("armour",0.0))*(1.0+float(result.get("armour_increased",0.0)))
 	for stat: String in capacity_increased: result[stat] *= 1.0 + float(capacity_increased[stat])
+	# Final override follows every capacity source, before capacity-based recovery.
+	if float(result.get("chaos_inoculation", 0.0)) == 1.0: result.max_health = 1.0
 	if float(result.get("zealots_oath", 0.0)) > 0.0:
 		var regeneration := ZealotsOath.profile(float(result.get("life_regen", 0.0)),
 			float(result.get("life_regen_percent", 0.0)), float(result.max_shield))

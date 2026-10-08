@@ -167,6 +167,10 @@ static func incoming_hit(components: Variant, defense_stats: Variant, shield: Va
 ## permanently cached percentage. Elemental caps precede shield, then life.
 static func source_profile(stats: Dictionary, actor: String = "player") -> Dictionary:
 	if not ACTORS.has(actor): return _failure("Unknown defense actor")
+	var inoculation: Variant = stats.get("chaos_inoculation", 0.0)
+	if not _finite_number(inoculation) or float(inoculation) not in [0.0, 1.0]:
+		return _failure("Chaos Inoculation must be a finite zero or one")
+	if actor != "player" and float(inoculation) != 0.0: return _failure("Chaos Inoculation is a player source rule")
 	var raw := {}
 	var effective := {}
 	for type: String in ELEMENTS:
@@ -189,7 +193,9 @@ static func source_profile(stats: Dictionary, actor: String = "player") -> Dicti
 		if not chaos.ok: return chaos
 		raw["chaos"] = chaos.raw
 		effective["chaos"] = chaos.effective
-	return {"ok":true,"reason":"","actor":actor,"armour":float(stats.get("armour",0.0)),"raw_resistances":raw,"effective_resistances":effective}
+	var result := {"ok":true,"reason":"","actor":actor,"armour":float(stats.get("armour",0.0)),"raw_resistances":raw,"effective_resistances":effective}
+	if float(inoculation) == 1.0: result.chaos_immune = true
+	return result
 
 
 static func apply_armour(resolved: Dictionary, armour: float) -> Dictionary:
@@ -213,6 +219,7 @@ static func incoming_source_hit(components: Variant,stats: Dictionary,shield: Va
 	if not profile.ok: return profile
 	var packet := Damage.packet(checked.components,["hit"],"incoming_hit")
 	var resolved := apply_armour(Damage.resolve(packet,[],profile.effective_resistances),profile.armour)
+	if profile.get("chaos_immune", false): resolved = _apply_chaos_immunity(resolved)
 	if not _finite_number(hit_taken_increased) or float(hit_taken_increased) != 0.0: resolved = apply_hit_damage_taken(resolved,hit_taken_increased)
 	var result := settle_with_mana(resolved,shield,health,mana,ratio) if not _finite_number(ratio) or float(ratio)!=0.0 else settle_resolved(resolved,shield,health)
 	if result.ok:
@@ -221,6 +228,23 @@ static func incoming_source_hit(components: Variant,stats: Dictionary,shield: Va
 		result.raw_resistances=profile.raw_resistances
 		result.effective_resistances=profile.effective_resistances
 		result.armour=profile.armour
+		if profile.get("chaos_immune", false): result.chaos_immune = true
+	return result
+
+
+## Zero only the settled chaos component, never its original damage or the
+## resistance value. Existing shield/mana/life settlement owns the remainder.
+static func _apply_chaos_immunity(resolved: Dictionary) -> Dictionary:
+	if not settle_resolved(resolved, 0.0, 1.0).ok: return {}
+	if not resolved.components.has("chaos"): return resolved
+	var result := resolved.duplicate(true)
+	result.components.chaos = 0.0
+	for detail: Dictionary in result.details:
+		if detail.type == "chaos":
+			detail.final = 0.0
+			detail.chaos_immune = true
+	result.total = 0.0
+	for amount: float in result.components.values(): result.total += amount
 	return result
 
 

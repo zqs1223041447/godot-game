@@ -161,6 +161,9 @@ const IRON_GRIP_ENTRY := "Strength's Damage bonus applies to Projectile Attack D
 # Schema58 only: existing keystone50288 explicitly extends to ALL spell damage.
 const IRON_WILL_ENTRY := "Strength's Damage bonus applies to all Spell Damage as well"
 
+# Schema59 only: the complete capacity/immunity tradeoff of keystone11455.
+const CHAOS_INOCULATION_ENTRY := "Maximum Life becomes 1, Immune to Chaos Damage"
+
 const ZEALOTS_OATH_ENTRY := "Life Regeneration is applied to Energy Shield instead"
 
 const NEGATIVE_PATTERN: String = "^-([0-9]+(?:\\.[0-9]+)?)(?: to maximum (?:Life|Mana|Energy Shield)|% increased (?:Damage|Projectile Damage|Spell Damage|Fire Damage|Cold Damage|Lightning Damage|Elemental Damage|Area Damage|Attack Speed|Movement Speed|Mana Regeneration Rate|maximum Life|maximum Mana|maximum Energy Shield))$"
@@ -176,10 +179,12 @@ static func _expression(pattern: String) -> RegEx:
 	return _regex_cache[pattern]
 
 
-static func parse_line(raw_line: Variant, allow_spatial:bool=true,allow_recharge:bool=true,allow_resource:bool=true,allow_flask:bool=true,allow_critical:bool=true,allow_leech:bool=true,allow_fire_dot:bool=true,allow_faster_burn:bool=true,allow_mana_guard:bool=true,allow_elemental_resistance_cap:bool=true,allow_resolute:bool=true,allow_iron_reflexes:bool=true,allow_zealots_oath:bool=true,allow_physical_fire_conversion:bool=true,allow_precise_technique:bool=true,allow_elemental_conversion:bool=true,allow_cold_ailment_duration:bool=true,allow_attack_elemental:bool=true,allow_one_with_nature:bool=true,allow_iron_grip:bool=true,allow_iron_will:bool=true) -> Dictionary:
+static func parse_line(raw_line: Variant, allow_spatial:bool=true,allow_recharge:bool=true,allow_resource:bool=true,allow_flask:bool=true,allow_critical:bool=true,allow_leech:bool=true,allow_fire_dot:bool=true,allow_faster_burn:bool=true,allow_mana_guard:bool=true,allow_elemental_resistance_cap:bool=true,allow_resolute:bool=true,allow_iron_reflexes:bool=true,allow_zealots_oath:bool=true,allow_physical_fire_conversion:bool=true,allow_precise_technique:bool=true,allow_elemental_conversion:bool=true,allow_cold_ailment_duration:bool=true,allow_attack_elemental:bool=true,allow_one_with_nature:bool=true,allow_iron_grip:bool=true,allow_iron_will:bool=true,allow_chaos_inoculation:bool=true) -> Dictionary:
 	if not raw_line is String:
 		return _unsupported("输入必须是单行英文字符串")
 	var line: String = raw_line
+	if allow_chaos_inoculation and allow_iron_will and allow_iron_grip and allow_one_with_nature and allow_attack_elemental and allow_cold_ailment_duration and allow_elemental_conversion and allow_precise_technique and allow_physical_fire_conversion and allow_zealots_oath and allow_iron_reflexes and allow_resolute and allow_elemental_resistance_cap and allow_mana_guard and allow_faster_burn and allow_fire_dot and allow_leech and allow_critical and allow_flask and allow_resource and allow_recharge and allow_spatial and line == CHAOS_INOCULATION_ENTRY:
+		return {"supported":true,"reason":"","grants":[{"stat":"chaos_inoculation","value":1.0,"mode":"flat"}]}
 	if allow_iron_will and allow_iron_grip and allow_one_with_nature and allow_attack_elemental and allow_cold_ailment_duration and allow_elemental_conversion and allow_precise_technique and allow_physical_fire_conversion and allow_zealots_oath and allow_iron_reflexes and allow_resolute and allow_elemental_resistance_cap and allow_mana_guard and allow_faster_burn and allow_fire_dot and allow_leech and allow_critical and allow_flask and allow_resource and allow_recharge and allow_spatial and line == IRON_WILL_ENTRY:
 		return {"supported":true,"reason":"","grants":[{"stat":"iron_will","value":1.0,"mode":"flat"}]}
 	if allow_iron_grip and allow_one_with_nature and allow_attack_elemental and allow_cold_ailment_duration and allow_elemental_conversion and allow_precise_technique and allow_physical_fire_conversion and allow_zealots_oath and allow_iron_reflexes and allow_resolute and allow_elemental_resistance_cap and allow_mana_guard and allow_faster_burn and allow_fire_dot and allow_leech and allow_critical and allow_flask and allow_resource and allow_recharge and allow_spatial and line == IRON_GRIP_ENTRY:

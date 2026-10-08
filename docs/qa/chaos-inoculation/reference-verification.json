@@ -1,0 +1,32 @@
+{
+  "baseline": "c74596e5a268000a4988d779c5517f712b55afe2",
+  "changed_cards": [
+    "rules-elemental_conversion",
+    "rules-equipment",
+    "rules-frost_lock",
+    "rules-physical_fire_conversion",
+    "rules-source_defenses",
+    "rules-source_monster_damage_life",
+    "rules-source_monster_movement",
+    "rules-source_monster_shield_recharge",
+    "rules-source_tree",
+    "source_passives-11455"
+  ],
+  "unchanged_cards": 3806,
+  "checked_related_links": 248,
+  "coverage_changed_nodes": [
+    "11455"
+  ],
+  "frozen_source_and_other_systems": [
+    "data/passive_source/data.json",
+    "data/passive_source/normalized_tree.json",
+    "data/passive_source/localization_zh_CN.json",
+    "data/passives/official_tree_runtime.json",
+    "scripts/combat/leech_runtime.gd",
+    "scripts/combat/leech_rules.gd",
+    "scripts/combat/damage_resolver.gd",
+    "scripts/items/equipment_catalog.gd"
+  ],
+  "catalog_sha256": "9563e4082daf4e58617e4644ad6bfb2f4f24486e3e2685eb529c887c2bd59840",
+  "html_sha256": "15d34a0c80f238c7daf973398e8028e8e60f2a4e70ae8a95935413e0e890c19f"
+}

@@ -79,7 +79,16 @@ def iron_will_effect(rule):
 
 
 def iron_will_save_rule(rule):
-    return '<p>当前58先完整验证冻结旧57，再写原字节备份'+esc(rule['backup_suffix'])+'，仅升级版本并开放完整铁意志机制。原分配、点数、物品、技能和旅程保全，不赠点、不赠物。原56→57保持固定终点，旧合法集合不扩张；完整加载只备份最初版本并保存/发布一次。备份失败或冲突、外部修改及最终原子写失败沿用原保护。</p><p>旧57程序拒绝58文件。回退需先另存58，再人工恢复升级前57备份；备份不含升级后进度，不能手改版本伪装回退。进行中地图字段保全不等于重建战斗，启动离场按既有规则。保存不承诺任意并发时序或断电级持久性。</p>'
+    return '<p>57→58步骤先完整验证冻结旧57，再写原字节备份'+esc(rule['backup_suffix'])+'，仅升级版本并开放完整铁意志机制。原分配、点数、物品、技能和旅程保全，不赠点、不赠物。原56→57保持固定终点，旧合法集合不扩张；完整加载只备份最初版本并保存/发布一次。备份失败或冲突、外部修改及最终原子写失败沿用原保护。</p><p>旧57程序拒绝58文件。回退需先另存58，再人工恢复升级前57备份；备份不含升级后进度，不能手改版本伪装回退。进行中地图字段保全不等于重建战斗，启动离场按既有规则。保存不承诺任意并发时序或断电级持久性。</p>'
+
+
+def chaos_inoculation_effect(rule):
+    route=' → '.join(esc(node) for node in rule['witch_route'])
+    return '<p>schema '+str(rule['minimum_save_version'])+'：全部容量加成结算后，最终最大生命固定为1；混沌伤害分量明确免疫，不是提高混沌抗性。原混抗数值和上限保持，混合包其余分量仍按抗性/护甲、护盾、可选魔力分担、生命结算。本游戏混沌原本不绕盾；没有新增绕盾、中毒或混沌持续伤害系统。</p><p>代价是失去生命缓冲：物理、元素和既有火焰燃烧仍可致死。生命百分比再生和偷取上限读取最终1生命；狂信者的誓约仍按护盾容量再生，生命药剂不变成护盾药剂。分配只钳制当前生命，退款恢复容量但不免费补血。纯免疫保留原伤害/减免记录，沿既有零伤害拒绝路径，不触发受伤无敌或重置充能。</p><p>普通女巫路线（起点免费，共11点）：'+route+'。最早7级预算仅代表可分配，不代表护盾构筑已安全；旧58继续拒绝此基石。现有蚀影巡逻可验证纯混沌攻击，其他怪物伤害仍需应对。</p>'
+
+
+def chaos_inoculation_save_rule(rule):
+    return '<p>当前59先完整验证冻结旧58，再保全原字节备份'+esc(rule['backup_suffix'])+'，只改变版本并开放完整混沌防护。原物品、分配、点数、技能与旅程不变，不赠物或赠点；57→58保持固定终点。完整加载仅备份最初版本、保存并发布一次，备份冲突、外部修改和原子写失败沿用既有保护。</p><p>旧58程序拒绝59文件。回退需先另存59，再人工恢复升级前58备份；备份不含升级后的进度，不能手改版本伪装回退。进行中地图字段保全不等于战斗快照恢复，启动离场仍按原规则。保存不承诺任意并发时序或断电级持久性。</p>'
 
 
 def chaos_value(key, amount, ratio=False):
@@ -1544,6 +1553,7 @@ def build(data, art):
         if key == '15842' and 'one_with_nature' in data: body+=one_with_nature_effect(data['one_with_nature'])
         if key == '12926' and 'iron_grip' in data: body+=iron_grip_effect(data['iron_grip'])
         if key == '50288' and 'iron_will' in data: body+=iron_will_effect(data['iron_will'])
+        if key == '11455' and 'chaos_inoculation' in data: body+=chaos_inoculation_effect(data['chaos_inoculation'])
         for choice in p['mastery_choices']:
             label='已执行' if allowed and choice['execution']['status']=='full' else '未完整执行 · 不可选择'
             body+=details(f'精通 {choice["effect"]} · {label}','<p>'+lines(localized['mastery_choices'][str(choice['effect'])])+'</p>')
@@ -2161,6 +2171,8 @@ def build(data, art):
         if key == 'source_tree' and 'one_with_nature' in data: body+=one_with_nature_save_rule(data['one_with_nature'])
         if key == 'source_tree' and 'iron_grip' in data: body+=iron_grip_save_rule(data['iron_grip'])
         if key == 'source_tree' and 'iron_will' in data: body+=iron_will_save_rule(data['iron_will'])
+        if key == 'source_tree' and 'chaos_inoculation' in data: body+=chaos_inoculation_save_rule(data['chaos_inoculation'])
+        if key == 'source_defenses' and 'chaos_inoculation' in data: body+='<p>'+link('source_passives','11455','混沌防护')+'将最终最大生命固定为1并明确免疫混沌分量；其他伤害、护盾/魔力/生命顺序和抗性上限保持，退款不补血。具体取舍与11点女巫路线见基石。</p>'
         if key == 'source_defenses' and 'iron_grip' in data: body+='<p>分配'+link('source_passives','12926','铁握持')+'后，力量原生物理伤害提高同时适用投射物攻击，双标签只计一次；不会把其他近战INC转移。实际收益、转换范围与14点游侠路线见该基石说明。</p>'
         if key == 'source_defenses' and 'iron_will' in data: body+='<p>分配'+link('source_passives','50288','铁意志')+'后，力量自身的每5点取整1%收益也适用全部法术伤害类型，不复制近战INC。原力量生命和近战收益保持；具体范围、8点贵族路线与在途快照见该基石说明。</p>'
         cards.append(add('rules',key,name,summary,body,{'implemented':'已实现规则','research':'研究来源','planned':'未实现边界'}[status],status))
