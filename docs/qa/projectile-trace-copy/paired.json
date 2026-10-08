@@ -1,0 +1,2213 @@
+{
+	"after": {
+		"phases": {
+			"damage_packet_inclusive_us": {
+				"max_us": 48781,
+				"mean_us": 21955.791666666668,
+				"n": 48,
+				"over_16_7_ms": 48,
+				"over_33_3_ms": 2,
+				"p50_us": 18563,
+				"p95_us": 33215
+			},
+			"damage_packet_self_us": {
+				"max_us": 48781,
+				"mean_us": 21955.791666666668,
+				"n": 48,
+				"over_16_7_ms": 48,
+				"over_33_3_ms": 2,
+				"p50_us": 18563,
+				"p95_us": 33215
+			},
+			"effects_inclusive_us": {
+				"max_us": 2251,
+				"mean_us": 326.4791666666667,
+				"n": 48,
+				"over_16_7_ms": 0,
+				"over_33_3_ms": 0,
+				"p50_us": 274,
+				"p95_us": 401
+			},
+			"effects_self_us": {
+				"max_us": 2251,
+				"mean_us": 326.4791666666667,
+				"n": 48,
+				"over_16_7_ms": 0,
+				"over_33_3_ms": 0,
+				"p50_us": 274,
+				"p95_us": 401
+			},
+			"enemy_ai_inclusive_us": {
+				"max_us": 6732,
+				"mean_us": 3060.375,
+				"n": 48,
+				"over_16_7_ms": 0,
+				"over_33_3_ms": 0,
+				"p50_us": 2469,
+				"p95_us": 5695
+			},
+			"enemy_ai_self_us": {
+				"max_us": 6732,
+				"mean_us": 3060.375,
+				"n": 48,
+				"over_16_7_ms": 0,
+				"over_33_3_ms": 0,
+				"p50_us": 2469,
+				"p95_us": 5695
+			},
+			"event_settlement_inclusive_us": {
+				"max_us": 62545,
+				"mean_us": 25668.958333333332,
+				"n": 48,
+				"over_16_7_ms": 48,
+				"over_33_3_ms": 10,
+				"p50_us": 21432,
+				"p95_us": 37020
+			},
+			"event_settlement_self_us": {
+				"max_us": 13764,
+				"mean_us": 3713.1666666666665,
+				"n": 48,
+				"over_16_7_ms": 0,
+				"over_33_3_ms": 0,
+				"p50_us": 2786,
+				"p95_us": 8347
+			},
+			"projectiles_inclusive_us": {
+				"max_us": 78971,
+				"mean_us": 33534.020833333336,
+				"n": 48,
+				"over_16_7_ms": 48,
+				"over_33_3_ms": 15,
+				"p50_us": 28444,
+				"p95_us": 48698
+			},
+			"projectiles_self_us": {
+				"max_us": 16426,
+				"mean_us": 7865.0625,
+				"n": 48,
+				"over_16_7_ms": 0,
+				"over_33_3_ms": 0,
+				"p50_us": 6777,
+				"p95_us": 12984
+			}
+		},
+		"tick": {
+			"max_us": 88932,
+			"mean_us": 37874.166666666664,
+			"n": 48,
+			"over_16_7_ms": 48,
+			"over_33_3_ms": 24,
+			"p50_us": 33710,
+			"p95_us": 55645
+		}
+	},
+	"baseline_commit": "dbdc846e21e70477c98516562bf18273b2ebcc95",
+	"before": {
+		"phases": {
+			"damage_packet_inclusive_us": {
+				"max_us": 44839,
+				"mean_us": 23641.5,
+				"n": 48,
+				"over_16_7_ms": 48,
+				"over_33_3_ms": 6,
+				"p50_us": 21052,
+				"p95_us": 38974
+			},
+			"damage_packet_self_us": {
+				"max_us": 44839,
+				"mean_us": 23641.5,
+				"n": 48,
+				"over_16_7_ms": 48,
+				"over_33_3_ms": 6,
+				"p50_us": 21052,
+				"p95_us": 38974
+			},
+			"effects_inclusive_us": {
+				"max_us": 2768,
+				"mean_us": 370.75,
+				"n": 48,
+				"over_16_7_ms": 0,
+				"over_33_3_ms": 0,
+				"p50_us": 282,
+				"p95_us": 483
+			},
+			"effects_self_us": {
+				"max_us": 2768,
+				"mean_us": 370.75,
+				"n": 48,
+				"over_16_7_ms": 0,
+				"over_33_3_ms": 0,
+				"p50_us": 282,
+				"p95_us": 483
+			},
+			"enemy_ai_inclusive_us": {
+				"max_us": 6617,
+				"mean_us": 2969.8958333333335,
+				"n": 48,
+				"over_16_7_ms": 0,
+				"over_33_3_ms": 0,
+				"p50_us": 2457,
+				"p95_us": 5781
+			},
+			"enemy_ai_self_us": {
+				"max_us": 6617,
+				"mean_us": 2969.8958333333335,
+				"n": 48,
+				"over_16_7_ms": 0,
+				"over_33_3_ms": 0,
+				"p50_us": 2457,
+				"p95_us": 5781
+			},
+			"event_settlement_inclusive_us": {
+				"max_us": 63258,
+				"mean_us": 33197.666666666664,
+				"n": 48,
+				"over_16_7_ms": 48,
+				"over_33_3_ms": 17,
+				"p50_us": 30141,
+				"p95_us": 54403
+			},
+			"event_settlement_self_us": {
+				"max_us": 21895,
+				"mean_us": 9556.166666666666,
+				"n": 48,
+				"over_16_7_ms": 2,
+				"over_33_3_ms": 0,
+				"p50_us": 7956,
+				"p95_us": 15324
+			},
+			"projectiles_inclusive_us": {
+				"max_us": 77394,
+				"mean_us": 42115.145833333336,
+				"n": 48,
+				"over_16_7_ms": 48,
+				"over_33_3_ms": 28,
+				"p50_us": 36911,
+				"p95_us": 70553
+			},
+			"projectiles_self_us": {
+				"max_us": 24690,
+				"mean_us": 8917.479166666666,
+				"n": 48,
+				"over_16_7_ms": 4,
+				"over_33_3_ms": 0,
+				"p50_us": 6760,
+				"p95_us": 17910
+			}
+		},
+		"tick": {
+			"max_us": 90642,
+			"mean_us": 46738.125,
+			"n": 48,
+			"over_16_7_ms": 48,
+			"over_33_3_ms": 48,
+			"p50_us": 41410,
+			"p95_us": 79600
+		}
+	},
+	"cpu": "INTEL(R) XEON(R) PLATINUM 8573C",
+	"engine": "4.6.3-stable (official)",
+	"failures": 0,
+	"repetitions": [
+		{
+			"final": [
+				{
+					"bytes": 1124484,
+					"critical": {
+						"draws": 0,
+						"events": 0,
+						"state": 2380781706045169222
+					},
+					"damage": 323.99999999997374,
+					"events": {
+						"hit": 4320
+					},
+					"kills": 0,
+					"rng": "2562738993602066876",
+					"sha256": "910e4495e87635ed7a2d4eae74bf6d0abe35505b61c55f55e67ef0fe7f7fb811"
+				},
+				{
+					"bytes": 1124484,
+					"critical": {
+						"draws": 0,
+						"events": 0,
+						"state": 2380781706045169222
+					},
+					"damage": 323.99999999997374,
+					"events": {
+						"hit": 4320
+					},
+					"kills": 0,
+					"rng": "2562738993602066876",
+					"sha256": "910e4495e87635ed7a2d4eae74bf6d0abe35505b61c55f55e67ef0fe7f7fb811"
+				}
+			],
+			"repetition": 0,
+			"samples": [
+				{
+					"after": {
+						"cpu_us": 38831,
+						"phases": {
+							"damage_packet_inclusive_us": 21496,
+							"damage_packet_self_us": 21496,
+							"effects_inclusive_us": 274,
+							"effects_self_us": 274,
+							"enemy_ai_inclusive_us": 1378,
+							"enemy_ai_self_us": 1378,
+							"event_settlement_inclusive_us": 26332,
+							"event_settlement_self_us": 4836,
+							"projectiles_inclusive_us": 32688,
+							"projectiles_self_us": 6356
+						},
+						"sha256": "4f7847ba9c0ce02835aaa93751705202384e87b26a2869ca7d692dabab8bc6ea"
+					},
+					"before": {
+						"cpu_us": 35087,
+						"phases": {
+							"damage_packet_inclusive_us": 16686,
+							"damage_packet_self_us": 16686,
+							"effects_inclusive_us": 254,
+							"effects_self_us": 254,
+							"enemy_ai_inclusive_us": 1398,
+							"enemy_ai_self_us": 1398,
+							"event_settlement_inclusive_us": 25100,
+							"event_settlement_self_us": 8414,
+							"projectiles_inclusive_us": 32007,
+							"projectiles_self_us": 6907
+						},
+						"sha256": "4f7847ba9c0ce02835aaa93751705202384e87b26a2869ca7d692dabab8bc6ea"
+					},
+					"byte_equal": true,
+					"frame": 0,
+					"order": [
+						0,
+						1
+					]
+				},
+				{
+					"after": {
+						"cpu_us": 33788,
+						"phases": {
+							"damage_packet_inclusive_us": 18184,
+							"damage_packet_self_us": 18184,
+							"effects_inclusive_us": 249,
+							"effects_self_us": 249,
+							"enemy_ai_inclusive_us": 4883,
+							"enemy_ai_self_us": 4883,
+							"event_settlement_inclusive_us": 20912,
+							"event_settlement_self_us": 2728,
+							"projectiles_inclusive_us": 27875,
+							"projectiles_self_us": 6963
+						},
+						"sha256": "f6280d462d48b88994861271ce240cdb069d114c03d6184a1db45dd623d1c132"
+					},
+					"before": {
+						"cpu_us": 36806,
+						"phases": {
+							"damage_packet_inclusive_us": 17938,
+							"damage_packet_self_us": 17938,
+							"effects_inclusive_us": 244,
+							"effects_self_us": 244,
+							"enemy_ai_inclusive_us": 4102,
+							"enemy_ai_self_us": 4102,
+							"event_settlement_inclusive_us": 25176,
+							"event_settlement_self_us": 7238,
+							"projectiles_inclusive_us": 31816,
+							"projectiles_self_us": 6640
+						},
+						"sha256": "f6280d462d48b88994861271ce240cdb069d114c03d6184a1db45dd623d1c132"
+					},
+					"byte_equal": true,
+					"frame": 1,
+					"order": [
+						1,
+						0
+					]
+				},
+				{
+					"after": {
+						"cpu_us": 29275,
+						"phases": {
+							"damage_packet_inclusive_us": 17161,
+							"damage_packet_self_us": 17161,
+							"effects_inclusive_us": 250,
+							"effects_self_us": 250,
+							"enemy_ai_inclusive_us": 2397,
+							"enemy_ai_self_us": 2397,
+							"event_settlement_inclusive_us": 19673,
+							"event_settlement_self_us": 2512,
+							"projectiles_inclusive_us": 26025,
+							"projectiles_self_us": 6352
+						},
+						"sha256": "0d274c2d4b9eaf03bce84f71d0cfe264bb2a0415d03ca299eca6c4bd149a260e"
+					},
+					"before": {
+						"cpu_us": 34084,
+						"phases": {
+							"damage_packet_inclusive_us": 17372,
+							"damage_packet_self_us": 17372,
+							"effects_inclusive_us": 256,
+							"effects_self_us": 256,
+							"enemy_ai_inclusive_us": 2565,
+							"enemy_ai_self_us": 2565,
+							"event_settlement_inclusive_us": 24223,
+							"event_settlement_self_us": 6851,
+							"projectiles_inclusive_us": 30701,
+							"projectiles_self_us": 6478
+						},
+						"sha256": "0d274c2d4b9eaf03bce84f71d0cfe264bb2a0415d03ca299eca6c4bd149a260e"
+					},
+					"byte_equal": true,
+					"frame": 2,
+					"order": [
+						0,
+						1
+					]
+				},
+				{
+					"after": {
+						"cpu_us": 35292,
+						"phases": {
+							"damage_packet_inclusive_us": 22300,
+							"damage_packet_self_us": 22300,
+							"effects_inclusive_us": 320,
+							"effects_self_us": 320,
+							"enemy_ai_inclusive_us": 2467,
+							"enemy_ai_self_us": 2467,
+							"event_settlement_inclusive_us": 24883,
+							"event_settlement_self_us": 2583,
+							"projectiles_inclusive_us": 31351,
+							"projectiles_self_us": 6468
+						},
+						"sha256": "01ca9a6b10c81e25e700371b1127e316f912db84e751f8f95c7fdb8201d87aa3"
+					},
+					"before": {
+						"cpu_us": 34507,
+						"phases": {
+							"damage_packet_inclusive_us": 17859,
+							"damage_packet_self_us": 17859,
+							"effects_inclusive_us": 240,
+							"effects_self_us": 240,
+							"enemy_ai_inclusive_us": 2327,
+							"enemy_ai_self_us": 2327,
+							"event_settlement_inclusive_us": 24983,
+							"event_settlement_self_us": 7124,
+							"projectiles_inclusive_us": 31406,
+							"projectiles_self_us": 6423
+						},
+						"sha256": "01ca9a6b10c81e25e700371b1127e316f912db84e751f8f95c7fdb8201d87aa3"
+					},
+					"byte_equal": true,
+					"frame": 3,
+					"order": [
+						1,
+						0
+					]
+				},
+				{
+					"after": {
+						"cpu_us": 29663,
+						"phases": {
+							"damage_packet_inclusive_us": 17320,
+							"damage_packet_self_us": 17320,
+							"effects_inclusive_us": 245,
+							"effects_self_us": 245,
+							"enemy_ai_inclusive_us": 2458,
+							"enemy_ai_self_us": 2458,
+							"event_settlement_inclusive_us": 19910,
+							"event_settlement_self_us": 2590,
+							"projectiles_inclusive_us": 26439,
+							"projectiles_self_us": 6529
+						},
+						"sha256": "1ea17d05fdd78e87ba6b3e6054bd7952a204af74cea10ad951fca5705db2c91d"
+					},
+					"before": {
+						"cpu_us": 33930,
+						"phases": {
+							"damage_packet_inclusive_us": 17381,
+							"damage_packet_self_us": 17381,
+							"effects_inclusive_us": 227,
+							"effects_self_us": 227,
+							"enemy_ai_inclusive_us": 2378,
+							"enemy_ai_self_us": 2378,
+							"event_settlement_inclusive_us": 24303,
+							"event_settlement_self_us": 6922,
+							"projectiles_inclusive_us": 30796,
+							"projectiles_self_us": 6493
+						},
+						"sha256": "1ea17d05fdd78e87ba6b3e6054bd7952a204af74cea10ad951fca5705db2c91d"
+					},
+					"byte_equal": true,
+					"frame": 4,
+					"order": [
+						0,
+						1
+					]
+				},
+				{
+					"after": {
+						"cpu_us": 28459,
+						"phases": {
+							"damage_packet_inclusive_us": 16942,
+							"damage_packet_self_us": 16942,
+							"effects_inclusive_us": 223,
+							"effects_self_us": 223,
+							"enemy_ai_inclusive_us": 2254,
+							"enemy_ai_self_us": 2254,
+							"event_settlement_inclusive_us": 19420,
+							"event_settlement_self_us": 2478,
+							"projectiles_inclusive_us": 25511,
+							"projectiles_self_us": 6091
+						},
+						"sha256": "77fc2a4ebdc7a514869a70d59a60a1f87424db44d3ff018afdc2fb40841dfdc2"
+					},
+					"before": {
+						"cpu_us": 36688,
+						"phases": {
+							"damage_packet_inclusive_us": 19897,
+							"damage_packet_self_us": 19897,
+							"effects_inclusive_us": 244,
+							"effects_self_us": 244,
+							"enemy_ai_inclusive_us": 2386,
+							"enemy_ai_self_us": 2386,
+							"event_settlement_inclusive_us": 27070,
+							"event_settlement_self_us": 7173,
+							"projectiles_inclusive_us": 33536,
+							"projectiles_self_us": 6466
+						},
+						"sha256": "77fc2a4ebdc7a514869a70d59a60a1f87424db44d3ff018afdc2fb40841dfdc2"
+					},
+					"byte_equal": true,
+					"frame": 5,
+					"order": [
+						1,
+						0
+					]
+				},
+				{
+					"after": {
+						"cpu_us": 29758,
+						"phases": {
+							"damage_packet_inclusive_us": 17407,
+							"damage_packet_self_us": 17407,
+							"effects_inclusive_us": 255,
+							"effects_self_us": 255,
+							"enemy_ai_inclusive_us": 2365,
+							"enemy_ai_self_us": 2365,
+							"event_settlement_inclusive_us": 20019,
+							"event_settlement_self_us": 2612,
+							"projectiles_inclusive_us": 26573,
+							"projectiles_self_us": 6554
+						},
+						"sha256": "a08ed4f8f609ddefb32160478d25cea27cb9dfb943bbe7d638e572976f0dd546"
+					},
+					"before": {
+						"cpu_us": 34622,
+						"phases": {
+							"damage_packet_inclusive_us": 17986,
+							"damage_packet_self_us": 17986,
+							"effects_inclusive_us": 266,
+							"effects_self_us": 266,
+							"enemy_ai_inclusive_us": 2400,
+							"enemy_ai_self_us": 2400,
+							"event_settlement_inclusive_us": 25034,
+							"event_settlement_self_us": 7048,
+							"projectiles_inclusive_us": 31462,
+							"projectiles_self_us": 6428
+						},
+						"sha256": "a08ed4f8f609ddefb32160478d25cea27cb9dfb943bbe7d638e572976f0dd546"
+					},
+					"byte_equal": true,
+					"frame": 6,
+					"order": [
+						0,
+						1
+					]
+				},
+				{
+					"after": {
+						"cpu_us": 32133,
+						"phases": {
+							"damage_packet_inclusive_us": 17907,
+							"damage_packet_self_us": 17907,
+							"effects_inclusive_us": 232,
+							"effects_self_us": 232,
+							"enemy_ai_inclusive_us": 3272,
+							"enemy_ai_self_us": 3272,
+							"event_settlement_inclusive_us": 20706,
+							"event_settlement_self_us": 2799,
+							"projectiles_inclusive_us": 28137,
+							"projectiles_self_us": 7431
+						},
+						"sha256": "a716321f0b28b04be1007c77c1b33be10c0b2eda475455c3cb32bbb3162a99e7"
+					},
+					"before": {
+						"cpu_us": 36186,
+						"phases": {
+							"damage_packet_inclusive_us": 18903,
+							"damage_packet_self_us": 18903,
+							"effects_inclusive_us": 261,
+							"effects_self_us": 261,
+							"enemy_ai_inclusive_us": 2446,
+							"enemy_ai_self_us": 2446,
+							"event_settlement_inclusive_us": 26355,
+							"event_settlement_self_us": 7452,
+							"projectiles_inclusive_us": 32963,
+							"projectiles_self_us": 6608
+						},
+						"sha256": "a716321f0b28b04be1007c77c1b33be10c0b2eda475455c3cb32bbb3162a99e7"
+					},
+					"byte_equal": true,
+					"frame": 7,
+					"order": [
+						1,
+						0
+					]
+				},
+				{
+					"after": {
+						"cpu_us": 50370,
+						"phases": {
+							"damage_packet_inclusive_us": 31225,
+							"damage_packet_self_us": 31225,
+							"effects_inclusive_us": 276,
+							"effects_self_us": 276,
+							"enemy_ai_inclusive_us": 5578,
+							"enemy_ai_self_us": 5578,
+							"event_settlement_inclusive_us": 34029,
+							"event_settlement_self_us": 2804,
+							"projectiles_inclusive_us": 43912,
+							"projectiles_self_us": 9883
+						},
+						"sha256": "6c448e670f1fc2ab520adb635dd37912adcaed984613017f9742a6e03e842dc5"
+					},
+					"before": {
+						"cpu_us": 41976,
+						"phases": {
+							"damage_packet_inclusive_us": 24854,
+							"damage_packet_self_us": 24854,
+							"effects_inclusive_us": 285,
+							"effects_self_us": 285,
+							"enemy_ai_inclusive_us": 2348,
+							"enemy_ai_self_us": 2348,
+							"event_settlement_inclusive_us": 32260,
+							"event_settlement_self_us": 7406,
+							"projectiles_inclusive_us": 38863,
+							"projectiles_self_us": 6603
+						},
+						"sha256": "6c448e670f1fc2ab520adb635dd37912adcaed984613017f9742a6e03e842dc5"
+					},
+					"byte_equal": true,
+					"frame": 8,
+					"order": [
+						0,
+						1
+					]
+				},
+				{
+					"after": {
+						"cpu_us": 50527,
+						"phases": {
+							"damage_packet_inclusive_us": 29787,
+							"damage_packet_self_us": 29787,
+							"effects_inclusive_us": 306,
+							"effects_self_us": 306,
+							"enemy_ai_inclusive_us": 5465,
+							"enemy_ai_self_us": 5465,
+							"event_settlement_inclusive_us": 34635,
+							"event_settlement_self_us": 4848,
+							"projectiles_inclusive_us": 44197,
+							"projectiles_self_us": 9562
+						},
+						"sha256": "b1f0fc61e1844e135edc563a5c2b048621f51b344791ce509b0c2fce2bb76e38"
+					},
+					"before": {
+						"cpu_us": 39311,
+						"phases": {
+							"damage_packet_inclusive_us": 21052,
+							"damage_packet_self_us": 21052,
+							"effects_inclusive_us": 302,
+							"effects_self_us": 302,
+							"enemy_ai_inclusive_us": 2421,
+							"enemy_ai_self_us": 2421,
+							"event_settlement_inclusive_us": 29188,
+							"event_settlement_self_us": 8136,
+							"projectiles_inclusive_us": 36005,
+							"projectiles_self_us": 6817
+						},
+						"sha256": "b1f0fc61e1844e135edc563a5c2b048621f51b344791ce509b0c2fce2bb76e38"
+					},
+					"byte_equal": true,
+					"frame": 9,
+					"order": [
+						1,
+						0
+					]
+				},
+				{
+					"after": {
+						"cpu_us": 30989,
+						"phases": {
+							"damage_packet_inclusive_us": 17885,
+							"damage_packet_self_us": 17885,
+							"effects_inclusive_us": 307,
+							"effects_self_us": 307,
+							"enemy_ai_inclusive_us": 2255,
+							"enemy_ai_self_us": 2255,
+							"event_settlement_inclusive_us": 21119,
+							"event_settlement_self_us": 3234,
+							"projectiles_inclusive_us": 27892,
+							"projectiles_self_us": 6773
+						},
+						"sha256": "268fa2a0db81470d7e9e055b7e8e239374328aca2add3629f5e71868ceb4ecdc"
+					},
+					"before": {
+						"cpu_us": 35965,
+						"phases": {
+							"damage_packet_inclusive_us": 18508,
+							"damage_packet_self_us": 18508,
+							"effects_inclusive_us": 255,
+							"effects_self_us": 255,
+							"enemy_ai_inclusive_us": 2366,
+							"enemy_ai_self_us": 2366,
+							"event_settlement_inclusive_us": 26017,
+							"event_settlement_self_us": 7509,
+							"projectiles_inclusive_us": 32748,
+							"projectiles_self_us": 6731
+						},
+						"sha256": "268fa2a0db81470d7e9e055b7e8e239374328aca2add3629f5e71868ceb4ecdc"
+					},
+					"byte_equal": true,
+					"frame": 10,
+					"order": [
+						0,
+						1
+					]
+				},
+				{
+					"after": {
+						"cpu_us": 30227,
+						"phases": {
+							"damage_packet_inclusive_us": 17744,
+							"damage_packet_self_us": 17744,
+							"effects_inclusive_us": 232,
+							"effects_self_us": 232,
+							"enemy_ai_inclusive_us": 2414,
+							"enemy_ai_self_us": 2414,
+							"event_settlement_inclusive_us": 20336,
+							"event_settlement_self_us": 2592,
+							"projectiles_inclusive_us": 27076,
+							"projectiles_self_us": 6740
+						},
+						"sha256": "f4c3408d5fbab906ecb29c349b8bd1a691be8ec0645d6f3ce7bb58f1c90d468a"
+					},
+					"before": {
+						"cpu_us": 34438,
+						"phases": {
+							"damage_packet_inclusive_us": 17896,
+							"damage_packet_self_us": 17896,
+							"effects_inclusive_us": 281,
+							"effects_self_us": 281,
+							"enemy_ai_inclusive_us": 2324,
+							"enemy_ai_self_us": 2324,
+							"event_settlement_inclusive_us": 25209,
+							"event_settlement_self_us": 7313,
+							"projectiles_inclusive_us": 31336,
+							"projectiles_self_us": 6127
+						},
+						"sha256": "f4c3408d5fbab906ecb29c349b8bd1a691be8ec0645d6f3ce7bb58f1c90d468a"
+					},
+					"byte_equal": true,
+					"frame": 11,
+					"order": [
+						1,
+						0
+					]
+				},
+				{
+					"after": {
+						"cpu_us": 31120,
+						"phases": {
+							"damage_packet_inclusive_us": 18822,
+							"damage_packet_self_us": 18822,
+							"effects_inclusive_us": 259,
+							"effects_self_us": 259,
+							"enemy_ai_inclusive_us": 2425,
+							"enemy_ai_self_us": 2425,
+							"event_settlement_inclusive_us": 21421,
+							"event_settlement_self_us": 2599,
+							"projectiles_inclusive_us": 27923,
+							"projectiles_self_us": 6502
+						},
+						"sha256": "63325bba660838065893d9476b208216d0180dd4455627a5288864664f0a27ac"
+					},
+					"before": {
+						"cpu_us": 34802,
+						"phases": {
+							"damage_packet_inclusive_us": 17987,
+							"damage_packet_self_us": 17987,
+							"effects_inclusive_us": 229,
+							"effects_self_us": 229,
+							"enemy_ai_inclusive_us": 2357,
+							"enemy_ai_self_us": 2357,
+							"event_settlement_inclusive_us": 25224,
+							"event_settlement_self_us": 7237,
+							"projectiles_inclusive_us": 31736,
+							"projectiles_self_us": 6512
+						},
+						"sha256": "63325bba660838065893d9476b208216d0180dd4455627a5288864664f0a27ac"
+					},
+					"byte_equal": true,
+					"frame": 12,
+					"order": [
+						0,
+						1
+					]
+				},
+				{
+					"after": {
+						"cpu_us": 29017,
+						"phases": {
+							"damage_packet_inclusive_us": 17180,
+							"damage_packet_self_us": 17180,
+							"effects_inclusive_us": 230,
+							"effects_self_us": 230,
+							"enemy_ai_inclusive_us": 2340,
+							"enemy_ai_self_us": 2340,
+							"event_settlement_inclusive_us": 19646,
+							"event_settlement_self_us": 2466,
+							"projectiles_inclusive_us": 25707,
+							"projectiles_self_us": 6061
+						},
+						"sha256": "5c31a477c9b36b94b829b57b2330773ed4d81c504a0f8c0128cc7b12d2feb6bc"
+					},
+					"before": {
+						"cpu_us": 49535,
+						"phases": {
+							"damage_packet_inclusive_us": 25782,
+							"damage_packet_self_us": 25782,
+							"effects_inclusive_us": 354,
+							"effects_self_us": 354,
+							"enemy_ai_inclusive_us": 3216,
+							"enemy_ai_self_us": 3216,
+							"event_settlement_inclusive_us": 36343,
+							"event_settlement_self_us": 10561,
+							"projectiles_inclusive_us": 44245,
+							"projectiles_self_us": 7902
+						},
+						"sha256": "5c31a477c9b36b94b829b57b2330773ed4d81c504a0f8c0128cc7b12d2feb6bc"
+					},
+					"byte_equal": true,
+					"frame": 13,
+					"order": [
+						1,
+						0
+					]
+				},
+				{
+					"after": {
+						"cpu_us": 32971,
+						"phases": {
+							"damage_packet_inclusive_us": 18442,
+							"damage_packet_self_us": 18442,
+							"effects_inclusive_us": 265,
+							"effects_self_us": 265,
+							"enemy_ai_inclusive_us": 2469,
+							"enemy_ai_self_us": 2469,
+							"event_settlement_inclusive_us": 21050,
+							"event_settlement_self_us": 2608,
+							"projectiles_inclusive_us": 29636,
+							"projectiles_self_us": 8586
+						},
+						"sha256": "8d937aa59a7103e26400b832b56e049780072f79a04c75a4e164ccea688e282f"
+					},
+					"before": {
+						"cpu_us": 39650,
+						"phases": {
+							"damage_packet_inclusive_us": 21528,
+							"damage_packet_self_us": 21528,
+							"effects_inclusive_us": 282,
+							"effects_self_us": 282,
+							"enemy_ai_inclusive_us": 2292,
+							"enemy_ai_self_us": 2292,
+							"event_settlement_inclusive_us": 30131,
+							"event_settlement_self_us": 8603,
+							"projectiles_inclusive_us": 36566,
+							"projectiles_self_us": 6435
+						},
+						"sha256": "8d937aa59a7103e26400b832b56e049780072f79a04c75a4e164ccea688e282f"
+					},
+					"byte_equal": true,
+					"frame": 14,
+					"order": [
+						0,
+						1
+					]
+				},
+				{
+					"after": {
+						"cpu_us": 88932,
+						"phases": {
+							"damage_packet_inclusive_us": 48781,
+							"damage_packet_self_us": 48781,
+							"effects_inclusive_us": 231,
+							"effects_self_us": 231,
+							"enemy_ai_inclusive_us": 5904,
+							"enemy_ai_self_us": 5904,
+							"event_settlement_inclusive_us": 62545,
+							"event_settlement_self_us": 13764,
+							"projectiles_inclusive_us": 78971,
+							"projectiles_self_us": 16426
+						},
+						"sha256": "3f3e5c44cd9de71fa90ab94ba5da8c4bd7431742b57e153672489eb103f7e1d3"
+					},
+					"before": {
+						"cpu_us": 43778,
+						"phases": {
+							"damage_packet_inclusive_us": 23581,
+							"damage_packet_self_us": 23581,
+							"effects_inclusive_us": 300,
+							"effects_self_us": 300,
+							"enemy_ai_inclusive_us": 2457,
+							"enemy_ai_self_us": 2457,
+							"event_settlement_inclusive_us": 31728,
+							"event_settlement_self_us": 8147,
+							"projectiles_inclusive_us": 40398,
+							"projectiles_self_us": 8670
+						},
+						"sha256": "3f3e5c44cd9de71fa90ab94ba5da8c4bd7431742b57e153672489eb103f7e1d3"
+					},
+					"byte_equal": true,
+					"frame": 15,
+					"order": [
+						1,
+						0
+					]
+				},
+				{
+					"after": {
+						"cpu_us": 33864,
+						"phases": {
+							"damage_packet_inclusive_us": 18136,
+							"damage_packet_self_us": 18136,
+							"effects_inclusive_us": 286,
+							"effects_self_us": 286,
+							"enemy_ai_inclusive_us": 2449,
+							"enemy_ai_self_us": 2449,
+							"event_settlement_inclusive_us": 23956,
+							"event_settlement_self_us": 5820,
+							"projectiles_inclusive_us": 30502,
+							"projectiles_self_us": 6546
+						},
+						"sha256": "2e2d86b81ea730bb6c4b5516efa19b28a34df5a0f2c7516f8aca72e8e378ba61"
+					},
+					"before": {
+						"cpu_us": 40169,
+						"phases": {
+							"damage_packet_inclusive_us": 22925,
+							"damage_packet_self_us": 22925,
+							"effects_inclusive_us": 256,
+							"effects_self_us": 256,
+							"enemy_ai_inclusive_us": 2454,
+							"enemy_ai_self_us": 2454,
+							"event_settlement_inclusive_us": 30447,
+							"event_settlement_self_us": 7522,
+							"projectiles_inclusive_us": 36911,
+							"projectiles_self_us": 6464
+						},
+						"sha256": "2e2d86b81ea730bb6c4b5516efa19b28a34df5a0f2c7516f8aca72e8e378ba61"
+					},
+					"byte_equal": true,
+					"frame": 16,
+					"order": [
+						0,
+						1
+					]
+				},
+				{
+					"after": {
+						"cpu_us": 33718,
+						"phases": {
+							"damage_packet_inclusive_us": 19222,
+							"damage_packet_self_us": 19222,
+							"effects_inclusive_us": 2251,
+							"effects_self_us": 2251,
+							"enemy_ai_inclusive_us": 2398,
+							"enemy_ai_self_us": 2398,
+							"event_settlement_inclusive_us": 22037,
+							"event_settlement_self_us": 2815,
+							"projectiles_inclusive_us": 28444,
+							"projectiles_self_us": 6407
+						},
+						"sha256": "4708b80c44982d81681ef9c879e0a62d1e0e9f01016e71be03e1911991305aca"
+					},
+					"before": {
+						"cpu_us": 45372,
+						"phases": {
+							"damage_packet_inclusive_us": 23744,
+							"damage_packet_self_us": 23744,
+							"effects_inclusive_us": 333,
+							"effects_self_us": 333,
+							"enemy_ai_inclusive_us": 2521,
+							"enemy_ai_self_us": 2521,
+							"event_settlement_inclusive_us": 32764,
+							"event_settlement_self_us": 9020,
+							"projectiles_inclusive_us": 41932,
+							"projectiles_self_us": 9168
+						},
+						"sha256": "4708b80c44982d81681ef9c879e0a62d1e0e9f01016e71be03e1911991305aca"
+					},
+					"byte_equal": true,
+					"frame": 17,
+					"order": [
+						1,
+						0
+					]
+				},
+				{
+					"after": {
+						"cpu_us": 36048,
+						"phases": {
+							"damage_packet_inclusive_us": 18473,
+							"damage_packet_self_us": 18473,
+							"effects_inclusive_us": 454,
+							"effects_self_us": 454,
+							"enemy_ai_inclusive_us": 4225,
+							"enemy_ai_self_us": 4225,
+							"event_settlement_inclusive_us": 21159,
+							"event_settlement_self_us": 2686,
+							"projectiles_inclusive_us": 28353,
+							"projectiles_self_us": 7194
+						},
+						"sha256": "c5e892dd533c4c4dc6e34ee7a5e4793760c129e84e5d84070b6e5bf3176dca4f"
+					},
+					"before": {
+						"cpu_us": 47151,
+						"phases": {
+							"damage_packet_inclusive_us": 25614,
+							"damage_packet_self_us": 25614,
+							"effects_inclusive_us": 1429,
+							"effects_self_us": 1429,
+							"enemy_ai_inclusive_us": 2572,
+							"enemy_ai_self_us": 2572,
+							"event_settlement_inclusive_us": 33570,
+							"event_settlement_self_us": 7956,
+							"projectiles_inclusive_us": 42506,
+							"projectiles_self_us": 8936
+						},
+						"sha256": "c5e892dd533c4c4dc6e34ee7a5e4793760c129e84e5d84070b6e5bf3176dca4f"
+					},
+					"byte_equal": true,
+					"frame": 18,
+					"order": [
+						0,
+						1
+					]
+				},
+				{
+					"after": {
+						"cpu_us": 30608,
+						"phases": {
+							"damage_packet_inclusive_us": 17831,
+							"damage_packet_self_us": 17831,
+							"effects_inclusive_us": 237,
+							"effects_self_us": 237,
+							"enemy_ai_inclusive_us": 2539,
+							"enemy_ai_self_us": 2539,
+							"event_settlement_inclusive_us": 20585,
+							"event_settlement_self_us": 2754,
+							"projectiles_inclusive_us": 27283,
+							"projectiles_self_us": 6698
+						},
+						"sha256": "67cd496871cba6eb5665705a8173b44e225e1fbd84d120476568bebd0cadb2c3"
+					},
+					"before": {
+						"cpu_us": 47646,
+						"phases": {
+							"damage_packet_inclusive_us": 25309,
+							"damage_packet_self_us": 25309,
+							"effects_inclusive_us": 438,
+							"effects_self_us": 438,
+							"enemy_ai_inclusive_us": 3071,
+							"enemy_ai_self_us": 3071,
+							"event_settlement_inclusive_us": 35154,
+							"event_settlement_self_us": 9845,
+							"projectiles_inclusive_us": 42198,
+							"projectiles_self_us": 7044
+						},
+						"sha256": "67cd496871cba6eb5665705a8173b44e225e1fbd84d120476568bebd0cadb2c3"
+					},
+					"byte_equal": true,
+					"frame": 19,
+					"order": [
+						1,
+						0
+					]
+				},
+				{
+					"after": {
+						"cpu_us": 32898,
+						"phases": {
+							"damage_packet_inclusive_us": 18406,
+							"damage_packet_self_us": 18406,
+							"effects_inclusive_us": 306,
+							"effects_self_us": 306,
+							"enemy_ai_inclusive_us": 2549,
+							"enemy_ai_self_us": 2549,
+							"event_settlement_inclusive_us": 21294,
+							"event_settlement_self_us": 2888,
+							"projectiles_inclusive_us": 29329,
+							"projectiles_self_us": 8035
+						},
+						"sha256": "282b0d4c21ce3b8006333d188b53ee96ee43f9a6ce8a0a1341762b1b27fb63fb"
+					},
+					"before": {
+						"cpu_us": 36146,
+						"phases": {
+							"damage_packet_inclusive_us": 18386,
+							"damage_packet_self_us": 18386,
+							"effects_inclusive_us": 246,
+							"effects_self_us": 246,
+							"enemy_ai_inclusive_us": 2480,
+							"enemy_ai_self_us": 2480,
+							"event_settlement_inclusive_us": 26030,
+							"event_settlement_self_us": 7644,
+							"projectiles_inclusive_us": 32821,
+							"projectiles_self_us": 6791
+						},
+						"sha256": "282b0d4c21ce3b8006333d188b53ee96ee43f9a6ce8a0a1341762b1b27fb63fb"
+					},
+					"byte_equal": true,
+					"frame": 20,
+					"order": [
+						0,
+						1
+					]
+				},
+				{
+					"after": {
+						"cpu_us": 43515,
+						"phases": {
+							"damage_packet_inclusive_us": 22570,
+							"damage_packet_self_us": 22570,
+							"effects_inclusive_us": 271,
+							"effects_self_us": 271,
+							"enemy_ai_inclusive_us": 2599,
+							"enemy_ai_self_us": 2599,
+							"event_settlement_inclusive_us": 30917,
+							"event_settlement_self_us": 8347,
+							"projectiles_inclusive_us": 40089,
+							"projectiles_self_us": 9172
+						},
+						"sha256": "c1c8a3d5b0e1998eb76c246bf7b0e044e55a975075936d28b78056a4bdd074de"
+					},
+					"before": {
+						"cpu_us": 44792,
+						"phases": {
+							"damage_packet_inclusive_us": 23238,
+							"damage_packet_self_us": 23238,
+							"effects_inclusive_us": 296,
+							"effects_self_us": 296,
+							"enemy_ai_inclusive_us": 2383,
+							"enemy_ai_self_us": 2383,
+							"event_settlement_inclusive_us": 34491,
+							"event_settlement_self_us": 11253,
+							"projectiles_inclusive_us": 41533,
+							"projectiles_self_us": 7042
+						},
+						"sha256": "c1c8a3d5b0e1998eb76c246bf7b0e044e55a975075936d28b78056a4bdd074de"
+					},
+					"byte_equal": true,
+					"frame": 21,
+					"order": [
+						1,
+						0
+					]
+				},
+				{
+					"after": {
+						"cpu_us": 51731,
+						"phases": {
+							"damage_packet_inclusive_us": 33113,
+							"damage_packet_self_us": 33113,
+							"effects_inclusive_us": 315,
+							"effects_self_us": 315,
+							"enemy_ai_inclusive_us": 5458,
+							"enemy_ai_self_us": 5458,
+							"event_settlement_inclusive_us": 35910,
+							"event_settlement_self_us": 2797,
+							"projectiles_inclusive_us": 45298,
+							"projectiles_self_us": 9388
+						},
+						"sha256": "426a68642708a8eceda730f7a9205ef09e8973824cc2bbd12186534d613a8a9c"
+					},
+					"before": {
+						"cpu_us": 45790,
+						"phases": {
+							"damage_packet_inclusive_us": 24380,
+							"damage_packet_self_us": 24380,
+							"effects_inclusive_us": 404,
+							"effects_self_us": 404,
+							"enemy_ai_inclusive_us": 2430,
+							"enemy_ai_self_us": 2430,
+							"event_settlement_inclusive_us": 35786,
+							"event_settlement_self_us": 11406,
+							"projectiles_inclusive_us": 42389,
+							"projectiles_self_us": 6603
+						},
+						"sha256": "426a68642708a8eceda730f7a9205ef09e8973824cc2bbd12186534d613a8a9c"
+					},
+					"byte_equal": true,
+					"frame": 22,
+					"order": [
+						0,
+						1
+					]
+				},
+				{
+					"after": {
+						"cpu_us": 48978,
+						"phases": {
+							"damage_packet_inclusive_us": 33215,
+							"damage_packet_self_us": 33215,
+							"effects_inclusive_us": 258,
+							"effects_self_us": 258,
+							"enemy_ai_inclusive_us": 2393,
+							"enemy_ai_self_us": 2393,
+							"event_settlement_inclusive_us": 35934,
+							"event_settlement_self_us": 2719,
+							"projectiles_inclusive_us": 45768,
+							"projectiles_self_us": 9834
+						},
+						"sha256": "910e4495e87635ed7a2d4eae74bf6d0abe35505b61c55f55e67ef0fe7f7fb811"
+					},
+					"before": {
+						"cpu_us": 57977,
+						"phases": {
+							"damage_packet_inclusive_us": 27041,
+							"damage_packet_self_us": 27041,
+							"effects_inclusive_us": 305,
+							"effects_self_us": 305,
+							"enemy_ai_inclusive_us": 2486,
+							"enemy_ai_self_us": 2486,
+							"event_settlement_inclusive_us": 36431,
+							"event_settlement_self_us": 9390,
+							"projectiles_inclusive_us": 52515,
+							"projectiles_self_us": 16084
+						},
+						"sha256": "910e4495e87635ed7a2d4eae74bf6d0abe35505b61c55f55e67ef0fe7f7fb811"
+					},
+					"byte_equal": true,
+					"frame": 23,
+					"order": [
+						1,
+						0
+					]
+				}
+			]
+		},
+		{
+			"final": [
+				{
+					"bytes": 1124484,
+					"critical": {
+						"draws": 0,
+						"events": 0,
+						"state": 2380781706045169222
+					},
+					"damage": 323.99999999997374,
+					"events": {
+						"hit": 4320
+					},
+					"kills": 0,
+					"rng": "2562738993602066876",
+					"sha256": "910e4495e87635ed7a2d4eae74bf6d0abe35505b61c55f55e67ef0fe7f7fb811"
+				},
+				{
+					"bytes": 1124484,
+					"critical": {
+						"draws": 0,
+						"events": 0,
+						"state": 2380781706045169222
+					},
+					"damage": 323.99999999997374,
+					"events": {
+						"hit": 4320
+					},
+					"kills": 0,
+					"rng": "2562738993602066876",
+					"sha256": "910e4495e87635ed7a2d4eae74bf6d0abe35505b61c55f55e67ef0fe7f7fb811"
+				}
+			],
+			"repetition": 1,
+			"samples": [
+				{
+					"after": {
+						"cpu_us": 51584,
+						"phases": {
+							"damage_packet_inclusive_us": 25765,
+							"damage_packet_self_us": 25765,
+							"effects_inclusive_us": 209,
+							"effects_self_us": 209,
+							"enemy_ai_inclusive_us": 1336,
+							"enemy_ai_self_us": 1336,
+							"event_settlement_inclusive_us": 34553,
+							"event_settlement_self_us": 8788,
+							"projectiles_inclusive_us": 48698,
+							"projectiles_self_us": 14145
+						},
+						"sha256": "4f7847ba9c0ce02835aaa93751705202384e87b26a2869ca7d692dabab8bc6ea"
+					},
+					"before": {
+						"cpu_us": 55023,
+						"phases": {
+							"damage_packet_inclusive_us": 26072,
+							"damage_packet_self_us": 26072,
+							"effects_inclusive_us": 220,
+							"effects_self_us": 220,
+							"enemy_ai_inclusive_us": 1460,
+							"enemy_ai_self_us": 1460,
+							"event_settlement_inclusive_us": 41396,
+							"event_settlement_self_us": 15324,
+							"projectiles_inclusive_us": 52009,
+							"projectiles_self_us": 10613
+						},
+						"sha256": "4f7847ba9c0ce02835aaa93751705202384e87b26a2869ca7d692dabab8bc6ea"
+					},
+					"byte_equal": true,
+					"frame": 0,
+					"order": [
+						1,
+						0
+					]
+				},
+				{
+					"after": {
+						"cpu_us": 32289,
+						"phases": {
+							"damage_packet_inclusive_us": 17738,
+							"damage_packet_self_us": 17738,
+							"effects_inclusive_us": 290,
+							"effects_self_us": 290,
+							"enemy_ai_inclusive_us": 4195,
+							"enemy_ai_self_us": 4195,
+							"event_settlement_inclusive_us": 20388,
+							"event_settlement_self_us": 2650,
+							"projectiles_inclusive_us": 27193,
+							"projectiles_self_us": 6805
+						},
+						"sha256": "f6280d462d48b88994861271ce240cdb069d114c03d6184a1db45dd623d1c132"
+					},
+					"before": {
+						"cpu_us": 36663,
+						"phases": {
+							"damage_packet_inclusive_us": 17816,
+							"damage_packet_self_us": 17816,
+							"effects_inclusive_us": 256,
+							"effects_self_us": 256,
+							"enemy_ai_inclusive_us": 4098,
+							"enemy_ai_self_us": 4098,
+							"event_settlement_inclusive_us": 24983,
+							"event_settlement_self_us": 7167,
+							"projectiles_inclusive_us": 31635,
+							"projectiles_self_us": 6652
+						},
+						"sha256": "f6280d462d48b88994861271ce240cdb069d114c03d6184a1db45dd623d1c132"
+					},
+					"byte_equal": true,
+					"frame": 1,
+					"order": [
+						0,
+						1
+					]
+				},
+				{
+					"after": {
+						"cpu_us": 37236,
+						"phases": {
+							"damage_packet_inclusive_us": 24856,
+							"damage_packet_self_us": 24856,
+							"effects_inclusive_us": 284,
+							"effects_self_us": 284,
+							"enemy_ai_inclusive_us": 2398,
+							"enemy_ai_self_us": 2398,
+							"event_settlement_inclusive_us": 27425,
+							"event_settlement_self_us": 2569,
+							"projectiles_inclusive_us": 34003,
+							"projectiles_self_us": 6578
+						},
+						"sha256": "0d274c2d4b9eaf03bce84f71d0cfe264bb2a0415d03ca299eca6c4bd149a260e"
+					},
+					"before": {
+						"cpu_us": 76839,
+						"phases": {
+							"damage_packet_inclusive_us": 41098,
+							"damage_packet_self_us": 41098,
+							"effects_inclusive_us": 290,
+							"effects_self_us": 290,
+							"enemy_ai_inclusive_us": 5315,
+							"enemy_ai_self_us": 5315,
+							"event_settlement_inclusive_us": 55410,
+							"event_settlement_self_us": 14312,
+							"projectiles_inclusive_us": 70553,
+							"projectiles_self_us": 15143
+						},
+						"sha256": "0d274c2d4b9eaf03bce84f71d0cfe264bb2a0415d03ca299eca6c4bd149a260e"
+					},
+					"byte_equal": true,
+					"frame": 2,
+					"order": [
+						1,
+						0
+					]
+				},
+				{
+					"after": {
+						"cpu_us": 31381,
+						"phases": {
+							"damage_packet_inclusive_us": 18143,
+							"damage_packet_self_us": 18143,
+							"effects_inclusive_us": 303,
+							"effects_self_us": 303,
+							"enemy_ai_inclusive_us": 2691,
+							"enemy_ai_self_us": 2691,
+							"event_settlement_inclusive_us": 20934,
+							"event_settlement_self_us": 2791,
+							"projectiles_inclusive_us": 27711,
+							"projectiles_self_us": 6777
+						},
+						"sha256": "01ca9a6b10c81e25e700371b1127e316f912db84e751f8f95c7fdb8201d87aa3"
+					},
+					"before": {
+						"cpu_us": 64863,
+						"phases": {
+							"damage_packet_inclusive_us": 34697,
+							"damage_packet_self_us": 34697,
+							"effects_inclusive_us": 271,
+							"effects_self_us": 271,
+							"enemy_ai_inclusive_us": 2867,
+							"enemy_ai_self_us": 2867,
+							"event_settlement_inclusive_us": 49539,
+							"event_settlement_self_us": 14842,
+							"projectiles_inclusive_us": 58648,
+							"projectiles_self_us": 9109
+						},
+						"sha256": "01ca9a6b10c81e25e700371b1127e316f912db84e751f8f95c7fdb8201d87aa3"
+					},
+					"byte_equal": true,
+					"frame": 3,
+					"order": [
+						0,
+						1
+					]
+				},
+				{
+					"after": {
+						"cpu_us": 31266,
+						"phases": {
+							"damage_packet_inclusive_us": 18749,
+							"damage_packet_self_us": 18749,
+							"effects_inclusive_us": 248,
+							"effects_self_us": 248,
+							"enemy_ai_inclusive_us": 2477,
+							"enemy_ai_self_us": 2477,
+							"event_settlement_inclusive_us": 21432,
+							"event_settlement_self_us": 2683,
+							"projectiles_inclusive_us": 27946,
+							"projectiles_self_us": 6514
+						},
+						"sha256": "1ea17d05fdd78e87ba6b3e6054bd7952a204af74cea10ad951fca5705db2c91d"
+					},
+					"before": {
+						"cpu_us": 36015,
+						"phases": {
+							"damage_packet_inclusive_us": 18225,
+							"damage_packet_self_us": 18225,
+							"effects_inclusive_us": 282,
+							"effects_self_us": 282,
+							"enemy_ai_inclusive_us": 2624,
+							"enemy_ai_self_us": 2624,
+							"event_settlement_inclusive_us": 25762,
+							"event_settlement_self_us": 7537,
+							"projectiles_inclusive_us": 32505,
+							"projectiles_self_us": 6743
+						},
+						"sha256": "1ea17d05fdd78e87ba6b3e6054bd7952a204af74cea10ad951fca5705db2c91d"
+					},
+					"byte_equal": true,
+					"frame": 4,
+					"order": [
+						1,
+						0
+					]
+				},
+				{
+					"after": {
+						"cpu_us": 59217,
+						"phases": {
+							"damage_packet_inclusive_us": 36670,
+							"damage_packet_self_us": 36670,
+							"effects_inclusive_us": 334,
+							"effects_self_us": 334,
+							"enemy_ai_inclusive_us": 2367,
+							"enemy_ai_self_us": 2367,
+							"event_settlement_inclusive_us": 44090,
+							"event_settlement_self_us": 7420,
+							"projectiles_inclusive_us": 55883,
+							"projectiles_self_us": 11793
+						},
+						"sha256": "77fc2a4ebdc7a514869a70d59a60a1f87424db44d3ff018afdc2fb40841dfdc2"
+					},
+					"before": {
+						"cpu_us": 46450,
+						"phases": {
+							"damage_packet_inclusive_us": 28924,
+							"damage_packet_self_us": 28924,
+							"effects_inclusive_us": 248,
+							"effects_self_us": 248,
+							"enemy_ai_inclusive_us": 2383,
+							"enemy_ai_self_us": 2383,
+							"event_settlement_inclusive_us": 36813,
+							"event_settlement_self_us": 7889,
+							"projectiles_inclusive_us": 43294,
+							"projectiles_self_us": 6481
+						},
+						"sha256": "77fc2a4ebdc7a514869a70d59a60a1f87424db44d3ff018afdc2fb40841dfdc2"
+					},
+					"byte_equal": true,
+					"frame": 5,
+					"order": [
+						0,
+						1
+					]
+				},
+				{
+					"after": {
+						"cpu_us": 55645,
+						"phases": {
+							"damage_packet_inclusive_us": 29015,
+							"damage_packet_self_us": 29015,
+							"effects_inclusive_us": 262,
+							"effects_self_us": 262,
+							"enemy_ai_inclusive_us": 6732,
+							"enemy_ai_self_us": 6732,
+							"event_settlement_inclusive_us": 35111,
+							"event_settlement_self_us": 6096,
+							"projectiles_inclusive_us": 48095,
+							"projectiles_self_us": 12984
+						},
+						"sha256": "a08ed4f8f609ddefb32160478d25cea27cb9dfb943bbe7d638e572976f0dd546"
+					},
+					"before": {
+						"cpu_us": 43588,
+						"phases": {
+							"damage_packet_inclusive_us": 20893,
+							"damage_packet_self_us": 20893,
+							"effects_inclusive_us": 395,
+							"effects_self_us": 395,
+							"enemy_ai_inclusive_us": 2463,
+							"enemy_ai_self_us": 2463,
+							"event_settlement_inclusive_us": 30181,
+							"event_settlement_self_us": 9288,
+							"projectiles_inclusive_us": 40064,
+							"projectiles_self_us": 9883
+						},
+						"sha256": "a08ed4f8f609ddefb32160478d25cea27cb9dfb943bbe7d638e572976f0dd546"
+					},
+					"byte_equal": true,
+					"frame": 6,
+					"order": [
+						1,
+						0
+					]
+				},
+				{
+					"after": {
+						"cpu_us": 34386,
+						"phases": {
+							"damage_packet_inclusive_us": 18563,
+							"damage_packet_self_us": 18563,
+							"effects_inclusive_us": 329,
+							"effects_self_us": 329,
+							"enemy_ai_inclusive_us": 2566,
+							"enemy_ai_self_us": 2566,
+							"event_settlement_inclusive_us": 21526,
+							"event_settlement_self_us": 2963,
+							"projectiles_inclusive_us": 29702,
+							"projectiles_self_us": 8176
+						},
+						"sha256": "a716321f0b28b04be1007c77c1b33be10c0b2eda475455c3cb32bbb3162a99e7"
+					},
+					"before": {
+						"cpu_us": 42219,
+						"phases": {
+							"damage_packet_inclusive_us": 19541,
+							"damage_packet_self_us": 19541,
+							"effects_inclusive_us": 302,
+							"effects_self_us": 302,
+							"enemy_ai_inclusive_us": 3212,
+							"enemy_ai_self_us": 3212,
+							"event_settlement_inclusive_us": 27548,
+							"event_settlement_self_us": 8007,
+							"projectiles_inclusive_us": 35277,
+							"projectiles_self_us": 7729
+						},
+						"sha256": "a716321f0b28b04be1007c77c1b33be10c0b2eda475455c3cb32bbb3162a99e7"
+					},
+					"byte_equal": true,
+					"frame": 7,
+					"order": [
+						0,
+						1
+					]
+				},
+				{
+					"after": {
+						"cpu_us": 30210,
+						"phases": {
+							"damage_packet_inclusive_us": 17763,
+							"damage_packet_self_us": 17763,
+							"effects_inclusive_us": 320,
+							"effects_self_us": 320,
+							"enemy_ai_inclusive_us": 2371,
+							"enemy_ai_self_us": 2371,
+							"event_settlement_inclusive_us": 20373,
+							"event_settlement_self_us": 2610,
+							"projectiles_inclusive_us": 26864,
+							"projectiles_self_us": 6491
+						},
+						"sha256": "6c448e670f1fc2ab520adb635dd37912adcaed984613017f9742a6e03e842dc5"
+					},
+					"before": {
+						"cpu_us": 84029,
+						"phases": {
+							"damage_packet_inclusive_us": 44839,
+							"damage_packet_self_us": 44839,
+							"effects_inclusive_us": 352,
+							"effects_self_us": 352,
+							"enemy_ai_inclusive_us": 4572,
+							"enemy_ai_self_us": 4572,
+							"event_settlement_inclusive_us": 63258,
+							"event_settlement_self_us": 18419,
+							"projectiles_inclusive_us": 77394,
+							"projectiles_self_us": 14136
+						},
+						"sha256": "6c448e670f1fc2ab520adb635dd37912adcaed984613017f9742a6e03e842dc5"
+					},
+					"byte_equal": true,
+					"frame": 8,
+					"order": [
+						1,
+						0
+					]
+				},
+				{
+					"after": {
+						"cpu_us": 33710,
+						"phases": {
+							"damage_packet_inclusive_us": 17876,
+							"damage_packet_self_us": 17876,
+							"effects_inclusive_us": 314,
+							"effects_self_us": 314,
+							"enemy_ai_inclusive_us": 2810,
+							"enemy_ai_self_us": 2810,
+							"event_settlement_inclusive_us": 20683,
+							"event_settlement_self_us": 2807,
+							"projectiles_inclusive_us": 27502,
+							"projectiles_self_us": 6819
+						},
+						"sha256": "b1f0fc61e1844e135edc563a5c2b048621f51b344791ce509b0c2fce2bb76e38"
+					},
+					"before": {
+						"cpu_us": 79600,
+						"phases": {
+							"damage_packet_inclusive_us": 38974,
+							"damage_packet_self_us": 38974,
+							"effects_inclusive_us": 418,
+							"effects_self_us": 418,
+							"enemy_ai_inclusive_us": 6067,
+							"enemy_ai_self_us": 6067,
+							"event_settlement_inclusive_us": 50553,
+							"event_settlement_self_us": 11579,
+							"projectiles_inclusive_us": 70629,
+							"projectiles_self_us": 20076
+						},
+						"sha256": "b1f0fc61e1844e135edc563a5c2b048621f51b344791ce509b0c2fce2bb76e38"
+					},
+					"byte_equal": true,
+					"frame": 9,
+					"order": [
+						0,
+						1
+					]
+				},
+				{
+					"after": {
+						"cpu_us": 28542,
+						"phases": {
+							"damage_packet_inclusive_us": 16915,
+							"damage_packet_self_us": 16915,
+							"effects_inclusive_us": 271,
+							"effects_self_us": 271,
+							"enemy_ai_inclusive_us": 2277,
+							"enemy_ai_self_us": 2277,
+							"event_settlement_inclusive_us": 19452,
+							"event_settlement_self_us": 2537,
+							"projectiles_inclusive_us": 25462,
+							"projectiles_self_us": 6010
+						},
+						"sha256": "268fa2a0db81470d7e9e055b7e8e239374328aca2add3629f5e71868ceb4ecdc"
+					},
+					"before": {
+						"cpu_us": 35628,
+						"phases": {
+							"damage_packet_inclusive_us": 17979,
+							"damage_packet_self_us": 17979,
+							"effects_inclusive_us": 267,
+							"effects_self_us": 267,
+							"enemy_ai_inclusive_us": 2549,
+							"enemy_ai_self_us": 2549,
+							"event_settlement_inclusive_us": 25487,
+							"event_settlement_self_us": 7508,
+							"projectiles_inclusive_us": 32083,
+							"projectiles_self_us": 6596
+						},
+						"sha256": "268fa2a0db81470d7e9e055b7e8e239374328aca2add3629f5e71868ceb4ecdc"
+					},
+					"byte_equal": true,
+					"frame": 10,
+					"order": [
+						1,
+						0
+					]
+				},
+				{
+					"after": {
+						"cpu_us": 51617,
+						"phases": {
+							"damage_packet_inclusive_us": 28256,
+							"damage_packet_self_us": 28256,
+							"effects_inclusive_us": 264,
+							"effects_self_us": 264,
+							"enemy_ai_inclusive_us": 3781,
+							"enemy_ai_self_us": 3781,
+							"event_settlement_inclusive_us": 34239,
+							"event_settlement_self_us": 5983,
+							"projectiles_inclusive_us": 47038,
+							"projectiles_self_us": 12799
+						},
+						"sha256": "f4c3408d5fbab906ecb29c349b8bd1a691be8ec0645d6f3ce7bb58f1c90d468a"
+					},
+					"before": {
+						"cpu_us": 41410,
+						"phases": {
+							"damage_packet_inclusive_us": 24523,
+							"damage_packet_self_us": 24523,
+							"effects_inclusive_us": 282,
+							"effects_self_us": 282,
+							"enemy_ai_inclusive_us": 2334,
+							"enemy_ai_self_us": 2334,
+							"event_settlement_inclusive_us": 31815,
+							"event_settlement_self_us": 7292,
+							"projectiles_inclusive_us": 38297,
+							"projectiles_self_us": 6482
+						},
+						"sha256": "f4c3408d5fbab906ecb29c349b8bd1a691be8ec0645d6f3ce7bb58f1c90d468a"
+					},
+					"byte_equal": true,
+					"frame": 11,
+					"order": [
+						0,
+						1
+					]
+				},
+				{
+					"after": {
+						"cpu_us": 53654,
+						"phases": {
+							"damage_packet_inclusive_us": 31234,
+							"damage_packet_self_us": 31234,
+							"effects_inclusive_us": 257,
+							"effects_self_us": 257,
+							"enemy_ai_inclusive_us": 5695,
+							"enemy_ai_self_us": 5695,
+							"event_settlement_inclusive_us": 37020,
+							"event_settlement_self_us": 5786,
+							"projectiles_inclusive_us": 47156,
+							"projectiles_self_us": 10136
+						},
+						"sha256": "63325bba660838065893d9476b208216d0180dd4455627a5288864664f0a27ac"
+					},
+					"before": {
+						"cpu_us": 65131,
+						"phases": {
+							"damage_packet_inclusive_us": 33758,
+							"damage_packet_self_us": 33758,
+							"effects_inclusive_us": 306,
+							"effects_self_us": 306,
+							"enemy_ai_inclusive_us": 5091,
+							"enemy_ai_self_us": 5091,
+							"event_settlement_inclusive_us": 48738,
+							"event_settlement_self_us": 14980,
+							"projectiles_inclusive_us": 59160,
+							"projectiles_self_us": 10422
+						},
+						"sha256": "63325bba660838065893d9476b208216d0180dd4455627a5288864664f0a27ac"
+					},
+					"byte_equal": true,
+					"frame": 12,
+					"order": [
+						1,
+						0
+					]
+				},
+				{
+					"after": {
+						"cpu_us": 39446,
+						"phases": {
+							"damage_packet_inclusive_us": 23589,
+							"damage_packet_self_us": 23589,
+							"effects_inclusive_us": 400,
+							"effects_self_us": 400,
+							"enemy_ai_inclusive_us": 2761,
+							"enemy_ai_self_us": 2761,
+							"event_settlement_inclusive_us": 26808,
+							"event_settlement_self_us": 3219,
+							"projectiles_inclusive_us": 33846,
+							"projectiles_self_us": 7038
+						},
+						"sha256": "5c31a477c9b36b94b829b57b2330773ed4d81c504a0f8c0128cc7b12d2feb6bc"
+					},
+					"before": {
+						"cpu_us": 55578,
+						"phases": {
+							"damage_packet_inclusive_us": 20243,
+							"damage_packet_self_us": 20243,
+							"effects_inclusive_us": 360,
+							"effects_self_us": 360,
+							"enemy_ai_inclusive_us": 3780,
+							"enemy_ai_self_us": 3780,
+							"event_settlement_inclusive_us": 30141,
+							"event_settlement_self_us": 9898,
+							"projectiles_inclusive_us": 47361,
+							"projectiles_self_us": 17220
+						},
+						"sha256": "5c31a477c9b36b94b829b57b2330773ed4d81c504a0f8c0128cc7b12d2feb6bc"
+					},
+					"byte_equal": true,
+					"frame": 13,
+					"order": [
+						0,
+						1
+					]
+				},
+				{
+					"after": {
+						"cpu_us": 37033,
+						"phases": {
+							"damage_packet_inclusive_us": 24446,
+							"damage_packet_self_us": 24446,
+							"effects_inclusive_us": 274,
+							"effects_self_us": 274,
+							"enemy_ai_inclusive_us": 2515,
+							"enemy_ai_self_us": 2515,
+							"event_settlement_inclusive_us": 27237,
+							"event_settlement_self_us": 2791,
+							"projectiles_inclusive_us": 33565,
+							"projectiles_self_us": 6328
+						},
+						"sha256": "8d937aa59a7103e26400b832b56e049780072f79a04c75a4e164ccea688e282f"
+					},
+					"before": {
+						"cpu_us": 73580,
+						"phases": {
+							"damage_packet_inclusive_us": 32508,
+							"damage_packet_self_us": 32508,
+							"effects_inclusive_us": 2768,
+							"effects_self_us": 2768,
+							"enemy_ai_inclusive_us": 5781,
+							"enemy_ai_self_us": 5781,
+							"event_settlement_inclusive_us": 54403,
+							"event_settlement_self_us": 21895,
+							"projectiles_inclusive_us": 64129,
+							"projectiles_self_us": 9726
+						},
+						"sha256": "8d937aa59a7103e26400b832b56e049780072f79a04c75a4e164ccea688e282f"
+					},
+					"byte_equal": true,
+					"frame": 14,
+					"order": [
+						1,
+						0
+					]
+				},
+				{
+					"after": {
+						"cpu_us": 31876,
+						"phases": {
+							"damage_packet_inclusive_us": 18154,
+							"damage_packet_self_us": 18154,
+							"effects_inclusive_us": 299,
+							"effects_self_us": 299,
+							"enemy_ai_inclusive_us": 2478,
+							"enemy_ai_self_us": 2478,
+							"event_settlement_inclusive_us": 20940,
+							"event_settlement_self_us": 2786,
+							"projectiles_inclusive_us": 27542,
+							"projectiles_self_us": 6602
+						},
+						"sha256": "3f3e5c44cd9de71fa90ab94ba5da8c4bd7431742b57e153672489eb103f7e1d3"
+					},
+					"before": {
+						"cpu_us": 90642,
+						"phases": {
+							"damage_packet_inclusive_us": 30647,
+							"damage_packet_self_us": 30647,
+							"effects_inclusive_us": 387,
+							"effects_self_us": 387,
+							"enemy_ai_inclusive_us": 4385,
+							"enemy_ai_self_us": 4385,
+							"event_settlement_inclusive_us": 45112,
+							"event_settlement_self_us": 14465,
+							"projectiles_inclusive_us": 69802,
+							"projectiles_self_us": 24690
+						},
+						"sha256": "3f3e5c44cd9de71fa90ab94ba5da8c4bd7431742b57e153672489eb103f7e1d3"
+					},
+					"byte_equal": true,
+					"frame": 15,
+					"order": [
+						0,
+						1
+					]
+				},
+				{
+					"after": {
+						"cpu_us": 34161,
+						"phases": {
+							"damage_packet_inclusive_us": 20182,
+							"damage_packet_self_us": 20182,
+							"effects_inclusive_us": 401,
+							"effects_self_us": 401,
+							"enemy_ai_inclusive_us": 2467,
+							"enemy_ai_self_us": 2467,
+							"event_settlement_inclusive_us": 22892,
+							"event_settlement_self_us": 2710,
+							"projectiles_inclusive_us": 30557,
+							"projectiles_self_us": 7665
+						},
+						"sha256": "2e2d86b81ea730bb6c4b5516efa19b28a34df5a0f2c7516f8aca72e8e378ba61"
+					},
+					"before": {
+						"cpu_us": 36324,
+						"phases": {
+							"damage_packet_inclusive_us": 18422,
+							"damage_packet_self_us": 18422,
+							"effects_inclusive_us": 327,
+							"effects_self_us": 327,
+							"enemy_ai_inclusive_us": 2412,
+							"enemy_ai_self_us": 2412,
+							"event_settlement_inclusive_us": 26106,
+							"event_settlement_self_us": 7684,
+							"projectiles_inclusive_us": 32866,
+							"projectiles_self_us": 6760
+						},
+						"sha256": "2e2d86b81ea730bb6c4b5516efa19b28a34df5a0f2c7516f8aca72e8e378ba61"
+					},
+					"byte_equal": true,
+					"frame": 16,
+					"order": [
+						1,
+						0
+					]
+				},
+				{
+					"after": {
+						"cpu_us": 31820,
+						"phases": {
+							"damage_packet_inclusive_us": 18934,
+							"damage_packet_self_us": 18934,
+							"effects_inclusive_us": 389,
+							"effects_self_us": 389,
+							"enemy_ai_inclusive_us": 2417,
+							"enemy_ai_self_us": 2417,
+							"event_settlement_inclusive_us": 21662,
+							"event_settlement_self_us": 2728,
+							"projectiles_inclusive_us": 28425,
+							"projectiles_self_us": 6763
+						},
+						"sha256": "4708b80c44982d81681ef9c879e0a62d1e0e9f01016e71be03e1911991305aca"
+					},
+					"before": {
+						"cpu_us": 36243,
+						"phases": {
+							"damage_packet_inclusive_us": 18709,
+							"damage_packet_self_us": 18709,
+							"effects_inclusive_us": 276,
+							"effects_self_us": 276,
+							"enemy_ai_inclusive_us": 2423,
+							"enemy_ai_self_us": 2423,
+							"event_settlement_inclusive_us": 26309,
+							"event_settlement_self_us": 7600,
+							"projectiles_inclusive_us": 32971,
+							"projectiles_self_us": 6662
+						},
+						"sha256": "4708b80c44982d81681ef9c879e0a62d1e0e9f01016e71be03e1911991305aca"
+					},
+					"byte_equal": true,
+					"frame": 17,
+					"order": [
+						0,
+						1
+					]
+				},
+				{
+					"after": {
+						"cpu_us": 43714,
+						"phases": {
+							"damage_packet_inclusive_us": 24657,
+							"damage_packet_self_us": 24657,
+							"effects_inclusive_us": 359,
+							"effects_self_us": 359,
+							"enemy_ai_inclusive_us": 5535,
+							"enemy_ai_self_us": 5535,
+							"event_settlement_inclusive_us": 30483,
+							"event_settlement_self_us": 5826,
+							"projectiles_inclusive_us": 37225,
+							"projectiles_self_us": 6742
+						},
+						"sha256": "c5e892dd533c4c4dc6e34ee7a5e4793760c129e84e5d84070b6e5bf3176dca4f"
+					},
+					"before": {
+						"cpu_us": 77027,
+						"phases": {
+							"damage_packet_inclusive_us": 36549,
+							"damage_packet_self_us": 36549,
+							"effects_inclusive_us": 483,
+							"effects_self_us": 483,
+							"enemy_ai_inclusive_us": 6617,
+							"enemy_ai_self_us": 6617,
+							"event_settlement_inclusive_us": 51319,
+							"event_settlement_self_us": 14770,
+							"projectiles_inclusive_us": 69229,
+							"projectiles_self_us": 17910
+						},
+						"sha256": "c5e892dd533c4c4dc6e34ee7a5e4793760c129e84e5d84070b6e5bf3176dca4f"
+					},
+					"byte_equal": true,
+					"frame": 18,
+					"order": [
+						1,
+						0
+					]
+				},
+				{
+					"after": {
+						"cpu_us": 31248,
+						"phases": {
+							"damage_packet_inclusive_us": 18389,
+							"damage_packet_self_us": 18389,
+							"effects_inclusive_us": 241,
+							"effects_self_us": 241,
+							"enemy_ai_inclusive_us": 2580,
+							"enemy_ai_self_us": 2580,
+							"event_settlement_inclusive_us": 21063,
+							"event_settlement_self_us": 2674,
+							"projectiles_inclusive_us": 27835,
+							"projectiles_self_us": 6772
+						},
+						"sha256": "67cd496871cba6eb5665705a8173b44e225e1fbd84d120476568bebd0cadb2c3"
+					},
+					"before": {
+						"cpu_us": 58707,
+						"phases": {
+							"damage_packet_inclusive_us": 32332,
+							"damage_packet_self_us": 32332,
+							"effects_inclusive_us": 266,
+							"effects_self_us": 266,
+							"enemy_ai_inclusive_us": 2447,
+							"enemy_ai_self_us": 2447,
+							"event_settlement_inclusive_us": 43238,
+							"event_settlement_self_us": 10906,
+							"projectiles_inclusive_us": 55457,
+							"projectiles_self_us": 12219
+						},
+						"sha256": "67cd496871cba6eb5665705a8173b44e225e1fbd84d120476568bebd0cadb2c3"
+					},
+					"byte_equal": true,
+					"frame": 19,
+					"order": [
+						0,
+						1
+					]
+				},
+				{
+					"after": {
+						"cpu_us": 33073,
+						"phases": {
+							"damage_packet_inclusive_us": 20634,
+							"damage_packet_self_us": 20634,
+							"effects_inclusive_us": 259,
+							"effects_self_us": 259,
+							"enemy_ai_inclusive_us": 2406,
+							"enemy_ai_self_us": 2406,
+							"event_settlement_inclusive_us": 23287,
+							"event_settlement_self_us": 2653,
+							"projectiles_inclusive_us": 29886,
+							"projectiles_self_us": 6599
+						},
+						"sha256": "282b0d4c21ce3b8006333d188b53ee96ee43f9a6ce8a0a1341762b1b27fb63fb"
+					},
+					"before": {
+						"cpu_us": 35295,
+						"phases": {
+							"damage_packet_inclusive_us": 17831,
+							"damage_packet_self_us": 17831,
+							"effects_inclusive_us": 267,
+							"effects_self_us": 267,
+							"enemy_ai_inclusive_us": 2354,
+							"enemy_ai_self_us": 2354,
+							"event_settlement_inclusive_us": 25394,
+							"event_settlement_self_us": 7563,
+							"projectiles_inclusive_us": 32104,
+							"projectiles_self_us": 6710
+						},
+						"sha256": "282b0d4c21ce3b8006333d188b53ee96ee43f9a6ce8a0a1341762b1b27fb63fb"
+					},
+					"byte_equal": true,
+					"frame": 20,
+					"order": [
+						1,
+						0
+					]
+				},
+				{
+					"after": {
+						"cpu_us": 30070,
+						"phases": {
+							"damage_packet_inclusive_us": 17688,
+							"damage_packet_self_us": 17688,
+							"effects_inclusive_us": 254,
+							"effects_self_us": 254,
+							"enemy_ai_inclusive_us": 2307,
+							"enemy_ai_self_us": 2307,
+							"event_settlement_inclusive_us": 20401,
+							"event_settlement_self_us": 2713,
+							"projectiles_inclusive_us": 26966,
+							"projectiles_self_us": 6565
+						},
+						"sha256": "c1c8a3d5b0e1998eb76c246bf7b0e044e55a975075936d28b78056a4bdd074de"
+					},
+					"before": {
+						"cpu_us": 34853,
+						"phases": {
+							"damage_packet_inclusive_us": 17663,
+							"damage_packet_self_us": 17663,
+							"effects_inclusive_us": 274,
+							"effects_self_us": 274,
+							"enemy_ai_inclusive_us": 2479,
+							"enemy_ai_self_us": 2479,
+							"event_settlement_inclusive_us": 24993,
+							"event_settlement_self_us": 7330,
+							"projectiles_inclusive_us": 31583,
+							"projectiles_self_us": 6590
+						},
+						"sha256": "c1c8a3d5b0e1998eb76c246bf7b0e044e55a975075936d28b78056a4bdd074de"
+					},
+					"byte_equal": true,
+					"frame": 21,
+					"order": [
+						0,
+						1
+					]
+				},
+				{
+					"after": {
+						"cpu_us": 31564,
+						"phases": {
+							"damage_packet_inclusive_us": 18408,
+							"damage_packet_self_us": 18408,
+							"effects_inclusive_us": 275,
+							"effects_self_us": 275,
+							"enemy_ai_inclusive_us": 2448,
+							"enemy_ai_self_us": 2448,
+							"event_settlement_inclusive_us": 21229,
+							"event_settlement_self_us": 2821,
+							"projectiles_inclusive_us": 28276,
+							"projectiles_self_us": 7047
+						},
+						"sha256": "426a68642708a8eceda730f7a9205ef09e8973824cc2bbd12186534d613a8a9c"
+					},
+					"before": {
+						"cpu_us": 35996,
+						"phases": {
+							"damage_packet_inclusive_us": 18374,
+							"damage_packet_self_us": 18374,
+							"effects_inclusive_us": 266,
+							"effects_self_us": 266,
+							"enemy_ai_inclusive_us": 2405,
+							"enemy_ai_self_us": 2405,
+							"event_settlement_inclusive_us": 26079,
+							"event_settlement_self_us": 7705,
+							"projectiles_inclusive_us": 32764,
+							"projectiles_self_us": 6685
+						},
+						"sha256": "426a68642708a8eceda730f7a9205ef09e8973824cc2bbd12186534d613a8a9c"
+					},
+					"byte_equal": true,
+					"frame": 22,
+					"order": [
+						1,
+						0
+					]
+				},
+				{
+					"after": {
+						"cpu_us": 30506,
+						"phases": {
+							"damage_packet_inclusive_us": 17705,
+							"damage_packet_self_us": 17705,
+							"effects_inclusive_us": 303,
+							"effects_self_us": 303,
+							"enemy_ai_inclusive_us": 2354,
+							"enemy_ai_self_us": 2354,
+							"event_settlement_inclusive_us": 20454,
+							"event_settlement_self_us": 2749,
+							"projectiles_inclusive_us": 27278,
+							"projectiles_self_us": 6824
+						},
+						"sha256": "910e4495e87635ed7a2d4eae74bf6d0abe35505b61c55f55e67ef0fe7f7fb811"
+					},
+					"before": {
+						"cpu_us": 35319,
+						"phases": {
+							"damage_packet_inclusive_us": 18328,
+							"damage_packet_self_us": 18328,
+							"effects_inclusive_us": 246,
+							"effects_self_us": 246,
+							"enemy_ai_inclusive_us": 2257,
+							"enemy_ai_self_us": 2257,
+							"event_settlement_inclusive_us": 25894,
+							"event_settlement_self_us": 7566,
+							"projectiles_inclusive_us": 32324,
+							"projectiles_self_us": 6430
+						},
+						"sha256": "910e4495e87635ed7a2d4eae74bf6d0abe35505b61c55f55e67ef0fe7f7fb811"
+					},
+					"byte_equal": true,
+					"frame": 23,
+					"order": [
+						0,
+						1
+					]
+				}
+			]
+		}
+	],
+	"scope": "Two same-input formal broken_ruins I repetitions, each 24 interleaved before/after steps,37 original actors,180 controlled carriers. Identical wrappers. Tick excludes creation/hash/render/HUD. Not Windows FPS.",
+	"source_sha256": [
+		"6850f5c58400f599878b241979a708b66f983ebd80507ed9d180d5c1fa3d873a",
+		"710bb8e280abc3331c3caed4dcb0616c20f2063bbe0757c47c3110b561910beb"
+	]
+}

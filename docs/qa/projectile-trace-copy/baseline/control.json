@@ -1,0 +1,798 @@
+{
+	"base_commit": "dbdc846e21e70477c98516562bf18273b2ebcc95",
+	"calls": {
+
+	},
+	"cpu": "INTEL(R) XEON(R) PLATINUM 8573C",
+	"critical": {
+		"draws": 0,
+		"events": 0,
+		"state": 2380781706045169222
+	},
+	"damage": 323.99999999997374,
+	"engine": "4.6.3-stable (official)",
+	"events": {
+		"hit": 4320
+	},
+	"frames": 24,
+	"geometry": {
+		"bounds": "[P: (42.0, 104.0), S: (3600.0, 2400.0)]",
+		"encounter_mode": "exploration",
+		"id": "broken_ruins",
+		"landmarks": {
+			"boss": {
+				"center": "(3222.0, 424.0)",
+				"id": "rift_warden",
+				"name": "裂隙守卫",
+				"sign_position": "(3042.0, 574.0)",
+				"trigger_center": "(3222.0, 424.0)",
+				"trigger_radius": 64.0
+			},
+			"camps": [
+				{
+					"center": "(1362.0, 2224.0)",
+					"id": "camp_west",
+					"name": "西侧据点",
+					"positions": [
+						"(1284.0, 2204.0)",
+						"(1337.0, 2267.0)",
+						"(1389.0, 2184.0)",
+						"(1442.0, 2248.0)",
+						"(607.0, 1256.0)",
+						"(646.0, 1198.0)",
+						"(720.0, 1178.0)",
+						"(792.0, 1211.0)",
+						"(820.0, 1284.0)",
+						"(777.0, 1357.0)",
+						"(702.0, 1386.0)",
+						"(626.0, 1336.0)"
+					],
+					"root_count": 12,
+					"sign_position": "(1362.0, 2374.0)",
+					"trigger_center": "(1362.0, 2224.0)",
+					"trigger_radius": 64.0
+				},
+				{
+					"center": "(1462.0, 474.0)",
+					"id": "camp_north",
+					"name": "北侧据点",
+					"positions": [
+						"(1384.0, 454.0)",
+						"(1437.0, 517.0)",
+						"(1489.0, 434.0)",
+						"(1542.0, 498.0)",
+						"(1727.0, 1226.0)",
+						"(1766.0, 1168.0)",
+						"(1840.0, 1148.0)",
+						"(1912.0, 1181.0)",
+						"(1940.0, 1254.0)",
+						"(1897.0, 1327.0)",
+						"(1822.0, 1356.0)",
+						"(1746.0, 1306.0)"
+					],
+					"root_count": 12,
+					"sign_position": "(1462.0, 624.0)",
+					"trigger_center": "(1462.0, 474.0)",
+					"trigger_radius": 64.0
+				},
+				{
+					"center": "(2802.0, 2204.0)",
+					"id": "camp_east",
+					"name": "东侧据点",
+					"positions": [
+						"(2724.0, 2184.0)",
+						"(2777.0, 2247.0)",
+						"(2829.0, 2164.0)",
+						"(2882.0, 2228.0)",
+						"(2947.0, 1196.0)",
+						"(2986.0, 1138.0)",
+						"(3060.0, 1118.0)",
+						"(3132.0, 1151.0)",
+						"(3160.0, 1224.0)",
+						"(3117.0, 1297.0)",
+						"(3042.0, 1326.0)",
+						"(2966.0, 1276.0)"
+					],
+					"root_count": 12,
+					"sign_position": "(2802.0, 2354.0)",
+					"trigger_center": "(2802.0, 2204.0)",
+					"trigger_radius": 64.0
+				}
+			],
+			"distribution_version": "route_outposts_v1",
+			"entry": "(362.0, 2184.0)",
+			"outposts": [
+				{
+					"center": "(1362.0, 2224.0)",
+					"id": "camp_west_1",
+					"name": "西侧据点 · 1",
+					"ordinals": [
+						1,
+						2,
+						3,
+						4
+					],
+					"positions": [
+						"(1284.0, 2204.0)",
+						"(1337.0, 2267.0)",
+						"(1389.0, 2184.0)",
+						"(1442.0, 2248.0)"
+					],
+					"root_count": 4,
+					"sign_position": "(1362.0, 2374.0)",
+					"source_group": "camp_west"
+				},
+				{
+					"center": "(712.0, 1284.0)",
+					"id": "camp_west_2",
+					"name": "西侧据点 · 2",
+					"ordinals": [
+						5,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12
+					],
+					"positions": [
+						"(607.0, 1256.0)",
+						"(646.0, 1198.0)",
+						"(720.0, 1178.0)",
+						"(792.0, 1211.0)",
+						"(820.0, 1284.0)",
+						"(777.0, 1357.0)",
+						"(702.0, 1386.0)",
+						"(626.0, 1336.0)"
+					],
+					"root_count": 8,
+					"sign_position": "(712.0, 1434.0)",
+					"source_group": "camp_west"
+				},
+				{
+					"center": "(1462.0, 474.0)",
+					"id": "camp_north_1",
+					"name": "北侧据点 · 1",
+					"ordinals": [
+						1,
+						2,
+						3,
+						4
+					],
+					"positions": [
+						"(1384.0, 454.0)",
+						"(1437.0, 517.0)",
+						"(1489.0, 434.0)",
+						"(1542.0, 498.0)"
+					],
+					"root_count": 4,
+					"sign_position": "(1462.0, 624.0)",
+					"source_group": "camp_north"
+				},
+				{
+					"center": "(1832.0, 1254.0)",
+					"id": "camp_north_2",
+					"name": "北侧据点 · 2",
+					"ordinals": [
+						5,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12
+					],
+					"positions": [
+						"(1727.0, 1226.0)",
+						"(1766.0, 1168.0)",
+						"(1840.0, 1148.0)",
+						"(1912.0, 1181.0)",
+						"(1940.0, 1254.0)",
+						"(1897.0, 1327.0)",
+						"(1822.0, 1356.0)",
+						"(1746.0, 1306.0)"
+					],
+					"root_count": 8,
+					"sign_position": "(1832.0, 1404.0)",
+					"source_group": "camp_north"
+				},
+				{
+					"center": "(2802.0, 2204.0)",
+					"id": "camp_east_1",
+					"name": "东侧据点 · 1",
+					"ordinals": [
+						1,
+						2,
+						3,
+						4
+					],
+					"positions": [
+						"(2724.0, 2184.0)",
+						"(2777.0, 2247.0)",
+						"(2829.0, 2164.0)",
+						"(2882.0, 2228.0)"
+					],
+					"root_count": 4,
+					"sign_position": "(2802.0, 2354.0)",
+					"source_group": "camp_east"
+				},
+				{
+					"center": "(3052.0, 1224.0)",
+					"id": "camp_east_2",
+					"name": "东侧据点 · 2",
+					"ordinals": [
+						5,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12
+					],
+					"positions": [
+						"(2947.0, 1196.0)",
+						"(2986.0, 1138.0)",
+						"(3060.0, 1118.0)",
+						"(3132.0, 1151.0)",
+						"(3160.0, 1224.0)",
+						"(3117.0, 1297.0)",
+						"(3042.0, 1326.0)",
+						"(2966.0, 1276.0)"
+					],
+					"root_count": 8,
+					"sign_position": "(3052.0, 1374.0)",
+					"source_group": "camp_east"
+				}
+			],
+			"route_segments": [
+				{
+					"from": "(362.0, 2184.0)",
+					"to": "(742.0, 2204.0)",
+					"width": 72.0
+				},
+				{
+					"from": "(742.0, 2204.0)",
+					"to": "(1362.0, 2224.0)",
+					"width": 72.0
+				},
+				{
+					"from": "(1362.0, 2224.0)",
+					"to": "(1922.0, 2284.0)",
+					"width": 72.0
+				},
+				{
+					"from": "(1922.0, 2284.0)",
+					"to": "(2802.0, 2204.0)",
+					"width": 72.0
+				},
+				{
+					"from": "(2802.0, 2204.0)",
+					"to": "(3092.0, 1784.0)",
+					"width": 72.0
+				},
+				{
+					"from": "(3092.0, 1784.0)",
+					"to": "(3052.0, 1224.0)",
+					"width": 72.0
+				},
+				{
+					"from": "(3052.0, 1224.0)",
+					"to": "(3222.0, 424.0)",
+					"width": 72.0
+				},
+				{
+					"from": "(362.0, 2184.0)",
+					"to": "(692.0, 1904.0)",
+					"width": 72.0
+				},
+				{
+					"from": "(692.0, 1904.0)",
+					"to": "(712.0, 1284.0)",
+					"width": 72.0
+				},
+				{
+					"from": "(712.0, 1284.0)",
+					"to": "(742.0, 454.0)",
+					"width": 72.0
+				},
+				{
+					"from": "(742.0, 454.0)",
+					"to": "(1462.0, 474.0)",
+					"width": 72.0
+				},
+				{
+					"from": "(1462.0, 474.0)",
+					"to": "(1882.0, 474.0)",
+					"width": 72.0
+				},
+				{
+					"from": "(1882.0, 474.0)",
+					"to": "(3222.0, 424.0)",
+					"width": 72.0
+				},
+				{
+					"from": "(1362.0, 2224.0)",
+					"to": "(1782.0, 1954.0)",
+					"width": 72.0
+				},
+				{
+					"from": "(1782.0, 1954.0)",
+					"to": "(1832.0, 1254.0)",
+					"width": 72.0
+				},
+				{
+					"from": "(1832.0, 1254.0)",
+					"to": "(1882.0, 474.0)",
+					"width": 72.0
+				},
+				{
+					"from": "(1832.0, 1254.0)",
+					"to": "(2272.0, 824.0)",
+					"width": 72.0
+				},
+				{
+					"from": "(2272.0, 824.0)",
+					"to": "(2762.0, 824.0)",
+					"width": 72.0
+				},
+				{
+					"from": "(2762.0, 824.0)",
+					"to": "(3052.0, 1224.0)",
+					"width": 72.0
+				}
+			]
+		},
+		"obstacle_style": "",
+		"revision": 2,
+		"spawn": "(362.0, 2184.0)",
+		"walls": [
+			"[P: (1162.0, 604.0), S: (100.0, 1260.0)]",
+			"[P: (2422.0, 1004.0), S: (100.0, 1100.0)]"
+		]
+	},
+	"initial_sha256": "b546dc7e65df8f828b4941038a28dddce6c0ebc17d5bcfe8da3724f40ea64044",
+	"instrumented": false,
+	"kills": 0,
+	"map": {
+		"admitted": 36,
+		"boss_defeated": false,
+		"boss_id": 37,
+		"complete": false,
+		"ordinary_kills": 0,
+		"ordinary_target": 36
+	},
+	"observation_bytes": 1124484,
+	"observation_sha256": "910e4495e87635ed7a2d4eae74bf6d0abe35505b61c55f55e67ef0fe7f7fb811",
+	"phases": {
+
+	},
+	"rng_state": "2562738993602066876",
+	"samples": [
+		{
+			"awake": 37,
+			"candidate_visits": 400,
+			"cpu_us": 52995,
+			"enemies": 37,
+			"frame": 0,
+			"full_scan_visits": 6660,
+			"hits": 180,
+			"observation_sha256": "4f7847ba9c0ce02835aaa93751705202384e87b26a2869ca7d692dabab8bc6ea",
+			"particles": 180,
+			"phases": {
+
+			},
+			"separation_candidates": 65,
+			"sort_skips": 179,
+			"sorts": 1
+		},
+		{
+			"awake": 37,
+			"candidate_visits": 396,
+			"cpu_us": 42100,
+			"enemies": 37,
+			"frame": 1,
+			"full_scan_visits": 6660,
+			"hits": 360,
+			"observation_sha256": "f6280d462d48b88994861271ce240cdb069d114c03d6184a1db45dd623d1c132",
+			"particles": 180,
+			"phases": {
+
+			},
+			"separation_candidates": 65,
+			"sort_skips": 179,
+			"sorts": 1
+		},
+		{
+			"awake": 37,
+			"candidate_visits": 396,
+			"cpu_us": 45787,
+			"enemies": 37,
+			"frame": 2,
+			"full_scan_visits": 6660,
+			"hits": 540,
+			"observation_sha256": "0d274c2d4b9eaf03bce84f71d0cfe264bb2a0415d03ca299eca6c4bd149a260e",
+			"particles": 180,
+			"phases": {
+
+			},
+			"separation_candidates": 64,
+			"sort_skips": 179,
+			"sorts": 1
+		},
+		{
+			"awake": 37,
+			"candidate_visits": 396,
+			"cpu_us": 44417,
+			"enemies": 37,
+			"frame": 3,
+			"full_scan_visits": 6660,
+			"hits": 720,
+			"observation_sha256": "01ca9a6b10c81e25e700371b1127e316f912db84e751f8f95c7fdb8201d87aa3",
+			"particles": 180,
+			"phases": {
+
+			},
+			"separation_candidates": 64,
+			"sort_skips": 179,
+			"sorts": 1
+		},
+		{
+			"awake": 37,
+			"candidate_visits": 391,
+			"cpu_us": 42755,
+			"enemies": 37,
+			"frame": 4,
+			"full_scan_visits": 6660,
+			"hits": 900,
+			"observation_sha256": "1ea17d05fdd78e87ba6b3e6054bd7952a204af74cea10ad951fca5705db2c91d",
+			"particles": 180,
+			"phases": {
+
+			},
+			"separation_candidates": 63,
+			"sort_skips": 179,
+			"sorts": 1
+		},
+		{
+			"awake": 37,
+			"candidate_visits": 392,
+			"cpu_us": 33959,
+			"enemies": 37,
+			"frame": 5,
+			"full_scan_visits": 6660,
+			"hits": 1080,
+			"observation_sha256": "77fc2a4ebdc7a514869a70d59a60a1f87424db44d3ff018afdc2fb40841dfdc2",
+			"particles": 180,
+			"phases": {
+
+			},
+			"separation_candidates": 62,
+			"sort_skips": 179,
+			"sorts": 1
+		},
+		{
+			"awake": 37,
+			"candidate_visits": 392,
+			"cpu_us": 34725,
+			"enemies": 37,
+			"frame": 6,
+			"full_scan_visits": 6660,
+			"hits": 1260,
+			"observation_sha256": "a08ed4f8f609ddefb32160478d25cea27cb9dfb943bbe7d638e572976f0dd546",
+			"particles": 180,
+			"phases": {
+
+			},
+			"separation_candidates": 61,
+			"sort_skips": 179,
+			"sorts": 1
+		},
+		{
+			"awake": 37,
+			"candidate_visits": 387,
+			"cpu_us": 34870,
+			"enemies": 37,
+			"frame": 7,
+			"full_scan_visits": 6660,
+			"hits": 1440,
+			"observation_sha256": "a716321f0b28b04be1007c77c1b33be10c0b2eda475455c3cb32bbb3162a99e7",
+			"particles": 180,
+			"phases": {
+
+			},
+			"separation_candidates": 60,
+			"sort_skips": 179,
+			"sorts": 1
+		},
+		{
+			"awake": 37,
+			"candidate_visits": 387,
+			"cpu_us": 34498,
+			"enemies": 37,
+			"frame": 8,
+			"full_scan_visits": 6660,
+			"hits": 1620,
+			"observation_sha256": "6c448e670f1fc2ab520adb635dd37912adcaed984613017f9742a6e03e842dc5",
+			"particles": 180,
+			"phases": {
+
+			},
+			"separation_candidates": 62,
+			"sort_skips": 179,
+			"sorts": 1
+		},
+		{
+			"awake": 37,
+			"candidate_visits": 392,
+			"cpu_us": 61677,
+			"enemies": 37,
+			"frame": 9,
+			"full_scan_visits": 6660,
+			"hits": 1800,
+			"observation_sha256": "b1f0fc61e1844e135edc563a5c2b048621f51b344791ce509b0c2fce2bb76e38",
+			"particles": 180,
+			"phases": {
+
+			},
+			"separation_candidates": 62,
+			"sort_skips": 179,
+			"sorts": 1
+		},
+		{
+			"awake": 37,
+			"candidate_visits": 392,
+			"cpu_us": 71999,
+			"enemies": 37,
+			"frame": 10,
+			"full_scan_visits": 6660,
+			"hits": 1980,
+			"observation_sha256": "268fa2a0db81470d7e9e055b7e8e239374328aca2add3629f5e71868ceb4ecdc",
+			"particles": 180,
+			"phases": {
+
+			},
+			"separation_candidates": 61,
+			"sort_skips": 179,
+			"sorts": 1
+		},
+		{
+			"awake": 37,
+			"candidate_visits": 367,
+			"cpu_us": 71495,
+			"enemies": 37,
+			"frame": 11,
+			"full_scan_visits": 6660,
+			"hits": 2160,
+			"observation_sha256": "f4c3408d5fbab906ecb29c349b8bd1a691be8ec0645d6f3ce7bb58f1c90d468a",
+			"particles": 180,
+			"phases": {
+
+			},
+			"separation_candidates": 60,
+			"sort_skips": 179,
+			"sorts": 1
+		},
+		{
+			"awake": 37,
+			"candidate_visits": 372,
+			"cpu_us": 35357,
+			"enemies": 37,
+			"frame": 12,
+			"full_scan_visits": 6660,
+			"hits": 2340,
+			"observation_sha256": "63325bba660838065893d9476b208216d0180dd4455627a5288864664f0a27ac",
+			"particles": 180,
+			"phases": {
+
+			},
+			"separation_candidates": 59,
+			"sort_skips": 179,
+			"sorts": 1
+		},
+		{
+			"awake": 37,
+			"candidate_visits": 372,
+			"cpu_us": 67354,
+			"enemies": 37,
+			"frame": 13,
+			"full_scan_visits": 6660,
+			"hits": 2520,
+			"observation_sha256": "5c31a477c9b36b94b829b57b2330773ed4d81c504a0f8c0128cc7b12d2feb6bc",
+			"particles": 180,
+			"phases": {
+
+			},
+			"separation_candidates": 60,
+			"sort_skips": 179,
+			"sorts": 1
+		},
+		{
+			"awake": 37,
+			"candidate_visits": 362,
+			"cpu_us": 61491,
+			"enemies": 37,
+			"frame": 14,
+			"full_scan_visits": 6660,
+			"hits": 2700,
+			"observation_sha256": "8d937aa59a7103e26400b832b56e049780072f79a04c75a4e164ccea688e282f",
+			"particles": 180,
+			"phases": {
+
+			},
+			"separation_candidates": 60,
+			"sort_skips": 179,
+			"sorts": 1
+		},
+		{
+			"awake": 37,
+			"candidate_visits": 372,
+			"cpu_us": 62974,
+			"enemies": 37,
+			"frame": 15,
+			"full_scan_visits": 6660,
+			"hits": 2880,
+			"observation_sha256": "3f3e5c44cd9de71fa90ab94ba5da8c4bd7431742b57e153672489eb103f7e1d3",
+			"particles": 180,
+			"phases": {
+
+			},
+			"separation_candidates": 59,
+			"sort_skips": 179,
+			"sorts": 1
+		},
+		{
+			"awake": 37,
+			"candidate_visits": 372,
+			"cpu_us": 73238,
+			"enemies": 37,
+			"frame": 16,
+			"full_scan_visits": 6660,
+			"hits": 3060,
+			"observation_sha256": "2e2d86b81ea730bb6c4b5516efa19b28a34df5a0f2c7516f8aca72e8e378ba61",
+			"particles": 180,
+			"phases": {
+
+			},
+			"separation_candidates": 60,
+			"sort_skips": 179,
+			"sorts": 1
+		},
+		{
+			"awake": 37,
+			"candidate_visits": 368,
+			"cpu_us": 44638,
+			"enemies": 37,
+			"frame": 17,
+			"full_scan_visits": 6660,
+			"hits": 3240,
+			"observation_sha256": "4708b80c44982d81681ef9c879e0a62d1e0e9f01016e71be03e1911991305aca",
+			"particles": 180,
+			"phases": {
+
+			},
+			"separation_candidates": 59,
+			"sort_skips": 179,
+			"sorts": 1
+		},
+		{
+			"awake": 37,
+			"candidate_visits": 373,
+			"cpu_us": 41441,
+			"enemies": 37,
+			"frame": 18,
+			"full_scan_visits": 6660,
+			"hits": 3420,
+			"observation_sha256": "c5e892dd533c4c4dc6e34ee7a5e4793760c129e84e5d84070b6e5bf3176dca4f",
+			"particles": 0,
+			"phases": {
+
+			},
+			"separation_candidates": 59,
+			"sort_skips": 179,
+			"sorts": 1
+		},
+		{
+			"awake": 37,
+			"candidate_visits": 353,
+			"cpu_us": 38144,
+			"enemies": 37,
+			"frame": 19,
+			"full_scan_visits": 6660,
+			"hits": 3600,
+			"observation_sha256": "67cd496871cba6eb5665705a8173b44e225e1fbd84d120476568bebd0cadb2c3",
+			"particles": 180,
+			"phases": {
+
+			},
+			"separation_candidates": 59,
+			"sort_skips": 179,
+			"sorts": 1
+		},
+		{
+			"awake": 37,
+			"candidate_visits": 348,
+			"cpu_us": 34262,
+			"enemies": 37,
+			"frame": 20,
+			"full_scan_visits": 6660,
+			"hits": 3780,
+			"observation_sha256": "282b0d4c21ce3b8006333d188b53ee96ee43f9a6ce8a0a1341762b1b27fb63fb",
+			"particles": 180,
+			"phases": {
+
+			},
+			"separation_candidates": 58,
+			"sort_skips": 179,
+			"sorts": 1
+		},
+		{
+			"awake": 37,
+			"candidate_visits": 343,
+			"cpu_us": 36200,
+			"enemies": 37,
+			"frame": 21,
+			"full_scan_visits": 6660,
+			"hits": 3960,
+			"observation_sha256": "c1c8a3d5b0e1998eb76c246bf7b0e044e55a975075936d28b78056a4bdd074de",
+			"particles": 180,
+			"phases": {
+
+			},
+			"separation_candidates": 57,
+			"sort_skips": 179,
+			"sorts": 1
+		},
+		{
+			"awake": 37,
+			"candidate_visits": 343,
+			"cpu_us": 114898,
+			"enemies": 37,
+			"frame": 22,
+			"full_scan_visits": 6660,
+			"hits": 4140,
+			"observation_sha256": "426a68642708a8eceda730f7a9205ef09e8973824cc2bbd12186534d613a8a9c",
+			"particles": 180,
+			"phases": {
+
+			},
+			"separation_candidates": 56,
+			"sort_skips": 179,
+			"sorts": 1
+		},
+		{
+			"awake": 37,
+			"candidate_visits": 343,
+			"cpu_us": 65380,
+			"enemies": 37,
+			"frame": 23,
+			"full_scan_visits": 6660,
+			"hits": 4320,
+			"observation_sha256": "910e4495e87635ed7a2d4eae74bf6d0abe35505b61c55f55e67ef0fe7f7fb811",
+			"particles": 180,
+			"phases": {
+
+			},
+			"separation_candidates": 56,
+			"sort_skips": 179,
+			"sorts": 1
+		}
+	],
+	"scope": "Headless tick CPU only, excluding draw/render/HUD presentation, projectile construction and observation hashing. Formal broken_ruins I roster/geometry with protected player and spawn protection removed; 180 artificial near-contact carriers per tick, not natural player throughput. No supports/burn/shock/freeze/deaths/rewards. Nested inclusive phases overlap.",
+	"seeds": [
+		500050,
+		500051
+	],
+	"step": 0.016666666666666666,
+	"tick": {
+		"max_us": 114898,
+		"mean_us": 51943.916666666664,
+		"n": 24,
+		"over_16_7_ms": 24,
+		"over_33_3_ms": 24,
+		"p50_us": 44638,
+		"p95_us": 73238
+	}
+}

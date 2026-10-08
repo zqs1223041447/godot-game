@@ -1,0 +1,21 @@
+{
+  "base_commit": "dbdc846e21e70477c98516562bf18273b2ebcc95",
+  "runs": [
+    "instrumented-a",
+    "control",
+    "instrumented-b"
+  ],
+  "initial_observation_equal": true,
+  "all_24_per_tick_observations_equal": true,
+  "final_binary_byte_equal": true,
+  "final_sha256": "910e4495e87635ed7a2d4eae74bf6d0abe35505b61c55f55e67ef0fe7f7fb811",
+  "final_bytes": 1124484,
+  "rng_state": "2562738993602066876",
+  "critical": {
+    "draws": 0,
+    "events": 0,
+    "state": 2380781706045169222
+  },
+  "production_changes": false,
+  "optimization_implemented": false
+}

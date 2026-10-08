@@ -1562,10 +1562,12 @@ func _settle_projectile_events(events:Array[Dictionary],original_delta:float=0.0
 		if ember_batch:_ember_projectile_clock={"sequence":event.sequence,"raw":float(event.time),"offset":float(offsets[event_index])}
 		event_index+=1
 		event_counts[event.type] = int(event_counts.get(event.type, 0)) + 1
-		var brief: Dictionary = event.duplicate(true)
+		# Trace omits these large fields; exclude them before deep-copying the
+		# retained data, without mutating the live event or sharing nested data.
+		var brief: Dictionary = event.duplicate()
 		brief.erase("snapshot")
 		brief.erase("payload")
-		combat_trace.append(brief)
+		combat_trace.append(brief.duplicate(true))
 		if combat_trace.size() > 96:
 			combat_trace.pop_front()
 		if event.type == "hit":
