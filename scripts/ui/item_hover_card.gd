@@ -97,17 +97,19 @@ func contains_viewport_point(point: Vector2) -> bool:
 
 func scroll_at(point: Vector2, direction: int, steps: int=1) -> bool:
 	if not visible or _drag_active: return false
-	var scrolls: Array[Node] = find_children("ItemDetailsScroll","ScrollContainer",true,false)
-	for node: Node in scrolls:
-		var scroll := node as ScrollContainer
-		var local: Vector2=scroll.get_global_transform_with_canvas().affine_inverse()*point
-		if Rect2(Vector2.ZERO,scroll.size).has_point(local):
+	var scrolls: Array[ScrollContainer] = []
+	for column: Control in _row.get_children():
+		var scroll := column.find_child("ItemDetailsScroll",true,false) as ScrollContainer
+		if scroll == null: continue
+		scrolls.append(scroll)
+		var local: Vector2=column.get_global_transform_with_canvas().affine_inverse()*point
+		if Rect2(Vector2.ZERO,column.size).has_point(local):
 			scroll.scroll_vertical += direction*maxi(1,steps)*42
 			return true
 	# The pointer may remain on the source item; no focus transfer is needed.
 	var parent_control := get_parent() as Control
 	if parent_control != null and _last_anchor.has_point(parent_control.get_global_transform_with_canvas().affine_inverse()*point) and not scrolls.is_empty():
-		(scrolls[0] as ScrollContainer).scroll_vertical += direction*maxi(1,steps)*42
+		scrolls[0].scroll_vertical += direction*maxi(1,steps)*42
 		return true
 	return false
 
