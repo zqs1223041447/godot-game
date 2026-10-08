@@ -56,6 +56,14 @@ def component_text(components):
 def percent(value): return number(value*100)+'%'
 
 
+def one_with_nature_effect(rule):
+    return '<p>schema '+str(rule['minimum_save_version'])+' 已实装精确'+percent(rule['value'])+'攻击元素INC，与原12%天赋和装备同属性加算，之后才乘独立MORE。仅攻击的火、冰、雷分量适用，物理、混沌、法术及独立次级爆炸不获得此项。原全元素抗性+8%和攻击暴击率提高24%保持；旧55仍拒绝该节点。</p>'
+
+
+def one_with_nature_save_rule(rule):
+    return '<p>当前56先完整验证冻结旧55，再保存原字节备份'+esc(rule['backup_suffix'])+'并升级；仅改变版本，保留原分配、点数、物品、技能与旅程字段，不赠点或物品。失败不发布新构筑，冲突备份不覆盖。进行中地图字段保全不等于恢复整场战斗：怪物、弹体和状态计时不会由此迁移重建，启动离场仍按原规则处理。</p><p>旧55程序拒绝56文件；回退需先另存56，再人工恢复原55备份，备份不含升级后进度。保存前检查外部修改，不承诺覆盖任意并发时序或断电级持久性。</p>'
+
+
 def chaos_value(key, amount, ratio=False):
     return '<strong data-chaos-value="'+esc(key)+'" data-value="'+esc(amount)+'">'+(percent(amount) if ratio else number(amount))+'</strong>'
 
@@ -1511,6 +1519,7 @@ def build(data, art):
         if p['type'] in ['start','socket'] and selectable: state='结构节点规则已接入，不算属性效果覆盖'
         body=facts([('源版本','3.29.1'),('分区',esc(localized['partition'])),('状态',esc(state)),('源坐标',esc(', '.join(number(x) for x in p['position'])) if p['has_position'] else '源记录没有坐标，不虚构布局')])
         if effect['unsupported']:body+=details('未实现的源效果 · 整节点锁定','<p>'+lines(source_lines(effect['unsupported']))+'</p>')
+        if key == '15842' and 'one_with_nature' in data: body+=one_with_nature_effect(data['one_with_nature'])
         for choice in p['mastery_choices']:
             label='已执行' if allowed and choice['execution']['status']=='full' else '未完整执行 · 不可选择'
             body+=details(f'精通 {choice["effect"]} · {label}','<p>'+lines(localized['mastery_choices'][str(choice['effect'])])+'</p>')
@@ -2124,7 +2133,9 @@ def build(data, art):
         rule_defs.append(('long_stride', RULE_TITLES['long_stride'], '仅冲刺：请求距离175→280，本次新增保护0.6→0秒；已有保护保留，魔力×1.20，实际移动受墙体与边界限制。', long_stride_rule(data,link,facts), 'implemented'))
     if 'encircling_cleave' in data:
         rule_defs.append(('encircling_cleave', RULE_TITLES['encircling_cleave'], '仅裂刃斩：180度前方半圆改为360度整圆，主命中×0.75、魔力×1.25；半径与冷却保持。', encircling_cleave_rule(data,link,facts), 'implemented'))
-    for key,name,summary,body,status in rule_defs: cards.append(add('rules',key,name,summary,body,{'implemented':'已实现规则','research':'研究来源','planned':'未实现边界'}[status],status))
+    for key,name,summary,body,status in rule_defs:
+        if key == 'source_tree' and 'one_with_nature' in data: body+=one_with_nature_save_rule(data['one_with_nature'])
+        cards.append(add('rules',key,name,summary,body,{'implemented':'已实现规则','research':'研究来源','planned':'未实现边界'}[status],status))
     category_counts={cat:sum(x['cat']==cat for x in records) for cat,_ in CATEGORIES}
     nav=''.join(f'<a href="#category-{cat}" id="category-{cat}" class="nav-link" data-category="{cat}"><span>{label}</span><span>{category_counts[cat]}</span></a>' for cat,label in CATEGORIES)
     options=''.join(f'<option value="{esc(k)}">{esc(data["passives"][k]["name"])} · {esc(k)}</option>' for k in data['special_coverage'])

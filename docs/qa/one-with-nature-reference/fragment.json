@@ -1,0 +1,123 @@
+{
+	"linked_existing_node": {
+		"id": "18670",
+		"ordinary_reachable_class_ids": [
+			0,
+			1,
+			2,
+			3,
+			4,
+			5,
+			6
+		]
+	},
+	"localized_line": {
+		"status": {
+			"grants": [
+				{
+					"mode": "increased",
+					"stat": "attack_elemental_increased",
+					"value": 0.24
+				}
+			],
+			"implemented": true,
+			"missing_consumers": [],
+			"parser_supported": true
+		},
+		"text": "攻击技能造成的元素伤害提高24%"
+	},
+	"localized_node": {
+		"mastery_choices": {
+
+		},
+		"name": "与自然合一",
+		"partition": "标准主树",
+		"stats": "所有元素抗性+8%\n暴击几率提高24%（对攻击）\n攻击技能造成的元素伤害提高24%"
+	},
+	"node": {
+		"blighted_only": false,
+		"execution": {
+			"grants": [
+				{
+					"mode": "flat",
+					"stat": "fire_resistance",
+					"value": 0.08
+				},
+				{
+					"mode": "flat",
+					"stat": "cold_resistance",
+					"value": 0.08
+				},
+				{
+					"mode": "flat",
+					"stat": "lightning_resistance",
+					"value": 0.08
+				},
+				{
+					"mode": "increased",
+					"stat": "attack_crit_chance_increased",
+					"value": 0.24
+				},
+				{
+					"mode": "increased",
+					"stat": "attack_elemental_increased",
+					"value": 0.24
+				}
+			],
+			"status": "full",
+			"supported": [
+				"+8% to all Elemental Resistances",
+				"24% increased Critical Strike Chance for Attacks",
+				"24% increased Elemental Damage with Attack Skills"
+			],
+			"unsupported": []
+		},
+		"has_position": true,
+		"id": "15842",
+		"mastery_choices": [],
+		"name": "One With Nature",
+		"neighbors": [
+			"18670",
+			"30894"
+		],
+		"ordinary_reachable_class_ids": [
+			0,
+			1,
+			2,
+			3,
+			4,
+			5,
+			6
+		],
+		"partition": "standard",
+		"position": [
+			5112.080078125,
+			2784.5
+		],
+		"source_proxy": false,
+		"standard_graph": true,
+		"stats": [
+			"+8% to all Elemental Resistances",
+			"24% increased Critical Strike Chance for Attacks",
+			"24% increased Elemental Damage with Attack Skills"
+		],
+		"type": "notable"
+	},
+	"one_with_nature": {
+		"arbitrary_concurrent_write_cas": false,
+		"backup_suffix": ".v55-backup.json",
+		"changes_only_version": true,
+		"combat_runtime_restored": false,
+		"equipment_vocabulary": 51,
+		"minimum_save_version": 56,
+		"mode": "increased",
+		"node_id": "15842",
+		"power_loss_durability_claim": false,
+		"previous_save_version": 55,
+		"stat": "attack_elemental_increased",
+		"value": 0.24
+	},
+	"save_version": 56,
+	"source_policy": 56,
+	"source_sha256": "7e9f755e33152129ebf36c2ebdad639c527e4ad70d274b1fefb860f30ca01122"
+}

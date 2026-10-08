@@ -130005,7 +130005,7 @@
 		},
 		"timing": "施放时冻结；分配、退款和换装只影响新施放，旧飞行、母子箭、返回与独立爆炸保持各自快照"
 	},
-	"save_version": 55,
+	"save_version": 56,
 	"schema_version": 3,
 	"sectors": [
 		{
@@ -421593,16 +421593,20 @@
 							"mode": "increased",
 							"stat": "attack_crit_chance_increased",
 							"value": 0.24
+						},
+						{
+							"mode": "increased",
+							"stat": "attack_elemental_increased",
+							"value": 0.24
 						}
 					],
-					"status": "partial",
+					"status": "full",
 					"supported": [
 						"+8% to all Elemental Resistances",
-						"24% increased Critical Strike Chance for Attacks"
-					],
-					"unsupported": [
+						"24% increased Critical Strike Chance for Attacks",
 						"24% increased Elemental Damage with Attack Skills"
-					]
+					],
+					"unsupported": []
 				},
 				"has_position": true,
 				"id": "15842",
@@ -421611,6 +421615,15 @@
 				"neighbors": [
 					"18670",
 					"30894"
+				],
+				"ordinary_reachable_class_ids": [
+					0,
+					1,
+					2,
+					3,
+					4,
+					5,
+					6
 				],
 				"partition": "standard",
 				"position": [
@@ -427329,7 +427342,15 @@
 					"15842",
 					"37504"
 				],
-				"ordinary_reachable_class_ids": [],
+				"ordinary_reachable_class_ids": [
+					0,
+					1,
+					2,
+					3,
+					4,
+					5,
+					6
+				],
 				"partition": "standard",
 				"position": [
 					5252.3759765625,
@@ -546838,7 +546859,7 @@
 			"totalPoints": 123.0
 		},
 		"source_commit": "8bd138b32ea2631455cac5935bfab089f826094f",
-		"source_policy": 55,
+		"source_policy": 56,
 		"source_sha256": "7e9f755e33152129ebf36c2ebdad639c527e4ad70d274b1fefb860f30ca01122",
 		"source_url": "https://github.com/grindinggear/skilltree-export/tree/8bd138b32ea2631455cac5935bfab089f826094f",
 		"source_version": "3.29.1",
@@ -558695,12 +558716,18 @@
 			},
 			"24% increased Elemental Damage with Attack Skills": {
 				"status": {
-					"grants": [],
-					"implemented": false,
+					"grants": [
+						{
+							"mode": "increased",
+							"stat": "attack_elemental_increased",
+							"value": 0.24
+						}
+					],
+					"implemented": true,
 					"missing_consumers": [],
-					"parser_supported": false
+					"parser_supported": true
 				},
-				"text": "元素攻击技能造成的伤害提高24%（暂未实装）"
+				"text": "攻击技能造成的元素伤害提高24%"
 			},
 			"24% increased Elemental Damage with Wands": {
 				"status": {
@@ -579128,12 +579155,10 @@
 				"stats": "有10%几率避免元素异常状态（暂未实装）"
 			},
 			"15842": {
-				"mastery_choices": {
-
-				},
-				"name": "一与自然",
+				"mastery_choices": {},
+				"name": "与自然合一",
 				"partition": "标准主树",
-				"stats": "所有元素抗性+8%\n暴击几率提高24%（对攻击）\n元素攻击技能造成的伤害提高24%（暂未实装）"
+				"stats": "所有元素抗性+8%\n暴击几率提高24%（对攻击）\n攻击技能造成的元素伤害提高24%"
 			},
 			"15852": {
 				"mastery_choices": {
@@ -618478,5 +618503,19 @@
 		"save_version": 53,
 		"scope": "实际Main报告复用：合法新角色与自然入图首领，实际按键退圈再进内心；其他边界、资源、冻结与死亡情形为明确控制的集成探针，不是自然战斗录像。参考导出只读取既有夹具、事件和政策；不重放Main，不另造构筑，不重跑地图或战斗矩阵。",
 		"source_policy": 49
+	},
+	"one_with_nature": {
+		"arbitrary_concurrent_write_cas": false,
+		"backup_suffix": ".v55-backup.json",
+		"changes_only_version": true,
+		"combat_runtime_restored": false,
+		"equipment_vocabulary": 51,
+		"minimum_save_version": 56,
+		"mode": "increased",
+		"node_id": "15842",
+		"power_loss_durability_claim": false,
+		"previous_save_version": 55,
+		"stat": "attack_elemental_increased",
+		"value": 0.24
 	}
 }

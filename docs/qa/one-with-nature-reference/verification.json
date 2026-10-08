@@ -1,0 +1,51 @@
+{
+  "ok": true,
+  "baseline": "dbfbbf42457fe3f49a50fe232b5411c1e37c9f72",
+  "effect_cards": [
+    "source_passives-15842"
+  ],
+  "directly_related_existing_cards": [
+    "source_passives-18670",
+    "source_passives-30894"
+  ],
+  "current_rule_cards": [
+    "rules-elemental_conversion",
+    "rules-equipment",
+    "rules-frost_lock",
+    "rules-physical_fire_conversion",
+    "rules-source_monster_damage_life",
+    "rules-source_monster_movement",
+    "rules-source_monster_shield_recharge",
+    "rules-source_tree"
+  ],
+  "other_cards_byte_identical": 3805,
+  "checked_related_local_links": 250,
+  "coverage_changed_nodes": [
+    "15842"
+  ],
+  "new_ordinary_reachable_ids": [
+    "15842",
+    "18670"
+  ],
+  "reachable_count_per_class": [
+    715,
+    715,
+    715,
+    715,
+    715,
+    715,
+    715
+  ],
+  "source_sha256": {
+    "docs/reference/catalog.json": "947332f66fa36feb554495fd9a2ca9278442b3747c9f531e9fa19a3e29f6ab4f",
+    "docs/reference/index.html": "765fd4eddd943f57dc256a27f51dfc6baa6df7b2b1f386dfcb6dc6761b377e31",
+    "docs/reference/source-tree-coverage.json": "2a9af5601c6e30cab0d18a00ce7d1343c113e61d23bcf00b5a4f2ab729e051b7",
+    "tools/build_reference.py": "e1b0785189898a500484c4f3a8c5a05849b85e0c8b7d477b97572c284753c365",
+    "tools/one_with_nature_reference.gd": "66d76a02fd50b7e1c2fdb1b9a30502c07d2283a00385843848347bd44703699e",
+    "tools/merge_one_with_nature_reference.py": "a66682ca5431fc6bd8634449b892080eb8e543373742863b8c85f5b5d5d8b7db",
+    "tools/verify_one_with_nature_reference.py": "b3144ad206518442eb81c7c362dd39af96b797df08a69f9974b97ee9010928b0",
+    "docs/qa/one-with-nature-reference/fragment.json": "4ab81d030d656d4d6b816a0699ab898ba89ec0747f6abde8110b8715271b032b"
+  },
+  "runtime_files_byte_identical": 628,
+  "boundaries": "Read-only source export, related card generation/preservation and local links only; no transaction/combat suites, browser interaction or full battle restoration claim."
+}
