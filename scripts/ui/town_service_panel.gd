@@ -36,6 +36,7 @@ var _stock_refresh_queued := false
 var _normal := {}
 var _special := {}
 var _map_summary: Label
+var _map_preview: Label
 var _map_launch: Button
 var _map_prepare: Button
 var _map_gate_status: Label
@@ -193,6 +194,7 @@ func _refresh_map_status() -> void:
 	_map_status_queued = false
 	if not is_visible_in_tree() or _service != "map_device" or not is_instance_valid(_map_summary) or not is_instance_valid(_map_launch): return
 	_update_map_modifier_gates()
+	_update_map_selection_preview()
 	var draft: Dictionary = arena.map_draft()
 	if _map_selection_dirty:
 		_map_summary.text = "配置已更改 · 请准备地图"
@@ -231,6 +233,7 @@ func open_service(id: String = "") -> void:
 
 func _clear() -> void:
 	_map_summary = null
+	_map_preview = null
 	_map_launch = null
 	_map_prepare = null
 	_map_gate_status = null
@@ -366,6 +369,10 @@ func _build_map() -> void:
 	_tier_select = OptionButton.new()
 	_content.add_child(_tier_select)
 	_update_tiers(options, int(draft.get("tier", 1)))
+	_map_preview = Label.new()
+	_map_preview.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_map_preview.visible = false
+	_content.add_child(_map_preview)
 	_normal.clear()
 	_special.clear()
 	for group: String in ["normal_modifiers","special_modifiers"]:
@@ -417,6 +424,30 @@ func _build_map() -> void:
 	for check: CheckBox in _normal.values()+_special.values():
 		check.toggled.connect(func(_value: bool): _mark_map_selection_dirty())
 	_update_map_modifier_gates()
+	_update_map_selection_preview()
+
+func _update_map_selection_preview() -> void:
+	if not is_instance_valid(_map_preview): return
+	_map_preview.visible = _map_selection_dirty
+	_map_preview.text = ""
+	if not _map_selection_dirty: return
+	var normals: Array[String] = []
+	var specials: Array[String] = []
+	for id: String in _normal:
+		if _normal[id].button_pressed: normals.append(id)
+	for id: String in _special:
+		if _special[id].button_pressed: specials.append(id)
+	var tier: int = int(_tier_select.get_selected_metadata()) if _tier_select.item_count > 0 else 1
+	var preview: Dictionary = arena.map_selection_preview(str(_map_select.get_selected_metadata()),tier,normals,specials)
+	_map_preview.text = "所选配置 · 尚未准备\n"
+	if not preview.ok:
+		_map_preview.text += str(preview.reason)
+		return
+	_map_preview.text += str(preview.summary) + "\n"
+	if preview.test_mode:
+		_map_preview.text += "独立测试地图 · 免费；无正式地图结算"
+	else:
+		_map_preview.text += "入场 %d 校准碎片 · 全清结算 %d（须完成后领取）\n背包余额 %d%s" % [int(preview.cost),int(preview.completion_reward),int(preview.balance)," · 校准碎片不足" if int(preview.balance)<int(preview.cost) else ""]
 
 func _update_map_modifier_gates() -> void:
 	if not is_instance_valid(_map_prepare) or not is_instance_valid(_map_select): return

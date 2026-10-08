@@ -2831,6 +2831,17 @@ func map_modifier_availability(map_id: Variant, tier: Variant) -> Dictionary:
 		rows.append({"id": id, "name": MapCatalog.SPECIAL[id].name, "minimum_wave": MapCatalog.SPECIAL[id].minimum_wave,
 			"available": compiled.ok, "reason": compiled.reason})
 	return {"ok": true, "reason": "", "wave": base.profile.wave, "special_modifiers": rows}
+## Current controls only: no draft, save, RNG, admission or currency mutation.
+func map_selection_preview(map_id: Variant, tier: Variant, normal_ids: Variant, special_ids: Variant) -> Dictionary:
+	var testing := _is_test_profile()
+	var compiled: Dictionary = MapCompiler.compile(map_id,normal_ids,special_ids) if testing else MapCompiler.compile_normal(map_id,tier,normal_ids,special_ids)
+	if not compiled.ok: return compiled
+	if not testing:
+		for row: Dictionary in NormalMaps.tiers(map_id,int(state.normal_journey().best_tiers[map_id])):
+			if row.tier==tier and not row.unlocked: return _world_failure("tier_locked",str(row.reason))
+	return {"ok":true,"reason":"","test_mode":testing,"summary":compiled.profile.summary,
+		"cost":int(compiled.profile.get("fee",0)),"completion_reward":int(compiled.profile.get("completion_reward",0)),
+		"balance":state.crafting_balance()}
 func _normal_start_reason()->String:
 	if _is_test_profile():return ""
 	var journey:Dictionary=state.normal_journey()

@@ -1,0 +1,40 @@
+{
+	"checks": 60,
+	"display": "X11",
+	"failed_labels": [],
+	"failures": 0,
+	"method": "Trusted finite canonical UI fixture, actual Main/panel/inventory signals, one lawful entry; no combat, model assets or economic balance claim",
+	"source_sha256": {
+		"scripts/main.gd": "cf415835586a14af7b94452274874c17330a05c0414e0b9c2d9bf93984095231",
+		"scripts/ui/town_service_panel.gd": "21ed18cd8ada7bd24caf9c8731a67c5dca52bc3fd3ede6a5fa7c8b14445c650a",
+		"scripts/world/map_compiler.gd": "c800ccaf90a9807cc753fc694c19c614e52fff8226fdcaa27f0f5fdc2fcb5851",
+		"scripts/world/normal_map_catalog.gd": "a3d5d7a58fc481c2b258a0c083b8bdb4dd5a483121a0e2d4796bfbe676597ddb"
+	},
+	"states": [
+		{
+			"case": "tierIII with two existing modifier bonuses",
+			"draft_revision": 0,
+			"text": "所选配置 · 尚未准备\n旧庭试炼 · III · 凶猛 · 雷纹巡逻\n入场 8 校准碎片 · 全清结算 15（须完成后领取）\n背包余额 3 · 校准碎片不足"
+		},
+		{
+			"case": "returned original prepared configuration",
+			"draft_revision": 0,
+			"text": "所选配置 · 尚未准备\n旧庭试炼 · I\n入场 0 校准碎片 · 全清结算 4（须完成后领取）\n背包余额 3"
+		},
+		{
+			"case": "costfour at balancethree",
+			"draft_revision": 0,
+			"text": "所选配置 · 尚未准备\n断垣试炼 · II · 凶猛 · 雷纹巡逻\n入场 4 校准碎片 · 全清结算 11（须完成后领取）\n背包余额 3 · 校准碎片不足"
+		},
+		{
+			"case": "balancefour refresh",
+			"draft_revision": 0,
+			"text": "所选配置 · 尚未准备\n断垣试炼 · II · 凶猛 · 雷纹巡逻\n入场 4 校准碎片 · 全清结算 11（须完成后领取）\n背包余额 4"
+		},
+		{
+			"case": "independent test selection",
+			"draft_revision": 2,
+			"text": "所选配置 · 尚未准备\n断垣试炼 · 雷纹巡逻\n独立测试地图 · 免费；无正式地图结算"
+		}
+	]
+}
