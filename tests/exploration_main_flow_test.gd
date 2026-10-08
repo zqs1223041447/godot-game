@@ -369,7 +369,7 @@ func paid_atomic_reentry() -> bool:
 	arena._encounter_error=""
 	if not return_to_town("Paid reopened run returns without refund"):return false
 	check(arena.state.crafting_balance()==0 and arena.state.normal_journey().active_run.is_empty(),"Abandonment preserves paid fee and clears only active receipt")
-	check(Rules.reason(arena.state.snapshot()).is_empty() and arena.state.snapshot().version==50,"Final character remains valid existing schema50")
+	check(Rules.reason(arena.state.snapshot()).is_empty() and arena.state.snapshot().version==Rules.VERSION,"Final character remains valid current formal schema")
 	write_json("formal-final-save.json",arena.state.snapshot())
 	return true
 
@@ -388,8 +388,14 @@ func run() -> void:
 	pause()
 	check(arena.world_context().normal_town and not arena.world_context().test_mode and arena.enemies.is_empty(),"Default Main starts genuine fresh formal town")
 	check(arena.build_save_path=="user://build_save.json" and arena.state.normal_journey().normal_root_kills==0,"Fresh profile uses normal save path and no granted progression")
-	check(arena.state.snapshot().version==50 and Rules.reason(arena.state.snapshot()).is_empty(),"Existing schema50 and original ownership validate at first launch")
+	check(arena.state.snapshot().version==Rules.VERSION and Rules.reason(arena.state.snapshot()).is_empty(),"Current formal schema and original ownership validate at first launch")
 	if not check(arena.save_build(),"Actual Main saves fresh profile before admission"):
+		finish()
+		return
+	if OS.get_environment("EXPLORATION_MAIN_SAVE_ONLY")=="1":
+		# Earn the paid-entry prerequisite through the original root/reward path.
+		# Keep all paid atomicity checks; skip unrelated maps and active probes.
+		if enter("old_garden") and complete_boss_first():paid_atomic_reentry()
 		finish()
 		return
 	if OS.get_environment("EXPLORATION_MAIN_INPUT_ONLY")=="1":
