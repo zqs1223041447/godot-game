@@ -1243,6 +1243,37 @@
 					"via_reachable_node_id": "63139"
 				},
 				{
+					"name": "One With Nature",
+					"node_id": "15842",
+					"shortest_executable_prefix": [
+						"58833",
+						"48828",
+						"33508",
+						"36881",
+						"35503",
+						"19144",
+						"16167",
+						"10829",
+						"238",
+						"11497",
+						"5408",
+						"63139",
+						"61306",
+						"54142",
+						"30894",
+						"15842"
+					],
+					"status": "partial",
+					"supported": [
+						"+8% to all Elemental Resistances",
+						"24% increased Critical Strike Chance for Attacks"
+					],
+					"unsupported": [
+						"24% increased Elemental Damage with Attack Skills"
+					],
+					"via_reachable_node_id": "30894"
+				},
+				{
 					"name": "Attack Area of Effect and Accuracy",
 					"node_id": "15880",
 					"shortest_executable_prefix": [
@@ -4242,8 +4273,8 @@
 					"via_reachable_node_id": "1461"
 				},
 				{
-					"name": "Weapon Elemental Damage",
-					"node_id": "30894",
+					"name": "Weapon Elemental Damage and Ailment Effect",
+					"node_id": "30969",
 					"shortest_executable_prefix": [
 						"58833",
 						"48828",
@@ -4258,15 +4289,18 @@
 						"5408",
 						"63139",
 						"61306",
-						"54142",
-						"30894"
+						"60942",
+						"32555",
+						"64878",
+						"30969"
 					],
 					"status": "unsupported",
 					"supported": [],
 					"unsupported": [
-						"12% increased Elemental Damage with Attack Skills"
+						"10% increased Elemental Damage with Attack Skills",
+						"10% increased Effect of Non-Damaging Ailments"
 					],
-					"via_reachable_node_id": "54142"
+					"via_reachable_node_id": "64878"
 				},
 				{
 					"name": "Pierce",
@@ -7309,6 +7343,40 @@
 					"via_reachable_node_id": "59928"
 				},
 				{
+					"name": "Forces of Nature",
+					"node_id": "4481",
+					"shortest_executable_prefix": [
+						"58833",
+						"48828",
+						"33508",
+						"36881",
+						"35503",
+						"19144",
+						"16167",
+						"10829",
+						"238",
+						"11497",
+						"5408",
+						"63139",
+						"61306",
+						"60942",
+						"41866",
+						"63843",
+						"27283",
+						"5616",
+						"39718",
+						"56646",
+						"25511",
+						"4481"
+					],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"Attack Damage Penetrates 10% of Enemy Elemental Resistances"
+					],
+					"via_reachable_node_id": "25511"
+				},
+				{
 					"name": "Avatar of Fire",
 					"node_id": "44941",
 					"shortest_executable_prefix": [
@@ -8564,6 +8632,36 @@
 						"14% increased Damage Over Time with Bow Skills"
 					],
 					"via_reachable_node_id": "19711"
+				},
+				{
+					"name": "Weapon Elemental Damage, Status Ailment Chance",
+					"node_id": "50150",
+					"shortest_executable_prefix": [
+						"58833",
+						"48828",
+						"33508",
+						"36881",
+						"35503",
+						"19144",
+						"16167",
+						"10829",
+						"238",
+						"11497",
+						"5408",
+						"63139",
+						"61306",
+						"60942",
+						"32555",
+						"64878",
+						"50150"
+					],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"10% chance to Freeze, Shock and Ignite",
+						"10% increased Elemental Damage with Attack Skills"
+					],
+					"via_reachable_node_id": "64878"
 				},
 				{
 					"name": "Chance to Poison with Spells",
@@ -10133,38 +10231,6 @@
 						"Attacks have 10% chance to cause Bleeding"
 					],
 					"via_reachable_node_id": "30679"
-				},
-				{
-					"name": "Weapon Elemental Damage",
-					"node_id": "56646",
-					"shortest_executable_prefix": [
-						"58833",
-						"48828",
-						"33508",
-						"36881",
-						"35503",
-						"19144",
-						"16167",
-						"10829",
-						"238",
-						"11497",
-						"5408",
-						"63139",
-						"61306",
-						"60942",
-						"41866",
-						"63843",
-						"27283",
-						"5616",
-						"39718",
-						"56646"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"12% increased Elemental Damage with Attack Skills"
-					],
-					"via_reachable_node_id": "39718"
 				},
 				{
 					"name": "Impale Effect",
@@ -12020,34 +12086,6 @@
 					"via_reachable_node_id": "43374"
 				},
 				{
-					"name": "Weapon Elemental Damage",
-					"node_id": "64878",
-					"shortest_executable_prefix": [
-						"58833",
-						"48828",
-						"33508",
-						"36881",
-						"35503",
-						"19144",
-						"16167",
-						"10829",
-						"238",
-						"11497",
-						"5408",
-						"63139",
-						"61306",
-						"60942",
-						"32555",
-						"64878"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"12% increased Elemental Damage with Attack Skills"
-					],
-					"via_reachable_node_id": "32555"
-				},
-				{
 					"name": "Elemental Resistances",
 					"node_id": "651",
 					"shortest_executable_prefix": [
@@ -12856,11 +12894,11 @@
 					"via_reachable_node_id": "59650"
 				}
 			],
-			"blocked_frontier_count": 431,
+			"blocked_frontier_count": 432,
 			"blocked_frontier_status_counts": {
 				"full": 0,
 				"other": 0,
-				"partial": 112,
+				"partial": 113,
 				"unsupported": 319
 			},
 			"class_id": 0,
@@ -13143,9 +13181,9 @@
 					"via_reachable_node_id": "47306"
 				}
 			],
-			"reachable_count_excluding_start": 708,
-			"reachable_count_including_start": 709,
-			"reachable_full_direct_effect_nodes": 693,
+			"reachable_count_excluding_start": 712,
+			"reachable_count_including_start": 713,
+			"reachable_full_direct_effect_nodes": 697,
 			"reachable_no_direct_stats_neutral_nodes": 15,
 			"reachable_node_ids_including_start": [
 				"10017",
@@ -13320,6 +13358,7 @@
 				"25237",
 				"25260",
 				"2550",
+				"25511",
 				"25531",
 				"25714",
 				"25757",
@@ -13376,6 +13415,7 @@
 				"30679",
 				"30691",
 				"30733",
+				"30894",
 				"31033",
 				"31080",
 				"31153",
@@ -13695,6 +13735,7 @@
 				"56355",
 				"56460",
 				"56589",
+				"56646",
 				"56716",
 				"56803",
 				"56814",
@@ -13809,6 +13850,7 @@
 				"64501",
 				"64587",
 				"64709",
+				"64878",
 				"65033",
 				"65034",
 				"65053",
@@ -15157,6 +15199,43 @@
 						"10% chance to Avoid Elemental Ailments"
 					],
 					"via_reachable_node_id": "63139"
+				},
+				{
+					"name": "One With Nature",
+					"node_id": "15842",
+					"shortest_executable_prefix": [
+						"47175",
+						"50904",
+						"6981",
+						"36543",
+						"49412",
+						"31080",
+						"43374",
+						"30691",
+						"476",
+						"24865",
+						"34031",
+						"56001",
+						"17201",
+						"19711",
+						"6580",
+						"11651",
+						"5408",
+						"63139",
+						"61306",
+						"54142",
+						"30894",
+						"15842"
+					],
+					"status": "partial",
+					"supported": [
+						"+8% to all Elemental Resistances",
+						"24% increased Critical Strike Chance for Attacks"
+					],
+					"unsupported": [
+						"24% increased Elemental Damage with Attack Skills"
+					],
+					"via_reachable_node_id": "30894"
 				},
 				{
 					"name": "Attack Area of Effect and Accuracy",
@@ -18333,8 +18412,8 @@
 					"via_reachable_node_id": "1461"
 				},
 				{
-					"name": "Weapon Elemental Damage",
-					"node_id": "30894",
+					"name": "Weapon Elemental Damage and Ailment Effect",
+					"node_id": "30969",
 					"shortest_executable_prefix": [
 						"47175",
 						"50904",
@@ -18350,20 +18429,22 @@
 						"56001",
 						"17201",
 						"19711",
-						"6580",
-						"11651",
-						"5408",
-						"63139",
-						"61306",
-						"54142",
-						"30894"
+						"20010",
+						"23471",
+						"3469",
+						"64709",
+						"60942",
+						"32555",
+						"64878",
+						"30969"
 					],
 					"status": "unsupported",
 					"supported": [],
 					"unsupported": [
-						"12% increased Elemental Damage with Attack Skills"
+						"10% increased Elemental Damage with Attack Skills",
+						"10% increased Effect of Non-Damaging Ailments"
 					],
-					"via_reachable_node_id": "54142"
+					"via_reachable_node_id": "64878"
 				},
 				{
 					"name": "Pierce",
@@ -21565,6 +21646,45 @@
 					"via_reachable_node_id": "59928"
 				},
 				{
+					"name": "Forces of Nature",
+					"node_id": "4481",
+					"shortest_executable_prefix": [
+						"47175",
+						"50904",
+						"6981",
+						"36543",
+						"49412",
+						"31080",
+						"43374",
+						"30691",
+						"476",
+						"24865",
+						"34031",
+						"56001",
+						"17201",
+						"19711",
+						"20010",
+						"23471",
+						"3469",
+						"64709",
+						"60942",
+						"41866",
+						"63843",
+						"27283",
+						"5616",
+						"39718",
+						"56646",
+						"25511",
+						"4481"
+					],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"Attack Damage Penetrates 10% of Enemy Elemental Resistances"
+					],
+					"via_reachable_node_id": "25511"
+				},
+				{
 					"name": "Avatar of Fire",
 					"node_id": "44941",
 					"shortest_executable_prefix": [
@@ -22866,6 +22986,41 @@
 						"14% increased Damage Over Time with Bow Skills"
 					],
 					"via_reachable_node_id": "19711"
+				},
+				{
+					"name": "Weapon Elemental Damage, Status Ailment Chance",
+					"node_id": "50150",
+					"shortest_executable_prefix": [
+						"47175",
+						"50904",
+						"6981",
+						"36543",
+						"49412",
+						"31080",
+						"43374",
+						"30691",
+						"476",
+						"24865",
+						"34031",
+						"56001",
+						"17201",
+						"19711",
+						"20010",
+						"23471",
+						"3469",
+						"64709",
+						"60942",
+						"32555",
+						"64878",
+						"50150"
+					],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"10% chance to Freeze, Shock and Ignite",
+						"10% increased Elemental Damage with Attack Skills"
+					],
+					"via_reachable_node_id": "64878"
 				},
 				{
 					"name": "Chance to Poison with Spells",
@@ -24581,43 +24736,6 @@
 						"Attacks have 10% chance to cause Bleeding"
 					],
 					"via_reachable_node_id": "30679"
-				},
-				{
-					"name": "Weapon Elemental Damage",
-					"node_id": "56646",
-					"shortest_executable_prefix": [
-						"47175",
-						"50904",
-						"6981",
-						"36543",
-						"49412",
-						"31080",
-						"43374",
-						"30691",
-						"476",
-						"24865",
-						"34031",
-						"56001",
-						"17201",
-						"19711",
-						"20010",
-						"23471",
-						"3469",
-						"64709",
-						"60942",
-						"41866",
-						"63843",
-						"27283",
-						"5616",
-						"39718",
-						"56646"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"12% increased Elemental Damage with Attack Skills"
-					],
-					"via_reachable_node_id": "39718"
 				},
 				{
 					"name": "Impale Effect",
@@ -26625,39 +26743,6 @@
 					"via_reachable_node_id": "43374"
 				},
 				{
-					"name": "Weapon Elemental Damage",
-					"node_id": "64878",
-					"shortest_executable_prefix": [
-						"47175",
-						"50904",
-						"6981",
-						"36543",
-						"49412",
-						"31080",
-						"43374",
-						"30691",
-						"476",
-						"24865",
-						"34031",
-						"56001",
-						"17201",
-						"19711",
-						"20010",
-						"23471",
-						"3469",
-						"64709",
-						"60942",
-						"32555",
-						"64878"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"12% increased Elemental Damage with Attack Skills"
-					],
-					"via_reachable_node_id": "32555"
-				},
-				{
 					"name": "Elemental Resistances",
 					"node_id": "651",
 					"shortest_executable_prefix": [
@@ -27486,11 +27571,11 @@
 					"via_reachable_node_id": "59650"
 				}
 			],
-			"blocked_frontier_count": 431,
+			"blocked_frontier_count": 432,
 			"blocked_frontier_status_counts": {
 				"full": 0,
 				"other": 0,
-				"partial": 112,
+				"partial": 113,
 				"unsupported": 319
 			},
 			"class_id": 1,
@@ -27773,9 +27858,9 @@
 					"via_reachable_node_id": "47306"
 				}
 			],
-			"reachable_count_excluding_start": 708,
-			"reachable_count_including_start": 709,
-			"reachable_full_direct_effect_nodes": 693,
+			"reachable_count_excluding_start": 712,
+			"reachable_count_including_start": 713,
+			"reachable_full_direct_effect_nodes": 697,
 			"reachable_no_direct_stats_neutral_nodes": 15,
 			"reachable_node_ids_including_start": [
 				"10017",
@@ -27950,6 +28035,7 @@
 				"25237",
 				"25260",
 				"2550",
+				"25511",
 				"25531",
 				"25714",
 				"25757",
@@ -28006,6 +28092,7 @@
 				"30679",
 				"30691",
 				"30733",
+				"30894",
 				"31033",
 				"31080",
 				"31153",
@@ -28326,6 +28413,7 @@
 				"56355",
 				"56460",
 				"56589",
+				"56646",
 				"56716",
 				"56803",
 				"56814",
@@ -28439,6 +28527,7 @@
 				"64501",
 				"64587",
 				"64709",
+				"64878",
 				"65033",
 				"65034",
 				"65053",
@@ -29800,6 +29889,29 @@
 						"10% chance to Avoid Elemental Ailments"
 					],
 					"via_reachable_node_id": "63139"
+				},
+				{
+					"name": "One With Nature",
+					"node_id": "15842",
+					"shortest_executable_prefix": [
+						"50459",
+						"39821",
+						"52904",
+						"444",
+						"61306",
+						"54142",
+						"30894",
+						"15842"
+					],
+					"status": "partial",
+					"supported": [
+						"+8% to all Elemental Resistances",
+						"24% increased Critical Strike Chance for Attacks"
+					],
+					"unsupported": [
+						"24% increased Elemental Damage with Attack Skills"
+					],
+					"via_reachable_node_id": "30894"
 				},
 				{
 					"name": "Attack Area of Effect and Accuracy",
@@ -32951,23 +33063,26 @@
 					"via_reachable_node_id": "1461"
 				},
 				{
-					"name": "Weapon Elemental Damage",
-					"node_id": "30894",
+					"name": "Weapon Elemental Damage and Ailment Effect",
+					"node_id": "30969",
 					"shortest_executable_prefix": [
 						"50459",
 						"39821",
 						"52904",
 						"444",
 						"61306",
-						"54142",
-						"30894"
+						"60942",
+						"32555",
+						"64878",
+						"30969"
 					],
 					"status": "unsupported",
 					"supported": [],
 					"unsupported": [
-						"12% increased Elemental Damage with Attack Skills"
+						"10% increased Elemental Damage with Attack Skills",
+						"10% increased Effect of Non-Damaging Ailments"
 					],
-					"via_reachable_node_id": "54142"
+					"via_reachable_node_id": "64878"
 				},
 				{
 					"name": "Pierce",
@@ -36064,6 +36179,28 @@
 					"via_reachable_node_id": "59928"
 				},
 				{
+					"name": "Forces of Nature",
+					"node_id": "4481",
+					"shortest_executable_prefix": [
+						"50459",
+						"45035",
+						"59370",
+						"63795",
+						"38662",
+						"5616",
+						"39718",
+						"56646",
+						"25511",
+						"4481"
+					],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"Attack Damage Penetrates 10% of Enemy Elemental Resistances"
+					],
+					"via_reachable_node_id": "25511"
+				},
+				{
 					"name": "Avatar of Fire",
 					"node_id": "44941",
 					"shortest_executable_prefix": [
@@ -37392,6 +37529,28 @@
 						"14% increased Damage Over Time with Bow Skills"
 					],
 					"via_reachable_node_id": "19711"
+				},
+				{
+					"name": "Weapon Elemental Damage, Status Ailment Chance",
+					"node_id": "50150",
+					"shortest_executable_prefix": [
+						"50459",
+						"39821",
+						"52904",
+						"444",
+						"61306",
+						"60942",
+						"32555",
+						"64878",
+						"50150"
+					],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"10% chance to Freeze, Shock and Ignite",
+						"10% increased Elemental Damage with Attack Skills"
+					],
+					"via_reachable_node_id": "64878"
 				},
 				{
 					"name": "Chance to Poison with Spells",
@@ -38979,26 +39138,6 @@
 					"via_reachable_node_id": "30679"
 				},
 				{
-					"name": "Weapon Elemental Damage",
-					"node_id": "56646",
-					"shortest_executable_prefix": [
-						"50459",
-						"45035",
-						"59370",
-						"63795",
-						"38662",
-						"5616",
-						"39718",
-						"56646"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"12% increased Elemental Damage with Attack Skills"
-					],
-					"via_reachable_node_id": "39718"
-				},
-				{
 					"name": "Impale Effect",
 					"node_id": "56659",
 					"shortest_executable_prefix": [
@@ -40817,26 +40956,6 @@
 					"via_reachable_node_id": "43374"
 				},
 				{
-					"name": "Weapon Elemental Damage",
-					"node_id": "64878",
-					"shortest_executable_prefix": [
-						"50459",
-						"39821",
-						"52904",
-						"444",
-						"61306",
-						"60942",
-						"32555",
-						"64878"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"12% increased Elemental Damage with Attack Skills"
-					],
-					"via_reachable_node_id": "32555"
-				},
-				{
 					"name": "Elemental Resistances",
 					"node_id": "651",
 					"shortest_executable_prefix": [
@@ -41725,11 +41844,11 @@
 					"via_reachable_node_id": "59650"
 				}
 			],
-			"blocked_frontier_count": 431,
+			"blocked_frontier_count": 432,
 			"blocked_frontier_status_counts": {
 				"full": 0,
 				"other": 0,
-				"partial": 112,
+				"partial": 113,
 				"unsupported": 319
 			},
 			"class_id": 2,
@@ -42012,9 +42131,9 @@
 					"via_reachable_node_id": "47306"
 				}
 			],
-			"reachable_count_excluding_start": 708,
-			"reachable_count_including_start": 709,
-			"reachable_full_direct_effect_nodes": 693,
+			"reachable_count_excluding_start": 712,
+			"reachable_count_including_start": 713,
+			"reachable_full_direct_effect_nodes": 697,
 			"reachable_no_direct_stats_neutral_nodes": 15,
 			"reachable_node_ids_including_start": [
 				"10017",
@@ -42189,6 +42308,7 @@
 				"25237",
 				"25260",
 				"2550",
+				"25511",
 				"25531",
 				"25714",
 				"25757",
@@ -42245,6 +42365,7 @@
 				"30679",
 				"30691",
 				"30733",
+				"30894",
 				"31033",
 				"31080",
 				"31153",
@@ -42565,6 +42686,7 @@
 				"56355",
 				"56460",
 				"56589",
+				"56646",
 				"56716",
 				"56803",
 				"56814",
@@ -42678,6 +42800,7 @@
 				"64501",
 				"64587",
 				"64709",
+				"64878",
 				"65033",
 				"65034",
 				"65053",
@@ -43972,6 +44095,47 @@
 						"10% chance to Avoid Elemental Ailments"
 					],
 					"via_reachable_node_id": "63139"
+				},
+				{
+					"name": "One With Nature",
+					"node_id": "15842",
+					"shortest_executable_prefix": [
+						"54447",
+						"57226",
+						"21678",
+						"32210",
+						"8948",
+						"27659",
+						"37671",
+						"21301",
+						"20546",
+						"3656",
+						"58244",
+						"7112",
+						"13885",
+						"28012",
+						"59252",
+						"59606",
+						"1461",
+						"36287",
+						"20807",
+						"12412",
+						"32555",
+						"60942",
+						"61306",
+						"54142",
+						"30894",
+						"15842"
+					],
+					"status": "partial",
+					"supported": [
+						"+8% to all Elemental Resistances",
+						"24% increased Critical Strike Chance for Attacks"
+					],
+					"unsupported": [
+						"24% increased Elemental Damage with Attack Skills"
+					],
+					"via_reachable_node_id": "30894"
 				},
 				{
 					"name": "Attack Area of Effect and Accuracy",
@@ -47094,8 +47258,8 @@
 					"via_reachable_node_id": "1461"
 				},
 				{
-					"name": "Weapon Elemental Damage",
-					"node_id": "30894",
+					"name": "Weapon Elemental Damage and Ailment Effect",
+					"node_id": "30969",
 					"shortest_executable_prefix": [
 						"54447",
 						"57226",
@@ -47118,17 +47282,16 @@
 						"20807",
 						"12412",
 						"32555",
-						"60942",
-						"61306",
-						"54142",
-						"30894"
+						"64878",
+						"30969"
 					],
 					"status": "unsupported",
 					"supported": [],
 					"unsupported": [
-						"12% increased Elemental Damage with Attack Skills"
+						"10% increased Elemental Damage with Attack Skills",
+						"10% increased Effect of Non-Damaging Ailments"
 					],
-					"via_reachable_node_id": "54142"
+					"via_reachable_node_id": "64878"
 				},
 				{
 					"name": "Pierce",
@@ -50189,6 +50352,38 @@
 					"via_reachable_node_id": "59928"
 				},
 				{
+					"name": "Forces of Nature",
+					"node_id": "4481",
+					"shortest_executable_prefix": [
+						"54447",
+						"57226",
+						"21678",
+						"32210",
+						"8948",
+						"27659",
+						"37671",
+						"21301",
+						"20546",
+						"3656",
+						"58244",
+						"7112",
+						"13885",
+						"28012",
+						"59252",
+						"59606",
+						"39718",
+						"56646",
+						"25511",
+						"4481"
+					],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"Attack Damage Penetrates 10% of Enemy Elemental Resistances"
+					],
+					"via_reachable_node_id": "25511"
+				},
+				{
 					"name": "Avatar of Fire",
 					"node_id": "44941",
 					"shortest_executable_prefix": [
@@ -51540,6 +51735,42 @@
 						"14% increased Damage Over Time with Bow Skills"
 					],
 					"via_reachable_node_id": "19711"
+				},
+				{
+					"name": "Weapon Elemental Damage, Status Ailment Chance",
+					"node_id": "50150",
+					"shortest_executable_prefix": [
+						"54447",
+						"57226",
+						"21678",
+						"32210",
+						"8948",
+						"27659",
+						"37671",
+						"21301",
+						"20546",
+						"3656",
+						"58244",
+						"7112",
+						"13885",
+						"28012",
+						"59252",
+						"59606",
+						"1461",
+						"36287",
+						"20807",
+						"12412",
+						"32555",
+						"64878",
+						"50150"
+					],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"10% chance to Freeze, Shock and Ignite",
+						"10% increased Elemental Damage with Attack Skills"
+					],
+					"via_reachable_node_id": "64878"
 				},
 				{
 					"name": "Chance to Poison with Spells",
@@ -53122,36 +53353,6 @@
 						"Attacks have 10% chance to cause Bleeding"
 					],
 					"via_reachable_node_id": "30679"
-				},
-				{
-					"name": "Weapon Elemental Damage",
-					"node_id": "56646",
-					"shortest_executable_prefix": [
-						"54447",
-						"57226",
-						"21678",
-						"32210",
-						"8948",
-						"27659",
-						"37671",
-						"21301",
-						"20546",
-						"3656",
-						"58244",
-						"7112",
-						"13885",
-						"28012",
-						"59252",
-						"59606",
-						"39718",
-						"56646"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"12% increased Elemental Damage with Attack Skills"
-					],
-					"via_reachable_node_id": "39718"
 				},
 				{
 					"name": "Impale Effect",
@@ -55075,40 +55276,6 @@
 					"via_reachable_node_id": "43374"
 				},
 				{
-					"name": "Weapon Elemental Damage",
-					"node_id": "64878",
-					"shortest_executable_prefix": [
-						"54447",
-						"57226",
-						"21678",
-						"32210",
-						"8948",
-						"27659",
-						"37671",
-						"21301",
-						"20546",
-						"3656",
-						"58244",
-						"7112",
-						"13885",
-						"28012",
-						"59252",
-						"59606",
-						"1461",
-						"36287",
-						"20807",
-						"12412",
-						"32555",
-						"64878"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"12% increased Elemental Damage with Attack Skills"
-					],
-					"via_reachable_node_id": "32555"
-				},
-				{
 					"name": "Elemental Resistances",
 					"node_id": "651",
 					"shortest_executable_prefix": [
@@ -56014,11 +56181,11 @@
 					"via_reachable_node_id": "59650"
 				}
 			],
-			"blocked_frontier_count": 431,
+			"blocked_frontier_count": 432,
 			"blocked_frontier_status_counts": {
 				"full": 0,
 				"other": 0,
-				"partial": 112,
+				"partial": 113,
 				"unsupported": 319
 			},
 			"class_id": 3,
@@ -56301,9 +56468,9 @@
 					"via_reachable_node_id": "47306"
 				}
 			],
-			"reachable_count_excluding_start": 708,
-			"reachable_count_including_start": 709,
-			"reachable_full_direct_effect_nodes": 693,
+			"reachable_count_excluding_start": 712,
+			"reachable_count_including_start": 713,
+			"reachable_full_direct_effect_nodes": 697,
 			"reachable_no_direct_stats_neutral_nodes": 15,
 			"reachable_node_ids_including_start": [
 				"10017",
@@ -56478,6 +56645,7 @@
 				"25237",
 				"25260",
 				"2550",
+				"25511",
 				"25531",
 				"25714",
 				"25757",
@@ -56534,6 +56702,7 @@
 				"30679",
 				"30691",
 				"30733",
+				"30894",
 				"31033",
 				"31080",
 				"31153",
@@ -56854,6 +57023,7 @@
 				"56355",
 				"56460",
 				"56589",
+				"56646",
 				"56716",
 				"56803",
 				"56814",
@@ -56967,6 +57137,7 @@
 				"64501",
 				"64587",
 				"64709",
+				"64878",
 				"65033",
 				"65034",
 				"65053",
@@ -58330,6 +58501,33 @@
 						"10% chance to Avoid Elemental Ailments"
 					],
 					"via_reachable_node_id": "63139"
+				},
+				{
+					"name": "One With Nature",
+					"node_id": "15842",
+					"shortest_executable_prefix": [
+						"50986",
+						"39725",
+						"63649",
+						"49806",
+						"6580",
+						"11651",
+						"5408",
+						"63139",
+						"61306",
+						"54142",
+						"30894",
+						"15842"
+					],
+					"status": "partial",
+					"supported": [
+						"+8% to all Elemental Resistances",
+						"24% increased Critical Strike Chance for Attacks"
+					],
+					"unsupported": [
+						"24% increased Elemental Damage with Attack Skills"
+					],
+					"via_reachable_node_id": "30894"
 				},
 				{
 					"name": "Attack Area of Effect and Accuracy",
@@ -61416,8 +61614,8 @@
 					"via_reachable_node_id": "1461"
 				},
 				{
-					"name": "Weapon Elemental Damage",
-					"node_id": "30894",
+					"name": "Weapon Elemental Damage and Ailment Effect",
+					"node_id": "30969",
 					"shortest_executable_prefix": [
 						"50986",
 						"39725",
@@ -61428,15 +61626,18 @@
 						"5408",
 						"63139",
 						"61306",
-						"54142",
-						"30894"
+						"60942",
+						"32555",
+						"64878",
+						"30969"
 					],
 					"status": "unsupported",
 					"supported": [],
 					"unsupported": [
-						"12% increased Elemental Damage with Attack Skills"
+						"10% increased Elemental Damage with Attack Skills",
+						"10% increased Effect of Non-Damaging Ailments"
 					],
-					"via_reachable_node_id": "54142"
+					"via_reachable_node_id": "64878"
 				},
 				{
 					"name": "Pierce",
@@ -64553,6 +64754,36 @@
 					"via_reachable_node_id": "59928"
 				},
 				{
+					"name": "Forces of Nature",
+					"node_id": "4481",
+					"shortest_executable_prefix": [
+						"50986",
+						"39725",
+						"63649",
+						"49806",
+						"6580",
+						"11651",
+						"5408",
+						"63139",
+						"61306",
+						"60942",
+						"41866",
+						"63843",
+						"27283",
+						"5616",
+						"39718",
+						"56646",
+						"25511",
+						"4481"
+					],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"Attack Damage Penetrates 10% of Enemy Elemental Resistances"
+					],
+					"via_reachable_node_id": "25511"
+				},
+				{
 					"name": "Avatar of Fire",
 					"node_id": "44941",
 					"shortest_executable_prefix": [
@@ -65840,6 +66071,32 @@
 						"14% increased Damage Over Time with Bow Skills"
 					],
 					"via_reachable_node_id": "19711"
+				},
+				{
+					"name": "Weapon Elemental Damage, Status Ailment Chance",
+					"node_id": "50150",
+					"shortest_executable_prefix": [
+						"50986",
+						"39725",
+						"63649",
+						"49806",
+						"6580",
+						"11651",
+						"5408",
+						"63139",
+						"61306",
+						"60942",
+						"32555",
+						"64878",
+						"50150"
+					],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"10% chance to Freeze, Shock and Ignite",
+						"10% increased Elemental Damage with Attack Skills"
+					],
+					"via_reachable_node_id": "64878"
 				},
 				{
 					"name": "Chance to Poison with Spells",
@@ -67488,34 +67745,6 @@
 						"Attacks have 10% chance to cause Bleeding"
 					],
 					"via_reachable_node_id": "30679"
-				},
-				{
-					"name": "Weapon Elemental Damage",
-					"node_id": "56646",
-					"shortest_executable_prefix": [
-						"50986",
-						"39725",
-						"63649",
-						"49806",
-						"6580",
-						"11651",
-						"5408",
-						"63139",
-						"61306",
-						"60942",
-						"41866",
-						"63843",
-						"27283",
-						"5616",
-						"39718",
-						"56646"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"12% increased Elemental Damage with Attack Skills"
-					],
-					"via_reachable_node_id": "39718"
 				},
 				{
 					"name": "Impale Effect",
@@ -69418,30 +69647,6 @@
 					"via_reachable_node_id": "43374"
 				},
 				{
-					"name": "Weapon Elemental Damage",
-					"node_id": "64878",
-					"shortest_executable_prefix": [
-						"50986",
-						"39725",
-						"63649",
-						"49806",
-						"6580",
-						"11651",
-						"5408",
-						"63139",
-						"61306",
-						"60942",
-						"32555",
-						"64878"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"12% increased Elemental Damage with Attack Skills"
-					],
-					"via_reachable_node_id": "32555"
-				},
-				{
 					"name": "Elemental Resistances",
 					"node_id": "651",
 					"shortest_executable_prefix": [
@@ -70278,11 +70483,11 @@
 					"via_reachable_node_id": "59650"
 				}
 			],
-			"blocked_frontier_count": 431,
+			"blocked_frontier_count": 432,
 			"blocked_frontier_status_counts": {
 				"full": 0,
 				"other": 0,
-				"partial": 112,
+				"partial": 113,
 				"unsupported": 319
 			},
 			"class_id": 4,
@@ -70565,9 +70770,9 @@
 					"via_reachable_node_id": "47306"
 				}
 			],
-			"reachable_count_excluding_start": 708,
-			"reachable_count_including_start": 709,
-			"reachable_full_direct_effect_nodes": 693,
+			"reachable_count_excluding_start": 712,
+			"reachable_count_including_start": 713,
+			"reachable_full_direct_effect_nodes": 697,
 			"reachable_no_direct_stats_neutral_nodes": 15,
 			"reachable_node_ids_including_start": [
 				"10017",
@@ -70742,6 +70947,7 @@
 				"25237",
 				"25260",
 				"2550",
+				"25511",
 				"25531",
 				"25714",
 				"25757",
@@ -70798,6 +71004,7 @@
 				"30679",
 				"30691",
 				"30733",
+				"30894",
 				"31033",
 				"31080",
 				"31153",
@@ -71118,6 +71325,7 @@
 				"56355",
 				"56460",
 				"56589",
+				"56646",
 				"56716",
 				"56803",
 				"56814",
@@ -71231,6 +71439,7 @@
 				"64501",
 				"64587",
 				"64709",
+				"64878",
 				"65033",
 				"65034",
 				"65053",
@@ -72565,6 +72774,47 @@
 						"10% chance to Avoid Elemental Ailments"
 					],
 					"via_reachable_node_id": "63139"
+				},
+				{
+					"name": "One With Nature",
+					"node_id": "15842",
+					"shortest_executable_prefix": [
+						"61525",
+						"20228",
+						"39916",
+						"35556",
+						"44908",
+						"2913",
+						"50862",
+						"15405",
+						"33740",
+						"46910",
+						"65034",
+						"55485",
+						"13714",
+						"46578",
+						"28330",
+						"19144",
+						"16167",
+						"10829",
+						"238",
+						"11497",
+						"5408",
+						"63139",
+						"61306",
+						"54142",
+						"30894",
+						"15842"
+					],
+					"status": "partial",
+					"supported": [
+						"+8% to all Elemental Resistances",
+						"24% increased Critical Strike Chance for Attacks"
+					],
+					"unsupported": [
+						"24% increased Elemental Damage with Attack Skills"
+					],
+					"via_reachable_node_id": "30894"
 				},
 				{
 					"name": "Attack Area of Effect and Accuracy",
@@ -75741,8 +75991,8 @@
 					"via_reachable_node_id": "1461"
 				},
 				{
-					"name": "Weapon Elemental Damage",
-					"node_id": "30894",
+					"name": "Weapon Elemental Damage and Ailment Effect",
+					"node_id": "30969",
 					"shortest_executable_prefix": [
 						"61525",
 						"20228",
@@ -75767,15 +76017,18 @@
 						"5408",
 						"63139",
 						"61306",
-						"54142",
-						"30894"
+						"60942",
+						"32555",
+						"64878",
+						"30969"
 					],
 					"status": "unsupported",
 					"supported": [],
 					"unsupported": [
-						"12% increased Elemental Damage with Attack Skills"
+						"10% increased Elemental Damage with Attack Skills",
+						"10% increased Effect of Non-Damaging Ailments"
 					],
-					"via_reachable_node_id": "54142"
+					"via_reachable_node_id": "64878"
 				},
 				{
 					"name": "Pierce",
@@ -78955,6 +79208,48 @@
 					"via_reachable_node_id": "59928"
 				},
 				{
+					"name": "Forces of Nature",
+					"node_id": "4481",
+					"shortest_executable_prefix": [
+						"61525",
+						"63965",
+						"14151",
+						"27564",
+						"17735",
+						"13009",
+						"60398",
+						"31875",
+						"4397",
+						"7938",
+						"1031",
+						"19635",
+						"11551",
+						"38176",
+						"49651",
+						"41635",
+						"32710",
+						"4502",
+						"33783",
+						"3656",
+						"58244",
+						"7112",
+						"13885",
+						"28012",
+						"59252",
+						"59606",
+						"39718",
+						"56646",
+						"25511",
+						"4481"
+					],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"Attack Damage Penetrates 10% of Enemy Elemental Resistances"
+					],
+					"via_reachable_node_id": "25511"
+				},
+				{
 					"name": "Avatar of Fire",
 					"node_id": "44941",
 					"shortest_executable_prefix": [
@@ -80282,6 +80577,46 @@
 						"14% increased Damage Over Time with Bow Skills"
 					],
 					"via_reachable_node_id": "19711"
+				},
+				{
+					"name": "Weapon Elemental Damage, Status Ailment Chance",
+					"node_id": "50150",
+					"shortest_executable_prefix": [
+						"61525",
+						"20228",
+						"39916",
+						"35556",
+						"44908",
+						"2913",
+						"50862",
+						"15405",
+						"33740",
+						"46910",
+						"65034",
+						"55485",
+						"13714",
+						"46578",
+						"28330",
+						"19144",
+						"16167",
+						"10829",
+						"238",
+						"11497",
+						"5408",
+						"63139",
+						"61306",
+						"60942",
+						"32555",
+						"64878",
+						"50150"
+					],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"10% chance to Freeze, Shock and Ignite",
+						"10% increased Elemental Damage with Attack Skills"
+					],
+					"via_reachable_node_id": "64878"
 				},
 				{
 					"name": "Chance to Poison with Spells",
@@ -81947,46 +82282,6 @@
 						"Attacks have 10% chance to cause Bleeding"
 					],
 					"via_reachable_node_id": "30679"
-				},
-				{
-					"name": "Weapon Elemental Damage",
-					"node_id": "56646",
-					"shortest_executable_prefix": [
-						"61525",
-						"63965",
-						"14151",
-						"27564",
-						"17735",
-						"13009",
-						"60398",
-						"31875",
-						"4397",
-						"7938",
-						"1031",
-						"19635",
-						"11551",
-						"38176",
-						"49651",
-						"41635",
-						"32710",
-						"4502",
-						"33783",
-						"3656",
-						"58244",
-						"7112",
-						"13885",
-						"28012",
-						"59252",
-						"59606",
-						"39718",
-						"56646"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"12% increased Elemental Damage with Attack Skills"
-					],
-					"via_reachable_node_id": "39718"
 				},
 				{
 					"name": "Impale Effect",
@@ -84032,44 +84327,6 @@
 					"via_reachable_node_id": "43374"
 				},
 				{
-					"name": "Weapon Elemental Damage",
-					"node_id": "64878",
-					"shortest_executable_prefix": [
-						"61525",
-						"20228",
-						"39916",
-						"35556",
-						"44908",
-						"2913",
-						"50862",
-						"15405",
-						"33740",
-						"46910",
-						"65034",
-						"55485",
-						"13714",
-						"46578",
-						"28330",
-						"19144",
-						"16167",
-						"10829",
-						"238",
-						"11497",
-						"5408",
-						"63139",
-						"61306",
-						"60942",
-						"32555",
-						"64878"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"12% increased Elemental Damage with Attack Skills"
-					],
-					"via_reachable_node_id": "32555"
-				},
-				{
 					"name": "Elemental Resistances",
 					"node_id": "651",
 					"shortest_executable_prefix": [
@@ -84926,11 +85183,11 @@
 					"via_reachable_node_id": "59650"
 				}
 			],
-			"blocked_frontier_count": 431,
+			"blocked_frontier_count": 432,
 			"blocked_frontier_status_counts": {
 				"full": 0,
 				"other": 0,
-				"partial": 112,
+				"partial": 113,
 				"unsupported": 319
 			},
 			"class_id": 5,
@@ -85213,9 +85470,9 @@
 					"via_reachable_node_id": "47306"
 				}
 			],
-			"reachable_count_excluding_start": 708,
-			"reachable_count_including_start": 709,
-			"reachable_full_direct_effect_nodes": 693,
+			"reachable_count_excluding_start": 712,
+			"reachable_count_including_start": 713,
+			"reachable_full_direct_effect_nodes": 697,
 			"reachable_no_direct_stats_neutral_nodes": 15,
 			"reachable_node_ids_including_start": [
 				"10017",
@@ -85390,6 +85647,7 @@
 				"25237",
 				"25260",
 				"2550",
+				"25511",
 				"25531",
 				"25714",
 				"25757",
@@ -85446,6 +85704,7 @@
 				"30679",
 				"30691",
 				"30733",
+				"30894",
 				"31033",
 				"31080",
 				"31153",
@@ -85765,6 +86024,7 @@
 				"56355",
 				"56460",
 				"56589",
+				"56646",
 				"56716",
 				"56803",
 				"56814",
@@ -85879,6 +86139,7 @@
 				"64501",
 				"64587",
 				"64709",
+				"64878",
 				"65033",
 				"65034",
 				"65053",
@@ -87230,6 +87491,39 @@
 						"10% chance to Avoid Elemental Ailments"
 					],
 					"via_reachable_node_id": "63139"
+				},
+				{
+					"name": "One With Nature",
+					"node_id": "15842",
+					"shortest_executable_prefix": [
+						"44683",
+						"45272",
+						"8640",
+						"45838",
+						"4011",
+						"28012",
+						"59252",
+						"59606",
+						"1461",
+						"36287",
+						"20807",
+						"12412",
+						"32555",
+						"60942",
+						"61306",
+						"54142",
+						"30894",
+						"15842"
+					],
+					"status": "partial",
+					"supported": [
+						"+8% to all Elemental Resistances",
+						"24% increased Critical Strike Chance for Attacks"
+					],
+					"unsupported": [
+						"24% increased Elemental Damage with Attack Skills"
+					],
+					"via_reachable_node_id": "30894"
 				},
 				{
 					"name": "Attack Area of Effect and Accuracy",
@@ -90372,8 +90666,8 @@
 					"via_reachable_node_id": "1461"
 				},
 				{
-					"name": "Weapon Elemental Damage",
-					"node_id": "30894",
+					"name": "Weapon Elemental Damage and Ailment Effect",
+					"node_id": "30969",
 					"shortest_executable_prefix": [
 						"44683",
 						"45272",
@@ -90388,17 +90682,16 @@
 						"20807",
 						"12412",
 						"32555",
-						"60942",
-						"61306",
-						"54142",
-						"30894"
+						"64878",
+						"30969"
 					],
 					"status": "unsupported",
 					"supported": [],
 					"unsupported": [
-						"12% increased Elemental Damage with Attack Skills"
+						"10% increased Elemental Damage with Attack Skills",
+						"10% increased Effect of Non-Damaging Ailments"
 					],
-					"via_reachable_node_id": "54142"
+					"via_reachable_node_id": "64878"
 				},
 				{
 					"name": "Pierce",
@@ -93459,6 +93752,30 @@
 					"via_reachable_node_id": "59928"
 				},
 				{
+					"name": "Forces of Nature",
+					"node_id": "4481",
+					"shortest_executable_prefix": [
+						"44683",
+						"45272",
+						"8640",
+						"45838",
+						"4011",
+						"28012",
+						"59252",
+						"59606",
+						"39718",
+						"56646",
+						"25511",
+						"4481"
+					],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"Attack Damage Penetrates 10% of Enemy Elemental Resistances"
+					],
+					"via_reachable_node_id": "25511"
+				},
+				{
 					"name": "Avatar of Fire",
 					"node_id": "44941",
 					"shortest_executable_prefix": [
@@ -94804,6 +95121,34 @@
 						"14% increased Damage Over Time with Bow Skills"
 					],
 					"via_reachable_node_id": "19711"
+				},
+				{
+					"name": "Weapon Elemental Damage, Status Ailment Chance",
+					"node_id": "50150",
+					"shortest_executable_prefix": [
+						"44683",
+						"45272",
+						"8640",
+						"45838",
+						"4011",
+						"28012",
+						"59252",
+						"59606",
+						"1461",
+						"36287",
+						"20807",
+						"12412",
+						"32555",
+						"64878",
+						"50150"
+					],
+					"status": "unsupported",
+					"supported": [],
+					"unsupported": [
+						"10% chance to Freeze, Shock and Ignite",
+						"10% increased Elemental Damage with Attack Skills"
+					],
+					"via_reachable_node_id": "64878"
 				},
 				{
 					"name": "Chance to Poison with Spells",
@@ -96375,28 +96720,6 @@
 						"Attacks have 10% chance to cause Bleeding"
 					],
 					"via_reachable_node_id": "30679"
-				},
-				{
-					"name": "Weapon Elemental Damage",
-					"node_id": "56646",
-					"shortest_executable_prefix": [
-						"44683",
-						"45272",
-						"8640",
-						"45838",
-						"4011",
-						"28012",
-						"59252",
-						"59606",
-						"39718",
-						"56646"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"12% increased Elemental Damage with Attack Skills"
-					],
-					"via_reachable_node_id": "39718"
 				},
 				{
 					"name": "Impale Effect",
@@ -98203,32 +98526,6 @@
 					"via_reachable_node_id": "43374"
 				},
 				{
-					"name": "Weapon Elemental Damage",
-					"node_id": "64878",
-					"shortest_executable_prefix": [
-						"44683",
-						"45272",
-						"8640",
-						"45838",
-						"4011",
-						"28012",
-						"59252",
-						"59606",
-						"1461",
-						"36287",
-						"20807",
-						"12412",
-						"32555",
-						"64878"
-					],
-					"status": "unsupported",
-					"supported": [],
-					"unsupported": [
-						"12% increased Elemental Damage with Attack Skills"
-					],
-					"via_reachable_node_id": "32555"
-				},
-				{
 					"name": "Elemental Resistances",
 					"node_id": "651",
 					"shortest_executable_prefix": [
@@ -99160,11 +99457,11 @@
 					"via_reachable_node_id": "59650"
 				}
 			],
-			"blocked_frontier_count": 431,
+			"blocked_frontier_count": 432,
 			"blocked_frontier_status_counts": {
 				"full": 0,
 				"other": 0,
-				"partial": 112,
+				"partial": 113,
 				"unsupported": 319
 			},
 			"class_id": 6,
@@ -99447,9 +99744,9 @@
 					"via_reachable_node_id": "47306"
 				}
 			],
-			"reachable_count_excluding_start": 708,
-			"reachable_count_including_start": 709,
-			"reachable_full_direct_effect_nodes": 693,
+			"reachable_count_excluding_start": 712,
+			"reachable_count_including_start": 713,
+			"reachable_full_direct_effect_nodes": 697,
 			"reachable_no_direct_stats_neutral_nodes": 15,
 			"reachable_node_ids_including_start": [
 				"10017",
@@ -99624,6 +99921,7 @@
 				"25237",
 				"25260",
 				"2550",
+				"25511",
 				"25531",
 				"25714",
 				"25757",
@@ -99680,6 +99978,7 @@
 				"30679",
 				"30691",
 				"30733",
+				"30894",
 				"31033",
 				"31080",
 				"31153",
@@ -100000,6 +100299,7 @@
 				"56355",
 				"56460",
 				"56589",
+				"56646",
 				"56716",
 				"56803",
 				"56814",
@@ -100113,6 +100413,7 @@
 				"64501",
 				"64587",
 				"64709",
+				"64878",
 				"65033",
 				"65034",
 				"65053",
@@ -100168,12 +100469,12 @@
 	"effect_coverage": {
 		"all_source": {
 			"direct_effect_entries": {
-				"full": 879,
+				"full": 884,
 				"no_direct_stats": 165,
 				"other_status": 0,
 				"partial": 435,
 				"total_with_stats": 4709,
-				"unsupported": 3395
+				"unsupported": 3390
 			},
 			"mastery_nodes": 353,
 			"mastery_option_status_counts": {
@@ -100187,16 +100488,16 @@
 			"mastery_options_without_direct_stats": 0,
 			"node_api_status_counts": {
 				"choice": 353,
-				"full": 988,
+				"full": 993,
 				"partial": 421,
 				"unknown": 0,
-				"unsupported": 1628
+				"unsupported": 1623
 			},
 			"node_direct_effect_status_counts": {
-				"full": 879,
+				"full": 884,
 				"other": 0,
 				"partial": 435,
-				"unsupported": 3395
+				"unsupported": 3390
 			},
 			"node_records": 3390,
 			"nodes_with_direct_stats": 2872,
@@ -100205,12 +100506,12 @@
 		"counting_rule": "Only source entries with non-empty direct stats count as full, partial or unsupported effect entries. Empty-stat nodes/options are recorded as no_direct_stats even when node_effect returns full with no grants.",
 		"standard_allocation_graph": {
 			"direct_effect_entries": {
-				"full": 768,
+				"full": 773,
 				"no_direct_stats": 64,
 				"other_status": 0,
 				"partial": 242,
 				"total_with_stats": 3845,
-				"unsupported": 2835
+				"unsupported": 2830
 			},
 			"mastery_nodes": 315,
 			"mastery_option_status_counts": {
@@ -100224,16 +100525,16 @@
 			"mastery_options_without_direct_stats": 0,
 			"node_api_status_counts": {
 				"choice": 315,
-				"full": 776,
+				"full": 781,
 				"partial": 228,
 				"unknown": 0,
-				"unsupported": 1068
+				"unsupported": 1063
 			},
 			"node_direct_effect_status_counts": {
-				"full": 768,
+				"full": 773,
 				"other": 0,
 				"partial": 242,
-				"unsupported": 2835
+				"unsupported": 2830
 			},
 			"node_records": 2387,
 			"nodes_with_direct_stats": 2008,
@@ -130304,14 +130605,20 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "full",
+				"coverage_status": "full",
+				"grants": [
+					{
+						"mode": "increased",
+						"stat": "attack_elemental_increased",
+						"value": 0.12
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
-				"unsupported": [
+				"supported": [
 					"12% increased Elemental Damage with Attack Skills"
-				]
+				],
+				"unsupported": []
 			},
 			"group_id": "659",
 			"has_position": true,
@@ -153953,14 +154260,20 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "full",
+				"coverage_status": "full",
+				"grants": [
+					{
+						"mode": "increased",
+						"stat": "attack_elemental_increased",
+						"value": 0.12
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
-				"unsupported": [
+				"supported": [
 					"12% increased Elemental Damage with Attack Skills"
-				]
+				],
+				"unsupported": []
 			},
 			"group_id": "720",
 			"has_position": true,
@@ -172721,14 +173034,20 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "full",
+				"coverage_status": "full",
+				"grants": [
+					{
+						"mode": "increased",
+						"stat": "attack_elemental_increased",
+						"value": 0.12
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
-				"unsupported": [
+				"supported": [
 					"12% increased Elemental Damage with Attack Skills"
-				]
+				],
+				"unsupported": []
 			},
 			"group_id": "659",
 			"has_position": true,
@@ -271590,14 +271909,20 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "full",
+				"coverage_status": "full",
+				"grants": [
+					{
+						"mode": "increased",
+						"stat": "attack_elemental_increased",
+						"value": 0.12
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
-				"unsupported": [
+				"supported": [
 					"12% increased Elemental Damage with Attack Skills"
-				]
+				],
+				"unsupported": []
 			},
 			"group_id": "720",
 			"has_position": true,
@@ -302444,14 +302769,20 @@
 		{
 			"default_allocation_graph": true,
 			"execution": {
-				"api_status": "unsupported",
-				"coverage_status": "unsupported",
-				"grants": [],
+				"api_status": "full",
+				"coverage_status": "full",
+				"grants": [
+					{
+						"mode": "increased",
+						"stat": "attack_elemental_increased",
+						"value": 0.12
+					}
+				],
 				"has_direct_stats": true,
-				"supported": [],
-				"unsupported": [
+				"supported": [
 					"12% increased Elemental Damage with Attack Skills"
-				]
+				],
+				"unsupported": []
 			},
 			"group_id": "727",
 			"has_position": true,

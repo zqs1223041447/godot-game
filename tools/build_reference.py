@@ -1500,6 +1500,8 @@ def build(data, art):
         effect=p['execution']; allowed=p['standard_graph'] and not p['source_proxy'] and not p['blighted_only']
         selectable=allowed and effect['status']=='full' and p['type']!='mastery'
         state='完整效果已接入；仍需合法连接、点数和位置资格' if selectable else '保留源数据；未完整执行的节点不可分配'
+        if selectable and p.get('ordinary_reachable_class_ids') == []:
+            state='完整效果已接入；当前已支持普通路径无法到达，不能普通连线分配。特殊珠宝准入需另行验证'
         if p['type']=='mastery': state='精通按所选效果单独验证；同组普通连通显著天赋及1点必需'
         if p['type'] in ['start','socket'] and selectable: state='结构节点规则已接入，不算属性效果覆盖'
         body=facts([('源版本','3.29.1'),('分区',esc(localized['partition'])),('状态',esc(state)),('源坐标',esc(', '.join(number(x) for x in p['position'])) if p['has_position'] else '源记录没有坐标，不虚构布局')])
