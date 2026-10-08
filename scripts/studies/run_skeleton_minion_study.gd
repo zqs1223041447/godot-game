@@ -50,9 +50,11 @@ class Driver extends Node:
 	var clock := 0.0
 	var cue := false
 	func _process(delta: float) -> void:
+		if owner_study.arena.hud.is_blocking(): return
 		var step := minf(delta, .1)
 		clock += step
 		owner_study.arena._move_player(step)  # genuine player movement and collision, unchanged 240 baseline
+		owner_study.arena.retained_actors.advance(step)
 		var phase := fmod(clock, 4.0)
 		for index: int in owner_study.proxy.enemies.size():
 			var enemy: Dictionary = owner_study.proxy.enemies[index]
@@ -94,7 +96,7 @@ func _run() -> void:
 	if not draft.ok: printerr(draft.reason); quit(1); return
 	var entered: Dictionary = await arena.open_map(arena.map_draft().revision)
 	if not entered.ok: printerr(entered.reason); quit(1); return
-	arena.set_process(false); arena.hud.hide()
+	arena.set_process(false); arena.set_process_unhandled_key_input(false); arena.hud.hide()
 	check(arena.world_geometry().id == "ruins_garden" and arena.static_environment._study_ground.diagnostics().ready,
 		"Actual formal map has ready current natural-ground shader")
 	for enemy: Dictionary in arena.enemies:
