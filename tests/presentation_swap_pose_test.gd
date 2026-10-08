@@ -28,6 +28,31 @@ func _initialize() -> void:
 		check(actor._body_key.is_empty() and actor._shadow_key.is_empty() and actor.body.redraw_requests == redraws+1, "Both presentation command caches invalidate")
 		check(var_to_bytes([actor.direction, actor.facing, actor._last_attack_timer, actor._last_cue_id]) == observed, "Facing and observed attack identities are not reset or replayed")
 	check(actor._hero_presentation.is_empty() and actor.atlas == Catalog.resource("hero"), "Reset releases custom entry and returns original catalog")
+	# A faster walk sample must not shorten the existing visual attack cue.
+	var animated: Dictionary = raw.duplicate(true)
+	animated.fps = 32.0
+	animated.frames_per_direction = 6
+	animated.clips = {"idle": [0, 1], "walk": [0, 6], "attack": [0, 6]}
+	animated.frames = []
+	for direction_index in 8:
+		for unused in 6: animated.frames.append(raw.frames[direction_index].duplicate(true))
+	var fast: Dictionary = Catalog.prepare_presentation(animated)
+	check(fast.ok, "Synthetic high-fps presentation validates")
+	if fast.ok:
+		actor.preferences.motion = true
+		actor.set_hero_presentation(fast.entry, 3)
+		actor._update_pose(Vector2.ZERO, Vector2.ZERO, 0.0, false, Vector2.RIGHT)
+		actor._update_pose(Vector2.RIGHT, Vector2.RIGHT, 0.05, true, Vector2.RIGHT)
+		check(is_equal_approx(actor._attack_left, 0.45), "Custom fps preserves half-second visual attack countdown")
+		for step in 5:
+			actor._update_pose(Vector2(step + 2, 0), Vector2.RIGHT, 0.1 + step * 0.05, false, Vector2.RIGHT)
+		check(actor.animation == "attack" and actor.frame == 3, "Attack samples its middle frame at a quarter second despite faster walk fps")
+		for step in 8:
+			actor._update_pose(Vector2(step + 7, 0), Vector2.RIGHT, 0.35 + step * 0.05, false, Vector2.RIGHT)
+		check(actor.animation == "walk", "Movement presentation resumes after the unchanged attack cue")
+		actor.set_hero_presentation(prepared.entry, 4)
+		actor._update_pose(Vector2(20, 0), Vector2.RIGHT, 0.75, true, Vector2.RIGHT)
+		check(is_equal_approx(actor._attack_left, 0.45), "Missing attack art also keeps the existing cue duration")
 	actor.free()
 	print("PRESENTATION_SWAP_POSE: %d checks, %d failures" % [checks,failures])
 	quit(1 if failures else 0)

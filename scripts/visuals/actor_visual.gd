@@ -155,9 +155,6 @@ func _update_pose(next_position: Vector2, displacement: Vector2, time: float, at
 		if not displacement.is_zero_approx(): facing = displacement.normalized()
 		if attacking:
 			_attack_left = 6.0 / Catalog.FPS
-			if not _hero_presentation.is_empty():
-				var clip: Vector2i = atlas.clips.get("attack", atlas.clips.idle)
-				_attack_left = float(clip.y) / float(atlas.fps)
 			if not attack_direction.is_zero_approx(): facing = attack_direction.normalized()
 		direction = Catalog.direction_index(facing, direction)
 		var next_animation := "attack" if _attack_left > 0.0 else "walk" if displacement.length_squared() > 0.00001 else "idle"
@@ -169,7 +166,13 @@ func _update_pose(next_position: Vector2, displacement: Vector2, time: float, at
 		frame = Catalog.presentation_frame(atlas, direction, "idle", 0.0, false) if not _hero_presentation.is_empty() else Catalog.frame_index(direction, "idle", 0.0, false)
 		pose_time = 0.0
 	elif not frozen or not _configured:
-		frame = Catalog.presentation_frame(atlas, direction, animation, animation_time) if not _hero_presentation.is_empty() else Catalog.frame_index(direction, animation, animation_time)
+		var sample_time := animation_time
+		if not _hero_presentation.is_empty() and animation == "attack" and atlas.clips.has("attack"):
+			# Keep the existing half-second visual cue while walk uses its own fps.
+			# Only the presentation clock changes; gameplay timers are read-only.
+			var clip: Vector2i = atlas.clips.attack
+			sample_time *= (float(clip.y) / float(atlas.fps)) / (6.0 / Catalog.FPS)
+		frame = Catalog.presentation_frame(atlas, direction, animation, sample_time) if not _hero_presentation.is_empty() else Catalog.frame_index(direction, animation, animation_time)
 		pose_time = floorf(animation_time * Catalog.FPS) / Catalog.FPS
 	_configured = true
 
