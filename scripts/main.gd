@@ -1842,7 +1842,7 @@ func _finish_enemy_death(enemy:Dictionary,legacy_particles:bool=true,at:float=-1
 		else: hud.notify("里程碑奖励仍待领取，返回正式城镇整理后领取")
 		_world_revision += 1; world_context_changed.emit()
 	if eligible and enemy.get("rarity", "") == "boss":
-		_award_kill_special_jewel()
+		_award_kill_special_jewel(enemy)
 	if eligible and reward_kills % 4 == 0:
 		pickups.append({"pos": Vector2(enemy.pos), "life": 22.0})
 	if legacy_particles:
@@ -1887,13 +1887,19 @@ func _award_kill_jewel() -> void:
 	_add_text(player_pos + Vector2(0, -58), "+ 珠宝", Color("dba3f2"))
 
 
-func _award_kill_special_jewel() -> void:
+func _award_kill_special_jewel(enemy: Dictionary = {}) -> void:
 	# Boss roots use the same once-only death gate; legacy random rolls are untouched.
-	var jewel_id: String = state.award_special_jewel()
+	var formal_boss: bool = _world_mode == "map" and not _is_test_profile() \
+		and enemy.get("rarity", "") == "boss" and int(enemy.get("id", 0)) == _map_run.boss_id \
+		and int(enemy.get("generation", -1)) == 0
+	var jewel_id: String = state.award_normal_boss_special_jewel(_normal_run_id) if formal_boss else state.award_special_jewel()
 	if jewel_id.is_empty():
-		hud.notify("首领珠宝未领取：背包保留空间不足；已有物品完整保留")
+		hud.notify("首领珠宝未领取：已达物品或存档上限，或正式挑战状态无效；已有物品完整保留" if formal_boss else "首领珠宝未领取：背包保留空间不足；已有物品完整保留")
 		return
-	hud.notify("获得寻枝晶玉 · 在 T 中选择已连通的珠宝孔查看覆盖")
+	if formal_boss and state.location(jewel_id).kind == "recovery":
+		hud.notify("寻枝晶玉已保留 · 按 I 腾出1格后在待安置中取回，再到 T 镶入已连通珠宝孔")
+	else:
+		hud.notify("获得寻枝晶玉 · 在 T 中选择已连通的珠宝孔查看覆盖")
 	_add_ring(player_pos, 100.0, Color("d8b577"), 0.8)
 	_add_text(player_pos + Vector2(0, -58), "+ 寻枝晶玉", Color("d8b577"))
 

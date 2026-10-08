@@ -1509,6 +1509,8 @@ def build(data, art):
         if j['kind']=='special':
             summary=j['description']
             body=facts([('固有半径',number(j['rule']['radius'])),('可远程分配',esc(' / '.join(TYPES[x] for x in j['rule']['types']))),('规则',esc(j['rule']['id']))])+f'<p><a href="#tree">打开覆盖图，选择珠宝孔</a></p>'
+            if key=='branchfinder':
+                body+='<p>正式地图已登记首领沿原奖励次数授予寻枝：有空位优先入包，已有待安置也不阻止入包；满包保留同一珠宝到待安置。按 I 腾出1格后取回，再到 T 镶入已分配且普通连通的珠宝孔。可与同场首领装备并存，不覆盖已有物品；原物品、序号及修订上限仍生效。非正式与普通掉落规则保持。</p>'
         else:
             summary='镶入已分配的珠宝孔后，提供已掷出的角色属性加值。普通珠宝不改变连通规则。'
             body=facts([('前缀词池',links('jewel_affixes',j['prefixes'])),('后缀词池',links('jewel_affixes',j['suffixes']))])

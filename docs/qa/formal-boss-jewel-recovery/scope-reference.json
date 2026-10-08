@@ -1,0 +1,69 @@
+{
+  "ok": true,
+  "baseline": "a0a8734b95f1f0f2c4d2af307db8590555067651",
+  "schema": 58,
+  "unchanged_files": [
+    "scripts/save/canonical_build_rules.gd",
+    "scripts/save/canonical_build_store.gd",
+    "scripts/save/canonical_build_migration.gd",
+    "scripts/items/item_location_rules.gd",
+    "scripts/items/item_transfer_plan.gd",
+    "scripts/items/unified_item_catalog.gd",
+    "scripts/ui/canonical_inventory_panel.gd",
+    "scripts/ui/canonical_passive_panel.gd",
+    "scripts/passives/source_tree_runtime.gd",
+    "scripts/passives/source_tree_allocation_rules.gd",
+    "scripts/items/jewel_purchase.gd",
+    "scripts/items/jewel_craft_rules.gd",
+    "scripts/monsters/monster_runtime.gd",
+    "data/passives/official_tree_runtime.json",
+    "data/passive_source/localization_zh_CN.json",
+    "docs/reference/source-tree-coverage.json",
+    "tests/formal_boss_equipment_recovery_test.gd",
+    "tests/source_tree_allocation_rules_test.gd"
+  ],
+  "unchanged_model_functions": [
+    "award_equipment",
+    "award_normal_boss_equipment",
+    "_award_equipment",
+    "award_jewel",
+    "award_special_jewel",
+    "_admit_reward_item",
+    "_admit_reward_item_candidate"
+  ],
+  "changed_cards": [
+    "jewels-branchfinder"
+  ],
+  "other_cards_byte_identical": 3815,
+  "checked_related_links": 4,
+  "catalog_changed_members": [
+    "jewels.branchfinder.description"
+  ],
+  "sha256": {
+    "scripts/save/canonical_build_rules.gd": "0f699ced3bb471da50ee6eeb174a7ee0463f8acb86738995fa508d113b3f443c",
+    "scripts/save/canonical_build_store.gd": "28965489fdc06243f55e25d0c7c030f0267f9271e5c8a1c8dec8c9c1398571f5",
+    "scripts/save/canonical_build_migration.gd": "1c2878c7ecf8ad6fa879332f849e58586056f70ce8a11efe4ceb1d79cbcf0058",
+    "scripts/items/item_location_rules.gd": "7b215b19093b693216f47a1b0f2c35b3a1aced96acab8a27a3eb5f2a7e8a867a",
+    "scripts/items/item_transfer_plan.gd": "e19bacba06c9c3fa175e60694d9eafc1a2381db15747c4e1bf5e8fe67edad760",
+    "scripts/items/unified_item_catalog.gd": "ae499e3e68f30269fa2359d2a21a4d7226a2d4d984b41fa38f48f69f226d5fbc",
+    "scripts/ui/canonical_inventory_panel.gd": "eec3ab27a85ca908135142a1396c094b36f06f0309a7e023fa1de612ecf72539",
+    "scripts/ui/canonical_passive_panel.gd": "247df7b43faad2afa08d2b396ac2e700392b4c026ae94137d8b6ea874602ebd6",
+    "scripts/passives/source_tree_runtime.gd": "70654817d52bbe586145735bcc6de4074f5bc9ea6c42309449756c07a923dc20",
+    "scripts/passives/source_tree_allocation_rules.gd": "631792b2ecf06481c6cc43165cd9f97688d578f6cd5cf394905b0c9beb814ef3",
+    "scripts/items/jewel_purchase.gd": "d84685ec74311a41fc409e1af543cd3b328844c6cbdb72c92f73593fc662f9e0",
+    "scripts/items/jewel_craft_rules.gd": "a01127c35e1f060b9fe0b679429c6fc611acc14452bd19c4bdfa910e891cfc30",
+    "scripts/monsters/monster_runtime.gd": "6280cbf52cdf373af0fe8d564b77b2ad1f1e934b207d37988f69bbdd404751a3",
+    "data/passives/official_tree_runtime.json": "9774a8ec1fe16199e775fe99a20853837ca8c7725c48dfcd9d6ee69646ff934f",
+    "data/passive_source/localization_zh_CN.json": "833a5d596ad7505ca693d3959f3c98e67318e42dd36b50647e098be5994ca269",
+    "docs/reference/source-tree-coverage.json": "84ef1837f7e9628aa901a3f5f5981857c67e7fd496b60e5e27801423e4dfb3c5",
+    "tests/formal_boss_equipment_recovery_test.gd": "272747dae91ac4687125fac7219328537fd1c72722bd9983b0734476c5bfbc0f",
+    "tests/source_tree_allocation_rules_test.gd": "ad6511602d8a933aa4b3ac26c9478bd060ff7cf0168462e2fcf544e9106e5e43",
+    "scripts/main.gd": "6850f5c58400f599878b241979a708b66f983ebd80507ed9d180d5c1fa3d873a",
+    "scripts/canonical_game_state.gd": "4290e8356d85b5578ea56669d17218590f4cf7828c94bd46d5dda826a8ab4a15",
+    "scripts/jewel_data.gd": "99761c8a320cc98295852dfff97859f07a2f21188ea985fe663f1f3b127fc641",
+    "tests/formal_boss_jewel_recovery_test.gd": "fd50579ece12cddd81b5f66d69d3a88aef293b1d0ee442f4844fda81bb635e10",
+    "tools/build_reference.py": "0636bf73fa50078f55447f4df1f7a4e6773c3095225e798b5013bb93684a56bc",
+    "docs/reference/catalog.json": "4de9769262ccc53946418c8f2661b0e2eb76ae96a9bbb8c698cf78ac679babd0",
+    "docs/reference/index.html": "3c2f36b95c26fe40713689c307c1c3455e8c81bef816040ec4b219a53d16eb69"
+  }
+}

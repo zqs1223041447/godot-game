@@ -92,7 +92,7 @@ static func get_color(jewel: Dictionary) -> Color:
 
 static func get_description(jewel: Dictionary) -> String:
 	if not allocation_rule(jewel).is_empty():
-		return "镶嵌在沿已点连线连通起点的珠宝孔中时：半径 280 内的小型与核心天赋可不连线分配，每个仍消耗 1 点。\n远程节点不能向范围外延伸；珠宝孔必须沿已点连线连通起点。移除或移动珠宝不得使已点天赋失去支持。\n固定规则，无随机词缀；不直接增加属性。"
+		return "镶嵌在沿已点连线连通起点的珠宝孔中时：半径 280 内的小型与显著天赋可不连线分配，每个仍消耗 1 点。不含基石、精通、起点或珠宝孔。\n远程节点不能向范围外延伸；珠宝孔必须沿已点连线连通起点。移除或移动珠宝不得使已点天赋失去支持。\n固定规则，无随机词缀；不直接增加属性。"
 	var lines: PackedStringArray = []
 	for affix: Dictionary in jewel.get("affixes", []):
 		var definition: Dictionary = AFFIXES.get(affix.get("id", ""), {})

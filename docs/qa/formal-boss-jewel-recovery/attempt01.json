@@ -1,0 +1,184 @@
+{
+	"awards": [],
+	"checks": 33,
+	"description": "镶嵌在沿已点连线连通起点的珠宝孔中时：半径 280 内的小型与显著天赋可不连线分配，每个仍消耗 1 点。不含基石、精通、起点或珠宝孔。\n远程节点不能向范围外延伸；珠宝孔必须沿已点连线连通起点。移除或移动珠宝不得使已点天赋失去支持。\n固定规则，无随机词缀；不直接增加属性。",
+	"evidence": [
+		{
+			"case": "normal boss bag",
+			"label": "Actual formal Main opens and saves",
+			"ok": true
+		},
+		{
+			"case": "normal boss bag",
+			"label": "Select free formal Old Garden I: ",
+			"ok": true
+		},
+		{
+			"case": "normal boss bag",
+			"label": "Actual map admission: ",
+			"ok": true
+		},
+		{
+			"case": "normal boss bag",
+			"label": "24 actual camp roots unlock one registered boss",
+			"ok": false
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Remove only isolated suite save",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Actual formal Main opens and saves",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Select free formal Old Garden I: ",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Actual map admission: ",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "24 actual camp roots unlock one registered boss",
+			"ok": false
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Remove only isolated suite save",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Actual formal Main opens and saves",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Select free formal Old Garden I: ",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Actual map admission: ",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "24 actual camp roots unlock one registered boss",
+			"ok": false
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Remove only isolated suite save",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Actual formal Main opens and saves",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Select free formal Old Garden I: ",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Actual map admission: ",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "24 actual camp roots unlock one registered boss",
+			"ok": false
+		},
+		{
+			"case": "test boss remains original",
+			"label": "Remove only isolated suite save",
+			"ok": true
+		},
+		{
+			"case": "test boss remains original",
+			"label": "Actual formal Main opens and saves",
+			"ok": true
+		},
+		{
+			"case": "test boss remains original",
+			"label": "Enter separate existing test town: ",
+			"ok": true
+		},
+		{
+			"case": "test boss remains original",
+			"label": "Load only test profile",
+			"ok": true
+		},
+		{
+			"case": "test boss remains original",
+			"label": "Actual map admission: ",
+			"ok": true
+		},
+		{
+			"case": "test boss remains original",
+			"label": "24 actual camp roots unlock one registered boss",
+			"ok": false
+		},
+		{
+			"case": "formal guard and original limits",
+			"label": "Remove only isolated suite save",
+			"ok": true
+		},
+		{
+			"case": "formal guard and original limits",
+			"label": "Remove only isolated suite save",
+			"ok": true
+		},
+		{
+			"case": "formal guard and original limits",
+			"label": "Actual formal Main opens and saves",
+			"ok": true
+		},
+		{
+			"case": "formal guard and original limits",
+			"label": "Select free formal Old Garden I: ",
+			"ok": true
+		},
+		{
+			"case": "formal guard and original limits",
+			"label": "Actual map admission: ",
+			"ok": true
+		},
+		{
+			"case": "formal guard and original limits",
+			"label": "24 actual camp roots unlock one registered boss",
+			"ok": false
+		},
+		{
+			"case": "formal guard and original limits",
+			"label": "All four actual positive boss scenarios completed",
+			"ok": false
+		},
+		{
+			"case": "formal guard and original limits",
+			"label": "Actual item text accurately states unchanged type scope/radius/cost",
+			"ok": true
+		}
+	],
+	"failed_labels": [
+		"normal boss bag: 24 actual camp roots unlock one registered boss",
+		"full bag / existing=false / write_fault=false: 24 actual camp roots unlock one registered boss",
+		"full bag / existing=true / write_fault=true: 24 actual camp roots unlock one registered boss",
+		"existing pending / room for both rewards: 24 actual camp roots unlock one registered boss",
+		"test boss remains original: 24 actual camp roots unlock one registered boss",
+		"formal guard and original limits: 24 actual camp roots unlock one registered boss",
+		"formal guard and original limits: All four actual positive boss scenarios completed"
+	],
+	"failures": 7,
+	"schema": 58,
+	"scope": "Actual Main/HUD registered Old Garden boss after 24 camp roots; damage shortcut, capacity and write-fault fixtures; no natural-play or native-keyboard claim"
+}

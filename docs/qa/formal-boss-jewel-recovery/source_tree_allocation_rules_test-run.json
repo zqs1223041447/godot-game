@@ -1,0 +1,34 @@
+{
+  "baseline": "a0a8734b95f1f0f2c4d2af307db8590555067651",
+  "suite": "source_tree_allocation_rules_test",
+  "ok": true,
+  "exit_code": 0,
+  "command": [
+    "godot",
+    "--headless",
+    "--path",
+    "/workspace/godot-flask-recovery",
+    "--script",
+    "res://tests/source_tree_allocation_rules_test.gd"
+  ],
+  "isolated_xdg": "/tmp/godot-boss-jewel-yezuhl1s",
+  "timeout_seconds": 45,
+  "elapsed_seconds": 1.12,
+  "checks": 80,
+  "failures": 0,
+  "sha256": {
+    "scripts/main.gd": "6850f5c58400f599878b241979a708b66f983ebd80507ed9d180d5c1fa3d873a",
+    "scripts/canonical_game_state.gd": "4290e8356d85b5578ea56669d17218590f4cf7828c94bd46d5dda826a8ab4a15",
+    "scripts/jewel_data.gd": "99761c8a320cc98295852dfff97859f07a2f21188ea985fe663f1f3b127fc641",
+    "scripts/save/canonical_build_rules.gd": "0f699ced3bb471da50ee6eeb174a7ee0463f8acb86738995fa508d113b3f443c",
+    "scripts/save/canonical_build_migration.gd": "1c2878c7ecf8ad6fa879332f849e58586056f70ce8a11efe4ceb1d79cbcf0058",
+    "scripts/save/canonical_build_store.gd": "28965489fdc06243f55e25d0c7c030f0267f9271e5c8a1c8dec8c9c1398571f5",
+    "scripts/items/item_location_rules.gd": "7b215b19093b693216f47a1b0f2c35b3a1aced96acab8a27a3eb5f2a7e8a867a",
+    "scripts/items/item_transfer_plan.gd": "e19bacba06c9c3fa175e60694d9eafc1a2381db15747c4e1bf5e8fe67edad760",
+    "scripts/ui/canonical_inventory_panel.gd": "eec3ab27a85ca908135142a1396c094b36f06f0309a7e023fa1de612ecf72539",
+    "scripts/passives/source_tree_runtime.gd": "70654817d52bbe586145735bcc6de4074f5bc9ea6c42309449756c07a923dc20",
+    "scripts/passives/source_tree_allocation_rules.gd": "631792b2ecf06481c6cc43165cd9f97688d578f6cd5cf394905b0c9beb814ef3",
+    "tests/formal_boss_equipment_recovery_test.gd": "272747dae91ac4687125fac7219328537fd1c72722bd9983b0734476c5bfbc0f",
+    "tests/source_tree_allocation_rules_test.gd": "ad6511602d8a933aa4b3ac26c9478bd060ff7cf0168462e2fcf544e9106e5e43"
+  }
+}

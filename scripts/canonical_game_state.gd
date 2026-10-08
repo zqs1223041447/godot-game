@@ -509,6 +509,17 @@ func award_special_jewel() -> String:
 	return uid if not wrapped.is_empty() and _admit_reward_item(wrapped) else ""
 
 
+func award_normal_boss_special_jewel(run_id: int) -> String:
+	# Main's registered root-death ledger owns once-only delivery, as for gear.
+	# Only this formal-map entrypoint can retain the existing reward in recovery.
+	if not _normal_journey_guard(revision(), _command_path()).ok: return ""
+	if run_id <= 0 or _current.journey.active_run.get("run_id", 0) != run_id: return ""
+	if _current.next_item_serial >= Rules.MAX_SERIAL: return ""
+	var uid := "jewel_%06d" % int(_current.next_item_serial)
+	var wrapped: Dictionary = Items.wrap_jewel(Rules.Jewels.generate_special(uid))
+	return uid if not wrapped.is_empty() and _admit_reward_item_candidate(wrapped, true) else ""
+
+
 func equip(uid: String) -> bool:
 	var definition:=item_definition(uid)
 	var targets:Array=Slots.targets_for_category(str(definition.get("category","")))

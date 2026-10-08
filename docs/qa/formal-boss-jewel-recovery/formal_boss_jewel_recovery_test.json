@@ -1,0 +1,4820 @@
+{
+	"awards": [
+		{
+			"case": "normal boss bag",
+			"gear": {
+				"definition_id": "equipment:pulse_seed",
+				"kind": "equipment",
+				"payload": {
+					"affixes": [
+						{
+							"id": "deepwell",
+							"tier": 1,
+							"value": 5
+						},
+						{
+							"id": "rootwell",
+							"tier": 1,
+							"value": 14
+						},
+						{
+							"id": "attack_mana_leech",
+							"tier": 1,
+							"value": 14
+						},
+						{
+							"id": "beatlink",
+							"tier": 1,
+							"value": 2
+						}
+					],
+					"base_id": "pulse_seed",
+					"id": "gear_000004",
+					"item_level": 1,
+					"rarity": "rare"
+				},
+				"uid": "gear_000004"
+			},
+			"gear_location": {
+				"kind": "bag",
+				"page": 0,
+				"x": 8,
+				"y": 0
+			},
+			"jewel": {
+				"definition_id": "jewel:branchfinder",
+				"kind": "jewel",
+				"payload": {
+					"affixes": [],
+					"base": "branchfinder",
+					"id": "jewel_000005",
+					"rarity": "special"
+				},
+				"uid": "jewel_000005"
+			},
+			"jewel_location": {
+				"kind": "bag",
+				"page": 0,
+				"x": 9,
+				"y": 0
+			}
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"gear": {
+				"definition_id": "equipment:pulse_seed",
+				"kind": "equipment",
+				"payload": {
+					"affixes": [
+						{
+							"id": "deepwell",
+							"tier": 1,
+							"value": 5
+						},
+						{
+							"id": "rootwell",
+							"tier": 1,
+							"value": 14
+						},
+						{
+							"id": "attack_mana_leech",
+							"tier": 1,
+							"value": 14
+						},
+						{
+							"id": "beatlink",
+							"tier": 1,
+							"value": 2
+						}
+					],
+					"base_id": "pulse_seed",
+					"id": "gear_000205",
+					"item_level": 1,
+					"rarity": "rare"
+				},
+				"uid": "gear_000205"
+			},
+			"gear_location": {
+				"index": 239,
+				"kind": "recovery"
+			},
+			"jewel": {
+				"definition_id": "jewel:branchfinder",
+				"kind": "jewel",
+				"payload": {
+					"affixes": [],
+					"base": "branchfinder",
+					"id": "jewel_000206",
+					"rarity": "special"
+				},
+				"uid": "jewel_000206"
+			},
+			"jewel_location": {
+				"index": 240,
+				"kind": "recovery"
+			}
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"gear": {
+				"definition_id": "equipment:pulse_seed",
+				"kind": "equipment",
+				"payload": {
+					"affixes": [
+						{
+							"id": "deepwell",
+							"tier": 1,
+							"value": 5
+						},
+						{
+							"id": "rootwell",
+							"tier": 1,
+							"value": 14
+						},
+						{
+							"id": "attack_mana_leech",
+							"tier": 1,
+							"value": 14
+						},
+						{
+							"id": "beatlink",
+							"tier": 1,
+							"value": 2
+						}
+					],
+					"base_id": "pulse_seed",
+					"id": "gear_000206",
+					"item_level": 1,
+					"rarity": "rare"
+				},
+				"uid": "gear_000206"
+			},
+			"gear_location": {
+				"index": 240,
+				"kind": "recovery"
+			},
+			"jewel": {
+				"definition_id": "jewel:branchfinder",
+				"kind": "jewel",
+				"payload": {
+					"affixes": [],
+					"base": "branchfinder",
+					"id": "jewel_000207",
+					"rarity": "special"
+				},
+				"uid": "jewel_000207"
+			},
+			"jewel_location": {
+				"index": 241,
+				"kind": "recovery"
+			}
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"gear": {
+				"definition_id": "equipment:pulse_seed",
+				"kind": "equipment",
+				"payload": {
+					"affixes": [
+						{
+							"id": "deepwell",
+							"tier": 1,
+							"value": 5
+						},
+						{
+							"id": "rootwell",
+							"tier": 1,
+							"value": 14
+						},
+						{
+							"id": "attack_mana_leech",
+							"tier": 1,
+							"value": 14
+						},
+						{
+							"id": "beatlink",
+							"tier": 1,
+							"value": 2
+						}
+					],
+					"base_id": "pulse_seed",
+					"id": "gear_000206",
+					"item_level": 1,
+					"rarity": "rare"
+				},
+				"uid": "gear_000206"
+			},
+			"gear_location": {
+				"kind": "bag",
+				"page": 1,
+				"x": 4,
+				"y": 3
+			},
+			"jewel": {
+				"definition_id": "jewel:branchfinder",
+				"kind": "jewel",
+				"payload": {
+					"affixes": [],
+					"base": "branchfinder",
+					"id": "jewel_000207",
+					"rarity": "special"
+				},
+				"uid": "jewel_000207"
+			},
+			"jewel_location": {
+				"kind": "bag",
+				"page": 1,
+				"x": 5,
+				"y": 3
+			}
+		}
+	],
+	"checks": 916,
+	"description": "镶嵌在沿已点连线连通起点的珠宝孔中时：半径 280 内的小型与显著天赋可不连线分配，每个仍消耗 1 点。不含基石、精通、起点或珠宝孔。\n远程节点不能向范围外延伸；珠宝孔必须沿已点连线连通起点。移除或移动珠宝不得使已点天赋失去支持。\n固定规则，无随机词缀；不直接增加属性。",
+	"evidence": [
+		{
+			"case": "normal boss bag",
+			"label": "Actual formal Main opens and saves",
+			"ok": true
+		},
+		{
+			"case": "normal boss bag",
+			"label": "Select free formal Old Garden I: ",
+			"ok": true
+		},
+		{
+			"case": "normal boss bag",
+			"label": "Actual map admission: ",
+			"ok": true
+		},
+		{
+			"case": "normal boss bag",
+			"label": "Current map admits 24 ordinary roots and one registered boss on entry",
+			"ok": true
+		},
+		{
+			"case": "normal boss bag",
+			"label": "One existing gear decision and one special jewel decision",
+			"ok": true
+		},
+		{
+			"case": "normal boss bag",
+			"label": "Exact fixed branchfinder wrapper/payload and original UID",
+			"ok": true
+		},
+		{
+			"case": "normal boss bag",
+			"label": "Both reward destinations: jewel=bag, gear=bag",
+			"ok": true
+		},
+		{
+			"case": "normal boss bag",
+			"label": "Original equipment roll/RNG preserved; jewel consumes no random draw",
+			"ok": true
+		},
+		{
+			"case": "normal boss bag",
+			"label": "Coexisting gear and jewel consume exactly one sequential UID each",
+			"ok": true
+		},
+		{
+			"case": "normal boss bag",
+			"label": "Complete native schema58 accepts recovered jewel without rule changes",
+			"ok": true
+		},
+		{
+			"case": "normal boss bag",
+			"label": "Exactly one rewarded root death advances original boss ledger",
+			"ok": true
+		},
+		{
+			"case": "normal boss bag",
+			"label": "Existing item and location preserved: ember_wand",
+			"ok": true
+		},
+		{
+			"case": "normal boss bag",
+			"label": "Existing item and location preserved: swift_blade",
+			"ok": true
+		},
+		{
+			"case": "normal boss bag",
+			"label": "Existing item and location preserved: guardian_robe",
+			"ok": true
+		},
+		{
+			"case": "normal boss bag",
+			"label": "Existing item and location preserved: vitality_armor",
+			"ok": true
+		},
+		{
+			"case": "normal boss bag",
+			"label": "Existing item and location preserved: azure_charm",
+			"ok": true
+		},
+		{
+			"case": "normal boss bag",
+			"label": "Existing item and location preserved: storm_charm",
+			"ok": true
+		},
+		{
+			"case": "normal boss bag",
+			"label": "Existing item and location preserved: prism_bow",
+			"ok": true
+		},
+		{
+			"case": "normal boss bag",
+			"label": "Existing item and location preserved: return_mantle",
+			"ok": true
+		},
+		{
+			"case": "normal boss bag",
+			"label": "Existing item and location preserved: detonation_charm",
+			"ok": true
+		},
+		{
+			"case": "normal boss bag",
+			"label": "Existing item and location preserved: jewel_000001",
+			"ok": true
+		},
+		{
+			"case": "normal boss bag",
+			"label": "Existing item and location preserved: jewel_000002",
+			"ok": true
+		},
+		{
+			"case": "normal boss bag",
+			"label": "Existing item and location preserved: jewel_000003",
+			"ok": true
+		},
+		{
+			"case": "normal boss bag",
+			"label": "Existing item and location preserved: migration_gem_000001",
+			"ok": true
+		},
+		{
+			"case": "normal boss bag",
+			"label": "Existing item and location preserved: migration_gem_000002",
+			"ok": true
+		},
+		{
+			"case": "normal boss bag",
+			"label": "Existing item and location preserved: migration_gem_000003",
+			"ok": true
+		},
+		{
+			"case": "normal boss bag",
+			"label": "Existing item and location preserved: migration_gem_000004",
+			"ok": true
+		},
+		{
+			"case": "normal boss bag",
+			"label": "Existing item and location preserved: migration_gem_000005",
+			"ok": true
+		},
+		{
+			"case": "normal boss bag",
+			"label": "Existing item and location preserved: migration_gem_000006",
+			"ok": true
+		},
+		{
+			"case": "normal boss bag",
+			"label": "Existing item and location preserved: migration_gem_000007",
+			"ok": true
+		},
+		{
+			"case": "normal boss bag",
+			"label": "Existing item and location preserved: migration_gem_000008",
+			"ok": true
+		},
+		{
+			"case": "normal boss bag",
+			"label": "Existing item and location preserved: migration_gem_000009",
+			"ok": true
+		},
+		{
+			"case": "normal boss bag",
+			"label": "Existing item and location preserved: migration_gem_000010",
+			"ok": true
+		},
+		{
+			"case": "normal boss bag",
+			"label": "Existing item and location preserved: migration_gem_000011",
+			"ok": true
+		},
+		{
+			"case": "normal boss bag",
+			"label": "Existing item and location preserved: migration_gem_000012",
+			"ok": true
+		},
+		{
+			"case": "normal boss bag",
+			"label": "Existing item and location preserved: migration_gem_000013",
+			"ok": true
+		},
+		{
+			"case": "normal boss bag",
+			"label": "Existing item and location preserved: migration_gem_000014",
+			"ok": true
+		},
+		{
+			"case": "normal boss bag",
+			"label": "Existing item and location preserved: migration_gem_000015",
+			"ok": true
+		},
+		{
+			"case": "normal boss bag",
+			"label": "Existing item and location preserved: migration_gem_000016",
+			"ok": true
+		},
+		{
+			"case": "normal boss bag",
+			"label": "Existing item and location preserved: migration_gem_000017",
+			"ok": true
+		},
+		{
+			"case": "normal boss bag",
+			"label": "Existing item and location preserved: migration_gem_000018",
+			"ok": true
+		},
+		{
+			"case": "normal boss bag",
+			"label": "Existing item and location preserved: migration_gem_000019",
+			"ok": true
+		},
+		{
+			"case": "normal boss bag",
+			"label": "Existing item and location preserved: migration_gem_000020",
+			"ok": true
+		},
+		{
+			"case": "normal boss bag",
+			"label": "Existing item and location preserved: migration_gem_000021",
+			"ok": true
+		},
+		{
+			"case": "normal boss bag",
+			"label": "Existing item and location preserved: migration_gem_000022",
+			"ok": true
+		},
+		{
+			"case": "normal boss bag",
+			"label": "Existing item and location preserved: migration_gem_000023",
+			"ok": true
+		},
+		{
+			"case": "normal boss bag",
+			"label": "Existing item and location preserved: migration_gem_000024",
+			"ok": true
+		},
+		{
+			"case": "normal boss bag",
+			"label": "Existing item and location preserved: migration_flask_000001",
+			"ok": true
+		},
+		{
+			"case": "normal boss bag",
+			"label": "Existing item and location preserved: migration_flask_000002",
+			"ok": true
+		},
+		{
+			"case": "normal boss bag",
+			"label": "Roomy bag introduces no recovery",
+			"ok": true
+		},
+		{
+			"case": "normal boss bag",
+			"label": "Repeated same dead dictionary cannot duplicate reward/save/RNG",
+			"ok": true
+		},
+		{
+			"case": "normal boss bag",
+			"label": "Root ledger also rejects reconstructed same identity",
+			"ok": true
+		},
+		{
+			"case": "normal boss bag",
+			"label": "Repeated corpse/reconstructed identity cannot mint another jewel",
+			"ok": true
+		},
+		{
+			"case": "normal boss bag",
+			"label": "Normal rewards survive reload",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Remove only isolated suite save",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Actual formal Main opens and saves",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Select free formal Old Garden I: ",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Actual map admission: ",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Current map admits 24 ordinary roots and one registered boss on entry",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Capacity-only fixture preserves all real items and passes canonical commit",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Both real bag pages are completely full",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "One existing gear decision and one special jewel decision",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Exact fixed branchfinder wrapper/payload and original UID",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Both reward destinations: jewel=recovery, gear=recovery",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Original equipment roll/RNG preserved; jewel consumes no random draw",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Coexisting gear and jewel consume exactly one sequential UID each",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Complete native schema58 accepts recovered jewel without rule changes",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Exactly one rewarded root death advances original boss ledger",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: ember_wand",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: swift_blade",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: guardian_robe",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: vitality_armor",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: azure_charm",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: storm_charm",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: prism_bow",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: return_mantle",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: detonation_charm",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: jewel_000001",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: jewel_000002",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: jewel_000003",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: migration_gem_000001",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: migration_gem_000002",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: migration_gem_000003",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: migration_gem_000004",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: migration_gem_000005",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: migration_gem_000006",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: migration_gem_000007",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: migration_gem_000008",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: migration_gem_000009",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: migration_gem_000010",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: migration_gem_000011",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: migration_gem_000012",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: migration_gem_000013",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: migration_gem_000014",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: migration_gem_000015",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: migration_gem_000016",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: migration_gem_000017",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: migration_gem_000018",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: migration_gem_000019",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: migration_gem_000020",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: migration_gem_000021",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: migration_gem_000022",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: migration_gem_000023",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: migration_gem_000024",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: migration_flask_000001",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: migration_flask_000002",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000004",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000005",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000006",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000007",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000008",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000009",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000010",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000011",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000012",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000013",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000014",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000015",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000016",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000017",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000018",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000019",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000020",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000021",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000022",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000023",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000024",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000025",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000026",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000027",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000028",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000029",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000030",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000031",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000032",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000033",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000034",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000035",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000036",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000037",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000038",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000039",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000040",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000041",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000042",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000043",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000044",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000045",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000046",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000047",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000048",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000049",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000050",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000051",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000052",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000053",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000054",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000055",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000056",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000057",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000058",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000059",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000060",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000061",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000062",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000063",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000064",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000065",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000066",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000067",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000068",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000069",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000070",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000071",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000072",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000073",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000074",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000075",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000076",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000077",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000078",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000079",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000080",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000081",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000082",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000083",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000084",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000085",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000086",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000087",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000088",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000089",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000090",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000091",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000092",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000093",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000094",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000095",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000096",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000097",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000098",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000099",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000100",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000101",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000102",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000103",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000104",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000105",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000106",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000107",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000108",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000109",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000110",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000111",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000112",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000113",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000114",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000115",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000116",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000117",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000118",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000119",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000120",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000121",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000122",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000123",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000124",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000125",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000126",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000127",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000128",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000129",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000130",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000131",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000132",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000133",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000134",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000135",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000136",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000137",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000138",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000139",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000140",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000141",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000142",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000143",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000144",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000145",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000146",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000147",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000148",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000149",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000150",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000151",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000152",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000153",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000154",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000155",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000156",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000157",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000158",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000159",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000160",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000161",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000162",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000163",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000164",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000165",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000166",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000167",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000168",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000169",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000170",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000171",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000172",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000173",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000174",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000175",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000176",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000177",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000178",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000179",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000180",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000181",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000182",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000183",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000184",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000185",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000186",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000187",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000188",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000189",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000190",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000191",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000192",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000193",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000194",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000195",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000196",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000197",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000198",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000199",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000200",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000201",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000202",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000203",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing item and location preserved: item_000204",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Append retains old pending plus both distinct boss rewards in order",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Original reward batch saves both items once",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Repeated same dead dictionary cannot duplicate reward/save/RNG",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Root ledger also rejects reconstructed same identity",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Repeated corpse/reconstructed identity cannot mint another jewel",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Both pending rewards survive canonical reload",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing pending UI lists both rewards and old pending",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing return button refuses full bag without mutation",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Actual jewel footprint is one cell",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Free exactly one real fixture cell through canonical discard: ",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing placement planner accepts that one cell",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Failed pending-item move keeps exact item, location, disk and serial",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Same pending button retrieves exact same UID/fixed jewel",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Retrieving jewel keeps coexisting pending equipment",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Recovered jewel and pending gear survive exact schema58 reload",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Existing UI selects lawful free Scion start",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Actual connected socket route button: 2151",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Actual connected socket route button: 37690",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Actual connected socket route button: 48423",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Actual connected socket route button: 6230",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Four real route points paid without grants",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Recovered boss jewel selectable in existing socket UI",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Same rewarded UID installed through actual button",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Original 280 radius admits real disconnected standard-tree small node",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Remote node has actual allocatable UI state",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Remote allocation spends one point and produces original life regeneration",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Removing supporting jewel is atomically refused",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Radius does not authorize keystone/start/socket: 50288",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Radius does not authorize keystone/start/socket: 58833",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Radius does not authorize keystone/start/socket: 6230",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "All real covered candidates retain small/notable-only scope",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=false / write_fault=false",
+			"label": "Same boss jewel and actual remote allocation survive reload",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Remove only isolated suite save",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Actual formal Main opens and saves",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Select free formal Old Garden I: ",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Actual map admission: ",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Current map admits 24 ordinary roots and one registered boss on entry",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Capacity-only fixture preserves all real items and passes canonical commit",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Both real bag pages are completely full",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "One existing gear decision and one special jewel decision",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Exact fixed branchfinder wrapper/payload and original UID",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Both reward destinations: jewel=recovery, gear=recovery",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Original equipment roll/RNG preserved; jewel consumes no random draw",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Coexisting gear and jewel consume exactly one sequential UID each",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Complete native schema58 accepts recovered jewel without rule changes",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Exactly one rewarded root death advances original boss ledger",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: ember_wand",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: swift_blade",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: guardian_robe",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: vitality_armor",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: azure_charm",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: storm_charm",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: prism_bow",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: return_mantle",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: detonation_charm",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: jewel_000001",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: jewel_000002",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: jewel_000003",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: migration_gem_000001",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: migration_gem_000002",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: migration_gem_000003",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: migration_gem_000004",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: migration_gem_000005",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: migration_gem_000006",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: migration_gem_000007",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: migration_gem_000008",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: migration_gem_000009",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: migration_gem_000010",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: migration_gem_000011",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: migration_gem_000012",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: migration_gem_000013",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: migration_gem_000014",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: migration_gem_000015",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: migration_gem_000016",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: migration_gem_000017",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: migration_gem_000018",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: migration_gem_000019",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: migration_gem_000020",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: migration_gem_000021",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: migration_gem_000022",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: migration_gem_000023",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: migration_gem_000024",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: migration_flask_000001",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: migration_flask_000002",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000004",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000005",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000006",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000007",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000008",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000009",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000010",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000011",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000012",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000013",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000014",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000015",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000016",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000017",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000018",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000019",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000020",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000021",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000022",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000023",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000024",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000025",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000026",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000027",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000028",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000029",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000030",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000031",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000032",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000033",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000034",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000035",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000036",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000037",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000038",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000039",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000040",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000041",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000042",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000043",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000044",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000045",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000046",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000047",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000048",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000049",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000050",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000051",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000052",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000053",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000054",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000055",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000056",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000057",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000058",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000059",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000060",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000061",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000062",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000063",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000064",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000065",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000066",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000067",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000068",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000069",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000070",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000071",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000072",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000073",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000074",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000075",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000076",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000077",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000078",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000079",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000080",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000081",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000082",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000083",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000084",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000085",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000086",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000087",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000088",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000089",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000090",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000091",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000092",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000093",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000094",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000095",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000096",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000097",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000098",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000099",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000100",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000101",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000102",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000103",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000104",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000105",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000106",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000107",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000108",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000109",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000110",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000111",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000112",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000113",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000114",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000115",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000116",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000117",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000118",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000119",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000120",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000121",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000122",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000123",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000124",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000125",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000126",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000127",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000128",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000129",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000130",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000131",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000132",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000133",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000134",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000135",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000136",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000137",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000138",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000139",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000140",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000141",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000142",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000143",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000144",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000145",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000146",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000147",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000148",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000149",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000150",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000151",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000152",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000153",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000154",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000155",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000156",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000157",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000158",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000159",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000160",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000161",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000162",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000163",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000164",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000165",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000166",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000167",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000168",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000169",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000170",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000171",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000172",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000173",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000174",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000175",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000176",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000177",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000178",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000179",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000180",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000181",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000182",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000183",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000184",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000185",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000186",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000187",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000188",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000189",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000190",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000191",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000192",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000193",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000194",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000195",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000196",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000197",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000198",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000199",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000200",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000201",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000202",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000203",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000204",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing item and location preserved: item_000205",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Append retains old pending plus both distinct boss rewards in order",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Failed death save preserves old bytes and dirty complete reward memory",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Disk reload after failure sees complete prior state",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Repeated same dead dictionary cannot duplicate reward/save/RNG",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Root ledger also rejects reconstructed same identity",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Repeated corpse/reconstructed identity cannot mint another jewel",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Failed explicit retry neither remints nor partially writes",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Successful retry writes exact retained two rewards",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Repeated same dead dictionary cannot duplicate reward/save/RNG",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Root ledger also rejects reconstructed same identity",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Repeated corpse/reconstructed identity cannot mint another jewel",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Both pending rewards survive canonical reload",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Actual Main reload uses existing safe map abandonment",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Actual Main reload retains both rewards and old pending with no additional UIDs",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Reload issues no completion receipt or tier unlock",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing pending UI lists both rewards and old pending",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing return button refuses full bag without mutation",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Actual jewel footprint is one cell",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Free exactly one real fixture cell through canonical discard: ",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Existing placement planner accepts that one cell",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Failed pending-item move keeps exact item, location, disk and serial",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Same pending button retrieves exact same UID/fixed jewel",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Retrieving jewel keeps coexisting pending equipment",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Recovered jewel and pending gear survive exact schema58 reload",
+			"ok": true
+		},
+		{
+			"case": "full bag / existing=true / write_fault=true",
+			"label": "Original pending entry remains after jewel retrieval",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Remove only isolated suite save",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Actual formal Main opens and saves",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Select free formal Old Garden I: ",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Actual map admission: ",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Current map admits 24 ordinary roots and one registered boss on entry",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Capacity-only fixture preserves all real items and passes canonical commit",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Both real bag pages are completely full",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Free actual bag rectangle while retaining old pending: ",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Free actual bag rectangle while retaining old pending: ",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Free actual bag rectangle while retaining old pending: ",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Free actual bag rectangle while retaining old pending: ",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Free actual bag rectangle while retaining old pending: ",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Free actual bag rectangle while retaining old pending: ",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Free actual bag rectangle while retaining old pending: ",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Free actual bag rectangle while retaining old pending: ",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Free actual bag rectangle while retaining old pending: ",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Free actual bag rectangle while retaining old pending: ",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Free actual bag rectangle while retaining old pending: ",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Free actual bag rectangle while retaining old pending: ",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Free actual bag rectangle while retaining old pending: ",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Free actual bag rectangle while retaining old pending: ",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Free actual bag rectangle while retaining old pending: ",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Free actual bag rectangle while retaining old pending: ",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Free actual bag rectangle while retaining old pending: ",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Free actual bag rectangle while retaining old pending: ",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Free actual bag rectangle while retaining old pending: ",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Free actual bag rectangle while retaining old pending: ",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Free actual bag rectangle while retaining old pending: ",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Free actual bag rectangle while retaining old pending: ",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Free actual bag rectangle while retaining old pending: ",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Free actual bag rectangle while retaining old pending: ",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Free actual bag rectangle while retaining old pending: ",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Free actual bag rectangle while retaining old pending: ",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Free actual bag rectangle while retaining old pending: ",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Free actual bag rectangle while retaining old pending: ",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Free actual bag rectangle while retaining old pending: ",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Free actual bag rectangle while retaining old pending: ",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Free actual bag rectangle while retaining old pending: ",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Free actual bag rectangle while retaining old pending: ",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Free actual bag rectangle while retaining old pending: ",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Free actual bag rectangle while retaining old pending: ",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Free actual bag rectangle while retaining old pending: ",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Free actual bag rectangle while retaining old pending: ",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Free actual bag rectangle while retaining old pending: ",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Free actual bag rectangle while retaining old pending: ",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Free actual bag rectangle while retaining old pending: ",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Free actual bag rectangle while retaining old pending: ",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Free actual bag rectangle while retaining old pending: ",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Free actual bag rectangle while retaining old pending: ",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Free actual bag rectangle while retaining old pending: ",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Free actual bag rectangle while retaining old pending: ",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Free actual bag rectangle while retaining old pending: ",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Free actual bag rectangle while retaining old pending: ",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Free actual bag rectangle while retaining old pending: ",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Free actual bag rectangle while retaining old pending: ",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Free actual bag rectangle while retaining old pending: ",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Free actual bag rectangle while retaining old pending: ",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Free actual bag rectangle while retaining old pending: ",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Free actual bag rectangle while retaining old pending: ",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Free actual bag rectangle while retaining old pending: ",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Free actual bag rectangle while retaining old pending: ",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Free actual bag rectangle while retaining old pending: ",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Free actual bag rectangle while retaining old pending: ",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "One existing gear decision and one special jewel decision",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Exact fixed branchfinder wrapper/payload and original UID",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Both reward destinations: jewel=bag, gear=bag",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Original equipment roll/RNG preserved; jewel consumes no random draw",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Coexisting gear and jewel consume exactly one sequential UID each",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Complete native schema58 accepts recovered jewel without rule changes",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Exactly one rewarded root death advances original boss ledger",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: ember_wand",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: swift_blade",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: guardian_robe",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: vitality_armor",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: azure_charm",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: storm_charm",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: prism_bow",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: return_mantle",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: detonation_charm",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: jewel_000001",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: jewel_000002",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: jewel_000003",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: migration_gem_000001",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: migration_gem_000002",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: migration_gem_000003",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: migration_gem_000004",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: migration_gem_000005",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: migration_gem_000006",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: migration_gem_000007",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: migration_gem_000008",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: migration_gem_000009",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: migration_gem_000010",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: migration_gem_000011",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: migration_gem_000012",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: migration_gem_000013",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: migration_gem_000014",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: migration_gem_000015",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: migration_gem_000016",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: migration_gem_000017",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: migration_gem_000018",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: migration_gem_000019",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: migration_gem_000020",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: migration_gem_000021",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: migration_gem_000022",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: migration_gem_000023",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: migration_gem_000024",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: migration_flask_000001",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: migration_flask_000002",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000004",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000005",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000006",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000007",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000008",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000009",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000010",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000011",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000012",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000013",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000014",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000015",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000016",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000017",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000018",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000019",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000020",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000021",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000022",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000023",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000024",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000025",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000026",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000027",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000028",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000029",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000030",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000031",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000032",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000033",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000034",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000035",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000036",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000037",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000038",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000039",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000040",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000041",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000042",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000043",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000044",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000045",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000046",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000047",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000048",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000049",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000050",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000051",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000052",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000053",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000054",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000055",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000056",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000057",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000058",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000059",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000060",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000061",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000062",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000063",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000064",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000065",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000066",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000067",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000068",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000069",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000070",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000071",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000072",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000073",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000074",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000075",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000076",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000077",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000078",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000079",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000080",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000081",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000082",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000083",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000084",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000085",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000086",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000087",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000088",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000089",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000090",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000091",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000092",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000093",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000094",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000095",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000096",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000097",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000098",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000099",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000100",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000101",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000102",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000103",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000104",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000105",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000106",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000107",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000108",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000109",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000110",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000111",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000112",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000113",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000114",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000115",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000116",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000117",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000118",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000119",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000120",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000121",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000122",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000123",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000124",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000133",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000134",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000135",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000136",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000145",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000146",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000147",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000148",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000157",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000158",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000159",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000160",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000169",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000170",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000171",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000172",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000181",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000182",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000183",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000184",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000193",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000194",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000195",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000196",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing item and location preserved: item_000205",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Existing recovery does not block normal bag placement or get overwritten",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Repeated same dead dictionary cannot duplicate reward/save/RNG",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Root ledger also rejects reconstructed same identity",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Repeated corpse/reconstructed identity cannot mint another jewel",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room for both rewards",
+			"label": "Two new bag rewards and old pending reload unchanged",
+			"ok": true
+		},
+		{
+			"case": "test boss remains original",
+			"label": "Remove only isolated suite save",
+			"ok": true
+		},
+		{
+			"case": "test boss remains original",
+			"label": "Actual formal Main opens and saves",
+			"ok": true
+		},
+		{
+			"case": "test boss remains original",
+			"label": "Enter separate existing test town: ",
+			"ok": true
+		},
+		{
+			"case": "test boss remains original",
+			"label": "Load only test profile",
+			"ok": true
+		},
+		{
+			"case": "test boss remains original",
+			"label": "Actual map admission: ",
+			"ok": true
+		},
+		{
+			"case": "test boss remains original",
+			"label": "Current map admits 24 ordinary roots and one registered boss on entry",
+			"ok": true
+		},
+		{
+			"case": "test boss remains original",
+			"label": "Capacity-only fixture preserves all real items and passes canonical commit",
+			"ok": true
+		},
+		{
+			"case": "test boss remains original",
+			"label": "Both real bag pages are completely full",
+			"ok": true
+		},
+		{
+			"case": "test boss remains original",
+			"label": "Test boss full bag creates neither recovery nor new UID",
+			"ok": true
+		},
+		{
+			"case": "test boss remains original",
+			"label": "Test reward does not write formal profile",
+			"ok": true
+		},
+		{
+			"case": "ordinary / legacy / demo isolation",
+			"label": "Remove only isolated suite save",
+			"ok": true
+		},
+		{
+			"case": "ordinary / legacy / demo isolation",
+			"label": "Remove only isolated suite save",
+			"ok": true
+		},
+		{
+			"case": "ordinary / legacy / demo isolation",
+			"label": "Actual formal Main opens and saves",
+			"ok": true
+		},
+		{
+			"case": "ordinary / legacy / demo isolation",
+			"label": "Select free formal Old Garden I: ",
+			"ok": true
+		},
+		{
+			"case": "ordinary / legacy / demo isolation",
+			"label": "Actual map admission: ",
+			"ok": true
+		},
+		{
+			"case": "ordinary / legacy / demo isolation",
+			"label": "Current map admits 24 ordinary roots and one registered boss on entry",
+			"ok": true
+		},
+		{
+			"case": "ordinary / legacy / demo isolation",
+			"label": "Actual ordinary root produces no special jewel",
+			"ok": true
+		},
+		{
+			"case": "ordinary / legacy / demo isolation",
+			"label": "Capacity-only fixture preserves all real items and passes canonical commit",
+			"ok": true
+		},
+		{
+			"case": "ordinary / legacy / demo isolation",
+			"label": "Both real bag pages are completely full",
+			"ok": true
+		},
+		{
+			"case": "ordinary / legacy / demo isolation",
+			"label": "Original special award API retains full-bag refusal",
+			"ok": true
+		},
+		{
+			"case": "ordinary / legacy / demo isolation",
+			"label": "Ordinary jewel drop retains original refusal and RNG",
+			"ok": true
+		},
+		{
+			"case": "ordinary / legacy / demo isolation",
+			"label": "Ordinary equipment drop retains original refusal and RNG",
+			"ok": true
+		},
+		{
+			"case": "ordinary / legacy / demo isolation",
+			"label": "Demo boss never enters special recovery path",
+			"ok": true
+		},
+		{
+			"case": "formal guard and original limits",
+			"label": "Remove only isolated suite save",
+			"ok": true
+		},
+		{
+			"case": "formal guard and original limits",
+			"label": "Actual formal Main opens and saves",
+			"ok": true
+		},
+		{
+			"case": "formal guard and original limits",
+			"label": "Select free formal Old Garden I: ",
+			"ok": true
+		},
+		{
+			"case": "formal guard and original limits",
+			"label": "Actual map admission: ",
+			"ok": true
+		},
+		{
+			"case": "formal guard and original limits",
+			"label": "Current map admits 24 ordinary roots and one registered boss on entry",
+			"ok": true
+		},
+		{
+			"case": "formal guard and original limits",
+			"label": "Mismatched active run rejected",
+			"ok": true
+		},
+		{
+			"case": "formal guard and original limits",
+			"label": "Exhausted limit is still a lawful schema58 fixture: revision",
+			"ok": true
+		},
+		{
+			"case": "formal guard and original limits",
+			"label": "Original limit rejects admission without consuming identity: revision",
+			"ok": true
+		},
+		{
+			"case": "formal guard and original limits",
+			"label": "Exhausted limit is still a lawful schema58 fixture: next_item_serial",
+			"ok": true
+		},
+		{
+			"case": "formal guard and original limits",
+			"label": "Original limit rejects admission without consuming identity: next_item_serial",
+			"ok": true
+		},
+		{
+			"case": "formal guard and original limits",
+			"label": "Original reward item-cap fixture passes unchanged schema58 rules",
+			"ok": true
+		},
+		{
+			"case": "formal guard and original limits",
+			"label": "Original item cap remains mandatory",
+			"ok": true
+		},
+		{
+			"case": "formal guard and original limits",
+			"label": "Existing active-run abandonment: ",
+			"ok": true
+		},
+		{
+			"case": "formal guard and original limits",
+			"label": "No active formal run cannot mint a recovered jewel",
+			"ok": true
+		},
+		{
+			"case": "formal guard and original limits",
+			"label": "All four actual positive boss scenarios completed",
+			"ok": true
+		},
+		{
+			"case": "formal guard and original limits",
+			"label": "Actual item text accurately states unchanged type scope/radius/cost",
+			"ok": true
+		}
+	],
+	"failed_labels": [],
+	"failures": 0,
+	"schema": 58,
+	"scope": "Actual Main/HUD registered Old Garden boss in initial 25-root map; damage shortcut, capacity and write-fault fixtures; no natural-play or native-keyboard claim"
+}
