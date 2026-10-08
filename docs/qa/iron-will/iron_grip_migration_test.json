@@ -1,0 +1,315 @@
+{
+	"checks": 77,
+	"evidence": [
+		{
+			"label": "Immutable pre-edit56 production sample: town",
+			"ok": true
+		},
+		{
+			"label": "Complete frozen56 native validation and decode: town",
+			"ok": true
+		},
+		{
+			"label": "Pure migration changes only version, preserving source/RNG: town",
+			"ok": true
+		},
+		{
+			"label": "Exact canonical field preserved town/revision",
+			"ok": true
+		},
+		{
+			"label": "Exact canonical field preserved town/items",
+			"ok": true
+		},
+		{
+			"label": "Exact canonical field preserved town/locations",
+			"ok": true
+		},
+		{
+			"label": "Exact canonical field preserved town/next_item_serial",
+			"ok": true
+		},
+		{
+			"label": "Exact canonical field preserved town/skill_groups",
+			"ok": true
+		},
+		{
+			"label": "Exact canonical field preserved town/bindings",
+			"ok": true
+		},
+		{
+			"label": "Exact canonical field preserved town/talents",
+			"ok": true
+		},
+		{
+			"label": "Exact canonical field preserved town/progress",
+			"ok": true
+		},
+		{
+			"label": "Exact canonical field preserved town/crafting",
+			"ok": true
+		},
+		{
+			"label": "Exact canonical field preserved town/migration_ledger",
+			"ok": true
+		},
+		{
+			"label": "Exact canonical field preserved town/journey",
+			"ok": true
+		},
+		{
+			"label": "Inactive old/current stats exactly match captured56 oracle: town",
+			"ok": true
+		},
+		{
+			"label": "Actual56 load publishes only version change to current, including active journey",
+			"ok": true
+		},
+		{
+			"label": "Complete chain saves and publishes once",
+			"ok": true
+		},
+		{
+			"label": "Exact original-version backup bytes",
+			"ok": true
+		},
+		{
+			"label": "56 notice names full new mechanism and preservation",
+			"ok": true
+		},
+		{
+			"label": "Current reopens with no migration/write",
+			"ok": true
+		},
+		{
+			"label": "Repeated current load preserves committed bytes",
+			"ok": true
+		},
+		{
+			"label": "Immutable pre-edit56 production sample: active",
+			"ok": true
+		},
+		{
+			"label": "Complete frozen56 native validation and decode: active",
+			"ok": true
+		},
+		{
+			"label": "Pure migration changes only version, preserving source/RNG: active",
+			"ok": true
+		},
+		{
+			"label": "Exact canonical field preserved active/revision",
+			"ok": true
+		},
+		{
+			"label": "Exact canonical field preserved active/items",
+			"ok": true
+		},
+		{
+			"label": "Exact canonical field preserved active/locations",
+			"ok": true
+		},
+		{
+			"label": "Exact canonical field preserved active/next_item_serial",
+			"ok": true
+		},
+		{
+			"label": "Exact canonical field preserved active/skill_groups",
+			"ok": true
+		},
+		{
+			"label": "Exact canonical field preserved active/bindings",
+			"ok": true
+		},
+		{
+			"label": "Exact canonical field preserved active/talents",
+			"ok": true
+		},
+		{
+			"label": "Exact canonical field preserved active/progress",
+			"ok": true
+		},
+		{
+			"label": "Exact canonical field preserved active/crafting",
+			"ok": true
+		},
+		{
+			"label": "Exact canonical field preserved active/migration_ledger",
+			"ok": true
+		},
+		{
+			"label": "Exact canonical field preserved active/journey",
+			"ok": true
+		},
+		{
+			"label": "Inactive old/current stats exactly match captured56 oracle: active",
+			"ok": true
+		},
+		{
+			"label": "Actual56 load publishes only version change to current, including active journey",
+			"ok": true
+		},
+		{
+			"label": "Complete chain saves and publishes once",
+			"ok": true
+		},
+		{
+			"label": "Exact original-version backup bytes",
+			"ok": true
+		},
+		{
+			"label": "56 notice names full new mechanism and preservation",
+			"ok": true
+		},
+		{
+			"label": "Current reopens with no migration/write",
+			"ok": true
+		},
+		{
+			"label": "Repeated current load preserves committed bytes",
+			"ok": true
+		},
+		{
+			"label": "Failed56 upgrade preserves unpublished memory: backup",
+			"ok": true
+		},
+		{
+			"label": "Preserve original/concurrent file: backup",
+			"ok": true
+		},
+		{
+			"label": "Backup/conflict checks precede final write: backup",
+			"ok": true
+		},
+		{
+			"label": "Failed56 upgrade preserves unpublished memory: collision",
+			"ok": true
+		},
+		{
+			"label": "Preserve original/concurrent file: collision",
+			"ok": true
+		},
+		{
+			"label": "Backup/conflict checks precede final write: collision",
+			"ok": true
+		},
+		{
+			"label": "Backup conflict never overwrites prior bytes",
+			"ok": true
+		},
+		{
+			"label": "Failed56 upgrade preserves unpublished memory: external",
+			"ok": true
+		},
+		{
+			"label": "Preserve original/concurrent file: external",
+			"ok": true
+		},
+		{
+			"label": "Backup/conflict checks precede final write: external",
+			"ok": true
+		},
+		{
+			"label": "Final-write failure retains exact backup",
+			"ok": true
+		},
+		{
+			"label": "Inject final atomic migration write fault",
+			"ok": true
+		},
+		{
+			"label": "Failed56 upgrade preserves unpublished memory: atomic",
+			"ok": true
+		},
+		{
+			"label": "Preserve original/concurrent file: atomic",
+			"ok": true
+		},
+		{
+			"label": "Backup/conflict checks precede final write: atomic",
+			"ok": true
+		},
+		{
+			"label": "Final-write failure retains exact backup",
+			"ok": true
+		},
+		{
+			"label": "Healthy retry reuses exact backup and commits once",
+			"ok": true
+		},
+		{
+			"label": "Callback cannot bypass complete frozen56 validator: target",
+			"ok": true
+		},
+		{
+			"label": "Illegal old/future file protected before backup/write/publish: target",
+			"ok": true
+		},
+		{
+			"label": "Callback cannot bypass complete frozen56 validator: points",
+			"ok": true
+		},
+		{
+			"label": "Illegal old/future file protected before backup/write/publish: points",
+			"ok": true
+		},
+		{
+			"label": "Callback cannot bypass complete frozen56 validator: items",
+			"ok": true
+		},
+		{
+			"label": "Illegal old/future file protected before backup/write/publish: items",
+			"ok": true
+		},
+		{
+			"label": "Callback cannot bypass complete frozen56 validator: journey",
+			"ok": true
+		},
+		{
+			"label": "Illegal old/future file protected before backup/write/publish: journey",
+			"ok": true
+		},
+		{
+			"label": "Callback cannot bypass complete frozen56 validator: future",
+			"ok": true
+		},
+		{
+			"label": "Illegal old/future file protected before backup/write/publish: future",
+			"ok": true
+		},
+		{
+			"label": "Existing55→56 step remains frozen56, never jumps to57",
+			"ok": true
+		},
+		{
+			"label": "Actual55 load publishes only version change to current, including active journey",
+			"ok": true
+		},
+		{
+			"label": "Complete chain saves and publishes once",
+			"ok": true
+		},
+		{
+			"label": "Exact original-version backup bytes",
+			"ok": true
+		},
+		{
+			"label": "55→56→57 creates no intermediate56 backup",
+			"ok": true
+		},
+		{
+			"label": "Current reopens with no migration/write",
+			"ok": true
+		},
+		{
+			"label": "Repeated current load preserves committed bytes",
+			"ok": true
+		},
+		{
+			"label": "No equipment vocabulary change",
+			"ok": true
+		}
+	],
+	"failed_labels": [],
+	"failures": 0
+}

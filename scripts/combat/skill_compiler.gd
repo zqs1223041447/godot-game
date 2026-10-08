@@ -14,6 +14,7 @@ const Critical=preload("res://scripts/combat/critical_strike_rules.gd")
 const Resolute = preload("res://scripts/combat/resolute_technique_rules.gd")
 const Precise = preload("res://scripts/combat/precise_technique_rules.gd")
 const IronGrip = preload("res://scripts/combat/iron_grip_rules.gd")
+const IronWill = preload("res://scripts/combat/iron_will_rules.gd")
 const Burn=preload("res://scripts/combat/burn_rules.gd")
 const FrostLock = preload("res://scripts/combat/frost_lock_rules.gd")
 const ColdDuration = preload("res://scripts/combat/cold_ailment_duration_rules.gd")
@@ -442,6 +443,8 @@ static func _snapshot_error(snapshot: Dictionary) -> String:
 	if not precise_error.is_empty(): return precise_error
 	var iron_grip_error: String = IronGrip.snapshot_error(snapshot)
 	if not iron_grip_error.is_empty(): return iron_grip_error
+	var iron_will_error: String = IronWill.snapshot_error(snapshot)
+	if not iron_will_error.is_empty(): return iron_will_error
 	return ColdDuration.snapshot_error(snapshot)
 
 

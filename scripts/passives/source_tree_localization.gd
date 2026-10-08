@@ -12,6 +12,16 @@ const TERM_NOTE := "词缀说明：提高/降低为同类加算；额外提高/�
 # A parser match is not sufficient by itself. These closed-world groups name
 # the actual runtime paths that consume each parsed stat after SourceTree.apply_stats.
 const STAT_CONSUMER_GROUPS := {
+	"iron_will": {
+		"evidence":"source_tree_runtime.gd::apply_stats -> combat_data.gd::snapshot -> iron_will_rules.gd::spell_modifier -> existing damage_resolver.gd spell scope and conversion portions",
+		"code_checks":[
+			{"path":"scripts/passives/source_tree_runtime.gd","contains":"result.iron_will = 1.0"},
+			{"path":"scripts/combat/combat_data.gd","contains":"IronWill.spell_modifier(value)"},
+			{"path":"scripts/combat/iron_will_rules.gd","contains":"\"all_tags\":[\"spell\"],\"skills\":[],\"damage_types\":[]"},
+			{"path":"scripts/combat/skill_compiler.gd","contains":"IronWill.snapshot_error(snapshot)"},
+		],
+		"stats":["iron_will"]
+	},
 	"iron_grip": {
 		"evidence":"source_tree_runtime.gd::apply_stats -> combat_data.gd::snapshot -> iron_grip_rules.gd::projectile_modifier -> damage_resolver.gd tag scope and physical lineage",
 		"code_checks":[

@@ -1,0 +1,779 @@
+{
+	"checks": 193,
+	"evidence": [
+		{
+			"label": "Entire frozen57 policy exactly matches the pre-edit normalized SHA256",
+			"ok": true
+		},
+		{
+			"label": "Only exact pinned wording grants the new rule flag",
+			"ok": true
+		},
+		{
+			"label": "Exact wording occurs only at existing standard keystone50288",
+			"ok": true
+		},
+		{
+			"label": "Frozen old policy rejects Iron Will: 19",
+			"ok": true
+		},
+		{
+			"label": "Current/old caches remain independent",
+			"ok": true
+		},
+		{
+			"label": "Frozen old policy rejects Iron Will: 45",
+			"ok": true
+		},
+		{
+			"label": "Current/old caches remain independent",
+			"ok": true
+		},
+		{
+			"label": "Frozen old policy rejects Iron Will: 55",
+			"ok": true
+		},
+		{
+			"label": "Current/old caches remain independent",
+			"ok": true
+		},
+		{
+			"label": "Frozen old policy rejects Iron Will: 56",
+			"ok": true
+		},
+		{
+			"label": "Current/old caches remain independent",
+			"ok": true
+		},
+		{
+			"label": "Frozen old policy rejects Iron Will: 57",
+			"ok": true
+		},
+		{
+			"label": "Current/old caches remain independent",
+			"ok": true
+		},
+		{
+			"label": "Iron Grip source effect remains unchanged",
+			"ok": true
+		},
+		{
+			"label": "Disabled earlier vocabulary cannot open the new keystone",
+			"ok": true
+		},
+		{
+			"label": "Other wording/condition/physical-only variants stay unsupported: Strength's Damage bonus applies to all Spell Damage as well.",
+			"ok": true
+		},
+		{
+			"label": "Other wording/condition/physical-only variants stay unsupported: Strength's Damage bonus applies to all Spell Damage as well while Chilled",
+			"ok": true
+		},
+		{
+			"label": "Other wording/condition/physical-only variants stay unsupported:  Strength's Damage bonus applies to all Spell Damage as well",
+			"ok": true
+		},
+		{
+			"label": "Other wording/condition/physical-only variants stay unsupported: Strength's Damage bonus applies to all Spell Damage as well\n",
+			"ok": true
+		},
+		{
+			"label": "Other wording/condition/physical-only variants stay unsupported: Strength's Damage bonus applies to Physical Spell Damage as well",
+			"ok": true
+		},
+		{
+			"label": "Existing official Chinese name retained; complete wording has actual consumer",
+			"ok": true
+		},
+		{
+			"label": "Consumer evidence points to production code: scripts/passives/source_tree_runtime.gd",
+			"ok": true
+		},
+		{
+			"label": "Consumer evidence points to production code: scripts/combat/combat_data.gd",
+			"ok": true
+		},
+		{
+			"label": "Consumer evidence points to production code: scripts/combat/iron_will_rules.gd",
+			"ok": true
+		},
+		{
+			"label": "Consumer evidence points to production code: scripts/combat/skill_compiler.gd",
+			"ok": true
+		},
+		{
+			"label": "Real standard edge: 58833→2151",
+			"ok": true
+		},
+		{
+			"label": "Real standard edge: 2151→37690",
+			"ok": true
+		},
+		{
+			"label": "Real standard edge: 37690→48423",
+			"ok": true
+		},
+		{
+			"label": "Real standard edge: 48423→6204",
+			"ok": true
+		},
+		{
+			"label": "Real standard edge: 6204→63976",
+			"ok": true
+		},
+		{
+			"label": "Real standard edge: 63976→16775",
+			"ok": true
+		},
+		{
+			"label": "Real standard edge: 16775→46910",
+			"ok": true
+		},
+		{
+			"label": "Real standard edge: 46910→50288",
+			"ok": true
+		},
+		{
+			"label": "ALL spell types get Strength20 + spell30 + global10 once, no other melee30: physical: 160.00000000 expected 160.00000000",
+			"ok": true
+		},
+		{
+			"label": "ALL spell types get Strength20 + spell30 + global10 once, no other melee30: fire: 160.00000000 expected 160.00000000",
+			"ok": true
+		},
+		{
+			"label": "ALL spell types get Strength20 + spell30 + global10 once, no other melee30: cold: 160.00000000 expected 160.00000000",
+			"ok": true
+		},
+		{
+			"label": "ALL spell types get Strength20 + spell30 + global10 once, no other melee30: lightning: 160.00000000 expected 160.00000000",
+			"ok": true
+		},
+		{
+			"label": "ALL spell types get Strength20 + spell30 + global10 once, no other melee30: chaos: 160.00000000 expected 160.00000000",
+			"ok": true
+		},
+		{
+			"label": "Spell INC sums before independent MORE: 200.00000000 expected 200.00000000",
+			"ok": true
+		},
+		{
+			"label": "Attack/independent explosion gains no Iron Will: 110.00000000 expected 110.00000000",
+			"ok": true
+		},
+		{
+			"label": "Attack/independent explosion fire excludes spell source: 110.00000000 expected 110.00000000",
+			"ok": true
+		},
+		{
+			"label": "Attack/independent explosion gains no Iron Will: 160.00000000 expected 160.00000000",
+			"ok": true
+		},
+		{
+			"label": "Attack/independent explosion fire excludes spell source: 110.00000000 expected 110.00000000",
+			"ok": true
+		},
+		{
+			"label": "Attack/independent explosion gains no Iron Will: 110.00000000 expected 110.00000000",
+			"ok": true
+		},
+		{
+			"label": "Attack/independent explosion fire excludes spell source: 110.00000000 expected 110.00000000",
+			"ok": true
+		},
+		{
+			"label": "A genuine spell-tagged event qualifies even when called an explosion: 160.00000000 expected 160.00000000",
+			"ok": true
+		},
+		{
+			"label": "Both flags: projectile spell gets Will once, never Grip: 160.00000000 expected 160.00000000",
+			"ok": true
+		},
+		{
+			"label": "Both flags: projectile attack gets Grip once, never Will: 130.00000000 expected 130.00000000",
+			"ok": true
+		},
+		{
+			"label": "Grip remains physical-only while Will remains spell-only: 110.00000000 expected 110.00000000",
+			"ok": true
+		},
+		{
+			"label": "Existing actual frost recipe admits typed spell additions",
+			"ok": true
+		},
+		{
+			"label": "Frost intrinsic85 + added8.5 receives20% exactly once: 112.20000000 expected 112.20000000",
+			"ok": true
+		},
+		{
+			"label": "Added lightning17 receives20% exactly once: 20.40000000 expected 20.40000000",
+			"ok": true
+		},
+		{
+			"label": "Existing chaos-spell recipe compiles numeric physical-added conversion fixture: physical_to_fire_conversion",
+			"ok": true
+		},
+		{
+			"label": "Native chaos240 gets one combined60% INC: 384.00000000 expected 384.00000000",
+			"ok": true
+		},
+		{
+			"label": "Remaining physical144 receives spell INC once: fire: 230.40000000 expected 230.40000000",
+			"ok": true
+		},
+		{
+			"label": "Converted96 and native same-type part separately receive one source: fire: 345.60000000 expected 345.60000000",
+			"ok": true
+		},
+		{
+			"label": "Each native/converted portion has one Will and no Grip",
+			"ok": true
+		},
+		{
+			"label": "Each native/converted portion has one Will and no Grip",
+			"ok": true
+		},
+		{
+			"label": "Each native/converted portion has one Will and no Grip",
+			"ok": true
+		},
+		{
+			"label": "Each native/converted portion has one Will and no Grip",
+			"ok": true
+		},
+		{
+			"label": "Existing chaos-spell recipe compiles numeric physical-added conversion fixture: physical_to_cold_conversion",
+			"ok": true
+		},
+		{
+			"label": "Native chaos240 gets one combined60% INC: 384.00000000 expected 384.00000000",
+			"ok": true
+		},
+		{
+			"label": "Remaining physical144 receives spell INC once: cold: 230.40000000 expected 230.40000000",
+			"ok": true
+		},
+		{
+			"label": "Converted96 and native same-type part separately receive one source: cold: 153.60000000 expected 153.60000000",
+			"ok": true
+		},
+		{
+			"label": "Each native/converted portion has one Will and no Grip",
+			"ok": true
+		},
+		{
+			"label": "Each native/converted portion has one Will and no Grip",
+			"ok": true
+		},
+		{
+			"label": "Each native/converted portion has one Will and no Grip",
+			"ok": true
+		},
+		{
+			"label": "Each native/converted portion has one Will and no Grip",
+			"ok": true
+		},
+		{
+			"label": "Existing chaos-spell recipe compiles numeric physical-added conversion fixture: physical_to_lightning_conversion",
+			"ok": true
+		},
+		{
+			"label": "Native chaos240 gets one combined60% INC: 384.00000000 expected 384.00000000",
+			"ok": true
+		},
+		{
+			"label": "Remaining physical144 receives spell INC once: lightning: 230.40000000 expected 230.40000000",
+			"ok": true
+		},
+		{
+			"label": "Converted96 and native same-type part separately receive one source: lightning: 153.60000000 expected 153.60000000",
+			"ok": true
+		},
+		{
+			"label": "Each native/converted portion has one Will and no Grip",
+			"ok": true
+		},
+		{
+			"label": "Each native/converted portion has one Will and no Grip",
+			"ok": true
+		},
+		{
+			"label": "Each native/converted portion has one Will and no Grip",
+			"ok": true
+		},
+		{
+			"label": "Each native/converted portion has one Will and no Grip",
+			"ok": true
+		},
+		{
+			"label": "Existing chaos-spell recipe compiles numeric physical-added conversion fixture: all",
+			"ok": true
+		},
+		{
+			"label": "Native chaos240 gets one combined60% INC: 384.00000000 expected 384.00000000",
+			"ok": true
+		},
+		{
+			"label": "120% request normalizes; no physical remainder: 0.00000000 expected 0.00000000",
+			"ok": true
+		},
+		{
+			"label": "Normalized converted80 and native fire120 each receive60% once: 320.00000000 expected 320.00000000",
+			"ok": true
+		},
+		{
+			"label": "Normalized converted cold gets one spell source: 128.00000000 expected 128.00000000",
+			"ok": true
+		},
+		{
+			"label": "Normalized converted lightning gets one spell source: 128.00000000 expected 128.00000000",
+			"ok": true
+		},
+		{
+			"label": "Each native/converted portion has one Will and no Grip",
+			"ok": true
+		},
+		{
+			"label": "Each native/converted portion has one Will and no Grip",
+			"ok": true
+		},
+		{
+			"label": "Each native/converted portion has one Will and no Grip",
+			"ok": true
+		},
+		{
+			"label": "Each native/converted portion has one Will and no Grip",
+			"ok": true
+		},
+		{
+			"label": "Each native/converted portion has one Will and no Grip",
+			"ok": true
+		},
+		{
+			"label": "Explicit rounded-attribute unit candidate uses the legal eight-point source route",
+			"ok": true
+		},
+		{
+			"label": "Final Strength rounding precedes native five-point staircase: 0.00000000 expected 0.00000000",
+			"ok": true
+		},
+		{
+			"label": "Original native melee coefficient preserved with other melee supply: 0.30000000 expected 0.30000000",
+			"ok": true
+		},
+		{
+			"label": "Will reuses the exact native final Strength coefficient: 0.00000000 expected 0.00000000",
+			"ok": true
+		},
+		{
+			"label": "Final Strength rounding precedes native five-point staircase: 4.00000000 expected 4.00000000",
+			"ok": true
+		},
+		{
+			"label": "Original native melee coefficient preserved with other melee supply: 0.30000000 expected 0.30000000",
+			"ok": true
+		},
+		{
+			"label": "Will reuses the exact native final Strength coefficient: 0.00000000 expected 0.00000000",
+			"ok": true
+		},
+		{
+			"label": "Final Strength rounding precedes native five-point staircase: 5.00000000 expected 5.00000000",
+			"ok": true
+		},
+		{
+			"label": "Original native melee coefficient preserved with other melee supply: 0.31000000 expected 0.31000000",
+			"ok": true
+		},
+		{
+			"label": "Will reuses the exact native final Strength coefficient: 0.01000000 expected 0.01000000",
+			"ok": true
+		},
+		{
+			"label": "Final Strength rounding precedes native five-point staircase: 5.00000000 expected 5.00000000",
+			"ok": true
+		},
+		{
+			"label": "Original native melee coefficient preserved with other melee supply: 0.31000000 expected 0.31000000",
+			"ok": true
+		},
+		{
+			"label": "Will reuses the exact native final Strength coefficient: 0.01000000 expected 0.01000000",
+			"ok": true
+		},
+		{
+			"label": "Final Strength rounding precedes native five-point staircase: 9.00000000 expected 9.00000000",
+			"ok": true
+		},
+		{
+			"label": "Original native melee coefficient preserved with other melee supply: 0.31000000 expected 0.31000000",
+			"ok": true
+		},
+		{
+			"label": "Will reuses the exact native final Strength coefficient: 0.01000000 expected 0.01000000",
+			"ok": true
+		},
+		{
+			"label": "Final Strength rounding precedes native five-point staircase: 10.00000000 expected 10.00000000",
+			"ok": true
+		},
+		{
+			"label": "Original native melee coefficient preserved with other melee supply: 0.32000000 expected 0.32000000",
+			"ok": true
+		},
+		{
+			"label": "Will reuses the exact native final Strength coefficient: 0.02000000 expected 0.02000000",
+			"ok": true
+		},
+		{
+			"label": "Final Strength rounding precedes native five-point staircase: 10.00000000 expected 10.00000000",
+			"ok": true
+		},
+		{
+			"label": "Original native melee coefficient preserved with other melee supply: 0.32000000 expected 0.32000000",
+			"ok": true
+		},
+		{
+			"label": "Will reuses the exact native final Strength coefficient: 0.02000000 expected 0.02000000",
+			"ok": true
+		},
+		{
+			"label": "Final Strength rounding precedes native five-point staircase: 40.00000000 expected 40.00000000",
+			"ok": true
+		},
+		{
+			"label": "Original native melee coefficient preserved with other melee supply: 0.38000000 expected 0.38000000",
+			"ok": true
+		},
+		{
+			"label": "Will reuses the exact native final Strength coefficient: 0.08000000 expected 0.08000000",
+			"ok": true
+		},
+		{
+			"label": "Final Strength rounding precedes native five-point staircase: 50.00000000 expected 50.00000000",
+			"ok": true
+		},
+		{
+			"label": "Original native melee coefficient preserved with other melee supply: 0.40000000 expected 0.40000000",
+			"ok": true
+		},
+		{
+			"label": "Will reuses the exact native final Strength coefficient: 0.10000000 expected 0.10000000",
+			"ok": true
+		},
+		{
+			"label": "Absent/zero rule is inert and preserves old snapshot shape",
+			"ok": true
+		},
+		{
+			"label": "Malformed source flags are rejected by compiler",
+			"ok": true
+		},
+		{
+			"label": "Malformed source flags are rejected by compiler",
+			"ok": true
+		},
+		{
+			"label": "Malformed source flags are rejected by compiler",
+			"ok": true
+		},
+		{
+			"label": "Malformed source flags are rejected by compiler",
+			"ok": true
+		},
+		{
+			"label": "Malformed source flags are rejected by compiler",
+			"ok": true
+		},
+		{
+			"label": "Aggregate melee bucket cannot replace independently derived Strength amount",
+			"ok": true
+		},
+		{
+			"label": "Existing earned level5/seven-paid-point57 profile migrates lawfully",
+			"ok": true
+		},
+		{
+			"label": "Inactive stats/snapshot match original57 production capture",
+			"ok": true
+		},
+		{
+			"label": "Relevant inactive cast matches pre-edit capture: basic",
+			"ok": true
+		},
+		{
+			"label": "Relevant inactive cast matches pre-edit capture: frost",
+			"ok": true
+		},
+		{
+			"label": "Relevant inactive cast matches pre-edit capture: shade_bolt",
+			"ok": true
+		},
+		{
+			"label": "Actual Chinese detail/canvas/button agrees with complete mechanism",
+			"ok": true
+		},
+		{
+			"label": "Inject final allocation write fault",
+			"ok": true
+		},
+		{
+			"label": "Failed allocation spends no point and publishes no snapshot or disk change",
+			"ok": true
+		},
+		{
+			"label": "Remove only isolated allocation fault",
+			"ok": true
+		},
+		{
+			"label": "Actual button pays eighth route point exactly once",
+			"ok": true
+		},
+		{
+			"label": "Only Will flag added; native Strength, capacities and melee bonuses stay unchanged",
+			"ok": true
+		},
+		{
+			"label": "Allocation preserves unrelated canonical field: version",
+			"ok": true
+		},
+		{
+			"label": "Allocation preserves unrelated canonical field: items",
+			"ok": true
+		},
+		{
+			"label": "Allocation preserves unrelated canonical field: locations",
+			"ok": true
+		},
+		{
+			"label": "Allocation preserves unrelated canonical field: next_item_serial",
+			"ok": true
+		},
+		{
+			"label": "Allocation preserves unrelated canonical field: skill_groups",
+			"ok": true
+		},
+		{
+			"label": "Allocation preserves unrelated canonical field: bindings",
+			"ok": true
+		},
+		{
+			"label": "Allocation preserves unrelated canonical field: progress",
+			"ok": true
+		},
+		{
+			"label": "Allocation preserves unrelated canonical field: crafting",
+			"ok": true
+		},
+		{
+			"label": "Allocation preserves unrelated canonical field: migration_ledger",
+			"ok": true
+		},
+		{
+			"label": "Allocation preserves unrelated canonical field: journey",
+			"ok": true
+		},
+		{
+			"label": "Actual Main admitted-hit target exists",
+			"ok": true
+		},
+		{
+			"label": "Actual relevant spell/attack compiles: frost",
+			"ok": true
+		},
+		{
+			"label": "One actual Main admitted-hit settlement: frost",
+			"ok": true
+		},
+		{
+			"label": "Actual relevant spell/attack compiles: frost",
+			"ok": true
+		},
+		{
+			"label": "One actual Main admitted-hit settlement: frost",
+			"ok": true
+		},
+		{
+			"label": "Real cold/chaos spell health loss adds8%; attacks unchanged: frost: 1.76800000 expected 1.76800000",
+			"ok": true
+		},
+		{
+			"label": "Actual relevant spell/attack compiles: shade_bolt",
+			"ok": true
+		},
+		{
+			"label": "One actual Main admitted-hit settlement: shade_bolt",
+			"ok": true
+		},
+		{
+			"label": "Actual relevant spell/attack compiles: shade_bolt",
+			"ok": true
+		},
+		{
+			"label": "One actual Main admitted-hit settlement: shade_bolt",
+			"ok": true
+		},
+		{
+			"label": "Real cold/chaos spell health loss adds8%; attacks unchanged: shade_bolt: 4.99200000 expected 4.99200000",
+			"ok": true
+		},
+		{
+			"label": "Actual relevant spell/attack compiles: basic",
+			"ok": true
+		},
+		{
+			"label": "One actual Main admitted-hit settlement: basic",
+			"ok": true
+		},
+		{
+			"label": "Actual relevant spell/attack compiles: basic",
+			"ok": true
+		},
+		{
+			"label": "One actual Main admitted-hit settlement: basic",
+			"ok": true
+		},
+		{
+			"label": "Real cold/chaos spell health loss adds8%; attacks unchanged: basic: 0.00000000 expected 0.00000000",
+			"ok": true
+		},
+		{
+			"label": "Actual relevant spell/attack compiles: cleave",
+			"ok": true
+		},
+		{
+			"label": "One actual Main admitted-hit settlement: cleave",
+			"ok": true
+		},
+		{
+			"label": "Actual relevant spell/attack compiles: cleave",
+			"ok": true
+		},
+		{
+			"label": "One actual Main admitted-hit settlement: cleave",
+			"ok": true
+		},
+		{
+			"label": "Real cold/chaos spell health loss adds8%; attacks unchanged: cleave: 0.00000000 expected 0.00000000",
+			"ok": true
+		},
+		{
+			"label": "Actual spell-carrier independent explosion has no spell eligibility",
+			"ok": true
+		},
+		{
+			"label": "Selected58 reopens without rewrite",
+			"ok": true
+		},
+		{
+			"label": "Old57 rejects injected new allocation before migration",
+			"ok": true
+		},
+		{
+			"label": "Original bridge refund restriction preserved",
+			"ok": true
+		},
+		{
+			"label": "Actual finite flight target exists",
+			"ok": true
+		},
+		{
+			"label": "Actual cold-spell carrier launches with Strength40/8%",
+			"ok": true
+		},
+		{
+			"label": "Last earned point buys legal existing Strength+10 branch: 33740",
+			"ok": true
+		},
+		{
+			"label": "Actual paid Strength40→50: 50.00000000 expected 50.00000000",
+			"ok": true
+		},
+		{
+			"label": "Future spell snapshot uses10%: 0.10000000 expected 0.10000000",
+			"ok": true
+		},
+		{
+			"label": "Actual swap uses existing owned blade; no new item",
+			"ok": true
+		},
+		{
+			"label": "Old flight snapshot/base unchanged after paid Strength and weapon swap",
+			"ok": true
+		},
+		{
+			"label": "Next spell captures changed weapon base and Strength source",
+			"ok": true
+		},
+		{
+			"label": "Next actual spell launches with swapped build",
+			"ok": true
+		},
+		{
+			"label": "Old/new spells use real flight contacts and settlement",
+			"ok": true
+		},
+		{
+			"label": "Old actual hit retains original base and8%: 23.86800000 expected 23.86800000",
+			"ok": true
+		},
+		{
+			"label": "New actual hit uses changed base and10%: 16.83000000 expected 16.83000000",
+			"ok": true
+		},
+		{
+			"label": "Both real spell contacts produce exact health loss: 40.69800000 expected 40.69800000",
+			"ok": true
+		},
+		{
+			"label": "Restore original owned weapon and refund only paid Strength branch",
+			"ok": true
+		},
+		{
+			"label": "Actual chaos-spell carrier launches before keystone refund",
+			"ok": true
+		},
+		{
+			"label": "Real refund removes rule from future casts",
+			"ok": true
+		},
+		{
+			"label": "In-flight chaos snapshot retains Will after refund",
+			"ok": true
+		},
+		{
+			"label": "Old chaos carrier settles once after refund",
+			"ok": true
+		},
+		{
+			"label": "Actual chaos health loss retains frozen8% after refund: 67.39200000 expected 67.39200000",
+			"ok": true
+		},
+		{
+			"label": "Re-pay target to restore later refund proof",
+			"ok": true
+		},
+		{
+			"label": "Flight checks restore point balance, original owned equipment and build snapshot",
+			"ok": true
+		},
+		{
+			"label": "Inject final refund write fault",
+			"ok": true
+		},
+		{
+			"label": "Failed refund preserves points/rule/disk",
+			"ok": true
+		},
+		{
+			"label": "Remove isolated refund fault",
+			"ok": true
+		},
+		{
+			"label": "Successful refund returns one point and exact inactive stats/snapshot",
+			"ok": true
+		}
+	],
+	"failed_labels": [],
+	"failures": 0
+}

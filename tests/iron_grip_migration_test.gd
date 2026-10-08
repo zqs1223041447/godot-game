@@ -13,15 +13,15 @@ func success_case(source: Dictionary, version: int) -> void:
 	var bytes := (JSON.stringify(source,"  ",false,true)+"\n").to_utf8_buffer(); write(path,bytes)
 	var game := Game.new(); var events := [0]; game.changed.connect(func():events[0] += 1)
 	var source56: Dictionary = source if version == 56 else Nature.migrate_v55(source)
-	var wanted: Dictionary = expected(source56)
-	check(game.load_build(path) and game.snapshot() == wanted,"Actual%d load publishes only version change to57, including active journey" % version)
+	var wanted: Dictionary = expected(source56,Rules.VERSION)
+	check(game.load_build(path) and game.snapshot() == wanted,"Actual%d load publishes only version change to current, including active journey" % version)
 	check(game.save_attempts == 1 and game.successful_saves == 1 and events[0] == 1,"Complete chain saves and publishes once")
 	check(FileAccess.get_file_as_bytes(path+".v%d-backup.json" % version) == bytes,"Exact original-version backup bytes")
 	if version == 55: check(not FileAccess.file_exists(path+".v56-backup.json"),"55→56→57 creates no intermediate56 backup")
 	if version == 56: check(game.migrated_from_legacy and game.migration_message.contains("铁握持") and game.migration_message.contains("不额外赠物或赠点"),"56 notice names full new mechanism and preservation")
 	var saved := FileAccess.get_file_as_bytes(path)
 	var reopened := Game.new()
-	check(reopened.load_build(path) and reopened.snapshot() == wanted and reopened.save_attempts == 0 and not reopened.migrated_from_legacy,"57 reopens with no migration/write")
+	check(reopened.load_build(path) and reopened.snapshot() == wanted and reopened.save_attempts == 0 and not reopened.migrated_from_legacy,"Current reopens with no migration/write")
 	check(game.load_build(path) and game.save_attempts == 1 and events[0] == 2 and FileAccess.get_file_as_bytes(path) == saved,"Repeated current load preserves committed bytes")
 func failure_case(source: Dictionary, failure: String) -> void:
 	var path := "user://iron-failure-"+failure+".json"
@@ -38,7 +38,7 @@ func failure_case(source: Dictionary, failure: String) -> void:
 	if failure in ["external","atomic"]: check(FileAccess.get_file_as_bytes(path+".v56-backup.json") == bytes,"Final-write failure retains exact backup")
 	if failure == "collision": check(FileAccess.get_file_as_string(path+".v56-backup.json") == "existing backup","Backup conflict never overwrites prior bytes")
 	if failure == "atomic":
-		check(DirAccess.remove_absolute(path+".tmp") == OK and store.load_build(path) and store.snapshot() == expected(source) and events[0] == 1 and store.successful_saves == 1,"Healthy retry reuses exact backup and commits once")
+		check(DirAccess.remove_absolute(path+".tmp") == OK and store.load_build(path) and store.snapshot() == expected(source,Rules.VERSION) and events[0] == 1 and store.successful_saves == 1,"Healthy retry reuses exact backup and commits once")
 func invalid_case(source: Dictionary, bad: String) -> void:
 	var invalid: Dictionary = source.duplicate(true)
 	match bad:
@@ -46,7 +46,7 @@ func invalid_case(source: Dictionary, bad: String) -> void:
 		"points": invalid.talents.normal_points += 1
 		"items": invalid.items.clear()
 		"journey": invalid.journey.best_tiers.erase("ruins_garden")
-		"future": invalid.version = 58
+		"future": invalid.version = Rules.VERSION + 1
 	check(Grip.migrate_v56(invalid,func(_v):return "").is_empty(),"Callback cannot bypass complete frozen56 validator: "+bad)
 	var path := "user://iron-invalid-"+bad+".json"
 	var bytes := JSON.stringify(invalid).to_utf8_buffer(); write(path,bytes)

@@ -1,0 +1,806 @@
+{
+	"active_sha256": "b990f7a217e5bba85a1f759c424d493ae4cf542474b1bea3f811f777acb3e78c",
+	"baseline": "47f31d0aeab2651f19a3590dbe6031ffb4a60830",
+	"casts": {
+		"basic": {
+			"damage": {
+				"components": {
+					"physical": 26.0
+				},
+				"details": [
+					{
+						"base": 26.0,
+						"before_defense": 26.0,
+						"final": 26.0,
+						"increased": 0.0,
+						"modifiers": [],
+						"more": 1.0,
+						"resistance": 0.0,
+						"type": "physical"
+					}
+				],
+				"total": 26.0
+			},
+			"snapshot": {
+				"accuracy": 140.0,
+				"added_damage": {
+					"attack": {
+						"fire": 0.0,
+						"physical": 0.0
+					},
+					"spell": {
+						"cold": 0.0,
+						"lightning": 0.0
+					}
+				},
+				"added_damage_sources": [],
+				"base_damage": 26.0,
+				"compiled_packets": {
+					"projectile": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 1.0,
+							"base_coefficient": 1.0,
+							"intrinsic": {
+								"physical": 26.0
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"physical": 26.0
+						},
+						"role": "projectile",
+						"skill_id": "basic",
+						"tags": [
+							"hit",
+							"projectile",
+							"attack"
+						]
+					},
+					"secondary": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 0.0,
+							"base_coefficient": 0.9,
+							"intrinsic": {
+								"fire": 23.400000000000002
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"fire": 23.400000000000002
+						},
+						"role": "secondary",
+						"skill_id": "basic",
+						"tags": [
+							"hit",
+							"area",
+							"secondary",
+							"explosion"
+						]
+					}
+				},
+				"compiled_skill_id": "basic",
+				"critical": {
+					"primary": {
+						"chance": 0.05,
+						"multiplier": 1.5
+					},
+					"secondary": {
+						"chance": 0.05,
+						"multiplier": 1.5
+					}
+				},
+				"critical_modifiers": {
+					"base_chance": 0.05,
+					"base_multiplier": 1.5
+				},
+				"effects": [],
+				"explosion_recipe": {
+					"added_effectiveness": 0.0,
+					"coefficient": 0.9,
+					"radius": 76.0
+				},
+				"modifiers": [
+					{
+						"all_tags": [
+							"attack",
+							"melee"
+						],
+						"damage_types": [
+							"physical"
+						],
+						"id": "melee_physical_increased",
+						"mode": "increased",
+						"value": 0.08
+					}
+				],
+				"projectile_count": 0,
+				"tornado_recipe": {
+					"child": {
+						"added_effectiveness": 0.7,
+						"coefficient": 0.7,
+						"lifetime": 1.7,
+						"pierce": -1,
+						"radius": 4.5,
+						"range": 150.0,
+						"role": "child",
+						"speed": 260.0,
+						"split": false
+					},
+					"child_count": 3,
+					"explosion": {
+						"added_effectiveness": 0.0,
+						"coefficient": 0.9,
+						"radius": 76.0
+					},
+					"parent": {
+						"added_effectiveness": 1.0,
+						"coefficient": 1.0,
+						"lifetime": 0.9,
+						"pierce": -1,
+						"radius": 6.0,
+						"range": 150.0,
+						"role": "parent",
+						"speed": 420.0,
+						"split": true
+					},
+					"parent_count": 3,
+					"spread": 0.16
+				}
+			}
+		},
+		"frost": {
+			"damage": {
+				"components": {
+					"cold": 22.099999999999998
+				},
+				"details": [
+					{
+						"base": 22.099999999999998,
+						"before_defense": 22.099999999999998,
+						"final": 22.099999999999998,
+						"increased": 0.0,
+						"modifiers": [],
+						"more": 1.0,
+						"resistance": 0.0,
+						"type": "cold"
+					}
+				],
+				"total": 22.099999999999998
+			},
+			"snapshot": {
+				"accuracy": 140.0,
+				"added_damage": {
+					"attack": {
+						"fire": 0.0,
+						"physical": 0.0
+					},
+					"spell": {
+						"cold": 0.0,
+						"lightning": 0.0
+					}
+				},
+				"added_damage_sources": [],
+				"base_damage": 26.0,
+				"compiled_packets": {
+					"projectile": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 0.85,
+							"base_coefficient": 0.85,
+							"intrinsic": {
+								"cold": 22.099999999999998
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"cold": 22.099999999999998
+						},
+						"role": "projectile",
+						"skill_id": "frost",
+						"tags": [
+							"hit",
+							"projectile",
+							"spell"
+						]
+					},
+					"secondary": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 0.0,
+							"base_coefficient": 0.9,
+							"intrinsic": {
+								"fire": 23.400000000000002
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"fire": 23.400000000000002
+						},
+						"role": "secondary",
+						"skill_id": "frost",
+						"tags": [
+							"hit",
+							"area",
+							"secondary",
+							"explosion"
+						]
+					}
+				},
+				"compiled_skill_id": "frost",
+				"critical": {
+					"primary": {
+						"chance": 0.05,
+						"multiplier": 1.5
+					},
+					"secondary": {
+						"chance": 0.05,
+						"multiplier": 1.5
+					}
+				},
+				"critical_modifiers": {
+					"base_chance": 0.05,
+					"base_multiplier": 1.5
+				},
+				"effects": [],
+				"explosion_recipe": {
+					"added_effectiveness": 0.0,
+					"coefficient": 0.9,
+					"radius": 76.0
+				},
+				"initial_count": 5,
+				"modifiers": [
+					{
+						"all_tags": [
+							"attack",
+							"melee"
+						],
+						"damage_types": [
+							"physical"
+						],
+						"id": "melee_physical_increased",
+						"mode": "increased",
+						"value": 0.08
+					}
+				],
+				"projectile_count": 0,
+				"tornado_recipe": {
+					"child": {
+						"added_effectiveness": 0.7,
+						"coefficient": 0.7,
+						"lifetime": 1.7,
+						"pierce": -1,
+						"radius": 4.5,
+						"range": 150.0,
+						"role": "child",
+						"speed": 260.0,
+						"split": false
+					},
+					"child_count": 3,
+					"explosion": {
+						"added_effectiveness": 0.0,
+						"coefficient": 0.9,
+						"radius": 76.0
+					},
+					"parent": {
+						"added_effectiveness": 1.0,
+						"coefficient": 1.0,
+						"lifetime": 0.9,
+						"pierce": -1,
+						"radius": 6.0,
+						"range": 150.0,
+						"role": "parent",
+						"speed": 420.0,
+						"split": true
+					},
+					"parent_count": 3,
+					"spread": 0.16
+				}
+			}
+		},
+		"shade_bolt": {
+			"damage": {
+				"components": {
+					"chaos": 62.4
+				},
+				"details": [
+					{
+						"base": 62.4,
+						"before_defense": 62.4,
+						"final": 62.4,
+						"increased": 0.0,
+						"modifiers": [],
+						"more": 1.0,
+						"resistance": 0.0,
+						"type": "chaos"
+					}
+				],
+				"total": 62.4
+			},
+			"snapshot": {
+				"accuracy": 140.0,
+				"added_damage": {
+					"attack": {
+						"fire": 0.0,
+						"physical": 0.0
+					},
+					"spell": {
+						"cold": 0.0,
+						"lightning": 0.0
+					}
+				},
+				"added_damage_sources": [],
+				"base_damage": 26.0,
+				"compiled_packets": {
+					"projectile": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 2.4,
+							"base_coefficient": 2.4,
+							"intrinsic": {
+								"chaos": 62.4
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"chaos": 62.4
+						},
+						"role": "projectile",
+						"skill_id": "shade_bolt",
+						"tags": [
+							"hit",
+							"projectile",
+							"spell"
+						]
+					},
+					"secondary": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 0.0,
+							"base_coefficient": 0.9,
+							"intrinsic": {
+								"fire": 23.400000000000002
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"fire": 23.400000000000002
+						},
+						"role": "secondary",
+						"skill_id": "shade_bolt",
+						"tags": [
+							"hit",
+							"area",
+							"secondary",
+							"explosion"
+						]
+					}
+				},
+				"compiled_skill_id": "shade_bolt",
+				"critical": {
+					"primary": {
+						"chance": 0.05,
+						"multiplier": 1.5
+					},
+					"secondary": {
+						"chance": 0.05,
+						"multiplier": 1.5
+					}
+				},
+				"critical_modifiers": {
+					"base_chance": 0.05,
+					"base_multiplier": 1.5
+				},
+				"effects": [],
+				"explosion_recipe": {
+					"added_effectiveness": 0.0,
+					"coefficient": 0.9,
+					"radius": 76.0
+				},
+				"initial_count": 1,
+				"modifiers": [
+					{
+						"all_tags": [
+							"attack",
+							"melee"
+						],
+						"damage_types": [
+							"physical"
+						],
+						"id": "melee_physical_increased",
+						"mode": "increased",
+						"value": 0.08
+					}
+				],
+				"projectile_count": 0,
+				"tornado_recipe": {
+					"child": {
+						"added_effectiveness": 0.7,
+						"coefficient": 0.7,
+						"lifetime": 1.7,
+						"pierce": -1,
+						"radius": 4.5,
+						"range": 150.0,
+						"role": "child",
+						"speed": 260.0,
+						"split": false
+					},
+					"child_count": 3,
+					"explosion": {
+						"added_effectiveness": 0.0,
+						"coefficient": 0.9,
+						"radius": 76.0
+					},
+					"parent": {
+						"added_effectiveness": 1.0,
+						"coefficient": 1.0,
+						"lifetime": 0.9,
+						"pierce": -1,
+						"radius": 6.0,
+						"range": 150.0,
+						"role": "parent",
+						"speed": 420.0,
+						"split": true
+					},
+					"parent_count": 3,
+					"spread": 0.16
+				}
+			}
+		}
+	},
+	"effects_count": 4874,
+	"effects_policy57_sha256": "95e5dcf88bbee01599309aec366f146b364acda5a73e47a4df2e0bdd0e557d5a",
+	"fixture_sha256": "57cc365e657146a5bd65274297f158ad4363948d1e9c4f915f80e79c0511d1c8",
+	"level": 5,
+	"route_paid": [
+		"2151",
+		"37690",
+		"48423",
+		"6204",
+		"63976",
+		"16775",
+		"46910"
+	],
+	"selected_effects": {
+		"12926": {
+			"grants": [
+				{
+					"mode": "flat",
+					"stat": "iron_grip",
+					"value": 1.0
+				}
+			],
+			"status": "full",
+			"supported": [
+				"Strength's Damage bonus applies to Projectile Attack Damage as well as Melee Damage"
+			],
+			"unsupported": []
+		},
+		"15842": {
+			"grants": [
+				{
+					"mode": "flat",
+					"stat": "fire_resistance",
+					"value": 0.08
+				},
+				{
+					"mode": "flat",
+					"stat": "cold_resistance",
+					"value": 0.08
+				},
+				{
+					"mode": "flat",
+					"stat": "lightning_resistance",
+					"value": 0.08
+				},
+				{
+					"mode": "increased",
+					"stat": "attack_crit_chance_increased",
+					"value": 0.24
+				},
+				{
+					"mode": "increased",
+					"stat": "attack_elemental_increased",
+					"value": 0.24
+				}
+			],
+			"status": "full",
+			"supported": [
+				"+8% to all Elemental Resistances",
+				"24% increased Critical Strike Chance for Attacks",
+				"24% increased Elemental Damage with Attack Skills"
+			],
+			"unsupported": []
+		},
+		"16775": {
+			"grants": [
+				{
+					"mode": "flat",
+					"stat": "strength",
+					"value": 10.0
+				}
+			],
+			"status": "full",
+			"supported": [
+				"+10 to Strength"
+			],
+			"unsupported": []
+		},
+		"2151": {
+			"grants": [
+				{
+					"mode": "increased",
+					"stat": "mana_regen_increased",
+					"value": 0.2
+				},
+				{
+					"mode": "flat",
+					"stat": "intelligence",
+					"value": 5.0
+				}
+			],
+			"status": "full",
+			"supported": [
+				"20% increased Mana Regeneration Rate",
+				"+5 to Intelligence"
+			],
+			"unsupported": []
+		},
+		"37690": {
+			"grants": [
+				{
+					"mode": "increased",
+					"stat": "max_mana",
+					"value": 0.08
+				}
+			],
+			"status": "full",
+			"supported": [
+				"8% increased maximum Mana"
+			],
+			"unsupported": []
+		},
+		"46910": {
+			"grants": [
+				{
+					"mode": "flat",
+					"stat": "strength",
+					"value": 10.0
+				}
+			],
+			"status": "full",
+			"supported": [
+				"+10 to Strength"
+			],
+			"unsupported": []
+		},
+		"48423": {
+			"grants": [
+				{
+					"mode": "increased",
+					"stat": "max_mana",
+					"value": 0.08
+				}
+			],
+			"status": "full",
+			"supported": [
+				"8% increased maximum Mana"
+			],
+			"unsupported": []
+		},
+		"50288": {
+			"grants": [],
+			"status": "unsupported",
+			"supported": [],
+			"unsupported": [
+				"Strength's Damage bonus applies to all Spell Damage as well"
+			]
+		},
+		"6204": {
+			"grants": [
+				{
+					"mode": "increased",
+					"stat": "max_mana",
+					"value": 0.08
+				}
+			],
+			"status": "full",
+			"supported": [
+				"8% increased maximum Mana"
+			],
+			"unsupported": []
+		},
+		"63976": {
+			"grants": [
+				{
+					"mode": "increased",
+					"stat": "mana_regen_increased",
+					"value": 0.4
+				},
+				{
+					"mode": "flat",
+					"stat": "life_regen_percent",
+					"value": 0.01
+				}
+			],
+			"status": "full",
+			"supported": [
+				"40% increased Mana Regeneration Rate",
+				"Regenerate 1% of Life per second"
+			],
+			"unsupported": []
+		}
+	},
+	"snapshot": {
+		"accuracy": 140.0,
+		"added_damage": {
+			"attack": {
+				"fire": 0.0,
+				"physical": 0.0
+			},
+			"spell": {
+				"cold": 0.0,
+				"lightning": 0.0
+			}
+		},
+		"added_damage_sources": [],
+		"base_damage": 26.0,
+		"critical_modifiers": {
+			"base_chance": 0.05,
+			"base_multiplier": 1.5
+		},
+		"effects": [],
+		"explosion_recipe": {
+			"added_effectiveness": 0.0,
+			"coefficient": 0.9,
+			"radius": 76.0
+		},
+		"modifiers": [
+			{
+				"all_tags": [
+					"attack",
+					"melee"
+				],
+				"damage_types": [
+					"physical"
+				],
+				"id": "melee_physical_increased",
+				"mode": "increased",
+				"value": 0.08
+			}
+		],
+		"projectile_count": 0,
+		"tornado_recipe": {
+			"child": {
+				"added_effectiveness": 0.7,
+				"coefficient": 0.7,
+				"lifetime": 1.7,
+				"pierce": -1,
+				"radius": 4.5,
+				"range": 150.0,
+				"role": "child",
+				"speed": 260.0,
+				"split": false
+			},
+			"child_count": 3,
+			"explosion": {
+				"added_effectiveness": 0.0,
+				"coefficient": 0.9,
+				"radius": 76.0
+			},
+			"parent": {
+				"added_effectiveness": 1.0,
+				"coefficient": 1.0,
+				"lifetime": 0.9,
+				"pierce": -1,
+				"radius": 6.0,
+				"range": 150.0,
+				"role": "parent",
+				"speed": 420.0,
+				"split": true
+			},
+			"parent_count": 3,
+			"spread": 0.16
+		}
+	},
+	"stats": {
+		"accuracy": 140.0,
+		"accuracy_increased": 0.0,
+		"additional_skill_slots": 0.0,
+		"area_increased": 0.0,
+		"area_size_increased": 0.0,
+		"armour": 0.0,
+		"armour_increased": 0.0,
+		"attack_added_fire": 0.0,
+		"attack_added_physical": 0.0,
+		"attack_crit_chance_increased": 0.0,
+		"attack_elemental_increased": 0.0,
+		"attack_life_leech": 0.0,
+		"attack_mana_leech": 0.0,
+		"attack_physical_increased": 0.0,
+		"attack_speed": 1.7,
+		"attack_speed_increased": 0.0,
+		"chaos_increased": 0.0,
+		"cold_ailment_duration_increased": 0.0,
+		"cold_increased": 0.0,
+		"cold_resistance": 0.0,
+		"crit_base_chance": 0.05,
+		"crit_base_multiplier": 1.5,
+		"crit_chance_increased": 0.0,
+		"crit_multiplier_add": 0.0,
+		"damage": 26.0,
+		"damage_taken_from_mana_before_life": 0.0,
+		"damaging_ailments_faster": 0.0,
+		"dexterity": 20.0,
+		"elemental_increased": 0.0,
+		"evasion": 15.600000000000001,
+		"evasion_increased": 0.0,
+		"fire_dot_multiplier_add": 0.0,
+		"fire_increased": 0.0,
+		"fire_resistance": 0.0,
+		"flask_charges_gained_increased": 0.0,
+		"flask_life_recovery_increased": 0.0,
+		"flask_mana_recovery_increased": 0.0,
+		"global_increased": 0.0,
+		"intelligence": 25.0,
+		"life_leech_max_rate_increased": 0.0,
+		"life_leech_rate_increased": 0.0,
+		"life_regen": 1.4000000000000001,
+		"life_regen_percent": 0.01,
+		"lightning_increased": 0.0,
+		"lightning_resistance": 0.0,
+		"mana_cost_efficiency_increased": 0.0,
+		"mana_cost_increased": 0.0,
+		"mana_leech_max_rate_increased": 0.0,
+		"mana_leech_rate_increased": 0.0,
+		"mana_regen": 19.200000000000003,
+		"mana_regen_increased": 0.6000000000000001,
+		"max_health": 140.0,
+		"max_mana": 176.08,
+		"max_shield": 91.8,
+		"maximum_cold_resistance_add": 0.0,
+		"maximum_fire_resistance_add": 0.0,
+		"maximum_lightning_resistance_add": 0.0,
+		"melee_area_size_increased": 0.0,
+		"melee_crit_chance_increased": 0.0,
+		"melee_crit_multiplier_add": 0.0,
+		"melee_physical_increased": 0.08,
+		"move_speed": 240.0,
+		"move_speed_increased": 0.0,
+		"physical_attack_life_leech": 0.0,
+		"physical_attack_mana_leech": 0.0,
+		"physical_increased": 0.0,
+		"projectile_attack_crit_chance_increased": 0.0,
+		"projectile_attack_crit_multiplier_add": 0.0,
+		"projectile_count": 0.0,
+		"projectile_increased": 0.0,
+		"projectile_speed_increased": 0.0,
+		"resolute_technique": 0.0,
+		"shield_recharge_delay": 4.0,
+		"shield_recharge_rate": 16.0,
+		"shield_recharge_rate_increased": 0.0,
+		"shield_recharge_start_faster": 0.0,
+		"shield_regen": 16.0,
+		"spell_added_cold": 0.0,
+		"spell_added_lightning": 0.0,
+		"spell_area_size_increased": 0.0,
+		"spell_crit_chance_increased": 0.0,
+		"spell_crit_multiplier_add": 0.0,
+		"spell_increased": 0.0,
+		"strength": 40.0
+	},
+	"town_sha256": "4ad9f58749e7c76eaad4d96e0e99639309dcde46ce3556e6b2ad3e0f945ad317"
+}

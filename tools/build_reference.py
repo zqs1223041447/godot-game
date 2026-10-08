@@ -70,7 +70,16 @@ def iron_grip_effect(rule):
 
 
 def iron_grip_save_rule(rule):
-    return '<p>当前57先完整验证冻结旧56，再写原字节备份'+esc(rule['backup_suffix'])+'，仅升级版本并开放完整铁握持机制。原分配、点数、物品、技能和旅程全部保全，不赠点、不赠物。沿用备份冲突、外部修改检查及原子写失败保护；失败不发布候选内存。</p><p>旧56程序拒绝57文件。回退需先另存57，再人工恢复升级前56备份；备份不含升级后进度，不能手改版本伪装回退。进行中地图字段保全不等于恢复战斗快照，启动离场仍按既有规则。保存不承诺任意并发时序或断电级持久性。</p>'
+    return '<p>56→57步骤先完整验证冻结旧56，再写原字节备份'+esc(rule['backup_suffix'])+'，仅升级版本并开放完整铁握持机制。原分配、点数、物品、技能和旅程全部保全，不赠点、不赠物。沿用备份冲突、外部修改检查及原子写失败保护；失败不发布候选内存。</p><p>旧56程序拒绝57文件。回退需先另存57，再人工恢复升级前56备份；备份不含升级后进度，不能手改版本伪装回退。进行中地图字段保全不等于恢复战斗快照，启动离场仍按既有规则。保存不承诺任意并发时序或断电级持久性。</p>'
+
+
+def iron_will_effect(rule):
+    route=' → '.join(esc(node) for node in rule['scion_route'])
+    return '<p>schema '+str(rule['minimum_save_version'])+'：力量每5点取整的1%原生伤害提高同时用于全部法术伤害，覆盖物理、元素与混沌，包括原有附加伤害及转换分量，每份只计一次。不转移其他近战INC，不额外增强攻击。铁握持仍仅处理投射物攻击的物理谱系，两者按事件标签分开生效。独立次级爆炸没有spell标签，不因法术载体而继承资格。力量变化、换装和退款只影响后续施放，在途施放保留快照。</p><p>普通贵族路线（起点免费，共8点）：'+route+'。仍需实际成长预算、连通与合法付点；旧57继续拒绝此基石。</p>'
+
+
+def iron_will_save_rule(rule):
+    return '<p>当前58先完整验证冻结旧57，再写原字节备份'+esc(rule['backup_suffix'])+'，仅升级版本并开放完整铁意志机制。原分配、点数、物品、技能和旅程保全，不赠点、不赠物。原56→57保持固定终点，旧合法集合不扩张；完整加载只备份最初版本并保存/发布一次。备份失败或冲突、外部修改及最终原子写失败沿用原保护。</p><p>旧57程序拒绝58文件。回退需先另存58，再人工恢复升级前57备份；备份不含升级后进度，不能手改版本伪装回退。进行中地图字段保全不等于重建战斗，启动离场按既有规则。保存不承诺任意并发时序或断电级持久性。</p>'
 
 
 def chaos_value(key, amount, ratio=False):
@@ -1532,6 +1541,7 @@ def build(data, art):
         if effect['unsupported']:body+=details('未实现的源效果 · 整节点锁定','<p>'+lines(source_lines(effect['unsupported']))+'</p>')
         if key == '15842' and 'one_with_nature' in data: body+=one_with_nature_effect(data['one_with_nature'])
         if key == '12926' and 'iron_grip' in data: body+=iron_grip_effect(data['iron_grip'])
+        if key == '50288' and 'iron_will' in data: body+=iron_will_effect(data['iron_will'])
         for choice in p['mastery_choices']:
             label='已执行' if allowed and choice['execution']['status']=='full' else '未完整执行 · 不可选择'
             body+=details(f'精通 {choice["effect"]} · {label}','<p>'+lines(localized['mastery_choices'][str(choice['effect'])])+'</p>')
@@ -2148,7 +2158,9 @@ def build(data, art):
     for key,name,summary,body,status in rule_defs:
         if key == 'source_tree' and 'one_with_nature' in data: body+=one_with_nature_save_rule(data['one_with_nature'])
         if key == 'source_tree' and 'iron_grip' in data: body+=iron_grip_save_rule(data['iron_grip'])
+        if key == 'source_tree' and 'iron_will' in data: body+=iron_will_save_rule(data['iron_will'])
         if key == 'source_defenses' and 'iron_grip' in data: body+='<p>分配'+link('source_passives','12926','铁握持')+'后，力量原生物理伤害提高同时适用投射物攻击，双标签只计一次；不会把其他近战INC转移。实际收益、转换范围与14点游侠路线见该基石说明。</p>'
+        if key == 'source_defenses' and 'iron_will' in data: body+='<p>分配'+link('source_passives','50288','铁意志')+'后，力量自身的每5点取整1%收益也适用全部法术伤害类型，不复制近战INC。原力量生命和近战收益保持；具体范围、8点贵族路线与在途快照见该基石说明。</p>'
         cards.append(add('rules',key,name,summary,body,{'implemented':'已实现规则','research':'研究来源','planned':'未实现边界'}[status],status))
     category_counts={cat:sum(x['cat']==cat for x in records) for cat,_ in CATEGORIES}
     nav=''.join(f'<a href="#category-{cat}" id="category-{cat}" class="nav-link" data-category="{cat}"><span>{label}</span><span>{category_counts[cat]}</span></a>' for cat,label in CATEGORIES)

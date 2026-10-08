@@ -1,0 +1,17 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+ERROR: Actual56 load publishes only version change to58, including active journey
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/attack_elemental_passive_migration_test.gd:22)
+       [1] check (res://tests/iron_will_migration_test.gd:8)
+       [2] success_case (res://tests/iron_will_migration_test.gd:17)
+       [3] run (res://tests/iron_will_migration_test.gd:78)
+ERROR: 58 reopens with no migration/write
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/attack_elemental_passive_migration_test.gd:22)
+       [1] check (res://tests/iron_will_migration_test.gd:8)
+       [2] success_case (res://tests/iron_will_migration_test.gd:24)
+       [3] run (res://tests/iron_will_migration_test.gd:78)
+IRON_WILL_MIGRATION checks=77 failures=2

@@ -649,7 +649,9 @@ func load_build(path: String = "user://build_save.json") -> bool:
 	var loaded:=super.load_build(path)
 	if loaded and old_version>0 and old_version<Rules.VERSION:
 		migrated_from_legacy=true
-		if old_version == Rules.V56_VERSION:
+		if old_version == Rules.V57_VERSION:
+			migration_message="旧存档已原字节备份，铁意志已开放：力量自身的伤害加成同时用于全部法术伤害；原物品、天赋点与旅程保持，不额外赠物或赠点。"
+		elif old_version == Rules.V56_VERSION:
 			migration_message="旧存档已原字节备份，铁握持已开放：仅将力量原生物理伤害加成扩展到投射物攻击；原物品、天赋点与旅程保持，不额外赠物或赠点。"
 		elif old_version == Rules.V55_VERSION:
 			migration_message="旧存档已原字节备份，与自然合一的攻击技能元素伤害提高24%已开放；原物品、天赋点与旅程保持，不额外赠物或赠点。"
