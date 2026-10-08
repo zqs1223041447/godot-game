@@ -1,0 +1,770 @@
+{
+  "status": "geometry_failed_visual_pending",
+  "rejection_reasons": [
+    "Actual boot vertices penetrate the unchanged ground plane; no pose-dependent ground correction allowed."
+  ],
+  "target_screen_speed_px_s": 156,
+  "game_move_world_s": 240,
+  "game_camera_zoom": 0.65,
+  "blend": {
+    "jog_weight": 0.2,
+    "walk_weight": 0.8,
+    "walk_phase_offset": 0.19374999999999998,
+    "jog_phase_offset": 0.11607142659474393,
+    "jog_relative_to_walk_phase_offset": -0.07767857340525605,
+    "method": "Local quaternion slerp, normalized; local pelvis translation lerp; scales1 and root translation0. Same-side mid-support aligned. No IK or contact fix."
+  },
+  "render": {
+    "resolution": [
+      128,
+      192
+    ],
+    "density": 2,
+    "display_size": [
+      64,
+      96
+    ],
+    "root_anchor_px": [
+      64.0,
+      158.0000410079956
+    ],
+    "heading_world_degrees": 90,
+    "direction": "screen_right",
+    "camera_elevation_degrees": 55,
+    "source_horizontal_pixels_per_m": 47.407407407407405,
+    "source_depth_pixels_per_m": 38.83387469221887,
+    "source_height_pixels_per_m": 27.191771797382927,
+    "root_anchor_policy": "Fixed projected ground origin; never track lowest alpha or posed feet."
+  },
+  "root_anchor_px": [
+    64.0,
+    158.0000410079956
+  ],
+  "variants": {
+    "candidate": {
+      "cycle_seconds": 0.7436822466639094,
+      "frame_count": 16,
+      "phases": [
+        0.0,
+        0.0625,
+        0.125,
+        0.1875,
+        0.25,
+        0.3125,
+        0.375,
+        0.4375,
+        0.5,
+        0.5625,
+        0.625,
+        0.6875,
+        0.75,
+        0.8125,
+        0.875,
+        0.9375
+      ],
+      "frames": [
+        "frames/candidate/00.png",
+        "frames/candidate/01.png",
+        "frames/candidate/02.png",
+        "frames/candidate/03.png",
+        "frames/candidate/04.png",
+        "frames/candidate/05.png",
+        "frames/candidate/06.png",
+        "frames/candidate/07.png",
+        "frames/candidate/08.png",
+        "frames/candidate/09.png",
+        "frames/candidate/10.png",
+        "frames/candidate/11.png",
+        "frames/candidate/12.png",
+        "frames/candidate/13.png",
+        "frames/candidate/14.png",
+        "frames/candidate/15.png"
+      ],
+      "source_target_frames": [
+        {
+          "walk_frame": 7.749999999999999,
+          "jog_frame": 3.24999994465283
+        },
+        {
+          "walk_frame": 10.25,
+          "jog_frame": 4.99999994465283
+        },
+        {
+          "walk_frame": 12.75,
+          "jog_frame": 6.74999994465283
+        },
+        {
+          "walk_frame": 15.25,
+          "jog_frame": 8.49999994465283
+        },
+        {
+          "walk_frame": 17.75,
+          "jog_frame": 10.24999994465283
+        },
+        {
+          "walk_frame": 20.25,
+          "jog_frame": 11.99999994465283
+        },
+        {
+          "walk_frame": 22.75,
+          "jog_frame": 13.74999994465283
+        },
+        {
+          "walk_frame": 25.25,
+          "jog_frame": 15.49999994465283
+        },
+        {
+          "walk_frame": 27.75,
+          "jog_frame": 17.249999944652828
+        },
+        {
+          "walk_frame": 30.25,
+          "jog_frame": 18.999999944652828
+        },
+        {
+          "walk_frame": 32.75,
+          "jog_frame": 20.749999944652828
+        },
+        {
+          "walk_frame": 35.25,
+          "jog_frame": 22.499999944652828
+        },
+        {
+          "walk_frame": 37.75,
+          "jog_frame": 24.249999944652828
+        },
+        {
+          "walk_frame": 0.25000000000000355,
+          "jog_frame": 25.999999944652828
+        },
+        {
+          "walk_frame": 2.7500000000000036,
+          "jog_frame": 27.749999944652828
+        },
+        {
+          "walk_frame": 5.2500000000000036,
+          "jog_frame": 1.4999999446528323
+        }
+      ],
+      "reference_quality": "full_trial"
+    }
+  },
+  "support_fit": {
+    "basis": "Predeclared same-side mid-support phase +/-0.06; evaluated fixed forefoot vertices; world+X travel. No height/parameter search. Regress foot X on phase, then period = mean cycle distance*47.4074074/156. Diagnostic only, not authored root motion.",
+    "sides": {
+      "l": {
+        "phase_center": 0,
+        "phase_relative_bounds": [
+          -0.05208333333333348,
+          0.05208333333333337
+        ],
+        "phase_samples": [
+          0.9479166666666666,
+          0.9583333333333334,
+          0.96875,
+          0.9791666666666666,
+          0.9895833333333334,
+          0.0,
+          0.010416666666666666,
+          0.020833333333333332,
+          0.03125,
+          0.041666666666666664,
+          0.052083333333333336
+        ],
+        "sample_count": 11,
+        "distance_per_cycle_m": 2.405949557369405,
+        "fit_max_error_m": 0.003645185465839751,
+        "fit_rms_m": 0.0016804679291910272,
+        "lateral_span_m": 0.0006085038185119629,
+        "toe_minz_range_m": [
+          -0.010224791243672371,
+          0.01091369241476059
+        ],
+        "heel_minz_range_m": [
+          0.00951123982667923,
+          0.016202310100197792
+        ],
+        "common_period_residual_span_display_px": 0.3484648480158475
+      },
+      "r": {
+        "phase_center": 0.5,
+        "phase_relative_bounds": [
+          -0.052083333333333315,
+          0.05208333333333337
+        ],
+        "phase_samples": [
+          0.4479166666666667,
+          0.4583333333333333,
+          0.46875,
+          0.4791666666666667,
+          0.4895833333333333,
+          0.5,
+          0.5104166666666666,
+          0.5208333333333334,
+          0.53125,
+          0.5416666666666666,
+          0.5520833333333334
+        ],
+        "sample_count": 11,
+        "distance_per_cycle_m": 2.4884092284874484,
+        "fit_max_error_m": 0.0034904700534588717,
+        "fit_rms_m": 0.0016059481016566705,
+        "lateral_span_m": 0.0032724738121032715,
+        "toe_minz_range_m": [
+          -0.010300034657120705,
+          0.009996694512665272
+        ],
+        "heel_minz_range_m": [
+          0.010024668648838997,
+          0.01642249897122383
+        ],
+        "common_period_residual_span_display_px": 0.3003651537879095
+      }
+    },
+    "cycle_distance_m": 2.447179392928427,
+    "cycle_seconds": 0.7436822466639094
+  },
+  "ground": {
+    "fixed_assembly_z": 0.003971691709011793,
+    "lower_boot_height_m": [
+      -0.019707536324858665,
+      0.02733612060546875
+    ],
+    "max_penetration_m": 0.019707536324858665,
+    "max_both_feet_clearance_m": 0.02733612060546875,
+    "lower_boot_height_display_px": [
+      -0.5358828304341915,
+      0.7433175533296434
+    ],
+    "fraction_lower_boot_above_25mm": 0.08333333333333333
+  },
+  "invariants": {
+    "original_13_meshes_plus_shoulder_bridge_unchanged": true,
+    "target_rest_and_weights_unchanged": true,
+    "original_actions_unchanged": true,
+    "maximum_bone_length_error_m": 1.064146607610006e-06,
+    "root_translation_error_m": 0
+  },
+  "sources": {
+    "v123_blend_sha256": "f4f8ac62ec605849666cf88d21bd988349a6499a57c46b4d58c1bb759ff7f2d3",
+    "v124_blend_sha256": "eb2d2413e4cc7cde097f704c6893524a3a37ae924f191ba1cad99fcf1b988daa"
+  },
+  "no_gameplay_changes": true,
+  "contact_projection": {
+    "coordinates": "128x192 render pixels; x right/y down. Forefoot marker is fixed toe vertex mean, ground marker same world x/y at z0. Neither is lowest-alpha anchor.",
+    "frames": [
+      {
+        "phase": 0.0,
+        "feet": {
+          "l": {
+            "fixed_forefoot_mean_px": [
+              78.0592716358326,
+              148.42271912870007
+            ],
+            "fixed_forefoot_ground_projection_px": [
+              78.0592716358326,
+              148.22350803260002
+            ],
+            "all_boot_minz_m": -0.01413537748157978,
+            "toe_minz_m": -0.004762813914567232,
+            "within_fitted_support_window": true
+          },
+          "r": {
+            "fixed_forefoot_mean_px": [
+              33.3322103994864,
+              163.55746462073083
+            ],
+            "fixed_forefoot_ground_projection_px": [
+              33.3322103994864,
+              167.72691022419562
+            ],
+            "all_boot_minz_m": 0.0689052864909172,
+            "toe_minz_m": 0.07603436708450317,
+            "within_fitted_support_window": false
+          }
+        }
+      },
+      {
+        "phase": 0.0625,
+        "feet": {
+          "l": {
+            "fixed_forefoot_mean_px": [
+              64.49583708798444,
+              148.56985563827976
+            ],
+            "fixed_forefoot_ground_projection_px": [
+              64.49583708798444,
+              148.21638113501598
+            ],
+            "all_boot_minz_m": -0.01704191043972969,
+            "toe_minz_m": -0.0076009961776435375,
+            "within_fitted_support_window": false
+          },
+          "r": {
+            "fixed_forefoot_mean_px": [
+              53.95425542195638,
+              162.1413699466123
+            ],
+            "fixed_forefoot_ground_projection_px": [
+              53.95425542195638,
+              167.32243506083836
+            ],
+            "all_boot_minz_m": 0.08793392777442932,
+            "toe_minz_m": 0.09464456140995026,
+            "within_fitted_support_window": false
+          }
+        }
+      },
+      {
+        "phase": 0.125,
+        "feet": {
+          "l": {
+            "fixed_forefoot_mean_px": [
+              52.675412778501155,
+              148.46274376353884
+            ],
+            "fixed_forefoot_ground_projection_px": [
+              52.675412778501155,
+              148.16295717928733
+            ],
+            "all_boot_minz_m": -0.007230470422655344,
+            "toe_minz_m": -0.00624295836314559,
+            "within_fitted_support_window": false
+          },
+          "r": {
+            "fixed_forefoot_mean_px": [
+              79.85106319851346,
+              162.62379651335243
+            ],
+            "fixed_forefoot_ground_projection_px": [
+              79.85106319851346,
+              168.1927741547744
+            ],
+            "all_boot_minz_m": 0.10022436082363129,
+            "toe_minz_m": 0.10174600034952164,
+            "within_fitted_support_window": false
+          }
+        }
+      },
+      {
+        "phase": 0.1875,
+        "feet": {
+          "l": {
+            "fixed_forefoot_mean_px": [
+              45.01791946976273,
+              147.6098118658248
+            ],
+            "fixed_forefoot_ground_projection_px": [
+              45.01791946976273,
+              148.09084218816048
+            ],
+            "all_boot_minz_m": 0.008246371522545815,
+            "toe_minz_m": 0.008246371522545815,
+            "within_fitted_support_window": false
+          },
+          "r": {
+            "fixed_forefoot_mean_px": [
+              101.621174565068,
+              159.64486280969948
+            ],
+            "fixed_forefoot_ground_projection_px": [
+              101.621174565068,
+              168.15193742511332
+            ],
+            "all_boot_minz_m": 0.15206079185009003,
+            "toe_minz_m": 0.1555151343345642,
+            "within_fitted_support_window": false
+          }
+        }
+      },
+      {
+        "phase": 0.25,
+        "feet": {
+          "l": {
+            "fixed_forefoot_mean_px": [
+              37.804312811957466,
+              146.8767307719722
+            ],
+            "fixed_forefoot_ground_projection_px": [
+              37.804312811957466,
+              148.02486341187458
+            ],
+            "all_boot_minz_m": 0.02019522711634636,
+            "toe_minz_m": 0.02054317109286785,
+            "within_fitted_support_window": false
+          },
+          "r": {
+            "fixed_forefoot_mean_px": [
+              111.3998627839265,
+              158.3814671653553
+            ],
+            "fixed_forefoot_ground_projection_px": [
+              111.3998627839265,
+              168.27292339777335
+            ],
+            "all_boot_minz_m": 0.08190825581550598,
+            "toe_minz_m": 0.1802702397108078,
+            "within_fitted_support_window": false
+          }
+        }
+      },
+      {
+        "phase": 0.3125,
+        "feet": {
+          "l": {
+            "fixed_forefoot_mean_px": [
+              30.041918154116033,
+              146.5112179439581
+            ],
+            "fixed_forefoot_ground_projection_px": [
+              30.041918154116033,
+              148.00705195461273
+            ],
+            "all_boot_minz_m": 0.026987040415406227,
+            "toe_minz_m": 0.026987040415406227,
+            "within_fitted_support_window": false
+          },
+          "r": {
+            "fixed_forefoot_mean_px": [
+              113.26476937753182,
+              159.48000939364962
+            ],
+            "fixed_forefoot_ground_projection_px": [
+              113.26476937753182,
+              168.48567714621026
+            ],
+            "all_boot_minz_m": 0.026335233822464943,
+            "toe_minz_m": 0.16381454467773438,
+            "within_fitted_support_window": false
+          }
+        }
+      },
+      {
+        "phase": 0.375,
+        "feet": {
+          "l": {
+            "fixed_forefoot_mean_px": [
+              24.242967958803533,
+              147.6483845269952
+            ],
+            "fixed_forefoot_ground_projection_px": [
+              24.242967958803533,
+              148.07089659657825
+            ],
+            "all_boot_minz_m": 0.006413513328880072,
+            "toe_minz_m": 0.007425880059599876,
+            "within_fitted_support_window": false
+          },
+          "r": {
+            "fixed_forefoot_mean_px": [
+              105.96754455566406,
+              163.7343660429837
+            ],
+            "fixed_forefoot_ground_projection_px": [
+              105.96754455566406,
+              168.54329993020048
+            ],
+            "all_boot_minz_m": 0.0031741929706186056,
+            "toe_minz_m": 0.08690079301595688,
+            "within_fitted_support_window": false
+          }
+        }
+      },
+      {
+        "phase": 0.4375,
+        "feet": {
+          "l": {
+            "fixed_forefoot_mean_px": [
+              22.429401538990163,
+              146.73527163757132
+            ],
+            "fixed_forefoot_ground_projection_px": [
+              22.429401538990163,
+              147.98555089853667
+            ],
+            "all_boot_minz_m": 0.01642976887524128,
+            "toe_minz_m": 0.022151470184326172,
+            "within_fitted_support_window": false
+          },
+          "r": {
+            "fixed_forefoot_mean_px": [
+              91.81536808720341,
+              167.3628406471778
+            ],
+            "fixed_forefoot_ground_projection_px": [
+              91.81536808720341,
+              168.1056091187981
+            ],
+            "all_boot_minz_m": 0.0032282602041959763,
+            "toe_minz_m": 0.012559037655591965,
+            "within_fitted_support_window": false
+          }
+        }
+      },
+      {
+        "phase": 0.5,
+        "feet": {
+          "l": {
+            "fixed_forefoot_mean_px": [
+              33.62708649811921,
+              143.6928631548404
+            ],
+            "fixed_forefoot_ground_projection_px": [
+              33.62708649811921,
+              147.80722453276178
+            ],
+            "all_boot_minz_m": 0.0667366087436676,
+            "toe_minz_m": 0.07443373650312424,
+            "within_fitted_support_window": false
+          },
+          "r": {
+            "fixed_forefoot_mean_px": [
+              77.06485070122613,
+              167.94851751602545
+            ],
+            "fixed_forefoot_ground_projection_px": [
+              77.06485070122613,
+              167.75336122196813
+            ],
+            "all_boot_minz_m": -0.014061028137803078,
+            "toe_minz_m": -0.004688346292823553,
+            "within_fitted_support_window": true
+          }
+        }
+      },
+      {
+        "phase": 0.5625,
+        "feet": {
+          "l": {
+            "fixed_forefoot_mean_px": [
+              51.300474378797745,
+              142.29627858641055
+            ],
+            "fixed_forefoot_ground_projection_px": [
+              51.300474378797745,
+              147.7277326586858
+            ],
+            "all_boot_minz_m": 0.09147771447896957,
+            "toe_minz_m": 0.09840406477451324,
+            "within_fitted_support_window": false
+          },
+          "r": {
+            "fixed_forefoot_mean_px": [
+              62.980147573683,
+              168.12499593044603
+            ],
+            "fixed_forefoot_ground_projection_px": [
+              62.980147573683,
+              167.77002691297338
+            ],
+            "all_boot_minz_m": -0.01706796884536743,
+            "toe_minz_m": -0.00762856425717473,
+            "within_fitted_support_window": false
+          }
+        }
+      },
+      {
+        "phase": 0.625,
+        "feet": {
+          "l": {
+            "fixed_forefoot_mean_px": [
+              77.68309727421513,
+              142.6634973060473
+            ],
+            "fixed_forefoot_ground_projection_px": [
+              77.68309727421513,
+              148.18086238106108
+            ],
+            "all_boot_minz_m": 0.09820155799388885,
+            "toe_minz_m": 0.10017985850572586,
+            "within_fitted_support_window": false
+          },
+          "r": {
+            "fixed_forefoot_mean_px": [
+              50.65699146412037,
+              168.1376511569141
+            ],
+            "fixed_forefoot_ground_projection_px": [
+              50.65699146412037,
+              167.86055865000066
+            ],
+            "all_boot_minz_m": -0.006792172323912382,
+            "toe_minz_m": -0.005825274158269167,
+            "within_fitted_support_window": false
+          }
+        }
+      },
+      {
+        "phase": 0.6875,
+        "feet": {
+          "l": {
+            "fixed_forefoot_mean_px": [
+              101.2470036259404,
+              139.21414555222603
+            ],
+            "fixed_forefoot_ground_projection_px": [
+              101.2470036259404,
+              147.97940658231815
+            ],
+            "all_boot_minz_m": 0.15698795020580292,
+            "toe_minz_m": 0.16027206182479858,
+            "within_fitted_support_window": false
+          },
+          "r": {
+            "fixed_forefoot_mean_px": [
+              42.50321027967665,
+              167.37789017792988
+            ],
+            "fixed_forefoot_ground_projection_px": [
+              42.50321027967665,
+              167.9565402994546
+            ],
+            "all_boot_minz_m": 0.010041696950793266,
+            "toe_minz_m": 0.010041696950793266,
+            "within_fitted_support_window": false
+          }
+        }
+      },
+      {
+        "phase": 0.75,
+        "feet": {
+          "l": {
+            "fixed_forefoot_mean_px": [
+              111.02468024359808,
+              137.82035285329192
+            ],
+            "fixed_forefoot_ground_projection_px": [
+              111.02468024359808,
+              147.88975673810657
+            ],
+            "all_boot_minz_m": 0.08362320065498352,
+            "toe_minz_m": 0.18353256583213806,
+            "within_fitted_support_window": false
+          },
+          "r": {
+            "fixed_forefoot_mean_px": [
+              34.772495976200815,
+              166.78726876039954
+            ],
+            "fixed_forefoot_ground_projection_px": [
+              34.772495976200815,
+              168.01467925693012
+            ],
+            "all_boot_minz_m": 0.021662680432200432,
+            "toe_minz_m": 0.022001048550009727,
+            "within_fitted_support_window": false
+          }
+        }
+      },
+      {
+        "phase": 0.8125,
+        "feet": {
+          "l": {
+            "fixed_forefoot_mean_px": [
+              112.8124762641059,
+              139.25549141899893
+            ],
+            "fixed_forefoot_ground_projection_px": [
+              112.8124762641059,
+              148.15304340781853
+            ],
+            "all_boot_minz_m": 0.02659577503800392,
+            "toe_minz_m": 0.16183219850063324,
+            "within_fitted_support_window": false
+          },
+          "r": {
+            "fixed_forefoot_mean_px": [
+              26.272118462456596,
+              166.59064606220764
+            ],
+            "fixed_forefoot_ground_projection_px": [
+              26.272118462456596,
+              167.990475812764
+            ],
+            "all_boot_minz_m": 0.02520616538822651,
+            "toe_minz_m": 0.02520616538822651,
+            "within_fitted_support_window": false
+          }
+        }
+      },
+      {
+        "phase": 0.875,
+        "feet": {
+          "l": {
+            "fixed_forefoot_mean_px": [
+              106.03373379177518,
+              143.66504826186605
+            ],
+            "fixed_forefoot_ground_projection_px": [
+              106.03373379177518,
+              148.35974600587897
+            ],
+            "all_boot_minz_m": 0.00258421478793025,
+            "toe_minz_m": 0.08478938043117523,
+            "within_fitted_support_window": false
+          },
+          "r": {
+            "fixed_forefoot_mean_px": [
+              23.56341213650174,
+              167.09523034115838
+            ],
+            "fixed_forefoot_ground_projection_px": [
+              23.56341213650174,
+              167.85794884908285
+            ],
+            "all_boot_minz_m": 0.013779016211628914,
+            "toe_minz_m": 0.013779016211628914,
+            "within_fitted_support_window": false
+          }
+        }
+      },
+      {
+        "phase": 0.9375,
+        "feet": {
+          "l": {
+            "fixed_forefoot_mean_px": [
+              92.36708351417823,
+              147.4493958810295
+            ],
+            "fixed_forefoot_ground_projection_px": [
+              92.36708351417823,
+              148.24956322021117
+            ],
+            "all_boot_minz_m": 0.004284081514924765,
+            "toe_minz_m": 0.013614531606435776,
+            "within_fitted_support_window": false
+          },
+          "r": {
+            "fixed_forefoot_mean_px": [
+              24.900237471969042,
+              166.25841680751418
+            ],
+            "fixed_forefoot_ground_projection_px": [
+              24.900237471969042,
+              167.87102678716332
+            ],
+            "all_boot_minz_m": 0.02529102750122547,
+            "toe_minz_m": 0.028799857944250107,
+            "within_fitted_support_window": false
+          }
+        }
+      }
+    ]
+  },
+  "geometry_acceptance": "Zero-penetration criterion FAILED; unchanged floor, maximum penetration19.71mm /0.536display pixels",
+  "visual_acceptance": "Selected static images inspected. Dynamic gait and in-game behavior have not been accepted.",
+  "reference_cycle_seconds": {
+    "walk": 0.4463395727641576,
+    "jog": 1.6579843913098522
+  },
+  "archive_scope": {
+    "direction": "screen_right_only",
+    "candidate_png_count": 16,
+    "static_review": "Inspected selected stills/contact sheet only",
+    "dynamic_acceptance": "Not accepted; generated preview is not a dynamic visual test",
+    "gameplay_acceptance": "Not tested or integrated",
+    "baseline_frames_omitted": true,
+    "new_rendering_during_archive": false,
+    "original_asset_packages_and_blends_excluded": true
+  }
+}
