@@ -221,6 +221,7 @@ func _ready() -> void:
 	hud.setup(self)
 	world_context_changed.connect(_sync_camp_presentation)
 	world_context_changed.connect(_invalidate_normal_gem_quotes)
+	world_context_changed.connect(_equipment_purchase.clear)
 	_ready_complete = true
 	restart_run()
 	if not recovered.ok:
@@ -2434,6 +2435,7 @@ var _normal_reset_authorized:bool=false
 var _normal_completion_pending:bool=false
 var test_supply_enabled:=true
 var _normal_gem_receipts: Dictionary = {}
+var _equipment_purchase = preload("res://scripts/items/equipment_purchase.gd").new()
 
 func world_geometry() -> Dictionary:
 	var result: Dictionary = _geometry.snapshot()
@@ -2678,13 +2680,15 @@ func leave_town_test(expected_revision:Variant)->Dictionary:
 func town_services()->Array[Dictionary]:
 	var rows:=TownCatalog.services()
 	for row:Dictionary in rows:
-		row.available=_world_mode=="town" and (_is_test_profile() or row.id in ["skill_merchant","crafter","passive_reset","map_device"])
+		row.available=_world_mode=="town" and (_is_test_profile() or row.id in ["skill_merchant","equipment_merchant","crafter","passive_reset","map_device"])
 		row.reason="" if row.available else "测试商人仅在独立测试城镇供应" if _world_mode=="town" else "请先返回城镇"
 		if not _is_test_profile() and row.id=="skill_merchant":row.description="用校准碎片购买已实现主动与辅助宝石；背包中的宝石可回收。"
+		elif not _is_test_profile() and row.id=="equipment_merchant":row.description="购买普通无词缀底材，每件8校准碎片、物品等级1；更高等级来自地图掉落。"
 		elif not _is_test_profile() and row.id=="crafter":row.description="使用正式背包内的真实校准碎片进行六项现有工艺。"
 		elif not _is_test_profile() and row.id=="map_device":row.description="选择地图与挑战档位；成功入图才扣费，完整完成后领取结算。"
 	return rows
 func town_stock(service_id:String)->Array[Dictionary]:
+	if service_id=="equipment_merchant" and not _is_test_profile(): return normal_equipment_offers()
 	var rows:=TownCatalog.offers(service_id)
 	if service_id=="skill_merchant" and not _is_test_profile():
 		var prices:Dictionary={}
@@ -2742,6 +2746,30 @@ func execute_normal_gem_trade(handle: Variant,current_target: Variant) -> Dictio
 		state.cancel_gem_trade_quote(handle)
 		return _world_failure("stale_world","城镇或存档已切换，请重新获取报价")
 	var result: Dictionary = state.execute_gem_trade(handle,current_target)
+	if result.ok: world_context_changed.emit()
+	return result
+
+func _equipment_purchase_context() -> PackedByteArray:
+	return var_to_bytes([get_instance_id(),_world_revision,state.get_instance_id()])
+
+func normal_equipment_offers() -> Array[Dictionary]:
+	var rows: Array[Dictionary] = _equipment_purchase.offers(state,build_save_path)
+	if _world_mode!="town" or _is_test_profile():
+		for row: Dictionary in rows: row.available=false; row.reason="请返回正式城镇购买底材"
+	return rows
+
+func normal_equipment_purchase_quote(base_id: Variant, expected_revision: Variant) -> Dictionary:
+	if _world_mode!="town" or _is_test_profile(): return _world_failure("service_unavailable","请返回正式城镇购买底材")
+	return _equipment_purchase.quote(state,base_id,expected_revision,build_save_path,_equipment_purchase_context())
+
+func cancel_normal_equipment_purchase_quote(handle: String) -> void:
+	_equipment_purchase.cancel(handle)
+
+func execute_normal_equipment_purchase(handle: Variant, base_id: Variant) -> Dictionary:
+	if _world_mode!="town" or _is_test_profile():
+		if handle is String: _equipment_purchase.cancel(handle)
+		return _world_failure("service_unavailable","请返回正式城镇购买底材")
+	var result: Dictionary = _equipment_purchase.execute(state,handle,base_id,_equipment_purchase_context())
 	if result.ok: world_context_changed.emit()
 	return result
 

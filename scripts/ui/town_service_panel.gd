@@ -140,7 +140,7 @@ func refresh_world() -> void:
 	_leave.text = "返回正式游戏" if testing else "竞技练习"
 	_test_enter.visible = not testing
 	for id: String in _service_buttons:
-		_service_buttons[id].disabled = not testing and id not in ["map_device", "crafter", "passive_reset", "skill_merchant"]
+		_service_buttons[id].disabled = not testing and id not in ["map_device", "crafter", "passive_reset", "skill_merchant", "equipment_merchant"]
 		if _service_buttons[id].disabled: _service_buttons[id].tooltip_text = "免费供应仅在独立测试城镇开放。"
 	_claim.visible = not testing and _has_pending_rewards(context)
 	_claim.disabled = not bool(context.get("can_claim_normal_rewards", false))
@@ -150,7 +150,7 @@ func refresh_world() -> void:
 		_claim.tooltip_text += ("\n" if not pending_text.is_empty() else "") + str(context.claim_reason)
 	_reward_status.text = pending_text
 	_reward_status.visible = not testing and not pending_text.is_empty()
-	if not testing and _service not in ["", "map_device", "crafter", "passive_reset", "skill_merchant"]:
+	if not testing and _service not in ["", "map_device", "crafter", "passive_reset", "skill_merchant", "equipment_merchant"]:
 		_select("map_device")
 	_queue_stock_refresh()
 	_queue_map_status_refresh()
@@ -169,14 +169,14 @@ func _on_stock_changed() -> void:
 	_queue_map_status_refresh()
 
 func _queue_stock_refresh() -> void:
-	if _stock_refresh_queued or not is_visible_in_tree() or _service != "skill_merchant": return
+	if _stock_refresh_queued or not is_visible_in_tree() or _service not in ["skill_merchant", "equipment_merchant"]: return
 	_stock_refresh_queued = true
 	_refresh_stock_if_needed.call_deferred()
 
 func _refresh_stock_if_needed() -> void:
 	_stock_refresh_queued = false
-	if is_visible_in_tree() and _service == "skill_merchant" and _stock_revision != arena.state.revision():
-		_select("skill_merchant")
+	if is_visible_in_tree() and _service in ["skill_merchant", "equipment_merchant"] and _stock_revision != arena.state.revision():
+		_select(_service)
 
 func _queue_map_status_refresh() -> void:
 	if _map_status_queued or not is_visible_in_tree() or _service != "map_device": return
@@ -233,7 +233,7 @@ func _clear() -> void:
 func _select(id: String) -> void:
 	arena.cancel_map_preparation()
 	_cancel_gem_purchase()
-	if not bool(arena.world_context().get("test_mode", false)) and id not in ["map_device", "crafter", "passive_reset", "skill_merchant"]: id = "map_device"
+	if not bool(arena.world_context().get("test_mode", false)) and id not in ["map_device", "crafter", "passive_reset", "skill_merchant", "equipment_merchant"]: id = "map_device"
 	_service = id
 	_clear()
 	if id == "map_device":
@@ -276,7 +276,9 @@ func _select(id: String) -> void:
 		if not str(offer.get("reason", "")).is_empty(): buy.tooltip_text += "\n" + str(offer.reason)
 		buy.disabled = not bool(offer.available)
 		if bool(offer.get("paid", false)):
-			buy.pressed.connect(_request_gem_purchase.bind(str(offer.definition_id)))
+			if str(offer.get("purchase_kind", "")) == "equipment":
+				buy.pressed.connect(_request_equipment_purchase.bind(str(offer.base_id)))
+			else: buy.pressed.connect(_request_gem_purchase.bind(str(offer.definition_id)))
 		else:
 			buy.pressed.connect(func(): _result(arena.town_buy(str(offer.id),arena.state.revision())))
 		row.add_child(buy)
@@ -288,20 +290,35 @@ func _request_gem_purchase(definition_id: String) -> void:
 	if not bool(quote.get("ok", false)):
 		_result(quote)
 		return
-	_gem_pending = {"quote":quote.duplicate(true),"target":definition_id,"model":arena.state,"world_revision":int(arena.world_context().revision)}
+	_gem_dialog.title = "购买宝石"
+	_gem_pending = {"kind":"gem","quote":quote.duplicate(true),"target":definition_id,"model":arena.state,"world_revision":int(arena.world_context().revision)}
 	_gem_dialog.dialog_text = "购买「%s」？\n消耗校准碎片 %d 枚，放入行囊。" % [str(quote.name), int(quote.cost.calibration_shard)]
 	_gem_dialog.popup_centered(Vector2i(420,180))
+
+func _request_equipment_purchase(base_id: String) -> void:
+	_cancel_gem_purchase()
+	var quote: Dictionary = arena.normal_equipment_purchase_quote(base_id, arena.state.revision())
+	if not bool(quote.get("ok", false)):
+		_result(quote)
+		return
+	_gem_pending = {"kind":"equipment","quote":quote.duplicate(true),"target":base_id,"model":arena.state,"world_revision":int(arena.world_context().revision)}
+	_gem_dialog.title = "购买装备底材"
+	_gem_dialog.dialog_text = "购买「%s」？\n普通无词缀 · 物品等级 %d\n消耗校准碎片 %d 枚，放入行囊。" % [str(quote.name),int(quote.item_level),int(quote.cost.calibration_shard)]
+	_gem_dialog.popup_centered(Vector2i(420,200))
 
 func _confirm_gem_purchase() -> void:
 	if _gem_pending.is_empty(): return
 	var issued: Dictionary = _gem_pending
 	_gem_pending = {}
-	_result(arena.execute_normal_gem_trade(issued.quote.handle, issued.target))
-	if is_visible_in_tree(): _select("skill_merchant")
+	if issued.get("kind", "gem") == "equipment":
+		_result(arena.execute_normal_equipment_purchase(issued.quote.handle, issued.target))
+	else: _result(arena.execute_normal_gem_trade(issued.quote.handle, issued.target))
+	if is_visible_in_tree(): _select(_service)
 
 func _cancel_gem_purchase() -> void:
 	if not _gem_pending.is_empty():
-		if arena.state == _gem_pending.model: arena.cancel_normal_gem_trade_quote(_gem_pending.quote.handle)
+		if _gem_pending.get("kind", "gem") == "equipment": arena.cancel_normal_equipment_purchase_quote(_gem_pending.quote.handle)
+		elif arena.state == _gem_pending.model: arena.cancel_normal_gem_trade_quote(_gem_pending.quote.handle)
 		else: _gem_pending.model.cancel_gem_trade_quote(_gem_pending.quote.handle)
 		_gem_pending = {}
 	if is_instance_valid(_gem_dialog): _gem_dialog.hide()
