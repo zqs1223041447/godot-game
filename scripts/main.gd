@@ -222,6 +222,7 @@ func _ready() -> void:
 	world_context_changed.connect(_sync_camp_presentation)
 	world_context_changed.connect(_invalidate_normal_gem_quotes)
 	world_context_changed.connect(_equipment_purchase.clear)
+	world_context_changed.connect(_jewel_purchase.clear)
 	_ready_complete = true
 	restart_run()
 	if not recovered.ok:
@@ -2436,6 +2437,7 @@ var _normal_completion_pending:bool=false
 var test_supply_enabled:=true
 var _normal_gem_receipts: Dictionary = {}
 var _equipment_purchase = preload("res://scripts/items/equipment_purchase.gd").new()
+var _jewel_purchase = preload("res://scripts/items/jewel_purchase.gd").new()
 
 func world_geometry() -> Dictionary:
 	var result: Dictionary = _geometry.snapshot()
@@ -2680,15 +2682,17 @@ func leave_town_test(expected_revision:Variant)->Dictionary:
 func town_services()->Array[Dictionary]:
 	var rows:=TownCatalog.services()
 	for row:Dictionary in rows:
-		row.available=_world_mode=="town" and (_is_test_profile() or row.id in ["skill_merchant","equipment_merchant","crafter","passive_reset","map_device"])
+		row.available=_world_mode=="town" and (_is_test_profile() or row.id in ["skill_merchant","equipment_merchant","jewel_merchant","crafter","passive_reset","map_device"])
 		row.reason="" if row.available else "测试商人仅在独立测试城镇供应" if _world_mode=="town" else "请先返回城镇"
 		if not _is_test_profile() and row.id=="skill_merchant":row.description="用校准碎片购买已实现主动与辅助宝石；背包中的宝石可回收。"
 		elif not _is_test_profile() and row.id=="equipment_merchant":row.description="购买普通无词缀底材，每件8校准碎片、物品等级1；更高等级来自地图掉落。"
+		elif not _is_test_profile() and row.id=="jewel_merchant":row.description="购买三种固定最低数值魔法珠宝，每件8校准碎片；须在已分配并连通的珠宝孔中使用。特殊珠宝仍来自原有掉落。"
 		elif not _is_test_profile() and row.id=="crafter":row.description="使用正式背包内的真实校准碎片进行六项现有工艺。"
 		elif not _is_test_profile() and row.id=="map_device":row.description="选择地图与挑战档位；成功入图才扣费，完整完成后领取结算。"
 	return rows
 func town_stock(service_id:String)->Array[Dictionary]:
 	if service_id=="equipment_merchant" and not _is_test_profile(): return normal_equipment_offers()
+	if service_id=="jewel_merchant" and not _is_test_profile(): return normal_jewel_offers()
 	var rows:=TownCatalog.offers(service_id)
 	if service_id=="skill_merchant" and not _is_test_profile():
 		var prices:Dictionary={}
@@ -2770,6 +2774,26 @@ func execute_normal_equipment_purchase(handle: Variant, base_id: Variant) -> Dic
 		if handle is String: _equipment_purchase.cancel(handle)
 		return _world_failure("service_unavailable","请返回正式城镇购买底材")
 	var result: Dictionary = _equipment_purchase.execute(state,handle,base_id,_equipment_purchase_context())
+	if result.ok: world_context_changed.emit()
+	return result
+
+func normal_jewel_offers() -> Array[Dictionary]:
+	var rows: Array[Dictionary] = _jewel_purchase.offers(state,build_save_path)
+	if _world_mode!="town" or _is_test_profile():
+		for row: Dictionary in rows: row.available=false; row.reason="请返回正式城镇购买基础珠宝"
+	return rows
+
+func normal_jewel_purchase_quote(base_id: Variant, expected_revision: Variant) -> Dictionary:
+	if _world_mode!="town" or _is_test_profile(): return _world_failure("service_unavailable","请返回正式城镇购买基础珠宝")
+	return _jewel_purchase.quote(state,base_id,expected_revision,build_save_path,_equipment_purchase_context())
+
+func cancel_normal_jewel_purchase_quote(handle: String) -> void: _jewel_purchase.cancel(handle)
+
+func execute_normal_jewel_purchase(handle: Variant, base_id: Variant) -> Dictionary:
+	if _world_mode!="town" or _is_test_profile():
+		if handle is String: _jewel_purchase.cancel(handle)
+		return _world_failure("service_unavailable","请返回正式城镇购买基础珠宝")
+	var result: Dictionary = _jewel_purchase.execute(state,handle,base_id,_equipment_purchase_context())
 	if result.ok: world_context_changed.emit()
 	return result
 

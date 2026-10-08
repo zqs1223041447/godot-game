@@ -15,6 +15,11 @@ static func make_item(base_id: Variant, serial: int) -> Dictionary:
 	if typeof(base_id) != TYPE_STRING or Gear.base_definition(base_id).is_empty() or serial < 1 or serial >= Rules.MAX_SERIAL: return {}
 	return Items.wrap_equipment({"id":"gear_%06d" % serial,"base_id":base_id,"rarity":"normal","item_level":ITEM_LEVEL,"affixes":[]})
 
+func _make_item(base_id: Variant, serial: int) -> Dictionary: return make_item(base_id,serial)
+func _cost() -> int: return COST
+func _quote_details(base_id: String) -> Dictionary:
+	return {"name":Gear.base_definition(base_id).name,"item_level":ITEM_LEVEL}
+
 func offers(model: RefCounted, path: String) -> Array[Dictionary]:
 	var rows: Array[Dictionary] = []
 	var guard := _guard(model, model.revision(), path)
@@ -52,8 +57,9 @@ func quote(model: RefCounted, base_id: Variant, expected_revision: Variant, path
 	while _quotes.size() >= 8: _quotes.erase(_quotes.keys()[0])
 	_quotes[handle] = {"model_id":model.get_instance_id(),"before":model.snapshot(),"candidate":planned.candidate,
 		"path":path,"disk":disk,"context":context.duplicate(),"base_id":base_id,"uid":planned.uid}
-	return {"ok":true,"code":"","reason":"","handle":handle,"base_id":base_id,"uid":planned.uid,
-		"name":Gear.base_definition(base_id).name,"item_level":ITEM_LEVEL,"cost":{"calibration_shard":COST}}
+	var result := {"ok":true,"code":"","reason":"","handle":handle,"base_id":base_id,"uid":planned.uid,"cost":{"calibration_shard":_cost()}}
+	result.merge(_quote_details(base_id))
+	return result
 
 func execute(model: RefCounted, handle: Variant, base_id: Variant, context: PackedByteArray) -> Dictionary:
 	if model._busy: return _failure("busy","当前操作尚未结束")
@@ -65,11 +71,11 @@ func execute(model: RefCounted, handle: Variant, base_id: Variant, context: Pack
 	var guard := _guard(model, issued.before.revision, issued.path)
 	if not guard.ok: return guard
 	if not Planner._same_data(model._current, issued.before): return _failure("stale_quote","构筑已变化，请重新获取报价")
-	if model._gem_trade_disk_receipt(issued.path) != issued.disk: return _failure("save_changed","存档已变化，装备与碎片保持原样")
+	if model._gem_trade_disk_receipt(issued.path) != issued.disk: return _failure("save_changed","存档已变化，物品与碎片保持原样")
 	var result: Dictionary = model._commit(issued.candidate.duplicate(true),issued.path)
 	if not result.ok: return _failure(str(result.error_code),str(result.reason))
 	_quotes.clear()
-	return {"ok":true,"code":"","reason":"","uid":issued.uid,"base_id":base_id,"cost":{"calibration_shard":COST},"revision":model.revision()}
+	return {"ok":true,"code":"","reason":"","uid":issued.uid,"base_id":base_id,"cost":{"calibration_shard":_cost()},"revision":model.revision()}
 
 func cancel(handle: String) -> void: _quotes.erase(handle)
 func clear() -> void: _quotes.clear()
@@ -84,11 +90,11 @@ func _guard(model: RefCounted, expected_revision: Variant, path: String) -> Dict
 
 func _plan(model: RefCounted, base_id: Variant) -> Dictionary:
 	var candidate: Dictionary = model.snapshot()
-	var wrapped := make_item(base_id,int(candidate.next_item_serial))
+	var wrapped := _make_item(base_id,int(candidate.next_item_serial))
 	if wrapped.is_empty(): return _failure("invalid_base","底材不存在或物品序号已达上限")
 	var balance: int = model.crafting_balance()
-	if balance < COST: return _failure("insufficient_shards","背包内校准碎片不足")
-	var currency: Dictionary = model._set_bag_currency_balance(candidate,balance-COST)
+	if balance < _cost(): return _failure("insufficient_shards","背包内校准碎片不足")
+	var currency: Dictionary = model._set_bag_currency_balance(candidate,balance-_cost())
 	if not currency.ok: return _failure(str(currency.error_code),str(currency.reason))
 	if not model._place_journey_reward(candidate,wrapped): return _failure("bag_full","背包没有底材的可用空间，物品上限或序号已用尽")
 	candidate.revision += 1
