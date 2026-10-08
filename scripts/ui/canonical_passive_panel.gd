@@ -25,6 +25,9 @@ var _refund: Button
 var _socket: Button
 var _return: Button
 var _search: LineEdit
+var _search_query := ""
+var _search_matches: Array[String] = []
+var _search_index := -1
 var _subtree := "standard"
 var _loaded_graph := ""
 var _refreshing := false
@@ -93,8 +96,10 @@ func _build()->void:
 	home.pressed.connect(_focus_start)
 	toolbar.add_child(home)
 	_search=LineEdit.new()
-	_search.placeholder_text="源名称 / 节点编号"
+	_search.placeholder_text="名称 / 中文词缀 / 编号"
 	_search.custom_minimum_size.x=170
+	_search.tooltip_text="搜索当前子树的中文名、原英文名或中文词缀；回车定位，再按回车查看下一项。精确节点编号优先。"
+	_search.text_changed.connect(func(_text:String):_reset_search())
 	_search.text_submitted.connect(_find_node)
 	toolbar.add_child(_search)
 	_summary=WrappedLabel.new()
@@ -232,6 +237,7 @@ func _load_graph()->void:
 		nodes[id]={"id":id,"position":node.position,"type":node.type,"name":Localization.node_name(id),
 			"description":Localization.display_lines(node.stats),"status":"locked" if locked else "choice" if effect.status=="choice" else "implemented"}
 	if _tree.set_tree(nodes,edges,focus):
+		_reset_search()
 		_loaded_graph=key
 		if not nodes.has(selected_node_id):selected_node_id=focus
 
@@ -355,22 +361,53 @@ func _focus_start()->void:
 	refresh()
 	_tree.pan=-Data.node(selected_node_id).position*_tree.zoom
 	_tree.queue_redraw()
+func _reset_search()->void:
+	_search_query=""
+	_search_matches.clear()
+	_search_index=-1
+
 func _find_node(query:String)->void:
 	var needle:=query.strip_edges().to_lower()
-	if needle.is_empty():return
-	for id:String in _tree._nodes:
-		var source_name:=str(Data.node(id).name).to_lower()
-		if id==needle or str(_tree._nodes[id].name).to_lower().contains(needle) or source_name.contains(needle):
-			selected_node_id=id
-			_tree.pan=-Data.node(id).position*_tree.zoom
-			_refresh_details();_refresh_overlay();return
-	# Detached definitions retain their real source identity; do not invent a
-	# position or mix them into the allocation graph merely to display their text.
-	var record:=Data.node(query.strip_edges())
-	if not record.is_empty():
-		selected_node_id=str(record.id)
-		_refresh_details();_refresh_overlay();return
-	feedback.emit("当前子树未找到此名称或编号")
+	if needle.is_empty():
+		_reset_search()
+		feedback.emit("请输入名称、中文词缀或节点编号")
+		return
+	if needle!=_search_query:
+		_reset_search()
+		_search_query=needle
+		# Exact IDs win over every text match. Detached definitions retain their
+		# identity without inventing a position or changing allocation eligibility.
+		if _tree._nodes.has(needle):
+			_search_matches.append(needle)
+		else:
+			var record:=Data.node(query.strip_edges())
+			if not record.is_empty():
+				selected_node_id=str(record.id)
+				_refresh_details();_refresh_overlay()
+				feedback.emit("匹配 1/1 · %s（%s） · 当前子树无此位置，仅显示详情"%[Localization.node_name(selected_node_id),selected_node_id])
+				# Repeated submissions of a detached ID must retain this behavior.
+				_search_query=""
+				return
+			var description_matches: Array[String]=[]
+			# Keep the original pinned graph order and put name matches first, so
+			# existing name queries still select their prior first result.
+			for id:String in _tree._node_order:
+				var node:Dictionary=_tree._nodes[id]
+				var source_name:=str(Data.node(id).name).to_lower()
+				if str(node.name).to_lower().contains(needle) or source_name.contains(needle):
+					_search_matches.append(id)
+				elif str(node.description).to_lower().contains(needle):
+					description_matches.append(id)
+			_search_matches.append_array(description_matches)
+	if _search_matches.is_empty():
+		feedback.emit("当前子树未找到此名称、中文词缀或编号（0 项）")
+		return
+	_search_index=(_search_index+1)%_search_matches.size()
+	selected_node_id=_search_matches[_search_index]
+	_tree.pan=-_tree._nodes[selected_node_id].position*_tree.zoom
+	_refresh_details();_refresh_overlay()
+	_tree.queue_redraw()
+	feedback.emit("匹配 %d/%d · %s（%s）"%[_search_index+1,_search_matches.size(),Localization.node_name(selected_node_id),selected_node_id])
 func _socket_selected()->void:
 	if not _socket.disabled:_move(str(_jewel.get_item_metadata(_jewel.selected)),{"kind":"passive_socket","node_id":selected_node_id},model.revision())
 func _return_jewel()->void:
