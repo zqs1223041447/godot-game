@@ -1,0 +1,1042 @@
+{
+	"awards": [
+		{
+			"case": "normal bag",
+			"item": {
+				"definition_id": "equipment:ashwood_bow",
+				"kind": "equipment",
+				"payload": {
+					"affixes": [
+						{
+							"id": "whetstone_edge",
+							"tier": 1,
+							"value": 2
+						},
+						{
+							"id": "coalglow",
+							"tier": 1,
+							"value": 6
+						},
+						{
+							"id": "beatlink",
+							"tier": 1,
+							"value": 3
+						},
+						{
+							"id": "sparkthread",
+							"tier": 1,
+							"value": 8
+						}
+					],
+					"base_id": "ashwood_bow",
+					"id": "gear_000004",
+					"item_level": 1,
+					"rarity": "rare"
+				},
+				"uid": "gear_000004"
+			},
+			"item_level": 1,
+			"location": {
+				"kind": "bag",
+				"page": 0,
+				"x": 8,
+				"y": 0
+			},
+			"pool": "",
+			"uid": "gear_000004"
+		},
+		{
+			"case": "full bag / pending=false / write fault=false",
+			"item": {
+				"definition_id": "equipment:ashwood_bow",
+				"kind": "equipment",
+				"payload": {
+					"affixes": [
+						{
+							"id": "whetstone_edge",
+							"tier": 1,
+							"value": 2
+						},
+						{
+							"id": "coalglow",
+							"tier": 1,
+							"value": 6
+						},
+						{
+							"id": "beatlink",
+							"tier": 1,
+							"value": 3
+						},
+						{
+							"id": "sparkthread",
+							"tier": 1,
+							"value": 8
+						}
+					],
+					"base_id": "ashwood_bow",
+					"id": "gear_000205",
+					"item_level": 1,
+					"rarity": "rare"
+				},
+				"uid": "gear_000205"
+			},
+			"item_level": 1,
+			"location": {
+				"index": 239,
+				"kind": "recovery"
+			},
+			"pool": "",
+			"uid": "gear_000205"
+		},
+		{
+			"case": "full bag / pending=true / write fault=true",
+			"item": {
+				"definition_id": "equipment:ashwood_bow",
+				"kind": "equipment",
+				"payload": {
+					"affixes": [
+						{
+							"id": "whetstone_edge",
+							"tier": 1,
+							"value": 2
+						},
+						{
+							"id": "coalglow",
+							"tier": 1,
+							"value": 6
+						},
+						{
+							"id": "beatlink",
+							"tier": 1,
+							"value": 3
+						},
+						{
+							"id": "sparkthread",
+							"tier": 1,
+							"value": 8
+						}
+					],
+					"base_id": "ashwood_bow",
+					"id": "gear_000206",
+					"item_level": 1,
+					"rarity": "rare"
+				},
+				"uid": "gear_000206"
+			},
+			"item_level": 1,
+			"location": {
+				"index": 240,
+				"kind": "recovery"
+			},
+			"pool": "",
+			"uid": "gear_000206"
+		},
+		{
+			"case": "existing pending / room in bag",
+			"item": {
+				"definition_id": "equipment:ashwood_bow",
+				"kind": "equipment",
+				"payload": {
+					"affixes": [
+						{
+							"id": "whetstone_edge",
+							"tier": 1,
+							"value": 2
+						},
+						{
+							"id": "coalglow",
+							"tier": 1,
+							"value": 6
+						},
+						{
+							"id": "beatlink",
+							"tier": 1,
+							"value": 3
+						},
+						{
+							"id": "sparkthread",
+							"tier": 1,
+							"value": 8
+						}
+					],
+					"base_id": "ashwood_bow",
+					"id": "gear_000206",
+					"item_level": 1,
+					"rarity": "rare"
+				},
+				"uid": "gear_000206"
+			},
+			"item_level": 1,
+			"location": {
+				"kind": "bag",
+				"page": 1,
+				"x": 10,
+				"y": 7
+			},
+			"pool": "",
+			"uid": "gear_000206"
+		}
+	],
+	"checks": 169,
+	"display": "headless",
+	"evidence": [
+		{
+			"case": "normal bag",
+			"label": "Actual Main opens and saves formal town",
+			"ok": true
+		},
+		{
+			"case": "normal bag",
+			"label": "Select actual free tier-I map: ",
+			"ok": true
+		},
+		{
+			"case": "normal bag",
+			"label": "Actual map admission: ",
+			"ok": true
+		},
+		{
+			"case": "normal bag",
+			"label": "Actual map registers 24 ordinary roots and one boss",
+			"ok": true
+		},
+		{
+			"case": "normal bag",
+			"label": "Registered boss invokes one original equipment decision",
+			"ok": true
+		},
+		{
+			"case": "normal bag",
+			"label": "Exact first original pool roll, UID, level and rare affixes retained",
+			"ok": true
+		},
+		{
+			"case": "normal bag",
+			"label": "No reroll or alternative loot selection consumes RNG",
+			"ok": true
+		},
+		{
+			"case": "normal bag",
+			"label": "Unique boss instance enters bag",
+			"ok": true
+		},
+		{
+			"case": "normal bag",
+			"label": "Unchanged schema55 validates complete build",
+			"ok": true
+		},
+		{
+			"case": "normal bag",
+			"label": "Actual once-only formal death records one kill",
+			"ok": true
+		},
+		{
+			"case": "normal bag",
+			"label": "Every existing item and authoritative location preserved; differing UIDs: []",
+			"ok": true
+		},
+		{
+			"case": "normal bag",
+			"label": "Original normal bag gear plus unchanged special-jewel reward allocate one serial each",
+			"ok": true
+		},
+		{
+			"case": "normal bag",
+			"label": "Normal bag admission adds no recovery",
+			"ok": true
+		},
+		{
+			"case": "normal bag",
+			"label": "Repeated same dead dictionary cannot duplicate reward/save/RNG",
+			"ok": true
+		},
+		{
+			"case": "normal bag",
+			"label": "Root ledger also rejects reconstructed same identity",
+			"ok": true
+		},
+		{
+			"case": "normal bag",
+			"label": "Normal rare gear and existing rewards survive exact canonical reload",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=false / write fault=false",
+			"label": "Remove only isolated suite save",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=false / write fault=false",
+			"label": "Actual Main opens and saves formal town",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=false / write fault=false",
+			"label": "Select actual free tier-I map: ",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=false / write fault=false",
+			"label": "Actual map admission: ",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=false / write fault=false",
+			"label": "Actual map registers 24 ordinary roots and one boss",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=false / write fault=false",
+			"label": "Capacity-only fixture preserves all real items and passes canonical commit",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=false / write fault=false",
+			"label": "Both real bag pages are completely full",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=false / write fault=false",
+			"label": "Registered boss invokes one original equipment decision",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=false / write fault=false",
+			"label": "Exact first original pool roll, UID, level and rare affixes retained",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=false / write fault=false",
+			"label": "No reroll or alternative loot selection consumes RNG",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=false / write fault=false",
+			"label": "Unique boss instance enters recovery",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=false / write fault=false",
+			"label": "Unchanged schema55 validates complete build",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=false / write fault=false",
+			"label": "Actual once-only formal death records one kill",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=false / write fault=false",
+			"label": "Every existing item and authoritative location preserved; differing UIDs: []",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=false / write fault=false",
+			"label": "Full bag allocates only boss gear; special jewel follows original refusal rule",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=false / write fault=false",
+			"label": "Append preserves original pending queue and one new UID",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=false / write fault=false",
+			"label": "Death reward batch makes one successful complete save",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=false / write fault=false",
+			"label": "Repeated same dead dictionary cannot duplicate reward/save/RNG",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=false / write fault=false",
+			"label": "Root ledger also rejects reconstructed same identity",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=false / write fault=false",
+			"label": "Full-bag pending gear survives exact canonical reload",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=false / write fault=false",
+			"label": "Original pending UI lists every old/new item",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=false / write fault=false",
+			"label": "Actual pending button refuses full bag without item/save/RNG mutation",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=false / write fault=false",
+			"label": "Canonical discard frees fixture cell: ",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=false / write fault=false",
+			"label": "Canonical discard frees fixture cell: ",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=false / write fault=false",
+			"label": "Canonical discard frees fixture cell: ",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=false / write fault=false",
+			"label": "Canonical discard frees fixture cell: ",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=false / write fault=false",
+			"label": "Canonical discard frees fixture cell: ",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=false / write fault=false",
+			"label": "Canonical discard frees fixture cell: ",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=false / write fault=false",
+			"label": "Original placement planner finds contiguous gear space",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=false / write fault=false",
+			"label": "Failed original UI move commit preserves memory/disk/serials and pending gear",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=false / write fault=false",
+			"label": "Same actual pending button returns same UID and all original affixes",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=false / write fault=false",
+			"label": "Take-back leaves existing pending item intact",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=false / write fault=false",
+			"label": "Retrieved original gear survives exact reload",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=false / write fault=false",
+			"label": "Repeated same dead dictionary cannot duplicate reward/save/RNG",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=false / write fault=false",
+			"label": "Root ledger also rejects reconstructed same identity",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=false / write fault=false",
+			"label": "Actual finite map still unlocks tier-I and creates original four-shard receipt",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=false / write fault=false",
+			"label": "Complete actual roster rewards exactly 25 roots and one boss decision",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=false / write fault=false",
+			"label": "Recovery creates no currency source or automatic settlement credit",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=false / write fault=false",
+			"label": "Original completed-map return succeeds: ",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=false / write fault=false",
+			"label": "Canonical organizing frees settlement space after ordinary drops: ",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=false / write fault=false",
+			"label": "Canonical organizing frees settlement space after ordinary drops: ",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=false / write fault=false",
+			"label": "Canonical organizing frees settlement space after ordinary drops: ",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=false / write fault=false",
+			"label": "Canonical organizing frees settlement space after ordinary drops: ",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=false / write fault=false",
+			"label": "Canonical organizing frees settlement space after ordinary drops: ",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=false / write fault=false",
+			"label": "Canonical organizing frees settlement space after ordinary drops: ",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=false / write fault=false",
+			"label": "Original settlement claim succeeds after organizing: ",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=false / write fault=false",
+			"label": "Existing one-time settlement credits exactly four physical shards",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=false / write fault=false",
+			"label": "Original completion unlocks tier-II draft: ",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=false / write fault=false",
+			"label": "Original paid tier-II entry succeeds: ",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=false / write fault=false",
+			"label": "Existing map fee is still debited exactly once",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=true / write fault=true",
+			"label": "Remove only isolated suite save",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=true / write fault=true",
+			"label": "Actual Main opens and saves formal town",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=true / write fault=true",
+			"label": "Select actual free tier-I map: ",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=true / write fault=true",
+			"label": "Actual map admission: ",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=true / write fault=true",
+			"label": "Actual map registers 24 ordinary roots and one boss",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=true / write fault=true",
+			"label": "Capacity-only fixture preserves all real items and passes canonical commit",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=true / write fault=true",
+			"label": "Both real bag pages are completely full",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=true / write fault=true",
+			"label": "Registered boss invokes one original equipment decision",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=true / write fault=true",
+			"label": "Exact first original pool roll, UID, level and rare affixes retained",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=true / write fault=true",
+			"label": "No reroll or alternative loot selection consumes RNG",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=true / write fault=true",
+			"label": "Unique boss instance enters recovery",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=true / write fault=true",
+			"label": "Unchanged schema55 validates complete build",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=true / write fault=true",
+			"label": "Actual once-only formal death records one kill",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=true / write fault=true",
+			"label": "Every existing item and authoritative location preserved; differing UIDs: []",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=true / write fault=true",
+			"label": "Full bag allocates only boss gear; special jewel follows original refusal rule",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=true / write fault=true",
+			"label": "Append preserves original pending queue and one new UID",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=true / write fault=true",
+			"label": "Failed batch write keeps exact prior disk and complete new memory dirty",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=true / write fault=true",
+			"label": "Reload of failed write sees complete prior canonical snapshot",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=true / write fault=true",
+			"label": "Repeated same dead dictionary cannot duplicate reward/save/RNG",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=true / write fault=true",
+			"label": "Root ledger also rejects reconstructed same identity",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=true / write fault=true",
+			"label": "Explicit failed retry neither rolls back part of reward nor half-writes",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=true / write fault=true",
+			"label": "Retry saves exact retained UID/affixes without reminting",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=true / write fault=true",
+			"label": "Full-bag pending gear survives exact canonical reload",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=true / write fault=true",
+			"label": "Actual Main reload uses existing safe active-map abandonment",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=true / write fault=true",
+			"label": "Actual game reload preserves complete gear/pending inventory and issues no additional rewards",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=true / write fault=true",
+			"label": "Reload of unfinished map adds no unlock, fee refund or completion receipt",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=true / write fault=true",
+			"label": "Repeated same dead dictionary cannot duplicate reward/save/RNG",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=true / write fault=true",
+			"label": "Root ledger also rejects reconstructed same identity",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=true / write fault=true",
+			"label": "Original pending UI lists every old/new item",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=true / write fault=true",
+			"label": "Actual pending button refuses full bag without item/save/RNG mutation",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=true / write fault=true",
+			"label": "Canonical discard frees fixture cell: ",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=true / write fault=true",
+			"label": "Canonical discard frees fixture cell: ",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=true / write fault=true",
+			"label": "Canonical discard frees fixture cell: ",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=true / write fault=true",
+			"label": "Canonical discard frees fixture cell: ",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=true / write fault=true",
+			"label": "Canonical discard frees fixture cell: ",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=true / write fault=true",
+			"label": "Canonical discard frees fixture cell: ",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=true / write fault=true",
+			"label": "Original placement planner finds contiguous gear space",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=true / write fault=true",
+			"label": "Failed original UI move commit preserves memory/disk/serials and pending gear",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=true / write fault=true",
+			"label": "Same actual pending button returns same UID and all original affixes",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=true / write fault=true",
+			"label": "Take-back leaves existing pending item intact",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=true / write fault=true",
+			"label": "Retrieved original gear survives exact reload",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=true / write fault=true",
+			"label": "Repeated same dead dictionary cannot duplicate reward/save/RNG",
+			"ok": true
+		},
+		{
+			"case": "full bag / pending=true / write fault=true",
+			"label": "Root ledger also rejects reconstructed same identity",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room in bag",
+			"label": "Remove only isolated suite save",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room in bag",
+			"label": "Actual Main opens and saves formal town",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room in bag",
+			"label": "Select actual free tier-I map: ",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room in bag",
+			"label": "Actual map admission: ",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room in bag",
+			"label": "Actual map registers 24 ordinary roots and one boss",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room in bag",
+			"label": "Capacity-only fixture preserves all real items and passes canonical commit",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room in bag",
+			"label": "Both real bag pages are completely full",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room in bag",
+			"label": "Canonical organizing creates room while old pending remains: ",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room in bag",
+			"label": "Canonical organizing creates room while old pending remains: ",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room in bag",
+			"label": "Canonical organizing creates room while old pending remains: ",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room in bag",
+			"label": "Canonical organizing creates room while old pending remains: ",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room in bag",
+			"label": "Canonical organizing creates room while old pending remains: ",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room in bag",
+			"label": "Canonical organizing creates room while old pending remains: ",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room in bag",
+			"label": "Registered boss invokes one original equipment decision",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room in bag",
+			"label": "Exact first original pool roll, UID, level and rare affixes retained",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room in bag",
+			"label": "No reroll or alternative loot selection consumes RNG",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room in bag",
+			"label": "Unique boss instance enters bag",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room in bag",
+			"label": "Unchanged schema55 validates complete build",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room in bag",
+			"label": "Actual once-only formal death records one kill",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room in bag",
+			"label": "Every existing item and authoritative location preserved; differing UIDs: []",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room in bag",
+			"label": "Existing pending does not prevent boss bag placement or duplicate unrelated rewards",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room in bag",
+			"label": "Repeated same dead dictionary cannot duplicate reward/save/RNG",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room in bag",
+			"label": "Root ledger also rejects reconstructed same identity",
+			"ok": true
+		},
+		{
+			"case": "existing pending / room in bag",
+			"label": "Boss bag gear coexists with old pending after exact reload",
+			"ok": true
+		},
+		{
+			"case": "test profile isolation",
+			"label": "Remove only isolated suite save",
+			"ok": true
+		},
+		{
+			"case": "test profile isolation",
+			"label": "Actual Main opens and saves formal town",
+			"ok": true
+		},
+		{
+			"case": "test profile isolation",
+			"label": "Enter existing independent test town: ",
+			"ok": true
+		},
+		{
+			"case": "test profile isolation",
+			"label": "Open independent test save",
+			"ok": true
+		},
+		{
+			"case": "test profile isolation",
+			"label": "Actual map admission: ",
+			"ok": true
+		},
+		{
+			"case": "test profile isolation",
+			"label": "Actual map registers 24 ordinary roots and one boss",
+			"ok": true
+		},
+		{
+			"case": "test profile isolation",
+			"label": "Capacity-only fixture preserves all real items and passes canonical commit",
+			"ok": true
+		},
+		{
+			"case": "test profile isolation",
+			"label": "Both real bag pages are completely full",
+			"ok": true
+		},
+		{
+			"case": "test profile isolation",
+			"label": "Test boss full bag keeps original refusal; no formal recovery",
+			"ok": true
+		},
+		{
+			"case": "test profile isolation",
+			"label": "Test death never writes formal save",
+			"ok": true
+		},
+		{
+			"case": "ordinary and demo isolation",
+			"label": "Remove only isolated suite save",
+			"ok": true
+		},
+		{
+			"case": "ordinary and demo isolation",
+			"label": "Remove only isolated suite save",
+			"ok": true
+		},
+		{
+			"case": "ordinary and demo isolation",
+			"label": "Actual Main opens and saves formal town",
+			"ok": true
+		},
+		{
+			"case": "ordinary and demo isolation",
+			"label": "Select actual free tier-I map: ",
+			"ok": true
+		},
+		{
+			"case": "ordinary and demo isolation",
+			"label": "Actual map admission: ",
+			"ok": true
+		},
+		{
+			"case": "ordinary and demo isolation",
+			"label": "Actual map registers 24 ordinary roots and one boss",
+			"ok": true
+		},
+		{
+			"case": "ordinary and demo isolation",
+			"label": "Capacity-only fixture preserves all real items and passes canonical commit",
+			"ok": true
+		},
+		{
+			"case": "ordinary and demo isolation",
+			"label": "Both real bag pages are completely full",
+			"ok": true
+		},
+		{
+			"case": "ordinary and demo isolation",
+			"label": "Non-boss full-bag gear path retains original no-award/RNG rollback",
+			"ok": true
+		},
+		{
+			"case": "ordinary and demo isolation",
+			"label": "Demo boss death does not enter formal reward path",
+			"ok": true
+		},
+		{
+			"case": "model guards and limits",
+			"label": "Remove only isolated suite save",
+			"ok": true
+		},
+		{
+			"case": "model guards and limits",
+			"label": "Actual Main opens and saves formal town",
+			"ok": true
+		},
+		{
+			"case": "model guards and limits",
+			"label": "Select actual free tier-I map: ",
+			"ok": true
+		},
+		{
+			"case": "model guards and limits",
+			"label": "Actual map admission: ",
+			"ok": true
+		},
+		{
+			"case": "model guards and limits",
+			"label": "Actual map registers 24 ordinary roots and one boss",
+			"ok": true
+		},
+		{
+			"case": "model guards and limits",
+			"label": "Mismatched persisted run rejected before generating loot",
+			"ok": true
+		},
+		{
+			"case": "model guards and limits",
+			"label": "Unknown registry pool rejected without mutation",
+			"ok": true
+		},
+		{
+			"case": "model guards and limits",
+			"label": "Exhausted next_item_serial fixture remains legal schema55",
+			"ok": true
+		},
+		{
+			"case": "model guards and limits",
+			"label": "Exhausted next_item_serial prevents reward and consumes no RNG",
+			"ok": true
+		},
+		{
+			"case": "model guards and limits",
+			"label": "Exhausted revision fixture remains legal schema55",
+			"ok": true
+		},
+		{
+			"case": "model guards and limits",
+			"label": "Exhausted revision prevents reward and consumes no RNG",
+			"ok": true
+		},
+		{
+			"case": "model guards and limits",
+			"label": "Reward item-cap fixture passes unchanged canonical rules",
+			"ok": true
+		},
+		{
+			"case": "model guards and limits",
+			"label": "Original item cap remains mandatory and failed admission restores RNG",
+			"ok": true
+		},
+		{
+			"case": "model guards and limits",
+			"label": "Original active-run abandonment: ",
+			"ok": true
+		},
+		{
+			"case": "model guards and limits",
+			"label": "Absent active map cannot mint recovery gear",
+			"ok": true
+		},
+		{
+			"case": "model guards and limits",
+			"label": "All bounded scenarios actually executed",
+			"ok": true
+		}
+	],
+	"failed_labels": [],
+	"failures": 0,
+	"schema": 55,
+	"source_sha256": {
+		"scripts/canonical_game_state.gd": "6125975318e883e8939a602ad73c3da3f7068e8e34aa53385695d3e015be4350",
+		"scripts/items/equipment_catalog.gd": "fa616367c66f7048317eac29feed3e607a610c9d47e96aa7da4e9261fa0dd6ea",
+		"scripts/items/item_location_rules.gd": "7b215b19093b693216f47a1b0f2c35b3a1aced96acab8a27a3eb5f2a7e8a867a",
+		"scripts/main.gd": "d9896b109234b5e7a2fcc10c0ef7f2c46a5225cf27b5214f6fe5450f558e1ad4",
+		"scripts/save/canonical_build_rules.gd": "46fa346c217b0fa05dfd2dcf254115bde10aaa53899e07a67284f5b1453b932e",
+		"scripts/save/canonical_build_store.gd": "73c2208f1d2551647e9a9b98b0f00d6ebc53b11864fcd91b376c2d59bba20ce7",
+		"scripts/ui/canonical_inventory_panel.gd": "eec3ab27a85ca908135142a1396c094b36f06f0309a7e023fa1de612ecf72539",
+		"tests/formal_boss_equipment_recovery_test.gd": "272747dae91ac4687125fac7219328537fd1c72722bd9983b0734476c5bfbc0f"
+	}
+}

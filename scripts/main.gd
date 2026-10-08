@@ -1851,12 +1851,19 @@ func _award_kill_equipment(enemy: Dictionary) -> void:
 	# A live encounter requests today's defense supply. Explicit historical
 	# catalog/model pool calls retain the immutable original defense sequence.
 	if pool == "defense": pool = Gear.CURRENT_DEFENSE_POOL_ID
-	var item_id: String = state.award_equipment(rng, item_level, rarity, "current" if pool.is_empty() else pool)
+	var loot_pool: String = "current" if pool.is_empty() else pool
+	var formal_boss: bool = _world_mode == "map" and not _is_test_profile() \
+		and enemy.get("rarity", "") == "boss" and int(enemy.get("id", 0)) == _map_run.boss_id \
+		and int(enemy.get("generation", -1)) == 0
+	var item_id: String = state.award_normal_boss_equipment(rng, item_level, loot_pool, _normal_run_id) if formal_boss else state.award_equipment(rng, item_level, rarity, loot_pool)
 	if item_id.is_empty():
 		hud.notify("背包保留空间不足，无法领取新装备；已有物品完整保留，可在 I 中清理随机装备")
 		return
 	var definition: Dictionary = state.get_item_definition(item_id)
-	hud.notify("获得装备：%s · 物品等级 %d · 按 I 比较和穿戴" % [definition.name, item_level])
+	if state.location(item_id).kind == "recovery":
+		hud.notify("首领装备已保留：%s · 物品等级 %d · 按 I 腾出空间后在待安置中取回" % [definition.name, item_level])
+	else:
+		hud.notify("获得装备：%s · 物品等级 %d · 按 I 比较和穿戴" % [definition.name, item_level])
 	_add_ring(player_pos, 90.0, Color("eac976"), 0.7)
 	_add_text(player_pos + Vector2(0, -76), "+ 装备", Color("eac976"))
 

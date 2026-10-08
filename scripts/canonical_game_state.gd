@@ -400,14 +400,27 @@ func reset_all_passives(expected_revision:Variant,path:String)->Dictionary:
 
 
 func award_equipment(rng: RandomNumberGenerator, item_level: int, rarity: String = "", pool: String = "current") -> String:
-	if _busy or rng == null or not pending_items().is_empty() or _current.next_item_serial >= Rules.MAX_SERIAL:
+	return _award_equipment(rng, item_level, rarity, pool)
+
+
+func award_normal_boss_equipment(rng: RandomNumberGenerator, item_level: int, pool: String, run_id: int) -> String:
+	# Main's registered root-death ledger owns eligibility and once-only delivery.
+	# Recovery is restricted to the currently opened formal map profile/run.
+	if not _normal_journey_guard(revision(), _command_path()).ok: return ""
+	var active: Dictionary = _current.journey.active_run
+	if run_id <= 0 or active.get("run_id", 0) != run_id: return ""
+	return _award_equipment(rng, item_level, "rare", pool, true)
+
+
+func _award_equipment(rng: RandomNumberGenerator, item_level: int, rarity: String, pool: String, allow_recovery: bool = false) -> String:
+	if _busy or rng == null or (not allow_recovery and not pending_items().is_empty()) or _current.next_item_serial >= Rules.MAX_SERIAL:
 		return ""
 	if pool != "current" and not Gear.pool_profiles().has(pool): return ""
 	var before_rng: int = rng.state
 	var uid: String = "gear_%06d" % int(_current.next_item_serial)
 	var generated: Dictionary = Gear.generate_loot_profile(rng, uid, item_level, rarity, LOOT_PROFILE_ID) if pool == "current" else Gear.generate_for_pool(rng, uid, item_level, rarity, pool)
 	var wrapped: Dictionary = Items.wrap_equipment(generated)
-	if wrapped.is_empty() or not _admit_reward_item(wrapped):
+	if wrapped.is_empty() or not (_admit_reward_item_candidate(wrapped, true) if allow_recovery else _admit_reward_item(wrapped)):
 		rng.state = before_rng
 		return ""
 	return uid
@@ -532,13 +545,21 @@ func _command_path() -> String:
 
 
 func _admit_reward_item(wrapped: Dictionary) -> bool:
+	return _admit_reward_item_candidate(wrapped)
+
+
+func _admit_reward_item_candidate(wrapped: Dictionary, allow_recovery: bool = false) -> bool:
 	var candidate := snapshot()
 	if candidate.items.has(wrapped.uid) or candidate.items.size() >= Rules.V17_MAX_ITEMS or candidate.revision >= Rules.MAX_SERIAL: return false
 	candidate.items[wrapped.uid] = wrapped.duplicate(true)
 	var metadata: Dictionary = Items.metadata_for_items(candidate.items)
 	var position: Dictionary = Transfer.first_bag_space_paged(metadata, candidate.locations,
 		Migration.paged_location_context(candidate, _socket_ids), wrapped.uid)
-	if position.is_empty(): return false
+	if position.is_empty():
+		if not allow_recovery: return false
+		# Every prior recovery index is below the prior item count. Append a
+		# unique legal v55 index without moving or replacing existing items.
+		position = {"kind": "recovery", "index": candidate.items.size() - 1}
 	candidate.locations[wrapped.uid] = position
 	candidate.next_item_serial += 1
 	candidate.revision += 1
