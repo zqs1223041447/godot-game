@@ -479,13 +479,13 @@ func _update_map_modifier_gates() -> void:
 		for entry: Dictionary in preview.special_modifiers:
 			var check: CheckBox = _special[str(entry.id)]
 			check.disabled = not bool(entry.available)
-			check.text = "%s · 需要波次 %d%s" % [entry.name, int(entry.minimum_wave), "" if entry.available else " · 当前不可用"]
+			check.text = "%s · 最低强度 %d%s" % [entry.name, int(entry.minimum_wave), "" if entry.available else " · 当前不可用"]
 			check.tooltip_text = str(check.get_meta("gate_description"))
-			check.tooltip_text += "\n需要波次 %d，当前波次 %d。" % [int(entry.minimum_wave), int(preview.wave)]
+			check.tooltip_text += "\n最低强度 %d，当前挑战强度 %d。" % [int(entry.minimum_wave), int(preview.wave)]
 			if not entry.available and check.button_pressed:
 				_map_ineligible_selected.append(str(entry.id))
-				invalid.append("%s（需要波次 %d）" % [entry.name, int(entry.minimum_wave)])
-		_map_gate_status.text = "当前挑战波次 %d" % int(preview.wave)
+				invalid.append("%s（最低强度 %d）" % [entry.name, int(entry.minimum_wave)])
+		_map_gate_status.text = "当前挑战强度 %d" % int(preview.wave)
 		if not invalid.is_empty():
 			_map_gate_reason = "已选词缀不适用：%s。请提高档位、切换地图或取消不适用的选择后再准备。" % "、".join(invalid)
 			_map_gate_status.text += "\n" + _map_gate_reason
