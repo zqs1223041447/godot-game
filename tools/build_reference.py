@@ -1487,6 +1487,9 @@ def build(data, art):
         if j['kind']=='ordinary' and 'jewel_crafting' in data:
             body+='<p>背包中的魔法与稀有珠宝可在工匠处回收或整体重铸；'+link('rules','jewel_crafting','价格、数量与风险')+'。</p>'
             related+=' · '+link('rules','jewel_crafting')
+        for purchase_offer in data.get('town_maps',{}).get('jewel_purchase',{}).get('offers',[]):
+            if purchase_offer['base_id']==key:
+                body+='<p>正式城镇'+link('town_services','jewel_merchant','珠宝商人')+'供应固定最低数值魔法样品，每件 <span data-jewel-purchase-id="'+esc(key)+'" data-cost="'+str(purchase_offer['cost'])+'">'+number(purchase_offer['cost'])+'</span> 校准碎片。词缀与数值固定，购买不随机；只入背包，须在已分配并连通起点的合法珠宝孔中镶嵌后生效，不赠点、不改变连通。</p><p>'+lines(purchase_offer['description'])+'</p><p>商店不出售特殊珠宝；自然掉落仍使用原词池、稀有度和数值范围，工匠工艺保持原规则。</p>'
         cards.append(add('jewels',key,j['name'],summary,body,TYPES[j['kind']],related=related))
     for key,j in data['jewel_affixes'].items():
         bases=[k for k,v in data['jewels'].items() if key in v.get('prefixes',[])+v.get('suffixes',[])]
@@ -1630,6 +1633,11 @@ def build(data, art):
                 body+='<p>正式城镇购买普通无词缀底材，每件 '+'<span data-equipment-purchase-field="cost">'+number(purchase['cost'])+'</span>'+' 校准碎片，物品等级 '+'<span data-equipment-purchase-field="item_level">'+number(purchase['item_level'])+'</span>'+'。购买不随机生成词缀，可在现有工匠处赋魔，也可直接装备；更高物品等级来自地图掉落。</p>'
                 body+='<p>只供应下表目录底材；固定机制装备、药剂、珠宝与免费碎片仍属独立测试供应。确认时碎片扣除与真实尺寸入包一次保存；满包、存档变化或写盘失败保留物品与碎片，取消或区域/库存变化后旧报价不可兑现。</p>'
                 body+='<div class="table-scroll"><table><thead><tr><th>正式底材</th><th>购买碎片</th><th>物品等级</th><th>随机词缀</th></tr></thead><tbody>'+''.join('<tr><td>'+link('equipment',o['base_id'],o['name'])+'</td><td data-base-purchase-id="'+esc(o['base_id'])+'" data-cost="'+str(o['cost'])+'">'+str(o['cost'])+'</td><td>'+str(o['item_level'])+'</td><td>无</td></tr>' for o in purchase['offers'])+'</tbody></table></div>'
+            if key=='jewel_merchant' and 'jewel_purchase' in town:
+                purchase=town['jewel_purchase']
+                body=facts([('开放条件','正式城镇开放三种基础珠宝付费购买；免费测试供应独立'),('购买价格','<span data-jewel-purchase-field="cost">'+number(purchase['cost'])+'</span> 校准碎片，沿用现有魔法珠宝整体重铸成本'),('商品','固定最低数值魔法珠宝；购买不随机、不出售特殊珠宝'),('使用条件','只入背包；须在已分配并连通起点的合法珠宝孔中使用，不赠点、不绕过连通')])
+                body+='<div class="table-scroll"><table><thead><tr><th>正式商品</th><th>购买碎片</th><th>固定最低数值</th></tr></thead><tbody>'+''.join('<tr><td>'+link('jewels',o['base_id'],o['name'])+'</td><td data-jewel-purchase-id="'+esc(o['base_id'])+'" data-cost="'+str(o['cost'])+'">'+str(o['cost'])+'</td><td>'+lines(o['description'])+'</td></tr>' for o in purchase['offers'])+'</tbody></table></div>'
+                body+='<p>确认后碎片扣除与真实1×1珠宝入包一次保存；满包、旧报价、取消、区域/模型变化或写盘失败不收费。下方免费测试供应不能领取到正式存档。自然掉落、特殊首领珠宝和'+link('rules','jewel_crafting','现有工匠工艺')+'保持原规则；魔法珠宝回收返 '+number(purchase['salvage_credit'])+' 碎片，低于购买价。</p>'
             if stock:
                 rows=[]
                 for offer in stock:
@@ -1649,6 +1657,8 @@ def build(data, art):
             summary = '正式付费购买与独立测试供应' if key=='skill_merchant' else service['description']
             if key=='equipment_merchant' and 'equipment_purchase' in town:
                 summary = '正式城镇供应普通无词缀底材：每件'+number(town['equipment_purchase']['cost'])+'碎片、物品等级'+number(town['equipment_purchase']['item_level'])+'；免费测试供应保持隔离。'
+            if key=='jewel_merchant' and 'jewel_purchase' in town:
+                summary='正式购买三种固定最低数值魔法珠宝，每件'+number(town['jewel_purchase']['cost'])+'碎片；特殊珠宝不售，须在合法连通珠宝孔中使用。'
             if key == 'crafter':
                 target_count=sum(bool(entry.get('targeted')) for entry in data['crafting'].values())
                 basic_count=sum(entry['kind']=='operation' and not entry.get('targeted') for entry in data['crafting'].values())
@@ -1658,7 +1668,7 @@ def build(data, art):
                 body = facts([('地图', ' · '.join(link('maps', mid, entry['name']) for mid, entry in data['exploration_maps']['maps'].items())), ('正式成长', '每图独立I/II/III，费用0/4/8、基础完成奖4/8/12校准碎片，另计原地图词缀奖励'), ('入图', '一次建立全部真实普通根怪与首领；远处实体可被命中，唤醒后持续追击'), ('结束', '全部根怪、首领、活后代和待出生队列清空后完成，返城领取冻结奖励'), ('独立入口', '竞技练习保留旧入侵；免费测试地图与正式档案隔离')]) + '<p>' + link('rules', 'exploration_maps', '探索规则与未来机制边界') + '</p>'
                 if 'ruins_garden' in data['exploration_maps']['maps']:
                     body += '<p>遗迹庭园：正式城镇选择地图、阶级与词缀 → 准备地图 → 开启地图；原生地形准备通过后才入图。它有独立正式进度，不属于历史免费测试地图入口。</p>'
-            cards.append(add('town_services',key,service['name'],summary,body,'正式购买 · 测试供应' if key=='skill_merchant' or (key=='equipment_merchant' and 'equipment_purchase' in town) else ('探索地图入口' if key=='map_device' and 'exploration_maps' in data else '可选测试服务')))
+            cards.append(add('town_services',key,service['name'],summary,body,'正式购买 · 测试供应' if key=='skill_merchant' or (key=='equipment_merchant' and 'equipment_purchase' in town) or (key=='jewel_merchant' and 'jewel_purchase' in town) else ('探索地图入口' if key=='map_device' and 'exploration_maps' in data else '可选测试服务')))
         if 'exploration_maps' in data:
             for key, m in data['exploration_maps']['maps'].items():
                 cards.append(add('maps', key, m['name'], m['description'], exploration_map_body(data,key,link,facts,details), '主动探索 / 正式三档', related=link('town_services','map_device')))

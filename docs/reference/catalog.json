@@ -615623,6 +615623,102 @@
 				"scripts/ui/town_service_panel.gd": "64be0c8d2d9c7cd20a6f5db98328fdab59d8a977725358c249fd116ca80d0215",
 				"scripts/ui/town_square_view.gd": "0feb815d3332e520c7d841608b02847cd81781040d6d42b42290aa05ff7a31c0"
 			}
+		},
+		"jewel_purchase": {
+			"cost": 8,
+			"fixed_minimum": true,
+			"offers": [
+				{
+					"affixes": [
+						{
+							"id": "force",
+							"value": 2.0
+						},
+						{
+							"id": "tempo",
+							"value": 0.04
+						}
+					],
+					"base_id": "emberheart",
+					"cost": 8,
+					"description": "前缀 · 炽烈：伤害 +2.0\n后缀 · 节律：攻击速度 +0.04 / 秒",
+					"name": "魔法 · 烬心晶玉",
+					"rarity": "magic",
+					"size": [
+						1,
+						1
+					],
+					"stats": {
+						"attack_speed": 0.04,
+						"damage": 2.0
+					}
+				},
+				{
+					"affixes": [
+						{
+							"id": "force",
+							"value": 2.0
+						},
+						{
+							"id": "renewal",
+							"value": 0.3
+						}
+					],
+					"base_id": "tideglass",
+					"cost": 8,
+					"description": "前缀 · 炽烈：伤害 +2.0\n后缀 · 回流：魔力恢复 +0.3 / 秒",
+					"name": "魔法 · 雾潮晶玉",
+					"rarity": "magic",
+					"size": [
+						1,
+						1
+					],
+					"stats": {
+						"damage": 2.0,
+						"mana_regen": 0.3
+					}
+				},
+				{
+					"affixes": [
+						{
+							"id": "force",
+							"value": 2.0
+						},
+						{
+							"id": "tempo",
+							"value": 0.04
+						}
+					],
+					"base_id": "windweave",
+					"cost": 8,
+					"description": "前缀 · 炽烈：伤害 +2.0\n后缀 · 节律：攻击速度 +0.04 / 秒",
+					"name": "魔法 · 岚纹晶玉",
+					"rarity": "magic",
+					"size": [
+						1,
+						1
+					],
+					"stats": {
+						"attack_speed": 0.04,
+						"damage": 2.0
+					}
+				}
+			],
+			"rarity": "magic",
+			"salvage_credit": 1,
+			"save_version": 55,
+			"service_id": "jewel_merchant",
+			"source_sha256": {
+				"scripts/items/equipment_purchase.gd": "531980ac22bbdad9978e111060e1d89a012689c50f4a23ed2098952ef0eaed19",
+				"scripts/items/jewel_craft_rules.gd": "a01127c35e1f060b9fe0b679429c6fc611acc14452bd19c4bdfa910e891cfc30",
+				"scripts/items/jewel_purchase.gd": "d84685ec74311a41fc409e1af543cd3b328844c6cbdb72c92f73593fc662f9e0",
+				"scripts/jewel_data.gd": "60122964b76b93fc529cdfe314d0f54cd507c7e3f19a66b89a609fb9018acc93",
+				"scripts/main.gd": "a2028c61b5d7acb5d0d30745e068acc383a353d66f2235509a4da67ac97c1a10",
+				"scripts/town/town_catalog.gd": "235225d644ea65dd02ff75a398440cde198689bca0127b0c61cd3f4927fe63c0",
+				"scripts/ui/town_service_panel.gd": "362d91eb61655d479b78c173aa768b8b52e818d0864624d291534635d7522d36",
+				"scripts/ui/town_square_view.gd": "96f40ae1de8d2327010a13f32d5c62757ee6d42df885f7f7f7c114cbf48c090e"
+			},
+			"special_sold": false
 		}
 	},
 	"weapon_stages": {
