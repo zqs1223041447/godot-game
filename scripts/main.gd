@@ -1528,6 +1528,9 @@ func _settle_projectile_events(events:Array[Dictionary],original_delta:float=0.0
 		if not prepared.ok:return false
 		offsets=prepared.offsets
 	var event_index:int=0
+	var hit_lookup: Dictionary = {}
+	var hit_source: Array[Dictionary] = []
+	var hit_source_size := -1
 	for event: Dictionary in events:
 		if ember_batch:_ember_projectile_clock={"sequence":event.sequence,"raw":float(event.time),"offset":float(offsets[event_index])}
 		event_index+=1
@@ -1539,11 +1542,20 @@ func _settle_projectile_events(events:Array[Dictionary],original_delta:float=0.0
 		if combat_trace.size() > 96:
 			combat_trace.pop_front()
 		if event.type == "hit":
-			for enemy: Dictionary in enemies:
-				if int(enemy.id) == int(event.target_id):
-					_apply_damage_packet(enemy, event.payload, event.snapshot, event.color, float(event.slow), event)
-					enemy.knockback = Vector2(event.direction) * 45.0
-					break
+			# Resolve once per batch, retaining the original first match for duplicate
+			# IDs and live dictionary references. Rebuild if the roster is replaced
+			# or resized; no lookup survives this settlement call.
+			if not is_same(hit_source, enemies) or hit_source_size != enemies.size():
+				hit_lookup.clear()
+				for enemy: Dictionary in enemies:
+					var id := int(enemy.id)
+					if not hit_lookup.has(id): hit_lookup[id] = enemy
+				hit_source = enemies
+				hit_source_size = enemies.size()
+			var target: Dictionary = hit_lookup.get(int(event.target_id), {})
+			if not target.is_empty():
+				_apply_damage_packet(target, event.payload, event.snapshot, event.color, float(event.slow), event)
+				target.knockback = Vector2(event.direction) * 45.0
 		elif event.type == "explosion":
 			# One independent roll per actual secondary event, shared by its AoE.
 			var secondary:Dictionary=critical_runtime.freeze(event.snapshot,"secondary")

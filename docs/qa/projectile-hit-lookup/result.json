@@ -1,0 +1,88 @@
+{
+  "base_commit": "840dc562c1fd3ed74ac34d221d3bdc922d837f59",
+  "paired_settlement": {
+    "after": {
+      "mean_us": 11575.75,
+      "n": 32,
+      "p50_us": 11449,
+      "p95_us": 12873
+    },
+    "before": {
+      "mean_us": 12733.46875,
+      "n": 32,
+      "p50_us": 12602,
+      "p95_us": 14235
+    },
+    "cpu": "AMD EPYC 9V74 80-Core Processor",
+    "engine": "4.6.3-stable (official)",
+    "failures": 0,
+    "hit_lookups_per_batch": 180,
+    "indexed_roster_visits_per_batch": 100,
+    "pairs": 36,
+    "reference_target_visits_per_batch": 8290,
+    "scope": "Paired actual Main settlement, 100 real targets / 180 supplied hit events; setup and cloning excluded. Controlled phase CPU, not a full tick or Windows FPS."
+  },
+  "full_tick_samples": [
+    {
+      "mode": "no_burn",
+      "frames": 24,
+      "before_mean_tick_us": 71811.33333333333,
+      "after_mean_tick_us": 52388.875,
+      "exact_observation_bytes_equal": true,
+      "observation_sha256": "b99d43280a4eaa9105a9d0e2fb38e88fa2c44d0b221b059dd1698ac3d35a2b3f",
+      "hits": 8359,
+      "kills": 0,
+      "reward_kills": 0,
+      "initial_inventory": 38,
+      "final_inventory": 38
+    },
+    {
+      "mode": "ignite",
+      "frames": 24,
+      "before_mean_tick_us": 89187.29166666667,
+      "after_mean_tick_us": 89645.375,
+      "exact_observation_bytes_equal": true,
+      "observation_sha256": "f9f288a9b0790516b43773f41a3e3ad87acc0ca7271083cf1f4565b318a20ff6",
+      "hits": 8359,
+      "kills": 0,
+      "reward_kills": 0,
+      "initial_inventory": 38,
+      "final_inventory": 38
+    },
+    {
+      "mode": "ember_deaths",
+      "frames": 150,
+      "before_mean_tick_us": 32540.31333333333,
+      "after_mean_tick_us": 34395.86666666667,
+      "exact_observation_bytes_equal": true,
+      "observation_sha256": "7eb76b3dda971138ba4ec1851dc689f972dab0db06cd1b264fb10f517e87ca30",
+      "hits": 1469,
+      "kills": 27,
+      "reward_kills": 27,
+      "initial_inventory": 38,
+      "final_inventory": 42
+    }
+  ],
+  "checks": {
+    "hit_lookup": {
+      "checks": 10,
+      "failures": 0
+    },
+    "projectile_dense_equivalence": {
+      "checks": 3126,
+      "failures": 0
+    },
+    "exploration_main_flow": {
+      "candidate_checks": 249,
+      "baseline_checks": 243,
+      "candidate_failures": 2,
+      "baseline_failures": 2,
+      "failed_labels": [
+        "Existing schema50 and original ownership validate at first launch",
+        "Final character remains valid existing schema50"
+      ],
+      "current_save_version": 54
+    }
+  },
+  "scope": "Short Linux headless CPU checks. Timings are descriptive, not Windows FPS or guaranteed end-to-end gains. Exploration test count varies with generated descendants; both versions report only the same two obsolete schema-version assertions."
+}
