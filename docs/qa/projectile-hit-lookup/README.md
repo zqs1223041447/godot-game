@@ -10,6 +10,20 @@ or resized roster invalidates the lookup. It never persists across calls. No
 other production function changed; admission, sleep/wake, event ordering,
 damage, death processing, reward RNG and save rules retain their code paths.
 
+The current production settlement call chain keeps enemy IDs and roster entry
+identity stable within the event loop. Both direct hits and the unchanged
+explosion loop call `_apply_damage_packet`; resource, status, burn and death
+settlement mutate the referenced enemy's fields without assigning its `id` or
+replacing an entry in the original Array. Death processing queues offspring.
+The reachable synchronous world/build callbacks update presentation, quotes,
+stats and saves, without changing the roster. `_flush_monster_spawns` filters
+into a new Array and admits queued offspring only after the entire event loop.
+The singular burn advance and proliferation paths reached during damage do
+not flush spawns. Thus same-length in-place enemy replacement or ID mutation
+cannot occur through these current production paths. The existing replacement
+and resize guards cover those separate supported roster changes; they do not
+claim to cover arbitrary external callback mutation.
+
 For the controlled 100-target / 180-hit batch, original first-match searches
 visit 8,290 entries; the changed path visits the roster's 100 entries and does
 180 lookups. The paired diagnostic alternates execution order for 36 pairs,
@@ -37,6 +51,27 @@ headless CPU samples, not a guaranteed full-tick gain or Windows FPS result.
   transactional save checks produced no additional failures. The count varies
   with generated descendants. This suite is not reported as passing.
 - `git diff --check`: passed.
+
+The two existing save assertion labels are exactly:
+
+- `exploration_main_flow_test.gd:391`, `run()`:
+  `Existing schema50 and original ownership validate at first launch`.
+- `exploration_main_flow_test.gd:372`, `paid_atomic_reentry()`:
+  `Final character remains valid existing schema50`.
+
+Both require `snapshot().version == 50`; the current version is 54 and
+`Rules.reason(snapshot()).is_empty()` succeeds. Their hardcoded version
+expectation causes the failures on both the unchanged base and candidate.
+
+After integrating the unchanged v125 source archive and east-only preview on
+the same base, the focused lookup test passed all 10 checks and the isolated
+headless movement preview passed all 46 checks. `git diff --check` passed and
+the archived source tree matched its original commit exactly. The integrated
+tree was not used to repeat the prior stress suite or native capture; the
+separate preview's native 62-check evidence remains recorded in
+`../v125-ranger-motion/`. The preview holds a locomotion frame for idle and
+visual attack cues; authored Idle/Attack clips and other directions remain
+unverified and absent.
 
 See `result.json` for the observations' matching hashes and measurements.
 The paired diagnostic accepts a source file exported from the base commit via
