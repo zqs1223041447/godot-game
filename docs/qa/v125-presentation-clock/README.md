@@ -30,13 +30,10 @@ authoritative state and save bytes during presentation operations.
 
 ## Asset blocker and unverified boundaries
 
-The parent supplied `ranger-locomotion-preview.zip`, Library identity
-`libfile_2303ff4d422881919a1a18c4fb6a17cc`, version 0, expected SHA256
+The intended source is `ranger-locomotion-preview.zip`, expected SHA256
 `31a0e0e38260f279e8fb01b05fff468e8e3e386aa980cc192110823cdefb0dce`.
-Library resolved that identity, but its current official transfer helper returned
-`download failed`. One supported retry with an explicit consumer-local target
-also returned `download failed`. No ZIP bytes were received, so SHA256, image
-inspection and extraction could not be performed in this environment.
+The source assets have not been integrated or inspected in this checkout, and
+their content hash has not been verified here.
 
 The independent single-direction ranger preview is therefore still pending.
 The supplied 80% Walk / 20% Jog, 0.743682-second cycle, 16 right-facing frames,
