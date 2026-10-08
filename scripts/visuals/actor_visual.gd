@@ -147,7 +147,8 @@ func configure_hero(arena: Node2D, time: float, attack_cue: Dictionary = {}) -> 
 func _update_pose(next_position: Vector2, displacement: Vector2, time: float, attacking: bool, attack_direction: Vector2) -> void:
 	# Re-entry from offscreen does not fast-forward a frozen pose or manufacture
 	# an unbounded animation catch-up. This clock also runs while walking in town.
-	var delta := clampf(time - _last_time, 0.0, 0.1) if _configured else 0.0
+	var observed_delta := maxf(time - _last_time, 0.0) if _configured else 0.0
+	var delta := clampf(observed_delta, 0.0, 0.1)
 	_last_time = time
 	position = next_position
 	configure_count += 1
@@ -158,9 +159,16 @@ func _update_pose(next_position: Vector2, displacement: Vector2, time: float, at
 			if not attack_direction.is_zero_approx(): facing = attack_direction.normalized()
 		direction = Catalog.direction_index(facing, direction)
 		var next_animation := "attack" if _attack_left > 0.0 else "walk" if displacement.length_squared() > 0.00001 else "idle"
-		if next_animation != animation or attacking:
+		var changed := next_animation != animation or attacking
+		if changed:
 			animation = next_animation; animation_time = 0.0
-		elif preferences.motion: animation_time += delta
+		if preferences.motion and next_animation == "walk" and not is_hero and atlas.has("walk_world_units_per_cycle"):
+			# Time is the existing visual phase carrier. Only this resource opts in;
+			# actual movement (including slow/collision) supplies its walk distance.
+			# Preserve the old 0.1s observation cap on offscreen re-entry/long frames.
+			var distance := displacement.length() * (delta / observed_delta if observed_delta > 0.0 else 0.0)
+			animation_time += distance * float(Catalog.CLIPS.walk.y) / (float(atlas.walk_world_units_per_cycle[direction]) * Catalog.FPS)
+		elif preferences.motion and not changed: animation_time += delta
 		_attack_left = maxf(0.0, _attack_left - delta)
 	if not preferences.motion:
 		frame = Catalog.presentation_frame(atlas, direction, "idle", 0.0, false) if not _hero_presentation.is_empty() else Catalog.frame_index(direction, "idle", 0.0, false)
@@ -183,7 +191,7 @@ func _refresh_commands() -> void:
 	if shadow_key != _shadow_key:
 		_shadow_key = shadow_key; shadow_redraw_requests += 1; queue_redraw()
 	var body_key: Array = [is_hero, atlas.is_empty(), radius, int(enemy.get("kind", -1)), str(enemy.get("template_id", "")), str(enemy.get("rarity", "")), hurt]
-	if not atlas.is_empty(): body_key.append(frame)
+	if not atlas.is_empty(): body_key.append_array([frame, atlas.get("family", "")])
 	if not _hero_presentation.is_empty(): body_key.append(_presentation_revision)
 	if is_hero:
 		body_key.append_array([source.shield, source.invulnerable > 0.0, source.alive])

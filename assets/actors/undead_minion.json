@@ -1,0 +1,49 @@
+{
+  "frame_width": 128,
+  "frame_height": 192,
+  "columns": 16,
+  "frame_count": 144,
+  "foot_anchor_px": [
+    64,
+    158
+  ],
+  "family": "undead_minion",
+  "atlas_sha256": "4826d0541b1c1548a79c0128b625bd8393cb3abaea4af9ed06e6546cd037fcfd",
+  "direction_order": [
+    "east",
+    "southeast",
+    "south",
+    "southwest",
+    "west",
+    "northwest",
+    "north",
+    "northeast"
+  ],
+  "walk_world_units_per_cycle": [
+    43.10572208502354,
+    39.40120105512794,
+    35.31014036650017,
+    39.40120105512794,
+    43.10572208502354,
+    39.40120105512795,
+    35.31014036650017,
+    39.40120105512794
+  ],
+  "walk_calibration": {
+    "source_clip": "Walking_D_Skeletons",
+    "source_cycle_seconds": 1.6000000635782878,
+    "stride_model_units": 0.9339573118421767,
+    "estimator": "total measured backward ankle stroke / total low-foot backward cycle fraction; whole stance average, not a fit to instantaneous toe-roll speed",
+    "measurement": "docs/qa/undead-minion-integration/source-walk-analysis.json",
+    "projection": "55deg, ortho3.2, 128x192 source; source pixel / 1.3 world units",
+    "boundary": "Whole stance stroke average. Toe roll, 8 held phases, quantized headings, impulses and long-frame cap retain residual slide."
+  },
+  "provenance": {
+    "commit": "15b62b9bad122f72926c10fb14d622c73819fa54",
+    "license": "CC0, Kay Lousberg",
+    "source_sha256": "6ffc003f895bed0b074791e0e490846210a2e2f8fc7da300aba53cc185f95968",
+    "head_pitch_degrees": -25,
+    "head_scale": 0.85
+  },
+  "binding": "Read-only existing ruins_garden map_spawn_key plus normal crawler generation0 root identity. Archetype unchanged."
+}

@@ -14,6 +14,7 @@ const CLIPS := {"idle": Vector2i(0, 4), "walk": Vector2i(4, 8), "attack": Vector
 const DEFINITIONS := {
 	"hero": {"path": "res://assets/actors/hero_atlas.png", "display_scale": 0.5, "foot_anchor": Vector2(64, 158)},
 	"crawler": {"path": "res://assets/actors/crawler_atlas.png", "display_scale": 0.64, "foot_anchor": Vector2(64, 142)},
+	"undead_minion": {"path": "res://assets/actors/studies/skeleton_minion_study.png", "manifest": "res://assets/actors/undead_minion.json", "display_scale": 1.0 / 1.3, "foot_anchor": Vector2(64, 158)},
 }
 static var _resources: Dictionary = {}
 
@@ -33,6 +34,14 @@ static func frame_rect(index: int) -> Rect2:
 	return Rect2(Vector2((safe % COLUMNS) * FRAME_SIZE.x, (safe / COLUMNS) * FRAME_SIZE.y), Vector2(FRAME_SIZE))
 
 static func enemy_key(enemy: Dictionary) -> String:
+	# Pure skin selection from existing root provenance, shared by body/bounds/markers.
+	# Never changes the enemy dictionary, combat archetype, names, saves or RNG.
+	if str(enemy.get("map_spawn_key", "")).begins_with("ruins_garden/") \
+			and str(enemy.get("template_id", "")) == "crawler" and int(enemy.get("kind", -1)) == 0 \
+			and str(enemy.get("rarity", "")) == "normal" and int(enemy.get("generation", -1)) == 0 \
+			and int(enemy.get("id", 0)) > 0 and int(enemy.get("root_id", 0)) == int(enemy.id) \
+			and not enemy.has("map_boss_attack_id"):
+		return "undead_minion"
 	return "crawler" if str(enemy.get("template_id", "")) == "crawler" else ""
 
 static func resource(key: String) -> Dictionary:
@@ -42,7 +51,7 @@ static func resource(key: String) -> Dictionary:
 		var definition: Dictionary = DEFINITIONS[key]
 		if ResourceLoader.exists(str(definition.path)):
 			var foot_anchor: Vector2 = definition.get("foot_anchor", FOOT_ANCHOR)
-			var manifest: Dictionary = _manifest(str(definition.path).get_basename() + ".json")
+			var manifest: Dictionary = _manifest(str(definition.get("manifest", str(definition.path).get_basename() + ".json")))
 			if not manifest.is_empty():
 				var anchor: Array = manifest.get("foot_anchor_px", manifest.get("foot_anchor", []))
 				if anchor.size() == 2: foot_anchor = Vector2(float(anchor[0]), float(anchor[1]))
@@ -58,10 +67,17 @@ static func resource(key: String) -> Dictionary:
 						var occupied: Rect2i = image.get_region(Rect2i(frame_rect(index))).get_used_rect()
 						if occupied.has_area(): used = occupied if not used.has_area() else used.merge(occupied)
 					if used.has_area(): bounds = Rect2(used)
-				result = {"texture": texture, "display_scale": float(definition.display_scale), "foot_anchor": foot_anchor,
+				result = {"texture": texture, "family": key, "display_scale": float(definition.display_scale), "foot_anchor": foot_anchor,
 					"head_anchor": (Vector2(FOOT_ANCHOR.x, bounds.position.y) - foot_anchor) * float(definition.display_scale),
 					"alpha_bounds_px": bounds, "manifest_verified": not manifest.is_empty(),
 					"visual_bounds": Rect2((bounds.position - foot_anchor) * float(definition.display_scale), bounds.size * float(definition.display_scale))}
+				if key == "undead_minion":
+					var distances: Variant = manifest.get("walk_world_units_per_cycle", [])
+					if not distances is Array or distances.size() != DIRECTIONS: result = {}
+					else:
+						for distance: Variant in distances:
+							if not _presentation_number(distance) or float(distance) <= 0.0: result = {}; break
+						if not result.is_empty(): result.walk_world_units_per_cycle = distances.duplicate()
 	_resources[key] = result
 	return result
 
