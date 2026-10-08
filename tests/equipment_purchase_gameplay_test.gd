@@ -36,7 +36,7 @@ func run() -> void:
 	arena.set_process(false);arena.hud.set_process(false);arena.auto_fire=false
 	check(arena.save_build() and arena.world_context().normal_town and arena.state.crafting_balance()==0,"Fresh actual formal town starts without free currency")
 	var before:=observe()
-	var rows: Array = arena.town_stock("equipment_merchant")
+	var rows: Array = arena.town_stock("equipment_merchant").filter(func(row: Dictionary):return row.purchase_kind=="equipment")
 	check(rows.size()==Purchase.Gear.all_base_ids().size(),"Formal merchant lists existing bases only")
 	for row: Dictionary in rows:check(row.paid and row.cost==8 and not row.available and row.purchase_kind=="equipment","Zero-shard stock uses paid base metadata")
 	check(observe()==before,"Reading stock has no authoritative effects")

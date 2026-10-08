@@ -298,6 +298,8 @@ func _select(id: String) -> void:
 				buy.pressed.connect(_request_equipment_purchase.bind(str(offer.base_id)))
 			elif str(offer.get("purchase_kind", "")) == "jewel":
 				buy.pressed.connect(_request_jewel_purchase.bind(str(offer.base_id)))
+			elif str(offer.get("purchase_kind", "")) == "flask":
+				buy.pressed.connect(_request_flask_purchase.bind(str(offer.definition_id)))
 			else: buy.pressed.connect(_request_gem_purchase.bind(str(offer.definition_id)))
 		else:
 			buy.pressed.connect(func(): _result(arena.town_buy(str(offer.id),arena.state.revision())))
@@ -337,6 +339,17 @@ func _request_jewel_purchase(base_id: String) -> void:
 	_gem_dialog.dialog_text = "购买「%s」？\n固定最低数值，无购买随机词缀\n%s\n消耗校准碎片 %d 枚，放入行囊。\n仅在已分配并连通的珠宝孔中生效。" % [str(quote.name),str(quote.description),int(quote.cost.calibration_shard)]
 	_gem_dialog.popup_centered(Vector2i(460,260))
 
+func _request_flask_purchase(definition_id: String) -> void:
+	_cancel_gem_purchase()
+	var quote: Dictionary = arena.normal_flask_purchase_quote(definition_id,arena.state.revision())
+	if not bool(quote.get("ok",false)):
+		_result(quote)
+		return
+	_gem_pending = {"kind":"flask","quote":quote.duplicate(true),"target":definition_id,"model":arena.state,"world_revision":int(arena.world_context().revision)}
+	_gem_dialog.title = "购买药剂"
+	_gem_dialog.dialog_text = "购买「%s」？\n%s\n消耗校准碎片 %d 枚，放入行囊。\n占用1×2格；装备到药剂栏后使用。" % [str(quote.name),str(quote.description),int(quote.cost.calibration_shard)]
+	_gem_dialog.popup_centered(Vector2i(460,240))
+
 func _confirm_gem_purchase() -> void:
 	if _gem_pending.is_empty(): return
 	var issued: Dictionary = _gem_pending
@@ -345,6 +358,8 @@ func _confirm_gem_purchase() -> void:
 		_result(arena.execute_normal_equipment_purchase(issued.quote.handle, issued.target))
 	elif issued.get("kind", "gem") == "jewel":
 		_result(arena.execute_normal_jewel_purchase(issued.quote.handle,issued.target))
+	elif issued.get("kind", "gem") == "flask":
+		_result(arena.execute_normal_flask_purchase(issued.quote.handle,issued.target))
 	else: _result(arena.execute_normal_gem_trade(issued.quote.handle, issued.target))
 	if is_visible_in_tree(): _select(_service)
 
@@ -352,6 +367,7 @@ func _cancel_gem_purchase() -> void:
 	if not _gem_pending.is_empty():
 		if _gem_pending.get("kind", "gem") == "equipment": arena.cancel_normal_equipment_purchase_quote(_gem_pending.quote.handle)
 		elif _gem_pending.get("kind", "gem") == "jewel": arena.cancel_normal_jewel_purchase_quote(_gem_pending.quote.handle)
+		elif _gem_pending.get("kind", "gem") == "flask": arena.cancel_normal_flask_purchase_quote(_gem_pending.quote.handle)
 		elif arena.state == _gem_pending.model: arena.cancel_normal_gem_trade_quote(_gem_pending.quote.handle)
 		else: _gem_pending.model.cancel_gem_trade_quote(_gem_pending.quote.handle)
 		_gem_pending = {}
@@ -463,13 +479,13 @@ func _update_map_modifier_gates() -> void:
 		for entry: Dictionary in preview.special_modifiers:
 			var check: CheckBox = _special[str(entry.id)]
 			check.disabled = not bool(entry.available)
-			check.text = "%s · 需要波次 %d%s" % [entry.name, int(entry.minimum_wave), "" if entry.available else " · 当前不可用"]
+			check.text = "%s · 最低强度 %d%s" % [entry.name, int(entry.minimum_wave), "" if entry.available else " · 当前不可用"]
 			check.tooltip_text = str(check.get_meta("gate_description"))
-			check.tooltip_text += "\n需要波次 %d，当前波次 %d。" % [int(entry.minimum_wave), int(preview.wave)]
+			check.tooltip_text += "\n最低强度 %d，当前挑战强度 %d。" % [int(entry.minimum_wave), int(preview.wave)]
 			if not entry.available and check.button_pressed:
 				_map_ineligible_selected.append(str(entry.id))
-				invalid.append("%s（需要波次 %d）" % [entry.name, int(entry.minimum_wave)])
-		_map_gate_status.text = "当前挑战波次 %d" % int(preview.wave)
+				invalid.append("%s（最低强度 %d）" % [entry.name, int(entry.minimum_wave)])
+		_map_gate_status.text = "当前挑战强度 %d" % int(preview.wave)
 		if not invalid.is_empty():
 			_map_gate_reason = "已选词缀不适用：%s。请提高档位、切换地图或取消不适用的选择后再准备。" % "、".join(invalid)
 			_map_gate_status.text += "\n" + _map_gate_reason

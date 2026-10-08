@@ -70,21 +70,21 @@ func run() -> void:
 		if not accepted(arena.state.normal_claim_rewards(arena.state.revision(), arena.build_save_path), "Trusted fixture claim"): await finish(); return
 	check_preview(false)
 	panel = arena.hud._town_view; panel.open_service("map_device"); await settle()
-	check(panel._map_gate_status.text == "当前挑战波次 1", "Formal tier I immediately shows actual wave one")
+	check(panel._map_gate_status.text == "当前挑战强度 1", "Formal tier I immediately shows actual wave one")
 	for check_box: CheckBox in panel._special.values():
-		check(check_box.disabled and not check_box.button_pressed and check_box.text.contains("需要波次") and check_box.text.contains("当前不可用"), "Low-tier unavailable option visibly disabled without selection")
+		check(check_box.disabled and not check_box.button_pressed and check_box.text.contains("最低强度") and check_box.text.contains("当前不可用"), "Low-tier unavailable option visibly disabled without selection")
 	check(not panel._map_prepare.disabled and not panel._map_gate_cancel.visible, "Unavailable unselected options do not block plain map preparation")
 	var before := observe()
 	select_option(panel._tier_select, 2); await settle()
-	check(panel._map_gate_status.text == "当前挑战波次 4" and not panel._special.elemental_aegis.disabled and panel._special.storm_patrol.disabled, "Tier II recalculates exact wave-four/five boundary")
+	check(panel._map_gate_status.text == "当前挑战强度 4" and not panel._special.elemental_aegis.disabled and panel._special.storm_patrol.disabled, "Tier II recalculates exact wave-four/five boundary")
 	select_option(panel._tier_select, 3); await settle()
-	check(not panel._special.storm_patrol.disabled and panel._map_gate_status.text == "当前挑战波次 8", "Higher tier makes wave-five special available")
+	check(not panel._special.storm_patrol.disabled and panel._map_gate_status.text == "当前挑战强度 8", "Higher tier makes wave-five special available")
 	panel._normal.enemy_damage_115.button_pressed = true
 	panel._special.storm_patrol.button_pressed = true; await settle()
 	select_option(panel._tier_select, 1); await settle()
 	check(panel._special.storm_patrol.button_pressed and panel._special.storm_patrol.disabled, "Downgrade retains checked special and disables unavailable checkbox")
 	check(panel._map_prepare.disabled and panel._map_launch.disabled and panel._map_gate_cancel.visible
-		and panel._map_gate_status.text.contains("已选词缀不适用") and panel._map_gate_status.text.contains("雷纹巡逻（需要波次 5）"), "Retained invalid selection explains remediation and blocks prepare/launch")
+		and panel._map_gate_status.text.contains("已选词缀不适用") and panel._map_gate_status.text.contains("雷纹巡逻（最低强度 5）"), "Retained invalid selection explains remediation and blocks prepare/launch")
 	check(observe() == before, "Changing tier and modifier controls never mutates or charges authority")
 	capture("formal_downgrade_retained")
 	if DisplayServer.get_name() != "headless":
@@ -99,9 +99,9 @@ func run() -> void:
 	await settle()
 	check(panel._special.storm_patrol.button_pressed and panel._map_prepare.disabled and observe() == before, "World refresh preserves invalid user choice and block")
 	select_option(panel._map_select, "broken_ruins"); await settle()
-	check(panel._map_gate_status.text.contains("当前挑战波次 2") and panel._special.storm_patrol.button_pressed and panel._map_prepare.disabled, "Map change preserves invalid choice and recomputes tier-I wave")
+	check(panel._map_gate_status.text.contains("当前挑战强度 2") and panel._special.storm_patrol.button_pressed and panel._map_prepare.disabled, "Map change preserves invalid choice and recomputes tier-I wave")
 	select_option(panel._tier_select, 2); await settle()
-	check(panel._map_gate_status.text == "当前挑战波次 5" and not panel._special.storm_patrol.disabled and not panel._map_prepare.disabled
+	check(panel._map_gate_status.text == "当前挑战强度 5" and not panel._special.storm_patrol.disabled and not panel._map_prepare.disabled
 		and not panel._map_gate_cancel.visible and panel._special.storm_patrol.button_pressed, "New map high tier restores existing choice without clearing it")
 	panel._map_prepare.pressed.emit(); await settle()
 	var prepared: Dictionary = arena.map_draft()
@@ -134,12 +134,12 @@ func run() -> void:
 	if not accepted(arena.enter_town_test(arena.world_context().revision), "Enter existing independent test profile"): await finish(); return
 	await settle(); panel.open_service("map_device"); await settle()
 	check_preview(true)
-	check(not panel._tier_select.visible and panel._map_gate_status.text == "当前挑战波次 4"
+	check(not panel._tier_select.visible and panel._map_gate_status.text == "当前挑战强度 4"
 		and not panel._special.elemental_aegis.disabled and panel._special.storm_patrol.disabled, "Test old garden uses fixed wave four, independent of formal tier I")
 	check(arena.craft_normal_map("old_garden", 1, [], [], arena.map_draft().revision).code == "not_in_normal_town", "Formal prepare API rejects test profile")
 	select_option(panel._map_select, "broken_ruins"); await settle()
 	panel._special.storm_patrol.button_pressed = true; await settle()
-	check(not panel._special.storm_patrol.disabled and panel._map_gate_status.text == "当前挑战波次 5", "Test map switch recomputes fixed wave five")
+	check(not panel._special.storm_patrol.disabled and panel._map_gate_status.text == "当前挑战强度 5", "Test map switch recomputes fixed wave five")
 	before = observe(); normal_calls = arena.normal_prepares
 	panel._map_prepare.pressed.emit(); await settle()
 	check(arena.test_prepares == 1 and arena.normal_prepares == normal_calls and arena.map_draft().special_ids == ["storm_patrol"], "Test prepare routes solely through existing free test API")
@@ -153,7 +153,7 @@ func run() -> void:
 	check(not panel._map_prepare.disabled and not panel._special.storm_patrol.button_pressed, "Explicit test cancel restores plain-map preparation")
 	if not accepted(arena.leave_town_test(arena.world_context().revision), "Return to normal profile"): await finish(); return
 	await settle(); panel.open_service("map_device"); await settle()
-	check(panel._tier_select.visible and panel._map_gate_status.text == "当前挑战波次 1" and arena.map_draft().map_id == "ruins_garden", "Normal entry restores its own draft, actual tier and gates")
+	check(panel._tier_select.visible and panel._map_gate_status.text == "当前挑战强度 1" and arena.map_draft().map_id == "ruins_garden", "Normal entry restores its own draft, actual tier and gates")
 	check(arena.craft_map("old_garden", [], [], arena.map_draft().revision).code == "not_in_test_town", "Test prepare API rejects normal profile")
 	check(arena.state.normal_journey().normal_root_kills == 0, "UI fixture performs no gameplay or root kills")
 	await finish()
