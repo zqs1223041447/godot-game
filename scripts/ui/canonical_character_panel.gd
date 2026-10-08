@@ -90,7 +90,7 @@ func refresh() -> void:
 			"percent": formatted = "%.1f%%" % (value * 100.0)
 			"multiplier": formatted = "%.2f×" % value
 			"chaos_resistance":
-				var display := chaos_resistance_display(chaos)
+				var display := chaos_resistance_display(chaos, float(stats.get("chaos_inoculation", 0.0)) == 1.0)
 				formatted = display.text
 				_resistance_cards[id].tooltip_text = display.tooltip
 			"resistance":
@@ -199,8 +199,11 @@ func _build() -> void:
 			card.tooltip_text = "显示当前有效抗性；基础上限为75%，天赋可提高当前上限。"
 
 
-static func chaos_resistance_display(profile: Dictionary) -> Dictionary:
+static func chaos_resistance_display(profile: Dictionary, chaos_immune: bool = false) -> Dictionary:
 	if not bool(profile.get("ok", false)):
 		return {"text":"—", "tooltip":str(profile.get("reason", "混沌抗性资料不可用"))}
+	if chaos_immune:
+		return {"text":"免疫",
+			"tooltip":"混沌防护：最大生命为1，免疫混沌伤害。\n原始混沌抗性 %.1f%% · 当前上限 %.0f%%" % [float(profile.raw)*100.0, float(profile.cap)*100.0]}
 	return {"text":"%.0f%%" % (float(profile.effective)*100.0),
 		"tooltip":"原始混沌抗性 %.1f%% · 当前上限 %.0f%%\n只降低混沌伤害；护盾仍按原规则先承伤。" % [float(profile.raw)*100.0, float(profile.cap)*100.0]}
