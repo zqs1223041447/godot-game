@@ -1620,11 +1620,16 @@ def build(data, art):
     if town:
         for service in town['services']:
             key=service['id'];stock=town['stock'].get(key,[])
-            body=facts([('开放条件','测试档全服务；正式城镇开放宝石商人、工匠、天赋重置和地图装置'),('存档隔离',esc(town['normal_save'])+' → 首次显式复制 → '+esc(town['test_save'])),('测试供应','真实UID物品，免费但受背包与注册表上限限制'),('配置开关',esc(town['supply_setting'])),('交易保护','完整候选验证，保存成功才提交；旧档实例与货币不被测试交易改写')])
+            body=facts([('开放条件','测试档全服务；正式城镇开放宝石商人、装备商人、工匠、天赋重置和地图装置' if 'equipment_purchase' in town else '测试档全服务；正式城镇开放宝石商人、工匠、天赋重置和地图装置'),('存档隔离',esc(town['normal_save'])+' → 首次显式复制 → '+esc(town['test_save'])),('测试供应','真实UID物品，免费但受背包与注册表上限限制'),('配置开关',esc(town['supply_setting'])),('交易保护','完整候选验证，保存成功才提交；旧档实例与货币不被测试交易改写')])
             if key=='skill_merchant':
                 trade=data['normal_gem_trading']
                 body+='<p>正式购买：主动8、辅助4校准碎片，背包所选宝石回收1。均为1级0品质，已装配或待安置不能回收。无词缀地图净得4碎片；买卖净损失3或7，不可套利。仅确认时原子保存；免费测试供应始终隔离。</p>'
                 body+='<div class="table-scroll"><table><thead><tr><th>正式商品</th><th>购买碎片</th><th>回收碎片</th></tr></thead><tbody>'+''.join('<tr><td>'+esc(o['name'])+'</td><td data-gem-trade-id="'+esc(o['definition_id'])+'" data-cost="'+str(o['cost'])+'">'+str(o['cost'])+'</td><td>'+str(trade['recycle_credit'])+'</td></tr>' for o in trade['offers'])+'</tbody></table></div>'
+            if key=='equipment_merchant' and 'equipment_purchase' in town:
+                purchase=town['equipment_purchase']
+                body+='<p>正式城镇购买普通无词缀底材，每件 '+'<span data-equipment-purchase-field="cost">'+number(purchase['cost'])+'</span>'+' 校准碎片，物品等级 '+'<span data-equipment-purchase-field="item_level">'+number(purchase['item_level'])+'</span>'+'。购买不随机生成词缀，可在现有工匠处赋魔，也可直接装备；更高物品等级来自地图掉落。</p>'
+                body+='<p>只供应下表目录底材；固定机制装备、药剂、珠宝与免费碎片仍属独立测试供应。确认时碎片扣除与真实尺寸入包一次保存；满包、存档变化或写盘失败保留物品与碎片，取消或区域/库存变化后旧报价不可兑现。</p>'
+                body+='<div class="table-scroll"><table><thead><tr><th>正式底材</th><th>购买碎片</th><th>物品等级</th><th>随机词缀</th></tr></thead><tbody>'+''.join('<tr><td>'+link('equipment',o['base_id'],o['name'])+'</td><td data-base-purchase-id="'+esc(o['base_id'])+'" data-cost="'+str(o['cost'])+'">'+str(o['cost'])+'</td><td>'+str(o['item_level'])+'</td><td>无</td></tr>' for o in purchase['offers'])+'</tbody></table></div>'
             if stock:
                 rows=[]
                 for offer in stock:
@@ -1642,6 +1647,8 @@ def build(data, art):
                 body+='<p>当前可用四张地图：'+' · '.join(link('maps',entry['id'],entry['name']) for entry in current_maps)+'。正式地图各有I/II/III独立成长；独立测试地图免费，正式入场沿分档费用。</p>'
             body+='<p>重进测试档不重新复制或覆盖。退出后恢复正常档并进入正式城镇。被替换的旧model拒绝迟到写入；原确认、拖拽与面板一并关闭。</p>'
             summary = '正式付费购买与独立测试供应' if key=='skill_merchant' else service['description']
+            if key=='equipment_merchant' and 'equipment_purchase' in town:
+                summary = '正式城镇供应普通无词缀底材：每件'+number(town['equipment_purchase']['cost'])+'碎片、物品等级'+number(town['equipment_purchase']['item_level'])+'；免费测试供应保持隔离。'
             if key == 'crafter':
                 target_count=sum(bool(entry.get('targeted')) for entry in data['crafting'].values())
                 basic_count=sum(entry['kind']=='operation' and not entry.get('targeted') for entry in data['crafting'].values())
@@ -1651,7 +1658,7 @@ def build(data, art):
                 body = facts([('地图', ' · '.join(link('maps', mid, entry['name']) for mid, entry in data['exploration_maps']['maps'].items())), ('正式成长', '每图独立I/II/III，费用0/4/8、基础完成奖4/8/12校准碎片，另计原地图词缀奖励'), ('入图', '一次建立全部真实普通根怪与首领；远处实体可被命中，唤醒后持续追击'), ('结束', '全部根怪、首领、活后代和待出生队列清空后完成，返城领取冻结奖励'), ('独立入口', '竞技练习保留旧入侵；免费测试地图与正式档案隔离')]) + '<p>' + link('rules', 'exploration_maps', '探索规则与未来机制边界') + '</p>'
                 if 'ruins_garden' in data['exploration_maps']['maps']:
                     body += '<p>遗迹庭园：正式城镇选择地图、阶级与词缀 → 准备地图 → 开启地图；原生地形准备通过后才入图。它有独立正式进度，不属于历史免费测试地图入口。</p>'
-            cards.append(add('town_services',key,service['name'],summary,body,'正式购买 · 测试供应' if key=='skill_merchant' else ('探索地图入口' if key=='map_device' and 'exploration_maps' in data else '可选测试服务')))
+            cards.append(add('town_services',key,service['name'],summary,body,'正式购买 · 测试供应' if key=='skill_merchant' or (key=='equipment_merchant' and 'equipment_purchase' in town) else ('探索地图入口' if key=='map_device' and 'exploration_maps' in data else '可选测试服务')))
         if 'exploration_maps' in data:
             for key, m in data['exploration_maps']['maps'].items():
                 cards.append(add('maps', key, m['name'], m['description'], exploration_map_body(data,key,link,facts,details), '主动探索 / 正式三档', related=link('town_services','map_device')))

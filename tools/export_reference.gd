@@ -38,6 +38,7 @@ const Flasks = preload("res://scripts/items/flask_catalog.gd")
 const FlaskRuntime = preload("res://scripts/combat/flask_runtime.gd")
 const FlaskModifiers = preload("res://scripts/combat/flask_modifier_rules.gd")
 const Town = preload("res://scripts/town/town_catalog.gd")
+const EquipmentPurchaseReference = preload("res://tools/equipment_purchase_reference.gd")
 const Maps = preload("res://scripts/world/map_catalog.gd")
 const MapRules = preload("res://scripts/world/map_compiler.gd")
 const CampLayoutData=preload("res://scripts/world/map_camp_layout.gd")
@@ -769,6 +770,7 @@ static func town_map_examples()->Dictionary:
 			"before_components":Damage.resolve(packet,[],source.resistances).components,
 			"after_components":Damage.resolve(packet,[],applied.enemy.resistances).components}
 	return {"services":Town.services(),"stock":stock,"options":options,"examples":examples,"defense_examples":defenses,
+		"equipment_purchase":EquipmentPurchaseReference.collect(),
 		"mode":"optional_town_test","normal_save":"user://build_save.json","test_save":"user://town_test_build_save.json",
 		"clone_policy":"explicit_first_entry_only","supply_setting":"testing/town_supply_enabled","map_reward_bonus":false,
 		"save_version":Canonical.Rules.VERSION,"retired_profile_writes":false,"map_runtime_persistent":false,

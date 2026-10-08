@@ -615426,7 +615426,204 @@
 			]
 		},
 		"supply_setting": "testing/town_supply_enabled",
-		"test_save": "user://town_test_build_save.json"
+		"test_save": "user://town_test_build_save.json",
+		"equipment_purchase": {
+			"affix_count": 0,
+			"cost": 8,
+			"item_level": 1,
+			"offers": [
+				{
+					"affix_count": 0,
+					"base_id": "nine_slot_etched_ring",
+					"cost": 8,
+					"item_level": 1,
+					"name": "普通 · 纹刻指环",
+					"rarity": "normal",
+					"size": [
+						1,
+						1
+					]
+				},
+				{
+					"affix_count": 0,
+					"base_id": "nine_slot_trail_boots",
+					"cost": 8,
+					"item_level": 1,
+					"name": "普通 · 踏纹短靴",
+					"rarity": "normal",
+					"size": [
+						2,
+						2
+					]
+				},
+				{
+					"affix_count": 0,
+					"base_id": "nine_slot_folded_belt",
+					"cost": 8,
+					"item_level": 1,
+					"name": "普通 · 折纹腰带",
+					"rarity": "normal",
+					"size": [
+						2,
+						1
+					]
+				},
+				{
+					"affix_count": 0,
+					"base_id": "nine_slot_threaded_gloves",
+					"cost": 8,
+					"item_level": 1,
+					"name": "普通 · 织纹手套",
+					"rarity": "normal",
+					"size": [
+						2,
+						2
+					]
+				},
+				{
+					"affix_count": 0,
+					"base_id": "nine_slot_slate_helmet",
+					"cost": 8,
+					"item_level": 1,
+					"name": "普通 · 石脊头盔",
+					"rarity": "normal",
+					"size": [
+						2,
+						2
+					]
+				},
+				{
+					"affix_count": 0,
+					"base_id": "cinder_reed",
+					"cost": 8,
+					"item_level": 1,
+					"name": "普通 · 烬芦杖",
+					"rarity": "normal",
+					"size": [
+						1,
+						3
+					]
+				},
+				{
+					"affix_count": 0,
+					"base_id": "gale_spindle",
+					"cost": 8,
+					"item_level": 1,
+					"name": "普通 · 岚纺刃",
+					"rarity": "normal",
+					"size": [
+						1,
+						3
+					]
+				},
+				{
+					"affix_count": 0,
+					"base_id": "woven_bastion",
+					"cost": 8,
+					"item_level": 1,
+					"name": "普通 · 绳垒衣",
+					"rarity": "normal",
+					"size": [
+						2,
+						3
+					]
+				},
+				{
+					"affix_count": 0,
+					"base_id": "tidebound_coat",
+					"cost": 8,
+					"item_level": 1,
+					"name": "普通 · 潮缄袍",
+					"rarity": "normal",
+					"size": [
+						2,
+						3
+					]
+				},
+				{
+					"affix_count": 0,
+					"base_id": "wayglass_token",
+					"cost": 8,
+					"item_level": 1,
+					"name": "普通 · 途镜坠",
+					"rarity": "normal",
+					"size": [
+						1,
+						1
+					]
+				},
+				{
+					"affix_count": 0,
+					"base_id": "pulse_seed",
+					"cost": 8,
+					"item_level": 1,
+					"name": "普通 · 脉籽符",
+					"rarity": "normal",
+					"size": [
+						1,
+						1
+					]
+				},
+				{
+					"affix_count": 0,
+					"base_id": "runewood_focus",
+					"cost": 8,
+					"item_level": 1,
+					"name": "普通 · 符木法器",
+					"rarity": "normal",
+					"size": [
+						1,
+						3
+					]
+				},
+				{
+					"affix_count": 0,
+					"base_id": "emberhide_vest",
+					"cost": 8,
+					"item_level": 1,
+					"name": "普通 · 灰烬皮甲",
+					"rarity": "normal",
+					"size": [
+						2,
+						3
+					]
+				},
+				{
+					"affix_count": 0,
+					"base_id": "ashwood_bow",
+					"cost": 8,
+					"item_level": 1,
+					"name": "普通 · 白蜡长弓",
+					"rarity": "normal",
+					"size": [
+						2,
+						3
+					]
+				},
+				{
+					"affix_count": 0,
+					"base_id": "forgeblade",
+					"cost": 8,
+					"item_level": 1,
+					"name": "普通 · 锻纹短刃",
+					"rarity": "normal",
+					"size": [
+						1,
+						3
+					]
+				}
+			],
+			"rarity": "normal",
+			"save_version": 55,
+			"service_id": "equipment_merchant",
+			"source_sha256": {
+				"scripts/items/equipment_catalog.gd": "fa616367c66f7048317eac29feed3e607a610c9d47e96aa7da4e9261fa0dd6ea",
+				"scripts/items/equipment_purchase.gd": "76a7633f2324f7ca2c4291f85479c675e6ee0002ca7b25b7cf49d07563cda912",
+				"scripts/main.gd": "8893febbeddcd7b961555465539d6c0cc83f9f50d2906e1b0fd19d3b6469b38a",
+				"scripts/ui/town_service_panel.gd": "64be0c8d2d9c7cd20a6f5db98328fdab59d8a977725358c249fd116ca80d0215",
+				"scripts/ui/town_square_view.gd": "0feb815d3332e520c7d841608b02847cd81781040d6d42b42290aa05ff7a31c0"
+			}
+		}
 	},
 	"weapon_stages": {
 		"weapon_local": {
