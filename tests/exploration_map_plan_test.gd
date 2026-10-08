@@ -221,7 +221,7 @@ func _bookkeeping() -> void:
 		run.begin(profile)
 		var before := var_to_bytes([run.profile, run.snapshot(), run.admitted, run.defeated])
 		var boss: Dictionary = plan.boss.duplicate(true)
-		boss[field] = {"id": 0, "root_id": 0, "generation": 1, "reward_eligible": false, "template_id": "crawler"}[field]
+		boss[field] = {"id": 0, "root_id": 0, "generation": 1, "reward_eligible": null, "template_id": "crawler"}[field]
 		check(not run.register_initial_group(plan.ordinary_roots, boss) and var_to_bytes([run.profile, run.snapshot(), run.admitted, run.defeated]) == before, "Invalid initial boss cannot partially register ordinary roots: " + field)
 	var run = RunState.new()
 	run.begin(profile)

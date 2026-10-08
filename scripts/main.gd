@@ -825,6 +825,13 @@ func _spawn_monster(template_id: String, forced_position: Vector2 = Vector2.ZERO
 func _flush_monster_spawns() -> void:
 	if not _encounter_ready():
 		return
+	# Validate before dead-actor filtering or FIFO admission, so an unknown
+	# corpse/request cannot disappear from the completion membership check.
+	if _world_mode == "map":
+		var members: Dictionary = _map_run.completion_members(enemies, monster_runtime.queue)
+		if not members.ok:
+			_encounter_failed(str(members.reason))
+			return
 	enemies = enemies.filter(func(enemy: Dictionary) -> bool: return float(enemy.health) > 0.0)
 	if not alive:
 		return
@@ -1798,8 +1805,9 @@ func _finish_enemy_death(enemy:Dictionary,legacy_particles:bool=true,at:float=-1
 		_ember_deaths.append({"id":int(enemy.id),"origin":Vector2(enemy.pos),"at":elapsed if at<0.0 else at,"status":ember_source.duplicate(true)})
 	visual_cues.emit_cue("death", Vector2(enemy.pos), {"radius": float(enemy.radius), "color": Monsters.RARITIES[enemy.rarity].color, "target_id": int(enemy.id)})
 	kills += 1
+	# The processed identity advances required roots independently of payout.
+	if _world_mode=="map" and _map_run.record_death(enemy):world_context_changed.emit()
 	var eligible: bool = bool(death.reward) and not demo_mode
-	if _world_mode=="map" and eligible and _map_run.record_death(enemy):world_context_changed.emit()
 	if eligible:
 		reward_kills += 1
 		_sync_flasks()
@@ -2510,7 +2518,13 @@ func exploration_cleanup_hint() -> Dictionary:
 	if _world_mode == "map_complete":
 		result.kind = "settlement" if _normal_completion_pending else "complete"
 		return result
-	result.pending_count = monster_runtime.queue.size()
+	var members: Dictionary = _map_run.completion_members(enemies, monster_runtime.queue)
+	if not members.ok:
+		result.kind = "blocked"
+		result.reason = members.reason
+		return result
+	result.pending_count = members.pending_count
+	result.living_count = members.living.size()
 	for outpost: Dictionary in _outpost_states():
 		if str(outpost.state) == "cleared":
 			continue
@@ -2519,10 +2533,7 @@ func exploration_cleanup_hint() -> Dictionary:
 			"pending_descendants": int(outpost.pending_descendants)})
 	var closest: Dictionary = {}
 	var closest_distance: float = INF
-	for enemy: Dictionary in enemies:
-		if float(enemy.health) <= 0.0:
-			continue
-		result.living_count += 1
+	for enemy: Dictionary in members.living:
 		var distance: float = player_pos.distance_squared_to(Vector2(enemy.pos))
 		if distance < closest_distance or (distance == closest_distance and (closest.is_empty() or int(enemy.id) < int(closest.id))):
 			closest = enemy
@@ -3089,10 +3100,11 @@ func _update_map_spawning(_delta:float)->void:
 	_camp_movement.clear()
 
 func _check_map_complete()->void:
-	var living:=0
-	for enemy:Dictionary in enemies:
-		if float(enemy.health)>0.0:living+=1
-	if _map_run.check_complete(living,monster_runtime.queue.size()):
+	var members: Dictionary = _map_run.completion_members(enemies, monster_runtime.queue)
+	if not members.ok:
+		_encounter_failed(str(members.reason))
+		return
+	if _map_run.check_complete(members.living.size(), members.pending_count):
 		projectile_runtime.cancel_all(projectiles);telegraphs.reset()
 		_world_mode="map_complete";_world_revision+=1;burn_runtime.reset();shock_runtime.reset();freeze_runtime.reset();chill_runtime.reset();trap_runtime.reset()
 		var message:String="地图完成，可以返回城镇" if _is_test_profile() else "地图完成，返回正式城镇领取结算"

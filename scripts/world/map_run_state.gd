@@ -16,7 +16,7 @@ func clear()->void:
 func can_admit()->bool:return not profile.is_empty() and not complete and admitted.size()<int(profile.ordinary_target)
 func register_root(enemy:Dictionary,is_boss:bool=false)->bool:
 	var id:int=int(enemy.get("id",0))
-	if id<=0 or enemy.get("root_id")!=id or int(enemy.get("generation",-1))!=0 or not enemy.get("reward_eligible",false):return false
+	if not _initial_root_valid(enemy):return false
 	if is_boss:
 		if not ready_for_boss():return false
 		boss_id=id;return true
@@ -27,9 +27,9 @@ func register_group(roots: Variant) -> bool:
 	if not roots is Array or roots.is_empty() or not can_admit() or admitted.size()+roots.size()>int(profile.ordinary_target): return false
 	var ids: Dictionary = {}
 	for enemy: Variant in roots:
-		if not enemy is Dictionary or not enemy.get("id") is int: return false
+		if not _initial_root_valid(enemy): return false
 		var id: int = enemy.id
-		if id<=0 or enemy.get("root_id")!=id or enemy.get("generation")!=0 or not enemy.get("reward_eligible",false) or admitted.has(id) or ids.has(id): return false
+		if admitted.has(id) or ids.has(id): return false
 		ids[id]=true
 	for id: int in ids: admitted[id]=true
 	return true
@@ -54,7 +54,24 @@ static func _initial_root_valid(enemy: Variant) -> bool:
 	return enemy is Dictionary and typeof(enemy.get("id")) == TYPE_INT and enemy.id > 0 \
 		and typeof(enemy.get("root_id")) == TYPE_INT and enemy.root_id == enemy.id \
 		and typeof(enemy.get("generation")) == TYPE_INT and enemy.generation == 0 \
-		and typeof(enemy.get("reward_eligible")) == TYPE_BOOL and enemy.reward_eligible
+		and typeof(enemy.get("reward_eligible")) == TYPE_BOOL
+
+## Required completion membership comes from admission, never reward eligibility.
+## Optional encounter admission is not implemented. Any unknown actor/request
+## fails closed until an explicit optional membership policy is introduced.
+func owns_lineage(root_id: Variant) -> bool:
+	return typeof(root_id) == TYPE_INT and root_id > 0 and (root_id == boss_id or admitted.has(root_id))
+
+func completion_members(enemies: Array[Dictionary], queue: Array[Dictionary]) -> Dictionary:
+	var living: Array[Dictionary] = []
+	for enemy: Dictionary in enemies:
+		if not owns_lineage(enemy.get("root_id")):
+			return {"ok": false, "reason": "地图存在未登记怪物，无法确认清图状态"}
+		if float(enemy.get("health", 0.0)) > 0.0: living.append(enemy)
+	for request: Dictionary in queue:
+		if not owns_lineage(request.get("root_id")):
+			return {"ok": false, "reason": "地图存在未登记后代，无法确认清图状态"}
+	return {"ok": true, "reason": "", "living": living, "pending_count": queue.size()}
 
 func record_death(enemy:Dictionary)->bool:
 	var id:int=int(enemy.get("id",0))

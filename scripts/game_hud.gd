@@ -1804,6 +1804,9 @@ static func cleanup_hint_view(hint: Dictionary) -> Dictionary:
 			text = "未清驻点 %d" % hint.get("outposts", []).size()
 		"waiting":
 			text = "等待后续怪物"
+		"blocked":
+			text = "清图状态异常，暂不能完成地图"
+			details.append(str(hint.get("reason", "")))
 		"settlement":
 			text = "结算待保存"
 		"complete":

@@ -1,0 +1,121 @@
+{
+  "baseline_runtime_commit": "b4cec15d61cfef890993714849d72f5a49009187",
+  "method": "Fixed-seed lawful original Main flow compared before and after implementation; controlled deaths, not natural combat. Separate explicitly labeled unit/fault fixtures do not implement a playable season.",
+  "godot_version": "4.6.3.stable.official.7d41c59c4",
+  "default_contract": {
+    "byte_identical": true,
+    "sha256": "84fd424092a955598bdac49d846e672ba3dea26af2196c768520a23f947431f1",
+    "death_events": 44
+  },
+  "final_checks": 963,
+  "final_failures": 0,
+  "results": [
+    {
+      "name": "baseline-default",
+      "checks": 137,
+      "failures": 0
+    },
+    {
+      "name": "candidate-default",
+      "checks": 137,
+      "failures": 0
+    },
+    {
+      "name": "seam-fixtures",
+      "checks": 130,
+      "failures": 0
+    },
+    {
+      "name": "generation-plan",
+      "checks": 352,
+      "failures": 0
+    },
+    {
+      "name": "bounded-split",
+      "checks": 110,
+      "failures": 0
+    },
+    {
+      "name": "hud-query-lineage",
+      "checks": 234,
+      "failures": 0
+    }
+  ],
+  "inputs": {
+    "scripts/main.gd": {
+      "candidate_sha256": "a45eb77e8239330fe29850972e8be0c8b07154d851293fb258674a2a03a4047c",
+      "baseline_sha256": "d9896b109234b5e7a2fcc10c0ef7f2c46a5225cf27b5214f6fe5450f558e1ad4",
+      "unchanged": false
+    },
+    "scripts/game_hud.gd": {
+      "candidate_sha256": "6661a37e7369f67d7da3a040f20cc0dc346047568cc9e91edbc831f05a79f926",
+      "baseline_sha256": "a9b8f2986be12f579695c9b7c5453e586a5d5c33de93fa0881fbf13cd864701c",
+      "unchanged": false
+    },
+    "scripts/world/map_run_state.gd": {
+      "candidate_sha256": "65c5ca1bdfcc682e09afbdccb6d9aa0cf993eaa9d287e132c0ec88f129570427",
+      "baseline_sha256": "7e71db299865764749160113b3030e416cab264893cefcb3fb75789e9a06a21d",
+      "unchanged": false
+    },
+    "scripts/world/exploration_map_plan.gd": {
+      "candidate_sha256": "22191fd4203490c4ad972840ba5beb2ddf06cb42a8a59f45da0f6562575cc2df",
+      "baseline_sha256": "22191fd4203490c4ad972840ba5beb2ddf06cb42a8a59f45da0f6562575cc2df",
+      "unchanged": true
+    },
+    "scripts/world/map_admission.gd": {
+      "candidate_sha256": "39c4d7dc34993587a081759f423192c1db2b6e8267c91854ef729f36ae4368c2",
+      "baseline_sha256": "39c4d7dc34993587a081759f423192c1db2b6e8267c91854ef729f36ae4368c2",
+      "unchanged": true
+    },
+    "scripts/encounters/encounter_admission.gd": {
+      "candidate_sha256": "a88a587b40c6942ee5fe8a84ca3c56e97514d237dce4bb39f2c1fe628b35b849",
+      "baseline_sha256": "a88a587b40c6942ee5fe8a84ca3c56e97514d237dce4bb39f2c1fe628b35b849",
+      "unchanged": true
+    },
+    "scripts/monsters/monster_runtime.gd": {
+      "candidate_sha256": "6280cbf52cdf373af0fe8d564b77b2ad1f1e934b207d37988f69bbdd404751a3",
+      "baseline_sha256": "6280cbf52cdf373af0fe8d564b77b2ad1f1e934b207d37988f69bbdd404751a3",
+      "unchanged": true
+    },
+    "scripts/monsters/monster_catalog.gd": {
+      "candidate_sha256": "499b12aa0dcc91ecb39c0f303745930ad853fb5b3b576b3c561714c771c44309",
+      "baseline_sha256": "499b12aa0dcc91ecb39c0f303745930ad853fb5b3b576b3c561714c771c44309",
+      "unchanged": true
+    },
+    "scripts/save/canonical_build_rules.gd": {
+      "candidate_sha256": "e244bbd27bb7cbbb04d5c1444072b6a327f2283f063ecdcbcaca60e2d9a8359c",
+      "baseline_sha256": "e244bbd27bb7cbbb04d5c1444072b6a327f2283f063ecdcbcaca60e2d9a8359c",
+      "unchanged": true
+    },
+    "tests/map_default_death_contract_test.gd": {
+      "candidate_sha256": "b7790ade7a5441840f76d938106a7b2abc041bcce666f216cbb0a91b1985acd6"
+    },
+    "tests/map_completion_reward_seams_test.gd": {
+      "candidate_sha256": "27a409ec3bdb95e8f8ca905b8d3253486f201a83f28b06857b6b54ab13e485b7"
+    },
+    "tests/map_completion_split_boundaries_test.gd": {
+      "candidate_sha256": "4f54abc94dcf8f4fec843dffcef448c942f67947d114f3998594563e8f5782e8"
+    },
+    "tests/exploration_main_flow_test.gd": {
+      "candidate_sha256": "8f40d51a90f7402251c4e3c2fe268ae7da4c1cad9d9ee25e4ee82272ad18b41c",
+      "baseline_sha256": "8f40d51a90f7402251c4e3c2fe268ae7da4c1cad9d9ee25e4ee82272ad18b41c",
+      "unchanged": true
+    },
+    "tests/exploration_cleanup_hint_test.gd": {
+      "candidate_sha256": "e5ad4070be3e5d10b9013904195dd8434b5bdf2d87e2a0793cf833a8c4b178fa",
+      "baseline_sha256": "e5ad4070be3e5d10b9013904195dd8434b5bdf2d87e2a0793cf833a8c4b178fa",
+      "unchanged": true
+    },
+    "tests/exploration_map_plan_test.gd": {
+      "candidate_sha256": "1a8507342c6fea3f86d6959dd7d28d01923171005f0b632049d63a5282924df8",
+      "baseline_sha256": "3077ea572fb7ec13d7f3dd1d2e1bbb352b778cf225f6b7de8d8b9e244a69206b",
+      "unchanged": false
+    },
+    "tests/monster_system_test.gd": {
+      "candidate_sha256": "ed960322cf808f5477727ac5bbfddb99873d10b9f05c0feace7417e36e56b427",
+      "baseline_sha256": "ed960322cf808f5477727ac5bbfddb99873d10b9f05c0feace7417e36e56b427",
+      "unchanged": true
+    }
+  },
+  "failed_attempt": "First new fixture script failed to parse due to an uninferred dynamic return type; corrected explicit Dictionary annotation. Logs retained separately; excluded from final successful checks."
+}
