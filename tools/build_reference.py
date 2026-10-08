@@ -1602,6 +1602,9 @@ def build(data, art):
         bar_width=220*e['restored']/e['maximum_at_use']
         chart=f'<figure><svg viewBox="0 0 280 62" role="img" aria-label="三秒实际药剂回复"><rect x="20" y="8" width="220" height="16" rx="3" fill="#c6b78c"/><rect x="20" y="8" width="{bar_width}" height="16" rx="3" fill="'+('#aa5046' if f['resource']=='health' else '#587da2')+f'"/><text x="20" y="48" fill="#493a2d">三秒恢复 {number(e["restored"])} / 最大 {number(e["maximum_at_use"])}</text></svg><figcaption>由实际FlaskRuntime推进；不含自然回复，满资源会提前结束。</figcaption></figure>'
         body=chart+facts([('占格','1×2，独立UID，不可堆叠'),('充能',f'{f["max_charges"]}上限 / 每次{f["cost"]}'),('资源',resource),('起手锁定',f'{number(f["duration"])}秒恢复使用瞬间最大值的{number(f["recovery_fraction"]*100)}%'),('使用门槛','活着、未暂停、资源未满、同资源未恢复、足够充能；失败不扣'),('获取',f'新档与首次schema18迁移各一瓶；每{f["acquisition"]["eligible_root_interval"]}有效根怪交替生命/魔力，满包拒收，额外RNG为零'),('战斗状态','换槽/卸下不补充，合法根怪给当时已装瓶各+1；后代/演示/重复尸体不充能。新战斗恢复30，临时charge不写构筑档'),('保存','旧原始文件验证并逐字节备份，完整候选成功写入后才更新；不丢原UID/位置/材料'),('未扩展','不恢复护盾，不清异常，不加药剂词缀')])+f'<table><thead><tr><th>经过</th><th>{resource}</th><th>充能</th></tr></thead><tbody>{rows}</tbody></table>'
+        for offer in data.get('town_maps',{}).get('flask_purchase',{}).get('offers',[]):
+            if offer['definition_id'] == 'flask:'+key:
+                body+='<h4>正式城镇购买</h4><p>'+link('town_services','equipment_merchant','装备商人')+'供应现有'+esc(offer['name'])+'，每瓶 <span data-flask-purchase-id="'+esc(offer['definition_id'])+'" data-cost="'+str(offer['cost'])+'">'+number(offer['cost'])+'</span> 校准碎片。购买只将真实1×2药剂放入行囊，不自动装备；在行囊激活可放入空药剂槽，也可拖到现有五槽药剂栏。战斗中使用HUD药剂按钮或Alt+1至Alt+5；须活着、未暂停、处于可战斗区域、对应资源未满、同资源未恢复且充能足够。失败不扣充能；换槽或卸下不补充。新购买只初始化新UID，旧瓶充能和已开始的恢复保持。药剂不能回收成碎片，丢弃不返款。原起始赠送、击杀奖励和回复/充能规则保持。</p>'
         cards.append(add('flasks',key,f['name'],f['description'],body,'真实药剂物品',related=link('rules','ownership')))
     for key,c in data.get('currencies',{}).items():
         diagram='<figure><svg viewBox="0 0 650 130" role="img" aria-label="回收装备产生背包碎片，校准消耗同一物品堆"><g fill="#ead3a2" stroke="#8c6b42"><rect x="10" y="35" width="170" height="60" rx="8"/><rect x="235" y="20" width="180" height="90" rx="8"/><rect x="470" y="35" width="170" height="60" rx="8"/></g><g fill="#3b281b" font-size="16" text-anchor="middle"><text x="95" y="70">回收装备</text><text x="325" y="58">1×1 碎片物品堆</text><text x="325" y="86">唯一UID · 真实数量</text><text x="555" y="70">消耗碎片校准</text></g><g fill="none" stroke="#79571f" stroke-width="2"><path d="M185 65H229M219 59L229 65L219 71M420 65H464M454 59L464 65L454 71"/></g></svg></figure>'
@@ -1631,8 +1634,13 @@ def build(data, art):
             if key=='equipment_merchant' and 'equipment_purchase' in town:
                 purchase=town['equipment_purchase']
                 body+='<p>正式城镇购买普通无词缀底材，每件 '+'<span data-equipment-purchase-field="cost">'+number(purchase['cost'])+'</span>'+' 校准碎片，物品等级 '+'<span data-equipment-purchase-field="item_level">'+number(purchase['item_level'])+'</span>'+'。购买不随机生成词缀，可在现有工匠处赋魔，也可直接装备；更高物品等级来自地图掉落。</p>'
-                body+='<p>只供应下表目录底材；固定机制装备、药剂、珠宝与免费碎片仍属独立测试供应。确认时碎片扣除与真实尺寸入包一次保存；满包、存档变化或写盘失败保留物品与碎片，取消或区域/库存变化后旧报价不可兑现。</p>'
+                scope='供应下表15种目录底材与两种现有基础药剂；固定机制装备与免费碎片仍属独立测试供应，正式珠宝沿原珠宝商人购买。' if 'flask_purchase' in town else '只供应下表目录底材；固定机制装备、药剂、珠宝与免费碎片仍属独立测试供应。'
+                body+='<p>'+scope+'确认时碎片扣除与真实尺寸入包一次保存；满包、存档变化或写盘失败保留物品与碎片，取消或区域/库存变化后旧报价不可兑现。</p>'
                 body+='<div class="table-scroll"><table><thead><tr><th>正式底材</th><th>购买碎片</th><th>物品等级</th><th>随机词缀</th></tr></thead><tbody>'+''.join('<tr><td>'+link('equipment',o['base_id'],o['name'])+'</td><td data-base-purchase-id="'+esc(o['base_id'])+'" data-cost="'+str(o['cost'])+'">'+str(o['cost'])+'</td><td>'+str(o['item_level'])+'</td><td>无</td></tr>' for o in purchase['offers'])+'</tbody></table></div>'
+                if 'flask_purchase' in town:
+                    flasks=town['flask_purchase']
+                    body+='<h4>两种基础药剂</h4><p>每瓶 <span data-flask-purchase-field="cost">'+number(flasks['cost'])+'</span> 校准碎片，只入行囊；在现有药剂栏装备后，活着、未暂停且处于可战斗区域时使用HUD按钮或Alt+1至Alt+5。对应资源已满、同资源恢复中或充能不足时拒绝且不扣充能。旧瓶充能和进行中的恢复保持，药剂不支持回收、丢弃不返款；免费测试供应仍隔离。</p>'
+                    body+='<div class="table-scroll"><table><thead><tr><th>正式药剂</th><th>每瓶碎片</th><th>占格</th><th>现有效果与使用充能</th></tr></thead><tbody>'+''.join('<tr><td>'+link('flasks',o['definition_id'].split(':',1)[1],o['name'])+'</td><td data-flask-purchase-id="'+esc(o['definition_id'])+'" data-cost="'+str(o['cost'])+'">'+str(o['cost'])+'</td><td>'+str(o['size'][0])+'×'+str(o['size'][1])+'</td><td>'+lines(o['description'])+'</td></tr>' for o in flasks['offers'])+'</tbody></table></div>'
             if key=='jewel_merchant' and 'jewel_purchase' in town:
                 purchase=town['jewel_purchase']
                 body=facts([('开放条件','正式城镇开放三种基础珠宝付费购买；免费测试供应独立'),('购买价格','<span data-jewel-purchase-field="cost">'+number(purchase['cost'])+'</span> 校准碎片，沿用现有魔法珠宝整体重铸成本'),('商品','固定最低数值魔法珠宝；购买不随机、不出售特殊珠宝'),('使用条件','只入背包；须在已分配并连通起点的合法珠宝孔中使用，不赠点、不绕过连通')])
@@ -1657,6 +1665,8 @@ def build(data, art):
             summary = '正式付费购买与独立测试供应' if key=='skill_merchant' else service['description']
             if key=='equipment_merchant' and 'equipment_purchase' in town:
                 summary = '正式城镇供应普通无词缀底材：每件'+number(town['equipment_purchase']['cost'])+'碎片、物品等级'+number(town['equipment_purchase']['item_level'])+'；免费测试供应保持隔离。'
+                if 'flask_purchase' in town:
+                    summary='正式城镇供应15种普通无词缀底材和两种基础生命/魔力药剂，每件或每瓶'+number(town['flask_purchase']['cost'])+'碎片；底材物品等级'+number(town['equipment_purchase']['item_level'])+'，药剂入包后在现有药剂栏装备使用。'
             if key=='jewel_merchant' and 'jewel_purchase' in town:
                 summary='正式购买三种固定最低数值魔法珠宝，每件'+number(town['jewel_purchase']['cost'])+'碎片；特殊珠宝不售，须在合法连通珠宝孔中使用。'
             if key == 'crafter':

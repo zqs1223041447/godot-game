@@ -615719,6 +615719,53 @@
 				"scripts/ui/town_square_view.gd": "96f40ae1de8d2327010a13f32d5c62757ee6d42df885f7f7f7c114cbf48c090e"
 			},
 			"special_sold": false
+		},
+		"flask_purchase": {
+			"cost": 8,
+			"offers": [
+				{
+					"cost": 8,
+					"definition_id": "flask:life",
+					"description": "3秒内恢复35%对应最大资源；消耗10充能。同资源恢复不叠加，已满或充能不足时不消耗。",
+					"duration": 3.0,
+					"max_charges": 30,
+					"name": "生命药剂",
+					"recovery_fraction": 0.35,
+					"resource": "health",
+					"size": [
+						1,
+						2
+					],
+					"use_cost": 10
+				},
+				{
+					"cost": 8,
+					"definition_id": "flask:mana",
+					"description": "3秒内恢复35%对应最大资源；消耗10充能。同资源恢复不叠加，已满或充能不足时不消耗。",
+					"duration": 3.0,
+					"max_charges": 30,
+					"name": "魔力药剂",
+					"recovery_fraction": 0.35,
+					"resource": "mana",
+					"size": [
+						1,
+						2
+					],
+					"use_cost": 10
+				}
+			],
+			"save_version": 55,
+			"service_id": "equipment_merchant",
+			"source_sha256": {
+				"scripts/combat/flask_runtime.gd": "0cfe1669ed60af48cc80b23c32a126841601820e9f564cc35115aa322478f9e0",
+				"scripts/items/equipment_purchase.gd": "531980ac22bbdad9978e111060e1d89a012689c50f4a23ed2098952ef0eaed19",
+				"scripts/items/flask_catalog.gd": "5895bb0bdcb6765cbbb733e3ca5713fc8d541508745009845f892e44e3ad0fe5",
+				"scripts/items/flask_purchase.gd": "17ebb82f1b202faecbcc2af345a1fb80f61d392acac433710f0f4b7c8079e39c",
+				"scripts/main.gd": "4f0f6765441ba660a904bd33d6ee992117b2e3a8ca933d96f54ff49f333b2f5b",
+				"scripts/save/canonical_build_rules.gd": "46fa346c217b0fa05dfd2dcf254115bde10aaa53899e07a67284f5b1453b932e",
+				"scripts/ui/canonical_inventory_panel.gd": "eec3ab27a85ca908135142a1396c094b36f06f0309a7e023fa1de612ecf72539",
+				"scripts/ui/town_service_panel.gd": "1a5fb7ecb39b1098a6a5f33c77acd44c8ceaa7c277a3ab3add24b82635bf830f"
+			}
 		}
 	},
 	"weapon_stages": {
