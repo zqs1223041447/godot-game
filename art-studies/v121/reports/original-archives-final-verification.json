@@ -1,0 +1,28 @@
+{
+  "verification_date_utc": "2026-10-08",
+  "manifest": "source-manifest.json",
+  "method": "Independent read-only SHA-256 hashing and byte-size comparison of both original source ZIPs; no archive contents or package scripts executed.",
+  "all_match": true,
+  "archives": [
+    {
+      "archive": "fantasy",
+      "filename": "Modular Character Outfits - Fantasy[Standard].zip",
+      "expected_sha256": "c3468b18871cc8c8f05ab14df7712baf22cb9f389cbd870babf130e595187f70",
+      "actual_sha256": "c3468b18871cc8c8f05ab14df7712baf22cb9f389cbd870babf130e595187f70",
+      "sha256_matches": true,
+      "expected_bytes": 294347394,
+      "actual_bytes": 294347394,
+      "size_matches": true
+    },
+    {
+      "archive": "base",
+      "filename": "Universal Base Characters[Standard].zip",
+      "expected_sha256": "fdbf1804c90dfc1ea03e992bff7da2dfd1a79318e13270a660180f9308455f40",
+      "actual_sha256": "fdbf1804c90dfc1ea03e992bff7da2dfd1a79318e13270a660180f9308455f40",
+      "sha256_matches": true,
+      "expected_bytes": 128968391,
+      "actual_bytes": 128968391,
+      "size_matches": true
+    }
+  ]
+}

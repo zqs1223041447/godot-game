@@ -1,0 +1,5 @@
+import bpy,json
+from pathlib import Path
+s=bpy.context.scene
+out={'camera':{'location':list(s.camera.location),'rotation':list(s.camera.rotation_euler),'ortho_scale':s.camera.data.ortho_scale},'lights':[{'name':o.name,'type':o.data.type,'location':list(o.location),'rotation_euler':list(o.rotation_euler),'energy':o.data.energy,'color':list(o.data.color),'angle':getattr(o.data,'angle',None),'size':getattr(o.data,'size',None)} for o in s.objects if o.type=='LIGHT'],'color':{'view_transform':s.view_settings.view_transform,'look':s.view_settings.look,'exposure':s.view_settings.exposure,'gamma':s.view_settings.gamma},'world':{'name':s.world.name,'color':list(s.world.color),'nodes':[{'name':n.name,'type':n.type,'inputs':{i.name:list(i.default_value) if hasattr(i.default_value,'__len__') else i.default_value for i in n.inputs if hasattr(i,'default_value') and i.type in ['VALUE','RGBA']}} for n in s.world.node_tree.nodes]} }
+(Path(__file__).resolve().parents[1]/'reports/environment-settings.json').write_text(json.dumps(out,indent=2)); print(json.dumps(out,indent=2))

@@ -1,0 +1,390 @@
+{
+  "sample": "Female Ranger / authored static ready pose",
+  "scope": "Isolated art study only; no production game modifications, no eight-direction batch, not a complete animation set",
+  "source_manifest": "source-manifest.json",
+  "original_package_sha256": {
+    "fantasy": {
+      "filename": "Modular Character Outfits - Fantasy[Standard].zip",
+      "sha256": "c3468b18871cc8c8f05ab14df7712baf22cb9f389cbd870babf130e595187f70",
+      "bytes": 294347394
+    },
+    "base": {
+      "filename": "Universal Base Characters[Standard].zip",
+      "sha256": "fdbf1804c90dfc1ea03e992bff7da2dfd1a79318e13270a660180f9308455f40",
+      "bytes": 128968391
+    }
+  },
+  "uri_repairs": [
+    {
+      "gltf": "Universal Base Characters[Standard]/Base Characters/Godot - UE/Superhero_Female_FullBody.gltf",
+      "old_uri": "T_Eye_Normal_png.png",
+      "new_uri": "T_Eye_Normal.png"
+    },
+    {
+      "gltf": "Universal Base Characters[Standard]/Base Characters/Godot - UE/Superhero_Male_FullBody.gltf",
+      "old_uri": "T_Hair_1_Normal_png.png",
+      "new_uri": "T_Hair_1_Normal.png"
+    },
+    {
+      "gltf": "Universal Base Characters[Standard]/Base Characters/Godot - UE/Superhero_Male_FullBody.gltf",
+      "old_uri": "T_Eye_Normal_png.png",
+      "new_uri": "T_Eye_Normal.png"
+    }
+  ],
+  "rig_checks": {
+    "Female_Ranger": {
+      "bones": 65,
+      "maximum_rest_matrix_error": 0.0
+    },
+    "Superhero_Female_FullBody": {
+      "bones": 65,
+      "maximum_rest_matrix_error": 0.0
+    },
+    "Hair_BuzzedFemale": {
+      "bones": 65,
+      "maximum_rest_matrix_error": 0.0
+    },
+    "Female_Peasant_Body": {
+      "bones": 65,
+      "maximum_rest_matrix_error": 0.0
+    }
+  },
+  "base_body_original": {
+    "vertices": 7376,
+    "faces": 12812
+  },
+  "head_neck_retained": {
+    "vertices": 1715,
+    "faces": 3164,
+    "min_z": 1.4674148559570312,
+    "max_z": 1.7666435241699219
+  },
+  "base_components": [
+    {
+      "vertices": 347,
+      "min_z": 1.4674148559570312,
+      "max_z": 1.5936306715011597,
+      "kept": true
+    },
+    {
+      "vertices": 261,
+      "min_z": 1.5847915410995483,
+      "max_z": 1.7666435241699219,
+      "kept": true
+    },
+    {
+      "vertices": 261,
+      "min_z": 1.5847915410995483,
+      "max_z": 1.7666435241699219,
+      "kept": true
+    },
+    {
+      "vertices": 776,
+      "min_z": 1.538089632987976,
+      "max_z": 1.762665867805481,
+      "kept": true
+    },
+    {
+      "vertices": 903,
+      "min_z": 1.04196035861969,
+      "max_z": 1.487852692604065,
+      "kept": false
+    },
+    {
+      "vertices": 598,
+      "min_z": 0.08812877535820007,
+      "max_z": 1.0504074096679688,
+      "kept": false
+    },
+    {
+      "vertices": 598,
+      "min_z": 0.08812877535820007,
+      "max_z": 1.0504074096679688,
+      "kept": false
+    },
+    {
+      "vertices": 350,
+      "min_z": 1.3510257005691528,
+      "max_z": 1.4708869457244873,
+      "kept": false
+    },
+    {
+      "vertices": 587,
+      "min_z": 1.351242184638977,
+      "max_z": 1.4396228790283203,
+      "kept": false
+    },
+    {
+      "vertices": 362,
+      "min_z": 1.351242184638977,
+      "max_z": 1.4154189825057983,
+      "kept": false
+    },
+    {
+      "vertices": 16,
+      "min_z": 1.4152535200119019,
+      "max_z": 1.4216243028640747,
+      "kept": false
+    },
+    {
+      "vertices": 16,
+      "min_z": 1.4127048254013062,
+      "max_z": 1.41849946975708,
+      "kept": false
+    },
+    {
+      "vertices": 16,
+      "min_z": 1.4177526235580444,
+      "max_z": 1.4224547147750854,
+      "kept": false
+    },
+    {
+      "vertices": 16,
+      "min_z": 1.416722297668457,
+      "max_z": 1.4227392673492432,
+      "kept": false
+    },
+    {
+      "vertices": 350,
+      "min_z": 1.3510257005691528,
+      "max_z": 1.4708868265151978,
+      "kept": false
+    },
+    {
+      "vertices": 587,
+      "min_z": 1.3512423038482666,
+      "max_z": 1.4396229982376099,
+      "kept": false
+    },
+    {
+      "vertices": 362,
+      "min_z": 1.3512423038482666,
+      "max_z": 1.4154192209243774,
+      "kept": false
+    },
+    {
+      "vertices": 16,
+      "min_z": 1.4152536392211914,
+      "max_z": 1.4216245412826538,
+      "kept": false
+    },
+    {
+      "vertices": 16,
+      "min_z": 1.4127048254013062,
+      "max_z": 1.4184995889663696,
+      "kept": false
+    },
+    {
+      "vertices": 16,
+      "min_z": 1.4177526235580444,
+      "max_z": 1.422454833984375,
+      "kept": false
+    },
+    {
+      "vertices": 16,
+      "min_z": 1.4167221784591675,
+      "max_z": 1.4227392673492432,
+      "kept": false
+    },
+    {
+      "vertices": 70,
+      "min_z": 1.5805212259292603,
+      "max_z": 1.5884077548980713,
+      "kept": true
+    },
+    {
+      "vertices": 302,
+      "min_z": -0.0007078972994349897,
+      "max_z": 0.10649424046278,
+      "kept": false
+    },
+    {
+      "vertices": 116,
+      "min_z": -0.008407306857407093,
+      "max_z": 0.014247332699596882,
+      "kept": false
+    },
+    {
+      "vertices": 302,
+      "min_z": -0.0007078977068886161,
+      "max_z": 0.10649424046278,
+      "kept": false
+    },
+    {
+      "vertices": 116,
+      "min_z": -0.008407305926084518,
+      "max_z": 0.014247332699596882,
+      "kept": false
+    }
+  ],
+  "hair": "Hair_BuzzedFemale under hood; no long hair",
+  "binding_changes": false,
+  "material_adjustment": {
+    "color_texture_preserved": true,
+    "normal_texture_preserved": true,
+    "ORM_texture_preserved": true,
+    "hue": 0.49,
+    "saturation": 0.78,
+    "linear_multiply": [
+      1,
+      0.97,
+      0.86
+    ],
+    "roughness_floor": 0.42,
+    "specular_ior_level": 0.35
+  },
+  "rest_stature_metres": 1.8,
+  "raw_rest_height": 1.7980463285930455,
+  "uniform_assembly_scale": 1.0010865523184174,
+  "character_heading_degrees": -23,
+  "pose": {
+    "action": null,
+    "frame": 1,
+    "render_label": "authored static ready pose; no motion clip",
+    "source_clip_problem": "Jog_Fwd_Loop has 195 constant channels over 29 samples; it is a repeated T-pose",
+    "maximum_vertex_displacement_from_rest_m": 0.8334704631491603,
+    "head_ranger_pose_matrix_error": 1.7881393432617188e-07,
+    "ground_offset": 0.003971691709011793,
+    "min": [
+      -0.2876548767089844,
+      -0.40694111585617065,
+      0.0
+    ],
+    "max": [
+      0.3429490327835083,
+      0.21725042164325714,
+      1.7999999523162842
+    ]
+  },
+  "full_loop_numeric_checks": [],
+  "projection": {
+    "camera_elevation_degrees": 55,
+    "source_resolution": [
+      1280,
+      720
+    ],
+    "orthographic_width_metres": 27,
+    "x_pixels_per_m": 47.407407407407405,
+    "y_pixels_per_m": 38.83387469221887,
+    "z_pixels_per_m": 27.191771797382927,
+    "vertical_1_8m_reference_pixels": 48.94518923528927,
+    "projected_geometry_bounds": {
+      "min_x": 626.3630294799805,
+      "max_x": 656.2583160400391,
+      "min_y": 306.04069232940674,
+      "max_y": 367.6589512825012,
+      "width": 29.895286560058594,
+      "height": 61.61825895309448
+    }
+  },
+  "environment_settings": {
+    "camera": {
+      "location": [
+        0.0,
+        -20.0,
+        28.562959671020508
+      ],
+      "rotation": [
+        0.6108651757240295,
+        -0.0,
+        0.0
+      ],
+      "ortho_scale": 27.0
+    },
+    "lights": [
+      {
+        "name": "Warm afternoon sun",
+        "type": "SUN",
+        "location": [
+          -8.0,
+          -6.0,
+          14.0
+        ],
+        "rotation_euler": [
+          0.6457718014717102,
+          -0.6806784272193909,
+          -0.6108652353286743
+        ],
+        "energy": 3.0,
+        "color": [
+          1.0,
+          0.8899999856948853,
+          0.7200000286102295
+        ],
+        "angle": 0.10471975803375244,
+        "size": null
+      },
+      {
+        "name": "Cool soft environment bounce",
+        "type": "AREA",
+        "location": [
+          2.0,
+          -2.0,
+          14.0
+        ],
+        "rotation_euler": [
+          0.3091934621334076,
+          5.119392199048889e-08,
+          0.46364766359329224
+        ],
+        "energy": 650.0,
+        "color": [
+          0.6800000071525574,
+          0.8100000023841858,
+          1.0
+        ],
+        "angle": null,
+        "size": 15.0
+      }
+    ],
+    "color": {
+      "view_transform": "AgX",
+      "look": "AgX - Medium High Contrast",
+      "exposure": 0.25,
+      "gamma": 1.0
+    },
+    "world": {
+      "name": "Cool open-sky fill",
+      "color": [
+        0.05000000074505806,
+        0.05000000074505806,
+        0.05000000074505806
+      ],
+      "nodes": [
+        {
+          "name": "Background",
+          "type": "BACKGROUND",
+          "inputs": {
+            "Color": [
+              0.38999998569488525,
+              0.5199999809265137,
+              0.7200000286102295,
+              1.0
+            ],
+            "Strength": 0.7200000286102295,
+            "Weight": 0.0
+          }
+        },
+        {
+          "name": "World Output",
+          "type": "OUTPUT_WORLD",
+          "inputs": {}
+        }
+      ]
+    }
+  },
+  "limits": [
+    "The included 1.1667-second Jog clip contains no changing channel values. This sample uses an authored static ready pose, not idle or walking animation; no weapon or magic effect is delivered.",
+    "Retained neck and hood need visual checks at the chosen pose; no automatic mesh-intersection clearance certificate is claimed.",
+    "Nominal 49 pixels is a vertical 1.8m reference; posed silhouette also reflects depth and limb motion.",
+    "The old 53-DEF UAL was not used.",
+    "One small shoulder lining was added for this static pose only, without skinning; shoulder animation fit is not validated. Six terminal-edge ray samples remain uncovered, so no watertightness claim is made."
+  ],
+  "static_shoulder_correction": {
+    "report": "shoulder-correction-report.json",
+    "final_verification": "final-sample-verification.json",
+    "object": "Static_Shoulder_Lining_Bridge",
+    "pose_specific_unskinned": true,
+    "original_meshes_rigs_and_weights_unchanged": true
+  }
+}

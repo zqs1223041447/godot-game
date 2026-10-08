@@ -1,0 +1,96 @@
+{
+  "camera": {
+    "location": [
+      0.0,
+      -20.0,
+      28.562959671020508
+    ],
+    "rotation": [
+      0.6108651757240295,
+      -0.0,
+      0.0
+    ],
+    "ortho_scale": 27.0
+  },
+  "lights": [
+    {
+      "name": "Warm afternoon sun",
+      "type": "SUN",
+      "location": [
+        -8.0,
+        -6.0,
+        14.0
+      ],
+      "rotation_euler": [
+        0.6457718014717102,
+        -0.6806784272193909,
+        -0.6108652353286743
+      ],
+      "energy": 3.0,
+      "color": [
+        1.0,
+        0.8899999856948853,
+        0.7200000286102295
+      ],
+      "angle": 0.10471975803375244,
+      "size": null
+    },
+    {
+      "name": "Cool soft environment bounce",
+      "type": "AREA",
+      "location": [
+        2.0,
+        -2.0,
+        14.0
+      ],
+      "rotation_euler": [
+        0.3091934621334076,
+        5.119392199048889e-08,
+        0.46364766359329224
+      ],
+      "energy": 650.0,
+      "color": [
+        0.6800000071525574,
+        0.8100000023841858,
+        1.0
+      ],
+      "angle": null,
+      "size": 15.0
+    }
+  ],
+  "color": {
+    "view_transform": "AgX",
+    "look": "AgX - Medium High Contrast",
+    "exposure": 0.25,
+    "gamma": 1.0
+  },
+  "world": {
+    "name": "Cool open-sky fill",
+    "color": [
+      0.05000000074505806,
+      0.05000000074505806,
+      0.05000000074505806
+    ],
+    "nodes": [
+      {
+        "name": "Background",
+        "type": "BACKGROUND",
+        "inputs": {
+          "Color": [
+            0.38999998569488525,
+            0.5199999809265137,
+            0.7200000286102295,
+            1.0
+          ],
+          "Strength": 0.7200000286102295,
+          "Weight": 0.0
+        }
+      },
+      {
+        "name": "World Output",
+        "type": "OUTPUT_WORLD",
+        "inputs": {}
+      }
+    ]
+  }
+}
