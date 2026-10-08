@@ -113,12 +113,12 @@ const HERO_WARD_BOUNDS := Rect2(-26, -51, 52, 52)
 
 static func prepare_presentation(definition: Dictionary) -> Dictionary:
 	var allowed := ["schema_version", "coordinate_space", "texture_path", "world_units_per_source_pixel",
-		"frames_per_direction", "fps", "frames", "clips", "contact_shadow_half_size_world", "provenance"]
+		"frames_per_direction", "fps", "frames", "clips", "contact_shadow_half_size_world", "provenance", "direction_count"]
 	for key: Variant in definition:
 		if not key is String or not allowed.has(key):
 			return _presentation_error("unknown_field", "Presentation contains an unsupported field.")
 	for key: String in allowed:
-		if key != "provenance" and not definition.has(key):
+		if key not in ["provenance", "direction_count"] and not definition.has(key):
 			return _presentation_error("missing_field", "Presentation requires '%s'." % key)
 	if definition.has("provenance") and not definition.provenance is Dictionary:
 		return _presentation_error("invalid_provenance", "Provenance must be a dictionary and is not interpreted.")
@@ -135,8 +135,11 @@ static func prepare_presentation(definition: Dictionary) -> Dictionary:
 	if not _presentation_number(definition.fps) or float(definition.fps) <= 0.0 or float(definition.fps) > 120.0:
 		return _presentation_error("invalid_fps", "Presentation fps must be positive, finite, and at most 120.")
 	var frames_per_direction := int(definition.frames_per_direction)
-	if not definition.frames is Array or definition.frames.size() != DIRECTIONS * frames_per_direction:
-		return _presentation_error("invalid_frames", "Frames must contain exactly eight directions of frames_per_direction entries.")
+	var direction_count: Variant = definition.get("direction_count", DIRECTIONS)
+	if not _presentation_integer(direction_count) or float(direction_count) not in [1.0, float(DIRECTIONS)]:
+		return _presentation_error("invalid_direction_count", "Presentation direction_count must be 1 for a single-heading study or 8.")
+	if not definition.frames is Array or definition.frames.size() != int(direction_count) * frames_per_direction:
+		return _presentation_error("invalid_frames", "Frames must contain direction_count sets of frames_per_direction entries (default eight).")
 	if not definition.clips is Dictionary or not definition.clips.has("idle"):
 		return _presentation_error("invalid_clips", "Clips must be a dictionary containing idle.")
 	var normalized_clips: Dictionary = {}
@@ -218,6 +221,7 @@ static func prepare_presentation(definition: Dictionary) -> Dictionary:
 	return {"ok": true, "error_code": "", "reason": "", "entry": {
 		"custom_presentation": true, "texture": texture, "display_scale": display_scale,
 		"frames": normalized_frames, "frames_per_direction": frames_per_direction,
+		"direction_count": int(direction_count),
 		"clips": normalized_clips, "fps": float(definition.fps),
 		"contact_shadow_half_size": shadow_half_size, "visual_bounds": visual_bounds,
 		"head_anchor": Vector2(0.0, occupied_bounds.position.y) if has_occupied_bounds else Vector2.ZERO}}
@@ -241,7 +245,7 @@ static func presentation_frame(entry: Dictionary, direction: int, animation: Str
 			if not is_finite(elapsed_frames):
 				elapsed_frames = fposmod(safe_seconds, float(clip.y) / fps) * fps
 			frame = floori(fposmod(elapsed_frames, float(clip.y)))
-	return posmod(direction, DIRECTIONS) * frames_per_direction + clip.x + frame
+	return posmod(direction, int(entry.get("direction_count", DIRECTIONS))) * frames_per_direction + clip.x + frame
 
 static func presentation_source_rect(entry: Dictionary, index: int) -> Rect2:
 	if entry.get("custom_presentation", false):

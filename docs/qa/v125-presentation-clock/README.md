@@ -30,16 +30,12 @@ authoritative state and save bytes during presentation operations.
 
 ## Asset blocker and unverified boundaries
 
-The intended source is `ranger-locomotion-preview.zip`, expected SHA256
-`31a0e0e38260f279e8fb01b05fff468e8e3e386aa980cc192110823cdefb0dce`.
-The source assets have not been integrated or inspected in this checkout, and
-their content hash has not been verified here.
+The single-heading sample is now archived in `art-studies/v125`, source commit
+`1cd353b68be4f45922de8de31ba4fff93252dc36`. Subsequent independent movement
+integration, native captures and focused checks are recorded in
+[the movement preview evidence](../v125-ranger-motion/README.md).
 
-The independent single-direction ranger preview is therefore still pending.
-The supplied 80% Walk / 20% Jog, 0.743682-second cycle, 16 right-facing frames,
-128x192 source cells, 64x96 projected display, foot [64,158], world scale
-`1 / (2 * 0.65)`, movement 240 world units/second and projected speed 156 px/second
-are integration requirements, not verified results here. New ranger movement,
-contact shadow and rendered contour acceptance have not been checked. No new
-eight-direction, Idle or Attack art is claimed. Full suites, long-duration
-checks, Windows exports and packaging were not run.
+That entry remains an optional east-only movement study. The formal default
+hero is not replaced, and no complete eight-direction, Idle or Attack art is
+claimed. This clock-fix record does not itself certify the later images. Full
+suites, long-duration checks, Windows exports and packaging were not run.
