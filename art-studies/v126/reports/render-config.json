@@ -1,0 +1,96 @@
+{
+  "cell_size": [
+    160,
+    224
+  ],
+  "density": 2,
+  "display_cell_size": [
+    80.0,
+    112.0
+  ],
+  "root_anchor_px": [
+    80.0,
+    174.00003719329834
+  ],
+  "fixed_ground_assembly_z": 0.003971691709011793,
+  "camera_elevation_degrees": 55,
+  "horizontal_display_px_per_m": 47.407407407407405,
+  "depth_display_px_per_m": 38.83387469221887,
+  "height_display_px_per_m": 27.191771797382927,
+  "direction_order": [
+    "e",
+    "se",
+    "s",
+    "sw",
+    "w",
+    "nw",
+    "n",
+    "ne"
+  ],
+  "direction_yaw_degrees": {
+    "e": 90,
+    "se": 45,
+    "s": 0,
+    "sw": -45,
+    "w": -90,
+    "nw": -135,
+    "n": 180,
+    "ne": 135
+  },
+  "forward_local": [
+    0,
+    -1,
+    0
+  ],
+  "forward_screen_basis": "camera at -Y; screen X=worldX; screenY=-sin55*worldY-cos55*worldZ",
+  "actions": {
+    "idle": "Game_Idle_Loop",
+    "walk": "Trial_Walk80_Jog20_Loop",
+    "attack": "Game_Cast_Simple_Composite"
+  },
+  "source_frames": {
+    "idle": [
+      0.0,
+      7.5,
+      15.0,
+      22.5,
+      30.0,
+      37.5,
+      45.0,
+      52.5,
+      60.0,
+      67.5
+    ],
+    "walk": [
+      0.0,
+      1.875,
+      3.75,
+      5.625,
+      7.5,
+      9.375,
+      11.25,
+      13.125,
+      15.0,
+      16.875,
+      18.75,
+      20.625,
+      22.5,
+      24.375,
+      26.25,
+      28.125
+    ],
+    "attack": [
+      23,
+      25.5,
+      28,
+      30.5,
+      33,
+      38
+    ]
+  },
+  "source_blend_sha256": "57d8c438d9d82e7dcfec79e51ea5b5adf7b8a527c96d9fbd2c811a293ae3c671",
+  "samples_per_pixel": 12,
+  "ground_rendered": false,
+  "shadow_contract": "body-only alpha; runtime draws independent foot-anchored shadow",
+  "attack_sampling_note": "f23->38 recovery-only slice. Nominal12fps source samples23,25.5,28,30.5,33,35.5; final sample is deliberately replaced by sourcef38 to retain neutral recovery endpoint. First5 unchanged; last interval is5source frames rather than2.5; endpoint is sampled2.5source frames later than the nominal last sample. Does not set release, damage or cooldown."
+}
