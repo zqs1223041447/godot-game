@@ -4,6 +4,16 @@ On 2026-10-08 the user rejected the KayKit cartoon skeleton style. Its cancelled
 
 This comparison branch starts from approved production main `cf90d198b7b376b801e8363ca4f1a9105f5f1eb8` and changes documentation only.
 
+## Updated priority: Clint Bellanger Skeleton Warrior
+
+The parent selected [Skeleton Warrior](https://opengameart.org/content/skeleton-warrior) as the first candidate after reviewing the author's GIF. The author describes this as a rigged model for small prerendered sprites, with Stance 4, Walk 8, Attack 4, Cast 4, Block 2, Hit/Die 6, and Aim Crossbow 4 frames. These remain page claims until the actual file is inspected. Lack of UV maps is consistent with the intended prerendered material workflow and is not itself a rejection criterion.
+
+The model page states CC-BY 3.0 and Clint Bellanger authorship. Its included [Skull Bastard Sword](https://opengameart.org/content/skull-bastard-sword) separately requires the credit: “Concept by Misha. Model by Clint Bellanger”. Preserve both credits if using the asset.
+
+The single direct download of the author's `skeleton_0.blend` failed with the same explicit `Tunnel connection failed: 403 Forbidden`; see `skeleton-download.json`. No bytes or SHA, Blender import result, rig/action evidence, or new render are available from this environment. This is a source-network block, not a Blender compatibility failure. No proxy/mirror workaround or old Blender installation was attempted.
+
+Resume with these exact official bytes supplied by the parent. Disable Blender autoexec and never run the embedded old render script. First inspect modern Blender mesh/action loading using our own script, then make a small original-proportion preview. Only a proven modern-reader error should trigger a separately documented official legacy-Blender data conversion. The two Zombie packages below are backups, not parallel rendering tasks. No Sketchfab login was attempted.
+
 | Candidate | Author page | Author-stated license | Author-stated actions | Actual package inspection |
 | --- | --- | --- | --- | --- |
 | Thin Zombie | [Rosswet Mobile](https://opengameart.org/content/thin-zombie-awake-zombie-asset) | CC-BY 3.0, attribution Rosswet Mobile | Idle, Walk/Walk2, Run, attacks, deaths, hurts | Not downloaded |
