@@ -1,0 +1,363 @@
+{
+	"checks": 89,
+	"evidence": [
+		{
+			"label": "Immutable baseline55 fixture: town",
+			"ok": true
+		},
+		{
+			"label": "Full frozen55 validation and decode: town",
+			"ok": true
+		},
+		{
+			"label": "Pure55→56 changes only version and leaves source/RNG intact: town",
+			"ok": true
+		},
+		{
+			"label": "Exact saved field retained town/revision",
+			"ok": true
+		},
+		{
+			"label": "Exact saved field retained town/items",
+			"ok": true
+		},
+		{
+			"label": "Exact saved field retained town/locations",
+			"ok": true
+		},
+		{
+			"label": "Exact saved field retained town/next_item_serial",
+			"ok": true
+		},
+		{
+			"label": "Exact saved field retained town/skill_groups",
+			"ok": true
+		},
+		{
+			"label": "Exact saved field retained town/bindings",
+			"ok": true
+		},
+		{
+			"label": "Exact saved field retained town/talents",
+			"ok": true
+		},
+		{
+			"label": "Exact saved field retained town/progress",
+			"ok": true
+		},
+		{
+			"label": "Exact saved field retained town/crafting",
+			"ok": true
+		},
+		{
+			"label": "Exact saved field retained town/migration_ledger",
+			"ok": true
+		},
+		{
+			"label": "Exact saved field retained town/journey",
+			"ok": true
+		},
+		{
+			"label": "All existing build stats unchanged before new allocation: town",
+			"ok": true
+		},
+		{
+			"label": "Actual55 load publishes exact current state including active journey",
+			"ok": true
+		},
+		{
+			"label": "Chained migration persists and publishes once",
+			"ok": true
+		},
+		{
+			"label": "Original version55 bytes backed up",
+			"ok": true
+		},
+		{
+			"label": "Explicit migration notice",
+			"ok": true
+		},
+		{
+			"label": "Notice names exact new effect and preservation",
+			"ok": true
+		},
+		{
+			"label": "Independent current reopen performs no rewrite",
+			"ok": true
+		},
+		{
+			"label": "Repeat load retains committed bytes",
+			"ok": true
+		},
+		{
+			"label": "Immutable baseline55 fixture: active",
+			"ok": true
+		},
+		{
+			"label": "Full frozen55 validation and decode: active",
+			"ok": true
+		},
+		{
+			"label": "Pure55→56 changes only version and leaves source/RNG intact: active",
+			"ok": true
+		},
+		{
+			"label": "Exact saved field retained active/revision",
+			"ok": true
+		},
+		{
+			"label": "Exact saved field retained active/items",
+			"ok": true
+		},
+		{
+			"label": "Exact saved field retained active/locations",
+			"ok": true
+		},
+		{
+			"label": "Exact saved field retained active/next_item_serial",
+			"ok": true
+		},
+		{
+			"label": "Exact saved field retained active/skill_groups",
+			"ok": true
+		},
+		{
+			"label": "Exact saved field retained active/bindings",
+			"ok": true
+		},
+		{
+			"label": "Exact saved field retained active/talents",
+			"ok": true
+		},
+		{
+			"label": "Exact saved field retained active/progress",
+			"ok": true
+		},
+		{
+			"label": "Exact saved field retained active/crafting",
+			"ok": true
+		},
+		{
+			"label": "Exact saved field retained active/migration_ledger",
+			"ok": true
+		},
+		{
+			"label": "Exact saved field retained active/journey",
+			"ok": true
+		},
+		{
+			"label": "All existing build stats unchanged before new allocation: active",
+			"ok": true
+		},
+		{
+			"label": "Frozen55 stats match pre-edit captured production oracle",
+			"ok": true
+		},
+		{
+			"label": "Actual55 load publishes exact current state including active journey",
+			"ok": true
+		},
+		{
+			"label": "Chained migration persists and publishes once",
+			"ok": true
+		},
+		{
+			"label": "Original version55 bytes backed up",
+			"ok": true
+		},
+		{
+			"label": "Explicit migration notice",
+			"ok": true
+		},
+		{
+			"label": "Notice names exact new effect and preservation",
+			"ok": true
+		},
+		{
+			"label": "Independent current reopen performs no rewrite",
+			"ok": true
+		},
+		{
+			"label": "Repeat load retains committed bytes",
+			"ok": true
+		},
+		{
+			"label": "Failed55 upgrade leaves memory unpublished: backup",
+			"ok": true
+		},
+		{
+			"label": "Original/concurrent source bytes preserved: backup",
+			"ok": true
+		},
+		{
+			"label": "Backup and conflict checks precede final write: backup",
+			"ok": true
+		},
+		{
+			"label": "Failed55 upgrade leaves memory unpublished: collision",
+			"ok": true
+		},
+		{
+			"label": "Original/concurrent source bytes preserved: collision",
+			"ok": true
+		},
+		{
+			"label": "Backup and conflict checks precede final write: collision",
+			"ok": true
+		},
+		{
+			"label": "Never overwrite a conflicting backup",
+			"ok": true
+		},
+		{
+			"label": "Failed55 upgrade leaves memory unpublished: external",
+			"ok": true
+		},
+		{
+			"label": "Original/concurrent source bytes preserved: external",
+			"ok": true
+		},
+		{
+			"label": "Backup and conflict checks precede final write: external",
+			"ok": true
+		},
+		{
+			"label": "Failed final commit retains exact original backup",
+			"ok": true
+		},
+		{
+			"label": "Inject final atomic migration failure",
+			"ok": true
+		},
+		{
+			"label": "Failed55 upgrade leaves memory unpublished: atomic",
+			"ok": true
+		},
+		{
+			"label": "Original/concurrent source bytes preserved: atomic",
+			"ok": true
+		},
+		{
+			"label": "Backup and conflict checks precede final write: atomic",
+			"ok": true
+		},
+		{
+			"label": "Failed final commit retains exact original backup",
+			"ok": true
+		},
+		{
+			"label": "After fault removal same source/backup migrates exactly once",
+			"ok": true
+		},
+		{
+			"label": "Optional callback cannot bypass frozen native validation: target",
+			"ok": true
+		},
+		{
+			"label": "Invalid historical/future file protected before backup or publish: target",
+			"ok": true
+		},
+		{
+			"label": "Optional callback cannot bypass frozen native validation: points",
+			"ok": true
+		},
+		{
+			"label": "Invalid historical/future file protected before backup or publish: points",
+			"ok": true
+		},
+		{
+			"label": "Optional callback cannot bypass frozen native validation: items",
+			"ok": true
+		},
+		{
+			"label": "Invalid historical/future file protected before backup or publish: items",
+			"ok": true
+		},
+		{
+			"label": "Optional callback cannot bypass frozen native validation: progress",
+			"ok": true
+		},
+		{
+			"label": "Invalid historical/future file protected before backup or publish: progress",
+			"ok": true
+		},
+		{
+			"label": "Optional callback cannot bypass frozen native validation: future",
+			"ok": true
+		},
+		{
+			"label": "Invalid historical/future file protected before backup or publish: future",
+			"ok": true
+		},
+		{
+			"label": "Existing54→55 step still targets frozen55 rather than56",
+			"ok": true
+		},
+		{
+			"label": "Actual54 load publishes exact current state including active journey",
+			"ok": true
+		},
+		{
+			"label": "Chained migration persists and publishes once",
+			"ok": true
+		},
+		{
+			"label": "Original version54 bytes backed up",
+			"ok": true
+		},
+		{
+			"label": "No intermediate backup: 55",
+			"ok": true
+		},
+		{
+			"label": "Explicit migration notice",
+			"ok": true
+		},
+		{
+			"label": "Independent current reopen performs no rewrite",
+			"ok": true
+		},
+		{
+			"label": "Repeat load retains committed bytes",
+			"ok": true
+		},
+		{
+			"label": "Actual53 load publishes exact current state including active journey",
+			"ok": true
+		},
+		{
+			"label": "Chained migration persists and publishes once",
+			"ok": true
+		},
+		{
+			"label": "Original version53 bytes backed up",
+			"ok": true
+		},
+		{
+			"label": "No intermediate backup: 54",
+			"ok": true
+		},
+		{
+			"label": "No intermediate backup: 55",
+			"ok": true
+		},
+		{
+			"label": "Explicit migration notice",
+			"ok": true
+		},
+		{
+			"label": "Independent current reopen performs no rewrite",
+			"ok": true
+		},
+		{
+			"label": "Repeat load retains committed bytes",
+			"ok": true
+		},
+		{
+			"label": "No new equipment vocabulary",
+			"ok": true
+		}
+	],
+	"failed_labels": [],
+	"failures": 0
+}

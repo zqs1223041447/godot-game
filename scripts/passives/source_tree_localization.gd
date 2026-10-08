@@ -12,6 +12,16 @@ const TERM_NOTE := "词缀说明：提高/降低为同类加算；额外提高/�
 # A parser match is not sufficient by itself. These closed-world groups name
 # the actual runtime paths that consume each parsed stat after SourceTree.apply_stats.
 const STAT_CONSUMER_GROUPS := {
+	"iron_grip": {
+		"evidence":"source_tree_runtime.gd::apply_stats -> combat_data.gd::snapshot -> iron_grip_rules.gd::projectile_modifier -> damage_resolver.gd tag scope and physical lineage",
+		"code_checks":[
+			{"path":"scripts/passives/source_tree_runtime.gd","contains":"result.iron_grip = 1.0"},
+			{"path":"scripts/combat/combat_data.gd","contains":"IronGrip.projectile_modifier(value)"},
+			{"path":"scripts/combat/iron_grip_rules.gd","contains":"\"excluded_tags\":[\"melee\"]"},
+			{"path":"scripts/combat/damage_resolver.gd","contains":"modifier.get(\"excluded_tags\", [])"},
+		],
+		"stats":["iron_grip"]
+	},
 	"cold_ailment_duration": {
 		"evidence": "source_tree_runtime.gd::apply_stats -> combat_data.gd::snapshot -> cold_ailment_duration_rules.gd::from_stats/duration -> skill_compiler.gd frost recipe.slow and FrostLock.derived_policy -> existing main.gd slow/freeze consumers",
 		"code_checks": [

@@ -16,8 +16,8 @@ func success_case(source: Dictionary, version: int) -> void:
 	var game := Game.new(); var events := [0]
 	game.changed.connect(func():events[0] += 1)
 	var source55: Dictionary = source if version == 55 else Migration.migrate_v54(source if version == 54 else Prior.migrate_v53(source))
-	var wanted: Dictionary = expected(source55)
-	check(game.load_build(path) and game.snapshot() == wanted,"Actual%d load publishes exact56 state including active journey" % version)
+	var wanted: Dictionary = expected(source55,Rules.VERSION)
+	check(game.load_build(path) and game.snapshot() == wanted,"Actual%d load publishes exact current state including active journey" % version)
 	check(game.save_attempts == 1 and game.successful_saves == 1 and events[0] == 1,"Chained migration persists and publishes once")
 	check(FileAccess.get_file_as_bytes(path+".v%d-backup.json" % version) == bytes,"Original version%d bytes backed up" % version)
 	for intermediate: int in [54,55]:
@@ -26,7 +26,7 @@ func success_case(source: Dictionary, version: int) -> void:
 	if version == 55: check(game.migration_message.contains("与自然合一") and game.migration_message.contains("24%") and game.migration_message.contains("不额外赠物或赠点"),"Notice names exact new effect and preservation")
 	var saved := FileAccess.get_file_as_bytes(path)
 	var reopened := Game.new()
-	check(reopened.load_build(path) and reopened.snapshot() == wanted and reopened.save_attempts == 0 and not reopened.migrated_from_legacy,"Independent56 reopen performs no rewrite")
+	check(reopened.load_build(path) and reopened.snapshot() == wanted and reopened.save_attempts == 0 and not reopened.migrated_from_legacy,"Independent current reopen performs no rewrite")
 	check(game.load_build(path) and game.save_attempts == 1 and events[0] == 2 and FileAccess.get_file_as_bytes(path) == saved,"Repeat load retains committed bytes")
 func failure_case(source: Dictionary, failure: String) -> void:
 	var path := "user://nature-failure-"+failure+".json"
@@ -43,7 +43,7 @@ func failure_case(source: Dictionary, failure: String) -> void:
 	if failure in ["external","atomic"]: check(FileAccess.get_file_as_bytes(path+".v55-backup.json") == bytes,"Failed final commit retains exact original backup")
 	if failure == "collision": check(FileAccess.get_file_as_string(path+".v55-backup.json") == "existing backup","Never overwrite a conflicting backup")
 	if failure == "atomic":
-		check(DirAccess.remove_absolute(path+".tmp") == OK and store.load_build(path) and store.snapshot() == expected(source) and events[0] == 1 and store.successful_saves == 1,"After fault removal same source/backup migrates exactly once")
+		check(DirAccess.remove_absolute(path+".tmp") == OK and store.load_build(path) and store.snapshot() == expected(source,Rules.VERSION) and events[0] == 1 and store.successful_saves == 1,"After fault removal same source/backup migrates exactly once")
 func invalid_case(source: Dictionary, bad: String) -> void:
 	var invalid: Dictionary = source.duplicate(true)
 	match bad:
@@ -51,7 +51,7 @@ func invalid_case(source: Dictionary, bad: String) -> void:
 		"points": invalid.talents.normal_points += 1
 		"items": invalid.items.clear()
 		"progress": invalid.journey.best_tiers.erase("ruins_garden")
-		"future": invalid.version = 57
+		"future": invalid.version = Rules.VERSION + 1
 	check(Nature.migrate_v55(invalid,func(_v):return "").is_empty(),"Optional callback cannot bypass frozen native validation: "+bad)
 	var path := "user://nature-invalid-"+bad+".json"
 	var bytes := JSON.stringify(invalid).to_utf8_buffer(); write(path,bytes)

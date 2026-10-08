@@ -1,0 +1,638 @@
+{
+	"checks": 156,
+	"evidence": [
+		{
+			"label": "All4874 frozen56 node/mastery effects exactly match pre-edit production oracle",
+			"ok": false
+		},
+		{
+			"label": "Exact frozen wording grants only the keystone flag",
+			"ok": true
+		},
+		{
+			"label": "Only existing keystone12926 contains this exact source line",
+			"ok": true
+		},
+		{
+			"label": "Frozen old policy rejects12926: 19",
+			"ok": true
+		},
+		{
+			"label": "New cache remains independent of old policy",
+			"ok": true
+		},
+		{
+			"label": "Frozen old policy rejects12926: 38",
+			"ok": true
+		},
+		{
+			"label": "New cache remains independent of old policy",
+			"ok": true
+		},
+		{
+			"label": "Frozen old policy rejects12926: 44",
+			"ok": true
+		},
+		{
+			"label": "New cache remains independent of old policy",
+			"ok": true
+		},
+		{
+			"label": "Frozen old policy rejects12926: 48",
+			"ok": true
+		},
+		{
+			"label": "New cache remains independent of old policy",
+			"ok": true
+		},
+		{
+			"label": "Frozen old policy rejects12926: 55",
+			"ok": true
+		},
+		{
+			"label": "New cache remains independent of old policy",
+			"ok": true
+		},
+		{
+			"label": "Frozen old policy rejects12926: 56",
+			"ok": true
+		},
+		{
+			"label": "New cache remains independent of old policy",
+			"ok": true
+		},
+		{
+			"label": "Disabled prior vocabulary cannot admit Iron Grip",
+			"ok": true
+		},
+		{
+			"label": "Other wording/conditions/spell extension remain rejected: Strength's Damage bonus applies to Projectile Attack Damage as well as Melee Damage.",
+			"ok": true
+		},
+		{
+			"label": "Other wording/conditions/spell extension remain rejected:  Strength's Damage bonus applies to Projectile Attack Damage as well as Melee Damage",
+			"ok": true
+		},
+		{
+			"label": "Other wording/conditions/spell extension remain rejected: Strength's Damage bonus applies to Projectile Attack Damage as well as Melee Damage\n",
+			"ok": true
+		},
+		{
+			"label": "Other wording/conditions/spell extension remain rejected: Strength's Damage bonus applies to Projectile Attack Damage as well as Melee Damage while Chilled",
+			"ok": true
+		},
+		{
+			"label": "Other wording/conditions/spell extension remain rejected: Strength's Damage bonus applies to all Spell Damage as well",
+			"ok": true
+		},
+		{
+			"label": "Chinese description uses actual consumer; implemented marker cleared",
+			"ok": true
+		},
+		{
+			"label": "Consumer evidence points to production code: scripts/passives/source_tree_runtime.gd",
+			"ok": true
+		},
+		{
+			"label": "Consumer evidence points to production code: scripts/combat/combat_data.gd",
+			"ok": true
+		},
+		{
+			"label": "Consumer evidence points to production code: scripts/combat/iron_grip_rules.gd",
+			"ok": true
+		},
+		{
+			"label": "Consumer evidence points to production code: scripts/combat/damage_resolver.gd",
+			"ok": true
+		},
+		{
+			"label": "Actual ordinary graph edge: 50459→39821",
+			"ok": true
+		},
+		{
+			"label": "Actual ordinary graph edge: 39821→52904",
+			"ok": true
+		},
+		{
+			"label": "Actual ordinary graph edge: 52904→444",
+			"ok": true
+		},
+		{
+			"label": "Actual ordinary graph edge: 444→61306",
+			"ok": true
+		},
+		{
+			"label": "Actual ordinary graph edge: 61306→63139",
+			"ok": true
+		},
+		{
+			"label": "Actual ordinary graph edge: 63139→5408",
+			"ok": true
+		},
+		{
+			"label": "Actual ordinary graph edge: 5408→11497",
+			"ok": true
+		},
+		{
+			"label": "Actual ordinary graph edge: 11497→238",
+			"ok": true
+		},
+		{
+			"label": "Actual ordinary graph edge: 238→10829",
+			"ok": true
+		},
+		{
+			"label": "Actual ordinary graph edge: 10829→16167",
+			"ok": true
+		},
+		{
+			"label": "Actual ordinary graph edge: 16167→19144",
+			"ok": true
+		},
+		{
+			"label": "Actual ordinary graph edge: 19144→28330",
+			"ok": true
+		},
+		{
+			"label": "Actual ordinary graph edge: 28330→46578",
+			"ok": true
+		},
+		{
+			"label": "Actual ordinary graph edge: 46578→12926",
+			"ok": true
+		},
+		{
+			"label": "Projectile physical adds only Strength20, excludes other melee30: 160.00000000 expected 160.00000000",
+			"ok": true
+		},
+		{
+			"label": "Native nonphysical component excludes Strength: fire: 130.00000000 expected 130.00000000",
+			"ok": true
+		},
+		{
+			"label": "Native nonphysical component excludes Strength: cold: 130.00000000 expected 130.00000000",
+			"ok": true
+		},
+		{
+			"label": "Native nonphysical component excludes Strength: lightning: 130.00000000 expected 130.00000000",
+			"ok": true
+		},
+		{
+			"label": "Native nonphysical component excludes Strength: chaos: 130.00000000 expected 130.00000000",
+			"ok": true
+		},
+		{
+			"label": "Existing melee includes native Strength once and retains other melee INC: 170.00000000 expected 170.00000000",
+			"ok": true
+		},
+		{
+			"label": "Hybrid melee/projectile tags receive native Strength only once: 190.00000000 expected 190.00000000",
+			"ok": true
+		},
+		{
+			"label": "Physical spell/independent explosion/nonattack excludes Strength extension: 140.00000000 expected 140.00000000",
+			"ok": true
+		},
+		{
+			"label": "Physical spell/independent explosion/nonattack excludes Strength extension: 120.00000000 expected 120.00000000",
+			"ok": true
+		},
+		{
+			"label": "Physical spell/independent explosion/nonattack excludes Strength extension: 140.00000000 expected 140.00000000",
+			"ok": true
+		},
+		{
+			"label": "Strength remains additive INC before independent MORE: 200.00000000 expected 200.00000000",
+			"ok": true
+		},
+		{
+			"label": "Physical conversion remainder retains Strength once: fire: 96.00000000 expected 96.00000000",
+			"ok": true
+		},
+		{
+			"label": "Converted ancestry inherits Strength; native added fire stays separate: fire: 194.00000000 expected 194.00000000",
+			"ok": true
+		},
+		{
+			"label": "Converted hybrid excludes duplicate Strength: fire: 114.00000000 expected 114.00000000",
+			"ok": true
+		},
+		{
+			"label": "Even converted physical spell excludes Strength: fire: 84.00000000 expected 84.00000000",
+			"ok": true
+		},
+		{
+			"label": "Physical conversion remainder retains Strength once: cold: 96.00000000 expected 96.00000000",
+			"ok": true
+		},
+		{
+			"label": "Converted ancestry inherits Strength; native added fire stays separate: cold: 64.00000000 expected 64.00000000",
+			"ok": true
+		},
+		{
+			"label": "Converted hybrid excludes duplicate Strength: cold: 114.00000000 expected 114.00000000",
+			"ok": true
+		},
+		{
+			"label": "Even converted physical spell excludes Strength: cold: 84.00000000 expected 84.00000000",
+			"ok": true
+		},
+		{
+			"label": "Physical conversion remainder retains Strength once: lightning: 96.00000000 expected 96.00000000",
+			"ok": true
+		},
+		{
+			"label": "Converted ancestry inherits Strength; native added fire stays separate: lightning: 64.00000000 expected 64.00000000",
+			"ok": true
+		},
+		{
+			"label": "Converted hybrid excludes duplicate Strength: lightning: 114.00000000 expected 114.00000000",
+			"ok": true
+		},
+		{
+			"label": "Even converted physical spell excludes Strength: lightning: 84.00000000 expected 84.00000000",
+			"ok": true
+		},
+		{
+			"label": "Normalized three-way physical ancestry20×1.6 plus native fire40×1.3: 84.00000000 expected 84.00000000",
+			"ok": true
+		},
+		{
+			"label": "Three-way converted cold only: 32.00000000 expected 32.00000000",
+			"ok": true
+		},
+		{
+			"label": "Three-way converted lightning only: 32.00000000 expected 32.00000000",
+			"ok": true
+		},
+		{
+			"label": "Existing Strength five-point staircase preserved: 0: 100.00000000 expected 100.00000000",
+			"ok": true
+		},
+		{
+			"label": "Existing Strength five-point staircase preserved: 4: 100.00000000 expected 100.00000000",
+			"ok": true
+		},
+		{
+			"label": "Existing Strength five-point staircase preserved: 5: 101.00000000 expected 101.00000000",
+			"ok": true
+		},
+		{
+			"label": "Existing Strength five-point staircase preserved: 9: 101.00000000 expected 101.00000000",
+			"ok": true
+		},
+		{
+			"label": "Existing Strength five-point staircase preserved: 10: 102.00000000 expected 102.00000000",
+			"ok": true
+		},
+		{
+			"label": "Existing Strength five-point staircase preserved: 44: 108.00000000 expected 108.00000000",
+			"ok": true
+		},
+		{
+			"label": "Existing Strength five-point staircase preserved: 54: 110.00000000 expected 110.00000000",
+			"ok": true
+		},
+		{
+			"label": "Absent/zero flag leaves old snapshot shape untouched",
+			"ok": true
+		},
+		{
+			"label": "Malformed source flag cannot silently enable rule",
+			"ok": true
+		},
+		{
+			"label": "Malformed source flag cannot silently enable rule",
+			"ok": true
+		},
+		{
+			"label": "Malformed source flag cannot silently enable rule",
+			"ok": true
+		},
+		{
+			"label": "Malformed source flag cannot silently enable rule",
+			"ok": true
+		},
+		{
+			"label": "Malformed source flag cannot silently enable rule",
+			"ok": true
+		},
+		{
+			"label": "Context cannot substitute aggregate melee INC for Strength source",
+			"ok": true
+		},
+		{
+			"label": "Exclusion predicate validates tags at compiler boundary",
+			"ok": true
+		},
+		{
+			"label": "Actual75-root earned fixture loads with13 paid predecessors and two remaining points",
+			"ok": true
+		},
+		{
+			"label": "Inactive stats and snapshot exactly match pre-edit56 production",
+			"ok": false
+		},
+		{
+			"label": "Inactive compiled packet/result matches baseline: basic",
+			"ok": false
+		},
+		{
+			"label": "Inactive compiled packet/result matches baseline: cleave",
+			"ok": false
+		},
+		{
+			"label": "Inactive compiled packet/result matches baseline: frost",
+			"ok": false
+		},
+		{
+			"label": "Inactive compiled packet/result matches baseline: tornado",
+			"ok": false
+		},
+		{
+			"label": "Actual detail/canvas/allocate button agree",
+			"ok": true
+		},
+		{
+			"label": "Inject isolated final allocation write fault",
+			"ok": true
+		},
+		{
+			"label": "Failed allocation spends no point, publishes no rule, preserves file/snapshot",
+			"ok": true
+		},
+		{
+			"label": "Remove only isolated allocation fault",
+			"ok": true
+		},
+		{
+			"label": "Actual button pays14th point exactly once",
+			"ok": true
+		},
+		{
+			"label": "Allocation preserves unrelated saved field: version",
+			"ok": true
+		},
+		{
+			"label": "Allocation preserves unrelated saved field: items",
+			"ok": true
+		},
+		{
+			"label": "Allocation preserves unrelated saved field: locations",
+			"ok": true
+		},
+		{
+			"label": "Allocation preserves unrelated saved field: next_item_serial",
+			"ok": true
+		},
+		{
+			"label": "Allocation preserves unrelated saved field: skill_groups",
+			"ok": true
+		},
+		{
+			"label": "Allocation preserves unrelated saved field: bindings",
+			"ok": true
+		},
+		{
+			"label": "Allocation preserves unrelated saved field: progress",
+			"ok": true
+		},
+		{
+			"label": "Allocation preserves unrelated saved field: crafting",
+			"ok": true
+		},
+		{
+			"label": "Allocation preserves unrelated saved field: migration_ledger",
+			"ok": true
+		},
+		{
+			"label": "Allocation preserves unrelated saved field: journey",
+			"ok": true
+		},
+		{
+			"label": "Keystone adds only rule flag; all attribute and native melee/resource benefits unchanged",
+			"ok": true
+		},
+		{
+			"label": "Actual relevant skill compilation: basic",
+			"ok": true
+		},
+		{
+			"label": "Actual Strength44 gives one8% physical INC: %s/%s: 2.08000000 expected 2.08000000",
+			"ok": true
+		},
+		{
+			"label": "Actual native fire unchanged: basic/projectile: 0.00000000 expected 0.00000000",
+			"ok": true
+		},
+		{
+			"label": "Actual relevant skill compilation: tornado",
+			"ok": true
+		},
+		{
+			"label": "Actual Strength44 gives one8% physical INC: %s/%s: 1.24800000 expected 1.24800000",
+			"ok": true
+		},
+		{
+			"label": "Actual native fire unchanged: tornado/parent: 10.40000000 expected 10.40000000",
+			"ok": true
+		},
+		{
+			"label": "Actual Strength44 gives one8% physical INC: %s/%s: 0.87360000 expected 0.87360000",
+			"ok": true
+		},
+		{
+			"label": "Actual native fire unchanged: tornado/child: 7.28000000 expected 7.28000000",
+			"ok": true
+		},
+		{
+			"label": "Actual melee/spell/independent explosion unchanged: tornado/secondary",
+			"ok": true
+		},
+		{
+			"label": "Actual relevant skill compilation: cleave",
+			"ok": true
+		},
+		{
+			"label": "Actual melee/spell/independent explosion unchanged: cleave/direct",
+			"ok": true
+		},
+		{
+			"label": "Actual relevant skill compilation: frost",
+			"ok": true
+		},
+		{
+			"label": "Actual melee/spell/independent explosion unchanged: frost/projectile",
+			"ok": true
+		},
+		{
+			"label": "Actual Main creates admitted finite hit target",
+			"ok": true
+		},
+		{
+			"label": "Actual Main settles one finite admitted hit: basic",
+			"ok": true
+		},
+		{
+			"label": "Actual Main settles one finite admitted hit: basic",
+			"ok": true
+		},
+		{
+			"label": "Real health-loss scope: basic: 2.08000000 expected 2.08000000",
+			"ok": true
+		},
+		{
+			"label": "Actual Main settles one finite admitted hit: tornado",
+			"ok": true
+		},
+		{
+			"label": "Actual Main settles one finite admitted hit: tornado",
+			"ok": true
+		},
+		{
+			"label": "Real health-loss scope: tornado: 1.24800000 expected 1.24800000",
+			"ok": true
+		},
+		{
+			"label": "Actual Main settles one finite admitted hit: cleave",
+			"ok": true
+		},
+		{
+			"label": "Actual Main settles one finite admitted hit: cleave",
+			"ok": true
+		},
+		{
+			"label": "Real health-loss scope: cleave: 0.00000000 expected 0.00000000",
+			"ok": true
+		},
+		{
+			"label": "Actual Main settles one finite admitted hit: frost",
+			"ok": true
+		},
+		{
+			"label": "Actual Main settles one finite admitted hit: frost",
+			"ok": true
+		},
+		{
+			"label": "Real health-loss scope: frost: 0.00000000 expected 0.00000000",
+			"ok": true
+		},
+		{
+			"label": "Allocated57 reloads without rewrite",
+			"ok": true
+		},
+		{
+			"label": "Old56 legal set cannot be expanded by injecting target allocation",
+			"ok": true
+		},
+		{
+			"label": "Original bridge refund legality preserved",
+			"ok": true
+		},
+		{
+			"label": "Actual Main flight target exists",
+			"ok": true
+		},
+		{
+			"label": "Actual projectile launched before Strength change",
+			"ok": true
+		},
+		{
+			"label": "Final earned point legally buys an existing adjacent Strength+10 node: 30733",
+			"ok": true
+		},
+		{
+			"label": "Final Strength changes44→54 via real paid node: 54.00000000 expected 54.00000000",
+			"ok": true
+		},
+		{
+			"label": "Next snapshot has new native10%: 0.10000000 expected 0.10000000",
+			"ok": true
+		},
+		{
+			"label": "In-flight packet/snapshot unchanged by successful Strength transaction",
+			"ok": true
+		},
+		{
+			"label": "Actual next projectile launches with Strength54",
+			"ok": true
+		},
+		{
+			"label": "Old and new projectiles follow real contact/settlement path",
+			"ok": true
+		},
+		{
+			"label": "Old in-flight health loss uses frozen8%, not current10%: 28.08000000 expected 28.08000000",
+			"ok": true
+		},
+		{
+			"label": "Next projectile uses frozen new10%: 28.60000000 expected 28.60000000",
+			"ok": true
+		},
+		{
+			"label": "Both actual carrier settlements produce exact health loss: 56.68000000 expected 56.68000000",
+			"ok": true
+		},
+		{
+			"label": "Refund only the test's paid Strength branch",
+			"ok": true
+		},
+		{
+			"label": "Actual carrier launches before keystone refund",
+			"ok": true
+		},
+		{
+			"label": "Temporarily refund target during flight",
+			"ok": true
+		},
+		{
+			"label": "Captured carrier retains keystone after refund; future casts lose rule",
+			"ok": true
+		},
+		{
+			"label": "Active in-flight snapshot unchanged by keystone refund",
+			"ok": true
+		},
+		{
+			"label": "Refunded keystone's old carrier still settles once",
+			"ok": true
+		},
+		{
+			"label": "Actual old-flight health loss retains8% after keystone refund: 28.08000000 expected 28.08000000",
+			"ok": true
+		},
+		{
+			"label": "Restore paid target for remaining refund proof",
+			"ok": true
+		},
+		{
+			"label": "Strength flight test restores only its paid node/target, with exact original point balance",
+			"ok": true
+		},
+		{
+			"label": "Inject isolated refund write fault",
+			"ok": true
+		},
+		{
+			"label": "Failed refund keeps point, flag and save",
+			"ok": true
+		},
+		{
+			"label": "Remove isolated refund fault",
+			"ok": true
+		},
+		{
+			"label": "Successful leaf refund returns one point and exact original stats/snapshot",
+			"ok": true
+		}
+	],
+	"failed_labels": [
+		"All4874 frozen56 node/mastery effects exactly match pre-edit production oracle",
+		"Inactive stats and snapshot exactly match pre-edit56 production",
+		"Inactive compiled packet/result matches baseline: basic",
+		"Inactive compiled packet/result matches baseline: cleave",
+		"Inactive compiled packet/result matches baseline: frost",
+		"Inactive compiled packet/result matches baseline: tornado"
+	],
+	"failures": 6
+}

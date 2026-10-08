@@ -13,6 +13,7 @@ const Area = preload("res://scripts/combat/area_support_rules.gd")
 const Critical=preload("res://scripts/combat/critical_strike_rules.gd")
 const Resolute = preload("res://scripts/combat/resolute_technique_rules.gd")
 const Precise = preload("res://scripts/combat/precise_technique_rules.gd")
+const IronGrip = preload("res://scripts/combat/iron_grip_rules.gd")
 const Burn=preload("res://scripts/combat/burn_rules.gd")
 const FrostLock = preload("res://scripts/combat/frost_lock_rules.gd")
 const ColdDuration = preload("res://scripts/combat/cold_ailment_duration_rules.gd")
@@ -412,15 +413,15 @@ static func _snapshot_error(snapshot: Dictionary) -> String:
 		if not modifier is Dictionary or not modifier.get("mode") in ["increased", "more"] or not _number(modifier.get("value")):
 			return "施放快照伤害修饰器无效"
 		for field: Variant in modifier:
-			if not field in ["id", "mode", "value", "all_tags", "skills", "damage_types"]:
+			if not field in ["id", "mode", "value", "all_tags", "excluded_tags", "skills", "damage_types"]:
 				return "施放快照伤害修饰器含未知字段"
 		# Also catch support-bearing snapshots whose compiled count was removed.
 		if str(modifier.get("id", "")).begins_with("support:"):
 			return "施放快照含已编译辅助；必须从基础构筑快照重新编译"
-		for key: String in ["all_tags", "skills", "damage_types"]:
+		for key: String in ["all_tags", "excluded_tags", "skills", "damage_types"]:
 			if not Supports._string_array(modifier.get(key, [])):
 				return "施放快照伤害作用域无效"
-		for tag: String in modifier.get("all_tags", []):
+		for tag: String in modifier.get("all_tags", []) + modifier.get("excluded_tags", []):
 			if not BaseCompiler.TAGS.has(tag):
 				return "施放快照伤害标签无效"
 		for id: String in modifier.get("skills", []):
@@ -439,6 +440,8 @@ static func _snapshot_error(snapshot: Dictionary) -> String:
 	if not resolute_error.is_empty(): return resolute_error
 	var precise_error: String = Precise.snapshot_error(snapshot)
 	if not precise_error.is_empty(): return precise_error
+	var iron_grip_error: String = IronGrip.snapshot_error(snapshot)
+	if not iron_grip_error.is_empty(): return iron_grip_error
 	return ColdDuration.snapshot_error(snapshot)
 
 

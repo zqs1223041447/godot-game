@@ -252,7 +252,7 @@ static func _conversion_part(base: float, lineage: Array[String], packet: Dictio
 		var modifier: Variant = modifiers[index]
 		if not modifier is Dictionary:
 			return {}
-		for field: String in ["all_tags", "skills", "damage_types"]:
+		for field: String in ["all_tags", "excluded_tags", "skills", "damage_types"]:
 			var scope: Variant = modifier.get(field, [])
 			if not scope is Array:
 				return {}
@@ -286,6 +286,8 @@ static func _conversion_part(base: float, lineage: Array[String], packet: Dictio
 
 
 static func _matches_lineage(modifier: Dictionary, packet: Dictionary, lineage: Array[String]) -> bool:
+	for tag: String in modifier.get("excluded_tags", []):
+		if packet.tags.has(tag): return false
 	for tag: String in modifier.get("all_tags", []):
 		if not packet.tags.has(tag):
 			return false
@@ -310,6 +312,8 @@ static func _conversion_failure(reason: String) -> Dictionary:
 
 
 static func matches(modifier: Dictionary, packet: Dictionary, type: String) -> bool:
+	for tag: String in modifier.get("excluded_tags", []):
+		if packet.get("tags", []).has(tag): return false
 	var allowed: Array = modifier.get("damage_types", [])
 	if not allowed.is_empty() and not allowed.has(type):
 		return false

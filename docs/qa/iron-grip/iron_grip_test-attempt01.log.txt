@@ -1,0 +1,62 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+ERROR: All4874 frozen56 node/mastery effects exactly match pre-edit production oracle
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/attack_elemental_passive_test.gd:24)
+       [1] check (res://tests/iron_grip_test.gd:10)
+       [2] source_checks (res://tests/iron_grip_test.gd:17)
+       [3] run (res://tests/iron_grip_test.gd:213)
+ERROR: Inactive stats and snapshot exactly match pre-edit56 production
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/attack_elemental_passive_test.gd:24)
+       [1] check (res://tests/iron_grip_test.gd:10)
+       [2] transaction_checks (res://tests/iron_grip_test.gd:94)
+       [3] run (res://tests/iron_grip_test.gd:213)
+ERROR: Inactive compiled packet/result matches baseline: basic
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/attack_elemental_passive_test.gd:24)
+       [1] check (res://tests/iron_grip_test.gd:10)
+       [2] transaction_checks (res://tests/iron_grip_test.gd:98)
+       [3] run (res://tests/iron_grip_test.gd:213)
+ERROR: Inactive compiled packet/result matches baseline: cleave
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/attack_elemental_passive_test.gd:24)
+       [1] check (res://tests/iron_grip_test.gd:10)
+       [2] transaction_checks (res://tests/iron_grip_test.gd:98)
+       [3] run (res://tests/iron_grip_test.gd:213)
+ERROR: Inactive compiled packet/result matches baseline: frost
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/attack_elemental_passive_test.gd:24)
+       [1] check (res://tests/iron_grip_test.gd:10)
+       [2] transaction_checks (res://tests/iron_grip_test.gd:98)
+       [3] run (res://tests/iron_grip_test.gd:213)
+ERROR: Inactive compiled packet/result matches baseline: tornado
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/attack_elemental_passive_test.gd:24)
+       [1] check (res://tests/iron_grip_test.gd:10)
+       [2] transaction_checks (res://tests/iron_grip_test.gd:98)
+       [3] run (res://tests/iron_grip_test.gd:213)
+ERROR: String formatting error: unsupported format character.
+   at: validated_evaluate (core/variant/variant_op.h:770)
+   GDScript backtrace (most recent call first):
+       [0] transaction_checks (res://tests/iron_grip_test.gd:126)
+       [1] run (res://tests/iron_grip_test.gd:213)
+ERROR: String formatting error: unsupported format character.
+   at: validated_evaluate (core/variant/variant_op.h:770)
+   GDScript backtrace (most recent call first):
+       [0] transaction_checks (res://tests/iron_grip_test.gd:126)
+       [1] run (res://tests/iron_grip_test.gd:213)
+ERROR: String formatting error: unsupported format character.
+   at: validated_evaluate (core/variant/variant_op.h:770)
+   GDScript backtrace (most recent call first):
+       [0] transaction_checks (res://tests/iron_grip_test.gd:126)
+       [1] run (res://tests/iron_grip_test.gd:213)
+godot-game: playable arena ready
+godot-game: playable arena ready
+IRON_GRIP checks=156 failures=6

@@ -61,7 +61,16 @@ def one_with_nature_effect(rule):
 
 
 def one_with_nature_save_rule(rule):
-    return '<p>当前56先完整验证冻结旧55，再保存原字节备份'+esc(rule['backup_suffix'])+'并升级；仅改变版本，保留原分配、点数、物品、技能与旅程字段，不赠点或物品。失败不发布新构筑，冲突备份不覆盖。进行中地图字段保全不等于恢复整场战斗：怪物、弹体和状态计时不会由此迁移重建，启动离场仍按原规则处理。</p><p>旧55程序拒绝56文件；回退需先另存56，再人工恢复原55备份，备份不含升级后进度。保存前检查外部修改，不承诺覆盖任意并发时序或断电级持久性。</p>'
+    return '<p>55→56步骤先完整验证冻结旧55，再保存原字节备份'+esc(rule['backup_suffix'])+'并升级；仅改变版本，保留原分配、点数、物品、技能与旅程字段，不赠点或物品。失败不发布新构筑，冲突备份不覆盖。进行中地图字段保全不等于恢复整场战斗：怪物、弹体和状态计时不会由此迁移重建，启动离场仍按原规则处理。</p><p>旧55程序拒绝56文件；回退需先另存56，再人工恢复原55备份，备份不含升级后进度。保存前检查外部修改，不承诺覆盖任意并发时序或断电级持久性。</p>'
+
+
+def iron_grip_effect(rule):
+    route=' → '.join(esc(node) for node in rule['ranger_route'])
+    return '<p>schema '+str(rule['minimum_save_version'])+'：力量每5点取整提供1%物理伤害提高，原近战收益保持。铁握持仅将力量自身的这一加成扩展到投射物攻击；装备及其他近战INC不转移，近战／投射物双标签只计一次。物理转换出的元素分量按原物理谱系继承；原生或新增纯元素伤害、法术与独立次级爆炸不获得此项。力量变化和退款只影响后续施放，飞行中的攻击保留快照。</p><p>普通游侠路线（起点免费，共14点）：'+route+'。仍需实际成长预算、连通与合法付点；旧56继续拒绝此基石。</p>'
+
+
+def iron_grip_save_rule(rule):
+    return '<p>当前57先完整验证冻结旧56，再写原字节备份'+esc(rule['backup_suffix'])+'，仅升级版本并开放完整铁握持机制。原分配、点数、物品、技能和旅程全部保全，不赠点、不赠物。沿用备份冲突、外部修改检查及原子写失败保护；失败不发布候选内存。</p><p>旧56程序拒绝57文件。回退需先另存57，再人工恢复升级前56备份；备份不含升级后进度，不能手改版本伪装回退。进行中地图字段保全不等于恢复战斗快照，启动离场仍按既有规则。保存不承诺任意并发时序或断电级持久性。</p>'
 
 
 def chaos_value(key, amount, ratio=False):
@@ -1522,6 +1531,7 @@ def build(data, art):
         body=facts([('源版本','3.29.1'),('分区',esc(localized['partition'])),('状态',esc(state)),('源坐标',esc(', '.join(number(x) for x in p['position'])) if p['has_position'] else '源记录没有坐标，不虚构布局')])
         if effect['unsupported']:body+=details('未实现的源效果 · 整节点锁定','<p>'+lines(source_lines(effect['unsupported']))+'</p>')
         if key == '15842' and 'one_with_nature' in data: body+=one_with_nature_effect(data['one_with_nature'])
+        if key == '12926' and 'iron_grip' in data: body+=iron_grip_effect(data['iron_grip'])
         for choice in p['mastery_choices']:
             label='已执行' if allowed and choice['execution']['status']=='full' else '未完整执行 · 不可选择'
             body+=details(f'精通 {choice["effect"]} · {label}','<p>'+lines(localized['mastery_choices'][str(choice['effect'])])+'</p>')
@@ -2137,6 +2147,8 @@ def build(data, art):
         rule_defs.append(('encircling_cleave', RULE_TITLES['encircling_cleave'], '仅裂刃斩：180度前方半圆改为360度整圆，主命中×0.75、魔力×1.25；半径与冷却保持。', encircling_cleave_rule(data,link,facts), 'implemented'))
     for key,name,summary,body,status in rule_defs:
         if key == 'source_tree' and 'one_with_nature' in data: body+=one_with_nature_save_rule(data['one_with_nature'])
+        if key == 'source_tree' and 'iron_grip' in data: body+=iron_grip_save_rule(data['iron_grip'])
+        if key == 'source_defenses' and 'iron_grip' in data: body+='<p>分配'+link('source_passives','12926','铁握持')+'后，力量原生物理伤害提高同时适用投射物攻击，双标签只计一次；不会把其他近战INC转移。实际收益、转换范围与14点游侠路线见该基石说明。</p>'
         cards.append(add('rules',key,name,summary,body,{'implemented':'已实现规则','research':'研究来源','planned':'未实现边界'}[status],status))
     category_counts={cat:sum(x['cat']==cat for x in records) for cat,_ in CATEGORIES}
     nav=''.join(f'<a href="#category-{cat}" id="category-{cat}" class="nav-link" data-category="{cat}"><span>{label}</span><span>{category_counts[cat]}</span></a>' for cat,label in CATEGORIES)

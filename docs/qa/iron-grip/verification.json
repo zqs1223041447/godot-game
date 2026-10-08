@@ -1,0 +1,46 @@
+{
+  "baseline": "904fd5e5e61f8169dda07e91566364d6bd42bfb6",
+  "schema": 57,
+  "results": [
+    {
+      "suite": "iron_grip_test",
+      "exit_code": 0,
+      "checks": 156,
+      "failures": 0
+    },
+    {
+      "suite": "iron_grip_migration_test",
+      "exit_code": 0,
+      "checks": 77,
+      "failures": 0
+    },
+    {
+      "suite": "one_with_nature_migration_test",
+      "exit_code": 0,
+      "checks": 89,
+      "failures": 0
+    }
+  ],
+  "sha256": {
+    "docs/qa/iron-grip/schema56-active.json": "420a747d1c8fe681bdd36ecadb467a6fbcf27e16ba1f74b231ac0128b3102085",
+    "docs/qa/iron-grip/schema56-oracle.json": "289b6bc9656e013837153fbf7736d36899400d039fc5e76c9902ccc51bbc6f30",
+    "docs/qa/iron-grip/schema56-town.json": "681fa1f9ebe009f70131c22f8c0e2a6f6a14facec18a9f2a4d53fc00270b5f0e",
+    "scripts/combat/iron_grip_rules.gd": "2ff88d05a6816f0fd619291ddb07d57eb17610b531edde70d916d925045dac8d",
+    "scripts/passives/source_tree_runtime.gd": "50fef15a0eee60d6f36ac5c4d330d5146c60b5c63cd5b4af3117635ec49111ed",
+    "scripts/save/iron_grip_migration.gd": "da35bfdb9e6818f11846c32c0d9850eb5981674c1a5ce65380d4d8d38204eb6c",
+    "scripts/combat/damage_resolver.gd": "51a3c503c2cae7b7ec1513976de1ed03f41c3677b892b8b55ab47bdb0b2ef6e5",
+    "scripts/combat/combat_data.gd": "04f74f9495ce92f4079fd6a51b3bfbe89990ec5cdc936d87ffc20184ddb87f24",
+    "scripts/combat/skill_compiler.gd": "4f9453f63ed103d0fd67c3642a7edf33f9611a658261bb28b3a00dca5a892838",
+    "scripts/passives/source_stat_patterns.gd": "2ca37adbc9b03b7f44551002ca2c332001f967d07d603bc8dafcc16d52950c78",
+    "scripts/passives/source_tree_localization.gd": "d841cfe52f466717f545ecca5353c744218ce8320892743fda5a6e43b7eb6aa1",
+    "data/passive_source/localization_zh_CN.json": "7636c85d0d47efad4353c7e290b5eaae3dc8134e60d1830d04b297db7b995918",
+    "scripts/save/one_with_nature_migration.gd": "20ab4279157631010c4bc7ff7b548a02e50e2c0bc10f7f69e24f1fd692adb278",
+    "scripts/save/canonical_build_rules.gd": "607a1f897c6f563ecb218a0c4232553b640befa2e86271c5a601d98d9a6c41d3",
+    "scripts/save/canonical_build_store.gd": "98933db82f743de7af37ac320db3966d173db545f74c499047090f81c63416bf",
+    "scripts/canonical_game_state.gd": "90d41a219d2e2d04b72c16c3cbd038936f7388df5c35dc9b3ce0ea30732f1c3f",
+    "tests/iron_grip_test.gd": "2ebb64eb0085c5aaaf5fb2d93ba79a6c2e1316d2f13511d6768a50516b6e2d62",
+    "tests/iron_grip_migration_test.gd": "ed881dea18469116a4a0eda683c504ed59c08af40481bde0ad3639664dc9f02a",
+    "tests/one_with_nature_migration_test.gd": "04677ce29d302423ed9594ad59458156182bb2af6c43f94fe78970c52f96be9a"
+  },
+  "scope": "Iron Grip and immediate frozen55→56 chain only; no skill matrix, long run or export"
+}
