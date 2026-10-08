@@ -1,6 +1,6 @@
 # KayKit Skeletons 1.0：单模型源归档
 
-仅保留作者的`Skeleton_Minion.glb`、同目录`skeleton_texture.png`和`LICENSE.txt`，以及下载溯源清单。未下载整套角色包，未混用1.1。文件原字节保持，校验见[source-manifest.json](source/source-manifest.json)。
+当前跟踪范围仅保留作者`LICENSE.txt`和下载溯源清单，不再跟踪原GLB/texture。已存在的本地原字节保留并忽略；没有重写历史。复现脚本必须显式传入外部`--source-dir`，缺文件会说明固定官方来源，不自动下载或运行作者脚本。未下载整套角色包，未混用1.1。校验与固定原文件URL见[source-manifest.json](source/source-manifest.json)。
 
 - 官方仓库：[KayKit Character Pack Skeletons 1.0](https://github.com/KayKit-Game-Assets/KayKit-Character-Pack-Skeletons-1.0/tree/15b62b9bad122f72926c10fb14d622c73819fa54)
 - 固定提交：`15b62b9bad122f72926c10fb14d622c73819fa54`

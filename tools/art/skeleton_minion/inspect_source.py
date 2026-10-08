@@ -6,13 +6,15 @@ import struct
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
-SOURCE = ROOT / 'art-studies/kaykit-skeleton-minion-1.0/source'
 OUTPUT = ROOT / 'docs/qa/kaykit-skeleton-minion/source-audit.json'
 SELECTED = ['Idle', 'Walking_D_Skeletons', 'Unarmed_Melee_Attack_Punch_A']
 
 
-def inspect():
-    data = (SOURCE / 'Skeleton_Minion.glb').read_bytes()
+def inspect(source):
+    for name in ['Skeleton_Minion.glb', 'skeleton_texture.png', 'LICENSE.txt']:
+        if not (source / name).is_file():
+            raise SystemExit(f'Missing external author file: {source / name}. Obtain the pinned official files listed in art-studies/kaykit-skeleton-minion-1.0/source/source-manifest.json; no automatic download is performed.')
+    data = (source / 'Skeleton_Minion.glb').read_bytes()
     assert len(data) == 4814296
     assert hashlib.sha1(b'blob 4814296\0' + data).hexdigest() == '3b7e7ee4f1c8dd6dd99ddad27824ef1dc52ff12d'
     magic, version, length = struct.unpack_from('<4sII', data)
@@ -69,8 +71,8 @@ def inspect():
     image_view = gltf['bufferViews'][gltf['images'][0]['bufferView']]
     start = image_view.get('byteOffset', 0)
     embedded = binary[start:start + image_view['byteLength']]
-    assert embedded == (SOURCE / 'skeleton_texture.png').read_bytes()
-    assert b'Creative Commons Zero, CC0' in (SOURCE / 'LICENSE.txt').read_bytes()
+    assert embedded == (source / 'skeleton_texture.png').read_bytes()
+    assert b'Creative Commons Zero, CC0' in (source / 'LICENSE.txt').read_bytes()
     return {'ok': True, 'locked_commit': '15b62b9bad122f72926c10fb14d622c73819fa54',
             'glb_sha256': hashlib.sha256(data).hexdigest(), 'skin_count': 1, 'joint_count': 41,
             'skinned_mesh_nodes': 9, 'embedded_texture_equals_adjacent_png': True,
@@ -79,6 +81,9 @@ def inspect():
 
 
 if __name__ == '__main__':
-    report = inspect()
+    import argparse
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--source-dir', type=Path, required=True, help='External directory with the three pinned official author files; no download is performed')
+    report = inspect(parser.parse_args().source_dir)
     OUTPUT.write_text(json.dumps(report, ensure_ascii=False, indent=2) + '\n')
     print('Verified one 41-joint skin, nine skinned meshes, actual selected varying curves and embedded texture')

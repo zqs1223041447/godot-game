@@ -1,6 +1,6 @@
 # KayKit Skeleton Minion：三方向近战美术小样
 
-仅做新亡灵外观族的适配研究，未接入正式敌人、替换蜘蛛或改变游戏机制。来源固定为[KayKit Skeletons 1.0指定提交](../../../art-studies/kaykit-skeleton-minion-1.0/README.md)，保留作者三份原文件及CC0许可证，不上传整个角色包。
+仅做新亡灵外观族的适配研究，未接入正式敌人、替换蜘蛛或改变游戏机制。来源固定为[KayKit Skeletons 1.0指定提交](../../../art-studies/kaykit-skeleton-minion-1.0/README.md)，当前只跟踪CC0原许可证、SHA与官方固定URL；原模型和贴图保留在外部本地工作源，不再跟踪，不重写Git历史。
 
 ## 同源检查
 
@@ -23,9 +23,9 @@ PNG透明背景没有烘焙地面或阴影。Godot隔离画廊复用现有`Fanta
 ## 复现与后续最小接入
 
 ```sh
-python3 tools/art/skeleton_minion/inspect_source.py
-blender --background --factory-startup --disable-autoexec --python tools/art/skeleton_minion/render_sample.py
-blender --background --factory-startup --disable-autoexec --python tools/art/skeleton_minion/render_sample.py -- --head-pitch -25
+python3 tools/art/skeleton_minion/inspect_source.py --source-dir /absolute/path/to/external/source
+blender --background --factory-startup --disable-autoexec --python tools/art/skeleton_minion/render_sample.py -- --source-dir /absolute/path/to/external/source
+blender --background --factory-startup --disable-autoexec --python tools/art/skeleton_minion/render_sample.py -- --source-dir /absolute/path/to/external/source --head-pitch -25
 python3 tools/art/skeleton_minion/pack_sample.py
 bash tools/art/skeleton_minion/run_preview.sh -- head-fit
 # 或 -- author；无参数默认展示头部适配样。

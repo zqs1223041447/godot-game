@@ -13,18 +13,19 @@ from mathutils import Matrix, Vector
 from bpy_extras.object_utils import world_to_camera_view
 
 ROOT = Path(__file__).resolve().parents[3]
-SOURCE = ROOT / 'art-studies/kaykit-skeleton-minion-1.0/source/Skeleton_Minion.glb'
 OUTPUT = ROOT / 'docs/qa/kaykit-skeleton-minion'
-HEAD_PITCH_DEGREES = 0.0
-if '--' in sys.argv:
-    import argparse
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--head-pitch', type=float, default=0)
-    args = parser.parse_args(sys.argv[sys.argv.index('--') + 1:])
-    HEAD_PITCH_DEGREES = args.head_pitch
-    assert HEAD_PITCH_DEGREES in (0, -25), 'Only the bounded static fit comparison is supported'
-    if HEAD_PITCH_DEGREES:
-        OUTPUT = OUTPUT / 'head-fit'
+import argparse
+parser = argparse.ArgumentParser()
+parser.add_argument('--source-dir', type=Path, required=True, help='External author source directory; no download is performed')
+parser.add_argument('--head-pitch', type=float, default=0)
+args = parser.parse_args(sys.argv[sys.argv.index('--') + 1:] if '--' in sys.argv else [])
+SOURCE = args.source_dir / 'Skeleton_Minion.glb'
+if not SOURCE.is_file():
+    raise SystemExit(f'Missing external author model: {SOURCE}. Use the pinned official URL and SHA in art-studies/kaykit-skeleton-minion-1.0/source/source-manifest.json; no automatic download is performed.')
+HEAD_PITCH_DEGREES = args.head_pitch
+assert HEAD_PITCH_DEGREES in (0, -25), 'Only the bounded static fit comparison is supported'
+if HEAD_PITCH_DEGREES:
+    OUTPUT = OUTPUT / 'head-fit'
 FRAMES = OUTPUT / 'frames'
 FRAMES.mkdir(parents=True, exist_ok=True)
 assert hashlib.sha256(SOURCE.read_bytes()).hexdigest() == '6ffc003f895bed0b074791e0e490846210a2e2f8fc7da300aba53cc185f95968'
