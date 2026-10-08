@@ -37,8 +37,11 @@ func run() -> void:
 	check(arena.save_build() and arena.world_context().normal_town and arena.state.crafting_balance()==0,"Fresh actual formal town starts without free currency")
 	var before:=observe()
 	var rows: Array = arena.town_stock("equipment_merchant")
-	check(rows.size()==Purchase.Gear.all_base_ids().size(),"Formal merchant lists existing bases only")
-	for row: Dictionary in rows:check(row.paid and row.cost==8 and not row.available and row.purchase_kind=="equipment","Zero-shard stock uses paid base metadata")
+	var base_rows: Array = rows.filter(func(row: Dictionary):return row.purchase_kind=="equipment")
+	var flask_rows: Array = rows.filter(func(row: Dictionary):return row.purchase_kind=="flask")
+	check(rows.size()==17 and base_rows.size()==15 and base_rows.size()==Purchase.Gear.all_base_ids().size() and flask_rows.size()==2,"Formal merchant lists all15existing bases and two existing flasks")
+	for row: Dictionary in base_rows:check(row.paid and row.cost==8 and not row.available and row.purchase_kind=="equipment","Zero-shard stock uses paid base metadata")
+	check(flask_rows.all(func(row: Dictionary):return row.paid and row.cost==8 and not row.available and row.definition_id in ["flask:life","flask:mana"]),"Two flask rows use paid existing definitions")
 	check(observe()==before,"Reading stock has no authoritative effects")
 	check(not arena.town_buy("base:forgeblade",arena.state.revision()).ok and observe()==before,"Free supplier cannot write paid base into normal save")
 	for cycle: int in range(4):
@@ -54,7 +57,7 @@ func run() -> void:
 	square._buttons[merchant_index].pressed.emit();await process_frame
 	check(panel._service=="equipment_merchant" and not panel._service_buttons.equipment_merchant.disabled,"Existing town route exposes actual formal equipment service")
 	rows=arena.town_stock("equipment_merchant")
-	check(panel._content.get_child_count()==rows.size(),"Actual panel renders one row per catalog base")
+	check(panel._content.get_child_count()==rows.size(),"Actual panel renders all15base rows and two flask rows")
 	var index := -1
 	for i: int in range(rows.size()):
 		if rows[i].base_id=="forgeblade": index=i;break
