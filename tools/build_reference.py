@@ -462,7 +462,9 @@ def exploration_rule_body(data, facts):
         ('已实现', ('五张大地图（含正式遗迹庭园）' if native else '四张大地图') + '、入图全体真实实体、感知/受伤唤醒、醒后追击、全清完成与跟随相机'),
         ('唯一当前配置', 'mechanism_config={}；非空配置在扣费前拒绝，optional_encounters=[]'),
         ('生成记录', 'spawn_key独立于actor ID游标且在本图内稳定；保留根/实体ID、来源组、序号、物种、位置、空encounter_id、standard奖励路线直到本图结束'),
-        ('奖励边界', '当前只允许standard；未知路线拒绝，不回退普通奖励'),
+        ('必需清图', '已登记普通根怪和首领谱系；活后代、待出生队列和未合法结算的死亡均阻塞，HUD与完成判断同口径；未知成员不静默忽略'),
+        ('进度与普通奖励', '根怪完成按已登记身份推进，不依赖普通奖励资格；经验、普通掉落、里程碑与药剂充能沿原standard资格，后代不增加奖励'),
+        ('奖励边界', '当前只允许standard；缺失来源或未知路线在死亡账本前拒绝，不回退普通奖励；未结算必需尸体保留，合法处理过的身份不重复结算'),
         ('前四图历史持续存档记录' if native else '持续存档', ('schema53 / source49 / equipment51；' if 'long_stride' in data else 'schema52 / source49 / equipment51；' if 'encircling_cleave' in data else 'schema51 / source49 / equipment51；' if 'chaos_defense' in data else 'schema50 / source49 / equipment46保持；')+'不把临时探索或未来机制状态写入旧profile')])
     if entry.get('formal_boss_equipment_recovery'):
         body += '<p data-boss-equipment-recovery="true">' + esc(entry['formal_boss_equipment_recovery']) + '</p>'
@@ -1686,7 +1688,7 @@ def build(data, art):
                 summary=f'使用背包中的真实碎片进行{basic_count}项现有工艺与{target_count}种定向重铸；资格和费用以当前装备报价为准。'
             if key == 'map_device' and 'exploration_maps' in data:
                 summary = '从城镇进入固定等级的大地图，全部初始怪物入图即在场，自由探索并全清返城领奖。'
-                body = facts([('地图', ' · '.join(link('maps', mid, entry['name']) for mid, entry in data['exploration_maps']['maps'].items())), ('正式成长', '每图独立I/II/III，费用0/4/8、基础完成奖4/8/12校准碎片，另计原地图词缀奖励'), ('入图', '一次建立全部真实普通根怪与首领；远处实体可被命中，唤醒后持续追击'), ('结束', '全部根怪、首领、活后代和待出生队列清空后完成，返城领取冻结奖励'), ('独立入口', '竞技练习保留旧入侵；免费测试地图与正式档案隔离')]) + '<p>' + link('rules', 'exploration_maps', '探索规则与未来机制边界') + '</p>'
+                body = facts([('地图', ' · '.join(link('maps', mid, entry['name']) for mid, entry in data['exploration_maps']['maps'].items())), ('正式成长', '每图独立I/II/III，费用0/4/8、基础完成奖4/8/12校准碎片，另计原地图词缀奖励'), ('入图', '一次建立全部真实普通根怪与首领；远处实体可被命中，唤醒后持续追击'), ('结束', '必需根怪、首领及其谱系死亡合法结算，活后代和待出生队列清空后完成；未结算必需尸体阻塞，返城领取冻结奖励'), ('独立入口', '竞技练习保留旧入侵；免费测试地图与正式档案隔离')]) + '<p>' + link('rules', 'exploration_maps', '探索规则与未来机制边界') + '</p>'
                 if 'ruins_garden' in data['exploration_maps']['maps']:
                     body += '<p>遗迹庭园：正式城镇选择地图、阶级与词缀 → 准备地图 → 开启地图；原生地形准备通过后才入图。它有独立正式进度，不属于历史免费测试地图入口。</p>'
             cards.append(add('town_services',key,service['name'],summary,body,'正式购买 · 测试供应' if key=='skill_merchant' or (key=='equipment_merchant' and 'equipment_purchase' in town) or (key=='jewel_merchant' and 'jewel_purchase' in town) else ('探索地图入口' if key=='map_device' and 'exploration_maps' in data else '可选测试服务')))

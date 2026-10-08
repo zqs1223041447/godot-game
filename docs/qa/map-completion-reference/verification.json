@@ -1,0 +1,32 @@
+{
+  "runtime_base_commit": "b46668444d1f491a7eb1d37adb63fc6e41016d45",
+  "scope": "Only existing map contract/route prose and two existing F8 cards plus corresponding search text; empty future configuration and unchanged default content. No runtime or Godot export/test reruns.",
+  "cards": 3816,
+  "changed_cards": [
+    "rules-exploration_maps",
+    "town_services-map_device"
+  ],
+  "unchanged_cards": 3814,
+  "changed_search_records": [
+    "rules-exploration_maps",
+    "town_services-map_device"
+  ],
+  "outside_cards_and_search_byte_identical": true,
+  "related_links_checked": 13,
+  "preserved_sha256": {
+    "docs/reference/catalog.json": "947332f66fa36feb554495fd9a2ca9278442b3747c9f531e9fa19a3e29f6ab4f",
+    "docs/reference/source-tree-coverage.json": "2a9af5601c6e30cab0d18a00ce7d1343c113e61d23bcf00b5a4f2ab729e051b7",
+    "docs/reference/reference.js": "98da0c764af965a5e975df9c674ee0fcd1278bcf4c301273d007235ff3e47c43",
+    "docs/reference/reference.css": "effec6de6fa1aeb530bfaba4783bcecd13a232466d8384291f15214759e96ed3",
+    "scripts/main.gd": "b6fb9031178d76d38cbecf7c39137a0587ed7dc962eb467667050b0b7b87bc3d",
+    "scripts/world/map_run_state.gd": "f185c78ad93aeaf498aee12b9479b76d0be062b9f3ca9b6f8bb83d4b27ecad89",
+    "scripts/monsters/monster_runtime.gd": "6280cbf52cdf373af0fe8d564b77b2ad1f1e934b207d37988f69bbdd404751a3"
+  },
+  "inputs_sha256": {
+    "docs/EXPLORATION_MAPS.zh-CN.md": "b641406029763592ef1950f36800dd971b014ec0e79601e9e429aa275f2e0f0e",
+    "docs/EXPLORATION_ROUTES.zh-CN.md": "0fcb1869ac3980f6302fb5ea8e7098992f12c95ebc637a59bce3a845d0056cf5",
+    "tools/build_reference.py": "48319a45394a543dbd19ea61785e7a73d06da167ab56d52cc1e1e06711767f5f",
+    "docs/reference/index.html": "c32e72b062f31f09f705915fa5a73a2f72753a09aa6f91f99a1016b05e7782e2"
+  },
+  "initial_check_note": "First scoped search assertion wrongly prefixed record IDs with their category although IDs were already complete. Corrected the assertion; documentation/content was not changed by this correction."
+}
