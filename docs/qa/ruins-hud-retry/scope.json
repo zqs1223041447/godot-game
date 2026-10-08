@@ -1,0 +1,55 @@
+{
+  "baseline": "86350b7ac9a6e55d637ffae51f94973698d09db8",
+  "branch": "codex/ruins-hud-retry",
+  "runtime_changed": [
+    "scripts/game_hud.gd"
+  ],
+  "schema": 55,
+  "all_other_runtime_reference_and_assets_byte_identical": true,
+  "critical_unchanged_sources": [
+    {
+      "path": "scripts/main.gd",
+      "sha256": "d9896b109234b5e7a2fcc10c0ef7f2c46a5225cf27b5214f6fe5450f558e1ad4"
+    },
+    {
+      "path": "scripts/save/canonical_build_rules.gd",
+      "sha256": "46fa346c217b0fa05dfd2dcf254115bde10aaa53899e07a67284f5b1453b932e"
+    },
+    {
+      "path": "scripts/save/canonical_build_store.gd",
+      "sha256": "73c2208f1d2551647e9a9b98b0f00d6ebc53b11864fcd91b376c2d59bba20ce7"
+    },
+    {
+      "path": "scripts/studies/modular_study_session.gd",
+      "sha256": "5878b0fc423f1fc95edd933188d0429314fdfd74c980c197adbd317d08d153d0"
+    },
+    {
+      "path": "scripts/ui/docked_menu_state.gd",
+      "sha256": "9e250bff9e8a5831299716b3f02c047385bbebd0e5220cdc4a0591acdb54a85a"
+    },
+    {
+      "path": "scripts/world/prepared_map_entry.gd",
+      "sha256": "3f231fe160e94c93ebc137e6bb09260f5cae872afb9dce64ac8733bf863ca2fe"
+    }
+  ],
+  "checks": 216,
+  "failures": 0,
+  "checks_by_case": {
+    "setup": 9,
+    "pause / none": 15,
+    "pause / write": 19,
+    "pause / native_readiness": 19,
+    "death / none": 15,
+    "death / write": 19,
+    "death / native_readiness": 19,
+    "waiting / close": 13,
+    "waiting / close_reopen": 13,
+    "waiting / settings": 13,
+    "waiting / death_return": 13,
+    "waiting / world_return": 14,
+    "waiting / model_change": 15,
+    "ordinary / pause": 9,
+    "ordinary / death": 11
+  },
+  "method": "Actual HUD pressed signals; bounded isolated native preparation/save faults; see README.md"
+}

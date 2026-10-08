@@ -57,6 +57,11 @@ var _cleanup_elapsed := 0.0
 var _edition_label: Label
 var _return_dialog: ConfirmationDialog
 var _return_revision := -1
+var _restart_pending := false
+var _restart_menu_owner: RefCounted
+var _restart_menu_snapshot: Dictionary = {}
+var _restart_menu_cancelled := false
+var _restart_run_revision := -1
 var _arena: Node
 var _state
 var _root: Control
@@ -273,6 +278,17 @@ func _sync_menu_views() -> void:
 		return
 	_dismiss_item_hover()
 	var snapshot: Dictionary = _menu_routes.snapshot()
+	if _restart_pending and (_menu_routes != _restart_menu_owner or snapshot != _restart_menu_snapshot):
+		# Main closes the old overlay inside a successful restart, before this
+		# coroutine resumes. Accept only that close of the newly adopted run.
+		var context: Dictionary = _arena.world_context()
+		if _menu_routes == _restart_menu_owner and str(snapshot.overlay).is_empty() \
+				and _arena.run_revision == _restart_run_revision + 1 \
+				and context.mode == "map" and context.map_id == "ruins_garden":
+			_restart_menu_snapshot = snapshot
+		else:
+			_restart_menu_cancelled = true
+			_arena.cancel_map_preparation()
 	var nav: Control = _root.get_node_or_null("Navigation") as Control
 	if is_instance_valid(nav): nav.visible = not bool(snapshot.paused)
 	if not str(snapshot.overlay).is_empty():
@@ -931,6 +947,7 @@ func _rebuild_panel() -> void:
 			_build_pause_panel()
 		"death":
 			_build_death_panel()
+	_update_restart_buttons()
 	if not _state.save_block_reason().is_empty():
 		_panel_footer.text = "原存档已保护，本次进度未写入；请先备份并恢复有效存档"
 		_panel_footer.tooltip_text = _state.save_block_reason()
@@ -1473,9 +1490,35 @@ func _slot_skill(id: String) -> void:
 
 
 func _restart() -> void:
+	if _restart_pending: return
 	var context: Dictionary = _arena.world_context()
 	if str(context.mode) in ["map", "map_complete"] and not bool(context.get("test_mode", false)):
-		var result: Dictionary = _arena.retry_normal_map(int(context.revision))
+		var result: Dictionary
+		if context.get("map_id") == "ruins_garden":
+			var owner: Node = _arena
+			var model: RefCounted = _arena.state
+			var save_path: String = _arena.build_save_path
+			var menu: RefCounted = _menu_routes
+			_restart_menu_owner = menu
+			_restart_menu_snapshot = menu.snapshot()
+			_restart_menu_cancelled = false
+			_restart_run_revision = owner.run_revision
+			_restart_pending = true
+			_update_restart_buttons()
+			result = await owner.retry_native_map(int(context.revision))
+			var current_menu: bool = not _restart_menu_cancelled and is_instance_valid(owner) \
+				and _arena == owner and owner.state == model and owner.build_save_path == save_path \
+				and _menu_routes == menu and menu.snapshot() == _restart_menu_snapshot
+			_restart_pending = false
+			_restart_menu_owner = null
+			_restart_menu_snapshot = {}
+			_update_restart_buttons()
+			if not current_menu: return
+			var current: Dictionary = owner.world_context()
+			var result_revision: int = int(result.get("world", {}).get("revision", -1)) if result.ok else int(context.revision)
+			if int(current.revision) != result_revision: return
+		else:
+			result = _arena.retry_normal_map(int(context.revision))
 		if not bool(result.get("ok", false)):
 			notify(str(result.get("reason", "重新挑战失败")))
 			return
@@ -1484,6 +1527,23 @@ func _restart() -> void:
 	_menu_routes = DockedMenus.new()
 	_sync_menu_views()
 	notify("新一轮试炼开始，构筑已保留")
+
+
+func _update_restart_buttons() -> void:
+	if _root == null: return
+	for stable_name: String in ["RestartButton", "RetryButton"]:
+		var button := _root.find_child(stable_name, true, false) as Button
+		if button == null: continue
+		if _restart_pending:
+			if not button.has_meta("restart_idle"):
+				button.set_meta("restart_idle", {"text": button.text, "disabled": button.disabled})
+			button.disabled = true
+			button.text = "准备地形…"
+		elif button.has_meta("restart_idle"):
+			var idle: Dictionary = button.get_meta("restart_idle")
+			button.text = idle.text
+			button.disabled = idle.disabled
+			button.remove_meta("restart_idle")
 
 
 func _exit_game() -> void:
