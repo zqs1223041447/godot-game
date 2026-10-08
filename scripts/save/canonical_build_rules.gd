@@ -51,7 +51,8 @@ const V50_VERSION := 50
 const V51_VERSION := 51
 const V52_VERSION := 52
 const V53_VERSION := 53
-const VERSION := 54
+const V54_VERSION := 54
+const VERSION := 55
 const LEGACY_MAX_ITEMS := 1024
 const V17_MAX_ITEMS := LEGACY_MAX_ITEMS + 1
 const MAX_ITEMS := V17_MAX_ITEMS + 2 # Two once-only migration bottles; bag capacity is unchanged.
@@ -69,6 +70,12 @@ const BINDABLE_KEYS := [KEY_0, KEY_1, KEY_2, KEY_3, KEY_4, KEY_5, KEY_6, KEY_7, 
 
 static func decode(raw: Variant) -> Dictionary:
 	return _decode(raw, true, VERSION, true)
+
+
+## Freeze every schema54 field and its source policy49 before the new effect opens.
+static func decode_v54(raw: Variant) -> Dictionary:
+	var decoded := _decode(raw, true, V54_VERSION, true)
+	return decoded if reason_v54(decoded).is_empty() else {}
 
 
 static func decode_v18(raw:Variant)->Dictionary:
@@ -367,6 +374,12 @@ static func reason_v29(value: Variant, validate_talents: Callable = Callable(), 
 	return _reason(value, V29_VERSION, true, true, MAX_ITEMS, validate_talents, socket_ids)
 
 
+static func reason_v54(value: Variant, validate_talents: Callable = Callable(), socket_ids: Array = []) -> String:
+	var native_reason := _reason(value, V54_VERSION, true, true, MAX_ITEMS, Callable(), socket_ids)
+	if not native_reason.is_empty(): return native_reason
+	return str(validate_talents.call(value)) if validate_talents.is_valid() else ""
+
+
 static func reason_v53(value: Variant, validate_talents: Callable = Callable(), socket_ids: Array = []) -> String:
 	# Frozen four-map legality and every domain check precede optional callbacks.
 	var native_reason := _reason(value, V53_VERSION, true, true, MAX_ITEMS, Callable(), socket_ids)
@@ -637,7 +650,7 @@ static func _reason(value: Variant, expected_version: int, paged: bool, allow_cu
 	return str(validate_talents.call(value)) if validate_talents.is_valid() else SourceTree.reason(value)
 
 
-## Source-only schemas35/36/38/40/41/44/45/48/49, gem-only42/43/47/52/53 and map-only50/54 define no equipment vocabularies.
+## Source-only schemas35/36/38/40/41/44/45/48/49/55, gem-only42/43/47/52/53 and map-only50/54 define no equipment vocabularies.
 ## Keep save-to-equipment mapping explicit and the Catalog API historically strict.
 static func equipment_vocabulary_for_save_version(save_version: int) -> int:
 	if save_version == 53: return 51

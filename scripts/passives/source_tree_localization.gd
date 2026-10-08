@@ -101,9 +101,10 @@ const STAT_CONSUMER_GROUPS := {
 		"evidence": "combat_data.gd::modifiers -> damage_resolver.gd; canonical_game_state.gd::_stats_for -> main.gd combat/movement/resource tick",
 		"code_checks": [
 			{"path": "scripts/combat/combat_data.gd", "contains": "static func modifiers(stats: Dictionary)"},
+			{"path": "scripts/combat/combat_data.gd", "contains": "\"attack_elemental_increased\": {\"all_tags\": [\"attack\"], \"damage_types\": Damage.ELEMENTS}"},
 			{"path": "scripts/canonical_game_state.gd", "contains": "physical_increased"},
 		],
-		"stats": ["physical_increased", "chaos_increased", "melee_physical_increased", "attack_physical_increased", "global_increased", "projectile_increased", "spell_increased", "fire_increased", "cold_increased", "lightning_increased", "elemental_increased", "area_increased", "attack_speed_increased", "move_speed_increased", "mana_regen_increased"]
+		"stats": ["physical_increased", "chaos_increased", "melee_physical_increased", "attack_physical_increased", "global_increased", "projectile_increased", "spell_increased", "fire_increased", "cold_increased", "lightning_increased", "elemental_increased", "attack_elemental_increased", "area_increased", "attack_speed_increased", "move_speed_increased", "mana_regen_increased"]
 	},
 	"spatial": {
 		"evidence": "source_spatial_rules.gd -> skill_compiler.gd and combat delivery/area resolution",

@@ -149,6 +149,9 @@ const ELEMENTAL_CONVERSION_ENTRIES := {
 # Schema49 only: the complete original node14209 entry. No percentage family.
 const COLD_AILMENT_DURATION_ENTRY := "20% increased Duration of Cold Ailments"
 
+# Schema55 only: one exact effect shared by five existing small nodes.
+const ATTACK_ELEMENTAL_ENTRY := "12% increased Elemental Damage with Attack Skills"
+
 const ZEALOTS_OATH_ENTRY := "Life Regeneration is applied to Energy Shield instead"
 
 const NEGATIVE_PATTERN: String = "^-([0-9]+(?:\\.[0-9]+)?)(?: to maximum (?:Life|Mana|Energy Shield)|% increased (?:Damage|Projectile Damage|Spell Damage|Fire Damage|Cold Damage|Lightning Damage|Elemental Damage|Area Damage|Attack Speed|Movement Speed|Mana Regeneration Rate|maximum Life|maximum Mana|maximum Energy Shield))$"
@@ -164,10 +167,12 @@ static func _expression(pattern: String) -> RegEx:
 	return _regex_cache[pattern]
 
 
-static func parse_line(raw_line: Variant, allow_spatial:bool=true,allow_recharge:bool=true,allow_resource:bool=true,allow_flask:bool=true,allow_critical:bool=true,allow_leech:bool=true,allow_fire_dot:bool=true,allow_faster_burn:bool=true,allow_mana_guard:bool=true,allow_elemental_resistance_cap:bool=true,allow_resolute:bool=true,allow_iron_reflexes:bool=true,allow_zealots_oath:bool=true,allow_physical_fire_conversion:bool=true,allow_precise_technique:bool=true,allow_elemental_conversion:bool=true,allow_cold_ailment_duration:bool=true) -> Dictionary:
+static func parse_line(raw_line: Variant, allow_spatial:bool=true,allow_recharge:bool=true,allow_resource:bool=true,allow_flask:bool=true,allow_critical:bool=true,allow_leech:bool=true,allow_fire_dot:bool=true,allow_faster_burn:bool=true,allow_mana_guard:bool=true,allow_elemental_resistance_cap:bool=true,allow_resolute:bool=true,allow_iron_reflexes:bool=true,allow_zealots_oath:bool=true,allow_physical_fire_conversion:bool=true,allow_precise_technique:bool=true,allow_elemental_conversion:bool=true,allow_cold_ailment_duration:bool=true,allow_attack_elemental:bool=true) -> Dictionary:
 	if not raw_line is String:
 		return _unsupported("输入必须是单行英文字符串")
 	var line: String = raw_line
+	if allow_spatial and allow_recharge and allow_resource and allow_flask and allow_critical and allow_leech and allow_fire_dot and allow_faster_burn and allow_mana_guard and allow_elemental_resistance_cap and allow_resolute and allow_iron_reflexes and allow_zealots_oath and allow_physical_fire_conversion and allow_precise_technique and allow_elemental_conversion and allow_cold_ailment_duration and allow_attack_elemental and line == ATTACK_ELEMENTAL_ENTRY:
+		return {"supported":true,"reason":"","grants":[{"stat":"attack_elemental_increased","value":0.12,"mode":"increased"}]}
 	# Do not split arbitrary multiline entries: both effects must enter together.
 	if allow_spatial and allow_recharge and allow_resource and allow_flask and allow_critical and allow_leech and allow_fire_dot and allow_faster_burn and allow_mana_guard and allow_elemental_resistance_cap and allow_resolute and line == RESOLUTE_TECHNIQUE_ENTRY:
 		return {"supported":true,"reason":"","grants":[{"stat":"resolute_technique","value":1.0,"mode":"flat"}]}

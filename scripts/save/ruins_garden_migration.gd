@@ -10,4 +10,4 @@ static func migrate_v53(source: Variant, validate_talents: Callable = Callable()
 	var candidate: Dictionary = source.duplicate(true)
 	candidate.version = 54
 	candidate.journey.best_tiers["ruins_garden"] = 0
-	return candidate if Rules.reason(candidate, validate_talents, socket_ids).is_empty() else {}
+	return candidate if Rules.reason_v54(candidate, validate_talents, socket_ids).is_empty() else {}
