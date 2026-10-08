@@ -456,6 +456,8 @@ def exploration_rule_body(data, facts):
         ('生成记录', 'spawn_key独立于actor ID游标且在本图内稳定；保留根/实体ID、来源组、序号、物种、位置、空encounter_id、standard奖励路线直到本图结束'),
         ('奖励边界', '当前只允许standard；未知路线拒绝，不回退普通奖励'),
         ('前四图历史持续存档记录' if native else '持续存档', ('schema53 / source49 / equipment51；' if 'long_stride' in data else 'schema52 / source49 / equipment51；' if 'encircling_cleave' in data else 'schema51 / source49 / equipment51；' if 'chaos_defense' in data else 'schema50 / source49 / equipment46保持；')+'不把临时探索或未来机制状态写入旧profile')])
+    if entry.get('formal_boss_equipment_recovery'):
+        body += '<p data-boss-equipment-recovery="true">' + esc(entry['formal_boss_equipment_recovery']) + '</p>'
     if route_distribution:
         body += facts([
             ('当前空间分布', ('每图6处驻点与1位首领；旧庭和遗迹庭园3/5怪各3处，其余地图4/8怪各3处，入图仍为25/37个根实体' if native else '每图6处驻点与1位首领；旧庭3/5怪各3处，其余地图4/8怪各3处，入图仍为25/37个根实体')),
