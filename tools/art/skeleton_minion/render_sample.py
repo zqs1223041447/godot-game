@@ -18,14 +18,21 @@ import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument('--source-dir', type=Path, required=True, help='External author source directory; no download is performed')
 parser.add_argument('--head-pitch', type=float, default=0)
+parser.add_argument('--head-scale', type=float, default=1, choices=[1, .85])
+parser.add_argument('--atlas', action='store_true', help='Eight true headings, Idle4/Walk8/Attack6; retained renderer layout')
 args = parser.parse_args(sys.argv[sys.argv.index('--') + 1:] if '--' in sys.argv else [])
 SOURCE = args.source_dir / 'Skeleton_Minion.glb'
 if not SOURCE.is_file():
     raise SystemExit(f'Missing external author model: {SOURCE}. Use the pinned official URL and SHA in art-studies/kaykit-skeleton-minion-1.0/source/source-manifest.json; no automatic download is performed.')
 HEAD_PITCH_DEGREES = args.head_pitch
+HEAD_SCALE = args.head_scale
 assert HEAD_PITCH_DEGREES in (0, -25), 'Only the bounded static fit comparison is supported'
 if HEAD_PITCH_DEGREES:
-    OUTPUT = OUTPUT / 'head-fit'
+    OUTPUT = OUTPUT / ('head-fit-small' if HEAD_SCALE == .85 else 'head-fit')
+assert HEAD_SCALE == 1 or HEAD_PITCH_DEGREES == -25
+if args.atlas:
+    assert HEAD_PITCH_DEGREES == -25
+    OUTPUT = ROOT / 'docs/qa/kaykit-skeleton-minion/eight-direction'
 FRAMES = OUTPUT / 'frames'
 FRAMES.mkdir(parents=True, exist_ok=True)
 assert hashlib.sha256(SOURCE.read_bytes()).hexdigest() == '6ffc003f895bed0b074791e0e490846210a2e2f8fc7da300aba53cc185f95968'
@@ -117,14 +124,20 @@ def set_fraction(action, fraction):
         # Constant rig-space heading-relative tilt, applied after each author pose.
         pitch = rig.matrix_world.to_quaternion() @ Vector((1, 0, 0))
         adjustment = Matrix.Translation(pivot) @ Matrix.Rotation(math.radians(HEAD_PITCH_DEGREES), 4, pitch) @ Matrix.Translation(-pivot)
-        head.matrix = rig.matrix_world.inverted() @ adjustment @ world
+        head.matrix = rig.matrix_world.inverted() @ adjustment @ world @ Matrix.Scale(HEAD_SCALE, 4)
         bpy.context.view_layer.update()
 
 
 clips = {'idle': 'Idle', 'walk': 'Walking_D_Skeletons', 'attack': 'Unarmed_Melee_Attack_Punch_A'}
 directions = {'south': 0, 'southeast': 45, 'east': 90}
 fractions = [0, .25, .5, .75]
+clip_fractions = {clip: fractions for clip in clips}
+if args.atlas:
+    directions = dict(zip(['east', 'southeast', 'south', 'southwest', 'west', 'northwest', 'north', 'northeast'], [90, 45, 0, -45, -90, -135, 180, 135]))
+    clip_fractions = {'idle': [i / 4 for i in range(4)], 'walk': [i / 8 for i in range(8)],
+                      'attack': [i / 5 for i in range(6)]}
 deformation = {}
+loop_audit = {}
 for clip, name in clips.items():
     action = bpy.data.actions[name + '_Rig']
     samples = []
@@ -139,12 +152,26 @@ for clip, name in clips.items():
                          'duration_seconds': (action.frame_range[1] - action.frame_range[0]) / 24,
                          'sample_fractions': fractions, 'max_vertex_displacement_from_first': deltas,
                          'verified_on': [mesh.name for mesh in meshes]}
+    if args.atlas and clip in ['idle', 'walk']:
+        set_fraction(action, 0); first = evaluate()
+        set_fraction(action, 1); last = evaluate()
+        closure = max((a - b).length for key in first for a, b in zip(first[key], last[key]))
+        assert closure < .0001, name + ' author cycle endpoints do not close'
+        phases = []
+        for index in range(64):
+            set_fraction(action, index / 64)
+            sample = evaluate()
+            feet = [v for key, points in sample.items() if '_Leg' in key for v in points]
+            phases.append(min(v.z for v in feet))
+        loop_audit[clip] = {'source_endpoint_max_vertex_delta': closure,
+                            'ground_sample_count': 64, 'minimum_sampled_foot_vertex_z': min(phases),
+                            'ground_sampling_boundary': '64 evaluated phases, not a mathematical continuous-cycle bound'}
 records = []
 for direction, yaw in directions.items():
     yaw_root.rotation_euler.z = math.radians(yaw)
     for clip, name in clips.items():
         action = bpy.data.actions[name + '_Rig']
-        for index, fraction in enumerate(fractions):
+        for index, fraction in enumerate(clip_fractions[clip]):
             set_fraction(action, fraction)
             vertices = evaluate()
             # Render re-evaluates animation. Freeze this sampled pose so a fitted
@@ -165,25 +192,27 @@ for direction, yaw in directions.items():
             scene.render.filepath = str(FRAMES / filename)
             bpy.ops.render.render(write_still=True)
             records.append({'path': 'frames/' + filename, 'direction': direction, 'yaw_degrees': yaw,
-                            'clip': clip, 'sample_fraction': fraction, 'author_time_seconds': fraction * deformation[clip]['duration_seconds'],
+                            'clip': clip, 'clip_frame_index': index, 'sample_fraction': fraction, 'author_time_seconds': fraction * deformation[clip]['duration_seconds'],
                             'foot_anchor_px': [foot.x * 128, (1 - foot.y) * 192],
                             'minimum_foot_vertex_z': min(v.z for v in foot_vertices),
                             'maximum_foot_vertex_z': max(v.z for v in foot_vertices),
                             'projected_mesh_bounds_px': [min(v.x for v in projected) * 128, (1 - max(v.y for v in projected)) * 192,
                                                          max(v.x for v in projected) * 128, (1 - min(v.y for v in projected)) * 192]})
-report = {'sample_kind': 'three-direction ordinary unarmed skeleton art fit', 'author_version': 'KayKit Skeletons 1.0',
+report = {'sample_kind': 'eight-direction retained-layout skeleton study' if args.atlas else 'three-direction ordinary unarmed skeleton art fit', 'author_version': 'KayKit Skeletons 1.0',
           'source_commit': '15b62b9bad122f72926c10fb14d622c73819fa54', 'source_cell_px': [128, 192],
           'sample_display_cell_px': [64, 96], 'sample_scale': .5, 'foot_anchor_px': [64, 158],
           'camera': {'projection': 'orthographic', 'elevation_degrees': 55, 'ortho_scale': 3.2},
           'render': {'blender': bpy.app.version_string, 'engine': 'Cycles CPU', 'samples': 40, 'denoising': False,
                      'view_transform': 'AgX', 'look': 'AgX - Medium High Contrast', 'fixed_light': True,
                      'material_change': 'skeleton roughness 0.75, metallic 0; author texture/glow retained'},
-          'deformation': deformation, 'frames': records,
+          'deformation': deformation, 'frames': records, 'source_loop_audit': loop_audit,
+          'direction_order': list(directions), 'clip_sample_fractions': clip_fractions,
           'root_policy': 'No per-frame grounding, root motion removal or retiming',
           'head_fit_pitch_degrees': HEAD_PITCH_DEGREES,
+          'head_fit_scale': HEAD_SCALE,
           'pose_policy': 'Author animation unchanged' if not HEAD_PITCH_DEGREES else 'One constant head-bone pitch after the author pose; this is an adapted fit candidate, not an untouched author render',
           'render_pose_policy': 'Sampled pose frozen for render; evaluated vertex agreement checked before every frame',
           'shadow_policy': 'Transparent renders contain no ground or baked shadow; preview adds one independent static contact shadow',
-          'boundary': 'Only 4 samples per clip and 3 headings; no production atlas or gameplay integration.'}
+          'boundary': 'Retained-layout study atlas only; no production family registration or gameplay integration.' if args.atlas else 'Only 4 samples per clip and 3 headings; no production atlas or gameplay integration.'}
 (OUTPUT / 'render-audit.json').write_text(json.dumps(report, indent=2) + '\n')
-print('Rendered 36 authored frames with evaluated deformation evidence')
+print(f'Rendered {len(records)} sampled frames with evaluated deformation evidence')

@@ -1,0 +1,3199 @@
+{
+  "sample_kind": "eight-direction retained-layout skeleton study",
+  "author_version": "KayKit Skeletons 1.0",
+  "source_commit": "15b62b9bad122f72926c10fb14d622c73819fa54",
+  "source_cell_px": [
+    128,
+    192
+  ],
+  "sample_display_cell_px": [
+    64,
+    96
+  ],
+  "sample_scale": 0.5,
+  "foot_anchor_px": [
+    64,
+    158
+  ],
+  "camera": {
+    "projection": "orthographic",
+    "elevation_degrees": 55,
+    "ortho_scale": 3.2
+  },
+  "render": {
+    "blender": "4.3.2",
+    "engine": "Cycles CPU",
+    "samples": 40,
+    "denoising": false,
+    "view_transform": "AgX",
+    "look": "AgX - Medium High Contrast",
+    "fixed_light": true,
+    "material_change": "skeleton roughness 0.75, metallic 0; author texture/glow retained"
+  },
+  "deformation": {
+    "idle": {
+      "author_animation": "Idle",
+      "action_fcurves": 410,
+      "duration_seconds": 1.0666667620340984,
+      "sample_fractions": [
+        0,
+        0.25,
+        0.5,
+        0.75
+      ],
+      "max_vertex_displacement_from_first": [
+        0.02663057696877929,
+        0.04699559821558349,
+        0.02663057696877929
+      ],
+      "verified_on": [
+        "Skeleton_Minion_ArmLeft",
+        "Skeleton_Minion_ArmRight",
+        "Skeleton_Minion_Body",
+        "Skeleton_Minion_Cloak",
+        "Skeleton_Minion_Eyes",
+        "Skeleton_Minion_Head",
+        "Skeleton_Minion_Jaw",
+        "Skeleton_Minion_LegLeft",
+        "Skeleton_Minion_LegRight"
+      ]
+    },
+    "walk": {
+      "author_animation": "Walking_D_Skeletons",
+      "action_fcurves": 410,
+      "duration_seconds": 1.6000000635782878,
+      "sample_fractions": [
+        0,
+        0.25,
+        0.5,
+        0.75
+      ],
+      "max_vertex_displacement_from_first": [
+        0.35862333338282376,
+        0.5697760835401955,
+        0.3348529686150561
+      ],
+      "verified_on": [
+        "Skeleton_Minion_ArmLeft",
+        "Skeleton_Minion_ArmRight",
+        "Skeleton_Minion_Body",
+        "Skeleton_Minion_Cloak",
+        "Skeleton_Minion_Eyes",
+        "Skeleton_Minion_Head",
+        "Skeleton_Minion_Jaw",
+        "Skeleton_Minion_LegLeft",
+        "Skeleton_Minion_LegRight"
+      ]
+    },
+    "attack": {
+      "author_animation": "Unarmed_Melee_Attack_Punch_A",
+      "action_fcurves": 410,
+      "duration_seconds": 1.4666666984558105,
+      "sample_fractions": [
+        0,
+        0.25,
+        0.5,
+        0.75
+      ],
+      "max_vertex_displacement_from_first": [
+        0.3509794441057353,
+        0.9170575753360981,
+        0.547822291906337
+      ],
+      "verified_on": [
+        "Skeleton_Minion_ArmLeft",
+        "Skeleton_Minion_ArmRight",
+        "Skeleton_Minion_Body",
+        "Skeleton_Minion_Cloak",
+        "Skeleton_Minion_Eyes",
+        "Skeleton_Minion_Head",
+        "Skeleton_Minion_Jaw",
+        "Skeleton_Minion_LegLeft",
+        "Skeleton_Minion_LegRight"
+      ]
+    }
+  },
+  "frames": [
+    {
+      "path": "frames/east-idle-00.png",
+      "direction": "east",
+      "yaw_degrees": 90,
+      "clip": "idle",
+      "clip_frame_index": 0,
+      "sample_fraction": 0.0,
+      "author_time_seconds": 0.0,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.00037211485323496163,
+      "maximum_foot_vertex_z": 0.5237502455711365,
+      "projected_mesh_bounds_px": [
+        29.81666374206543,
+        77.9161491394043,
+        87.11035919189453,
+        174.142653465271
+      ]
+    },
+    {
+      "path": "frames/east-idle-01.png",
+      "direction": "east",
+      "yaw_degrees": 90,
+      "clip": "idle",
+      "clip_frame_index": 1,
+      "sample_fraction": 0.25,
+      "author_time_seconds": 0.2666666905085246,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -9.12429895834066e-05,
+      "maximum_foot_vertex_z": 0.5138514637947083,
+      "projected_mesh_bounds_px": [
+        29.81666374206543,
+        78.32988739013672,
+        87.11035919189453,
+        174.14401960372925
+      ]
+    },
+    {
+      "path": "frames/east-idle-02.png",
+      "direction": "east",
+      "yaw_degrees": 90,
+      "clip": "idle",
+      "clip_frame_index": 2,
+      "sample_fraction": 0.5,
+      "author_time_seconds": 0.5333333810170492,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.0001103903996408917,
+      "maximum_foot_vertex_z": 0.5048257112503052,
+      "projected_mesh_bounds_px": [
+        29.81666374206543,
+        78.74360275268555,
+        87.11035919189453,
+        174.14532852172852
+      ]
+    },
+    {
+      "path": "frames/east-idle-03.png",
+      "direction": "east",
+      "yaw_degrees": 90,
+      "clip": "idle",
+      "clip_frame_index": 3,
+      "sample_fraction": 0.75,
+      "author_time_seconds": 0.8000000715255737,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -9.12429895834066e-05,
+      "maximum_foot_vertex_z": 0.5138514637947083,
+      "projected_mesh_bounds_px": [
+        29.81666374206543,
+        78.32988739013672,
+        87.11035919189453,
+        174.14401960372925
+      ]
+    },
+    {
+      "path": "frames/east-walk-00.png",
+      "direction": "east",
+      "yaw_degrees": 90,
+      "clip": "walk",
+      "clip_frame_index": 0,
+      "sample_fraction": 0.0,
+      "author_time_seconds": 0.0,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.05550446733832359,
+      "maximum_foot_vertex_z": 0.5116751194000244,
+      "projected_mesh_bounds_px": [
+        42.5357780456543,
+        85.70348739624023,
+        104.37889862060547,
+        172.06577253341675
+      ]
+    },
+    {
+      "path": "frames/east-walk-01.png",
+      "direction": "east",
+      "yaw_degrees": 90,
+      "clip": "walk",
+      "clip_frame_index": 1,
+      "sample_fraction": 0.125,
+      "author_time_seconds": 0.20000000794728598,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.04287906363606453,
+      "maximum_foot_vertex_z": 0.47027939558029175,
+      "projected_mesh_bounds_px": [
+        45.02667999267578,
+        86.04364013671875,
+        103.56861877441406,
+        171.63996648788452
+      ]
+    },
+    {
+      "path": "frames/east-walk-02.png",
+      "direction": "east",
+      "yaw_degrees": 90,
+      "clip": "walk",
+      "clip_frame_index": 2,
+      "sample_fraction": 0.25,
+      "author_time_seconds": 0.40000001589457196,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.005249129608273506,
+      "maximum_foot_vertex_z": 0.5225248336791992,
+      "projected_mesh_bounds_px": [
+        45.02667999267578,
+        83.35265350341797,
+        102.69133758544922,
+        169.91329622268677
+      ]
+    },
+    {
+      "path": "frames/east-walk-03.png",
+      "direction": "east",
+      "yaw_degrees": 90,
+      "clip": "walk",
+      "clip_frame_index": 3,
+      "sample_fraction": 0.375,
+      "author_time_seconds": 0.6000000238418579,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.01939818449318409,
+      "maximum_foot_vertex_z": 0.5304831862449646,
+      "projected_mesh_bounds_px": [
+        43.57417297363281,
+        84.25261688232422,
+        103.56861877441406,
+        168.62508487701416
+      ]
+    },
+    {
+      "path": "frames/east-walk-04.png",
+      "direction": "east",
+      "yaw_degrees": 90,
+      "clip": "walk",
+      "clip_frame_index": 4,
+      "sample_fraction": 0.5,
+      "author_time_seconds": 0.8000000317891439,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.05551064386963844,
+      "maximum_foot_vertex_z": 0.5116750597953796,
+      "projected_mesh_bounds_px": [
+        42.53147506713867,
+        85.70348739624023,
+        104.37889862060547,
+        170.24945211410522
+      ]
+    },
+    {
+      "path": "frames/east-walk-05.png",
+      "direction": "east",
+      "yaw_degrees": 90,
+      "clip": "walk",
+      "clip_frame_index": 5,
+      "sample_fraction": 0.625,
+      "author_time_seconds": 1.00000003973643,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.04288766533136368,
+      "maximum_foot_vertex_z": 0.4701390862464905,
+      "projected_mesh_bounds_px": [
+        45.02667999267578,
+        86.04364013671875,
+        103.56861877441406,
+        171.8320770263672
+      ]
+    },
+    {
+      "path": "frames/east-walk-06.png",
+      "direction": "east",
+      "yaw_degrees": 90,
+      "clip": "walk",
+      "clip_frame_index": 6,
+      "sample_fraction": 0.75,
+      "author_time_seconds": 1.2000000476837158,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.005249385256320238,
+      "maximum_foot_vertex_z": 0.5259230136871338,
+      "projected_mesh_bounds_px": [
+        45.02667999267578,
+        83.35265350341797,
+        102.69133758544922,
+        171.8569893836975
+      ]
+    },
+    {
+      "path": "frames/east-walk-07.png",
+      "direction": "east",
+      "yaw_degrees": 90,
+      "clip": "walk",
+      "clip_frame_index": 7,
+      "sample_fraction": 0.875,
+      "author_time_seconds": 1.400000055631002,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.022989852353930473,
+      "maximum_foot_vertex_z": 0.5263612270355225,
+      "projected_mesh_bounds_px": [
+        43.40010452270508,
+        84.50579452514648,
+        103.5686264038086,
+        172.45304775238037
+      ]
+    },
+    {
+      "path": "frames/east-attack-00.png",
+      "direction": "east",
+      "yaw_degrees": 90,
+      "clip": "attack",
+      "clip_frame_index": 0,
+      "sample_fraction": 0.0,
+      "author_time_seconds": 0.0,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.000292979326331988,
+      "maximum_foot_vertex_z": 0.5245366096496582,
+      "projected_mesh_bounds_px": [
+        38.30089569091797,
+        79.46858596801758,
+        104.20919799804688,
+        180.53824138641357
+      ]
+    },
+    {
+      "path": "frames/east-attack-01.png",
+      "direction": "east",
+      "yaw_degrees": 90,
+      "clip": "attack",
+      "clip_frame_index": 1,
+      "sample_fraction": 0.2,
+      "author_time_seconds": 0.2933333396911621,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.0009031230001710355,
+      "maximum_foot_vertex_z": 0.5264478921890259,
+      "projected_mesh_bounds_px": [
+        32.96769714355469,
+        80.56745910644531,
+        103.48013305664062,
+        180.53813409805298
+      ]
+    },
+    {
+      "path": "frames/east-attack-02.png",
+      "direction": "east",
+      "yaw_degrees": 90,
+      "clip": "attack",
+      "clip_frame_index": 2,
+      "sample_fraction": 0.4,
+      "author_time_seconds": 0.5866666793823242,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.01818982884287834,
+      "maximum_foot_vertex_z": 0.5382813215255737,
+      "projected_mesh_bounds_px": [
+        50.933074951171875,
+        78.21282577514648,
+        124.67733001708984,
+        179.1208691596985
+      ]
+    },
+    {
+      "path": "frames/east-attack-03.png",
+      "direction": "east",
+      "yaw_degrees": 90,
+      "clip": "attack",
+      "clip_frame_index": 3,
+      "sample_fraction": 0.6,
+      "author_time_seconds": 0.8800000190734864,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.00016347112250514328,
+      "maximum_foot_vertex_z": 0.50359046459198,
+      "projected_mesh_bounds_px": [
+        55.00019836425781,
+        78.48909759521484,
+        114.19612884521484,
+        175.68815660476685
+      ]
+    },
+    {
+      "path": "frames/east-attack-04.png",
+      "direction": "east",
+      "yaw_degrees": 90,
+      "clip": "attack",
+      "clip_frame_index": 4,
+      "sample_fraction": 0.8,
+      "author_time_seconds": 1.1733333587646484,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.00013652554480358958,
+      "maximum_foot_vertex_z": 0.5128297805786133,
+      "projected_mesh_bounds_px": [
+        45.44221496582031,
+        79.23347854614258,
+        107.3677978515625,
+        178.47812604904175
+      ]
+    },
+    {
+      "path": "frames/east-attack-05.png",
+      "direction": "east",
+      "yaw_degrees": 90,
+      "clip": "attack",
+      "clip_frame_index": 5,
+      "sample_fraction": 1.0,
+      "author_time_seconds": 1.4666666984558105,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.000292979326331988,
+      "maximum_foot_vertex_z": 0.5245366096496582,
+      "projected_mesh_bounds_px": [
+        38.30089569091797,
+        79.46858596801758,
+        104.20919799804688,
+        180.53824138641357
+      ]
+    },
+    {
+      "path": "frames/southeast-idle-00.png",
+      "direction": "southeast",
+      "yaw_degrees": 45,
+      "clip": "idle",
+      "clip_frame_index": 0,
+      "sample_fraction": 0.0,
+      "author_time_seconds": 0.0,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.00037211485323496163,
+      "maximum_foot_vertex_z": 0.5237502455711365,
+      "projected_mesh_bounds_px": [
+        30.810884475708008,
+        72.0721206665039,
+        92.49130249023438,
+        175.77036809921265
+      ]
+    },
+    {
+      "path": "frames/southeast-idle-01.png",
+      "direction": "southeast",
+      "yaw_degrees": 45,
+      "clip": "idle",
+      "clip_frame_index": 1,
+      "sample_fraction": 0.25,
+      "author_time_seconds": 0.2666666905085246,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -9.12429895834066e-05,
+      "maximum_foot_vertex_z": 0.5138514637947083,
+      "projected_mesh_bounds_px": [
+        30.810884475708008,
+        72.48584747314453,
+        92.52040100097656,
+        175.77036094665527
+      ]
+    },
+    {
+      "path": "frames/southeast-idle-02.png",
+      "direction": "southeast",
+      "yaw_degrees": 45,
+      "clip": "idle",
+      "clip_frame_index": 2,
+      "sample_fraction": 0.5,
+      "author_time_seconds": 0.5333333810170492,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.0001103903996408917,
+      "maximum_foot_vertex_z": 0.5048257112503052,
+      "projected_mesh_bounds_px": [
+        30.810884475708008,
+        72.89957427978516,
+        92.5128173828125,
+        175.77050399780273
+      ]
+    },
+    {
+      "path": "frames/southeast-idle-03.png",
+      "direction": "southeast",
+      "yaw_degrees": 45,
+      "clip": "idle",
+      "clip_frame_index": 3,
+      "sample_fraction": 0.75,
+      "author_time_seconds": 0.8000000715255737,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -9.12429895834066e-05,
+      "maximum_foot_vertex_z": 0.5138514637947083,
+      "projected_mesh_bounds_px": [
+        30.810884475708008,
+        72.48584747314453,
+        92.40766143798828,
+        175.77036094665527
+      ]
+    },
+    {
+      "path": "frames/southeast-walk-00.png",
+      "direction": "southeast",
+      "yaw_degrees": 45,
+      "clip": "walk",
+      "clip_frame_index": 0,
+      "sample_fraction": 0.0,
+      "author_time_seconds": 0.0,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.05550446733832359,
+      "maximum_foot_vertex_z": 0.5116751194000244,
+      "projected_mesh_bounds_px": [
+        39.453216552734375,
+        92.01791381835938,
+        114.9034194946289,
+        170.0458688735962
+      ]
+    },
+    {
+      "path": "frames/southeast-walk-01.png",
+      "direction": "southeast",
+      "yaw_degrees": 45,
+      "clip": "walk",
+      "clip_frame_index": 1,
+      "sample_fraction": 0.125,
+      "author_time_seconds": 0.20000000794728598,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.04287906363606453,
+      "maximum_foot_vertex_z": 0.47027939558029175,
+      "projected_mesh_bounds_px": [
+        43.09849548339844,
+        91.86774444580078,
+        114.64908599853516,
+        170.12959671020508
+      ]
+    },
+    {
+      "path": "frames/southeast-walk-02.png",
+      "direction": "southeast",
+      "yaw_degrees": 45,
+      "clip": "walk",
+      "clip_frame_index": 2,
+      "sample_fraction": 0.25,
+      "author_time_seconds": 0.40000001589457196,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.005249129608273506,
+      "maximum_foot_vertex_z": 0.5225248336791992,
+      "projected_mesh_bounds_px": [
+        43.09849548339844,
+        88.79434204101562,
+        113.97753143310547,
+        172.445659160614
+      ]
+    },
+    {
+      "path": "frames/southeast-walk-03.png",
+      "direction": "southeast",
+      "yaw_degrees": 45,
+      "clip": "walk",
+      "clip_frame_index": 3,
+      "sample_fraction": 0.375,
+      "author_time_seconds": 0.6000000238418579,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.01939818449318409,
+      "maximum_foot_vertex_z": 0.5304831862449646,
+      "projected_mesh_bounds_px": [
+        43.09849548339844,
+        90.07670974731445,
+        113.34378051757812,
+        175.24706554412842
+      ]
+    },
+    {
+      "path": "frames/southeast-walk-04.png",
+      "direction": "southeast",
+      "yaw_degrees": 45,
+      "clip": "walk",
+      "clip_frame_index": 4,
+      "sample_fraction": 0.5,
+      "author_time_seconds": 0.8000000317891439,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.05551064386963844,
+      "maximum_foot_vertex_z": 0.5116750597953796,
+      "projected_mesh_bounds_px": [
+        43.09849548339844,
+        92.01791381835938,
+        113.06596374511719,
+        176.63472604751587
+      ]
+    },
+    {
+      "path": "frames/southeast-walk-05.png",
+      "direction": "southeast",
+      "yaw_degrees": 45,
+      "clip": "walk",
+      "clip_frame_index": 5,
+      "sample_fraction": 0.625,
+      "author_time_seconds": 1.00000003973643,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.04288766533136368,
+      "maximum_foot_vertex_z": 0.4701390862464905,
+      "projected_mesh_bounds_px": [
+        43.09849548339844,
+        91.86774444580078,
+        113.43121337890625,
+        178.12471103668213
+      ]
+    },
+    {
+      "path": "frames/southeast-walk-06.png",
+      "direction": "southeast",
+      "yaw_degrees": 45,
+      "clip": "walk",
+      "clip_frame_index": 6,
+      "sample_fraction": 0.75,
+      "author_time_seconds": 1.2000000476837158,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.005249385256320238,
+      "maximum_foot_vertex_z": 0.5259230136871338,
+      "projected_mesh_bounds_px": [
+        43.09849548339844,
+        88.79434204101562,
+        113.97753143310547,
+        170.6870241165161
+      ]
+    },
+    {
+      "path": "frames/southeast-walk-07.png",
+      "direction": "southeast",
+      "yaw_degrees": 45,
+      "clip": "walk",
+      "clip_frame_index": 7,
+      "sample_fraction": 0.875,
+      "author_time_seconds": 1.400000055631002,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.022989852353930473,
+      "maximum_foot_vertex_z": 0.5263612270355225,
+      "projected_mesh_bounds_px": [
+        40.24468231201172,
+        90.32988739013672,
+        114.59416198730469,
+        170.31287384033203
+      ]
+    },
+    {
+      "path": "frames/southeast-attack-00.png",
+      "direction": "southeast",
+      "yaw_degrees": 45,
+      "clip": "attack",
+      "clip_frame_index": 0,
+      "sample_fraction": 0.0,
+      "author_time_seconds": 0.0,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.000292979326331988,
+      "maximum_foot_vertex_z": 0.5245366096496582,
+      "projected_mesh_bounds_px": [
+        35.75702667236328,
+        77.6294174194336,
+        112.62425231933594,
+        177.83701372146606
+      ]
+    },
+    {
+      "path": "frames/southeast-attack-01.png",
+      "direction": "southeast",
+      "yaw_degrees": 45,
+      "clip": "attack",
+      "clip_frame_index": 1,
+      "sample_fraction": 0.2,
+      "author_time_seconds": 0.2933333396911621,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.0009031230001710355,
+      "maximum_foot_vertex_z": 0.5264478921890259,
+      "projected_mesh_bounds_px": [
+        31.03615379333496,
+        75.3065071105957,
+        103.49122619628906,
+        173.73372745513916
+      ]
+    },
+    {
+      "path": "frames/southeast-attack-02.png",
+      "direction": "southeast",
+      "yaw_degrees": 45,
+      "clip": "attack",
+      "clip_frame_index": 2,
+      "sample_fraction": 0.4,
+      "author_time_seconds": 0.5866666793823242,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.01818982884287834,
+      "maximum_foot_vertex_z": 0.5382813215255737,
+      "projected_mesh_bounds_px": [
+        45.959232330322266,
+        84.22511672973633,
+        100.11480712890625,
+        177.2774691581726
+      ]
+    },
+    {
+      "path": "frames/southeast-attack-03.png",
+      "direction": "southeast",
+      "yaw_degrees": 45,
+      "clip": "attack",
+      "clip_frame_index": 3,
+      "sample_fraction": 0.6,
+      "author_time_seconds": 0.8800000190734864,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.00016347112250514328,
+      "maximum_foot_vertex_z": 0.50359046459198,
+      "projected_mesh_bounds_px": [
+        48.9409294128418,
+        85.80623245239258,
+        101.99962615966797,
+        184.26194858551025
+      ]
+    },
+    {
+      "path": "frames/southeast-attack-04.png",
+      "direction": "southeast",
+      "yaw_degrees": 45,
+      "clip": "attack",
+      "clip_frame_index": 4,
+      "sample_fraction": 0.8,
+      "author_time_seconds": 1.1733333587646484,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.00013652554480358958,
+      "maximum_foot_vertex_z": 0.5128297805786133,
+      "projected_mesh_bounds_px": [
+        41.19762420654297,
+        81.21528625488281,
+        107.43971252441406,
+        181.48295831680298
+      ]
+    },
+    {
+      "path": "frames/southeast-attack-05.png",
+      "direction": "southeast",
+      "yaw_degrees": 45,
+      "clip": "attack",
+      "clip_frame_index": 5,
+      "sample_fraction": 1.0,
+      "author_time_seconds": 1.4666666984558105,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.000292979326331988,
+      "maximum_foot_vertex_z": 0.5245366096496582,
+      "projected_mesh_bounds_px": [
+        35.75702667236328,
+        77.6294174194336,
+        112.62425231933594,
+        177.83701372146606
+      ]
+    },
+    {
+      "path": "frames/south-idle-00.png",
+      "direction": "south",
+      "yaw_degrees": 0,
+      "clip": "idle",
+      "clip_frame_index": 0,
+      "sample_fraction": 0.0,
+      "author_time_seconds": 0.0,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.00037211485323496163,
+      "maximum_foot_vertex_z": 0.5237502455711365,
+      "projected_mesh_bounds_px": [
+        25.220191955566406,
+        70.69925308227539,
+        103.74832916259766,
+        170.11527729034424
+      ]
+    },
+    {
+      "path": "frames/south-idle-01.png",
+      "direction": "south",
+      "yaw_degrees": 0,
+      "clip": "idle",
+      "clip_frame_index": 1,
+      "sample_fraction": 0.25,
+      "author_time_seconds": 0.2666666905085246,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -9.12429895834066e-05,
+      "maximum_foot_vertex_z": 0.5138514637947083,
+      "projected_mesh_bounds_px": [
+        25.24420166015625,
+        71.11297988891602,
+        103.73611450195312,
+        170.11439037322998
+      ]
+    },
+    {
+      "path": "frames/south-idle-02.png",
+      "direction": "south",
+      "yaw_degrees": 0,
+      "clip": "idle",
+      "clip_frame_index": 2,
+      "sample_fraction": 0.5,
+      "author_time_seconds": 0.5333333810170492,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.0001103903996408917,
+      "maximum_foot_vertex_z": 0.5048257112503052,
+      "projected_mesh_bounds_px": [
+        25.26308250427246,
+        71.52670669555664,
+        103.71947479248047,
+        170.11378240585327
+      ]
+    },
+    {
+      "path": "frames/south-idle-03.png",
+      "direction": "south",
+      "yaw_degrees": 0,
+      "clip": "idle",
+      "clip_frame_index": 3,
+      "sample_fraction": 0.75,
+      "author_time_seconds": 0.8000000715255737,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -9.12429895834066e-05,
+      "maximum_foot_vertex_z": 0.5138514637947083,
+      "projected_mesh_bounds_px": [
+        25.226903915405273,
+        71.11297988891602,
+        103.72559356689453,
+        170.11439037322998
+      ]
+    },
+    {
+      "path": "frames/south-walk-00.png",
+      "direction": "south",
+      "yaw_degrees": 0,
+      "clip": "walk",
+      "clip_frame_index": 0,
+      "sample_fraction": 0.0,
+      "author_time_seconds": 0.0,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.05550446733832359,
+      "maximum_foot_vertex_z": 0.5116751194000244,
+      "projected_mesh_bounds_px": [
+        17.76645851135254,
+        93.267333984375,
+        112.38200378417969,
+        174.1026635169983
+      ]
+    },
+    {
+      "path": "frames/south-walk-01.png",
+      "direction": "south",
+      "yaw_degrees": 0,
+      "clip": "walk",
+      "clip_frame_index": 1,
+      "sample_fraction": 0.125,
+      "author_time_seconds": 0.20000000794728598,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.04287906363606453,
+      "maximum_foot_vertex_z": 0.47027939558029175,
+      "projected_mesh_bounds_px": [
+        18.013214111328125,
+        93.66133117675781,
+        112.27767944335938,
+        175.4557056427002
+      ]
+    },
+    {
+      "path": "frames/south-walk-02.png",
+      "direction": "south",
+      "yaw_degrees": 0,
+      "clip": "walk",
+      "clip_frame_index": 2,
+      "sample_fraction": 0.25,
+      "author_time_seconds": 0.40000001589457196,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.005249129608273506,
+      "maximum_foot_vertex_z": 0.5225248336791992,
+      "projected_mesh_bounds_px": [
+        18.289058685302734,
+        91.16077423095703,
+        112.13906860351562,
+        167.78410148620605
+      ]
+    },
+    {
+      "path": "frames/south-walk-03.png",
+      "direction": "south",
+      "yaw_degrees": 0,
+      "clip": "walk",
+      "clip_frame_index": 3,
+      "sample_fraction": 0.375,
+      "author_time_seconds": 0.6000000238418579,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.01939818449318409,
+      "maximum_foot_vertex_z": 0.5304831862449646,
+      "projected_mesh_bounds_px": [
+        18.766332626342773,
+        91.87030792236328,
+        111.93067169189453,
+        172.7356095314026
+      ]
+    },
+    {
+      "path": "frames/south-walk-04.png",
+      "direction": "south",
+      "yaw_degrees": 0,
+      "clip": "walk",
+      "clip_frame_index": 4,
+      "sample_fraction": 0.5,
+      "author_time_seconds": 0.8000000317891439,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.05551064386963844,
+      "maximum_foot_vertex_z": 0.5116750597953796,
+      "projected_mesh_bounds_px": [
+        18.935293197631836,
+        93.267333984375,
+        111.82125854492188,
+        174.10272073745728
+      ]
+    },
+    {
+      "path": "frames/south-walk-05.png",
+      "direction": "south",
+      "yaw_degrees": 0,
+      "clip": "walk",
+      "clip_frame_index": 5,
+      "sample_fraction": 0.625,
+      "author_time_seconds": 1.00000003973643,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.04288766533136368,
+      "maximum_foot_vertex_z": 0.4701390862464905,
+      "projected_mesh_bounds_px": [
+        18.795997619628906,
+        93.66133117675781,
+        111.89952087402344,
+        175.45574140548706
+      ]
+    },
+    {
+      "path": "frames/south-walk-06.png",
+      "direction": "south",
+      "yaw_degrees": 0,
+      "clip": "walk",
+      "clip_frame_index": 6,
+      "sample_fraction": 0.75,
+      "author_time_seconds": 1.2000000476837158,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.005249385256320238,
+      "maximum_foot_vertex_z": 0.5259230136871338,
+      "projected_mesh_bounds_px": [
+        18.289058685302734,
+        91.16077423095703,
+        112.13906860351562,
+        167.7842674255371
+      ]
+    },
+    {
+      "path": "frames/south-walk-07.png",
+      "direction": "south",
+      "yaw_degrees": 0,
+      "clip": "walk",
+      "clip_frame_index": 7,
+      "sample_fraction": 0.875,
+      "author_time_seconds": 1.400000055631002,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.022989852353930473,
+      "maximum_foot_vertex_z": 0.5263612270355225,
+      "projected_mesh_bounds_px": [
+        17.99103355407715,
+        92.12348556518555,
+        112.31562805175781,
+        172.73564529418945
+      ]
+    },
+    {
+      "path": "frames/south-attack-00.png",
+      "direction": "south",
+      "yaw_degrees": 0,
+      "clip": "attack",
+      "clip_frame_index": 0,
+      "sample_fraction": 0.0,
+      "author_time_seconds": 0.0,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.000292979326331988,
+      "maximum_foot_vertex_z": 0.5245366096496582,
+      "projected_mesh_bounds_px": [
+        28.578031539916992,
+        77.09575653076172,
+        94.92827606201172,
+        177.86114645004272
+      ]
+    },
+    {
+      "path": "frames/south-attack-01.png",
+      "direction": "south",
+      "yaw_degrees": 0,
+      "clip": "attack",
+      "clip_frame_index": 1,
+      "sample_fraction": 0.2,
+      "author_time_seconds": 0.2933333396911621,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.0009031230001710355,
+      "maximum_foot_vertex_z": 0.5264478921890259,
+      "projected_mesh_bounds_px": [
+        20.201250076293945,
+        72.71700668334961,
+        86.67194366455078,
+        175.61218214035034
+      ]
+    },
+    {
+      "path": "frames/south-attack-02.png",
+      "direction": "south",
+      "yaw_degrees": 0,
+      "clip": "attack",
+      "clip_frame_index": 2,
+      "sample_fraction": 0.4,
+      "author_time_seconds": 0.5866666793823242,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.01818982884287834,
+      "maximum_foot_vertex_z": 0.5382813215255737,
+      "projected_mesh_bounds_px": [
+        36.792808532714844,
+        87.71420288085938,
+        114.08145141601562,
+        175.60520839691162
+      ]
+    },
+    {
+      "path": "frames/south-attack-03.png",
+      "direction": "south",
+      "yaw_degrees": 0,
+      "clip": "attack",
+      "clip_frame_index": 3,
+      "sample_fraction": 0.6,
+      "author_time_seconds": 0.8800000190734864,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.00016347112250514328,
+      "maximum_foot_vertex_z": 0.50359046459198,
+      "projected_mesh_bounds_px": [
+        30.339183807373047,
+        90.4474983215332,
+        109.63573455810547,
+        180.2169270515442
+      ]
+    },
+    {
+      "path": "frames/south-attack-04.png",
+      "direction": "south",
+      "yaw_degrees": 0,
+      "clip": "attack",
+      "clip_frame_index": 4,
+      "sample_fraction": 0.8,
+      "author_time_seconds": 1.1733333587646484,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.00013652554480358958,
+      "maximum_foot_vertex_z": 0.5128297805786133,
+      "projected_mesh_bounds_px": [
+        34.04832458496094,
+        82.74267196655273,
+        100.64542388916016,
+        176.8573350906372
+      ]
+    },
+    {
+      "path": "frames/south-attack-05.png",
+      "direction": "south",
+      "yaw_degrees": 0,
+      "clip": "attack",
+      "clip_frame_index": 5,
+      "sample_fraction": 1.0,
+      "author_time_seconds": 1.4666666984558105,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.000292979326331988,
+      "maximum_foot_vertex_z": 0.5245366096496582,
+      "projected_mesh_bounds_px": [
+        28.578031539916992,
+        77.09575653076172,
+        94.92827606201172,
+        177.86114645004272
+      ]
+    },
+    {
+      "path": "frames/southwest-idle-00.png",
+      "direction": "southwest",
+      "yaw_degrees": -45,
+      "clip": "idle",
+      "clip_frame_index": 0,
+      "sample_fraction": 0.0,
+      "author_time_seconds": 0.0,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.00037211485323496163,
+      "maximum_foot_vertex_z": 0.5237502455711365,
+      "projected_mesh_bounds_px": [
+        30.360347747802734,
+        71.7165756225586,
+        97.13568115234375,
+        176.2485523223877
+      ]
+    },
+    {
+      "path": "frames/southwest-idle-01.png",
+      "direction": "southwest",
+      "yaw_degrees": -45,
+      "clip": "idle",
+      "clip_frame_index": 1,
+      "sample_fraction": 0.25,
+      "author_time_seconds": 0.2666666905085246,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -9.12429895834066e-05,
+      "maximum_foot_vertex_z": 0.5138514637947083,
+      "projected_mesh_bounds_px": [
+        30.339588165283203,
+        72.13030242919922,
+        97.13567352294922,
+        176.24820184707642
+      ]
+    },
+    {
+      "path": "frames/southwest-idle-02.png",
+      "direction": "southwest",
+      "yaw_degrees": -45,
+      "clip": "idle",
+      "clip_frame_index": 2,
+      "sample_fraction": 0.5,
+      "author_time_seconds": 0.5333333810170492,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.0001103903996408917,
+      "maximum_foot_vertex_z": 0.5048257112503052,
+      "projected_mesh_bounds_px": [
+        30.34830665588379,
+        72.54402923583984,
+        97.13568115234375,
+        176.2479944229126
+      ]
+    },
+    {
+      "path": "frames/southwest-idle-03.png",
+      "direction": "southwest",
+      "yaw_degrees": -45,
+      "clip": "idle",
+      "clip_frame_index": 3,
+      "sample_fraction": 0.75,
+      "author_time_seconds": 0.8000000715255737,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -9.12429895834066e-05,
+      "maximum_foot_vertex_z": 0.5138514637947083,
+      "projected_mesh_bounds_px": [
+        30.43137550354004,
+        72.13030242919922,
+        97.13567352294922,
+        176.24820184707642
+      ]
+    },
+    {
+      "path": "frames/southwest-walk-00.png",
+      "direction": "southwest",
+      "yaw_degrees": -45,
+      "clip": "walk",
+      "clip_frame_index": 0,
+      "sample_fraction": 0.0,
+      "author_time_seconds": 0.0,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.05550446733832359,
+      "maximum_foot_vertex_z": 0.5116751194000244,
+      "projected_mesh_bounds_px": [
+        13.906834602355957,
+        88.33346557617188,
+        85.25022888183594,
+        176.63469743728638
+      ]
+    },
+    {
+      "path": "frames/southwest-walk-01.png",
+      "direction": "southwest",
+      "yaw_degrees": -45,
+      "clip": "walk",
+      "clip_frame_index": 1,
+      "sample_fraction": 0.125,
+      "author_time_seconds": 0.20000000794728598,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.04287906363606453,
+      "maximum_foot_vertex_z": 0.47027939558029175,
+      "projected_mesh_bounds_px": [
+        14.094757080078125,
+        89.60842895507812,
+        85.37686920166016,
+        178.12466096878052
+      ]
+    },
+    {
+      "path": "frames/southwest-walk-02.png",
+      "direction": "southwest",
+      "yaw_degrees": -45,
+      "clip": "walk",
+      "clip_frame_index": 2,
+      "sample_fraction": 0.25,
+      "author_time_seconds": 0.40000001589457196,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.005249129608273506,
+      "maximum_foot_vertex_z": 0.5225248336791992,
+      "projected_mesh_bounds_px": [
+        14.554022789001465,
+        87.62974548339844,
+        85.97624969482422,
+        172.3791618347168
+      ]
+    },
+    {
+      "path": "frames/southwest-walk-03.png",
+      "direction": "southwest",
+      "yaw_degrees": -45,
+      "clip": "walk",
+      "clip_frame_index": 3,
+      "sample_fraction": 0.375,
+      "author_time_seconds": 0.6000000238418579,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.01939818449318409,
+      "maximum_foot_vertex_z": 0.5304831862449646,
+      "projected_mesh_bounds_px": [
+        15.220763206481934,
+        87.8173942565918,
+        87.6645278930664,
+        172.26446342468262
+      ]
+    },
+    {
+      "path": "frames/southwest-walk-04.png",
+      "direction": "southwest",
+      "yaw_degrees": -45,
+      "clip": "walk",
+      "clip_frame_index": 4,
+      "sample_fraction": 0.5,
+      "author_time_seconds": 0.8000000317891439,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.05551064386963844,
+      "maximum_foot_vertex_z": 0.5116750597953796,
+      "projected_mesh_bounds_px": [
+        15.599794387817383,
+        88.33346557617188,
+        88.5407943725586,
+        172.14423608779907
+      ]
+    },
+    {
+      "path": "frames/southwest-walk-05.png",
+      "direction": "southwest",
+      "yaw_degrees": -45,
+      "clip": "walk",
+      "clip_frame_index": 5,
+      "sample_fraction": 0.625,
+      "author_time_seconds": 1.00000003973643,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.04288766533136368,
+      "maximum_foot_vertex_z": 0.4701390862464905,
+      "projected_mesh_bounds_px": [
+        15.146526336669922,
+        89.60842895507812,
+        86.30233001708984,
+        172.09197235107422
+      ]
+    },
+    {
+      "path": "frames/southwest-walk-06.png",
+      "direction": "southwest",
+      "yaw_degrees": -45,
+      "clip": "walk",
+      "clip_frame_index": 6,
+      "sample_fraction": 0.75,
+      "author_time_seconds": 1.2000000476837158,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.005249385256320238,
+      "maximum_foot_vertex_z": 0.5259230136871338,
+      "projected_mesh_bounds_px": [
+        14.554022789001465,
+        87.62974548339844,
+        85.97624969482422,
+        172.44575929641724
+      ]
+    },
+    {
+      "path": "frames/southwest-walk-07.png",
+      "direction": "southwest",
+      "yaw_degrees": -45,
+      "clip": "walk",
+      "clip_frame_index": 7,
+      "sample_fraction": 0.875,
+      "author_time_seconds": 1.400000055631002,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.022989852353930473,
+      "maximum_foot_vertex_z": 0.5263612270355225,
+      "projected_mesh_bounds_px": [
+        14.126994132995605,
+        88.07057189941406,
+        85.48546600341797,
+        175.24657201766968
+      ]
+    },
+    {
+      "path": "frames/southwest-attack-00.png",
+      "direction": "southwest",
+      "yaw_degrees": -45,
+      "clip": "attack",
+      "clip_frame_index": 0,
+      "sample_fraction": 0.0,
+      "author_time_seconds": 0.0,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.000292979326331988,
+      "maximum_foot_vertex_z": 0.5245366096496582,
+      "projected_mesh_bounds_px": [
+        16.333139419555664,
+        75.44305801391602,
+        89.90870666503906,
+        180.47592115402222
+      ]
+    },
+    {
+      "path": "frames/southwest-attack-01.png",
+      "direction": "southwest",
+      "yaw_degrees": -45,
+      "clip": "attack",
+      "clip_frame_index": 1,
+      "sample_fraction": 0.2,
+      "author_time_seconds": 0.2933333396911621,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.0009031230001710355,
+      "maximum_foot_vertex_z": 0.5264478921890259,
+      "projected_mesh_bounds_px": [
+        28.34894561767578,
+        71.57036590576172,
+        92.72856903076172,
+        178.88481330871582
+      ]
+    },
+    {
+      "path": "frames/southwest-attack-02.png",
+      "direction": "southwest",
+      "yaw_degrees": -45,
+      "clip": "attack",
+      "clip_frame_index": 2,
+      "sample_fraction": 0.4,
+      "author_time_seconds": 0.5866666793823242,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.01818982884287834,
+      "maximum_foot_vertex_z": 0.5382813215255737,
+      "projected_mesh_bounds_px": [
+        3.927032709121704,
+        84.19149398803711,
+        102.71004486083984,
+        178.88248872756958
+      ]
+    },
+    {
+      "path": "frames/southwest-attack-03.png",
+      "direction": "southwest",
+      "yaw_degrees": -45,
+      "clip": "attack",
+      "clip_frame_index": 3,
+      "sample_fraction": 0.6,
+      "author_time_seconds": 0.8800000190734864,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.00016347112250514328,
+      "maximum_foot_vertex_z": 0.50359046459198,
+      "projected_mesh_bounds_px": [
+        6.434776306152344,
+        85.99123764038086,
+        98.8805160522461,
+        178.9109058380127
+      ]
+    },
+    {
+      "path": "frames/southwest-attack-04.png",
+      "direction": "southwest",
+      "yaw_degrees": -45,
+      "clip": "attack",
+      "clip_frame_index": 4,
+      "sample_fraction": 0.8,
+      "author_time_seconds": 1.1733333587646484,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.00013652554480358958,
+      "maximum_foot_vertex_z": 0.5128297805786133,
+      "projected_mesh_bounds_px": [
+        14.261211395263672,
+        79.94404220581055,
+        85.17139434814453,
+        179.76861906051636
+      ]
+    },
+    {
+      "path": "frames/southwest-attack-05.png",
+      "direction": "southwest",
+      "yaw_degrees": -45,
+      "clip": "attack",
+      "clip_frame_index": 5,
+      "sample_fraction": 1.0,
+      "author_time_seconds": 1.4666666984558105,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.000292979326331988,
+      "maximum_foot_vertex_z": 0.5245366096496582,
+      "projected_mesh_bounds_px": [
+        16.333139419555664,
+        75.44305801391602,
+        89.90870666503906,
+        180.47592115402222
+      ]
+    },
+    {
+      "path": "frames/west-idle-00.png",
+      "direction": "west",
+      "yaw_degrees": -90,
+      "clip": "idle",
+      "clip_frame_index": 0,
+      "sample_fraction": 0.0,
+      "author_time_seconds": 0.0,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.00037211485323496163,
+      "maximum_foot_vertex_z": 0.5237502455711365,
+      "projected_mesh_bounds_px": [
+        40.889644622802734,
+        78.08440017700195,
+        98.18333435058594,
+        177.22275924682617
+      ]
+    },
+    {
+      "path": "frames/west-idle-01.png",
+      "direction": "west",
+      "yaw_degrees": -90,
+      "clip": "idle",
+      "clip_frame_index": 1,
+      "sample_fraction": 0.25,
+      "author_time_seconds": 0.2666666905085246,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -9.12429895834066e-05,
+      "maximum_foot_vertex_z": 0.5138514637947083,
+      "projected_mesh_bounds_px": [
+        40.889644622802734,
+        78.49812698364258,
+        98.18333435058594,
+        177.22451162338257
+      ]
+    },
+    {
+      "path": "frames/west-idle-02.png",
+      "direction": "west",
+      "yaw_degrees": -90,
+      "clip": "idle",
+      "clip_frame_index": 2,
+      "sample_fraction": 0.5,
+      "author_time_seconds": 0.5333333810170492,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.0001103903996408917,
+      "maximum_foot_vertex_z": 0.5048257112503052,
+      "projected_mesh_bounds_px": [
+        40.889644622802734,
+        78.9118537902832,
+        98.18333435058594,
+        177.22591352462769
+      ]
+    },
+    {
+      "path": "frames/west-idle-03.png",
+      "direction": "west",
+      "yaw_degrees": -90,
+      "clip": "idle",
+      "clip_frame_index": 3,
+      "sample_fraction": 0.75,
+      "author_time_seconds": 0.8000000715255737,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -9.12429895834066e-05,
+      "maximum_foot_vertex_z": 0.5138514637947083,
+      "projected_mesh_bounds_px": [
+        40.889644622802734,
+        78.49812698364258,
+        98.18333435058594,
+        177.22451162338257
+      ]
+    },
+    {
+      "path": "frames/west-walk-00.png",
+      "direction": "west",
+      "yaw_degrees": -90,
+      "clip": "walk",
+      "clip_frame_index": 0,
+      "sample_fraction": 0.0,
+      "author_time_seconds": 0.0,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.05550446733832359,
+      "maximum_foot_vertex_z": 0.5116751194000244,
+      "projected_mesh_bounds_px": [
+        23.621105194091797,
+        79.41519927978516,
+        85.46422576904297,
+        170.59735250473022
+      ]
+    },
+    {
+      "path": "frames/west-walk-01.png",
+      "direction": "west",
+      "yaw_degrees": -90,
+      "clip": "walk",
+      "clip_frame_index": 1,
+      "sample_fraction": 0.125,
+      "author_time_seconds": 0.20000000794728598,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.04287906363606453,
+      "maximum_foot_vertex_z": 0.47027939558029175,
+      "projected_mesh_bounds_px": [
+        24.431379318237305,
+        81.30463027954102,
+        82.97332000732422,
+        171.83201265335083
+      ]
+    },
+    {
+      "path": "frames/west-walk-02.png",
+      "direction": "west",
+      "yaw_degrees": -90,
+      "clip": "walk",
+      "clip_frame_index": 2,
+      "sample_fraction": 0.25,
+      "author_time_seconds": 0.40000001589457196,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.005249129608273506,
+      "maximum_foot_vertex_z": 0.5225248336791992,
+      "projected_mesh_bounds_px": [
+        25.308664321899414,
+        79.9918212890625,
+        82.97332000732422,
+        171.85697507858276
+      ]
+    },
+    {
+      "path": "frames/west-walk-03.png",
+      "direction": "west",
+      "yaw_degrees": -90,
+      "clip": "walk",
+      "clip_frame_index": 3,
+      "sample_fraction": 0.375,
+      "author_time_seconds": 0.6000000238418579,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.01939818449318409,
+      "maximum_foot_vertex_z": 0.5304831862449646,
+      "projected_mesh_bounds_px": [
+        24.431379318237305,
+        79.51359558105469,
+        84.42582702636719,
+        172.30078411102295
+      ]
+    },
+    {
+      "path": "frames/west-walk-04.png",
+      "direction": "west",
+      "yaw_degrees": -90,
+      "clip": "walk",
+      "clip_frame_index": 4,
+      "sample_fraction": 0.5,
+      "author_time_seconds": 0.8000000317891439,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.05551064386963844,
+      "maximum_foot_vertex_z": 0.5116750597953796,
+      "projected_mesh_bounds_px": [
+        23.621105194091797,
+        79.41519927978516,
+        85.4685287475586,
+        172.06553649902344
+      ]
+    },
+    {
+      "path": "frames/west-walk-05.png",
+      "direction": "west",
+      "yaw_degrees": -90,
+      "clip": "walk",
+      "clip_frame_index": 5,
+      "sample_fraction": 0.625,
+      "author_time_seconds": 1.00000003973643,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.04288766533136368,
+      "maximum_foot_vertex_z": 0.4701390862464905,
+      "projected_mesh_bounds_px": [
+        24.431379318237305,
+        81.30463027954102,
+        82.97332000732422,
+        171.63640451431274
+      ]
+    },
+    {
+      "path": "frames/west-walk-06.png",
+      "direction": "west",
+      "yaw_degrees": -90,
+      "clip": "walk",
+      "clip_frame_index": 6,
+      "sample_fraction": 0.75,
+      "author_time_seconds": 1.2000000476837158,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.005249385256320238,
+      "maximum_foot_vertex_z": 0.5259230136871338,
+      "projected_mesh_bounds_px": [
+        25.308664321899414,
+        79.9918212890625,
+        82.97332000732422,
+        171.0299677848816
+      ]
+    },
+    {
+      "path": "frames/west-walk-07.png",
+      "direction": "west",
+      "yaw_degrees": -90,
+      "clip": "walk",
+      "clip_frame_index": 7,
+      "sample_fraction": 0.875,
+      "author_time_seconds": 1.400000055631002,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.022989852353930473,
+      "maximum_foot_vertex_z": 0.5263612270355225,
+      "projected_mesh_bounds_px": [
+        24.43137550354004,
+        79.76678466796875,
+        84.59989929199219,
+        170.7664532661438
+      ]
+    },
+    {
+      "path": "frames/west-attack-00.png",
+      "direction": "west",
+      "yaw_degrees": -90,
+      "clip": "attack",
+      "clip_frame_index": 0,
+      "sample_fraction": 0.0,
+      "author_time_seconds": 0.0,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.000292979326331988,
+      "maximum_foot_vertex_z": 0.5245366096496582,
+      "projected_mesh_bounds_px": [
+        23.790802001953125,
+        76.5929946899414,
+        89.69910430908203,
+        172.95947742462158
+      ]
+    },
+    {
+      "path": "frames/west-attack-01.png",
+      "direction": "west",
+      "yaw_degrees": -90,
+      "clip": "attack",
+      "clip_frame_index": 1,
+      "sample_fraction": 0.2,
+      "author_time_seconds": 0.2933333396911621,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.0009031230001710355,
+      "maximum_foot_vertex_z": 0.5264478921890259,
+      "projected_mesh_bounds_px": [
+        24.51987075805664,
+        75.48838806152344,
+        95.03230285644531,
+        172.95759630203247
+      ]
+    },
+    {
+      "path": "frames/west-attack-02.png",
+      "direction": "west",
+      "yaw_degrees": -90,
+      "clip": "attack",
+      "clip_frame_index": 2,
+      "sample_fraction": 0.4,
+      "author_time_seconds": 0.5866666793823242,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.01818982884287834,
+      "maximum_foot_vertex_z": 0.5382813215255737,
+      "projected_mesh_bounds_px": [
+        3.3226702213287354,
+        78.5753059387207,
+        77.06692504882812,
+        172.96354722976685
+      ]
+    },
+    {
+      "path": "frames/west-attack-03.png",
+      "direction": "west",
+      "yaw_degrees": -90,
+      "clip": "attack",
+      "clip_frame_index": 3,
+      "sample_fraction": 0.6,
+      "author_time_seconds": 0.8800000190734864,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.00016347112250514328,
+      "maximum_foot_vertex_z": 0.50359046459198,
+      "projected_mesh_bounds_px": [
+        13.80387020111084,
+        78.98321914672852,
+        72.99980163574219,
+        172.96617937088013
+      ]
+    },
+    {
+      "path": "frames/west-attack-04.png",
+      "direction": "west",
+      "yaw_degrees": -90,
+      "clip": "attack",
+      "clip_frame_index": 4,
+      "sample_fraction": 0.8,
+      "author_time_seconds": 1.1733333587646484,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.00013652554480358958,
+      "maximum_foot_vertex_z": 0.5128297805786133,
+      "projected_mesh_bounds_px": [
+        20.6322021484375,
+        77.32461547851562,
+        82.55778503417969,
+        172.96499919891357
+      ]
+    },
+    {
+      "path": "frames/west-attack-05.png",
+      "direction": "west",
+      "yaw_degrees": -90,
+      "clip": "attack",
+      "clip_frame_index": 5,
+      "sample_fraction": 1.0,
+      "author_time_seconds": 1.4666666984558105,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.000292979326331988,
+      "maximum_foot_vertex_z": 0.5245366096496582,
+      "projected_mesh_bounds_px": [
+        23.790802001953125,
+        76.5929946899414,
+        89.69910430908203,
+        172.95947742462158
+      ]
+    },
+    {
+      "path": "frames/northwest-idle-00.png",
+      "direction": "northwest",
+      "yaw_degrees": -135,
+      "clip": "idle",
+      "clip_frame_index": 0,
+      "sample_fraction": 0.0,
+      "author_time_seconds": 0.0,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.00037211485323496163,
+      "maximum_foot_vertex_z": 0.5237502455711365,
+      "projected_mesh_bounds_px": [
+        35.508697509765625,
+        84.04315567016602,
+        97.18911743164062,
+        172.97007751464844
+      ]
+    },
+    {
+      "path": "frames/northwest-idle-01.png",
+      "direction": "northwest",
+      "yaw_degrees": -135,
+      "clip": "idle",
+      "clip_frame_index": 1,
+      "sample_fraction": 0.25,
+      "author_time_seconds": 0.2666666905085246,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -9.12429895834066e-05,
+      "maximum_foot_vertex_z": 0.5138514637947083,
+      "projected_mesh_bounds_px": [
+        35.47959899902344,
+        84.45688247680664,
+        97.18911743164062,
+        172.97302436828613
+      ]
+    },
+    {
+      "path": "frames/northwest-idle-02.png",
+      "direction": "northwest",
+      "yaw_degrees": -135,
+      "clip": "idle",
+      "clip_frame_index": 2,
+      "sample_fraction": 0.5,
+      "author_time_seconds": 0.5333333810170492,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.0001103903996408917,
+      "maximum_foot_vertex_z": 0.5048257112503052,
+      "projected_mesh_bounds_px": [
+        35.4871826171875,
+        84.87060928344727,
+        97.18911743164062,
+        172.9653353691101
+      ]
+    },
+    {
+      "path": "frames/northwest-idle-03.png",
+      "direction": "northwest",
+      "yaw_degrees": -135,
+      "clip": "idle",
+      "clip_frame_index": 3,
+      "sample_fraction": 0.75,
+      "author_time_seconds": 0.8000000715255737,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -9.12429895834066e-05,
+      "maximum_foot_vertex_z": 0.5138514637947083,
+      "projected_mesh_bounds_px": [
+        35.59233474731445,
+        84.45688247680664,
+        97.18911743164062,
+        172.97302436828613
+      ]
+    },
+    {
+      "path": "frames/northwest-walk-00.png",
+      "direction": "northwest",
+      "yaw_degrees": -135,
+      "clip": "walk",
+      "clip_frame_index": 0,
+      "sample_fraction": 0.0,
+      "author_time_seconds": 0.0,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.05550446733832359,
+      "maximum_foot_vertex_z": 0.5116751194000244,
+      "projected_mesh_bounds_px": [
+        13.096582412719727,
+        70.4857177734375,
+        88.54678344726562,
+        162.03256702423096
+      ]
+    },
+    {
+      "path": "frames/northwest-walk-01.png",
+      "direction": "northwest",
+      "yaw_degrees": -135,
+      "clip": "walk",
+      "clip_frame_index": 1,
+      "sample_fraction": 0.125,
+      "author_time_seconds": 0.20000000794728598,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.04287906363606453,
+      "maximum_foot_vertex_z": 0.47027939558029175,
+      "projected_mesh_bounds_px": [
+        13.350913047790527,
+        72.970458984375,
+        84.90150451660156,
+        165.91139030456543
+      ]
+    },
+    {
+      "path": "frames/northwest-walk-02.png",
+      "direction": "northwest",
+      "yaw_degrees": -135,
+      "clip": "walk",
+      "clip_frame_index": 2,
+      "sample_fraction": 0.25,
+      "author_time_seconds": 0.40000001589457196,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.005249129608273506,
+      "maximum_foot_vertex_z": 0.5225248336791992,
+      "projected_mesh_bounds_px": [
+        14.022466659545898,
+        72.54188919067383,
+        84.90150451660156,
+        173.36964797973633
+      ]
+    },
+    {
+      "path": "frames/northwest-walk-03.png",
+      "direction": "northwest",
+      "yaw_degrees": -135,
+      "clip": "walk",
+      "clip_frame_index": 3,
+      "sample_fraction": 0.375,
+      "author_time_seconds": 0.6000000238418579,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.01939818449318409,
+      "maximum_foot_vertex_z": 0.5304831862449646,
+      "projected_mesh_bounds_px": [
+        14.656218528747559,
+        71.17941284179688,
+        84.90150451660156,
+        176.93305921554565
+      ]
+    },
+    {
+      "path": "frames/northwest-walk-04.png",
+      "direction": "northwest",
+      "yaw_degrees": -135,
+      "clip": "walk",
+      "clip_frame_index": 4,
+      "sample_fraction": 0.5,
+      "author_time_seconds": 0.8000000317891439,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.05551064386963844,
+      "maximum_foot_vertex_z": 0.5116750597953796,
+      "projected_mesh_bounds_px": [
+        14.934038162231445,
+        70.4857177734375,
+        84.90150451660156,
+        173.15872621536255
+      ]
+    },
+    {
+      "path": "frames/northwest-walk-05.png",
+      "direction": "northwest",
+      "yaw_degrees": -135,
+      "clip": "walk",
+      "clip_frame_index": 5,
+      "sample_fraction": 0.625,
+      "author_time_seconds": 1.00000003973643,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.04288766533136368,
+      "maximum_foot_vertex_z": 0.4701390862464905,
+      "projected_mesh_bounds_px": [
+        14.568785667419434,
+        72.970458984375,
+        84.90150451660156,
+        169.59095191955566
+      ]
+    },
+    {
+      "path": "frames/northwest-walk-06.png",
+      "direction": "northwest",
+      "yaw_degrees": -135,
+      "clip": "walk",
+      "clip_frame_index": 6,
+      "sample_fraction": 0.75,
+      "author_time_seconds": 1.2000000476837158,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.005249385256320238,
+      "maximum_foot_vertex_z": 0.5259230136871338,
+      "projected_mesh_bounds_px": [
+        14.022466659545898,
+        72.54188919067383,
+        84.90150451660156,
+        163.13929653167725
+      ]
+    },
+    {
+      "path": "frames/northwest-walk-07.png",
+      "direction": "northwest",
+      "yaw_degrees": -135,
+      "clip": "walk",
+      "clip_frame_index": 7,
+      "sample_fraction": 0.875,
+      "author_time_seconds": 1.400000055631002,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.022989852353930473,
+      "maximum_foot_vertex_z": 0.5263612270355225,
+      "projected_mesh_bounds_px": [
+        13.405837059020996,
+        71.43260192871094,
+        87.75531768798828,
+        165.60769271850586
+      ]
+    },
+    {
+      "path": "frames/northwest-attack-00.png",
+      "direction": "northwest",
+      "yaw_degrees": -135,
+      "clip": "attack",
+      "clip_frame_index": 0,
+      "sample_fraction": 0.0,
+      "author_time_seconds": 0.0,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.000292979326331988,
+      "maximum_foot_vertex_z": 0.5245366096496582,
+      "projected_mesh_bounds_px": [
+        15.375744819641113,
+        77.69155883789062,
+        92.24297332763672,
+        164.06807613372803
+      ]
+    },
+    {
+      "path": "frames/northwest-attack-01.png",
+      "direction": "northwest",
+      "yaw_degrees": -135,
+      "clip": "attack",
+      "clip_frame_index": 1,
+      "sample_fraction": 0.2,
+      "author_time_seconds": 0.2933333396911621,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.0009031230001710355,
+      "maximum_foot_vertex_z": 0.5264478921890259,
+      "projected_mesh_bounds_px": [
+        24.50877571105957,
+        79.99206161499023,
+        96.9638442993164,
+        165.62882137298584
+      ]
+    },
+    {
+      "path": "frames/northwest-attack-02.png",
+      "direction": "northwest",
+      "yaw_degrees": -135,
+      "clip": "attack",
+      "clip_frame_index": 2,
+      "sample_fraction": 0.4,
+      "author_time_seconds": 0.5866666793823242,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.01818982884287834,
+      "maximum_foot_vertex_z": 0.5382813215255737,
+      "projected_mesh_bounds_px": [
+        27.885190963745117,
+        71.63116836547852,
+        82.04076385498047,
+        165.66652965545654
+      ]
+    },
+    {
+      "path": "frames/northwest-attack-03.png",
+      "direction": "northwest",
+      "yaw_degrees": -135,
+      "clip": "attack",
+      "clip_frame_index": 3,
+      "sample_fraction": 0.6,
+      "author_time_seconds": 0.8800000190734864,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.00016347112250514328,
+      "maximum_foot_vertex_z": 0.50359046459198,
+      "projected_mesh_bounds_px": [
+        26.000370025634766,
+        69.00708389282227,
+        79.05907440185547,
+        165.62208366394043
+      ]
+    },
+    {
+      "path": "frames/northwest-attack-04.png",
+      "direction": "northwest",
+      "yaw_degrees": -135,
+      "clip": "attack",
+      "clip_frame_index": 4,
+      "sample_fraction": 0.8,
+      "author_time_seconds": 1.1733333587646484,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.00013652554480358958,
+      "maximum_foot_vertex_z": 0.5128297805786133,
+      "projected_mesh_bounds_px": [
+        20.560285568237305,
+        73.68489074707031,
+        86.80237579345703,
+        164.78766632080078
+      ]
+    },
+    {
+      "path": "frames/northwest-attack-05.png",
+      "direction": "northwest",
+      "yaw_degrees": -135,
+      "clip": "attack",
+      "clip_frame_index": 5,
+      "sample_fraction": 1.0,
+      "author_time_seconds": 1.4666666984558105,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.000292979326331988,
+      "maximum_foot_vertex_z": 0.5245366096496582,
+      "projected_mesh_bounds_px": [
+        15.375744819641113,
+        77.69155883789062,
+        92.24297332763672,
+        164.06807613372803
+      ]
+    },
+    {
+      "path": "frames/north-idle-00.png",
+      "direction": "north",
+      "yaw_degrees": 180,
+      "clip": "idle",
+      "clip_frame_index": 0,
+      "sample_fraction": 0.0,
+      "author_time_seconds": 0.0,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.00037211485323496163,
+      "maximum_foot_vertex_z": 0.5237502455711365,
+      "projected_mesh_bounds_px": [
+        24.251670837402344,
+        86.99691009521484,
+        102.7798080444336,
+        166.15568733215332
+      ]
+    },
+    {
+      "path": "frames/north-idle-01.png",
+      "direction": "north",
+      "yaw_degrees": 180,
+      "clip": "idle",
+      "clip_frame_index": 1,
+      "sample_fraction": 0.25,
+      "author_time_seconds": 0.2666666905085246,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -9.12429895834066e-05,
+      "maximum_foot_vertex_z": 0.5138514637947083,
+      "projected_mesh_bounds_px": [
+        24.263883590698242,
+        87.41063690185547,
+        102.75579833984375,
+        166.17033576965332
+      ]
+    },
+    {
+      "path": "frames/north-idle-02.png",
+      "direction": "north",
+      "yaw_degrees": 180,
+      "clip": "idle",
+      "clip_frame_index": 2,
+      "sample_fraction": 0.5,
+      "author_time_seconds": 0.5333333810170492,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.0001103903996408917,
+      "maximum_foot_vertex_z": 0.5048257112503052,
+      "projected_mesh_bounds_px": [
+        24.280527114868164,
+        87.82437515258789,
+        102.7369155883789,
+        166.16753768920898
+      ]
+    },
+    {
+      "path": "frames/north-idle-03.png",
+      "direction": "north",
+      "yaw_degrees": 180,
+      "clip": "idle",
+      "clip_frame_index": 3,
+      "sample_fraction": 0.75,
+      "author_time_seconds": 0.8000000715255737,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -9.12429895834066e-05,
+      "maximum_foot_vertex_z": 0.5138514637947083,
+      "projected_mesh_bounds_px": [
+        24.2744083404541,
+        87.41063690185547,
+        102.7730941772461,
+        166.17033576965332
+      ]
+    },
+    {
+      "path": "frames/north-walk-00.png",
+      "direction": "north",
+      "yaw_degrees": 180,
+      "clip": "walk",
+      "clip_frame_index": 0,
+      "sample_fraction": 0.0,
+      "author_time_seconds": 0.0,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.05550446733832359,
+      "maximum_foot_vertex_z": 0.5116751194000244,
+      "projected_mesh_bounds_px": [
+        15.617990493774414,
+        70.20236206054688,
+        110.23353576660156,
+        168.82140827178955
+      ]
+    },
+    {
+      "path": "frames/north-walk-01.png",
+      "direction": "north",
+      "yaw_degrees": 180,
+      "clip": "walk",
+      "clip_frame_index": 1,
+      "sample_fraction": 0.125,
+      "author_time_seconds": 0.20000000794728598,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.04287906363606453,
+      "maximum_foot_vertex_z": 0.47027939558029175,
+      "projected_mesh_bounds_px": [
+        15.722317695617676,
+        72.48141860961914,
+        109.98678588867188,
+        163.96935653686523
+      ]
+    },
+    {
+      "path": "frames/north-walk-02.png",
+      "direction": "north",
+      "yaw_degrees": 180,
+      "clip": "walk",
+      "clip_frame_index": 2,
+      "sample_fraction": 0.25,
+      "author_time_seconds": 0.40000001589457196,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.005249129608273506,
+      "maximum_foot_vertex_z": 0.5225248336791992,
+      "projected_mesh_bounds_px": [
+        15.860934257507324,
+        71.74999237060547,
+        109.7109375,
+        169.24400997161865
+      ]
+    },
+    {
+      "path": "frames/north-walk-03.png",
+      "direction": "north",
+      "yaw_degrees": 180,
+      "clip": "walk",
+      "clip_frame_index": 3,
+      "sample_fraction": 0.375,
+      "author_time_seconds": 0.6000000238418579,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.01939818449318409,
+      "maximum_foot_vertex_z": 0.5304831862449646,
+      "projected_mesh_bounds_px": [
+        16.06932830810547,
+        70.69038391113281,
+        109.2336654663086,
+        174.19619035720825
+      ]
+    },
+    {
+      "path": "frames/north-walk-04.png",
+      "direction": "north",
+      "yaw_degrees": 180,
+      "clip": "walk",
+      "clip_frame_index": 4,
+      "sample_fraction": 0.5,
+      "author_time_seconds": 0.8000000317891439,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.05551064386963844,
+      "maximum_foot_vertex_z": 0.5116750597953796,
+      "projected_mesh_bounds_px": [
+        16.178741455078125,
+        70.20236206054688,
+        109.06470489501953,
+        168.88658952713013
+      ]
+    },
+    {
+      "path": "frames/north-walk-05.png",
+      "direction": "north",
+      "yaw_degrees": 180,
+      "clip": "walk",
+      "clip_frame_index": 5,
+      "sample_fraction": 0.625,
+      "author_time_seconds": 1.00000003973643,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.04288766533136368,
+      "maximum_foot_vertex_z": 0.4701390862464905,
+      "projected_mesh_bounds_px": [
+        16.10047721862793,
+        72.48141860961914,
+        109.2040023803711,
+        163.95318603515625
+      ]
+    },
+    {
+      "path": "frames/north-walk-06.png",
+      "direction": "north",
+      "yaw_degrees": 180,
+      "clip": "walk",
+      "clip_frame_index": 6,
+      "sample_fraction": 0.75,
+      "author_time_seconds": 1.2000000476837158,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.005249385256320238,
+      "maximum_foot_vertex_z": 0.5259230136871338,
+      "projected_mesh_bounds_px": [
+        15.860934257507324,
+        71.74999237060547,
+        109.7109375,
+        169.24770069122314
+      ]
+    },
+    {
+      "path": "frames/north-walk-07.png",
+      "direction": "north",
+      "yaw_degrees": 180,
+      "clip": "walk",
+      "clip_frame_index": 7,
+      "sample_fraction": 0.875,
+      "author_time_seconds": 1.400000055631002,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.022989852353930473,
+      "maximum_foot_vertex_z": 0.5263612270355225,
+      "projected_mesh_bounds_px": [
+        15.684370040893555,
+        70.94357299804688,
+        110.00896453857422,
+        174.6131558418274
+      ]
+    },
+    {
+      "path": "frames/north-attack-00.png",
+      "direction": "north",
+      "yaw_degrees": 180,
+      "clip": "attack",
+      "clip_frame_index": 0,
+      "sample_fraction": 0.0,
+      "author_time_seconds": 0.0,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.000292979326331988,
+      "maximum_foot_vertex_z": 0.5245366096496582,
+      "projected_mesh_bounds_px": [
+        33.07171630859375,
+        79.72683334350586,
+        99.42196655273438,
+        164.89737224578857
+      ]
+    },
+    {
+      "path": "frames/north-attack-01.png",
+      "direction": "north",
+      "yaw_degrees": 180,
+      "clip": "attack",
+      "clip_frame_index": 1,
+      "sample_fraction": 0.2,
+      "author_time_seconds": 0.2933333396911621,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.0009031230001710355,
+      "maximum_foot_vertex_z": 0.5264478921890259,
+      "projected_mesh_bounds_px": [
+        41.32805633544922,
+        84.08885192871094,
+        107.79875183105469,
+        170.70288848876953
+      ]
+    },
+    {
+      "path": "frames/north-attack-02.png",
+      "direction": "north",
+      "yaw_degrees": 180,
+      "clip": "attack",
+      "clip_frame_index": 2,
+      "sample_fraction": 0.4,
+      "author_time_seconds": 0.5866666793823242,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.01818982884287834,
+      "maximum_foot_vertex_z": 0.5382813215255737,
+      "projected_mesh_bounds_px": [
+        13.918550491333008,
+        69.74147415161133,
+        91.20719146728516,
+        161.0887155532837
+      ]
+    },
+    {
+      "path": "frames/north-attack-03.png",
+      "direction": "north",
+      "yaw_degrees": 180,
+      "clip": "attack",
+      "clip_frame_index": 3,
+      "sample_fraction": 0.6,
+      "author_time_seconds": 0.8800000190734864,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.00016347112250514328,
+      "maximum_foot_vertex_z": 0.50359046459198,
+      "projected_mesh_bounds_px": [
+        18.364269256591797,
+        66.60709762573242,
+        97.66081237792969,
+        158.44864082336426
+      ]
+    },
+    {
+      "path": "frames/north-attack-04.png",
+      "direction": "north",
+      "yaw_degrees": 180,
+      "clip": "attack",
+      "clip_frame_index": 4,
+      "sample_fraction": 0.8,
+      "author_time_seconds": 1.1733333587646484,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.00013652554480358958,
+      "maximum_foot_vertex_z": 0.5128297805786133,
+      "projected_mesh_bounds_px": [
+        27.354572296142578,
+        74.09222030639648,
+        93.95167541503906,
+        159.7553415298462
+      ]
+    },
+    {
+      "path": "frames/north-attack-05.png",
+      "direction": "north",
+      "yaw_degrees": 180,
+      "clip": "attack",
+      "clip_frame_index": 5,
+      "sample_fraction": 1.0,
+      "author_time_seconds": 1.4666666984558105,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.000292979326331988,
+      "maximum_foot_vertex_z": 0.5245366096496582,
+      "projected_mesh_bounds_px": [
+        33.07171630859375,
+        79.72683334350586,
+        99.42196655273438,
+        164.89737224578857
+      ]
+    },
+    {
+      "path": "frames/northeast-idle-00.png",
+      "direction": "northeast",
+      "yaw_degrees": 135,
+      "clip": "idle",
+      "clip_frame_index": 0,
+      "sample_fraction": 0.0,
+      "author_time_seconds": 0.0,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.00037211485323496163,
+      "maximum_foot_vertex_z": 0.5237502455711365,
+      "projected_mesh_bounds_px": [
+        30.864320755004883,
+        83.72139358520508,
+        97.6396484375,
+        170.07002305984497
+      ]
+    },
+    {
+      "path": "frames/northeast-idle-01.png",
+      "direction": "northeast",
+      "yaw_degrees": 135,
+      "clip": "idle",
+      "clip_frame_index": 1,
+      "sample_fraction": 0.25,
+      "author_time_seconds": 0.2666666905085246,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -9.12429895834066e-05,
+      "maximum_foot_vertex_z": 0.5138514637947083,
+      "projected_mesh_bounds_px": [
+        30.864328384399414,
+        84.1351203918457,
+        97.66041564941406,
+        170.07173252105713
+      ]
+    },
+    {
+      "path": "frames/northeast-idle-02.png",
+      "direction": "northeast",
+      "yaw_degrees": 135,
+      "clip": "idle",
+      "clip_frame_index": 2,
+      "sample_fraction": 0.5,
+      "author_time_seconds": 0.5333333810170492,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.0001103903996408917,
+      "maximum_foot_vertex_z": 0.5048257112503052,
+      "projected_mesh_bounds_px": [
+        30.864320755004883,
+        84.54884719848633,
+        97.65169525146484,
+        170.0650234222412
+      ]
+    },
+    {
+      "path": "frames/northeast-idle-03.png",
+      "direction": "northeast",
+      "yaw_degrees": 135,
+      "clip": "idle",
+      "clip_frame_index": 3,
+      "sample_fraction": 0.75,
+      "author_time_seconds": 0.8000000715255737,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -9.12429895834066e-05,
+      "maximum_foot_vertex_z": 0.5138514637947083,
+      "projected_mesh_bounds_px": [
+        30.864328384399414,
+        84.1351203918457,
+        97.5686264038086,
+        170.07173252105713
+      ]
+    },
+    {
+      "path": "frames/northeast-walk-00.png",
+      "direction": "northeast",
+      "yaw_degrees": 135,
+      "clip": "walk",
+      "clip_frame_index": 0,
+      "sample_fraction": 0.0,
+      "author_time_seconds": 0.0,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.05550446733832359,
+      "maximum_foot_vertex_z": 0.5116751194000244,
+      "projected_mesh_bounds_px": [
+        42.74977493286133,
+        75.93611526489258,
+        114.0931625366211,
+        173.16268873214722
+      ]
+    },
+    {
+      "path": "frames/northeast-walk-01.png",
+      "direction": "northeast",
+      "yaw_degrees": 135,
+      "clip": "walk",
+      "clip_frame_index": 1,
+      "sample_fraction": 0.125,
+      "author_time_seconds": 0.20000000794728598,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.04287906363606453,
+      "maximum_foot_vertex_z": 0.47027939558029175,
+      "projected_mesh_bounds_px": [
+        42.62312698364258,
+        77.34764099121094,
+        113.90524291992188,
+        169.61991262435913
+      ]
+    },
+    {
+      "path": "frames/northeast-walk-02.png",
+      "direction": "northeast",
+      "yaw_degrees": 135,
+      "clip": "walk",
+      "clip_frame_index": 2,
+      "sample_fraction": 0.25,
+      "author_time_seconds": 0.40000001589457196,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.005249129608273506,
+      "maximum_foot_vertex_z": 0.5225248336791992,
+      "projected_mesh_bounds_px": [
+        42.023746490478516,
+        75.69988632202148,
+        113.44597625732422,
+        163.13732814788818
+      ]
+    },
+    {
+      "path": "frames/northeast-walk-03.png",
+      "direction": "northeast",
+      "yaw_degrees": 135,
+      "clip": "walk",
+      "clip_frame_index": 3,
+      "sample_fraction": 0.375,
+      "author_time_seconds": 0.6000000238418579,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.01939818449318409,
+      "maximum_foot_vertex_z": 0.5304831862449646,
+      "projected_mesh_bounds_px": [
+        40.335472106933594,
+        75.55660629272461,
+        112.77923583984375,
+        165.23377990722656
+      ]
+    },
+    {
+      "path": "frames/northeast-walk-04.png",
+      "direction": "northeast",
+      "yaw_degrees": 135,
+      "clip": "walk",
+      "clip_frame_index": 4,
+      "sample_fraction": 0.5,
+      "author_time_seconds": 0.8000000317891439,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.05551064386963844,
+      "maximum_foot_vertex_z": 0.5116750597953796,
+      "projected_mesh_bounds_px": [
+        39.459205627441406,
+        75.93611526489258,
+        112.40020751953125,
+        162.0600471496582
+      ]
+    },
+    {
+      "path": "frames/northeast-walk-05.png",
+      "direction": "northeast",
+      "yaw_degrees": 135,
+      "clip": "walk",
+      "clip_frame_index": 5,
+      "sample_fraction": 0.625,
+      "author_time_seconds": 1.00000003973643,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.04288766533136368,
+      "maximum_foot_vertex_z": 0.4701390862464905,
+      "projected_mesh_bounds_px": [
+        41.697669982910156,
+        77.34764099121094,
+        112.85346984863281,
+        165.91679191589355
+      ]
+    },
+    {
+      "path": "frames/northeast-walk-06.png",
+      "direction": "northeast",
+      "yaw_degrees": 135,
+      "clip": "walk",
+      "clip_frame_index": 6,
+      "sample_fraction": 0.75,
+      "author_time_seconds": 1.2000000476837158,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.005249385256320238,
+      "maximum_foot_vertex_z": 0.5259230136871338,
+      "projected_mesh_bounds_px": [
+        42.023746490478516,
+        75.69988632202148,
+        113.44597625732422,
+        173.36977672576904
+      ]
+    },
+    {
+      "path": "frames/northeast-walk-07.png",
+      "direction": "northeast",
+      "yaw_degrees": 135,
+      "clip": "walk",
+      "clip_frame_index": 7,
+      "sample_fraction": 0.875,
+      "author_time_seconds": 1.400000055631002,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.022989852353930473,
+      "maximum_foot_vertex_z": 0.5263612270355225,
+      "projected_mesh_bounds_px": [
+        42.5145378112793,
+        75.80979537963867,
+        113.87300872802734,
+        177.30763864517212
+      ]
+    },
+    {
+      "path": "frames/northeast-attack-00.png",
+      "direction": "northeast",
+      "yaw_degrees": 135,
+      "clip": "attack",
+      "clip_frame_index": 0,
+      "sample_fraction": 0.0,
+      "author_time_seconds": 0.0,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.000292979326331988,
+      "maximum_foot_vertex_z": 0.5245366096496582,
+      "projected_mesh_bounds_px": [
+        38.09128952026367,
+        78.78342819213867,
+        111.66686248779297,
+        172.80234289169312
+      ]
+    },
+    {
+      "path": "frames/northeast-attack-01.png",
+      "direction": "northeast",
+      "yaw_degrees": 135,
+      "clip": "attack",
+      "clip_frame_index": 1,
+      "sample_fraction": 0.2,
+      "author_time_seconds": 0.2933333396911621,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.0009031230001710355,
+      "maximum_foot_vertex_z": 0.5264478921890259,
+      "projected_mesh_bounds_px": [
+        35.27143096923828,
+        83.80857467651367,
+        99.65105438232422,
+        176.90540027618408
+      ]
+    },
+    {
+      "path": "frames/northeast-attack-02.png",
+      "direction": "northeast",
+      "yaw_degrees": 135,
+      "clip": "attack",
+      "clip_frame_index": 2,
+      "sample_fraction": 0.4,
+      "author_time_seconds": 0.5866666793823242,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.01818982884287834,
+      "maximum_foot_vertex_z": 0.5382813215255737,
+      "projected_mesh_bounds_px": [
+        25.28995704650879,
+        71.7798843383789,
+        124.07296752929688,
+        170.84459495544434
+      ]
+    },
+    {
+      "path": "frames/northeast-attack-03.png",
+      "direction": "northeast",
+      "yaw_degrees": 135,
+      "clip": "attack",
+      "clip_frame_index": 3,
+      "sample_fraction": 0.6,
+      "author_time_seconds": 0.8800000190734864,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.00016347112250514328,
+      "maximum_foot_vertex_z": 0.50359046459198,
+      "projected_mesh_bounds_px": [
+        29.11948585510254,
+        69.17898559570312,
+        121.56522369384766,
+        165.08207988739014
+      ]
+    },
+    {
+      "path": "frames/northeast-attack-04.png",
+      "direction": "northeast",
+      "yaw_degrees": 135,
+      "clip": "attack",
+      "clip_frame_index": 4,
+      "sample_fraction": 0.8,
+      "author_time_seconds": 1.1733333587646484,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.00013652554480358958,
+      "maximum_foot_vertex_z": 0.5128297805786133,
+      "projected_mesh_bounds_px": [
+        42.828609466552734,
+        75.41152954101562,
+        113.73878479003906,
+        168.72978401184082
+      ]
+    },
+    {
+      "path": "frames/northeast-attack-05.png",
+      "direction": "northeast",
+      "yaw_degrees": 135,
+      "clip": "attack",
+      "clip_frame_index": 5,
+      "sample_fraction": 1.0,
+      "author_time_seconds": 1.4666666984558105,
+      "foot_anchor_px": [
+        64.0,
+        157.99996948242188
+      ],
+      "minimum_foot_vertex_z": -0.000292979326331988,
+      "maximum_foot_vertex_z": 0.5245366096496582,
+      "projected_mesh_bounds_px": [
+        38.09128952026367,
+        78.78342819213867,
+        111.66686248779297,
+        172.80234289169312
+      ]
+    }
+  ],
+  "source_loop_audit": {
+    "idle": {
+      "source_endpoint_max_vertex_delta": 0.0,
+      "ground_sample_count": 64,
+      "minimum_sampled_foot_vertex_z": -0.00037211485323496163,
+      "ground_sampling_boundary": "64 evaluated phases, not a mathematical continuous-cycle bound"
+    },
+    "walk": {
+      "source_endpoint_max_vertex_delta": 0.0,
+      "ground_sample_count": 64,
+      "minimum_sampled_foot_vertex_z": -0.05551064386963844,
+      "ground_sampling_boundary": "64 evaluated phases, not a mathematical continuous-cycle bound"
+    }
+  },
+  "direction_order": [
+    "east",
+    "southeast",
+    "south",
+    "southwest",
+    "west",
+    "northwest",
+    "north",
+    "northeast"
+  ],
+  "clip_sample_fractions": {
+    "idle": [
+      0.0,
+      0.25,
+      0.5,
+      0.75
+    ],
+    "walk": [
+      0.0,
+      0.125,
+      0.25,
+      0.375,
+      0.5,
+      0.625,
+      0.75,
+      0.875
+    ],
+    "attack": [
+      0.0,
+      0.2,
+      0.4,
+      0.6,
+      0.8,
+      1.0
+    ]
+  },
+  "root_policy": "No per-frame grounding, root motion removal or retiming",
+  "head_fit_pitch_degrees": -25.0,
+  "head_fit_scale": 0.85,
+  "pose_policy": "One constant head-bone pitch after the author pose; this is an adapted fit candidate, not an untouched author render",
+  "render_pose_policy": "Sampled pose frozen for render; evaluated vertex agreement checked before every frame",
+  "shadow_policy": "Transparent renders contain no ground or baked shadow; preview adds one independent static contact shadow",
+  "boundary": "Retained-layout study atlas only; no production family registration or gameplay integration."
+}

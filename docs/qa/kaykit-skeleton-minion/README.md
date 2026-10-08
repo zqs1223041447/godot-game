@@ -1,5 +1,7 @@
 # KayKit Skeleton Minion：三方向近战美术小样
 
+本页保留第一轮三方向原样/固定仰角的小样证据。当前已完成一次0.85头部比例对照及[真正八方向图集与独立正式地图视觉研究入口](eight-direction/README.md)；正式怪物目录仍未接入。
+
 仅做新亡灵外观族的适配研究，未接入正式敌人、替换蜘蛛或改变游戏机制。来源固定为[KayKit Skeletons 1.0指定提交](../../../art-studies/kaykit-skeleton-minion-1.0/README.md)，当前只跟踪CC0原许可证、SHA与官方固定URL；原模型和贴图保留在外部本地工作源，不再跟踪，不重写Git历史。
 
 ## 同源检查
@@ -33,6 +35,6 @@ bash tools/art/skeleton_minion/run_preview.sh -- head-fit
 
 原生截图复现给变体后增加输出路径，例如`bash tools/art/skeleton_minion/run_preview.sh -- head-fit /tmp/skeleton-fit.png`。运行器创建隔离XDG目录；画廊不加载Main、不生成怪物、不读写构筑档。步行栏的平移是画廊演示，不能用来证明游戏移动速度已匹配。
 
-自主结论：固定头部适配值得作为后续新亡灵外观族候选，仍先保持当前小样，不做八方向批量。最小正式接入应复用`ActorSpriteCatalog`现有128×192、[64,158]脚点、18帧/方向（Idle4、Walk8、Attack6）及`ActorVisual`/`RetainedActorLayer`；通过明确的新族键`undead_minion`选择，与crawler/skitter原族分开。源图要先补齐真正八方向并验证转向、实际游戏缩放/移动速度、全步行周期接地和已有攻击提示窗口；视觉采样可适配既有12fps约定，实际攻击、伤害、冷却、速度、碰撞与存档均沿原路径。此处只记录方案，未加生产目录条目、族选择或新敌人。
+当前结论：固定仰角和一次0.85头部比例适配作为新亡灵外观族候选。真正八方向已补齐并在独立研究入口复用`ActorSpriteCatalog`现有128×192、[64,158]脚点、18帧/方向（Idle4、Walk8、Attack6）及`ActorVisual`/`RetainedActorLayer`，转向、实际游戏缩放/移动速度及既有攻击图像窗口通过有界检查。接地和滑脚限制保留；生产目录中仍没有新族选择或新敌人，正式投放另行决定，crawler/skitter原族保持。
 
 未验证边界：其余92条动画、剩余五方向、正式战斗/伤害、全动作周期、死亡、密集同屏、稀有/首领配色、自然游玩和性能。未导出Windows程序、封包或跑600秒检测，未重跑战斗/迁移测试。

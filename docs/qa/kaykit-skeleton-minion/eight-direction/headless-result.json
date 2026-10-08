@@ -1,0 +1,553 @@
+{
+	"boundary": "Real map/camera/renderer and actual player movement; enemy motion is a visual-only speed/collision proxy. No natural AI, damage, spawn, culling-edge or FPS claim. Feet are not completely world-locked.",
+	"checks": 392,
+	"clip_slots": {
+		"attack": [
+			12,
+			30,
+			48,
+			66,
+			84,
+			102,
+			120,
+			138,
+			13,
+			31,
+			49,
+			67,
+			85,
+			103,
+			121,
+			139,
+			14,
+			32,
+			50,
+			68,
+			86,
+			104,
+			122,
+			140,
+			15,
+			33,
+			51,
+			69,
+			87,
+			105,
+			123,
+			141,
+			16,
+			34,
+			52,
+			70,
+			88,
+			106,
+			124,
+			142,
+			17,
+			35,
+			53,
+			71,
+			89,
+			107,
+			125,
+			143
+		],
+		"idle": [
+			0,
+			18,
+			36,
+			54,
+			72,
+			90,
+			108,
+			126,
+			1,
+			19,
+			37,
+			55,
+			73,
+			91,
+			109,
+			127,
+			2,
+			20,
+			38,
+			56,
+			74,
+			92,
+			110,
+			128,
+			3,
+			21,
+			39,
+			57,
+			75,
+			93,
+			111,
+			129
+		],
+		"walk": [
+			4,
+			22,
+			40,
+			58,
+			76,
+			94,
+			112,
+			130,
+			5,
+			23,
+			41,
+			59,
+			77,
+			95,
+			113,
+			131,
+			6,
+			24,
+			42,
+			60,
+			78,
+			96,
+			114,
+			132,
+			7,
+			25,
+			43,
+			61,
+			79,
+			97,
+			115,
+			133,
+			8,
+			26,
+			44,
+			62,
+			80,
+			98,
+			116,
+			134,
+			9,
+			27,
+			45,
+			63,
+			81,
+			99,
+			117,
+			135,
+			10,
+			28,
+			46,
+			64,
+			82,
+			100,
+			118,
+			136,
+			11,
+			29,
+			47,
+			65,
+			83,
+			101,
+			119,
+			137
+		]
+	},
+	"failures": [],
+	"map": "ruins_garden",
+	"movement_samples": [
+		{
+			"direction": 0,
+			"phase": 0,
+			"projected_world_speed": 42.509940591946616,
+			"world_speed": 65.39991100184923
+		},
+		{
+			"direction": 1,
+			"phase": 0,
+			"projected_world_speed": 42.50996290765701,
+			"world_speed": 65.39994533371264
+		},
+		{
+			"direction": 2,
+			"phase": 0,
+			"projected_world_speed": 42.51005960906873,
+			"world_speed": 65.40009410512074
+		},
+		{
+			"direction": 3,
+			"phase": 0,
+			"projected_world_speed": 42.509795539829035,
+			"world_speed": 65.39968784473707
+		},
+		{
+			"direction": 4,
+			"phase": 0,
+			"projected_world_speed": 42.509940591946616,
+			"world_speed": 65.39991100184923
+		},
+		{
+			"direction": 5,
+			"phase": 0,
+			"projected_world_speed": 42.50996290765701,
+			"world_speed": 65.39994533371264
+		},
+		{
+			"direction": 6,
+			"phase": 0,
+			"projected_world_speed": 42.509107472091806,
+			"world_speed": 65.39862927894866
+		},
+		{
+			"direction": 7,
+			"phase": 0,
+			"projected_world_speed": 42.509795539829035,
+			"world_speed": 65.39968784473707
+		},
+		{
+			"direction": 0,
+			"phase": 1,
+			"projected_world_speed": 42.51005960906873,
+			"world_speed": 65.40009410512074
+		},
+		{
+			"direction": 1,
+			"phase": 1,
+			"projected_world_speed": 42.50996290765701,
+			"world_speed": 65.39994533371264
+		},
+		{
+			"direction": 2,
+			"phase": 1,
+			"projected_world_speed": 42.51005960906873,
+			"world_speed": 65.40009410512074
+		},
+		{
+			"direction": 3,
+			"phase": 1,
+			"projected_world_speed": 42.509795539829035,
+			"world_speed": 65.39968784473707
+		},
+		{
+			"direction": 4,
+			"phase": 1,
+			"projected_world_speed": 42.51005960906873,
+			"world_speed": 65.40009410512074
+		},
+		{
+			"direction": 5,
+			"phase": 1,
+			"projected_world_speed": 42.50996290765701,
+			"world_speed": 65.39994533371264
+		},
+		{
+			"direction": 6,
+			"phase": 1,
+			"projected_world_speed": 42.509107472091806,
+			"world_speed": 65.39862927894866
+		},
+		{
+			"direction": 7,
+			"phase": 1,
+			"projected_world_speed": 42.509795539829035,
+			"world_speed": 65.39968784473707
+		},
+		{
+			"direction": 0,
+			"phase": 2,
+			"projected_world_speed": 42.51005960906873,
+			"world_speed": 65.40009410512074
+		},
+		{
+			"direction": 1,
+			"phase": 2,
+			"projected_world_speed": 42.50996290765701,
+			"world_speed": 65.39994533371264
+		},
+		{
+			"direction": 2,
+			"phase": 2,
+			"projected_world_speed": 42.51005960906873,
+			"world_speed": 65.40009410512074
+		},
+		{
+			"direction": 3,
+			"phase": 2,
+			"projected_world_speed": 42.509795539829035,
+			"world_speed": 65.39968784473707
+		},
+		{
+			"direction": 4,
+			"phase": 2,
+			"projected_world_speed": 42.51005960906873,
+			"world_speed": 65.40009410512074
+		},
+		{
+			"direction": 5,
+			"phase": 2,
+			"projected_world_speed": 42.50996290765701,
+			"world_speed": 65.39994533371264
+		},
+		{
+			"direction": 6,
+			"phase": 2,
+			"projected_world_speed": 42.509107472091806,
+			"world_speed": 65.39862927894866
+		},
+		{
+			"direction": 7,
+			"phase": 2,
+			"projected_world_speed": 42.509795539829035,
+			"world_speed": 65.39968784473707
+		},
+		{
+			"direction": 0,
+			"phase": 3,
+			"projected_world_speed": 42.51005960906873,
+			"world_speed": 65.40009410512074
+		},
+		{
+			"direction": 1,
+			"phase": 3,
+			"projected_world_speed": 42.50996290765701,
+			"world_speed": 65.39994533371264
+		},
+		{
+			"direction": 2,
+			"phase": 3,
+			"projected_world_speed": 42.51005960906873,
+			"world_speed": 65.40009410512074
+		},
+		{
+			"direction": 3,
+			"phase": 3,
+			"projected_world_speed": 42.509795539829035,
+			"world_speed": 65.39968784473707
+		},
+		{
+			"direction": 4,
+			"phase": 3,
+			"projected_world_speed": 42.51005960906873,
+			"world_speed": 65.40009410512074
+		},
+		{
+			"direction": 5,
+			"phase": 3,
+			"projected_world_speed": 42.50996290765701,
+			"world_speed": 65.39994533371264
+		},
+		{
+			"direction": 6,
+			"phase": 3,
+			"projected_world_speed": 42.509107472091806,
+			"world_speed": 65.39862927894866
+		},
+		{
+			"direction": 7,
+			"phase": 3,
+			"projected_world_speed": 42.509795539829035,
+			"world_speed": 65.39968784473707
+		},
+		{
+			"direction": 0,
+			"phase": 4,
+			"projected_world_speed": 42.51005960906873,
+			"world_speed": 65.40009410512074
+		},
+		{
+			"direction": 1,
+			"phase": 4,
+			"projected_world_speed": 42.50996290765701,
+			"world_speed": 65.39994533371264
+		},
+		{
+			"direction": 2,
+			"phase": 4,
+			"projected_world_speed": 42.51005960906873,
+			"world_speed": 65.40009410512074
+		},
+		{
+			"direction": 3,
+			"phase": 4,
+			"projected_world_speed": 42.509795539829035,
+			"world_speed": 65.39968784473707
+		},
+		{
+			"direction": 4,
+			"phase": 4,
+			"projected_world_speed": 42.51005960906873,
+			"world_speed": 65.40009410512074
+		},
+		{
+			"direction": 5,
+			"phase": 4,
+			"projected_world_speed": 42.50996290765701,
+			"world_speed": 65.39994533371264
+		},
+		{
+			"direction": 6,
+			"phase": 4,
+			"projected_world_speed": 42.509107472091806,
+			"world_speed": 65.39862927894866
+		},
+		{
+			"direction": 7,
+			"phase": 4,
+			"projected_world_speed": 42.509795539829035,
+			"world_speed": 65.39968784473707
+		},
+		{
+			"direction": 0,
+			"phase": 5,
+			"projected_world_speed": 42.51005960906873,
+			"world_speed": 65.40009410512074
+		},
+		{
+			"direction": 1,
+			"phase": 5,
+			"projected_world_speed": 42.50996290765701,
+			"world_speed": 65.39994533371264
+		},
+		{
+			"direction": 2,
+			"phase": 5,
+			"projected_world_speed": 42.51005960906873,
+			"world_speed": 65.40009410512074
+		},
+		{
+			"direction": 3,
+			"phase": 5,
+			"projected_world_speed": 42.509795539829035,
+			"world_speed": 65.39968784473707
+		},
+		{
+			"direction": 4,
+			"phase": 5,
+			"projected_world_speed": 42.51005960906873,
+			"world_speed": 65.40009410512074
+		},
+		{
+			"direction": 5,
+			"phase": 5,
+			"projected_world_speed": 42.50996290765701,
+			"world_speed": 65.39994533371264
+		},
+		{
+			"direction": 6,
+			"phase": 5,
+			"projected_world_speed": 42.509107472091806,
+			"world_speed": 65.39862927894866
+		},
+		{
+			"direction": 7,
+			"phase": 5,
+			"projected_world_speed": 42.509795539829035,
+			"world_speed": 65.39968784473707
+		},
+		{
+			"direction": 0,
+			"phase": 6,
+			"projected_world_speed": 42.51005960906873,
+			"world_speed": 65.40009410512074
+		},
+		{
+			"direction": 1,
+			"phase": 6,
+			"projected_world_speed": 42.50996290765701,
+			"world_speed": 65.39994533371264
+		},
+		{
+			"direction": 2,
+			"phase": 6,
+			"projected_world_speed": 42.51005960906873,
+			"world_speed": 65.40009410512074
+		},
+		{
+			"direction": 3,
+			"phase": 6,
+			"projected_world_speed": 42.509795539829035,
+			"world_speed": 65.39968784473707
+		},
+		{
+			"direction": 4,
+			"phase": 6,
+			"projected_world_speed": 42.51005960906873,
+			"world_speed": 65.40009410512074
+		},
+		{
+			"direction": 5,
+			"phase": 6,
+			"projected_world_speed": 42.50996290765701,
+			"world_speed": 65.39994533371264
+		},
+		{
+			"direction": 6,
+			"phase": 6,
+			"projected_world_speed": 42.509107472091806,
+			"world_speed": 65.39862927894866
+		},
+		{
+			"direction": 7,
+			"phase": 6,
+			"projected_world_speed": 42.509795539829035,
+			"world_speed": 65.39968784473707
+		},
+		{
+			"direction": 0,
+			"phase": 7,
+			"projected_world_speed": 42.51005960906873,
+			"world_speed": 65.40009410512074
+		},
+		{
+			"direction": 1,
+			"phase": 7,
+			"projected_world_speed": 42.50996290765701,
+			"world_speed": 65.39994533371264
+		},
+		{
+			"direction": 2,
+			"phase": 7,
+			"projected_world_speed": 42.51005960906873,
+			"world_speed": 65.40009410512074
+		},
+		{
+			"direction": 3,
+			"phase": 7,
+			"projected_world_speed": 42.509795539829035,
+			"world_speed": 65.39968784473707
+		},
+		{
+			"direction": 4,
+			"phase": 7,
+			"projected_world_speed": 42.51005960906873,
+			"world_speed": 65.40009410512074
+		},
+		{
+			"direction": 5,
+			"phase": 7,
+			"projected_world_speed": 42.50996290765701,
+			"world_speed": 65.39994533371264
+		},
+		{
+			"direction": 6,
+			"phase": 7,
+			"projected_world_speed": 42.509107472091806,
+			"world_speed": 65.39862927894866
+		},
+		{
+			"direction": 7,
+			"phase": 7,
+			"projected_world_speed": 42.509795539829035,
+			"world_speed": 65.39968784473707
+		}
+	],
+	"player_projected_speed": 156.0,
+	"player_world_speed": 240.0,
+	"projected_cell_size": [
+		64.0,
+		96.0
+	],
+	"reference_speed": 65.4,
+	"reference_template": "crawler",
+	"source": "res://assets/actors/studies/skeleton_minion_study.json"
+}
