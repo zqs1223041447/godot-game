@@ -8,6 +8,8 @@ const SAVE="user://build_save.json"
 var checks:=0
 var failures:Array[String]=[]
 var rows:Array=[]
+var signal_checks:=0
+var signal_rows:Array=[]
 var arena:Node
 var model:RefCounted
 var normal_life:float
@@ -53,6 +55,51 @@ func transition(enabled:bool)->void:
 	var same:Dictionary=after.duplicate(true);same.talents=before.talents;same.revision=before.revision
 	check(same==before and model.successful_saves==saves+1,"Model change/UI signal adds only the authorized talent/revision change and one save")
 	check([arena.health,arena.mana,arena.shield]==resources,"Damaged below-one-Life fixture receives no resource mutation from transition/display")
+func signal_display_check(enabled:bool,label:String)->void:
+	# Direct reads only: never refresh before these assertions.
+	var original:=observation()
+	var text:String=panel._values.chaos_resistance.text
+	var tooltip:String=panel._resistance_cards.chaos_resistance.tooltip_text
+	var expected:=expected_normal()
+	if enabled:
+		expected={"text":"免疫","tooltip":"混沌防护：最大生命为1，免疫混沌伤害。\n原始混沌抗性 %.1f%% · 当前上限 %.0f%%" % [float(profile.raw)*100.0,float(profile.cap)*100.0]}
+	check(text==expected.text and tooltip==expected.tooltip,label+": signal-driven exact label and tooltip")
+	check(panel._values.max_health.text==("1" if enabled else "%d" % roundi(normal_life)),label+": signal-driven Life ceiling")
+	check(observation()==original,label+": direct observation has no state or save side effects")
+	signal_rows.append({"case":label,"life_text":panel._values.max_health.text,"chaos_text":text,"tooltip":tooltip})
+func signal_flow(with_ring:bool)->void:
+	var start_checks:=checks
+	var counts:Array[int]=[0,0]
+	model.changed.connect(func()->void:counts[0]+=1)
+	panel.visibility_changed.connect(func()->void:counts[1]+=1)
+	# Clear the HUD route, then show its existing dock directly. This isolates
+	# real signals from open_panel/_build_character_dock's explicit refresh().
+	arena.hud.close_panel()
+	var dock:Control=arena.hud._dock_roots.left
+	dock.show()
+	await process_frame
+	for hidden:bool in [false,true]:
+		for enabled:bool in [true,false]:
+			var label:String="ring=%s/hidden=%s/enabled=%s" % [with_ring,hidden,enabled]
+			if hidden:
+				dock.hide()
+				await process_frame
+			var generation:int=panel.refresh_generation
+			var changed_count:int=counts[0]
+			transition(enabled)
+			await process_frame
+			check(counts[0]==changed_count+1,label+": actual model.changed emitted once")
+			if hidden:
+				check(not panel.is_visible_in_tree() and panel.refresh_generation==generation,label+": hidden change defers refresh")
+				var visible_count:int=counts[1]
+				var original:=observation()
+				dock.show()
+				await process_frame
+				check(counts[1]==visible_count+1,label+": inherited visibility_changed emitted on reopening")
+				check(observation()==original,label+": signal-driven reopening has no state or save side effects")
+			check(panel.is_visible_in_tree() and panel.refresh_generation>generation,label+": automatic refresh completed")
+			signal_display_check(enabled,label)
+	signal_checks+=checks-start_checks
 func case_run(with_ring:bool)->void:
 	var candidate:Dictionary=Rules.decode_v58(JSON.parse_string(FileAccess.get_file_as_string("res://docs/qa/chaos-inoculation/schema58-town.json")))
 	candidate.version=59
@@ -82,10 +129,11 @@ func case_run(with_ring:bool)->void:
 	transition(false);check(panel.refresh_generation==generation,"Hidden refund defers panel refresh")
 	await open_character();display_check(false,"%s/reopened refunded" % with_ring)
 	check(model.snapshot().version==59,"Display leaves schema59 unchanged")
+	await signal_flow(with_ring)
 	arena.queue_free();await process_frame;arena=null;panel=null;model=null
 func run()->void:
 	if not OS.get_environment("XDG_DATA_HOME").begins_with("/tmp/godot-ci-display-"):quit(78);return
 	check(Character.chaos_resistance_display({"ok":false},true).text=="—","Invalid resistance data keeps existing unavailable display")
 	await case_run(false);await case_run(true)
-	FileAccess.open(OS.get_environment("CI_DISPLAY_REPORT"),FileAccess.WRITE).store_string(JSON.stringify({"checks":checks,"failures":failures.size(),"failed_labels":failures,"rows":rows},"\t")+"\n")
+	FileAccess.open(OS.get_environment("CI_DISPLAY_REPORT"),FileAccess.WRITE).store_string(JSON.stringify({"checks":checks,"original_checks":checks-signal_checks,"added_signal_checks":signal_checks,"failures":failures.size(),"failed_labels":failures,"rows":rows,"signal_rows":signal_rows},"\t")+"\n")
 	print("CI_CHARACTER_DISPLAY checks=%d failures=%d" % [checks,failures.size()]);quit(1 if not failures.is_empty() else 0)

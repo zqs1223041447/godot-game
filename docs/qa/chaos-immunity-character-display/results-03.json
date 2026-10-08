@@ -1,0 +1,119 @@
+{
+	"added_signal_checks": 76,
+	"checks": 175,
+	"failed_labels": [],
+	"failures": 0,
+	"original_checks": 99,
+	"rows": [
+		{
+			"case": "false/unallocated",
+			"chaos_text": "0%",
+			"life_text": "127",
+			"tooltip": "原始混沌抗性 0.0% · 当前上限 75%\n只降低混沌伤害；护盾仍按原规则先承伤。"
+		},
+		{
+			"case": "false/allocated visible",
+			"chaos_text": "免疫",
+			"life_text": "1",
+			"tooltip": "混沌防护：最大生命为1，免疫混沌伤害。\n原始混沌抗性 0.0% · 当前上限 75%"
+		},
+		{
+			"case": "false/refunded visible",
+			"chaos_text": "0%",
+			"life_text": "127",
+			"tooltip": "原始混沌抗性 0.0% · 当前上限 75%\n只降低混沌伤害；护盾仍按原规则先承伤。"
+		},
+		{
+			"case": "false/reopened allocated",
+			"chaos_text": "免疫",
+			"life_text": "1",
+			"tooltip": "混沌防护：最大生命为1，免疫混沌伤害。\n原始混沌抗性 0.0% · 当前上限 75%"
+		},
+		{
+			"case": "false/reopened refunded",
+			"chaos_text": "0%",
+			"life_text": "127",
+			"tooltip": "原始混沌抗性 0.0% · 当前上限 75%\n只降低混沌伤害；护盾仍按原规则先承伤。"
+		},
+		{
+			"case": "true/unallocated",
+			"chaos_text": "25%",
+			"life_text": "131",
+			"tooltip": "原始混沌抗性 25.0% · 当前上限 75%\n只降低混沌伤害；护盾仍按原规则先承伤。"
+		},
+		{
+			"case": "true/allocated visible",
+			"chaos_text": "免疫",
+			"life_text": "1",
+			"tooltip": "混沌防护：最大生命为1，免疫混沌伤害。\n原始混沌抗性 25.0% · 当前上限 75%"
+		},
+		{
+			"case": "true/refunded visible",
+			"chaos_text": "25%",
+			"life_text": "131",
+			"tooltip": "原始混沌抗性 25.0% · 当前上限 75%\n只降低混沌伤害；护盾仍按原规则先承伤。"
+		},
+		{
+			"case": "true/reopened allocated",
+			"chaos_text": "免疫",
+			"life_text": "1",
+			"tooltip": "混沌防护：最大生命为1，免疫混沌伤害。\n原始混沌抗性 25.0% · 当前上限 75%"
+		},
+		{
+			"case": "true/reopened refunded",
+			"chaos_text": "25%",
+			"life_text": "131",
+			"tooltip": "原始混沌抗性 25.0% · 当前上限 75%\n只降低混沌伤害；护盾仍按原规则先承伤。"
+		}
+	],
+	"signal_rows": [
+		{
+			"case": "ring=false/hidden=false/enabled=true",
+			"chaos_text": "免疫",
+			"life_text": "1",
+			"tooltip": "混沌防护：最大生命为1，免疫混沌伤害。\n原始混沌抗性 0.0% · 当前上限 75%"
+		},
+		{
+			"case": "ring=false/hidden=false/enabled=false",
+			"chaos_text": "0%",
+			"life_text": "127",
+			"tooltip": "原始混沌抗性 0.0% · 当前上限 75%\n只降低混沌伤害；护盾仍按原规则先承伤。"
+		},
+		{
+			"case": "ring=false/hidden=true/enabled=true",
+			"chaos_text": "免疫",
+			"life_text": "1",
+			"tooltip": "混沌防护：最大生命为1，免疫混沌伤害。\n原始混沌抗性 0.0% · 当前上限 75%"
+		},
+		{
+			"case": "ring=false/hidden=true/enabled=false",
+			"chaos_text": "0%",
+			"life_text": "127",
+			"tooltip": "原始混沌抗性 0.0% · 当前上限 75%\n只降低混沌伤害；护盾仍按原规则先承伤。"
+		},
+		{
+			"case": "ring=true/hidden=false/enabled=true",
+			"chaos_text": "免疫",
+			"life_text": "1",
+			"tooltip": "混沌防护：最大生命为1，免疫混沌伤害。\n原始混沌抗性 25.0% · 当前上限 75%"
+		},
+		{
+			"case": "ring=true/hidden=false/enabled=false",
+			"chaos_text": "25%",
+			"life_text": "131",
+			"tooltip": "原始混沌抗性 25.0% · 当前上限 75%\n只降低混沌伤害；护盾仍按原规则先承伤。"
+		},
+		{
+			"case": "ring=true/hidden=true/enabled=true",
+			"chaos_text": "免疫",
+			"life_text": "1",
+			"tooltip": "混沌防护：最大生命为1，免疫混沌伤害。\n原始混沌抗性 25.0% · 当前上限 75%"
+		},
+		{
+			"case": "ring=true/hidden=true/enabled=false",
+			"chaos_text": "25%",
+			"life_text": "131",
+			"tooltip": "原始混沌抗性 25.0% · 当前上限 75%\n只降低混沌伤害；护盾仍按原规则先承伤。"
+		}
+	]
+}
