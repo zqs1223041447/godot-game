@@ -62,12 +62,20 @@ static func _initial_root_valid(enemy: Variant) -> bool:
 func owns_lineage(root_id: Variant) -> bool:
 	return typeof(root_id) == TYPE_INT and root_id > 0 and (root_id == boss_id or admitted.has(root_id))
 
-func completion_members(enemies: Array[Dictionary], queue: Array[Dictionary]) -> Dictionary:
+func completion_members(enemies: Array[Dictionary], queue: Array[Dictionary], death_lineages: Dictionary) -> Dictionary:
 	var living: Array[Dictionary] = []
 	for enemy: Dictionary in enemies:
 		if not owns_lineage(enemy.get("root_id")):
 			return {"ok": false, "reason": "地图存在未登记怪物，无法确认清图状态"}
-		if float(enemy.get("health", 0.0)) > 0.0: living.append(enemy)
+		if float(enemy.get("health", 0.0)) > 0.0:
+			living.append(enemy)
+		else:
+			# Actor flags can be stale copies. Only the runtime identity ledger
+			# proves legal death settlement before filtering or completion.
+			# Main retires lineage ledgers only after filtering settled corpses.
+			var processed: Dictionary = death_lineages.get(enemy.root_id, {}).get("processed", {})
+			if not processed.has(enemy.get("id")):
+				return {"ok": false, "reason": "地图存在尚未结算的死亡，无法确认清图状态"}
 	for request: Dictionary in queue:
 		if not owns_lineage(request.get("root_id")):
 			return {"ok": false, "reason": "地图存在未登记后代，无法确认清图状态"}

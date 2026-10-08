@@ -1,0 +1,51 @@
+{
+  "review_base_commit": "aa0f44e9af0955ce9879bad3881ebea71c26f811",
+  "classification": "Existing fault boundary; not a regression attributed to the seam implementation.",
+  "method": "Only new final-descendant refusal/recovery/duplicate-identity fixtures and the existing fixed-seed default comparison rerun. Prior 963-check record remains pinned to aa0f44e; not rerun.",
+  "results": [
+    {
+      "name": "boundary",
+      "checks": 107,
+      "failures": 0
+    },
+    {
+      "name": "default",
+      "checks": 137,
+      "failures": 0
+    }
+  ],
+  "incremental_checks": 244,
+  "incremental_failures": 0,
+  "default_contract": {
+    "baseline_commit": "b4cec15d61cfef890993714849d72f5a49009187",
+    "byte_identical": true,
+    "sha256": "84fd424092a955598bdac49d846e672ba3dea26af2196c768520a23f947431f1",
+    "death_events": 44,
+    "retained_artifact": "../baseline-default-contract.json"
+  },
+  "inputs": {
+    "scripts/main.gd": {
+      "candidate_sha256": "b6fb9031178d76d38cbecf7c39137a0587ed7dc962eb467667050b0b7b87bc3d",
+      "base_sha256": "a45eb77e8239330fe29850972e8be0c8b07154d851293fb258674a2a03a4047c",
+      "unchanged": false
+    },
+    "scripts/world/map_run_state.gd": {
+      "candidate_sha256": "f185c78ad93aeaf498aee12b9479b76d0be062b9f3ca9b6f8bb83d4b27ecad89",
+      "base_sha256": "65c5ca1bdfcc682e09afbdccb6d9aa0cf993eaa9d287e132c0ec88f129570427",
+      "unchanged": false
+    },
+    "scripts/monsters/monster_runtime.gd": {
+      "candidate_sha256": "6280cbf52cdf373af0fe8d564b77b2ad1f1e934b207d37988f69bbdd404751a3",
+      "base_sha256": "6280cbf52cdf373af0fe8d564b77b2ad1f1e934b207d37988f69bbdd404751a3",
+      "unchanged": true
+    },
+    "tests/map_pending_death_boundary_test.gd": {
+      "candidate_sha256": "6f6c451b2d03900bf0ed39c1a84b91a68db19e064af9bc5cfb8c6fa9b1d6701f"
+    },
+    "tests/map_default_death_contract_test.gd": {
+      "candidate_sha256": "b7790ade7a5441840f76d938106a7b2abc041bcce666f216cbb0a91b1985acd6",
+      "base_sha256": "b7790ade7a5441840f76d938106a7b2abc041bcce666f216cbb0a91b1985acd6",
+      "unchanged": true
+    }
+  }
+}

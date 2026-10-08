@@ -826,9 +826,9 @@ func _flush_monster_spawns() -> void:
 	if not _encounter_ready():
 		return
 	# Validate before dead-actor filtering or FIFO admission, so an unknown
-	# corpse/request cannot disappear from the completion membership check.
+	# or unsettled corpse/request cannot disappear from the membership check.
 	if _world_mode == "map":
-		var members: Dictionary = _map_run.completion_members(enemies, monster_runtime.queue)
+		var members: Dictionary = _map_run.completion_members(enemies, monster_runtime.queue, monster_runtime.roots)
 		if not members.ok:
 			_encounter_failed(str(members.reason))
 			return
@@ -2518,7 +2518,7 @@ func exploration_cleanup_hint() -> Dictionary:
 	if _world_mode == "map_complete":
 		result.kind = "settlement" if _normal_completion_pending else "complete"
 		return result
-	var members: Dictionary = _map_run.completion_members(enemies, monster_runtime.queue)
+	var members: Dictionary = _map_run.completion_members(enemies, monster_runtime.queue, monster_runtime.roots)
 	if not members.ok:
 		result.kind = "blocked"
 		result.reason = members.reason
@@ -3100,7 +3100,7 @@ func _update_map_spawning(_delta:float)->void:
 	_camp_movement.clear()
 
 func _check_map_complete()->void:
-	var members: Dictionary = _map_run.completion_members(enemies, monster_runtime.queue)
+	var members: Dictionary = _map_run.completion_members(enemies, monster_runtime.queue, monster_runtime.roots)
 	if not members.ok:
 		_encounter_failed(str(members.reason))
 		return

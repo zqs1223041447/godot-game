@@ -2,6 +2,8 @@
 
 基线：`b4cec15d61cfef890993714849d72f5a49009187`。实现分支：`codex/map-completion-reward-seams`，供审查，未合入 main。
 
+下述首轮 963 项验证及 `verification.json` 输入指纹对应 `aa0f44e9af0955ce9879bad3881ebea71c26f811`。后续未结算必需尸体的既有边界修补与两项增量验证见 [pending-death-boundary/README.md](pending-death-boundary/README.md)；首轮记录保留原指纹，没有重新运行整套。
+
 修改仅涉及 MapRun 身份登记、Main 死亡/清图/HUD 查询与异常提示。已登记根怪的死亡进度不依赖普通奖励资格；经验、普通掉落、里程碑、药剂充能继续使用原有 `eligible` 判断。奖励路由检查仍在一次性死亡账本之前。没有改变 schema、默认怪物内容、地图配置或费用，也没有开放新配置、奖励路由、冻结交互、精华货币或赛季。
 
 ## 成员完整性与未来边界
