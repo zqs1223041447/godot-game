@@ -1,0 +1,1449 @@
+{
+  "ok": true,
+  "locked_commit": "15b62b9bad122f72926c10fb14d622c73819fa54",
+  "glb_sha256": "6ffc003f895bed0b074791e0e490846210a2e2f8fc7da300aba53cc185f95968",
+  "skin_count": 1,
+  "joint_count": 41,
+  "skinned_mesh_nodes": 9,
+  "embedded_texture_equals_adjacent_png": true,
+  "animation_count": 95,
+  "inventory": [
+    {
+      "name": "1H_Melee_Attack_Chop",
+      "duration_seconds": 1.0666667222976685,
+      "channels": 123,
+      "varying_channels": 25,
+      "varying_paths": {
+        "translation": 4,
+        "rotation": 21
+      }
+    },
+    {
+      "name": "1H_Melee_Attack_Jump_Chop",
+      "duration_seconds": 1.3333333730697632,
+      "channels": 123,
+      "varying_channels": 36,
+      "varying_paths": {
+        "translation": 12,
+        "rotation": 24
+      }
+    },
+    {
+      "name": "1H_Melee_Attack_Slice_Diagonal",
+      "duration_seconds": 1.0,
+      "channels": 123,
+      "varying_channels": 27,
+      "varying_paths": {
+        "translation": 5,
+        "rotation": 22
+      }
+    },
+    {
+      "name": "1H_Melee_Attack_Slice_Horizontal",
+      "duration_seconds": 1.0666667222976685,
+      "channels": 123,
+      "varying_channels": 23,
+      "varying_paths": {
+        "translation": 3,
+        "rotation": 20
+      }
+    },
+    {
+      "name": "1H_Melee_Attack_Stab",
+      "duration_seconds": 1.600000023841858,
+      "channels": 123,
+      "varying_channels": 33,
+      "varying_paths": {
+        "translation": 10,
+        "rotation": 23
+      }
+    },
+    {
+      "name": "1H_Ranged_Aiming",
+      "duration_seconds": 1.0666667222976685,
+      "channels": 120,
+      "varying_channels": 39,
+      "varying_paths": {
+        "rotation": 26,
+        "translation": 11,
+        "scale": 2
+      }
+    },
+    {
+      "name": "1H_Ranged_Reload",
+      "duration_seconds": 1.1666666269302368,
+      "channels": 122,
+      "varying_channels": 29,
+      "varying_paths": {
+        "translation": 7,
+        "rotation": 22
+      }
+    },
+    {
+      "name": "1H_Ranged_Shoot",
+      "duration_seconds": 1.0666667222976685,
+      "channels": 120,
+      "varying_channels": 36,
+      "varying_paths": {
+        "rotation": 25,
+        "translation": 11
+      }
+    },
+    {
+      "name": "1H_Ranged_Shooting",
+      "duration_seconds": 1.600000023841858,
+      "channels": 101,
+      "varying_channels": 21,
+      "varying_paths": {
+        "translation": 3,
+        "rotation": 18
+      }
+    },
+    {
+      "name": "2H_Melee_Attack_Chop",
+      "duration_seconds": 1.6333333253860474,
+      "channels": 98,
+      "varying_channels": 33,
+      "varying_paths": {
+        "translation": 9,
+        "rotation": 24
+      }
+    },
+    {
+      "name": "2H_Melee_Attack_Slice",
+      "duration_seconds": 1.100000023841858,
+      "channels": 94,
+      "varying_channels": 28,
+      "varying_paths": {
+        "translation": 7,
+        "rotation": 21
+      }
+    },
+    {
+      "name": "2H_Melee_Attack_Spin",
+      "duration_seconds": 2.4000000953674316,
+      "channels": 98,
+      "varying_channels": 36,
+      "varying_paths": {
+        "rotation": 25,
+        "translation": 11
+      }
+    },
+    {
+      "name": "2H_Melee_Attack_Spinning",
+      "duration_seconds": 0.6666666865348816,
+      "channels": 87,
+      "varying_channels": 19,
+      "varying_paths": {
+        "rotation": 18,
+        "translation": 1
+      }
+    },
+    {
+      "name": "2H_Melee_Attack_Stab",
+      "duration_seconds": 1.600000023841858,
+      "channels": 97,
+      "varying_channels": 32,
+      "varying_paths": {
+        "translation": 10,
+        "rotation": 22
+      }
+    },
+    {
+      "name": "2H_Melee_Idle",
+      "duration_seconds": 1.0666667222976685,
+      "channels": 94,
+      "varying_channels": 21,
+      "varying_paths": {
+        "translation": 3,
+        "rotation": 18
+      }
+    },
+    {
+      "name": "2H_Ranged_Aiming",
+      "duration_seconds": 1.600000023841858,
+      "channels": 123,
+      "varying_channels": 39,
+      "varying_paths": {
+        "rotation": 24,
+        "translation": 14,
+        "scale": 1
+      }
+    },
+    {
+      "name": "2H_Ranged_Reload",
+      "duration_seconds": 1.600000023841858,
+      "channels": 109,
+      "varying_channels": 17,
+      "varying_paths": {
+        "rotation": 12,
+        "translation": 5
+      }
+    },
+    {
+      "name": "2H_Ranged_Shoot",
+      "duration_seconds": 1.0666667222976685,
+      "channels": 123,
+      "varying_channels": 39,
+      "varying_paths": {
+        "rotation": 24,
+        "translation": 14,
+        "scale": 1
+      }
+    },
+    {
+      "name": "2H_Ranged_Shooting",
+      "duration_seconds": 1.0666667222976685,
+      "channels": 108,
+      "varying_channels": 24,
+      "varying_paths": {
+        "translation": 6,
+        "rotation": 18
+      }
+    },
+    {
+      "name": "Block",
+      "duration_seconds": 1.0666667222976685,
+      "channels": 123,
+      "varying_channels": 31,
+      "varying_paths": {
+        "translation": 9,
+        "rotation": 22
+      }
+    },
+    {
+      "name": "Block_Attack",
+      "duration_seconds": 1.0666667222976685,
+      "channels": 123,
+      "varying_channels": 28,
+      "varying_paths": {
+        "translation": 7,
+        "rotation": 21
+      }
+    },
+    {
+      "name": "Block_Hit",
+      "duration_seconds": 1.0666667222976685,
+      "channels": 123,
+      "varying_channels": 22,
+      "varying_paths": {
+        "translation": 3,
+        "rotation": 19
+      }
+    },
+    {
+      "name": "Blocking",
+      "duration_seconds": 1.0666667222976685,
+      "channels": 123,
+      "varying_channels": 19,
+      "varying_paths": {
+        "translation": 2,
+        "rotation": 17
+      }
+    },
+    {
+      "name": "Cheer",
+      "duration_seconds": 1.6666666269302368,
+      "channels": 123,
+      "varying_channels": 28,
+      "varying_paths": {
+        "translation": 7,
+        "rotation": 21
+      }
+    },
+    {
+      "name": "Death_A",
+      "duration_seconds": 0.800000011920929,
+      "channels": 123,
+      "varying_channels": 40,
+      "varying_paths": {
+        "translation": 12,
+        "rotation": 27,
+        "scale": 1
+      }
+    },
+    {
+      "name": "Death_A_Pose",
+      "duration_seconds": 0.0,
+      "channels": 83,
+      "varying_channels": 0,
+      "varying_paths": {}
+    },
+    {
+      "name": "Death_B",
+      "duration_seconds": 2.633333444595337,
+      "channels": 123,
+      "varying_channels": 47,
+      "varying_paths": {
+        "translation": 16,
+        "rotation": 28,
+        "scale": 3
+      }
+    },
+    {
+      "name": "Death_B_Pose",
+      "duration_seconds": 0.0,
+      "channels": 83,
+      "varying_channels": 0,
+      "varying_paths": {}
+    },
+    {
+      "name": "Death_C_Pose",
+      "duration_seconds": 0.0,
+      "channels": 83,
+      "varying_channels": 0,
+      "varying_paths": {}
+    },
+    {
+      "name": "Death_C_Skeletons",
+      "duration_seconds": 2.0,
+      "channels": 102,
+      "varying_channels": 40,
+      "varying_paths": {
+        "translation": 15,
+        "rotation": 25
+      }
+    },
+    {
+      "name": "Death_C_Skeletons_Resurrect",
+      "duration_seconds": 2.700000047683716,
+      "channels": 101,
+      "varying_channels": 41,
+      "varying_paths": {
+        "translation": 16,
+        "rotation": 25
+      }
+    },
+    {
+      "name": "Dodge_Backward",
+      "duration_seconds": 0.4000000059604645,
+      "channels": 123,
+      "varying_channels": 33,
+      "varying_paths": {
+        "translation": 8,
+        "rotation": 22,
+        "scale": 3
+      }
+    },
+    {
+      "name": "Dodge_Forward",
+      "duration_seconds": 0.4000000059604645,
+      "channels": 123,
+      "varying_channels": 40,
+      "varying_paths": {
+        "translation": 12,
+        "rotation": 25,
+        "scale": 3
+      }
+    },
+    {
+      "name": "Dodge_Left",
+      "duration_seconds": 0.4000000059604645,
+      "channels": 123,
+      "varying_channels": 38,
+      "varying_paths": {
+        "translation": 12,
+        "rotation": 24,
+        "scale": 2
+      }
+    },
+    {
+      "name": "Dodge_Right",
+      "duration_seconds": 0.4000000059604645,
+      "channels": 123,
+      "varying_channels": 37,
+      "varying_paths": {
+        "translation": 12,
+        "rotation": 23,
+        "scale": 2
+      }
+    },
+    {
+      "name": "Dualwield_Melee_Attack_Chop",
+      "duration_seconds": 1.2666666507720947,
+      "channels": 123,
+      "varying_channels": 32,
+      "varying_paths": {
+        "translation": 11,
+        "rotation": 21
+      }
+    },
+    {
+      "name": "Dualwield_Melee_Attack_Slice",
+      "duration_seconds": 1.1666666269302368,
+      "channels": 96,
+      "varying_channels": 33,
+      "varying_paths": {
+        "translation": 9,
+        "rotation": 24
+      }
+    },
+    {
+      "name": "Dualwield_Melee_Attack_Stab",
+      "duration_seconds": 1.600000023841858,
+      "channels": 94,
+      "varying_channels": 30,
+      "varying_paths": {
+        "translation": 7,
+        "rotation": 23
+      }
+    },
+    {
+      "name": "Hit_A",
+      "duration_seconds": 0.6666666865348816,
+      "channels": 123,
+      "varying_channels": 23,
+      "varying_paths": {
+        "translation": 5,
+        "rotation": 18
+      }
+    },
+    {
+      "name": "Hit_B",
+      "duration_seconds": 0.8666666746139526,
+      "channels": 123,
+      "varying_channels": 25,
+      "varying_paths": {
+        "translation": 6,
+        "rotation": 19
+      }
+    },
+    {
+      "name": "Idle",
+      "duration_seconds": 1.0666667222976685,
+      "channels": 123,
+      "varying_channels": 19,
+      "varying_paths": {
+        "translation": 3,
+        "rotation": 16
+      }
+    },
+    {
+      "name": "Idle_B",
+      "duration_seconds": 2.133333444595337,
+      "channels": 123,
+      "varying_channels": 21,
+      "varying_paths": {
+        "translation": 3,
+        "rotation": 18
+      }
+    },
+    {
+      "name": "Idle_Combat",
+      "duration_seconds": 4.266666889190674,
+      "channels": 97,
+      "varying_channels": 21,
+      "varying_paths": {
+        "translation": 3,
+        "rotation": 18
+      }
+    },
+    {
+      "name": "Interact",
+      "duration_seconds": 1.2999999523162842,
+      "channels": 123,
+      "varying_channels": 25,
+      "varying_paths": {
+        "translation": 5,
+        "rotation": 20
+      }
+    },
+    {
+      "name": "Jump_Full_Long",
+      "duration_seconds": 2.3333332538604736,
+      "channels": 123,
+      "varying_channels": 28,
+      "varying_paths": {
+        "translation": 5,
+        "rotation": 23
+      }
+    },
+    {
+      "name": "Jump_Full_Short",
+      "duration_seconds": 1.1666666269302368,
+      "channels": 123,
+      "varying_channels": 27,
+      "varying_paths": {
+        "translation": 5,
+        "rotation": 22
+      }
+    },
+    {
+      "name": "Jump_Idle",
+      "duration_seconds": 1.0666667222976685,
+      "channels": 123,
+      "varying_channels": 24,
+      "varying_paths": {
+        "translation": 5,
+        "rotation": 19
+      }
+    },
+    {
+      "name": "Jump_Land",
+      "duration_seconds": 0.6666666865348816,
+      "channels": 123,
+      "varying_channels": 33,
+      "varying_paths": {
+        "translation": 5,
+        "rotation": 24,
+        "scale": 4
+      }
+    },
+    {
+      "name": "Jump_Start",
+      "duration_seconds": 0.6000000238418579,
+      "channels": 123,
+      "varying_channels": 31,
+      "varying_paths": {
+        "translation": 5,
+        "rotation": 22,
+        "scale": 4
+      }
+    },
+    {
+      "name": "Lie_Down",
+      "duration_seconds": 3.0,
+      "channels": 123,
+      "varying_channels": 49,
+      "varying_paths": {
+        "translation": 17,
+        "rotation": 31,
+        "scale": 1
+      }
+    },
+    {
+      "name": "Lie_Idle",
+      "duration_seconds": 2.6666667461395264,
+      "channels": 102,
+      "varying_channels": 15,
+      "varying_paths": {
+        "translation": 1,
+        "rotation": 14
+      }
+    },
+    {
+      "name": "Lie_Pose",
+      "duration_seconds": 0.0,
+      "channels": 102,
+      "varying_channels": 0,
+      "varying_paths": {}
+    },
+    {
+      "name": "Lie_StandUp",
+      "duration_seconds": 2.3333332538604736,
+      "channels": 123,
+      "varying_channels": 49,
+      "varying_paths": {
+        "translation": 17,
+        "rotation": 31,
+        "scale": 1
+      }
+    },
+    {
+      "name": "PickUp",
+      "duration_seconds": 1.2999999523162842,
+      "channels": 123,
+      "varying_channels": 26,
+      "varying_paths": {
+        "translation": 5,
+        "rotation": 21
+      }
+    },
+    {
+      "name": "Running_A",
+      "duration_seconds": 0.800000011920929,
+      "channels": 122,
+      "varying_channels": 34,
+      "varying_paths": {
+        "translation": 12,
+        "rotation": 22
+      }
+    },
+    {
+      "name": "Running_B",
+      "duration_seconds": 1.0666667222976685,
+      "channels": 123,
+      "varying_channels": 32,
+      "varying_paths": {
+        "translation": 9,
+        "rotation": 23
+      }
+    },
+    {
+      "name": "Running_C",
+      "duration_seconds": 0.800000011920929,
+      "channels": 123,
+      "varying_channels": 39,
+      "varying_paths": {
+        "translation": 14,
+        "rotation": 25
+      }
+    },
+    {
+      "name": "Running_Strafe_Left",
+      "duration_seconds": 0.800000011920929,
+      "channels": 123,
+      "varying_channels": 33,
+      "varying_paths": {
+        "translation": 11,
+        "rotation": 22
+      }
+    },
+    {
+      "name": "Running_Strafe_Right",
+      "duration_seconds": 0.800000011920929,
+      "channels": 123,
+      "varying_channels": 33,
+      "varying_paths": {
+        "translation": 11,
+        "rotation": 22
+      }
+    },
+    {
+      "name": "Sit_Chair_Down",
+      "duration_seconds": 0.800000011920929,
+      "channels": 123,
+      "varying_channels": 43,
+      "varying_paths": {
+        "translation": 13,
+        "rotation": 29,
+        "scale": 1
+      }
+    },
+    {
+      "name": "Sit_Chair_Idle",
+      "duration_seconds": 3.5999999046325684,
+      "channels": 89,
+      "varying_channels": 11,
+      "varying_paths": {
+        "rotation": 11
+      }
+    },
+    {
+      "name": "Sit_Chair_Pose",
+      "duration_seconds": 0.0,
+      "channels": 85,
+      "varying_channels": 0,
+      "varying_paths": {}
+    },
+    {
+      "name": "Sit_Chair_StandUp",
+      "duration_seconds": 0.800000011920929,
+      "channels": 123,
+      "varying_channels": 45,
+      "varying_paths": {
+        "translation": 14,
+        "rotation": 30,
+        "scale": 1
+      }
+    },
+    {
+      "name": "Sit_Floor_Down",
+      "duration_seconds": 1.0,
+      "channels": 123,
+      "varying_channels": 44,
+      "varying_paths": {
+        "translation": 15,
+        "rotation": 28,
+        "scale": 1
+      }
+    },
+    {
+      "name": "Sit_Floor_Idle",
+      "duration_seconds": 4.0,
+      "channels": 89,
+      "varying_channels": 17,
+      "varying_paths": {
+        "translation": 1,
+        "rotation": 16
+      }
+    },
+    {
+      "name": "Sit_Floor_Pose",
+      "duration_seconds": 0.0,
+      "channels": 84,
+      "varying_channels": 0,
+      "varying_paths": {}
+    },
+    {
+      "name": "Sit_Floor_StandUp",
+      "duration_seconds": 1.1333333253860474,
+      "channels": 94,
+      "varying_channels": 44,
+      "varying_paths": {
+        "translation": 15,
+        "rotation": 29
+      }
+    },
+    {
+      "name": "Skeleton_Inactive_Standing_Pose",
+      "duration_seconds": 0.0,
+      "channels": 98,
+      "varying_channels": 0,
+      "varying_paths": {}
+    },
+    {
+      "name": "Skeletons_Awaken_Floor",
+      "duration_seconds": 2.299999952316284,
+      "channels": 105,
+      "varying_channels": 49,
+      "varying_paths": {
+        "translation": 18,
+        "rotation": 30,
+        "scale": 1
+      }
+    },
+    {
+      "name": "Skeletons_Awaken_Floor_Long",
+      "duration_seconds": 3.8333332538604736,
+      "channels": 106,
+      "varying_channels": 49,
+      "varying_paths": {
+        "translation": 18,
+        "rotation": 30,
+        "scale": 1
+      }
+    },
+    {
+      "name": "Skeletons_Awaken_Standing",
+      "duration_seconds": 1.0,
+      "channels": 103,
+      "varying_channels": 38,
+      "varying_paths": {
+        "translation": 14,
+        "rotation": 24
+      }
+    },
+    {
+      "name": "Skeletons_Inactive_Floor_Pose",
+      "duration_seconds": 0.0,
+      "channels": 94,
+      "varying_channels": 0,
+      "varying_paths": {}
+    },
+    {
+      "name": "Spawn_Air",
+      "duration_seconds": 1.2999999523162842,
+      "channels": 123,
+      "varying_channels": 98,
+      "varying_paths": {
+        "translation": 16,
+        "rotation": 41,
+        "scale": 41
+      }
+    },
+    {
+      "name": "Spawn_Ground",
+      "duration_seconds": 1.2999999523162842,
+      "channels": 123,
+      "varying_channels": 97,
+      "varying_paths": {
+        "rotation": 41,
+        "scale": 41,
+        "translation": 15
+      }
+    },
+    {
+      "name": "Spawn_Ground_Skeletons",
+      "duration_seconds": 3.566666603088379,
+      "channels": 123,
+      "varying_channels": 39,
+      "varying_paths": {
+        "translation": 13,
+        "rotation": 25,
+        "scale": 1
+      }
+    },
+    {
+      "name": "Spellcast_Long",
+      "duration_seconds": 2.5333333015441895,
+      "channels": 123,
+      "varying_channels": 32,
+      "varying_paths": {
+        "translation": 8,
+        "rotation": 24
+      }
+    },
+    {
+      "name": "Spellcast_Raise",
+      "duration_seconds": 2.0999999046325684,
+      "channels": 123,
+      "varying_channels": 29,
+      "varying_paths": {
+        "translation": 7,
+        "rotation": 22
+      }
+    },
+    {
+      "name": "Spellcast_Shoot",
+      "duration_seconds": 0.9333333373069763,
+      "channels": 123,
+      "varying_channels": 29,
+      "varying_paths": {
+        "translation": 8,
+        "rotation": 21
+      }
+    },
+    {
+      "name": "Spellcast_Summon",
+      "duration_seconds": 4.300000190734863,
+      "channels": 99,
+      "varying_channels": 33,
+      "varying_paths": {
+        "translation": 10,
+        "rotation": 23
+      }
+    },
+    {
+      "name": "Spellcasting",
+      "duration_seconds": 0.6666666865348816,
+      "channels": 95,
+      "varying_channels": 18,
+      "varying_paths": {
+        "translation": 4,
+        "rotation": 14
+      }
+    },
+    {
+      "name": "T-Pose",
+      "duration_seconds": 0.0,
+      "channels": 123,
+      "varying_channels": 0,
+      "varying_paths": {}
+    },
+    {
+      "name": "Taunt",
+      "duration_seconds": 1.0333333015441895,
+      "channels": 123,
+      "varying_channels": 40,
+      "varying_paths": {
+        "translation": 12,
+        "rotation": 24,
+        "scale": 4
+      }
+    },
+    {
+      "name": "Taunt_Longer",
+      "duration_seconds": 3.0,
+      "channels": 123,
+      "varying_channels": 43,
+      "varying_paths": {
+        "translation": 14,
+        "rotation": 25,
+        "scale": 4
+      }
+    },
+    {
+      "name": "Throw",
+      "duration_seconds": 1.3666666746139526,
+      "channels": 100,
+      "varying_channels": 36,
+      "varying_paths": {
+        "rotation": 24,
+        "translation": 12
+      }
+    },
+    {
+      "name": "Unarmed_Idle",
+      "duration_seconds": 1.0666667222976685,
+      "channels": 123,
+      "varying_channels": 18,
+      "varying_paths": {
+        "translation": 3,
+        "rotation": 15
+      }
+    },
+    {
+      "name": "Unarmed_Melee_Attack_Kick",
+      "duration_seconds": 0.9333333373069763,
+      "channels": 123,
+      "varying_channels": 32,
+      "varying_paths": {
+        "translation": 11,
+        "rotation": 21
+      }
+    },
+    {
+      "name": "Unarmed_Melee_Attack_Punch_A",
+      "duration_seconds": 1.4666666984558105,
+      "channels": 123,
+      "varying_channels": 28,
+      "varying_paths": {
+        "translation": 8,
+        "rotation": 20
+      }
+    },
+    {
+      "name": "Unarmed_Melee_Attack_Punch_B",
+      "duration_seconds": 1.6666666269302368,
+      "channels": 123,
+      "varying_channels": 33,
+      "varying_paths": {
+        "translation": 11,
+        "rotation": 22
+      }
+    },
+    {
+      "name": "Unarmed_Pose",
+      "duration_seconds": 0.0,
+      "channels": 123,
+      "varying_channels": 0,
+      "varying_paths": {}
+    },
+    {
+      "name": "Use_Item",
+      "duration_seconds": 1.600000023841858,
+      "channels": 123,
+      "varying_channels": 22,
+      "varying_paths": {
+        "translation": 4,
+        "rotation": 18
+      }
+    },
+    {
+      "name": "Walking_A",
+      "duration_seconds": 1.0666667222976685,
+      "channels": 123,
+      "varying_channels": 29,
+      "varying_paths": {
+        "translation": 9,
+        "rotation": 20
+      }
+    },
+    {
+      "name": "Walking_B",
+      "duration_seconds": 1.0666667222976685,
+      "channels": 123,
+      "varying_channels": 28,
+      "varying_paths": {
+        "translation": 7,
+        "rotation": 21
+      }
+    },
+    {
+      "name": "Walking_Backwards",
+      "duration_seconds": 1.0666667222976685,
+      "channels": 123,
+      "varying_channels": 28,
+      "varying_paths": {
+        "translation": 8,
+        "rotation": 20
+      }
+    },
+    {
+      "name": "Walking_C",
+      "duration_seconds": 1.600000023841858,
+      "channels": 119,
+      "varying_channels": 26,
+      "varying_paths": {
+        "translation": 7,
+        "rotation": 19
+      }
+    },
+    {
+      "name": "Walking_D_Skeletons",
+      "duration_seconds": 1.600000023841858,
+      "channels": 123,
+      "varying_channels": 29,
+      "varying_paths": {
+        "translation": 9,
+        "rotation": 20
+      }
+    }
+  ],
+  "selected": {
+    "Idle": {
+      "name": "Idle",
+      "duration_seconds": 1.0666667222976685,
+      "channels": 123,
+      "varying_channels": 19,
+      "varying_paths": {
+        "translation": 3,
+        "rotation": 16
+      },
+      "varying_channel_evidence": [
+        {
+          "node": "hips",
+          "path": "translation",
+          "keys": 33,
+          "max_component_change": 0.02404382824897766
+        },
+        {
+          "node": "upperarm.l",
+          "path": "rotation",
+          "keys": 33,
+          "max_component_change": 0.016987144947052002
+        },
+        {
+          "node": "lowerarm.l",
+          "path": "rotation",
+          "keys": 33,
+          "max_component_change": 0.021832972764968872
+        },
+        {
+          "node": "hand.l",
+          "path": "rotation",
+          "keys": 33,
+          "max_component_change": 0.013752132654190063
+        },
+        {
+          "node": "handslot.l",
+          "path": "rotation",
+          "keys": 33,
+          "max_component_change": 0.0062639713287353516
+        },
+        {
+          "node": "upperarm.r",
+          "path": "rotation",
+          "keys": 33,
+          "max_component_change": 0.016820907592773438
+        },
+        {
+          "node": "lowerarm.r",
+          "path": "rotation",
+          "keys": 33,
+          "max_component_change": 0.020938396453857422
+        },
+        {
+          "node": "hand.r",
+          "path": "rotation",
+          "keys": 33,
+          "max_component_change": 0.014684408903121948
+        },
+        {
+          "node": "handslot.r",
+          "path": "rotation",
+          "keys": 33,
+          "max_component_change": 0.0056066392519174
+        },
+        {
+          "node": "upperleg.l",
+          "path": "rotation",
+          "keys": 33,
+          "max_component_change": 0.0788050564005971
+        },
+        {
+          "node": "lowerleg.l",
+          "path": "rotation",
+          "keys": 33,
+          "max_component_change": 0.20649053156375885
+        },
+        {
+          "node": "foot.l",
+          "path": "rotation",
+          "keys": 33,
+          "max_component_change": 0.1076662540435791
+        },
+        {
+          "node": "toes.l",
+          "path": "rotation",
+          "keys": 33,
+          "max_component_change": 1.840413749217987
+        },
+        {
+          "node": "upperleg.r",
+          "path": "rotation",
+          "keys": 33,
+          "max_component_change": 0.06639008224010468
+        },
+        {
+          "node": "lowerleg.r",
+          "path": "rotation",
+          "keys": 33,
+          "max_component_change": 0.17149630188941956
+        },
+        {
+          "node": "foot.r",
+          "path": "rotation",
+          "keys": 33,
+          "max_component_change": 0.09192478656768799
+        },
+        {
+          "node": "toes.r",
+          "path": "rotation",
+          "keys": 33,
+          "max_component_change": 0.00029608607292175293
+        },
+        {
+          "node": "handIK.l",
+          "path": "translation",
+          "keys": 33,
+          "max_component_change": 0.021038413047790527
+        },
+        {
+          "node": "handIK.r",
+          "path": "translation",
+          "keys": 33,
+          "max_component_change": 0.021038353443145752
+        }
+      ]
+    },
+    "Unarmed_Melee_Attack_Punch_A": {
+      "name": "Unarmed_Melee_Attack_Punch_A",
+      "duration_seconds": 1.4666666984558105,
+      "channels": 123,
+      "varying_channels": 28,
+      "varying_paths": {
+        "translation": 8,
+        "rotation": 20
+      },
+      "varying_channel_evidence": [
+        {
+          "node": "hips",
+          "path": "translation",
+          "keys": 45,
+          "max_component_change": 0.1803685501217842
+        },
+        {
+          "node": "hips",
+          "path": "rotation",
+          "keys": 45,
+          "max_component_change": 0.13101586140692234
+        },
+        {
+          "node": "spine",
+          "path": "rotation",
+          "keys": 45,
+          "max_component_change": 0.21571220457554574
+        },
+        {
+          "node": "upperarm.l",
+          "path": "rotation",
+          "keys": 45,
+          "max_component_change": 0.6963240820914507
+        },
+        {
+          "node": "lowerarm.l",
+          "path": "rotation",
+          "keys": 45,
+          "max_component_change": 0.4454161822795868
+        },
+        {
+          "node": "hand.l",
+          "path": "rotation",
+          "keys": 45,
+          "max_component_change": 0.2763920724391937
+        },
+        {
+          "node": "upperarm.r",
+          "path": "translation",
+          "keys": 45,
+          "max_component_change": 0.10465028016744071
+        },
+        {
+          "node": "upperarm.r",
+          "path": "rotation",
+          "keys": 45,
+          "max_component_change": 0.3107741177082062
+        },
+        {
+          "node": "lowerarm.r",
+          "path": "rotation",
+          "keys": 45,
+          "max_component_change": 0.16779905557632446
+        },
+        {
+          "node": "hand.r",
+          "path": "rotation",
+          "keys": 45,
+          "max_component_change": 0.38783030211925507
+        },
+        {
+          "node": "head",
+          "path": "rotation",
+          "keys": 45,
+          "max_component_change": 0.2789459303021431
+        },
+        {
+          "node": "upperleg.l",
+          "path": "rotation",
+          "keys": 45,
+          "max_component_change": 1.960887849330902
+        },
+        {
+          "node": "lowerleg.l",
+          "path": "rotation",
+          "keys": 45,
+          "max_component_change": 0.17780588567256927
+        },
+        {
+          "node": "foot.l",
+          "path": "rotation",
+          "keys": 45,
+          "max_component_change": 0.19687360525131226
+        },
+        {
+          "node": "toes.l",
+          "path": "rotation",
+          "keys": 45,
+          "max_component_change": 1.840582251548767
+        },
+        {
+          "node": "upperleg.r",
+          "path": "rotation",
+          "keys": 45,
+          "max_component_change": 1.9851129055023193
+        },
+        {
+          "node": "lowerleg.r",
+          "path": "rotation",
+          "keys": 45,
+          "max_component_change": 0.2699388675391674
+        },
+        {
+          "node": "foot.r",
+          "path": "rotation",
+          "keys": 45,
+          "max_component_change": 0.32787033170461655
+        },
+        {
+          "node": "toes.r",
+          "path": "rotation",
+          "keys": 45,
+          "max_component_change": 1.8402796387672424
+        },
+        {
+          "node": "control-heel-roll.l",
+          "path": "translation",
+          "keys": 45,
+          "max_component_change": 0.0453299880027771
+        },
+        {
+          "node": "control-heel-roll.r",
+          "path": "translation",
+          "keys": 45,
+          "max_component_change": 0.20753934979438782
+        },
+        {
+          "node": "control-heel-roll.r",
+          "path": "rotation",
+          "keys": 45,
+          "max_component_change": 1.9308632016181946
+        },
+        {
+          "node": "elbowIK.l",
+          "path": "translation",
+          "keys": 45,
+          "max_component_change": 1.4537409543991089
+        },
+        {
+          "node": "handIK.l",
+          "path": "translation",
+          "keys": 45,
+          "max_component_change": 0.4481895435601473
+        },
+        {
+          "node": "handIK.l",
+          "path": "rotation",
+          "keys": 45,
+          "max_component_change": 1.171188771724701
+        },
+        {
+          "node": "elbowIK.r",
+          "path": "translation",
+          "keys": 45,
+          "max_component_change": 0.5550471059978008
+        },
+        {
+          "node": "handIK.r",
+          "path": "translation",
+          "keys": 45,
+          "max_component_change": 0.5178182423114777
+        },
+        {
+          "node": "handIK.r",
+          "path": "rotation",
+          "keys": 45,
+          "max_component_change": 0.19367262721061707
+        }
+      ]
+    },
+    "Walking_D_Skeletons": {
+      "name": "Walking_D_Skeletons",
+      "duration_seconds": 1.600000023841858,
+      "channels": 123,
+      "varying_channels": 29,
+      "varying_paths": {
+        "translation": 9,
+        "rotation": 20
+      },
+      "varying_channel_evidence": [
+        {
+          "node": "hips",
+          "path": "translation",
+          "keys": 49,
+          "max_component_change": 0.03487682342529297
+        },
+        {
+          "node": "upperarm.l",
+          "path": "rotation",
+          "keys": 49,
+          "max_component_change": 0.03816238045692444
+        },
+        {
+          "node": "lowerarm.l",
+          "path": "rotation",
+          "keys": 49,
+          "max_component_change": 0.01925581693649292
+        },
+        {
+          "node": "hand.l",
+          "path": "rotation",
+          "keys": 49,
+          "max_component_change": 0.10543549060821533
+        },
+        {
+          "node": "upperarm.r",
+          "path": "rotation",
+          "keys": 49,
+          "max_component_change": 0.062356725335121155
+        },
+        {
+          "node": "lowerarm.r",
+          "path": "rotation",
+          "keys": 49,
+          "max_component_change": 0.059864580631256104
+        },
+        {
+          "node": "hand.r",
+          "path": "rotation",
+          "keys": 49,
+          "max_component_change": 0.23743845149874687
+        },
+        {
+          "node": "handslot.r",
+          "path": "rotation",
+          "keys": 49,
+          "max_component_change": 0.11859840154647827
+        },
+        {
+          "node": "head",
+          "path": "rotation",
+          "keys": 49,
+          "max_component_change": 0.04693548381328583
+        },
+        {
+          "node": "upperleg.l",
+          "path": "translation",
+          "keys": 49,
+          "max_component_change": 0.08000000193715096
+        },
+        {
+          "node": "upperleg.l",
+          "path": "rotation",
+          "keys": 49,
+          "max_component_change": 1.9455760717391968
+        },
+        {
+          "node": "lowerleg.l",
+          "path": "rotation",
+          "keys": 49,
+          "max_component_change": 0.5213573276996613
+        },
+        {
+          "node": "foot.l",
+          "path": "rotation",
+          "keys": 49,
+          "max_component_change": 0.15202546119689941
+        },
+        {
+          "node": "toes.l",
+          "path": "rotation",
+          "keys": 49,
+          "max_component_change": 0.016243398189544678
+        },
+        {
+          "node": "upperleg.r",
+          "path": "translation",
+          "keys": 49,
+          "max_component_change": 0.09000000730156898
+        },
+        {
+          "node": "upperleg.r",
+          "path": "rotation",
+          "keys": 49,
+          "max_component_change": 1.9977847337722778
+        },
+        {
+          "node": "lowerleg.r",
+          "path": "rotation",
+          "keys": 49,
+          "max_component_change": 0.7474048845469952
+        },
+        {
+          "node": "foot.r",
+          "path": "rotation",
+          "keys": 49,
+          "max_component_change": 0.13999497890472412
+        },
+        {
+          "node": "toes.r",
+          "path": "rotation",
+          "keys": 49,
+          "max_component_change": 0.006462574005126953
+        },
+        {
+          "node": "control-toe-roll.l",
+          "path": "translation",
+          "keys": 49,
+          "max_component_change": 0.5077371001243591
+        },
+        {
+          "node": "control-toe-roll.l",
+          "path": "rotation",
+          "keys": 49,
+          "max_component_change": 0.4675081968307495
+        },
+        {
+          "node": "control-heel-roll.l",
+          "path": "translation",
+          "keys": 49,
+          "max_component_change": 0.09999999403953552
+        },
+        {
+          "node": "control-toe-roll.r",
+          "path": "translation",
+          "keys": 49,
+          "max_component_change": 0.5077371001243591
+        },
+        {
+          "node": "control-toe-roll.r",
+          "path": "rotation",
+          "keys": 49,
+          "max_component_change": 0.46463915705680847
+        },
+        {
+          "node": "control-heel-roll.r",
+          "path": "translation",
+          "keys": 49,
+          "max_component_change": 0.09999996423721313
+        },
+        {
+          "node": "handIK.l",
+          "path": "translation",
+          "keys": 49,
+          "max_component_change": 0.015699297189712524
+        },
+        {
+          "node": "handIK.l",
+          "path": "rotation",
+          "keys": 49,
+          "max_component_change": 0.13133609294891357
+        },
+        {
+          "node": "handIK.r",
+          "path": "translation",
+          "keys": 49,
+          "max_component_change": 0.05224013328552246
+        },
+        {
+          "node": "handIK.r",
+          "path": "rotation",
+          "keys": 49,
+          "max_component_change": 0.1901203989982605
+        }
+      ]
+    }
+  },
+  "boundary": "Binary curves and bindings verified here; evaluated deformation is checked separately in Blender."
+}
