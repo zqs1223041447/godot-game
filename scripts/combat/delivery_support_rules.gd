@@ -18,8 +18,8 @@ const SUPPORTS: Dictionary = {
 	},
 	"heavy_projectiles": {
 		"name": "缓速强击辅助",
-		"description": "飞弹、冰霜与蚀影飞弹：投射物速度 ×0.75，主命中伤害总增 20%，魔力 ×1.15。龙卷与独立爆炸不适用。",
-		"skills": ["bolt", "frost", "shade_bolt"], "requires": ["projectile_hit"], "family": "delivery",
+		"description": "飞弹、冰霜、蚀影飞弹与龙卷：投射物速度 ×0.75，主命中伤害总增 20%，魔力 ×1.15。龙卷母箭与子箭均生效；伤害类型、射程与寿命不变，独立爆炸不增伤。",
+		"skills": ["bolt", "frost", "shade_bolt", "tornado"], "requires": ["projectile_hit"], "family": "delivery",
 		"operations": [
 			{"op": "projectile_speed_multiplier", "value": 0.75},
 			{"op": "primary_hit_more", "value": 0.20},
@@ -155,7 +155,7 @@ static func definition_error(value: Variant) -> String:
 		return "辅助缺少配方变换或魔力代价"
 	var fast: bool = factor == "projectile_speed_multiplier" and float(seen[factor]) > 1.0
 	var skills: Array = ["chain"] if value.family == "chain" else (["frost"] if value.family == "control" else ["bolt", "frost", "shade_bolt"])
-	if fast: skills.append("tornado")
+	if factor == "projectile_speed_multiplier": skills.append("tornado")
 	if value.skills != skills:
 		return "辅助技能与配方变换不匹配"
 	if fast:

@@ -10,6 +10,9 @@ const SWIFT := "support:swift_projectiles"
 var comparisons := 0
 var carrier_evidence: Array = []
 
+func support_definition_id() -> String: return SWIFT
+func isolated_prefix() -> String: return "/tmp/godot-m1-tornado-swift-"
+
 func near(actual: float, expected: float, label: String) -> void:
 	check(is_equal_approx(actual, expected), "%s: %.6f / %.6f" % [label, actual, expected])
 
@@ -34,7 +37,7 @@ func compile_checks() -> void:
 		for skill: String in Compiler.Data.SKILLS:
 			var selections: Array = [[]]
 			for support: String in Registry.supports_for_skill(skill):
-				if skill != "tornado" or support != "swift_projectiles": selections.append([support])
+				if old.Supports.compatibility_reason(skill,[support]).is_empty(): selections.append([support])
 			for selection: Array in selections:
 				var previous: Dictionary = old.compile_group(skill, snapshot, selection)
 				var current := Compiler.compile_group(skill, snapshot, selection)
@@ -63,12 +66,12 @@ func compile_checks() -> void:
 				check(Damage.resolve(fast.packets[role],fast.snapshot.modifiers) == Damage.resolve(plain.packets[role],plain.snapshot.modifiers), "Every resolved damage role unchanged: " + role)
 			if plain.has("burn_profile"): check(fast.burn_profile == plain.burn_profile, "Ignite/proliferation damage policy unchanged")
 		check(var_to_bytes(snapshot) == before, "Compiler does not mutate source")
-	for rejected: String in ["heavy_projectiles","lingering_chill","pierce"]:
+	for rejected: String in ["lingering_chill","pierce"]:
 		check(not Registry.compatibility_reason("tornado",[rejected]).is_empty(), "Other explicit incompatibility retained: " + rejected)
 
 func run() -> void:
 	var isolated := OS.get_environment("XDG_DATA_HOME")
-	if not isolated.begins_with("/tmp/godot-m1-tornado-swift-") or not OS.get_user_data_dir().begins_with(isolated + "/"): quit(78); return
+	if not isolated.begins_with(isolated_prefix()) or not OS.get_user_data_dir().begins_with(isolated + "/"): quit(78); return
 	compile_checks()
 	arena = load("res://scenes/main.tscn").instantiate()
 	root.add_child(arena)
@@ -81,10 +84,10 @@ func run() -> void:
 	var claim: Dictionary = arena.claim_normal_rewards(arena.world_context().revision)
 	check(claim.ok and claim.claimed_shards == 4 and arena.state.crafting_balance() == 4, "One real map reward funds the four-shard support")
 	arena.state.changed.connect(func() -> void: changes += 1)
-	var purchase := trade("buy",SWIFT,-4)
+	var purchase := trade("buy",support_definition_id(),-4)
 	if not purchase.get("ok",false): finish_swift(); return
 	var uid: String = purchase.uid
-	check(arena.state.item(uid).definition_id == SWIFT and arena.state.location(uid).kind == "bag", "Paid exact UID arrives in bag")
+	check(arena.state.item(uid).definition_id == support_definition_id() and arena.state.location(uid).kind == "bag", "Paid exact UID arrives in bag")
 	var group := ""
 	for record: Dictionary in arena.state.snapshot().skill_groups:
 		if arena.state.skill_group(record.id).skill_id == "tornado": group = record.id; break
@@ -95,7 +98,7 @@ func run() -> void:
 	check(linked.ok, "Purchased support equips by original canonical move transaction")
 	if not linked.ok: finish_swift(); return
 	var fast: Dictionary = arena.state.get_group_cast(group)
-	check(fast.ok and fast.support_ids.has("swift_projectiles"), "Actual owned group compiles accelerated recipe")
+	check(fast.ok and fast.support_ids.has(support_definition_id().trim_prefix("support:")), "Actual owned group compiles selected support recipe")
 	var loaded := Model.new()
 	check(loaded.load_build(arena.NORMAL_BUILD_PATH) and loaded.snapshot() == arena.state.snapshot(), "Same-schema reload preserves purchased UID and link")
 	check(arena.leave_normal_town(arena.world_context().revision).ok, "Enter existing practice arena for controlled carrier observation")
@@ -117,7 +120,7 @@ func run() -> void:
 	var parent_start: Vector2 = shots[0].pos
 	runtime.advance(shots,0.05,[],arena.player_pos,arena.MAX_PROJECTILES)
 	near(parent_start.distance_to(shots[0].pos),fast.recipe.parent.speed*0.05,"Parent actual movement")
-	var events: Array = runtime.advance(shots,0.25,[],arena.player_pos,arena.MAX_PROJECTILES)
+	var events: Array = runtime.advance(shots,float(fast.recipe.parent.range)/float(fast.recipe.parent.speed)-0.05+0.001,[],arena.player_pos,arena.MAX_PROJECTILES)
 	check(shots.size() == fast.initial_count * int(fast.recipe.child_count), "Original runtime splits all parents into original child count")
 	for shot: Dictionary in shots:
 		check(shot.role == "child", "Child generation remains original")
