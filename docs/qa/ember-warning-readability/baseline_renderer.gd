@@ -1,4 +1,3 @@
-class_name TelegraphRenderer
 extends RefCounted
 ## Read-only ground artwork for copied TelegraphedAreaRuntime.state_for snapshots.
 ## No retained states, clocks, events, damage, transforms, or gameplay RNG.
@@ -149,11 +148,8 @@ static func _append_state(state: Dictionary, effects: int, fills: Array[Dictiona
 	elif state.pattern == "ruins_mark":
 		rune = _boss_rune(rune_center, minf(16.0,radius * 0.21), "ruins_mark")
 	elif state.pattern == "ember_burn":
-		# The player stands on the locked center: put the existing flame below
-		# their feet rather than behind their torso/name. Keep it inside the ring.
-		var p: Vector2 = state.center + Vector2(0, radius * 0.58)
-		var scale: float = minf(1.5, radius / 60.0)
-		rune = PackedVector2Array([p + Vector2(-7, 6)*scale, p + Vector2(-2, -3)*scale, p + Vector2(0, 2)*scale, p + Vector2(5, -9)*scale, p + Vector2(8, 6)*scale])
+		var p: Vector2 = state.center + Vector2(0, -radius * 0.6)
+		rune = PackedVector2Array([p + Vector2(-7, 6), p + Vector2(-2, -3), p + Vector2(0, 2), p + Vector2(5, -9), p + Vector2(8, 6)])
 	elif state.pattern == "chaos_guard":
 		var p: Vector2 = state.center + Vector2(0, -radius * 0.6)
 		rune = PackedVector2Array([p+Vector2(-9,-6),p+Vector2(3,-6),p+Vector2(7,0),p+Vector2(-3,0),p+Vector2(-7,6),p+Vector2(9,6)])
@@ -163,12 +159,10 @@ static func _append_state(state: Dictionary, effects: int, fills: Array[Dictiona
 	elif state.pattern == "sunwell_echo":
 		var p: Vector2 = state.center + Vector2(0, -radius * 0.55)
 		rune = PackedVector2Array([p+Vector2(-15,3),p+Vector2(-8,-4),p+Vector2(0,3),p+Vector2(8,-4),p+Vector2(15,3)])
-	var ember: bool = state.pattern == "ember_burn"
-	marks.append(_line(state, "rune_base", rune, Color(INK, (0.85 if ember else 0.6) * fade), minf(4.5 if ember else 3.0, radius * 0.1)))
+	marks.append(_line(state, "rune_base", rune, Color(INK, 0.6 * fade), minf(3.0, radius * 0.1)))
 	var charged: PackedVector2Array = _trace(rune, progress if winding else 1.0)
 	if charged.size() >= 2:
-		var rune_pigment: Color = Color("e3bc80") if ember and winding else pigment
-		marks.append(_line(state, "rune_charge", charged, Color(rune_pigment, 0.92 * fade), minf(2.5 if ember else 1.6, radius * 0.06)))
+		marks.append(_line(state, "rune_charge", charged, Color(pigment, 0.92 * fade), minf(1.6, radius * 0.06)))
 	# Sparse, uneven earth cuts stay inside the circle and do not animate or emit RNG.
 	var count: int = 0 if effects == 0 else 1 if effects == 1 else 3
 	if state.pattern == "sunwell_echo":

@@ -4,6 +4,12 @@
 
 组件初次交付基线为 `codex/telegraphed-area-runtime` 的 `6bf5cf3b8d5e2d02bc4e6d5dc716f6cc928e7c79`。本次独立复核从 `codex/telegraph-renderer` 的 `60743b6452ced85531de903d9b08d0074dacc447` 起步，改动限于 `scripts/visuals/telegraph_renderer.gd`、`tests/telegraph_renderer_test.gd` 与本文档，提供可独立检查的绘制组件和接点说明。**尚未接入游戏主流程，也不是已上线的游戏功能。** `ArenaVisuals`、`main.gd`、运行时、怪物目录、UI、存档、图鉴及发布配置均保持基线。
 
+## 灰烬守卫火纹可读性调整
+
+当前灰烬守卫的锁点火纹放在危险圆内下方，避开站在圆心的角色身体与头顶文字。火纹适度放大，深色底线承托米色描线；低特效也保留按原蓄力进度逐笔完成的提示。危险圆仍从起手显示真实范围；火纹只是蓄力提示，不是更小的伤害区域。落击后沿原恢复期变灰消退，原命中和燃烧规则保持。
+
+只改变既有两条火纹折线的位置、尺寸和笔画，不增加图元、粒子、扫描或独立计时器。原生前后截图、实际命中/躲避和取消清理记录见[本次验收](qa/ember-warning-readability/README.md)。以下保留最初组件交付的历史说明。
+
 ## 状态来自实际运行时
 
 输入是 `TelegraphedAreaRuntime.state_for(source_id)` 返回的隔离字典组成的数组。组件仅读取 `source_id`、`center`、`phase`、`elapsed` 和 `profile` 中的 `radius`、`windup_seconds`、`recovery_seconds`，不查看 `packet`、来源位置、玩家位置、伤害或随机数。

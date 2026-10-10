@@ -1883,6 +1883,8 @@ def build(data, art):
             continue
         p=a['profile']; policy=a['policy']
         body=telegraph_diagram(a)+facts([('来源',links('monsters',a['integrated_templates'])),('发动距离',number(policy['trigger_distance'])+' 世界单位'),('原始伤害',component_text(a['example']['event']['packet']['base'])),('倍率',number(p['damage_multiplier'])+' × 来源接触基底'),('攻速作用','只缩放恢复期；预警时间固定；开始后本次时序和伤害冻结'),('期间行动','暂停主动追击；击退仍有效；同一守卫不再叠加贴身接触攻击'),('取消与保护','来源死亡/出生保护/移除、玩家死亡或重开取消；暂停冻结时钟；多次同时命中沿用玩家无敌帧'),('规则版本',esc(a['balance_version']))])
+        if key=='locked_circle':
+            body+='<p>灰烬守卫的蓄力火纹位于重击圆内下方，避开圆心角色与头顶文字；深色底线上的米色线条随原蓄力进度逐渐完成，低特效也保留。圆周始终表示完整伤害范围，火纹不是缩小的伤害区；落击后按原恢复期变灰消退。</p>'
         if a.get('natural_selection'):
             n=a['natural_selection']
             body+=facts([('自然出现',f'第 {n["minimum_wave"]} 波起，已成功普通入场序号除 {n["admission_modulus"]} 余 {n["admission_remainder"]}，且原抽签为 '+link('monsters',n['source_template'])),('保留原抽签','同物种的白/蓝/金、共享词缀、基础生命/伤害/移动与经验；没有强升蓝或额外奖励'),('防御示例','初始等级合法天赋路径：'+esc(' → '.join(a['example']['allocated_path']))+'。数值在攻击成功命中条件下，现有攻击闪避另可阻止命中。')])

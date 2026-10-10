@@ -1,0 +1,463 @@
+{
+	"baseline": true,
+	"checks": 29,
+	"failures": [],
+	"frames": [
+		{
+			"label": "low-early",
+			"primitives": [
+				{
+					"center": "(362.0, 2184.0)",
+					"color": "(0.4471, 0.3137, 0.2314, 0.0425)",
+					"filled": true,
+					"kind": "circle",
+					"phase": "windup",
+					"radius": 90.0,
+					"role": "ground_tint",
+					"source_id": 26,
+					"width": -1.0
+				},
+				{
+					"center": "(362.0, 2184.0)",
+					"color": "(0.2863, 0.2275, 0.1765, 0.78)",
+					"filled": false,
+					"kind": "circle",
+					"phase": "windup",
+					"radius": 90.0,
+					"role": "danger_boundary",
+					"source_id": 26,
+					"width": 3.8
+				},
+				{
+					"center": "(362.0, 2184.0)",
+					"color": "(0.7743, 0.5388, 0.3398, 0.94)",
+					"filled": false,
+					"kind": "circle",
+					"phase": "windup",
+					"radius": 90.0,
+					"role": "danger_boundary",
+					"source_id": 26,
+					"width": 1.5
+				},
+				{
+					"color": "(0.2863, 0.2275, 0.1765, 0.6)",
+					"kind": "polyline",
+					"phase": "windup",
+					"points": "[(355.0, 2136.0), (360.0, 2127.0), (362.0, 2132.0), (367.0, 2121.0), (370.0, 2136.0)]",
+					"role": "rune_base",
+					"source_id": 26,
+					"width": 3.0
+				},
+				{
+					"color": "(0.7743, 0.5388, 0.3398, 0.92)",
+					"kind": "polyline",
+					"phase": "windup",
+					"points": "[(355.0, 2136.0), (358.1368, 2130.354)]",
+					"role": "rune_charge",
+					"source_id": 26,
+					"width": 1.6
+				}
+			],
+			"states": [
+				{
+					"attack_id": 1,
+					"burn_policy": {
+						"duration": 3.0,
+						"rate_fraction": 0.333333333333333,
+						"upfront_fire_multiplier": 0.5
+					},
+					"center": "(362.0, 2184.0)",
+					"elapsed": 0.105,
+					"packet": {
+						"base": {
+							"fire": 7.56,
+							"physical": 15.12
+						},
+						"skill_id": "locked_circle",
+						"tags": [
+							"attack",
+							"area",
+							"hit"
+						]
+					},
+					"phase": "windup",
+					"profile": {
+						"damage_multiplier": 1.4,
+						"radius": 90.0,
+						"recovery_seconds": 1.2,
+						"windup_seconds": 0.7
+					},
+					"source_id": 26,
+					"visual_pattern": "ember_burn"
+				}
+			],
+			"trace": []
+		},
+		{
+			"label": "low-late",
+			"primitives": [
+				{
+					"center": "(362.0, 2184.0)",
+					"color": "(0.4471, 0.3137, 0.2314, 0.0775)",
+					"filled": true,
+					"kind": "circle",
+					"phase": "windup",
+					"radius": 90.0,
+					"role": "ground_tint",
+					"source_id": 26,
+					"width": -1.0
+				},
+				{
+					"center": "(362.0, 2184.0)",
+					"color": "(0.2863, 0.2275, 0.1765, 0.78)",
+					"filled": false,
+					"kind": "circle",
+					"phase": "windup",
+					"radius": 90.0,
+					"role": "danger_boundary",
+					"source_id": 26,
+					"width": 3.8
+				},
+				{
+					"center": "(362.0, 2184.0)",
+					"color": "(0.7276, 0.418, 0.2602, 0.94)",
+					"filled": false,
+					"kind": "circle",
+					"phase": "windup",
+					"radius": 90.0,
+					"role": "danger_boundary",
+					"source_id": 26,
+					"width": 1.5
+				},
+				{
+					"color": "(0.2863, 0.2275, 0.1765, 0.6)",
+					"kind": "polyline",
+					"phase": "windup",
+					"points": "[(355.0, 2136.0), (360.0, 2127.0), (362.0, 2132.0), (367.0, 2121.0), (370.0, 2136.0)]",
+					"role": "rune_base",
+					"source_id": 26,
+					"width": 3.0
+				},
+				{
+					"color": "(0.7276, 0.418, 0.2602, 0.92)",
+					"kind": "polyline",
+					"phase": "windup",
+					"points": "[(355.0, 2136.0), (360.0, 2127.0), (362.0, 2132.0), (367.0, 2121.0), (368.7332, 2129.666)]",
+					"role": "rune_charge",
+					"source_id": 26,
+					"width": 1.6
+				}
+			],
+			"states": [
+				{
+					"attack_id": 1,
+					"burn_policy": {
+						"duration": 3.0,
+						"rate_fraction": 0.333333333333333,
+						"upfront_fire_multiplier": 0.5
+					},
+					"center": "(362.0, 2184.0)",
+					"elapsed": 0.595,
+					"packet": {
+						"base": {
+							"fire": 7.56,
+							"physical": 15.12
+						},
+						"skill_id": "locked_circle",
+						"tags": [
+							"attack",
+							"area",
+							"hit"
+						]
+					},
+					"phase": "windup",
+					"profile": {
+						"damage_multiplier": 1.4,
+						"radius": 90.0,
+						"recovery_seconds": 1.2,
+						"windup_seconds": 0.7
+					},
+					"source_id": 26,
+					"visual_pattern": "ember_burn"
+				}
+			],
+			"trace": []
+		},
+		{
+			"label": "full-late",
+			"primitives": [
+				{
+					"center": "(362.0, 2184.0)",
+					"color": "(0.4471, 0.3137, 0.2314, 0.0775)",
+					"filled": true,
+					"kind": "circle",
+					"phase": "windup",
+					"radius": 90.0,
+					"role": "ground_tint",
+					"source_id": 26,
+					"width": -1.0
+				},
+				{
+					"center": "(362.0, 2184.0)",
+					"color": "(0.2863, 0.2275, 0.1765, 0.78)",
+					"filled": false,
+					"kind": "circle",
+					"phase": "windup",
+					"radius": 90.0,
+					"role": "danger_boundary",
+					"source_id": 26,
+					"width": 3.8
+				},
+				{
+					"center": "(362.0, 2184.0)",
+					"color": "(0.7276, 0.418, 0.2602, 0.94)",
+					"filled": false,
+					"kind": "circle",
+					"phase": "windup",
+					"radius": 90.0,
+					"role": "danger_boundary",
+					"source_id": 26,
+					"width": 1.5
+				},
+				{
+					"color": "(0.2863, 0.2275, 0.1765, 0.6)",
+					"kind": "polyline",
+					"phase": "windup",
+					"points": "[(355.0, 2136.0), (360.0, 2127.0), (362.0, 2132.0), (367.0, 2121.0), (370.0, 2136.0)]",
+					"role": "rune_base",
+					"source_id": 26,
+					"width": 3.0
+				},
+				{
+					"color": "(0.7276, 0.418, 0.2602, 0.92)",
+					"kind": "polyline",
+					"phase": "windup",
+					"points": "[(355.0, 2136.0), (360.0, 2127.0), (362.0, 2132.0), (367.0, 2121.0), (368.7332, 2129.666)]",
+					"role": "rune_charge",
+					"source_id": 26,
+					"width": 1.6
+				},
+				{
+					"color": "(0.7276, 0.418, 0.2602, 0.5)",
+					"kind": "polyline",
+					"phase": "windup",
+					"points": "[(420.7472, 2139.059), (415.0643, 2137.459), (414.6174, 2133.571)]",
+					"role": "earth_mark",
+					"source_id": 26,
+					"width": 1.5
+				},
+				{
+					"color": "(0.7276, 0.418, 0.2602, 0.5)",
+					"kind": "polyline",
+					"phase": "windup",
+					"points": "[(366.7176, 2257.815), (371.2056, 2253.98), (374.6862, 2255.769)]",
+					"role": "earth_mark",
+					"source_id": 26,
+					"width": 1.5
+				},
+				{
+					"color": "(0.7276, 0.418, 0.2602, 0.5)",
+					"kind": "polyline",
+					"phase": "windup",
+					"points": "[(298.0097, 2146.903), (298.7045, 2152.766), (295.2832, 2154.665)]",
+					"role": "earth_mark",
+					"source_id": 26,
+					"width": 1.5
+				}
+			],
+			"states": [
+				{
+					"attack_id": 1,
+					"burn_policy": {
+						"duration": 3.0,
+						"rate_fraction": 0.333333333333333,
+						"upfront_fire_multiplier": 0.5
+					},
+					"center": "(362.0, 2184.0)",
+					"elapsed": 0.595,
+					"packet": {
+						"base": {
+							"fire": 7.56,
+							"physical": 15.12
+						},
+						"skill_id": "locked_circle",
+						"tags": [
+							"attack",
+							"area",
+							"hit"
+						]
+					},
+					"phase": "windup",
+					"profile": {
+						"damage_multiplier": 1.4,
+						"radius": 90.0,
+						"recovery_seconds": 1.2,
+						"windup_seconds": 0.7
+					},
+					"source_id": 26,
+					"visual_pattern": "ember_burn"
+				}
+			],
+			"trace": []
+		},
+		{
+			"label": "impact",
+			"primitives": [
+				{
+					"center": "(362.0, 2184.0)",
+					"color": "(0.4471, 0.3137, 0.2314, 0.065)",
+					"filled": true,
+					"kind": "circle",
+					"phase": "recovery",
+					"radius": 90.0,
+					"role": "ground_tint",
+					"source_id": 26,
+					"width": -1.0
+				},
+				{
+					"center": "(362.0, 2184.0)",
+					"color": "(0.2863, 0.2275, 0.1765, 0.78)",
+					"filled": false,
+					"kind": "circle",
+					"phase": "recovery",
+					"radius": 90.0,
+					"role": "recovery_boundary",
+					"source_id": 26,
+					"width": 3.8
+				},
+				{
+					"center": "(362.0, 2184.0)",
+					"color": "(0.6549, 0.6078, 0.502, 0.94)",
+					"filled": false,
+					"kind": "circle",
+					"phase": "recovery",
+					"radius": 90.0,
+					"role": "recovery_boundary",
+					"source_id": 26,
+					"width": 1.5
+				},
+				{
+					"color": "(0.2863, 0.2275, 0.1765, 0.6)",
+					"kind": "polyline",
+					"phase": "recovery",
+					"points": "[(355.0, 2136.0), (360.0, 2127.0), (362.0, 2132.0), (367.0, 2121.0), (370.0, 2136.0)]",
+					"role": "rune_base",
+					"source_id": 26,
+					"width": 3.0
+				},
+				{
+					"color": "(0.6549, 0.6078, 0.502, 0.92)",
+					"kind": "polyline",
+					"phase": "recovery",
+					"points": "[(355.0, 2136.0), (360.0, 2127.0), (362.0, 2132.0), (367.0, 2121.0), (370.0, 2136.0)]",
+					"role": "rune_charge",
+					"source_id": 26,
+					"width": 1.6
+				},
+				{
+					"color": "(0.6549, 0.6078, 0.502, 0.5)",
+					"kind": "polyline",
+					"phase": "recovery",
+					"points": "[(420.7472, 2139.059), (415.0643, 2137.459), (414.6174, 2133.571)]",
+					"role": "earth_mark",
+					"source_id": 26,
+					"width": 1.5
+				},
+				{
+					"color": "(0.6549, 0.6078, 0.502, 0.5)",
+					"kind": "polyline",
+					"phase": "recovery",
+					"points": "[(366.7176, 2257.815), (371.2056, 2253.98), (374.6862, 2255.769)]",
+					"role": "earth_mark",
+					"source_id": 26,
+					"width": 1.5
+				},
+				{
+					"color": "(0.6549, 0.6078, 0.502, 0.5)",
+					"kind": "polyline",
+					"phase": "recovery",
+					"points": "[(298.0097, 2146.903), (298.7045, 2152.766), (295.2832, 2154.665)]",
+					"role": "earth_mark",
+					"source_id": 26,
+					"width": 1.5
+				}
+			],
+			"states": [
+				{
+					"attack_id": 1,
+					"burn_policy": {
+						"duration": 3.0,
+						"rate_fraction": 0.333333333333333,
+						"upfront_fire_multiplier": 0.5
+					},
+					"center": "(362.0, 2184.0)",
+					"elapsed": 0.7,
+					"packet": {
+						"base": {
+							"fire": 7.56,
+							"physical": 15.12
+						},
+						"skill_id": "locked_circle",
+						"tags": [
+							"attack",
+							"area",
+							"hit"
+						]
+					},
+					"phase": "recovery",
+					"profile": {
+						"damage_multiplier": 1.4,
+						"radius": 90.0,
+						"recovery_seconds": 1.2,
+						"windup_seconds": 0.7
+					},
+					"source_id": 26,
+					"visual_pattern": "ember_burn"
+				}
+			],
+			"trace": [
+				{
+					"applied": true,
+					"attack_age": 0.7,
+					"attack_id": 1,
+					"balance_version": "original-telegraphed-area-v1",
+					"burn_policy": {
+						"duration": 3.0,
+						"rate_fraction": 0.333333333333333,
+						"upfront_fire_multiplier": 0.5
+					},
+					"center": "(362.0, 2184.0)",
+					"inside": true,
+					"packet": {
+						"base": {
+							"fire": 7.56,
+							"physical": 15.12
+						},
+						"skill_id": "locked_circle",
+						"tags": [
+							"attack",
+							"area",
+							"hit"
+						]
+					},
+					"player_position": "(362.0, 2184.0)",
+					"profile": {
+						"damage_multiplier": 1.4,
+						"radius": 90.0,
+						"recovery_seconds": 1.2,
+						"windup_seconds": 0.7
+					},
+					"profile_id": "locked_circle",
+					"radius": 90.0,
+					"schema_version": 1,
+					"shape": "circle",
+					"source_id": 26,
+					"step_time": 0.105,
+					"type": "circle_attack",
+					"visual_pattern": "ember_burn"
+				}
+			]
+		}
+	],
+	"renderer": "X11"
+}

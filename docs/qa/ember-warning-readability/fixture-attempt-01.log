@@ -1,0 +1,17 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:364)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+godot-game: playable arena ready
+SCRIPT ERROR: Invalid call. Nonexistent function 'clear' in base 'RefCounted (BurnRuntime)'.
+          at: prepare (res://tests/ember_warning_readability_test.gd:21)
+          GDScript backtrace (most recent call first):
+              [0] prepare (res://tests/ember_warning_readability_test.gd:21)
+              [1] run (res://tests/ember_warning_readability_test.gd:36)
+              [2] fresh (res://tests/formal_boss_equipment_recovery_test.gd:80)
+SCRIPT ERROR: Invalid access to property or key 'rarity' on a base object of type 'Dictionary'.
+          at: run (res://tests/ember_warning_readability_test.gd:38)
+          GDScript backtrace (most recent call first):
+              [0] run (res://tests/ember_warning_readability_test.gd:38)
+              [1] fresh (res://tests/formal_boss_equipment_recovery_test.gd:80)
