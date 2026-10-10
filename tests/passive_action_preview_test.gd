@@ -117,7 +117,7 @@ func read_preview(f: Dictionary, node_id: Variant, effect: Variant = 0) -> Dicti
 		"Preview is a detached current revision with exactly two actions")
 	for action: String in ["allocate", "refund"]:
 		var row: Dictionary = preview.get(action, {})
-		check(row.size() == 3 and row.get("allowed") is bool and row.get("error_code") is String and row.get("reason") is String,
+		check(row.size() == 4 and row.get("resource_changes") is Dictionary and row.get("allowed") is bool and row.get("error_code") is String and row.get("reason") is String,
 			"Typed minimal action result: " + action)
 		check((row.allowed and row.error_code.is_empty() and row.reason.is_empty()) or (not row.allowed and not row.error_code.is_empty() and not row.reason.is_empty()),
 			"Allowed/rejected metadata is coherent: " + action)

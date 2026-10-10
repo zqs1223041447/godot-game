@@ -31,6 +31,14 @@ func _initialize() -> void:
 	panel._detail.text = "可分配节点"
 	panel._apply_action_preview({"allocate":{"allowed":true,"reason":""},"refund":{"allowed":false,"reason":"节点尚未分配"}},false)
 	expect(not panel._allocate.disabled and panel._allocate.tooltip_text.contains("消耗 1 点"), "Allowed allocation uses preview")
+	var changes := {"max_health":{"before":130.0,"after":156.0},"max_mana":{"before":140.0,"after":145.5}}
+	var original := var_to_bytes(changes)
+	panel._detail.text = "生命与魔力节点"
+	panel._apply_action_preview({"allocate":{"allowed":true,"resource_changes":changes},"refund":{"allowed":false}},false)
+	expect(panel._detail.text.contains("分配后资源上限") and panel._detail.text.contains("生命 130.0 → 156.0（+26.0）") and panel._detail.text.contains("魔力 140.0 → 145.5（+5.5）"), "Actual resource transitions and signed deltas have explicit scope")
+	expect(var_to_bytes(changes)==original, "Capacity presentation cannot edit supplied prediction")
+	expect(PassiveView.resource_preview_text({"max_health":{"before":156.0,"after":130.0}},true).contains("退还后资源上限\n生命 156.0 → 130.0（-26.0）"), "Refund format describes its own inverse action")
+	expect(PassiveView.resource_preview_text({},false).is_empty(), "Unchanged capacities add no spurious lines")
 	panel._allocate.free()
 	panel._refund.free()
 	panel._detail.free()

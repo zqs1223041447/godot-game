@@ -1,0 +1,23 @@
+{
+  "baseline": "d67a1221ec38a290a8b981ccf596acebf4e7df97",
+  "schema": 59,
+  "resource_checks": 238,
+  "resource_failures": 0,
+  "eligibility_checks": 116,
+  "eligibility_failures": 0,
+  "presentation_checks": 13,
+  "presentation_failures": 0,
+  "original_core_attempt": {
+    "timeout_seconds": 30,
+    "exit_code": 124,
+    "completed": false
+  },
+  "sha256": {
+    "scripts/canonical_game_state.gd": "38551302c5dfb14aef175784234212cf851b682b7aaf7b2a85ef3db11ef08c7e",
+    "scripts/ui/canonical_passive_panel.gd": "6cd2e59b0db0f9eb3daeccf0b2a26e1a367d01a2c30d9e5145184dc32ae5380b",
+    "tests/passive_resource_preview_test.gd": "c224e74716bd6e72548d241439879ecfd0d65d2410e09d0893a3c55a075f65b0",
+    "tests/passive_resource_eligibility_test.gd": "a9ea4731679febfe9a17cdc15c19074ff027f15cbd7163a6a82c1994a453f14f",
+    "tests/passive_action_preview_test.gd": "defa8d64cc06dcf7e96f239cfd54b80ae9b8d3fc8ece4a0265b6bf314e6f3f5f",
+    "tests/passive_action_presentation_test.gd": "94c0c5245d680e725e401c02c0b841b993e5eb5e8910a0d524cdc928db35cd13"
+  }
+}

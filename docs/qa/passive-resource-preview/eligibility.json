@@ -1,0 +1,123 @@
+{
+	"base": "181216b",
+	"cases": [
+		{
+			"effect": 0,
+			"label": "first-step",
+			"node_id": "2151",
+			"preview": {
+				"allocate": {
+					"allowed": true,
+					"error_code": "",
+					"reason": "",
+					"resource_changes": {
+						"max_mana": {
+							"after": 142.0,
+							"before": 140.0
+						}
+					}
+				},
+				"refund": {
+					"allowed": false,
+					"error_code": "not_allocated",
+					"reason": "此天赋尚未分配",
+					"resource_changes": {
+
+					}
+				},
+				"revision": 0
+			}
+		},
+		{
+			"effect": 0,
+			"label": "disconnected-source",
+			"node_id": "26740",
+			"preview": {
+				"allocate": {
+					"allowed": false,
+					"error_code": "invalid_candidate",
+					"reason": "断连天赋不在任何普通连通珠宝孔的有效范围内",
+					"resource_changes": {
+
+					}
+				},
+				"refund": {
+					"allowed": false,
+					"error_code": "not_allocated",
+					"reason": "此天赋尚未分配",
+					"resource_changes": {
+
+					}
+				},
+				"revision": 0
+			}
+		},
+		{
+			"effect": 0,
+			"label": "legal-leaf-refund",
+			"node_id": "48423",
+			"preview": {
+				"allocate": {
+					"allowed": false,
+					"error_code": "already_allocated",
+					"reason": "天赋已分配",
+					"resource_changes": {
+
+					}
+				},
+				"refund": {
+					"allowed": true,
+					"error_code": "",
+					"reason": "",
+					"resource_changes": {
+						"max_mana": {
+							"after": 153.36,
+							"before": 164.72
+						}
+					}
+				},
+				"revision": 0
+			}
+		},
+		{
+			"effect": 0,
+			"label": "bridge-disconnection",
+			"node_id": "37690",
+			"preview": {
+				"allocate": {
+					"allowed": false,
+					"error_code": "already_allocated",
+					"reason": "天赋已分配",
+					"resource_changes": {
+
+					}
+				},
+				"refund": {
+					"allowed": false,
+					"error_code": "invalid_candidate",
+					"reason": "断连天赋不在任何普通连通珠宝孔的有效范围内",
+					"resource_changes": {
+
+					}
+				},
+				"revision": 0
+			}
+		}
+	],
+	"checks": 116,
+	"failure_count": 0,
+	"failures": [],
+	"reloads": [],
+	"sections": {
+		"core": {
+			"checks": 116,
+			"duration_ms": 7543,
+			"failures": 0
+		}
+	},
+	"source_fixtures": {
+
+	},
+	"source_sha256": "7e9f755e33152129ebf36c2ebdad639c527e4ad70d274b1fefb860f30ca01122",
+	"source_version": "3.29.1"
+}

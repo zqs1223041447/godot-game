@@ -324,6 +324,21 @@ func _apply_action_preview(preview: Dictionary, allocated: bool) -> void:
 		var reason := str(selected_action.get("reason", ""))
 		if not reason.is_empty():
 			_detail.text += "\n\n" + ("无法退还：" if allocated else "无法分配：") + reason
+	else:
+		var resources := resource_preview_text(selected_action.get("resource_changes", {}), allocated)
+		if not resources.is_empty(): _detail.text += "\n\n" + resources
+
+
+static func resource_preview_text(changes: Dictionary, allocated: bool) -> String:
+	var lines: Array[String] = []
+	var names := {"max_health":"生命", "max_mana":"魔力", "max_shield":"护盾"}
+	for stat: String in names:
+		if not changes.has(stat): continue
+		var before := float(changes[stat].before)
+		var after := float(changes[stat].after)
+		var delta := after-before
+		lines.append("%s %s → %s（%s%s）" % [names[stat],String.num(before,2),String.num(after,2),"+" if delta>0 else "",String.num(delta,2)])
+	return "" if lines.is_empty() else ("退还后资源上限" if allocated else "分配后资源上限") + "\n" + "\n".join(lines)
 
 
 func _node_clicked(id:String,button:int,double_click:bool)->void:

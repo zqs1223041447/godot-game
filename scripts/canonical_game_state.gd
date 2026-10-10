@@ -263,10 +263,19 @@ func passive_action_preview(node_id: Variant, mastery_effect: Variant = 0) -> Di
 
 func _passive_plan_preview(plan: Dictionary) -> Dictionary:
 	if not plan.ok:
-		return {"allowed": false, "error_code": str(plan.error_code), "reason": str(plan.reason)}
+		return {"allowed": false, "error_code": str(plan.error_code), "reason": str(plan.reason), "resource_changes":{}}
 	var candidate := _prepare_candidate(plan.candidate)
 	var reason: String = Rules.reason(candidate, _talent_validator, _socket_ids)
-	return {"allowed": reason.is_empty(), "error_code": "" if reason.is_empty() else "invalid_candidate", "reason": reason}
+	var result := {"allowed": reason.is_empty(), "error_code": "" if reason.is_empty() else "invalid_candidate", "reason": reason, "resource_changes":{}}
+	if reason.is_empty():
+		# Compile the transaction's validated candidate, without accepting it or
+		# touching the live model's stat cache. Includes gear, attributes and overrides.
+		var before := _stats_for(_current)
+		var after := _stats_for(candidate)
+		for stat: String in ["max_health", "max_mana", "max_shield"]:
+			if not is_equal_approx(float(before[stat]), float(after[stat])):
+				result.resource_changes[stat] = {"before":float(before[stat]), "after":float(after[stat])}
+	return result
 
 
 func allocate_passive(node_id: Variant, mastery_effect: Variant, expected_revision: Variant, path: String) -> Dictionary:
