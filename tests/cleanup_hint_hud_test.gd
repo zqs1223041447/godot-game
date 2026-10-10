@@ -36,6 +36,8 @@ func _initialize() -> void:
 	expect(HUD.cleanup_hint_view({"kind":"settlement"}).text == "结算待保存", "Failed settlement not reported as saved completion")
 	var hud := HUD.new()
 	var label := Label.new()
+	var overview := HUD.ExplorationOverview.new()
+	hud._exploration_overview = overview
 	hud._arena = arena
 	hud._cleanup_label = label
 	hud._world_context_cache = {"mode":"map", "encounter_mode":"exploration"}
@@ -43,12 +45,21 @@ func _initialize() -> void:
 	expect(arena.calls == 0, "No early scan")
 	hud._tick_cleanup_hint(0.011)
 	expect(arena.calls == 1 and label.visible and label.text == "余敌 3 · 西北", "One scan at cadence")
+	expect(overview.cleanup_hint == arena.hint, "The same one query supplies overview and existing label")
+	overview.cleanup_hint.target.direction = "tampered"
+	expect(arena.hint.target.direction == "northwest" and hud._cleanup_hint_snapshot.target.direction == "northwest", "Overview receives a detached cached snapshot")
 	hud._tick_cleanup_hint(2.0)
 	expect(arena.calls == 2, "No catch-up burst after long frame")
 	hud._world_context_cache = {"mode":"normal_town"}
 	hud._tick_cleanup_hint(0.01)
 	expect(arena.calls == 2 and not label.visible and label.text.is_empty() and label.tooltip_text.is_empty(), "Town removes stale hint without scanning")
+	expect(overview.cleanup_hint.is_empty(), "Inactive tick removes overview target without another scan")
+	overview.update_cleanup_hint({"kind":"complete"})
+	expect(overview.cleanup_status() == "地图已清理", "Completed status has no target claim")
+	overview.update_cleanup_hint({"kind":"settlement"})
+	expect(overview.cleanup_status().contains("待保存"), "Failed settlement is distinguished from saved completion")
 	hud.free()
+	overview.free()
 	label.free()
 	arena.free()
 	print("Cleanup hint HUD: %d checks, %d failures" % [checks,failures])

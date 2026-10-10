@@ -6,8 +6,10 @@ const WALL := Color("778184")
 const WAITING := Color("e3bc73")
 const ACTIVE := Color("f68b70")
 const CLEARED := Color("86c4a0")
+const TARGET := Color("f5aad5")
 const PLAYER := Color("8bdeed")
 var _panel_style: StyleBoxFlat
+var cleanup_hint: Dictionary = {}
 var geometry: Dictionary = {}
 var context: Dictionary = {}
 var player_position := Vector2.ZERO
@@ -25,6 +27,10 @@ func open_map(value: Dictionary, world: Dictionary, position_value: Vector2, fac
 	geometry = value.duplicate(true)
 	update_live(world, position_value, facing)
 	show()
+
+func update_cleanup_hint(value: Dictionary) -> void:
+	cleanup_hint = value.duplicate(true)
+	if visible: queue_redraw()
 
 func update_live(world: Dictionary, position_value: Vector2, facing: Vector2) -> void:
 	context = world.duplicate(true)
@@ -83,6 +89,7 @@ func _draw() -> void:
 		var color := CLEARED if context.get("boss_phase","") == "defeated" else ACTIVE
 		draw_polyline(PackedVector2Array([boss+Vector2(0,-7),boss+Vector2(7,0),boss+Vector2(0,7),boss+Vector2(-7,0),boss+Vector2(0,-7)]),color,2,true)
 		_text(boss+Vector2(-24,23),"首领已败" if context.get("boss_phase","")=="defeated" else "首领",color,12)
+	_draw_cleanup_target()
 	var player := project(player_position)
 	var direction := player_facing.normalized()
 	if direction.is_zero_approx(): direction = Vector2.RIGHT
@@ -95,6 +102,28 @@ func _draw() -> void:
 	_text(Vector2(135,y),"● 交战 / 后续待生成",ACTIVE)
 	_text(Vector2(310,y),"◎ 已清驻点",CLEARED)
 	_text(Vector2(24,size.y-32),"灰色为实际障碍 · 标记为驻点原址 · 战斗继续",INK,13)
+	_text(Vector2(24,size.y-12),cleanup_status(),TARGET,12)
+
+func cleanup_status() -> String:
+	match str(cleanup_hint.get("kind","inactive")):
+		"target": return "余敌 %d · 圆环为最近余敌，需绕开障碍" % int(cleanup_hint.get("living_count",0))
+		"waiting": return "后续怪物待出现，暂不标目标"
+		"complete": return "地图已清理"
+		"settlement": return "地图已清理 · 结算待保存"
+		"blocked": return "清图状态异常，暂不标目标"
+	return "剩余 1–5 个敌人时，标示最近目标"
+
+func _draw_cleanup_target() -> void:
+	if cleanup_hint.get("kind","") != "target": return
+	var target: Dictionary = cleanup_hint.get("target",{})
+	if not target.get("position") is Vector2: return
+	var point := project(target.position)
+	draw_arc(point,12,0,TAU,32,TARGET,2,true)
+	draw_line(point-Vector2(4,0),point+Vector2(4,0),TARGET,2,true)
+	draw_line(point-Vector2(0,4),point+Vector2(0,4),TARGET,2,true)
+	var area := map_rect()
+	var label_at := Vector2(clampf(point.x+16,area.position.x+6,area.end.x-84),clampf(point.y-8,area.position.y+16,area.end.y-8))
+	_text(label_at,"最近余敌",TARGET,13)
 
 func _background() -> StyleBoxFlat:
 	var style := StyleBoxFlat.new()

@@ -59,6 +59,7 @@ var _world_button: Button
 var _world_label: Label
 var _cleanup_label: Label
 var _cleanup_elapsed := 0.0
+var _cleanup_hint_snapshot: Dictionary = {}
 var _edition_label: Label
 var _return_dialog: ConfirmationDialog
 var _return_revision := -1
@@ -1750,6 +1751,7 @@ func _build_world_controls() -> void:
 
 func _refresh_world() -> void:
 	var previous_mode := str(_world_context_cache.get("mode", ""))
+	var previous_run := int(_world_context_cache.get("run_revision", -1))
 	var context: Dictionary = _arena.world_context()
 	_world_context_cache = context
 	_map_hint.visible = str(context.mode) in ["map", "map_complete"]
@@ -1780,7 +1782,7 @@ func _refresh_world() -> void:
 			_town_view.hide()
 
 
-	if previous_mode != str(context.mode):
+	if previous_mode != str(context.mode) or previous_run != int(context.run_revision):
 		_cleanup_elapsed = 0.0
 		_refresh_cleanup_hint()
 
@@ -1793,6 +1795,8 @@ func _tick_cleanup_hint(delta: float) -> void:
 		_cleanup_label.hide()
 		_cleanup_label.text = ""
 		_cleanup_label.tooltip_text = ""
+		_cleanup_hint_snapshot.clear()
+		if is_instance_valid(_exploration_overview): _exploration_overview.update_cleanup_hint({})
 		return
 	_cleanup_elapsed += maxf(delta, 0.0)
 	if _cleanup_elapsed >= 0.2:
@@ -1803,7 +1807,9 @@ func _tick_cleanup_hint(delta: float) -> void:
 func _refresh_cleanup_hint() -> void:
 	if not is_instance_valid(_cleanup_label):
 		return
-	var view: Dictionary = cleanup_hint_view(_arena.exploration_cleanup_hint())
+	_cleanup_hint_snapshot = _arena.exploration_cleanup_hint()
+	if is_instance_valid(_exploration_overview): _exploration_overview.update_cleanup_hint(_cleanup_hint_snapshot)
+	var view: Dictionary = cleanup_hint_view(_cleanup_hint_snapshot)
 	_cleanup_label.text = str(view.text)
 	_cleanup_label.tooltip_text = str(view.tooltip)
 	_cleanup_label.visible = not str(view.text).is_empty()
@@ -1940,6 +1946,7 @@ func _input(event: InputEvent) -> void:
 			_overview_elapsed = 0.0
 			_layout_overview()
 			_exploration_overview.open_map(_arena.world_geometry(), context, _arena.player_pos, _arena.player_facing)
+			_exploration_overview.update_cleanup_hint(_cleanup_hint_snapshot)
 	get_viewport().set_input_as_handled()
 
 
