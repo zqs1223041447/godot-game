@@ -1,0 +1,252 @@
+{
+	"checks": 281,
+	"failures": 3,
+	"group_id": "group_000002",
+	"labels": [
+		"Actual targets receive original cold spell projectile hit",
+		"Actual targets receive original cold spell projectile hit",
+		"Actual targets receive original cold spell projectile hit"
+	],
+	"main_uid": "migration_gem_000002",
+	"old_cast_comparisons": 172,
+	"old_projectile_batches": 12,
+	"owned_cast": {
+		"area_impulse_profile": {
+			"direction": "toward_origin",
+			"enabled": true,
+			"impulse_speed": 190.0,
+			"mana_multiplier": 1.2
+		},
+		"cooldown": 4.0,
+		"critical": {
+			"primary": {
+				"chance": 0.05,
+				"multiplier": 1.5
+			},
+			"secondary": {
+				"chance": 0.05,
+				"multiplier": 1.5
+			}
+		},
+		"error": "",
+		"group_id": "group_000002",
+		"initial_count": 5,
+		"main_uid": "migration_gem_000002",
+		"mana": 19.2,
+		"ok": true,
+		"packets": {
+			"projectile": {
+				"assembly": {
+					"added": {
+
+					},
+					"added_effectiveness": 0.85,
+					"base_coefficient": 0.85,
+					"intrinsic": {
+						"cold": 22.099999999999998
+					},
+					"stage": "hit_base"
+				},
+				"base": {
+					"cold": 22.099999999999998
+				},
+				"role": "projectile",
+				"skill_id": "frost",
+				"tags": [
+					"hit",
+					"projectile",
+					"spell"
+				]
+			},
+			"secondary": {
+				"assembly": {
+					"added": {
+
+					},
+					"added_effectiveness": 0.0,
+					"base_coefficient": 0.9,
+					"intrinsic": {
+						"fire": 23.400000000000002
+					},
+					"stage": "hit_base"
+				},
+				"base": {
+					"fire": 23.400000000000002
+				},
+				"role": "secondary",
+				"skill_id": "frost",
+				"tags": [
+					"hit",
+					"area",
+					"secondary",
+					"explosion"
+				]
+			}
+		},
+		"recipe": {
+			"added_effectiveness": 0.85,
+			"coefficient": 0.85,
+			"damage_type": "cold",
+			"initial_count": 5,
+			"pierce": 2,
+			"slow": 3.0,
+			"speed": 520.0,
+			"spread": 0.14
+		},
+		"skill_id": "frost",
+		"snapshot": {
+			"accuracy": 140.0,
+			"added_damage": {
+				"attack": {
+					"fire": 0.0,
+					"physical": 0.0
+				},
+				"spell": {
+					"cold": 0.0,
+					"lightning": 0.0
+				}
+			},
+			"added_damage_sources": [],
+			"area_impulse_policy": {
+				"direction": "toward_origin",
+				"enabled": true,
+				"impulse_speed": 190.0,
+				"mana_multiplier": 1.2
+			},
+			"base_damage": 26.0,
+			"compiled_packets": {
+				"projectile": {
+					"assembly": {
+						"added": {
+
+						},
+						"added_effectiveness": 0.85,
+						"base_coefficient": 0.85,
+						"intrinsic": {
+							"cold": 22.099999999999998
+						},
+						"stage": "hit_base"
+					},
+					"base": {
+						"cold": 22.099999999999998
+					},
+					"role": "projectile",
+					"skill_id": "frost",
+					"tags": [
+						"hit",
+						"projectile",
+						"spell"
+					]
+				},
+				"secondary": {
+					"assembly": {
+						"added": {
+
+						},
+						"added_effectiveness": 0.0,
+						"base_coefficient": 0.9,
+						"intrinsic": {
+							"fire": 23.400000000000002
+						},
+						"stage": "hit_base"
+					},
+					"base": {
+						"fire": 23.400000000000002
+					},
+					"role": "secondary",
+					"skill_id": "frost",
+					"tags": [
+						"hit",
+						"area",
+						"secondary",
+						"explosion"
+					]
+				}
+			},
+			"compiled_skill_id": "frost",
+			"critical": {
+				"primary": {
+					"chance": 0.05,
+					"multiplier": 1.5
+				},
+				"secondary": {
+					"chance": 0.05,
+					"multiplier": 1.5
+				}
+			},
+			"critical_modifiers": {
+				"base_chance": 0.05,
+				"base_multiplier": 1.5
+			},
+			"effects": [],
+			"explosion_recipe": {
+				"added_effectiveness": 0.0,
+				"coefficient": 0.9,
+				"radius": 76.0
+			},
+			"initial_count": 5,
+			"modifiers": [
+				{
+					"all_tags": [
+						"attack",
+						"melee"
+					],
+					"damage_types": [
+						"physical"
+					],
+					"id": "melee_physical_increased",
+					"mode": "increased",
+					"value": 0.04
+				}
+			],
+			"projectile_count": 0,
+			"tornado_recipe": {
+				"child": {
+					"added_effectiveness": 0.7,
+					"coefficient": 0.7,
+					"lifetime": 1.7,
+					"pierce": -1,
+					"radius": 4.5,
+					"range": 150.0,
+					"role": "child",
+					"speed": 260.0,
+					"split": false
+				},
+				"child_count": 3,
+				"explosion": {
+					"added_effectiveness": 0.0,
+					"coefficient": 0.9,
+					"radius": 76.0
+				},
+				"parent": {
+					"added_effectiveness": 1.0,
+					"coefficient": 1.0,
+					"lifetime": 0.9,
+					"pierce": -1,
+					"radius": 6.0,
+					"range": 150.0,
+					"role": "parent",
+					"speed": 420.0,
+					"split": true
+				},
+				"parent_count": 3,
+				"spread": 0.16
+			}
+		},
+		"support_ids": [
+			"inward_pull"
+		]
+	},
+	"samples": [
+		{
+			"hits": 3,
+			"links": [],
+			"mana": 16.0,
+			"moved_player": "(942.0, 2104.0)",
+			"origin": "(442.0, 1704.0)",
+			"pierce": 2,
+			"slow": 3.0
+		}
+	],
+	"support_uid": "item_000012"
+}

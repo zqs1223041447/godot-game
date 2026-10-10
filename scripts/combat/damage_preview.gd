@@ -201,7 +201,10 @@ static func trap_lines(cast: Dictionary) -> PackedStringArray:
 static func inward_pull_lines(cast: Dictionary) -> PackedStringArray:
 	var lines := PackedStringArray()
 	if not bool(cast.get("ok", false)) or not bool(cast.get("area_impulse_profile", {}).get("enabled", false)): return lines
-	lines.append("命中牵引至爆发圆心，受墙体与怪物分离影响；不改变伤害或触发半径。")
+	if cast.skill_id == "frost":
+		lines.append("冰弹成功命中后，以190初速拉向发射时角色位置；在途原点与策略冻结。伤害、冰缓与穿透保持，魔力×1.20。")
+	else:
+		lines.append("命中牵引至爆发圆心，受墙体与怪物分离影响；不改变伤害或触发半径。")
 	return lines
 
 

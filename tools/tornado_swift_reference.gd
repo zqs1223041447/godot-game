@@ -12,7 +12,7 @@ func _initialize() -> void:
 	var support_id: String = args[0] if args.size() >= 2 else "swift_projectiles"
 	var output: String = args[1] if args.size() >= 2 else "res://docs/qa/tornado-swift/reference-fragment.json"
 	var skill_id: String = args[2] if args.size() >= 3 else "tornado"
-	assert((skill_id == "tornado" and support_id in ["swift_projectiles","heavy_projectiles"]) or (skill_id == "cleave" and support_id == "inward_pull") or (skill_id == "chain" and support_id == "ambush") or (skill_id == "nova" and support_id == "lingering_chill"))
+	assert((skill_id == "tornado" and support_id in ["swift_projectiles","heavy_projectiles"]) or (skill_id in ["cleave", "frost"] and support_id == "inward_pull") or (skill_id == "chain" and support_id == "ambush") or (skill_id == "nova" and support_id == "lingering_chill"))
 	var catalog: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://docs/reference/catalog.json"))
 	var full := Exporter.Build.new()
 	for id: String in Exporter.Data.COMBAT_STARTER_ITEMS: full.equip(id)

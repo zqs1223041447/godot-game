@@ -1271,8 +1271,12 @@ func _shoot(origin: Vector2, direction: Vector2, packet: Dictionary, color: Colo
 		cast_id = projectile_runtime.new_cast()
 	var spec: Dictionary = {"speed": speed, "range": 650.0, "lifetime": 1.7,
 		"pierce": pierce, "slow": slow}
-	projectiles.append(projectile_runtime.make_projectile(origin + direction * 19.0, direction,
-		spec, packet, snapshot, cast_id, color))
+	var shot: Dictionary = projectile_runtime.make_projectile(origin + direction * 19.0, direction,
+		spec, packet, snapshot, cast_id, color)
+	# Selected frost retains the cast's feet position, not the moving owner or muzzle.
+	if packet.get("skill_id") == "frost" and snapshot.has("area_impulse_policy"):
+		shot.impulse_origin = origin
+	projectiles.append(shot)
 	total_shots += 1
 	for i: int in range(3):
 		_add_particle(origin + direction * 20.0, direction.rotated(rng.randf_range(-0.6, 0.6)) * rng.randf_range(20, 90), color, 2.2, 0.16)
@@ -1323,7 +1327,7 @@ func _execute_compiled(compiled: Dictionary, group_id: String = "", main_uid: St
 		return false
 	var id: String = str(compiled.skill_id)
 	if not Data.SKILLS.has(id): return false
-	if id == "cleave" and compiled.snapshot.has("area_impulse_policy") and not InwardPull.policy_error(compiled.snapshot.area_impulse_policy).is_empty():
+	if id in ["cleave", "frost"] and compiled.snapshot.has("area_impulse_policy") and not InwardPull.policy_error(compiled.snapshot.area_impulse_policy).is_empty():
 		hud.notify("牵引配置无效")
 		return false
 	var stride_selected: bool = compiled.get("support_ids", []).has("long_stride")
@@ -1600,7 +1604,10 @@ func _settle_projectile_events(events:Array[Dictionary],original_delta:float=0.0
 			var target: Dictionary = hit_lookup.get(int(event.target_id), {})
 			if not target.is_empty():
 				_apply_damage_packet(target, event.payload, event.snapshot, event.color, float(event.slow), event)
-				target.knockback = Vector2(event.direction) * 45.0
+				# The successful hit already applied selected frost pull. Keep the
+				# original outgoing impulse for every other projectile event.
+				if not (event.payload.get("skill_id") == "frost" and event.snapshot.has("area_impulse_policy") and event.get("impulse_origin") is Vector2):
+					target.knockback = Vector2(event.direction) * 45.0
 		elif event.type == "explosion":
 			# One independent roll per actual secondary event, shared by its AoE.
 			var secondary:Dictionary=critical_runtime.freeze(event.snapshot,"secondary")
@@ -1715,7 +1722,7 @@ func _apply_damage_packet(enemy: Dictionary, packet: Dictionary, snapshot: Dicti
 				record.freeze_applied = {"at":elapsed, "frozen_until":frozen.frozen_until, "immune_until":frozen.immune_until}
 	# Apply only after the original hit admission and settlement succeeded. In
 	# particular, an evaded cleave must not move its target or roll accuracy twice.
-	if packet.skill_id == "cleave" and packet.get("role", "") == "direct" and snapshot.has("area_impulse_policy") and provenance.get("impulse_origin") is Vector2:
+	if ((packet.skill_id == "cleave" and packet.get("role", "") == "direct") or (packet.skill_id == "frost" and packet.get("role", "") == "projectile")) and snapshot.has("area_impulse_policy") and provenance.get("impulse_origin") is Vector2:
 		enemy.knockback = InwardPull.impulse(provenance.impulse_origin, Vector2(enemy.pos), snapshot.area_impulse_policy)
 
 

@@ -1,16 +1,16 @@
 class_name InwardPullSupportRules
 extends RefCounted
-## Circular spells reverse their impulse; a successful cleave gains the same
-## inward impulse. No new carrier, damage modifier or movement consumer.
+## Area spells reverse their impulse; cleave and frost primary hits pull toward
+## the retained cast origin. Reuses existing carriers and enemy movement.
 const Program = preload("res://scripts/combat/support_program.gd")
 const SAVE_VERSION: int = 43
-const SKILLS: Array[String] = ["nova", "meteor", "cleave"]
+const SKILLS: Array[String] = ["nova", "meteor", "cleave", "frost"]
 const POLICY: Dictionary = {
 	"impulse_speed": 190.0, "mana_multiplier": 1.20, "direction": "toward_origin",
 }
 const SUPPORTS: Dictionary = {"inward_pull": {
 	"name": "牵引辅助",
-	"description": "奥能新星、陨星坠落与裂刃斩成功命中后，将敌人拉向本次技能中心，初始速度190，沿原击退衰减、地形与分离规则；裂刃未命中不牵引。魔力×1.20，伤害、范围与冷却不变，占用1个辅助槽。",
+	"description": "新星、陨星与裂刃成功命中后拉向本次技能中心；冰霜脉冲成功命中后拉向发射时角色位置，替换原投射物向外冲量。初速190，沿原衰减、地形与分离规则。魔力×1.20，伤害、弹数、穿透、减速、范围与冷却不变。",
 	"skills": SKILLS, "requires": [], "family": "inward_pull",
 	"operations": [{"op": "mana_multiplier", "value": 1.20}],
 }}

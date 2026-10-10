@@ -1,0 +1,343 @@
+{
+	"checks": 90,
+	"failures": 0,
+	"flying": {
+		"cast": {
+			"cooldown": 4.0,
+			"critical": {
+				"primary": {
+					"chance": 0.06,
+					"multiplier": 1.5
+				},
+				"secondary": {
+					"chance": 0.05,
+					"multiplier": 1.5
+				}
+			},
+			"error": "",
+			"freeze_profile": {
+				"duration_by_rarity": {
+					"boss": 0.2,
+					"magic": 0.6,
+					"normal": 0.6,
+					"rare": 0.35
+				},
+				"enabled": true,
+				"hit_multiplier": 0.75,
+				"immunity_seconds": 1.5,
+				"mana_multiplier": 1.2
+			},
+			"group_id": "group_000002",
+			"initial_count": 5,
+			"main_uid": "migration_gem_000002",
+			"mana": 19.2,
+			"ok": true,
+			"packets": {
+				"projectile": {
+					"assembly": {
+						"added": {
+
+						},
+						"added_effectiveness": 0.85,
+						"base_coefficient": 0.85,
+						"intrinsic": {
+							"cold": 22.099999999999998
+						},
+						"stage": "hit_base"
+					},
+					"base": {
+						"cold": 22.099999999999998
+					},
+					"role": "projectile",
+					"skill_id": "frost",
+					"tags": [
+						"hit",
+						"projectile",
+						"spell"
+					]
+				},
+				"secondary": {
+					"assembly": {
+						"added": {
+
+						},
+						"added_effectiveness": 0.0,
+						"base_coefficient": 0.9,
+						"intrinsic": {
+							"fire": 23.400000000000002
+						},
+						"stage": "hit_base"
+					},
+					"base": {
+						"fire": 23.400000000000002
+					},
+					"role": "secondary",
+					"skill_id": "frost",
+					"tags": [
+						"hit",
+						"area",
+						"secondary",
+						"explosion"
+					]
+				}
+			},
+			"recipe": {
+				"added_effectiveness": 0.85,
+				"coefficient": 0.85,
+				"damage_type": "cold",
+				"initial_count": 5,
+				"pierce": 2,
+				"slow": 3.0,
+				"speed": 520.0,
+				"spread": 0.14
+			},
+			"skill_id": "frost",
+			"snapshot": {
+				"accuracy": 128.0,
+				"added_damage": {
+					"attack": {
+						"fire": 0.0,
+						"physical": 0.0
+					},
+					"spell": {
+						"cold": 0.0,
+						"lightning": 0.0
+					}
+				},
+				"added_damage_sources": [],
+				"base_damage": 26.0,
+				"compiled_packets": {
+					"projectile": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 0.85,
+							"base_coefficient": 0.85,
+							"intrinsic": {
+								"cold": 22.099999999999998
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"cold": 22.099999999999998
+						},
+						"role": "projectile",
+						"skill_id": "frost",
+						"tags": [
+							"hit",
+							"projectile",
+							"spell"
+						]
+					},
+					"secondary": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 0.0,
+							"base_coefficient": 0.9,
+							"intrinsic": {
+								"fire": 23.400000000000002
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"fire": 23.400000000000002
+						},
+						"role": "secondary",
+						"skill_id": "frost",
+						"tags": [
+							"hit",
+							"area",
+							"secondary",
+							"explosion"
+						]
+					}
+				},
+				"compiled_skill_id": "frost",
+				"critical": {
+					"primary": {
+						"chance": 0.06,
+						"multiplier": 1.5
+					},
+					"secondary": {
+						"chance": 0.05,
+						"multiplier": 1.5
+					}
+				},
+				"critical_modifiers": {
+					"base_chance": 0.05,
+					"base_multiplier": 1.5,
+					"spell_crit_chance_increased": 0.2
+				},
+				"effects": [],
+				"explosion_recipe": {
+					"added_effectiveness": 0.0,
+					"coefficient": 0.9,
+					"radius": 76.0
+				},
+				"freeze_policy": {
+					"duration_by_rarity": {
+						"boss": 0.2,
+						"magic": 0.6,
+						"normal": 0.6,
+						"rare": 0.35
+					},
+					"hit_multiplier": 0.75,
+					"immunity_seconds": 1.5,
+					"mana_multiplier": 1.2
+				},
+				"initial_count": 5,
+				"modifiers": [
+					{
+						"all_tags": [
+							"attack",
+							"melee"
+						],
+						"damage_types": [
+							"physical"
+						],
+						"id": "melee_physical_increased",
+						"mode": "increased",
+						"value": 0.02
+					},
+					{
+						"all_tags": [
+							"hit",
+							"spell",
+							"projectile"
+						],
+						"damage_types": [],
+						"id": "support:frost_lock",
+						"mode": "more",
+						"skills": [
+							"frost"
+						],
+						"value": -0.25
+					}
+				],
+				"projectile_count": 0,
+				"tornado_recipe": {
+					"child": {
+						"added_effectiveness": 0.7,
+						"coefficient": 0.7,
+						"lifetime": 1.7,
+						"pierce": -1,
+						"radius": 4.5,
+						"range": 150.0,
+						"role": "child",
+						"speed": 260.0,
+						"split": false
+					},
+					"child_count": 3,
+					"explosion": {
+						"added_effectiveness": 0.0,
+						"coefficient": 0.9,
+						"radius": 76.0
+					},
+					"parent": {
+						"added_effectiveness": 1.0,
+						"coefficient": 1.0,
+						"lifetime": 0.9,
+						"pierce": -1,
+						"radius": 6.0,
+						"range": 150.0,
+						"role": "parent",
+						"speed": 420.0,
+						"split": true
+					},
+					"parent_count": 3,
+					"spread": 0.16
+				}
+			},
+			"support_ids": [
+				"frost_lock"
+			]
+		},
+		"freeze": {
+			"frozen_from": 0.25,
+			"frozen_until": 0.85,
+			"immune_until": 2.35,
+			"provenance": {
+				"cast_id": 1,
+				"phase": "outbound",
+				"projectile_id": 3,
+				"skill_id": "frost"
+			},
+			"rarity": "normal",
+			"target_id": 1
+		},
+		"record": {
+			"assembly": {
+				"added": {
+
+				},
+				"added_effectiveness": 0.85,
+				"base_coefficient": 0.85,
+				"intrinsic": {
+					"cold": 22.099999999999998
+				},
+				"stage": "hit_base"
+			},
+			"before_defense_components": {
+				"cold": 16.575
+			},
+			"cast_id": 1,
+			"components": {
+				"cold": 16.575
+			},
+			"critical": {
+				"chance": 0.06,
+				"critical": false,
+				"multiplier": 1.0
+			},
+			"details": [
+				{
+					"base": 22.099999999999998,
+					"before_defense": 16.575,
+					"final": 16.575,
+					"increased": 0.0,
+					"modifiers": [
+						"support:frost_lock"
+					],
+					"more": 0.75,
+					"resistance": 0.0,
+					"type": "cold"
+				}
+			],
+			"effect_id": "",
+			"freeze_applied": {
+				"at": 0.25,
+				"frozen_until": 0.85,
+				"immune_until": 2.35
+			},
+			"health_lost": 0.0,
+			"phase": "outbound",
+			"prevented_components": {
+				"cold": 0.0
+			},
+			"projectile_id": 3,
+			"shield_spent": 16.575,
+			"skill_id": "frost",
+			"tags": [
+				"hit",
+				"projectile",
+				"spell"
+			],
+			"target_id": 1,
+			"total": 16.575
+		}
+	},
+	"scope": "Bounded actual Main; lawful source budget, real ownership and cast transactions, real arena.tick phase order. No historical suite, UI, packaging or production changes.",
+	"sections": {
+		"flying_snapshot": {
+			"checks": 27,
+			"failures": 0
+		},
+		"settlement_eligibility": {
+			"checks": 63,
+			"failures": 0
+		}
+	}
+}

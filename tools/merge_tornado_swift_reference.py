@@ -7,10 +7,10 @@ ROOT = Path(__file__).resolve().parents[1]
 parser = argparse.ArgumentParser()
 parser.add_argument('--support', choices=['swift_projectiles','heavy_projectiles','inward_pull','ambush','lingering_chill'], default='swift_projectiles')
 parser.add_argument('--qa', type=Path, default=ROOT / 'docs/qa/tornado-swift')
-parser.add_argument('--skill', choices=['tornado','cleave','chain','nova'], default='tornado')
+parser.add_argument('--skill', choices=['tornado','cleave','chain','nova','frost'], default='tornado')
 args = parser.parse_args()
 SKILL = args.skill
-assert (SKILL == 'tornado' and args.support in ['swift_projectiles','heavy_projectiles']) or (SKILL == 'cleave' and args.support == 'inward_pull') or (SKILL == 'chain' and args.support == 'ambush') or (SKILL == 'nova' and args.support == 'lingering_chill')
+assert (SKILL == 'tornado' and args.support in ['swift_projectiles','heavy_projectiles']) or (SKILL in ['cleave','frost'] and args.support == 'inward_pull') or (SKILL == 'chain' and args.support == 'ambush') or (SKILL == 'nova' and args.support == 'lingering_chill')
 SUPPORT = args.support
 QA = args.qa
 catalog = ROOT / 'docs/reference/catalog.json'
@@ -34,9 +34,9 @@ for config, added in fragment['examples'].items():
         else: new_rows.append(row)
     changes.append((('skills', SKILL, 'examples', config), old + new_rows))
 if SUPPORT == 'inward_pull':
-    for field in ['skills','direction','movement','snapshot','scope','damage_scope','risk','migration','source_policy','equipment_vocabulary','test_offer']:
+    for field in ['skills','direction','movement','snapshot','scope','damage_scope','risk','statuses','migration','source_policy','equipment_vocabulary','test_offer']:
         changes.append((('inward_pull',field),fragment['inward_pull'][field]))
-    changes.append((('inward_pull','examples'),dict(before['inward_pull']['examples'],cleave=fragment['inward_pull']['examples']['cleave'])))
+    changes.append((('inward_pull','examples'),dict(before['inward_pull']['examples'],**{SKILL:fragment['inward_pull']['examples'][SKILL]})))
 if SUPPORT == 'ambush':
     for field in ['skills','snapshot','geometry','statuses','damage_scope','provenance','migration','source_policy','equipment_vocabulary','test_offer']:
         changes.append((('ambush',field),fragment['ambush'][field]))
@@ -64,11 +64,15 @@ for path, value in changes:
         spans.append((start,end,encoded))
         continue
     start, end = member_span(text, path)
-    if path == ('ambush','examples'):
-        if before['ambush']['examples'] == value: continue
-        assert 'chain' not in before['ambush']['examples']
-        chain = json.dumps(value['chain'], ensure_ascii=False, sort_keys=True, indent='\t').replace('\n', '\n' + '\t' * (len(path) + 1))
-        encoded = text[start:end-1].rstrip() + ',\n' + '\t' * (len(path) + 1) + '"chain": ' + chain + '\n' + '\t' * len(path) + '}'
+    if path in [('ambush','examples'),('inward_pull','examples')]:
+        old_examples = before[path[0]]['examples']
+        if old_examples == value: continue
+        assert all(value[key] == row for key,row in old_examples.items())
+        added = {key:row for key,row in value.items() if key not in old_examples}
+        assert len(added) == 1
+        key,row = next(iter(added.items()))
+        encoded_row = json.dumps(row, ensure_ascii=False, sort_keys=True, indent='\t').replace('\n', '\n' + '\t' * (len(path) + 1))
+        encoded = text[start:end-1].rstrip() + ',\n' + '\t' * (len(path) + 1) + json.dumps(key) + ': ' + encoded_row + '\n' + '\t' * len(path) + '}'
     elif path[:3] == ('skills', SKILL, 'examples'):
         old_rows = before['skills'][SKILL]['examples'][path[-1]]
         if old_rows == value: continue
