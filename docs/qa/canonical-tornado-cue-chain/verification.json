@@ -1,0 +1,80 @@
+{
+  "baseline_commit": "41a540d891b9f635605fc2ee5009c103aa9cb9ab",
+  "production_changed_files": [],
+  "checks": 224,
+  "failures": 0,
+  "engine": "Godot 4.6.3 stable Linux headless",
+  "cases": [
+    {
+      "case": "natural_chain",
+      "events": {
+        "range_reached": 20,
+        "split": 5,
+        "terminated": 20,
+        "spawned": 15,
+        "return_started": 15,
+        "lifetime_expired": 15,
+        "flight_ended": 15,
+        "explosion": 15
+      },
+      "emitted_cues": {
+        "cast": 1,
+        "split": 5,
+        "return": 15,
+        "explosion": 15
+      },
+      "next_cue_id": 37,
+      "remaining_cues": 0,
+      "remaining_projectiles": 0,
+      "critical": {
+        "draws": 16,
+        "events": 16,
+        "state": -9045996418731805418
+      }
+    },
+    {
+      "case": "restart_outbound",
+      "events": {},
+      "emitted_cues": {
+        "cast": 1
+      },
+      "next_cue_id": 1,
+      "remaining_cues": 0,
+      "remaining_projectiles": 0,
+      "critical": {
+        "draws": 0,
+        "events": 0,
+        "state": 8744917929891962227
+      }
+    },
+    {
+      "case": "owner_death_returning",
+      "events": {
+        "range_reached": 20,
+        "split": 5,
+        "terminated": 5,
+        "spawned": 15,
+        "return_started": 15
+      },
+      "emitted_cues": {
+        "cast": 1,
+        "split": 5,
+        "return": 15,
+        "hurt": 1
+      },
+      "next_cue_id": 23,
+      "remaining_cues": 0,
+      "remaining_projectiles": 0,
+      "critical": {
+        "draws": 1,
+        "events": 1,
+        "state": 5666320248580673261
+      }
+    }
+  ],
+  "sha256": {
+    "tests/canonical_tornado_cue_chain_test.gd": "e32b4650f289052a91723653de663357bd45b983da4a0fdf7b29f3b8f224223b",
+    "docs/qa/canonical-tornado-cue-chain/results-02.json": "d76402f6d5a3ac17fd0a2c4f64e2c451a4582910bb49658292eb16c75cc2fd30",
+    "docs/qa/canonical-tornado-cue-chain/results-02.log": "01e93104f47d149ecd1ce786395797f7ef5b73942a4917ea43a132842fa4bdea"
+  }
+}
