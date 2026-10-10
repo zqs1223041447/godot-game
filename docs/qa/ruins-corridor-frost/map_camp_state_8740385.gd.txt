@@ -6,7 +6,6 @@ const Maps = preload("res://scripts/world/map_compiler.gd")
 const Monsters = preload("res://scripts/monsters/monster_catalog.gd")
 const Sunwell = preload("res://scripts/world/sunwell_roster_rules.gd")
 const Ginkgo = preload("res://scripts/world/ginkgo_roster_rules.gd")
-const Ruins = preload("res://scripts/world/broken_ruins_roster_rules.gd")
 const MistSkitter = preload("res://scripts/world/mist_skitter_roster_rules.gd")
 const CAMP_IDS: Array[String] = ["camp_west", "camp_north", "camp_east"]
 var _state: Dictionary = {}
@@ -71,9 +70,6 @@ func begin(profile: Variant, landmarks: Variant, seed_value: Variant,
 		var storm_index := Ginkgo.west_storm_index(profile, camp_id, roster)
 		if storm_index >= 0:
 			roster[storm_index].template_id = "storm_skitter"
-		var frost_index := Ruins.corridor_frost_index(profile, camp_id, roster)
-		if frost_index >= 0:
-			roster[frost_index].template_id = "frost_guard"
 		camps.append({"id": camp_id, "entries": roster, "root_ids": []})
 	# Publish only after validation and complete deterministic roster generation.
 	_state = {"profile": profile.duplicate(true), "landmarks": landmarks.duplicate(true),

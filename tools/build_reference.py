@@ -413,6 +413,9 @@ def exploration_map_body(data, map_id, link, facts, details):
     if map_id == 'ginkgo_arcade' and 'ginkgo_west_storm' in data:
         west = data['ginkgo_west_storm']
         body += '<h4>II/III档 · 西叶追击与雷圈</h4><p>' + esc(west['scope']) + '</p><p>' + link('monsters', 'storm_skitter', '雷纹掠行体') + '：' + esc(west['combat']) + '</p><p>' + esc(west['budget']) + '</p><p>' + esc(west['history']) + ' <a href="../qa/ginkgo-west-storm/README.md">本次编排与战斗记录</a></p>'
+    if map_id == 'broken_ruins' and 'ruins_corridor_frost' in data:
+        corridor = data['ruins_corridor_frost']
+        body += '<h4>II/III档 · 内廊霜卫与灰烬</h4><p>' + esc(corridor['scope']) + '</p><p>' + link('monsters', 'frost_guard', '霜纹守卫') + '与' + link('monsters', 'ember_guard', '灰烬守卫') + '：' + esc(corridor['combat']) + '</p><p>' + esc(corridor['budget']) + '</p><p>' + esc(corridor['history']) + ' <a href="../qa/ruins-corridor-frost/README.md">本次编排与战斗记录</a></p>'
     rows = []
     for tier in entry['tiers']:
         profile = tier['profile']
