@@ -8,6 +8,7 @@ signal return_requested(uid: String, revision: int)
 signal item_hovered(uid: String, anchor: Rect2)
 signal hover_left
 signal binding_requested(group_id: String, keycode: int, revision: int)
+signal empty_slot_requested(destination: Dictionary, revision: int, anchor: Rect2)
 
 const TooltipFactory = preload("res://scripts/ui/crafting_controls.gd")
 const PresentationTheme = preload("res://scripts/visuals/visual_theme.gd")
@@ -284,6 +285,7 @@ func _make_slot(row: Dictionary, row_index: int, slot_role: String, support_inde
 		slot.add_child(gem_icon)
 	slot.mouse_entered.connect(_on_slot_entered.bind(slot))
 	slot.mouse_exited.connect(_on_slot_exited.bind(slot))
+	slot.pressed.connect(_on_slot_pressed.bind(slot))
 	return slot
 
 
@@ -326,6 +328,12 @@ func _on_slot_entered(slot: GemSlot) -> void:
 	# With-canvas transform yields canvas logical coordinates, not physical pixels.
 	var anchor: Rect2 = slot.get_global_transform_with_canvas() * Rect2(Vector2.ZERO, slot.size)
 	item_hovered.emit(slot.gem_uid, anchor)
+
+
+func _on_slot_pressed(slot: GemSlot) -> void:
+	if not slot.gem_uid.is_empty() or not _is_current_slot(slot): return
+	var anchor: Rect2 = slot.get_global_transform_with_canvas() * Rect2(Vector2.ZERO, slot.size)
+	empty_slot_requested.emit(slot._destination(), _revision, anchor)
 
 
 func _on_slot_exited(slot: GemSlot) -> void:
@@ -416,7 +424,7 @@ func _binding_index(keycode: int) -> int:
 func _slot_tooltip(slot_role: String, support_index: int, gem: Dictionary) -> String:
 	var slot_label: String = "主动宝石" if slot_role == "main" else "辅助宝石 %d" % (support_index + 1)
 	if gem.is_empty():
-		return slot_label + " · 空槽"
+		return slot_label + " · 点击选择行囊宝石，或拖入宝石"
 	return "" # The shared item hover card owns non-empty gem details.
 
 

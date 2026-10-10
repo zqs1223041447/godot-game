@@ -1,0 +1,69 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:364)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+godot-game: playable arena ready
+ERROR: Real popup confirmation moves the exact main UID and saves once
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/flask_purchase_transactions_test.gd:18)
+       [1] run (res://tests/owned_gem_picker_test.gd:61)
+       [2] choose (res://tests/owned_gem_picker_test.gd:31)
+       [3] key (res://tests/owned_gem_picker_test.gd:13)
+       [4] settle (res://tests/owned_gem_picker_test.gd:7)
+ERROR: Chosen support uses original exact-location save transaction
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/flask_purchase_transactions_test.gd:18)
+       [1] run (res://tests/owned_gem_picker_test.gd:70)
+       [2] choose (res://tests/owned_gem_picker_test.gd:31)
+       [3] key (res://tests/owned_gem_picker_test.gd:13)
+       [4] settle (res://tests/owned_gem_picker_test.gd:7)
+ERROR: Existing compiled preview immediately reflects installed efficiency
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/flask_purchase_transactions_test.gd:18)
+       [1] run (res://tests/owned_gem_picker_test.gd:71)
+       [2] choose (res://tests/owned_gem_picker_test.gd:31)
+       [3] key (res://tests/owned_gem_picker_test.gd:13)
+       [4] settle (res://tests/owned_gem_picker_test.gd:7)
+ERROR: Duplicate support instance and incompatible support are filtered by original rules
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/flask_purchase_transactions_test.gd:18)
+       [1] run (res://tests/owned_gem_picker_test.gd:73)
+       [2] open_slot (res://tests/owned_gem_picker_test.gd:23)
+       [3] click (res://tests/owned_gem_picker_test.gd:18)
+       [4] settle (res://tests/owned_gem_picker_test.gd:7)
+ERROR: Save failure preserves inventory/disk and reports original failure
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/flask_purchase_transactions_test.gd:18)
+       [1] run (res://tests/owned_gem_picker_test.gd:79)
+       [2] choose (res://tests/owned_gem_picker_test.gd:31)
+       [3] key (res://tests/owned_gem_picker_test.gd:13)
+       [4] settle (res://tests/owned_gem_picker_test.gd:7)
+ERROR: No compatible bag gems shows a disabled empty-state explanation
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/flask_purchase_transactions_test.gd:18)
+       [1] run (res://tests/owned_gem_picker_test.gd:81)
+       [2] open_slot (res://tests/owned_gem_picker_test.gd:23)
+       [3] click (res://tests/owned_gem_picker_test.gd:18)
+       [4] settle (res://tests/owned_gem_picker_test.gd:7)
+ERROR: Clicking an occupied slot never replaces its gem
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/flask_purchase_transactions_test.gd:18)
+       [1] run (res://tests/owned_gem_picker_test.gd:92)
+       [2] click (res://tests/owned_gem_picker_test.gd:18)
+       [3] settle (res://tests/owned_gem_picker_test.gd:7)
+ERROR: Click actual empty slot opens owned-gem choices
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/flask_purchase_transactions_test.gd:18)
+       [1] open_slot (res://tests/owned_gem_picker_test.gd:23)
+       [2] click (res://tests/owned_gem_picker_test.gd:18)
+       [3] settle (res://tests/owned_gem_picker_test.gd:7)
+OWNED_GEM_PICKER {"checks":40,"display":"X11","failed_labels":["Real popup confirmation moves the exact main UID and saves once","Chosen support uses original exact-location save transaction","Existing compiled preview immediately reflects installed efficiency","Duplicate support instance and incompatible support are filtered by original rules","Save failure preserves inventory/disk and reports original failure","No compatible bag gems shows a disabled empty-state explanation","Clicking an occupied slot never replaces its gem","Click actual empty slot opens owned-gem choices"],"failures":8,"fixture":"Canonical physical currency40; five gems bought via original paid transactions. No natural earning claim.","owned_uids":["item_000005","item_000006","item_000007","item_000008","item_000009"]}

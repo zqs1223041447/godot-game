@@ -1,0 +1,43 @@
+{
+  "baseline_main": "75266eddc78a8ee07b6545cef939cf6e4c1e0884",
+  "branch": "codex/owned-gem-slot-picker",
+  "godot": "4.6.3",
+  "save_version": 59,
+  "final": {
+    "checks": 42,
+    "failures": 0,
+    "exit_code": 0
+  },
+  "existing_rows": {
+    "checks": 55,
+    "failures": 0,
+    "exit_code": 0
+  },
+  "iterations": {
+    "main-01": {
+      "checks": 40,
+      "failures": 8,
+      "exit_code": 1,
+      "reason": "Native automatic popup hide cleared pending choice before id_pressed"
+    },
+    "main-02": {
+      "checks": 40,
+      "failures": 0,
+      "exit_code": 0
+    }
+  },
+  "new_runtime_missing_glyphs": [],
+  "sha256": {
+    "scripts/ui/canonical_skill_panel.gd": "184b95efa83faac5b99708148f488699ba2cf4225c19803940b4873c797509ca",
+    "scripts/ui/skill_group_rows.gd": "386cdd6972a821934b08dd40a63fcc0f4c5632746a304c474e4952e225330567",
+    "tests/owned_gem_picker_test.gd": "3434dc281fa1f2b6bd0cd82fac3845a8e45f12059684be2ff1773151547c8d64",
+    "tests/skill_group_rows_test.gd": "c932f10dc3c1208eb567641e9631d21f535cfab7170ef92fbbd818a6fd95a8de",
+    "docs/OWNED_GEM_PICKER.zh-CN.md": "8a2b14aee65a4e0882cd29ab09c63c12053596e4bb30ae4552238a30d243999b",
+    "docs/qa/owned-gem-slot-picker/main-03.json": "09ab3e815872fad89c34d5d03a71e4cca3abbb76294d5451d6edb62793b739d7",
+    "docs/qa/owned-gem-slot-picker/main-03.log": "47ad902ad73578ab144c4cb5576437d2a2841bebeccf76bf688274b029b4766b",
+    "docs/qa/owned-gem-slot-picker/rows.log": "5d8d54e1baa69e3bf08fa42d9caff10c627b1c135a7da1bc7bdff493f660c160",
+    "docs/qa/owned-gem-slot-picker/active-choice.png": "72abcd15546e124ff477703e0d7c73726efe62eca4cd0c56966e8a62763795cf",
+    "docs/qa/owned-gem-slot-picker/support-choice.png": "2b87dd6815d0b8610bfeea6fcd6ec48d369e2c549d749580960bb4d2bfa4b37f",
+    "docs/qa/owned-gem-slot-picker/no-compatible-gems.png": "58981d1b8ab2a1a1d796aecf9e93ea416f0ea630a4b58814992440162320a3d2"
+  }
+}
