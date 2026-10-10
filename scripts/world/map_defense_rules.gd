@@ -7,9 +7,10 @@ const Defense=preload("res://scripts/mechanics/defense_rules.gd")
 const Monsters=preload("res://scripts/monsters/monster_catalog.gd")
 const SOURCE_FIELD:="map_defense_source"
 const MODIFIER_ID:="elemental_aegis"
+const CHAOS_MODIFIER_ID:="chaos_aegis"
 
 static func active(profile:Dictionary)->bool:
-	return profile.get("special_ids",[]).has(MODIFIER_ID)
+	return profile.get("special_ids",[]).has(MODIFIER_ID) or profile.get("special_ids",[]).has(CHAOS_MODIFIER_ID)
 
 static func apply_to_enemy(source:Variant,profile:Variant)->Dictionary:
 	var reason:=Compiler.profile_reason(profile)
@@ -20,21 +21,24 @@ static func apply_to_enemy(source:Variant,profile:Variant)->Dictionary:
 	if not source.defense_stats is Dictionary or not source.resistances is Dictionary:return _failure("怪物防御必须是字典")
 	var before:=Defense.source_profile(source.defense_stats,"monster")
 	if not before.ok:return _failure(before.reason)
-	for element:String in ["fire","cold","lightning"]:
+	var modifier_id:String=CHAOS_MODIFIER_ID if profile.special_ids.has(CHAOS_MODIFIER_ID) else MODIFIER_ID
+	var checked_types:Array[String]=["fire","cold","lightning"]
+	if modifier_id==CHAOS_MODIFIER_ID:checked_types.append("chaos")
+	for element:String in checked_types:
 		var effective:Variant=source.resistances.get(element,0.0)
-		if not (effective is int or effective is float) or not is_finite(float(effective)) or not is_equal_approx(float(effective),float(before.effective_resistances[element])):return _failure("怪物原始抗性与有效抗性不一致")
+		if not (effective is int or effective is float) or not is_finite(float(effective)) or not is_equal_approx(float(effective),float(before.effective_resistances.get(element,0.0))):return _failure("怪物原始抗性与有效抗性不一致")
 	var enemy:Dictionary=source.duplicate(true)
 	if not active(profile):return {"ok":true,"error":"","enemy":enemy}
-	var definition:Dictionary=Catalog.SPECIAL[MODIFIER_ID]
+	var definition:Dictionary=Catalog.SPECIAL[modifier_id]
 	var stats:Dictionary=source.defense_stats.duplicate(true)
 	for element:String in definition.damage_types:
 		stats[element+"_resistance"]=float(stats.get(element+"_resistance",0.0))+float(definition.resistance_bonus)
 	var after:=Defense.source_profile(stats,"monster")
 	if not after.ok:return _failure(after.reason)
 	enemy.defense_stats=stats
-	# Retain any existing physical/chaos entries; only the three authored types change.
+	# Change only this explicitly selected modifier's authored damage types.
 	for element:String in definition.damage_types:enemy.resistances[element]=after.effective_resistances[element]
-	enemy[SOURCE_FIELD]={"modifier_id":MODIFIER_ID,"source_stats":source.defense_stats.duplicate(true),"raw_resistances":after.raw_resistances.duplicate(true),"effective_resistances":after.effective_resistances.duplicate(true)}
+	enemy[SOURCE_FIELD]={"modifier_id":modifier_id,"source_stats":source.defense_stats.duplicate(true),"raw_resistances":after.raw_resistances.duplicate(true),"effective_resistances":after.effective_resistances.duplicate(true)}
 	return {"ok":true,"error":"","enemy":enemy}
 
 static func _failure(reason:String)->Dictionary:return {"ok":false,"error":reason}

@@ -1778,6 +1778,14 @@ def build(data, art):
             m=data['ginkgo_arcade']['definition']
             cards.append(add('maps',m['id'],m['name'],m['description'],ginkgo_map_body(data,link,facts,details),'正式三档 / 独立测试',related=link('town_services','map_device')))
         for special in town['options']['special_modifiers']:
+            if special['id']=='chaos_aegis' and 'chaos_aegis' in town:
+                entry=town['chaos_aegis']
+                body=facts([('最低波次',number(special['minimum_wave'])),('混沌原始加值',number(special['resistance_bonus']*100)+' 个百分点'),('有效范围','0%–'+percent(entry['chaos_cap'])),('适用',entry['scope']),('保留',entry['preserves']),('正式结算',entry['options']['normal']['reward_description']),('独立测试',entry['options']['test']['reward_description']),('互斥','最多1特殊词缀，不能与元素庇护或巡逻词缀同时选择')])
+                body+='<p>'+esc(entry['balance_basis'])+'</p><p>'+esc(entry['example_scope'])+'</p>'
+                for template,example in entry['examples'].items():
+                    body+=details('同源100点各类型示例：'+data['monsters'][template]['name'],facts([('怪物',link('monsters',template)),('原始混沌抗性',percent(example['raw_resistances']['chaos'])),('有效混沌抗性',percent(example['effective_resistances']['chaos'])),('施加前单次命中',component_text(example['before_components'])),('施加后单次命中',component_text(example['after_components']))]))
+                cards.append(add('map_specials','chaos_aegis',special['name'],entry['definition']['description'],body,'已实装特殊词缀',related=link('rules','chaos_defense')+' '+link('town_services','map_device')))
+                continue
             if special['id']=='chaos_patrol' and 'chaos_defense' in data:
                 cards.append(add('map_specials','chaos_patrol',special['name'],special['description'],chaos_special_body(data,link,facts),'已实装特殊词缀',related=link('rules','chaos_defense')))
                 continue

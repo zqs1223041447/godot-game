@@ -150,3 +150,18 @@ node --check docs/reference/reference.js
 单图导出复用正式目录、原生模块轮廓、准备后的两个绕行与一个脱离角色的I档Plan。SVG直接画4条/99顶点原生轮廓、14段真实路网、25初始实体、入口和7路标，不使用包围盒假墙。三档经济与首领预警均读取实际目录。旧3815卡中仅地图装置和探索规则补充当前入口与历史证据边界；其余3813卡、完整旧catalog原字节、美术和历史QA保持。旧catalog交给新版生成器时，整页HTML也与原版逐字节相同。
 
 无Main、收费/存档事务、战斗、全量历史导出或渲染。运行范围、保全基线和日志见[本批有界导出记录](../qa/v119-reference/README.md)。
+
+## 混沌庇护：单词缀增量
+
+入口 `index.html#map_specials-chaos_aegis`；只新增 `town_maps.chaos_aegis`、原特殊选项中的一项，并补充既有地图II/III档可选列表。原始混沌抗性+20个百分点、有效上限75%、最低波次4，沿用原费用与特殊完成奖；不刷新历史战斗、几何、源树或美术。
+
+```sh
+XDG_DATA_HOME=/tmp/godot-chaos-aegis-reference-review XDG_CACHE_HOME=/tmp/godot-chaos-aegis-reference-review-cache godot --headless --path . --script res://tools/chaos_aegis_reference.gd
+python3 tools/merge_chaos_aegis_reference.py
+python3 tools/build_reference.py
+python3 tools/merge_chaos_aegis_reference.py --check
+python3 tools/build_reference.py --check
+python3 docs/qa/chaos-aegis/check-reference.py
+```
+
+有界导出先核本批规则与正式Main证据无失败/脚本错误，再只调用目录与共享防御公式。完整导出器也复用相同 `collect()`，本批未执行完整导出。[中文规则](../CHAOS_AEGIS.zh-CN.md)及[验证记录](../qa/chaos-aegis/README.md)。

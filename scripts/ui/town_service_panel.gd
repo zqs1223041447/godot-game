@@ -464,6 +464,8 @@ func _build_map() -> void:
 		_content.add_child(heading)
 		for entry: Dictionary in options[group]:
 			var check := CheckBox.new()
+			for color_name: String in ["font_pressed_color", "font_hover_pressed_color", "font_hover_color", "font_focus_color"]:
+				check.add_theme_color_override(color_name, ThemeStyle.TEXT)
 			check.text = str(entry.name)
 			check.tooltip_text = str(entry.description)
 			if group == "special_modifiers": check.set_meta("gate_description", check.tooltip_text)

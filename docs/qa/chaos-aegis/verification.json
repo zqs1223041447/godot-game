@@ -1,0 +1,75 @@
+{
+  "baseline_main": "f5abdf8bed36c02a14ef778edf8dd81ce52345e0",
+  "branch": "codex/chaos-aegis-map-modifier",
+  "engine": "Godot4.6.3",
+  "save_version": 59,
+  "final_runs": {
+    "rules": {
+      "checks": 84,
+      "failures": 0,
+      "exit_code": 0
+    },
+    "formal_main": {
+      "checks": 105,
+      "failures": 0,
+      "exit_code": 0
+    },
+    "existing_elemental_rules": {
+      "checks": 543,
+      "failures": 0,
+      "exit_code": 0
+    },
+    "existing_elemental_admission": {
+      "checks": 56,
+      "failures": 0,
+      "exit_code": 0
+    },
+    "reference_check": {
+      "failures": 0,
+      "exit_code": 0
+    }
+  },
+  "discarded_runs": {
+    "rules-01": {
+      "failures": 6,
+      "exit_code": 1
+    },
+    "main-01": {
+      "exit_code": 124,
+      "reason": "Test API mismatch and headless click assertion; bounded timeout"
+    },
+    "main-02": {
+      "exit_code": 0,
+      "script_errors": 3,
+      "accepted": false
+    },
+    "reference-check-01": {
+      "exit_code": 1,
+      "reason": "Test expected facet label rather than rendered implementation status"
+    }
+  },
+  "scope": "Canonical controlled currency/progression fixture, real UI admission/retry and Main mixed hit; child admission at MapAdmission layer. No full-clear/natural economy, long suite, models or export package.",
+  "sha256": {
+    "scripts/world/map_catalog.gd": "6e0565222c04fe7e01cae34cede599355d2cc7530cdd4afa6d214364cda68189",
+    "scripts/world/map_defense_rules.gd": "ba8fb1a31ce3faabcae5b9861c85df38df17a2d1bfb76178d6a7713dbfa8dc80",
+    "scripts/ui/town_service_panel.gd": "bc7723817f0583efbdac4b3e7555a89269c7a4cb572e8bf45bb917832de394c3",
+    "tests/chaos_aegis_rules_test.gd": "a737fdea8e3215ef73f8d1fd7f0e2dec94b50b948b51a541dadc668476bf581f",
+    "tests/chaos_aegis_main_test.gd": "cc8e8bfc809c46e66df594f95753cb868b5125c597abf4058137147e48fe8428",
+    "tools/chaos_aegis_reference.gd": "0da644aaeb46d614ed9c6574fdb0c5c41680509577b56873ce7bf97e3bd22d76",
+    "tools/merge_chaos_aegis_reference.py": "26b165bbce28dfce15f6ab1a826ef6a2d398a507d792b383004591e845bcd49c",
+    "tools/build_reference.py": "66e36322fea71506e9561a581d1d30a6cd3962feb6095ac47373a6ca12292688",
+    "tools/export_reference.gd": "1f4c3cdf6e803bbcd79aa94080ab54fa7b0e165b96877bdc716b44d7de2ce15d",
+    "docs/reference/catalog.json": "23869016e06aebbddee9f82fcb6b1d7c1565834bbb041dfc88d86e17930744a7",
+    "docs/reference/index.html": "33a2f95532a1b4f514ef00859f0ff383226986cac4f40815069f5d64fc69dbb3",
+    "docs/CHAOS_AEGIS.zh-CN.md": "8b29d9dcd5780247da98d1b8b3a8db884e040af635be2579e02b1d07704dd7a5",
+    "docs/qa/chaos-aegis/rules-02.json": "296dc0f1727bc544974193011711cba28f1a8c8876641a0c7c1ff5bd16e934d3",
+    "docs/qa/chaos-aegis/rules-02.log": "0b9ac4ede0850029d00d16e37580b2c1d208cb3d4053c952f3b0df6d6d2b5c5f",
+    "docs/qa/chaos-aegis/main-03.json": "541b7f0da279e3d34df2950002e7e1685ffff3276c5f8838983071a6b6d97a99",
+    "docs/qa/chaos-aegis/main-03.log": "7d0f543e488d9212b5d1db7bc491eb4fcd57cfd20c95a71e3e346ded4eed2bdc",
+    "docs/qa/chaos-aegis/elemental-rules.log": "9e9cacef0addf2d9074df5698a0647c5ba336718cedb7b0595810931d2c1e5ab",
+    "docs/qa/chaos-aegis/elemental-admission.log": "a146ebc24afa4d641a19705bb122490932ec2ef3f31a195fd6132b4843e6451c",
+    "docs/qa/chaos-aegis/reference-fragment.json": "95b8d46b0b53d7b88ed37d109d69cb5c6af478297da406f8fd28d0f5bee4d384",
+    "docs/qa/chaos-aegis/reference-check.json": "0c132888c4ceb3d48d3457d888d405318f64aaaa7c587accd5b4c793167bde77",
+    "docs/qa/chaos-aegis/selection.png": "ddf2ec2ecd3bf8a79f2a590b9fdbadf6e5c9710e0b8337c044fc42cac4826ba4"
+  }
+}

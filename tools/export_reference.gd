@@ -41,6 +41,7 @@ const Town = preload("res://scripts/town/town_catalog.gd")
 const EquipmentPurchaseReference = preload("res://tools/equipment_purchase_reference.gd")
 const JewelPurchaseReference = preload("res://tools/jewel_purchase_reference.gd")
 const FlaskPurchaseReference = preload("res://tools/flask_purchase_reference.gd")
+const ChaosAegisReference = preload("res://tools/chaos_aegis_reference.gd")
 const Maps = preload("res://scripts/world/map_catalog.gd")
 const MapRules = preload("res://scripts/world/map_compiler.gd")
 const CampLayoutData=preload("res://scripts/world/map_camp_layout.gd")
@@ -775,6 +776,7 @@ static func town_map_examples()->Dictionary:
 		"equipment_purchase":EquipmentPurchaseReference.collect(),
 		"jewel_purchase":JewelPurchaseReference.collect(),
 		"flask_purchase":FlaskPurchaseReference.collect(),
+		"chaos_aegis":ChaosAegisReference.collect(),
 		"mode":"optional_town_test","normal_save":"user://build_save.json","test_save":"user://town_test_build_save.json",
 		"clone_policy":"explicit_first_entry_only","supply_setting":"testing/town_supply_enabled","map_reward_bonus":false,
 		"save_version":Canonical.Rules.VERSION,"retired_profile_writes":false,"map_runtime_persistent":false,

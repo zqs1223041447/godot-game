@@ -57783,7 +57783,8 @@
 						"eligible_special_ids": [
 							"elemental_aegis",
 							"frost_patrol",
-							"storm_patrol"
+							"storm_patrol",
+							"chaos_aegis"
 						],
 						"maximum_modifier_bonus": 4,
 						"profile": {
@@ -57852,7 +57853,8 @@
 						"eligible_special_ids": [
 							"elemental_aegis",
 							"frost_patrol",
-							"storm_patrol"
+							"storm_patrol",
+							"chaos_aegis"
 						],
 						"maximum_modifier_bonus": 4,
 						"profile": {
@@ -60492,7 +60494,8 @@
 						"eligible_special_ids": [
 							"elemental_aegis",
 							"frost_patrol",
-							"storm_patrol"
+							"storm_patrol",
+							"chaos_aegis"
 						],
 						"maximum_modifier_bonus": 4,
 						"profile": {
@@ -60561,7 +60564,8 @@
 						"eligible_special_ids": [
 							"elemental_aegis",
 							"frost_patrol",
-							"storm_patrol"
+							"storm_patrol",
+							"chaos_aegis"
 						],
 						"maximum_modifier_bonus": 4,
 						"profile": {
@@ -62457,7 +62461,8 @@
 					{
 						"eligible_special_ids": [
 							"elemental_aegis",
-							"frost_patrol"
+							"frost_patrol",
+							"chaos_aegis"
 						],
 						"maximum_modifier_bonus": 4,
 						"profile": {
@@ -62526,7 +62531,8 @@
 						"eligible_special_ids": [
 							"elemental_aegis",
 							"frost_patrol",
-							"storm_patrol"
+							"storm_patrol",
+							"chaos_aegis"
 						],
 						"maximum_modifier_bonus": 4,
 						"profile": {
@@ -65146,7 +65152,8 @@
 						"eligible_special_ids": [
 							"elemental_aegis",
 							"frost_patrol",
-							"storm_patrol"
+							"storm_patrol",
+							"chaos_aegis"
 						],
 						"maximum_modifier_bonus": 4,
 						"profile": {
@@ -65215,7 +65222,8 @@
 						"eligible_special_ids": [
 							"elemental_aegis",
 							"frost_patrol",
-							"storm_patrol"
+							"storm_patrol",
+							"chaos_aegis"
 						],
 						"maximum_modifier_bonus": 4,
 						"profile": {
@@ -67371,7 +67379,8 @@
 					{
 						"eligible_special_ids": [
 							"elemental_aegis",
-							"frost_patrol"
+							"frost_patrol",
+							"chaos_aegis"
 						],
 						"maximum_modifier_bonus": 4,
 						"profile": {
@@ -67442,7 +67451,8 @@
 							"elemental_aegis",
 							"frost_patrol",
 							"storm_patrol",
-							"chaos_patrol"
+							"chaos_patrol",
+							"chaos_aegis"
 						],
 						"maximum_modifier_bonus": 4,
 						"profile": {
@@ -81724,7 +81734,8 @@
 				"eligible_special_ids": [
 					"elemental_aegis",
 					"frost_patrol",
-					"storm_patrol"
+					"storm_patrol",
+					"chaos_aegis"
 				],
 				"legal_precondition": {
 					"balance": 4,
@@ -81926,7 +81937,8 @@
 				"eligible_special_ids": [
 					"elemental_aegis",
 					"frost_patrol",
-					"storm_patrol"
+					"storm_patrol",
+					"chaos_aegis"
 				],
 				"legal_precondition": {
 					"balance": 8,
@@ -608180,7 +608192,8 @@
 				"eligible_special_ids": [
 					"elemental_aegis",
 					"frost_patrol",
-					"storm_patrol"
+					"storm_patrol",
+					"chaos_aegis"
 				],
 				"maximum_bonus_example": {
 					"base_completion_reward": 8,
@@ -608375,7 +608388,8 @@
 				"eligible_special_ids": [
 					"elemental_aegis",
 					"frost_patrol",
-					"storm_patrol"
+					"storm_patrol",
+					"chaos_aegis"
 				],
 				"maximum_bonus_example": {
 					"base_completion_reward": 12,
@@ -612615,6 +612629,19 @@
 					"reward_description": "测试模式不增加完成奖励",
 					"species": "brute",
 					"template": "chaos_guard"
+				},
+				{
+					"completion_reward_bonus": 0,
+					"damage_types": [
+						"chaos"
+					],
+					"description": "地图根怪、首领与死亡后代的原始混沌抗性各加20个百分点，有效上限75%；物理与三元素不变。每个敌人从自身原始值施加一次，混沌命中仍先消耗护盾。 测试模式不增加完成奖励。",
+					"id": "chaos_aegis",
+					"kind": "defense",
+					"minimum_wave": 4,
+					"name": "混沌庇护",
+					"resistance_bonus": 0.2,
+					"reward_description": "测试模式不增加完成奖励"
 				}
 			]
 		},
@@ -615848,6 +615875,226 @@
 				"scripts/save/canonical_build_rules.gd": "46fa346c217b0fa05dfd2dcf254115bde10aaa53899e07a67284f5b1453b932e",
 				"scripts/ui/canonical_inventory_panel.gd": "eec3ab27a85ca908135142a1396c094b36f06f0309a7e023fa1de612ecf72539",
 				"scripts/ui/town_service_panel.gd": "1a5fb7ecb39b1098a6a5f33c77acd44c8ceaa7c277a3ab3add24b82635bf830f"
+			}
+		},
+		"chaos_aegis": {
+			"balance_basis": "原创保守预算：复用元素庇护每类+20个百分点和最低波次4，仅影响混沌一种伤害；不是外部游戏规则或完整平衡证明。",
+			"cap_examples": [
+				{
+					"after_raw": -0.3,
+					"base_raw": -0.5,
+					"effective": 0.0
+				},
+				{
+					"after_raw": 0.2,
+					"base_raw": 0.0,
+					"effective": 0.2
+				},
+				{
+					"after_raw": 0.45,
+					"base_raw": 0.25,
+					"effective": 0.45
+				},
+				{
+					"after_raw": 0.8500000000000001,
+					"base_raw": 0.65,
+					"effective": 0.75
+				},
+				{
+					"after_raw": 1.1,
+					"base_raw": 0.9,
+					"effective": 0.75
+				}
+			],
+			"chaos_cap": 0.75,
+			"definition": {
+				"damage_types": [
+					"chaos"
+				],
+				"description": "地图根怪、首领与死亡后代的原始混沌抗性各加20个百分点，有效上限75%；物理与三元素不变。每个敌人从自身原始值施加一次，混沌命中仍先消耗护盾。",
+				"id": "chaos_aegis",
+				"kind": "defense",
+				"minimum_wave": 4,
+				"name": "混沌庇护",
+				"resistance_bonus": 0.2
+			},
+			"eligible_tiers": {
+				"broken_ruins": [
+					2,
+					3
+				],
+				"ginkgo_arcade": [
+					2,
+					3
+				],
+				"old_garden": [
+					2,
+					3
+				],
+				"ruins_garden": [
+					2,
+					3
+				],
+				"sunwell_terrace": [
+					2,
+					3
+				]
+			},
+			"example_scope": "目录与实际共享规则的100点五类型单次命中，含蚀影守卫标量示例；混沌庇护与蚀影巡逻占同一个特殊槽，不能同时选择。不是实战DPS。",
+			"examples": {
+				"chaos_guard": {
+					"after_components": {
+						"chaos": 55.00000000000001,
+						"cold": 100.0,
+						"fire": 100.0,
+						"lightning": 100.0,
+						"physical": 100.0
+					},
+					"before_components": {
+						"chaos": 75.0,
+						"cold": 100.0,
+						"fire": 100.0,
+						"lightning": 100.0,
+						"physical": 100.0
+					},
+					"effective_resistances": {
+						"chaos": 0.45,
+						"fire": 0.0
+					},
+					"raw_resistances": {
+						"chaos": 0.45,
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"source_stats": {
+						"chaos_resistance": 0.25
+					}
+				},
+				"crawler": {
+					"after_components": {
+						"chaos": 80.0,
+						"cold": 100.0,
+						"fire": 100.0,
+						"lightning": 100.0,
+						"physical": 100.0
+					},
+					"before_components": {
+						"chaos": 100.0,
+						"cold": 100.0,
+						"fire": 100.0,
+						"lightning": 100.0,
+						"physical": 100.0
+					},
+					"effective_resistances": {
+						"chaos": 0.2,
+						"fire": 0.0
+					},
+					"raw_resistances": {
+						"chaos": 0.2,
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"source_stats": {}
+				},
+				"ember_guard": {
+					"after_components": {
+						"chaos": 80.0,
+						"cold": 100.0,
+						"fire": 75.0,
+						"lightning": 100.0,
+						"physical": 100.0
+					},
+					"before_components": {
+						"chaos": 100.0,
+						"cold": 100.0,
+						"fire": 75.0,
+						"lightning": 100.0,
+						"physical": 100.0
+					},
+					"effective_resistances": {
+						"chaos": 0.2,
+						"fire": 0.25
+					},
+					"raw_resistances": {
+						"chaos": 0.2,
+						"cold": 0.0,
+						"fire": 0.25,
+						"lightning": 0.0
+					},
+					"source_stats": {
+						"fire_resistance": 0.25
+					}
+				},
+				"rift_warden": {
+					"after_components": {
+						"chaos": 80.0,
+						"cold": 100.0,
+						"fire": 100.0,
+						"lightning": 100.0,
+						"physical": 100.0
+					},
+					"before_components": {
+						"chaos": 100.0,
+						"cold": 100.0,
+						"fire": 100.0,
+						"lightning": 100.0,
+						"physical": 100.0
+					},
+					"effective_resistances": {
+						"chaos": 0.2,
+						"fire": 0.0
+					},
+					"raw_resistances": {
+						"chaos": 0.2,
+						"cold": 0.0,
+						"fire": 0.0,
+						"lightning": 0.0
+					},
+					"source_stats": {}
+				}
+			},
+			"id": "chaos_aegis",
+			"integration_status": "implemented",
+			"options": {
+				"normal": {
+					"completion_reward_bonus": 2,
+					"damage_types": [
+						"chaos"
+					],
+					"description": "地图根怪、首领与死亡后代的原始混沌抗性各加20个百分点，有效上限75%；物理与三元素不变。每个敌人从自身原始值施加一次，混沌命中仍先消耗护盾。 正式地图完成奖励 +2 碎片。",
+					"id": "chaos_aegis",
+					"kind": "defense",
+					"minimum_wave": 4,
+					"name": "混沌庇护",
+					"resistance_bonus": 0.2,
+					"reward_description": "正式地图完成奖励 +2 碎片"
+				},
+				"test": {
+					"completion_reward_bonus": 0,
+					"damage_types": [
+						"chaos"
+					],
+					"description": "地图根怪、首领与死亡后代的原始混沌抗性各加20个百分点，有效上限75%；物理与三元素不变。每个敌人从自身原始值施加一次，混沌命中仍先消耗护盾。 测试模式不增加完成奖励。",
+					"id": "chaos_aegis",
+					"kind": "defense",
+					"minimum_wave": 4,
+					"name": "混沌庇护",
+					"resistance_bonus": 0.2,
+					"reward_description": "测试模式不增加完成奖励"
+				}
+			},
+			"preserves": "玩家、未选择词缀的地图、物理与三元素、敌人种类/身份/奖励/RNG和存档schema。混沌仍不绕盾；不新增中毒、持续伤害、穿透或最大混沌抗性。",
+			"save_version": 59,
+			"scope": "显式所选地图的根怪、首领及死亡后代；从各自原始防御施加一次，返城/重开不继承旧实例。",
+			"source_sha256": {
+				"scripts/combat/damage_resolver.gd": "51a3c503c2cae7b7ec1513976de1ed03f41c3677b892b8b55ab47bdb0b2ef6e5",
+				"scripts/mechanics/defense_rules.gd": "3d1790c45caa96b0cb4670395506fdedbf789e045113cb46bfc5afa17cd8790b",
+				"scripts/world/map_admission.gd": "39c4d7dc34993587a081759f423192c1db2b6e8267c91854ef729f36ae4368c2",
+				"scripts/world/map_catalog.gd": "6e0565222c04fe7e01cae34cede599355d2cc7530cdd4afa6d214364cda68189",
+				"scripts/world/map_compiler.gd": "c800ccaf90a9807cc753fc694c19c614e52fff8226fdcaa27f0f5fdc2fcb5851",
+				"scripts/world/map_defense_rules.gd": "ba8fb1a31ce3faabcae5b9861c85df38df17a2d1bfb76178d6a7713dbfa8dc80"
 			}
 		}
 	},

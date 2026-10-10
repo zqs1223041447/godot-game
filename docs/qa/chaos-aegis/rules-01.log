@@ -1,0 +1,33 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+ERROR: Five-type real damage resolver changes chaos alone: chaos_guard
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/chaos_aegis_rules_test.gd:14)
+       [1] _initialize (res://tests/chaos_aegis_rules_test.gd:36)
+ERROR: Chaos clamps after raw addition independently of raised elemental cap: -0.5
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/chaos_aegis_rules_test.gd:14)
+       [1] _initialize (res://tests/chaos_aegis_rules_test.gd:46)
+ERROR: Chaos clamps after raw addition independently of raised elemental cap: 0.0
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/chaos_aegis_rules_test.gd:14)
+       [1] _initialize (res://tests/chaos_aegis_rules_test.gd:46)
+ERROR: Chaos clamps after raw addition independently of raised elemental cap: 0.25
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/chaos_aegis_rules_test.gd:14)
+       [1] _initialize (res://tests/chaos_aegis_rules_test.gd:46)
+ERROR: Chaos clamps after raw addition independently of raised elemental cap: 0.65
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/chaos_aegis_rules_test.gd:14)
+       [1] _initialize (res://tests/chaos_aegis_rules_test.gd:46)
+ERROR: Chaos clamps after raw addition independently of raised elemental cap: 0.9
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/chaos_aegis_rules_test.gd:14)
+       [1] _initialize (res://tests/chaos_aegis_rules_test.gd:46)
+CHAOS_AEGIS_RULES {"checks":84,"failed_labels":["Five-type real damage resolver changes chaos alone: chaos_guard","Chaos clamps after raw addition independently of raised elemental cap: -0.5","Chaos clamps after raw addition independently of raised elemental cap: 0.0","Chaos clamps after raw addition independently of raised elemental cap: 0.25","Chaos clamps after raw addition independently of raised elemental cap: 0.65","Chaos clamps after raw addition independently of raised elemental cap: 0.9"],"failures":6}
