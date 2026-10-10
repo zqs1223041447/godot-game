@@ -1,0 +1,133 @@
+extends "res://tests/normal_gem_trade_gameplay_test.gd"
+## Reuse formal map rewards/trade assertions; only the owned support and carrier checks are new.
+const Compiler = preload("res://scripts/combat/skill_compiler.gd")
+const Combat = preload("res://scripts/combat/combat_data.gd")
+const Registry = preload("res://scripts/combat/support_registry.gd")
+const Damage = preload("res://scripts/combat/damage_resolver.gd")
+const Preview = preload("res://scripts/combat/damage_preview.gd")
+const Runtime = preload("res://scripts/combat/projectile_runtime.gd")
+const SWIFT := "support:swift_projectiles"
+var comparisons := 0
+var carrier_evidence: Array = []
+
+func near(actual: float, expected: float, label: String) -> void:
+	check(is_equal_approx(actual, expected), "%s: %.6f / %.6f" % [label, actual, expected])
+
+func complete_map() -> void:
+	# Current maps admit the full roster on entry; the inherited v28 gate-count
+	# assertions predate that change. Reuse its settlement helper, not its counts.
+	check(arena.enemies.size() >= 37, "Current formal map admits its full original roster")
+	arena._begin_progress_transaction()
+	for generation: int in range(5):
+		kill_all()
+		arena._check_map_complete()
+		if arena.world_context().mode == "map_complete": break
+	arena._end_progress_transaction()
+	check(arena.world_context().mode == "map_complete" and arena.world_context().pending_map_reward.shards == 4, "Bounded original root/descendant deaths earn actual four-shard receipt")
+
+func compile_checks() -> void:
+	var old = load("/tmp/godot-tornado-swift-baseline/skill_compiler.gd")
+	for stats: Dictionary in [{"damage":26.0}, {"damage":26.0,"projectile_speed_increased":0.5,"attack_added_physical":5.0,"attack_added_fire":3.0}]:
+		var snapshot := Combat.snapshot(stats, ["return_on_range", "explode_on_flight_end"])
+		var before := var_to_bytes(snapshot)
+		for skill: String in Compiler.Data.SKILLS:
+			var selections: Array = [[]]
+			for support: String in Registry.supports_for_skill(skill):
+				if skill != "tornado" or support != "swift_projectiles": selections.append([support])
+			for selection: Array in selections:
+				var previous: Dictionary = old.compile_group(skill, snapshot, selection)
+				var current := Compiler.compile_group(skill, snapshot, selection)
+				check(previous.ok and var_to_bytes(previous) == var_to_bytes(current), "Exact old/new cast bytes: " + skill + str(selection))
+				comparisons += 1
+		for others: Array in [[], ["volley","focus","physical_focus","ignite"], ["fire_focus","ember_proliferation","efficiency","quickcast"]]:
+			var selected := others + ["swift_projectiles"]
+			var plain := Compiler.compile_group("tornado", snapshot, others)
+			var fast := Compiler.compile_group("tornado", snapshot, selected)
+			check(plain.ok and fast.ok and not old.compile_group("tornado",snapshot,selected).ok, "Existing rejection becomes intentional legal combination")
+			if not fast.ok: continue
+			selected.reverse()
+			check(var_to_bytes(fast) == var_to_bytes(Compiler.compile_group("tornado",snapshot,selected)), "Five-slot support order independent")
+			near(fast.mana, plain.mana * 1.10, "Only new 1.10 mana multiplier")
+			check(fast.cooldown == plain.cooldown and fast.initial_count == plain.initial_count and fast.packets == plain.packets and fast.snapshot.modifiers == plain.snapshot.modifiers, "Count/cooldown/raw typed packets/damage modifiers unchanged")
+			for role: String in ["parent","child"]:
+				near(fast.recipe[role].speed, plain.recipe[role].speed * 1.35, "Role speed including source increase: " + role)
+				var unchanged: Dictionary = fast.recipe[role].duplicate(true)
+				for field: String in ["speed","base_speed"]:
+					if plain.recipe[role].has(field): unchanged[field] = plain.recipe[role][field]
+				check(unchanged == plain.recipe[role], "Role distance/lifetime/split/pierce/damage coefficient unchanged")
+			check(fast.snapshot.tornado_recipe == fast.recipe, "Runtime owns final parent and child speeds")
+			check(fast.snapshot.explosion_recipe == plain.snapshot.explosion_recipe, "Independent explosion unchanged")
+			check(Preview.details(fast).contains("%.2f" % fast.recipe.parent.speed) and Preview.details(fast).contains("%.2f" % fast.recipe.child.speed), "Current tooltip shows both actual speeds")
+			for role: String in plain.packets:
+				check(Damage.resolve(fast.packets[role],fast.snapshot.modifiers) == Damage.resolve(plain.packets[role],plain.snapshot.modifiers), "Every resolved damage role unchanged: " + role)
+			if plain.has("burn_profile"): check(fast.burn_profile == plain.burn_profile, "Ignite/proliferation damage policy unchanged")
+		check(var_to_bytes(snapshot) == before, "Compiler does not mutate source")
+	for rejected: String in ["heavy_projectiles","lingering_chill","pierce"]:
+		check(not Registry.compatibility_reason("tornado",[rejected]).is_empty(), "Other explicit incompatibility retained: " + rejected)
+
+func run() -> void:
+	var isolated := OS.get_environment("XDG_DATA_HOME")
+	if not isolated.begins_with("/tmp/godot-m1-tornado-swift-") or not OS.get_user_data_dir().begins_with(isolated + "/"): quit(78); return
+	compile_checks()
+	arena = load("res://scenes/main.tscn").instantiate()
+	root.add_child(arena)
+	await process_frame
+	arena.set_process(false); arena.hud.set_process(false); arena.auto_fire = false
+	check(arena.save_build() and arena.world_context().normal_town and arena.state.crafting_balance() == 0, "Fresh formal profile, no supplied currency")
+	check(arena.craft_normal_map("old_garden",1,[],[],arena.map_draft().revision).ok and arena.start_map(arena.map_draft().revision).ok, "Original free tier-I map")
+	complete_map()
+	check(arena.return_to_town(arena.world_context().revision).ok, "Return to formal town")
+	var claim: Dictionary = arena.claim_normal_rewards(arena.world_context().revision)
+	check(claim.ok and claim.claimed_shards == 4 and arena.state.crafting_balance() == 4, "One real map reward funds the four-shard support")
+	arena.state.changed.connect(func() -> void: changes += 1)
+	var purchase := trade("buy",SWIFT,-4)
+	if not purchase.get("ok",false): finish_swift(); return
+	var uid: String = purchase.uid
+	check(arena.state.item(uid).definition_id == SWIFT and arena.state.location(uid).kind == "bag", "Paid exact UID arrives in bag")
+	var group := ""
+	for record: Dictionary in arena.state.snapshot().skill_groups:
+		if arena.state.skill_group(record.id).skill_id == "tornado": group = record.id; break
+	check(not group.is_empty(), "Reuse existing owned tornado group")
+	if group.is_empty(): finish_swift(); return
+	var plain: Dictionary = arena.state.get_group_cast(group)
+	var linked: Dictionary = arena.state.move_item(uid,{"kind":"skill_support","group_id":group,"index":0},arena.state.revision(),arena.NORMAL_BUILD_PATH)
+	check(linked.ok, "Purchased support equips by original canonical move transaction")
+	if not linked.ok: finish_swift(); return
+	var fast: Dictionary = arena.state.get_group_cast(group)
+	check(fast.ok and fast.support_ids.has("swift_projectiles"), "Actual owned group compiles accelerated recipe")
+	var loaded := Model.new()
+	check(loaded.load_build(arena.NORMAL_BUILD_PATH) and loaded.snapshot() == arena.state.snapshot(), "Same-schema reload preserves purchased UID and link")
+	check(arena.leave_normal_town(arena.world_context().revision).ok, "Enter existing practice arena for controlled carrier observation")
+	arena.enemies.clear(); arena.projectiles.clear(); arena.player_pos = Vector2(640,360)
+	var mana_before: float = arena.mana
+	check(arena.cast_group(group), "Main casts the actual purchased/linked group")
+	near(mana_before - arena.mana,fast.mana,"Main pays exact compiled mana")
+	near(arena.group_cooldown_remaining(group),fast.cooldown,"Main starts original group cooldown")
+	check(arena.projectiles.size() == fast.initial_count, "Actual initial projectile count")
+	var frozen := var_to_bytes(arena.projectiles)
+	var moved: Dictionary = arena.state.move_item(uid,arena.state.first_bag_position(uid),arena.state.revision(),arena.NORMAL_BUILD_PATH)
+	check(moved.ok and var_to_bytes(arena.projectiles) == frozen, "Unlink changes build, never in-flight carriers")
+	near(arena.state.get_group_cast(group).recipe.parent.speed,plain.recipe.parent.speed,"Next compiled cast returns to original speed")
+	var shots: Array[Dictionary] = arena.projectiles.duplicate(true)
+	var runtime := Runtime.new()
+	for shot: Dictionary in shots:
+		runtime.next_projectile_id = maxi(runtime.next_projectile_id,int(shot.id)+1)
+		near(shot.velocity.length(),fast.recipe.parent.speed,"Actual Main parent velocity")
+	var parent_start: Vector2 = shots[0].pos
+	runtime.advance(shots,0.05,[],arena.player_pos,arena.MAX_PROJECTILES)
+	near(parent_start.distance_to(shots[0].pos),fast.recipe.parent.speed*0.05,"Parent actual movement")
+	var events: Array = runtime.advance(shots,0.25,[],arena.player_pos,arena.MAX_PROJECTILES)
+	check(shots.size() == fast.initial_count * int(fast.recipe.child_count), "Original runtime splits all parents into original child count")
+	for shot: Dictionary in shots:
+		check(shot.role == "child", "Child generation remains original")
+		near(shot.velocity.length(),fast.recipe.child.speed,"Child retains support after unlink")
+		near(shot.range,plain.recipe.child.range,"Child range unchanged")
+		near(shot.lifetime,plain.recipe.child.lifetime,"Child lifetime unchanged")
+	carrier_evidence.append({"parent_speed":fast.recipe.parent.speed,"child_speed":fast.recipe.child.speed,"children":shots.size(),"events":events.size(),"paid_mana":mana_before-arena.mana,"schema":arena.state.snapshot().version})
+	finish_swift()
+
+func finish_swift() -> void:
+	var report := {"checks":checks,"failures":failures,"old_new_cast_comparisons":comparisons,"carriers":carrier_evidence,"evidence":evidence}
+	FileAccess.open(OS.get_environment("SWIFT_REPORT"),FileAccess.WRITE).store_string(JSON.stringify(report,"\t")+"\n")
+	print("TORNADO_SWIFT checks=%d failures=%d comparisons=%d" % [checks,failures,comparisons])
+	quit(1 if failures else 0)

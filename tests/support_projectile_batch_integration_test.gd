@@ -459,7 +459,7 @@ func _phase_ledger() -> void:
 
 
 func _ineligible_tornado() -> void:
-	for id: String in ["swift_projectiles", "heavy_projectiles", "lingering_chill"]:
+	for id: String in ["heavy_projectiles", "lingering_chill"]:
 		_prepare("tornado", [])
 		var build: Dictionary = arena.state._snapshot()
 		_expect(not arena.state.set_skill_supports("tornado", [id]) and arena.state._snapshot() == build, "Tornado rejects travel/slow helper atomically: " + id)

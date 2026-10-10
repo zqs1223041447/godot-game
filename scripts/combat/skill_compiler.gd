@@ -135,6 +135,13 @@ static func compile_skill(skill_id: String, snapshot: Dictionary, support_ids: A
 	mana *= float(program.mana_multiplier)
 	var cooldown: float = float(skill.cooldown) * float(program.cooldown_multiplier)
 	var factors: Dictionary = program.recipe_factors
+	if skill_id == "tornado" and factors.has("projectile_speed_multiplier"):
+		for role: String in ["parent", "child"]:
+			recipe[role].speed *= float(factors.projectile_speed_multiplier)
+			if not _number(recipe[role].speed) or float(recipe[role].speed) <= 0.0 or float(recipe[role].speed) > Spatial.MAX_SPEED:
+				return _failure("编译后的龙卷速度无效")
+		# The runtime creates children from this cast's retained recipe.
+		compiled_snapshot.tornado_recipe = recipe.duplicate(true)
 	if skill_id in ["bolt", "frost", "shade_bolt"]:
 		recipe.speed *= float(factors.get("projectile_speed_multiplier", 1.0))
 		recipe.slow *= float(factors.get("slow_duration_multiplier", 1.0))

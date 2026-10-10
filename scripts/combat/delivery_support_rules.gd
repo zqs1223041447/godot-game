@@ -9,8 +9,8 @@ const FACTORS: Array[String] = ["projectile_speed_multiplier", "slow_duration_mu
 const SUPPORTS: Dictionary = {
 	"swift_projectiles": {
 		"name": "疾速投射辅助",
-		"description": "飞弹、冰霜与蚀影飞弹：投射物速度 ×1.35，魔力 ×1.10。龙卷不适配。",
-		"skills": ["bolt", "frost", "shade_bolt"], "requires": ["projectile_hit"], "family": "delivery",
+		"description": "飞弹、冰霜、蚀影飞弹与龙卷：投射物速度 ×1.35，魔力 ×1.10。龙卷母箭与子箭均加速；伤害、射程与寿命不变。",
+		"skills": ["bolt", "frost", "shade_bolt", "tornado"], "requires": ["projectile_hit"], "family": "delivery",
 		"operations": [
 			{"op": "projectile_speed_multiplier", "value": 1.35},
 			{"op": "mana_multiplier", "value": 1.10},
@@ -112,9 +112,8 @@ static func definition_error(value: Variant) -> String:
 		return "辅助类别无效"
 	if not Program.strings(value.skills) or not Program.strings(value.requires):
 		return "辅助技能或能力列表无效"
-	var skills: Array = ["chain"] if value.family == "chain" else (["frost"] if value.family == "control" else ["bolt", "frost", "shade_bolt"])
 	var requires: Array = ["chain_hit"] if value.family == "chain" else ["projectile_hit"]
-	if value.skills != skills or value.requires != requires:
+	if value.requires != requires:
 		return "辅助技能或能力与类别不匹配"
 	if not value.operations is Array or value.operations.size() < 2 or value.operations.size() > 3:
 		return "辅助操作列表无效"
@@ -155,6 +154,10 @@ static func definition_error(value: Variant) -> String:
 	if factor.is_empty() or not seen.has("mana_multiplier"):
 		return "辅助缺少配方变换或魔力代价"
 	var fast: bool = factor == "projectile_speed_multiplier" and float(seen[factor]) > 1.0
+	var skills: Array = ["chain"] if value.family == "chain" else (["frost"] if value.family == "control" else ["bolt", "frost", "shade_bolt"])
+	if fast: skills.append("tornado")
+	if value.skills != skills:
+		return "辅助技能与配方变换不匹配"
 	if fast:
 		if seen.has("primary_hit_more"):
 			return "疾速投射不改变命中伤害"
