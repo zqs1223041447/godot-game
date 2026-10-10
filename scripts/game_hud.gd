@@ -2,6 +2,7 @@ class_name GameHUD
 extends CanvasLayer
 ## Responsive, keyboard-friendly combat HUD and live build editor.
 
+const ExplorationOverview = preload("res://scripts/ui/exploration_map_overview.gd")
 const TownSquareView = preload("res://scripts/ui/town_square_view.gd")
 const TownServiceView = preload("res://scripts/ui/town_service_panel.gd")
 const FlaskSlotView = preload("res://scripts/ui/flask_slot.gd")
@@ -47,6 +48,10 @@ const STAT_NAMES: Dictionary = {
 	"area_mult": "范围倍率", "area_multiplier": "范围倍率", "fire_resistance": "火焰抗性"
 }
 
+var _exploration_overview: Control
+var _overview_elapsed := 0.0
+var _overview_run := -1
+var _map_hint: Label
 var _town_square: Control
 var _town_view: Control
 var _world_context_cache: Dictionary = {}
@@ -146,6 +151,9 @@ func setup(arena: Node) -> void:
 	_build_flask_hotbar()
 	_build_hotbar()
 	_build_hint()
+	_exploration_overview = ExplorationOverview.new()
+	_exploration_overview.name = "ExplorationOverview"
+	_root.add_child(_exploration_overview)
 	_build_toast()
 	_build_dock_windows()
 	_build_modal()
@@ -176,6 +184,7 @@ func _process(delta: float) -> void:
 		if compare != _hover_compare: _present_item_hover()
 		if _hover_exit_at > 0 and Time.get_ticks_msec() >= _hover_exit_at and not _item_hover.get_global_rect().has_point(_root.get_global_mouse_position()):
 			_dismiss_item_hover()
+	_tick_overview(delta)
 	_tick_cleanup_hint(delta)
 	_refresh_clock += delta
 	if _refresh_clock >= 0.05:
@@ -208,6 +217,9 @@ func open_panel(panel_name: String) -> void:
 
 
 func handle_menu_key(key: int, pressed: bool = true, echo: bool = false) -> bool:
+	if key == KEY_ESCAPE and pressed and not echo and is_instance_valid(_exploration_overview) and _exploration_overview.visible:
+		_exploration_overview.hide()
+		return true
 	if key not in [KEY_I, KEY_B, KEY_C, KEY_T, KEY_K, KEY_F6, KEY_F7, KEY_ESCAPE]:
 		return false
 	if not pressed:
@@ -277,6 +289,7 @@ func _sync_menu_views() -> void:
 	if _root == null:
 		return
 	_dismiss_item_hover()
+	if is_instance_valid(_exploration_overview): _exploration_overview.hide()
 	var snapshot: Dictionary = _menu_routes.snapshot()
 	if _restart_pending and (_menu_routes != _restart_menu_owner or snapshot != _restart_menu_snapshot):
 		# Main closes the old overlay inside a successful restart, before this
@@ -612,7 +625,7 @@ func _build_hint() -> void:
 	var box: VBoxContainer = VBoxContainer.new()
 	box.name = "CombatHelp"
 	box.add_theme_constant_override("separation", 7)
-	_place(box, Rect2(-250, -114, 230, 94), Control.PRESET_BOTTOM_RIGHT)
+	_place(box, Rect2(-250, -136, 230, 116), Control.PRESET_BOTTOM_RIGHT)
 	_auto_button = _button("自动攻击  开启", "AutoFireButton", _toggle_auto)
 	_auto_button.add_theme_font_size_override("font_size", 14)
 	box.add_child(_auto_button)
@@ -622,6 +635,9 @@ func _build_hint() -> void:
 	var aim_hint: Label = _label("Q 自动  /  F6 战斗  /  F7 怪物", 12, MUTED)
 	aim_hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	box.add_child(aim_hint)
+	_map_hint = _label("Tab 探索总览 · 战斗继续", 12, MUTED)
+	_map_hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	box.add_child(_map_hint)
 
 
 func _build_toast() -> void:
@@ -1736,6 +1752,10 @@ func _refresh_world() -> void:
 	var previous_mode := str(_world_context_cache.get("mode", ""))
 	var context: Dictionary = _arena.world_context()
 	_world_context_cache = context
+	_map_hint.visible = str(context.mode) in ["map", "map_complete"]
+	if is_instance_valid(_exploration_overview) and _exploration_overview.visible:
+		if not _overview_allowed() or int(context.run_revision) != _overview_run: _exploration_overview.hide()
+		else: _exploration_overview.update_live(context, _arena.player_pos, _arena.player_facing)
 	if is_instance_valid(_edition_label): _edition_label.text = world_caption(context)
 	_town_square.visible = str(context.mode) in ["town", "normal_town"]
 	_town_square.set_test_mode(bool(context.get("test_mode", false)))
@@ -1902,3 +1922,41 @@ static func exploration_progress_text(context: Dictionary) -> String:
 	var phase := str(context.get("boss_phase", "active"))
 	var complete := str(context.get("mode", "")) == "map_complete"
 	return headline + "\n" + outpost_text + ("地图已清理" if complete else "首领已击败 · 继续清理" if phase == "defeated" else "首领驻守" if not outposts.is_empty() else "寻找敌人 · 首领驻守")
+
+
+func _overview_allowed() -> bool:
+	return is_instance_valid(_arena) and bool(_arena.get("alive")) and not is_blocking() and str(_world_context_cache.get("mode","")) in ["map","map_complete"] and str(_world_context_cache.get("encounter_mode","")) == "exploration"
+
+
+func _input(event: InputEvent) -> void:
+	# Tab is not a bindable skill key. Handle before GUI focus navigation only
+	# during live exploration; ordinary menus retain their existing Tab behavior.
+	if not event is InputEventKey or event.physical_keycode != KEY_TAB or not _overview_allowed(): return
+	if event.pressed and not event.echo:
+		if _exploration_overview.visible: _exploration_overview.hide()
+		else:
+			var context: Dictionary = _arena.world_context()
+			_overview_run = int(context.run_revision)
+			_overview_elapsed = 0.0
+			_layout_overview()
+			_exploration_overview.open_map(_arena.world_geometry(), context, _arena.player_pos, _arena.player_facing)
+	get_viewport().set_input_as_handled()
+
+
+func _layout_overview() -> void:
+	var viewport_size := _root.size
+	_exploration_overview.size = Vector2(minf(720,viewport_size.x-40),minf(520,viewport_size.y-150))
+	_exploration_overview.position = (viewport_size-_exploration_overview.size)*0.5
+
+
+func _tick_overview(delta: float) -> void:
+	if not is_instance_valid(_exploration_overview) or not _exploration_overview.visible: return
+	if not _overview_allowed() or _arena.run_revision != _overview_run:
+		_exploration_overview.hide()
+		return
+	_layout_overview()
+	_overview_elapsed += maxf(delta,0.0)
+	if _overview_elapsed >= 0.2:
+		_overview_elapsed = 0.0
+		_exploration_overview.update_live(_arena.world_context(), _arena.player_pos, _arena.player_facing)
+	else: _exploration_overview.update_player(_arena.player_pos, _arena.player_facing)
