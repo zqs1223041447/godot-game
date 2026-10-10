@@ -1,0 +1,6562 @@
+{
+	"checks": 122,
+	"failures": 29,
+	"labels": [
+		"Finite cast-facing preserves valid direction: bolt: (0.0, 0.0) / (0.0, -1.0)",
+		"Actual carrier velocity retains fan: bolt0: (780.0, 0.0) / (-124.2682, -770.0373)",
+		"Original muzzle offset: bolt0: (642.0, 1704.0) / (638.973, 1685.243)",
+		"Actual carrier velocity retains fan: bolt1: (780.0, 0.0) / (0.0, -780.0)",
+		"Original muzzle offset: bolt1: (642.0, 1704.0) / (642.0, 1685.0)",
+		"Actual carrier velocity retains fan: bolt2: (780.0, 0.0) / (124.2682, -770.0373)",
+		"Original muzzle offset: bolt2: (642.0, 1704.0) / (645.027, 1685.243)",
+		"Finite cast-facing preserves valid direction: frost: (0.0, 0.0) / (0.0, -1.0)",
+		"Actual carrier velocity retains fan: frost0: (520.0, 0.0) / (-143.7049, -499.7488)",
+		"Original muzzle offset: frost0: (642.0, 1704.0) / (636.7493, 1685.74)",
+		"Actual carrier velocity retains fan: frost1: (520.0, 0.0) / (-72.56242, -514.9124)",
+		"Original muzzle offset: frost1: (642.0, 1704.0) / (639.3487, 1685.186)",
+		"Actual carrier velocity retains fan: frost2: (520.0, 0.0) / (0.0, -520.0)",
+		"Original muzzle offset: frost2: (642.0, 1704.0) / (642.0, 1685.0)",
+		"Actual carrier velocity retains fan: frost3: (520.0, 0.0) / (72.56242, -514.9124)",
+		"Original muzzle offset: frost3: (642.0, 1704.0) / (644.6513, 1685.186)",
+		"Actual carrier velocity retains fan: frost4: (520.0, 0.0) / (143.7049, -499.7488)",
+		"Original muzzle offset: frost4: (642.0, 1704.0) / (647.2507, 1685.74)",
+		"Finite cast-facing preserves valid direction: shade_bolt: (0.0, 0.0) / (0.0, -1.0)",
+		"Actual carrier velocity retains fan: shade_bolt0: (620.0, 0.0) / (0.0, -620.0)",
+		"Original muzzle offset: shade_bolt0: (642.0, 1704.0) / (642.0, 1685.0)",
+		"Finite cast-facing preserves valid direction: tornado: (0.0, 0.0) / (0.0, -1.0)",
+		"Actual carrier velocity retains fan: tornado0: (420.0, 0.0) / (-66.91365, -414.6355)",
+		"Original muzzle offset: tornado0: (642.0, 1704.0) / (638.973, 1685.243)",
+		"Actual carrier velocity retains fan: tornado1: (420.0, 0.0) / (0.0, -420.0)",
+		"Original muzzle offset: tornado1: (642.0, 1704.0) / (642.0, 1685.0)",
+		"Actual carrier velocity retains fan: tornado2: (420.0, 0.0) / (66.91365, -414.6355)",
+		"Original muzzle offset: tornado2: (642.0, 1704.0) / (645.027, 1685.243)",
+		"Idle-input dash keeps original displacement with coincident target: (642.0, 1704.0) / (642.0, 1529.0)"
+	],
+	"observations": [
+		{
+			"cast_facing": "(0.0, -1.0)",
+			"cooldown": 0.8,
+			"mana": 7.0,
+			"overlap": false,
+			"requested_facing": "(1.0, 0.0)",
+			"shapes": [
+				{
+					"lifetime": 1.7,
+					"payload": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 1.6,
+							"base_coefficient": 1.6,
+							"intrinsic": {
+								"lightning": 41.6
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"lightning": 41.6
+						},
+						"role": "projectile",
+						"skill_id": "bolt",
+						"tags": [
+							"hit",
+							"projectile",
+							"spell"
+						]
+					},
+					"pierce": 1,
+					"position": "(-3.027039, -18.75732)",
+					"range": 650.0,
+					"slow": 0.0,
+					"snapshot": {
+						"accuracy": 140.0,
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"added_damage_sources": [],
+						"base_damage": 26.0,
+						"compiled_packets": {
+							"projectile": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 1.6,
+									"base_coefficient": 1.6,
+									"intrinsic": {
+										"lightning": 41.6
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"lightning": 41.6
+								},
+								"role": "projectile",
+								"skill_id": "bolt",
+								"tags": [
+									"hit",
+									"projectile",
+									"spell"
+								]
+							},
+							"secondary": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.0,
+									"base_coefficient": 0.9,
+									"intrinsic": {
+										"fire": 23.400000000000002
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 23.400000000000002
+								},
+								"role": "secondary",
+								"skill_id": "bolt",
+								"tags": [
+									"hit",
+									"area",
+									"secondary",
+									"explosion"
+								]
+							}
+						},
+						"compiled_skill_id": "bolt",
+						"critical": {
+							"primary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							},
+							"secondary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							}
+						},
+						"critical_modifiers": {
+							"base_chance": 0.05,
+							"base_multiplier": 1.5
+						},
+						"critical_roll": {
+							"chance": 0.05,
+							"critical": false,
+							"multiplier": 1.0
+						},
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"initial_count": 3,
+						"modifiers": [
+							{
+								"all_tags": [
+									"attack",
+									"melee"
+								],
+								"damage_types": [
+									"physical"
+								],
+								"id": "melee_physical_increased",
+								"mode": "increased",
+								"value": 0.04
+							}
+						],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"speed": 780.0,
+					"velocity": "(-124.2682, -770.0373)"
+				},
+				{
+					"lifetime": 1.7,
+					"payload": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 1.6,
+							"base_coefficient": 1.6,
+							"intrinsic": {
+								"lightning": 41.6
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"lightning": 41.6
+						},
+						"role": "projectile",
+						"skill_id": "bolt",
+						"tags": [
+							"hit",
+							"projectile",
+							"spell"
+						]
+					},
+					"pierce": 1,
+					"position": "(0.0, -19.0)",
+					"range": 650.0,
+					"slow": 0.0,
+					"snapshot": {
+						"accuracy": 140.0,
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"added_damage_sources": [],
+						"base_damage": 26.0,
+						"compiled_packets": {
+							"projectile": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 1.6,
+									"base_coefficient": 1.6,
+									"intrinsic": {
+										"lightning": 41.6
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"lightning": 41.6
+								},
+								"role": "projectile",
+								"skill_id": "bolt",
+								"tags": [
+									"hit",
+									"projectile",
+									"spell"
+								]
+							},
+							"secondary": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.0,
+									"base_coefficient": 0.9,
+									"intrinsic": {
+										"fire": 23.400000000000002
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 23.400000000000002
+								},
+								"role": "secondary",
+								"skill_id": "bolt",
+								"tags": [
+									"hit",
+									"area",
+									"secondary",
+									"explosion"
+								]
+							}
+						},
+						"compiled_skill_id": "bolt",
+						"critical": {
+							"primary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							},
+							"secondary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							}
+						},
+						"critical_modifiers": {
+							"base_chance": 0.05,
+							"base_multiplier": 1.5
+						},
+						"critical_roll": {
+							"chance": 0.05,
+							"critical": false,
+							"multiplier": 1.0
+						},
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"initial_count": 3,
+						"modifiers": [
+							{
+								"all_tags": [
+									"attack",
+									"melee"
+								],
+								"damage_types": [
+									"physical"
+								],
+								"id": "melee_physical_increased",
+								"mode": "increased",
+								"value": 0.04
+							}
+						],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"speed": 780.0,
+					"velocity": "(0.0, -780.0)"
+				},
+				{
+					"lifetime": 1.7,
+					"payload": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 1.6,
+							"base_coefficient": 1.6,
+							"intrinsic": {
+								"lightning": 41.6
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"lightning": 41.6
+						},
+						"role": "projectile",
+						"skill_id": "bolt",
+						"tags": [
+							"hit",
+							"projectile",
+							"spell"
+						]
+					},
+					"pierce": 1,
+					"position": "(3.027039, -18.75732)",
+					"range": 650.0,
+					"slow": 0.0,
+					"snapshot": {
+						"accuracy": 140.0,
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"added_damage_sources": [],
+						"base_damage": 26.0,
+						"compiled_packets": {
+							"projectile": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 1.6,
+									"base_coefficient": 1.6,
+									"intrinsic": {
+										"lightning": 41.6
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"lightning": 41.6
+								},
+								"role": "projectile",
+								"skill_id": "bolt",
+								"tags": [
+									"hit",
+									"projectile",
+									"spell"
+								]
+							},
+							"secondary": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.0,
+									"base_coefficient": 0.9,
+									"intrinsic": {
+										"fire": 23.400000000000002
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 23.400000000000002
+								},
+								"role": "secondary",
+								"skill_id": "bolt",
+								"tags": [
+									"hit",
+									"area",
+									"secondary",
+									"explosion"
+								]
+							}
+						},
+						"compiled_skill_id": "bolt",
+						"critical": {
+							"primary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							},
+							"secondary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							}
+						},
+						"critical_modifiers": {
+							"base_chance": 0.05,
+							"base_multiplier": 1.5
+						},
+						"critical_roll": {
+							"chance": 0.05,
+							"critical": false,
+							"multiplier": 1.0
+						},
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"initial_count": 3,
+						"modifiers": [
+							{
+								"all_tags": [
+									"attack",
+									"melee"
+								],
+								"damage_types": [
+									"physical"
+								],
+								"id": "melee_physical_increased",
+								"mode": "increased",
+								"value": 0.04
+							}
+						],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"speed": 780.0,
+					"velocity": "(124.2682, -770.0373)"
+				}
+			],
+			"skill": "bolt"
+		},
+		{
+			"cast_facing": "(0.0, 0.0)",
+			"cooldown": 0.8,
+			"mana": 7.0,
+			"overlap": true,
+			"requested_facing": "(0.0, -1.0)",
+			"shapes": [
+				{
+					"lifetime": 1.7,
+					"payload": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 1.6,
+							"base_coefficient": 1.6,
+							"intrinsic": {
+								"lightning": 41.6
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"lightning": 41.6
+						},
+						"role": "projectile",
+						"skill_id": "bolt",
+						"tags": [
+							"hit",
+							"projectile",
+							"spell"
+						]
+					},
+					"pierce": 1,
+					"position": "(0.0, 0.0)",
+					"range": 650.0,
+					"slow": 0.0,
+					"snapshot": {
+						"accuracy": 140.0,
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"added_damage_sources": [],
+						"base_damage": 26.0,
+						"compiled_packets": {
+							"projectile": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 1.6,
+									"base_coefficient": 1.6,
+									"intrinsic": {
+										"lightning": 41.6
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"lightning": 41.6
+								},
+								"role": "projectile",
+								"skill_id": "bolt",
+								"tags": [
+									"hit",
+									"projectile",
+									"spell"
+								]
+							},
+							"secondary": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.0,
+									"base_coefficient": 0.9,
+									"intrinsic": {
+										"fire": 23.400000000000002
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 23.400000000000002
+								},
+								"role": "secondary",
+								"skill_id": "bolt",
+								"tags": [
+									"hit",
+									"area",
+									"secondary",
+									"explosion"
+								]
+							}
+						},
+						"compiled_skill_id": "bolt",
+						"critical": {
+							"primary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							},
+							"secondary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							}
+						},
+						"critical_modifiers": {
+							"base_chance": 0.05,
+							"base_multiplier": 1.5
+						},
+						"critical_roll": {
+							"chance": 0.05,
+							"critical": false,
+							"multiplier": 1.0
+						},
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"initial_count": 3,
+						"modifiers": [
+							{
+								"all_tags": [
+									"attack",
+									"melee"
+								],
+								"damage_types": [
+									"physical"
+								],
+								"id": "melee_physical_increased",
+								"mode": "increased",
+								"value": 0.04
+							}
+						],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"speed": 780.0,
+					"velocity": "(780.0, 0.0)"
+				},
+				{
+					"lifetime": 1.7,
+					"payload": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 1.6,
+							"base_coefficient": 1.6,
+							"intrinsic": {
+								"lightning": 41.6
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"lightning": 41.6
+						},
+						"role": "projectile",
+						"skill_id": "bolt",
+						"tags": [
+							"hit",
+							"projectile",
+							"spell"
+						]
+					},
+					"pierce": 1,
+					"position": "(0.0, 0.0)",
+					"range": 650.0,
+					"slow": 0.0,
+					"snapshot": {
+						"accuracy": 140.0,
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"added_damage_sources": [],
+						"base_damage": 26.0,
+						"compiled_packets": {
+							"projectile": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 1.6,
+									"base_coefficient": 1.6,
+									"intrinsic": {
+										"lightning": 41.6
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"lightning": 41.6
+								},
+								"role": "projectile",
+								"skill_id": "bolt",
+								"tags": [
+									"hit",
+									"projectile",
+									"spell"
+								]
+							},
+							"secondary": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.0,
+									"base_coefficient": 0.9,
+									"intrinsic": {
+										"fire": 23.400000000000002
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 23.400000000000002
+								},
+								"role": "secondary",
+								"skill_id": "bolt",
+								"tags": [
+									"hit",
+									"area",
+									"secondary",
+									"explosion"
+								]
+							}
+						},
+						"compiled_skill_id": "bolt",
+						"critical": {
+							"primary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							},
+							"secondary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							}
+						},
+						"critical_modifiers": {
+							"base_chance": 0.05,
+							"base_multiplier": 1.5
+						},
+						"critical_roll": {
+							"chance": 0.05,
+							"critical": false,
+							"multiplier": 1.0
+						},
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"initial_count": 3,
+						"modifiers": [
+							{
+								"all_tags": [
+									"attack",
+									"melee"
+								],
+								"damage_types": [
+									"physical"
+								],
+								"id": "melee_physical_increased",
+								"mode": "increased",
+								"value": 0.04
+							}
+						],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"speed": 780.0,
+					"velocity": "(780.0, 0.0)"
+				},
+				{
+					"lifetime": 1.7,
+					"payload": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 1.6,
+							"base_coefficient": 1.6,
+							"intrinsic": {
+								"lightning": 41.6
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"lightning": 41.6
+						},
+						"role": "projectile",
+						"skill_id": "bolt",
+						"tags": [
+							"hit",
+							"projectile",
+							"spell"
+						]
+					},
+					"pierce": 1,
+					"position": "(0.0, 0.0)",
+					"range": 650.0,
+					"slow": 0.0,
+					"snapshot": {
+						"accuracy": 140.0,
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"added_damage_sources": [],
+						"base_damage": 26.0,
+						"compiled_packets": {
+							"projectile": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 1.6,
+									"base_coefficient": 1.6,
+									"intrinsic": {
+										"lightning": 41.6
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"lightning": 41.6
+								},
+								"role": "projectile",
+								"skill_id": "bolt",
+								"tags": [
+									"hit",
+									"projectile",
+									"spell"
+								]
+							},
+							"secondary": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.0,
+									"base_coefficient": 0.9,
+									"intrinsic": {
+										"fire": 23.400000000000002
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 23.400000000000002
+								},
+								"role": "secondary",
+								"skill_id": "bolt",
+								"tags": [
+									"hit",
+									"area",
+									"secondary",
+									"explosion"
+								]
+							}
+						},
+						"compiled_skill_id": "bolt",
+						"critical": {
+							"primary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							},
+							"secondary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							}
+						},
+						"critical_modifiers": {
+							"base_chance": 0.05,
+							"base_multiplier": 1.5
+						},
+						"critical_roll": {
+							"chance": 0.05,
+							"critical": false,
+							"multiplier": 1.0
+						},
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"initial_count": 3,
+						"modifiers": [
+							{
+								"all_tags": [
+									"attack",
+									"melee"
+								],
+								"damage_types": [
+									"physical"
+								],
+								"id": "melee_physical_increased",
+								"mode": "increased",
+								"value": 0.04
+							}
+						],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"speed": 780.0,
+					"velocity": "(780.0, 0.0)"
+				}
+			],
+			"skill": "bolt"
+		},
+		{
+			"cast_facing": "(0.0, -1.0)",
+			"cooldown": 4.0,
+			"mana": 16.0,
+			"overlap": false,
+			"requested_facing": "(1.0, 0.0)",
+			"shapes": [
+				{
+					"lifetime": 1.7,
+					"payload": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 0.85,
+							"base_coefficient": 0.85,
+							"intrinsic": {
+								"cold": 22.099999999999998
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"cold": 22.099999999999998
+						},
+						"role": "projectile",
+						"skill_id": "frost",
+						"tags": [
+							"hit",
+							"projectile",
+							"spell"
+						]
+					},
+					"pierce": 2,
+					"position": "(-5.250732, -18.26001)",
+					"range": 650.0,
+					"slow": 3.0,
+					"snapshot": {
+						"accuracy": 140.0,
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"added_damage_sources": [],
+						"base_damage": 26.0,
+						"compiled_packets": {
+							"projectile": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.85,
+									"base_coefficient": 0.85,
+									"intrinsic": {
+										"cold": 22.099999999999998
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"cold": 22.099999999999998
+								},
+								"role": "projectile",
+								"skill_id": "frost",
+								"tags": [
+									"hit",
+									"projectile",
+									"spell"
+								]
+							},
+							"secondary": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.0,
+									"base_coefficient": 0.9,
+									"intrinsic": {
+										"fire": 23.400000000000002
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 23.400000000000002
+								},
+								"role": "secondary",
+								"skill_id": "frost",
+								"tags": [
+									"hit",
+									"area",
+									"secondary",
+									"explosion"
+								]
+							}
+						},
+						"compiled_skill_id": "frost",
+						"critical": {
+							"primary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							},
+							"secondary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							}
+						},
+						"critical_modifiers": {
+							"base_chance": 0.05,
+							"base_multiplier": 1.5
+						},
+						"critical_roll": {
+							"chance": 0.05,
+							"critical": false,
+							"multiplier": 1.0
+						},
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"initial_count": 5,
+						"modifiers": [
+							{
+								"all_tags": [
+									"attack",
+									"melee"
+								],
+								"damage_types": [
+									"physical"
+								],
+								"id": "melee_physical_increased",
+								"mode": "increased",
+								"value": 0.04
+							}
+						],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"speed": 520.0,
+					"velocity": "(-143.7049, -499.7488)"
+				},
+				{
+					"lifetime": 1.7,
+					"payload": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 0.85,
+							"base_coefficient": 0.85,
+							"intrinsic": {
+								"cold": 22.099999999999998
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"cold": 22.099999999999998
+						},
+						"role": "projectile",
+						"skill_id": "frost",
+						"tags": [
+							"hit",
+							"projectile",
+							"spell"
+						]
+					},
+					"pierce": 2,
+					"position": "(-2.651306, -18.81409)",
+					"range": 650.0,
+					"slow": 3.0,
+					"snapshot": {
+						"accuracy": 140.0,
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"added_damage_sources": [],
+						"base_damage": 26.0,
+						"compiled_packets": {
+							"projectile": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.85,
+									"base_coefficient": 0.85,
+									"intrinsic": {
+										"cold": 22.099999999999998
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"cold": 22.099999999999998
+								},
+								"role": "projectile",
+								"skill_id": "frost",
+								"tags": [
+									"hit",
+									"projectile",
+									"spell"
+								]
+							},
+							"secondary": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.0,
+									"base_coefficient": 0.9,
+									"intrinsic": {
+										"fire": 23.400000000000002
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 23.400000000000002
+								},
+								"role": "secondary",
+								"skill_id": "frost",
+								"tags": [
+									"hit",
+									"area",
+									"secondary",
+									"explosion"
+								]
+							}
+						},
+						"compiled_skill_id": "frost",
+						"critical": {
+							"primary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							},
+							"secondary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							}
+						},
+						"critical_modifiers": {
+							"base_chance": 0.05,
+							"base_multiplier": 1.5
+						},
+						"critical_roll": {
+							"chance": 0.05,
+							"critical": false,
+							"multiplier": 1.0
+						},
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"initial_count": 5,
+						"modifiers": [
+							{
+								"all_tags": [
+									"attack",
+									"melee"
+								],
+								"damage_types": [
+									"physical"
+								],
+								"id": "melee_physical_increased",
+								"mode": "increased",
+								"value": 0.04
+							}
+						],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"speed": 520.0,
+					"velocity": "(-72.56242, -514.9124)"
+				},
+				{
+					"lifetime": 1.7,
+					"payload": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 0.85,
+							"base_coefficient": 0.85,
+							"intrinsic": {
+								"cold": 22.099999999999998
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"cold": 22.099999999999998
+						},
+						"role": "projectile",
+						"skill_id": "frost",
+						"tags": [
+							"hit",
+							"projectile",
+							"spell"
+						]
+					},
+					"pierce": 2,
+					"position": "(0.0, -19.0)",
+					"range": 650.0,
+					"slow": 3.0,
+					"snapshot": {
+						"accuracy": 140.0,
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"added_damage_sources": [],
+						"base_damage": 26.0,
+						"compiled_packets": {
+							"projectile": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.85,
+									"base_coefficient": 0.85,
+									"intrinsic": {
+										"cold": 22.099999999999998
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"cold": 22.099999999999998
+								},
+								"role": "projectile",
+								"skill_id": "frost",
+								"tags": [
+									"hit",
+									"projectile",
+									"spell"
+								]
+							},
+							"secondary": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.0,
+									"base_coefficient": 0.9,
+									"intrinsic": {
+										"fire": 23.400000000000002
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 23.400000000000002
+								},
+								"role": "secondary",
+								"skill_id": "frost",
+								"tags": [
+									"hit",
+									"area",
+									"secondary",
+									"explosion"
+								]
+							}
+						},
+						"compiled_skill_id": "frost",
+						"critical": {
+							"primary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							},
+							"secondary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							}
+						},
+						"critical_modifiers": {
+							"base_chance": 0.05,
+							"base_multiplier": 1.5
+						},
+						"critical_roll": {
+							"chance": 0.05,
+							"critical": false,
+							"multiplier": 1.0
+						},
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"initial_count": 5,
+						"modifiers": [
+							{
+								"all_tags": [
+									"attack",
+									"melee"
+								],
+								"damage_types": [
+									"physical"
+								],
+								"id": "melee_physical_increased",
+								"mode": "increased",
+								"value": 0.04
+							}
+						],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"speed": 520.0,
+					"velocity": "(0.0, -520.0)"
+				},
+				{
+					"lifetime": 1.7,
+					"payload": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 0.85,
+							"base_coefficient": 0.85,
+							"intrinsic": {
+								"cold": 22.099999999999998
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"cold": 22.099999999999998
+						},
+						"role": "projectile",
+						"skill_id": "frost",
+						"tags": [
+							"hit",
+							"projectile",
+							"spell"
+						]
+					},
+					"pierce": 2,
+					"position": "(2.651306, -18.81409)",
+					"range": 650.0,
+					"slow": 3.0,
+					"snapshot": {
+						"accuracy": 140.0,
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"added_damage_sources": [],
+						"base_damage": 26.0,
+						"compiled_packets": {
+							"projectile": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.85,
+									"base_coefficient": 0.85,
+									"intrinsic": {
+										"cold": 22.099999999999998
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"cold": 22.099999999999998
+								},
+								"role": "projectile",
+								"skill_id": "frost",
+								"tags": [
+									"hit",
+									"projectile",
+									"spell"
+								]
+							},
+							"secondary": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.0,
+									"base_coefficient": 0.9,
+									"intrinsic": {
+										"fire": 23.400000000000002
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 23.400000000000002
+								},
+								"role": "secondary",
+								"skill_id": "frost",
+								"tags": [
+									"hit",
+									"area",
+									"secondary",
+									"explosion"
+								]
+							}
+						},
+						"compiled_skill_id": "frost",
+						"critical": {
+							"primary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							},
+							"secondary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							}
+						},
+						"critical_modifiers": {
+							"base_chance": 0.05,
+							"base_multiplier": 1.5
+						},
+						"critical_roll": {
+							"chance": 0.05,
+							"critical": false,
+							"multiplier": 1.0
+						},
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"initial_count": 5,
+						"modifiers": [
+							{
+								"all_tags": [
+									"attack",
+									"melee"
+								],
+								"damage_types": [
+									"physical"
+								],
+								"id": "melee_physical_increased",
+								"mode": "increased",
+								"value": 0.04
+							}
+						],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"speed": 520.0,
+					"velocity": "(72.56242, -514.9124)"
+				},
+				{
+					"lifetime": 1.7,
+					"payload": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 0.85,
+							"base_coefficient": 0.85,
+							"intrinsic": {
+								"cold": 22.099999999999998
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"cold": 22.099999999999998
+						},
+						"role": "projectile",
+						"skill_id": "frost",
+						"tags": [
+							"hit",
+							"projectile",
+							"spell"
+						]
+					},
+					"pierce": 2,
+					"position": "(5.250732, -18.26001)",
+					"range": 650.0,
+					"slow": 3.0,
+					"snapshot": {
+						"accuracy": 140.0,
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"added_damage_sources": [],
+						"base_damage": 26.0,
+						"compiled_packets": {
+							"projectile": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.85,
+									"base_coefficient": 0.85,
+									"intrinsic": {
+										"cold": 22.099999999999998
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"cold": 22.099999999999998
+								},
+								"role": "projectile",
+								"skill_id": "frost",
+								"tags": [
+									"hit",
+									"projectile",
+									"spell"
+								]
+							},
+							"secondary": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.0,
+									"base_coefficient": 0.9,
+									"intrinsic": {
+										"fire": 23.400000000000002
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 23.400000000000002
+								},
+								"role": "secondary",
+								"skill_id": "frost",
+								"tags": [
+									"hit",
+									"area",
+									"secondary",
+									"explosion"
+								]
+							}
+						},
+						"compiled_skill_id": "frost",
+						"critical": {
+							"primary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							},
+							"secondary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							}
+						},
+						"critical_modifiers": {
+							"base_chance": 0.05,
+							"base_multiplier": 1.5
+						},
+						"critical_roll": {
+							"chance": 0.05,
+							"critical": false,
+							"multiplier": 1.0
+						},
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"initial_count": 5,
+						"modifiers": [
+							{
+								"all_tags": [
+									"attack",
+									"melee"
+								],
+								"damage_types": [
+									"physical"
+								],
+								"id": "melee_physical_increased",
+								"mode": "increased",
+								"value": 0.04
+							}
+						],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"speed": 520.0,
+					"velocity": "(143.7049, -499.7488)"
+				}
+			],
+			"skill": "frost"
+		},
+		{
+			"cast_facing": "(0.0, 0.0)",
+			"cooldown": 4.0,
+			"mana": 16.0,
+			"overlap": true,
+			"requested_facing": "(0.0, -1.0)",
+			"shapes": [
+				{
+					"lifetime": 1.7,
+					"payload": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 0.85,
+							"base_coefficient": 0.85,
+							"intrinsic": {
+								"cold": 22.099999999999998
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"cold": 22.099999999999998
+						},
+						"role": "projectile",
+						"skill_id": "frost",
+						"tags": [
+							"hit",
+							"projectile",
+							"spell"
+						]
+					},
+					"pierce": 2,
+					"position": "(0.0, 0.0)",
+					"range": 650.0,
+					"slow": 3.0,
+					"snapshot": {
+						"accuracy": 140.0,
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"added_damage_sources": [],
+						"base_damage": 26.0,
+						"compiled_packets": {
+							"projectile": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.85,
+									"base_coefficient": 0.85,
+									"intrinsic": {
+										"cold": 22.099999999999998
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"cold": 22.099999999999998
+								},
+								"role": "projectile",
+								"skill_id": "frost",
+								"tags": [
+									"hit",
+									"projectile",
+									"spell"
+								]
+							},
+							"secondary": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.0,
+									"base_coefficient": 0.9,
+									"intrinsic": {
+										"fire": 23.400000000000002
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 23.400000000000002
+								},
+								"role": "secondary",
+								"skill_id": "frost",
+								"tags": [
+									"hit",
+									"area",
+									"secondary",
+									"explosion"
+								]
+							}
+						},
+						"compiled_skill_id": "frost",
+						"critical": {
+							"primary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							},
+							"secondary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							}
+						},
+						"critical_modifiers": {
+							"base_chance": 0.05,
+							"base_multiplier": 1.5
+						},
+						"critical_roll": {
+							"chance": 0.05,
+							"critical": false,
+							"multiplier": 1.0
+						},
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"initial_count": 5,
+						"modifiers": [
+							{
+								"all_tags": [
+									"attack",
+									"melee"
+								],
+								"damage_types": [
+									"physical"
+								],
+								"id": "melee_physical_increased",
+								"mode": "increased",
+								"value": 0.04
+							}
+						],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"speed": 520.0,
+					"velocity": "(520.0, 0.0)"
+				},
+				{
+					"lifetime": 1.7,
+					"payload": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 0.85,
+							"base_coefficient": 0.85,
+							"intrinsic": {
+								"cold": 22.099999999999998
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"cold": 22.099999999999998
+						},
+						"role": "projectile",
+						"skill_id": "frost",
+						"tags": [
+							"hit",
+							"projectile",
+							"spell"
+						]
+					},
+					"pierce": 2,
+					"position": "(0.0, 0.0)",
+					"range": 650.0,
+					"slow": 3.0,
+					"snapshot": {
+						"accuracy": 140.0,
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"added_damage_sources": [],
+						"base_damage": 26.0,
+						"compiled_packets": {
+							"projectile": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.85,
+									"base_coefficient": 0.85,
+									"intrinsic": {
+										"cold": 22.099999999999998
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"cold": 22.099999999999998
+								},
+								"role": "projectile",
+								"skill_id": "frost",
+								"tags": [
+									"hit",
+									"projectile",
+									"spell"
+								]
+							},
+							"secondary": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.0,
+									"base_coefficient": 0.9,
+									"intrinsic": {
+										"fire": 23.400000000000002
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 23.400000000000002
+								},
+								"role": "secondary",
+								"skill_id": "frost",
+								"tags": [
+									"hit",
+									"area",
+									"secondary",
+									"explosion"
+								]
+							}
+						},
+						"compiled_skill_id": "frost",
+						"critical": {
+							"primary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							},
+							"secondary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							}
+						},
+						"critical_modifiers": {
+							"base_chance": 0.05,
+							"base_multiplier": 1.5
+						},
+						"critical_roll": {
+							"chance": 0.05,
+							"critical": false,
+							"multiplier": 1.0
+						},
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"initial_count": 5,
+						"modifiers": [
+							{
+								"all_tags": [
+									"attack",
+									"melee"
+								],
+								"damage_types": [
+									"physical"
+								],
+								"id": "melee_physical_increased",
+								"mode": "increased",
+								"value": 0.04
+							}
+						],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"speed": 520.0,
+					"velocity": "(520.0, 0.0)"
+				},
+				{
+					"lifetime": 1.7,
+					"payload": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 0.85,
+							"base_coefficient": 0.85,
+							"intrinsic": {
+								"cold": 22.099999999999998
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"cold": 22.099999999999998
+						},
+						"role": "projectile",
+						"skill_id": "frost",
+						"tags": [
+							"hit",
+							"projectile",
+							"spell"
+						]
+					},
+					"pierce": 2,
+					"position": "(0.0, 0.0)",
+					"range": 650.0,
+					"slow": 3.0,
+					"snapshot": {
+						"accuracy": 140.0,
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"added_damage_sources": [],
+						"base_damage": 26.0,
+						"compiled_packets": {
+							"projectile": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.85,
+									"base_coefficient": 0.85,
+									"intrinsic": {
+										"cold": 22.099999999999998
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"cold": 22.099999999999998
+								},
+								"role": "projectile",
+								"skill_id": "frost",
+								"tags": [
+									"hit",
+									"projectile",
+									"spell"
+								]
+							},
+							"secondary": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.0,
+									"base_coefficient": 0.9,
+									"intrinsic": {
+										"fire": 23.400000000000002
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 23.400000000000002
+								},
+								"role": "secondary",
+								"skill_id": "frost",
+								"tags": [
+									"hit",
+									"area",
+									"secondary",
+									"explosion"
+								]
+							}
+						},
+						"compiled_skill_id": "frost",
+						"critical": {
+							"primary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							},
+							"secondary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							}
+						},
+						"critical_modifiers": {
+							"base_chance": 0.05,
+							"base_multiplier": 1.5
+						},
+						"critical_roll": {
+							"chance": 0.05,
+							"critical": false,
+							"multiplier": 1.0
+						},
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"initial_count": 5,
+						"modifiers": [
+							{
+								"all_tags": [
+									"attack",
+									"melee"
+								],
+								"damage_types": [
+									"physical"
+								],
+								"id": "melee_physical_increased",
+								"mode": "increased",
+								"value": 0.04
+							}
+						],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"speed": 520.0,
+					"velocity": "(520.0, 0.0)"
+				},
+				{
+					"lifetime": 1.7,
+					"payload": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 0.85,
+							"base_coefficient": 0.85,
+							"intrinsic": {
+								"cold": 22.099999999999998
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"cold": 22.099999999999998
+						},
+						"role": "projectile",
+						"skill_id": "frost",
+						"tags": [
+							"hit",
+							"projectile",
+							"spell"
+						]
+					},
+					"pierce": 2,
+					"position": "(0.0, 0.0)",
+					"range": 650.0,
+					"slow": 3.0,
+					"snapshot": {
+						"accuracy": 140.0,
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"added_damage_sources": [],
+						"base_damage": 26.0,
+						"compiled_packets": {
+							"projectile": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.85,
+									"base_coefficient": 0.85,
+									"intrinsic": {
+										"cold": 22.099999999999998
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"cold": 22.099999999999998
+								},
+								"role": "projectile",
+								"skill_id": "frost",
+								"tags": [
+									"hit",
+									"projectile",
+									"spell"
+								]
+							},
+							"secondary": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.0,
+									"base_coefficient": 0.9,
+									"intrinsic": {
+										"fire": 23.400000000000002
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 23.400000000000002
+								},
+								"role": "secondary",
+								"skill_id": "frost",
+								"tags": [
+									"hit",
+									"area",
+									"secondary",
+									"explosion"
+								]
+							}
+						},
+						"compiled_skill_id": "frost",
+						"critical": {
+							"primary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							},
+							"secondary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							}
+						},
+						"critical_modifiers": {
+							"base_chance": 0.05,
+							"base_multiplier": 1.5
+						},
+						"critical_roll": {
+							"chance": 0.05,
+							"critical": false,
+							"multiplier": 1.0
+						},
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"initial_count": 5,
+						"modifiers": [
+							{
+								"all_tags": [
+									"attack",
+									"melee"
+								],
+								"damage_types": [
+									"physical"
+								],
+								"id": "melee_physical_increased",
+								"mode": "increased",
+								"value": 0.04
+							}
+						],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"speed": 520.0,
+					"velocity": "(520.0, 0.0)"
+				},
+				{
+					"lifetime": 1.7,
+					"payload": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 0.85,
+							"base_coefficient": 0.85,
+							"intrinsic": {
+								"cold": 22.099999999999998
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"cold": 22.099999999999998
+						},
+						"role": "projectile",
+						"skill_id": "frost",
+						"tags": [
+							"hit",
+							"projectile",
+							"spell"
+						]
+					},
+					"pierce": 2,
+					"position": "(0.0, 0.0)",
+					"range": 650.0,
+					"slow": 3.0,
+					"snapshot": {
+						"accuracy": 140.0,
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"added_damage_sources": [],
+						"base_damage": 26.0,
+						"compiled_packets": {
+							"projectile": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.85,
+									"base_coefficient": 0.85,
+									"intrinsic": {
+										"cold": 22.099999999999998
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"cold": 22.099999999999998
+								},
+								"role": "projectile",
+								"skill_id": "frost",
+								"tags": [
+									"hit",
+									"projectile",
+									"spell"
+								]
+							},
+							"secondary": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.0,
+									"base_coefficient": 0.9,
+									"intrinsic": {
+										"fire": 23.400000000000002
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 23.400000000000002
+								},
+								"role": "secondary",
+								"skill_id": "frost",
+								"tags": [
+									"hit",
+									"area",
+									"secondary",
+									"explosion"
+								]
+							}
+						},
+						"compiled_skill_id": "frost",
+						"critical": {
+							"primary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							},
+							"secondary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							}
+						},
+						"critical_modifiers": {
+							"base_chance": 0.05,
+							"base_multiplier": 1.5
+						},
+						"critical_roll": {
+							"chance": 0.05,
+							"critical": false,
+							"multiplier": 1.0
+						},
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"initial_count": 5,
+						"modifiers": [
+							{
+								"all_tags": [
+									"attack",
+									"melee"
+								],
+								"damage_types": [
+									"physical"
+								],
+								"id": "melee_physical_increased",
+								"mode": "increased",
+								"value": 0.04
+							}
+						],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"speed": 520.0,
+					"velocity": "(520.0, 0.0)"
+				}
+			],
+			"skill": "frost"
+		},
+		{
+			"cast_facing": "(0.0, -1.0)",
+			"cooldown": 1.2,
+			"mana": 8.0,
+			"overlap": false,
+			"requested_facing": "(1.0, 0.0)",
+			"shapes": [
+				{
+					"lifetime": 1.7,
+					"payload": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 2.4,
+							"base_coefficient": 2.4,
+							"intrinsic": {
+								"chaos": 62.4
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"chaos": 62.4
+						},
+						"role": "projectile",
+						"skill_id": "shade_bolt",
+						"tags": [
+							"hit",
+							"projectile",
+							"spell"
+						]
+					},
+					"pierce": 0,
+					"position": "(0.0, -19.0)",
+					"range": 650.0,
+					"slow": 0.0,
+					"snapshot": {
+						"accuracy": 140.0,
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"added_damage_sources": [],
+						"base_damage": 26.0,
+						"compiled_packets": {
+							"projectile": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 2.4,
+									"base_coefficient": 2.4,
+									"intrinsic": {
+										"chaos": 62.4
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"chaos": 62.4
+								},
+								"role": "projectile",
+								"skill_id": "shade_bolt",
+								"tags": [
+									"hit",
+									"projectile",
+									"spell"
+								]
+							},
+							"secondary": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.0,
+									"base_coefficient": 0.9,
+									"intrinsic": {
+										"fire": 23.400000000000002
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 23.400000000000002
+								},
+								"role": "secondary",
+								"skill_id": "shade_bolt",
+								"tags": [
+									"hit",
+									"area",
+									"secondary",
+									"explosion"
+								]
+							}
+						},
+						"compiled_skill_id": "shade_bolt",
+						"critical": {
+							"primary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							},
+							"secondary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							}
+						},
+						"critical_modifiers": {
+							"base_chance": 0.05,
+							"base_multiplier": 1.5
+						},
+						"critical_roll": {
+							"chance": 0.05,
+							"critical": false,
+							"multiplier": 1.0
+						},
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"initial_count": 1,
+						"modifiers": [
+							{
+								"all_tags": [
+									"attack",
+									"melee"
+								],
+								"damage_types": [
+									"physical"
+								],
+								"id": "melee_physical_increased",
+								"mode": "increased",
+								"value": 0.04
+							}
+						],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"speed": 620.0,
+					"velocity": "(0.0, -620.0)"
+				}
+			],
+			"skill": "shade_bolt"
+		},
+		{
+			"cast_facing": "(0.0, 0.0)",
+			"cooldown": 1.2,
+			"mana": 8.0,
+			"overlap": true,
+			"requested_facing": "(0.0, -1.0)",
+			"shapes": [
+				{
+					"lifetime": 1.7,
+					"payload": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 2.4,
+							"base_coefficient": 2.4,
+							"intrinsic": {
+								"chaos": 62.4
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"chaos": 62.4
+						},
+						"role": "projectile",
+						"skill_id": "shade_bolt",
+						"tags": [
+							"hit",
+							"projectile",
+							"spell"
+						]
+					},
+					"pierce": 0,
+					"position": "(0.0, 0.0)",
+					"range": 650.0,
+					"slow": 0.0,
+					"snapshot": {
+						"accuracy": 140.0,
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"added_damage_sources": [],
+						"base_damage": 26.0,
+						"compiled_packets": {
+							"projectile": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 2.4,
+									"base_coefficient": 2.4,
+									"intrinsic": {
+										"chaos": 62.4
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"chaos": 62.4
+								},
+								"role": "projectile",
+								"skill_id": "shade_bolt",
+								"tags": [
+									"hit",
+									"projectile",
+									"spell"
+								]
+							},
+							"secondary": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.0,
+									"base_coefficient": 0.9,
+									"intrinsic": {
+										"fire": 23.400000000000002
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 23.400000000000002
+								},
+								"role": "secondary",
+								"skill_id": "shade_bolt",
+								"tags": [
+									"hit",
+									"area",
+									"secondary",
+									"explosion"
+								]
+							}
+						},
+						"compiled_skill_id": "shade_bolt",
+						"critical": {
+							"primary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							},
+							"secondary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							}
+						},
+						"critical_modifiers": {
+							"base_chance": 0.05,
+							"base_multiplier": 1.5
+						},
+						"critical_roll": {
+							"chance": 0.05,
+							"critical": false,
+							"multiplier": 1.0
+						},
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"initial_count": 1,
+						"modifiers": [
+							{
+								"all_tags": [
+									"attack",
+									"melee"
+								],
+								"damage_types": [
+									"physical"
+								],
+								"id": "melee_physical_increased",
+								"mode": "increased",
+								"value": 0.04
+							}
+						],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"speed": 620.0,
+					"velocity": "(620.0, 0.0)"
+				}
+			],
+			"skill": "shade_bolt"
+		},
+		{
+			"cast_facing": "(0.0, -1.0)",
+			"cooldown": 2.5,
+			"mana": 18.0,
+			"overlap": false,
+			"requested_facing": "(1.0, 0.0)",
+			"shapes": [
+				{
+					"lifetime": 0.9,
+					"payload": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 1.0,
+							"base_coefficient": 1.0,
+							"intrinsic": {
+								"fire": 10.4,
+								"physical": 15.6
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"fire": 10.4,
+							"physical": 15.6
+						},
+						"role": "parent",
+						"skill_id": "tornado",
+						"tags": [
+							"hit",
+							"attack",
+							"projectile"
+						]
+					},
+					"pierce": -1,
+					"position": "(-3.027039, -18.75732)",
+					"range": 150.0,
+					"slow": 0.0,
+					"snapshot": {
+						"accuracy": 140.0,
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"added_damage_sources": [],
+						"base_damage": 26.0,
+						"compiled_packets": {
+							"child": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.7,
+									"base_coefficient": 0.7,
+									"intrinsic": {
+										"fire": 7.279999999999999,
+										"physical": 10.92
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 7.279999999999999,
+									"physical": 10.92
+								},
+								"role": "child",
+								"skill_id": "tornado",
+								"tags": [
+									"hit",
+									"attack",
+									"projectile"
+								]
+							},
+							"parent": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 1.0,
+									"base_coefficient": 1.0,
+									"intrinsic": {
+										"fire": 10.4,
+										"physical": 15.6
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 10.4,
+									"physical": 15.6
+								},
+								"role": "parent",
+								"skill_id": "tornado",
+								"tags": [
+									"hit",
+									"attack",
+									"projectile"
+								]
+							},
+							"secondary": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.0,
+									"base_coefficient": 0.9,
+									"intrinsic": {
+										"fire": 23.400000000000002
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 23.400000000000002
+								},
+								"role": "secondary",
+								"skill_id": "tornado",
+								"tags": [
+									"hit",
+									"area",
+									"secondary",
+									"explosion"
+								]
+							}
+						},
+						"compiled_skill_id": "tornado",
+						"critical": {
+							"primary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							},
+							"secondary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							}
+						},
+						"critical_modifiers": {
+							"base_chance": 0.05,
+							"base_multiplier": 1.5
+						},
+						"critical_roll": {
+							"chance": 0.05,
+							"critical": false,
+							"multiplier": 1.0
+						},
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"initial_count": 3,
+						"modifiers": [
+							{
+								"all_tags": [
+									"attack",
+									"melee"
+								],
+								"damage_types": [
+									"physical"
+								],
+								"id": "melee_physical_increased",
+								"mode": "increased",
+								"value": 0.04
+							}
+						],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"speed": 420.0,
+					"velocity": "(-66.91365, -414.6355)"
+				},
+				{
+					"lifetime": 0.9,
+					"payload": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 1.0,
+							"base_coefficient": 1.0,
+							"intrinsic": {
+								"fire": 10.4,
+								"physical": 15.6
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"fire": 10.4,
+							"physical": 15.6
+						},
+						"role": "parent",
+						"skill_id": "tornado",
+						"tags": [
+							"hit",
+							"attack",
+							"projectile"
+						]
+					},
+					"pierce": -1,
+					"position": "(0.0, -19.0)",
+					"range": 150.0,
+					"slow": 0.0,
+					"snapshot": {
+						"accuracy": 140.0,
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"added_damage_sources": [],
+						"base_damage": 26.0,
+						"compiled_packets": {
+							"child": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.7,
+									"base_coefficient": 0.7,
+									"intrinsic": {
+										"fire": 7.279999999999999,
+										"physical": 10.92
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 7.279999999999999,
+									"physical": 10.92
+								},
+								"role": "child",
+								"skill_id": "tornado",
+								"tags": [
+									"hit",
+									"attack",
+									"projectile"
+								]
+							},
+							"parent": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 1.0,
+									"base_coefficient": 1.0,
+									"intrinsic": {
+										"fire": 10.4,
+										"physical": 15.6
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 10.4,
+									"physical": 15.6
+								},
+								"role": "parent",
+								"skill_id": "tornado",
+								"tags": [
+									"hit",
+									"attack",
+									"projectile"
+								]
+							},
+							"secondary": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.0,
+									"base_coefficient": 0.9,
+									"intrinsic": {
+										"fire": 23.400000000000002
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 23.400000000000002
+								},
+								"role": "secondary",
+								"skill_id": "tornado",
+								"tags": [
+									"hit",
+									"area",
+									"secondary",
+									"explosion"
+								]
+							}
+						},
+						"compiled_skill_id": "tornado",
+						"critical": {
+							"primary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							},
+							"secondary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							}
+						},
+						"critical_modifiers": {
+							"base_chance": 0.05,
+							"base_multiplier": 1.5
+						},
+						"critical_roll": {
+							"chance": 0.05,
+							"critical": false,
+							"multiplier": 1.0
+						},
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"initial_count": 3,
+						"modifiers": [
+							{
+								"all_tags": [
+									"attack",
+									"melee"
+								],
+								"damage_types": [
+									"physical"
+								],
+								"id": "melee_physical_increased",
+								"mode": "increased",
+								"value": 0.04
+							}
+						],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"speed": 420.0,
+					"velocity": "(0.0, -420.0)"
+				},
+				{
+					"lifetime": 0.9,
+					"payload": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 1.0,
+							"base_coefficient": 1.0,
+							"intrinsic": {
+								"fire": 10.4,
+								"physical": 15.6
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"fire": 10.4,
+							"physical": 15.6
+						},
+						"role": "parent",
+						"skill_id": "tornado",
+						"tags": [
+							"hit",
+							"attack",
+							"projectile"
+						]
+					},
+					"pierce": -1,
+					"position": "(3.027039, -18.75732)",
+					"range": 150.0,
+					"slow": 0.0,
+					"snapshot": {
+						"accuracy": 140.0,
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"added_damage_sources": [],
+						"base_damage": 26.0,
+						"compiled_packets": {
+							"child": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.7,
+									"base_coefficient": 0.7,
+									"intrinsic": {
+										"fire": 7.279999999999999,
+										"physical": 10.92
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 7.279999999999999,
+									"physical": 10.92
+								},
+								"role": "child",
+								"skill_id": "tornado",
+								"tags": [
+									"hit",
+									"attack",
+									"projectile"
+								]
+							},
+							"parent": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 1.0,
+									"base_coefficient": 1.0,
+									"intrinsic": {
+										"fire": 10.4,
+										"physical": 15.6
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 10.4,
+									"physical": 15.6
+								},
+								"role": "parent",
+								"skill_id": "tornado",
+								"tags": [
+									"hit",
+									"attack",
+									"projectile"
+								]
+							},
+							"secondary": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.0,
+									"base_coefficient": 0.9,
+									"intrinsic": {
+										"fire": 23.400000000000002
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 23.400000000000002
+								},
+								"role": "secondary",
+								"skill_id": "tornado",
+								"tags": [
+									"hit",
+									"area",
+									"secondary",
+									"explosion"
+								]
+							}
+						},
+						"compiled_skill_id": "tornado",
+						"critical": {
+							"primary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							},
+							"secondary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							}
+						},
+						"critical_modifiers": {
+							"base_chance": 0.05,
+							"base_multiplier": 1.5
+						},
+						"critical_roll": {
+							"chance": 0.05,
+							"critical": false,
+							"multiplier": 1.0
+						},
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"initial_count": 3,
+						"modifiers": [
+							{
+								"all_tags": [
+									"attack",
+									"melee"
+								],
+								"damage_types": [
+									"physical"
+								],
+								"id": "melee_physical_increased",
+								"mode": "increased",
+								"value": 0.04
+							}
+						],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"speed": 420.0,
+					"velocity": "(66.91365, -414.6355)"
+				}
+			],
+			"skill": "tornado"
+		},
+		{
+			"cast_facing": "(0.0, 0.0)",
+			"cooldown": 2.5,
+			"mana": 18.0,
+			"overlap": true,
+			"requested_facing": "(0.0, -1.0)",
+			"shapes": [
+				{
+					"lifetime": 0.9,
+					"payload": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 1.0,
+							"base_coefficient": 1.0,
+							"intrinsic": {
+								"fire": 10.4,
+								"physical": 15.6
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"fire": 10.4,
+							"physical": 15.6
+						},
+						"role": "parent",
+						"skill_id": "tornado",
+						"tags": [
+							"hit",
+							"attack",
+							"projectile"
+						]
+					},
+					"pierce": -1,
+					"position": "(0.0, 0.0)",
+					"range": 150.0,
+					"slow": 0.0,
+					"snapshot": {
+						"accuracy": 140.0,
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"added_damage_sources": [],
+						"base_damage": 26.0,
+						"compiled_packets": {
+							"child": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.7,
+									"base_coefficient": 0.7,
+									"intrinsic": {
+										"fire": 7.279999999999999,
+										"physical": 10.92
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 7.279999999999999,
+									"physical": 10.92
+								},
+								"role": "child",
+								"skill_id": "tornado",
+								"tags": [
+									"hit",
+									"attack",
+									"projectile"
+								]
+							},
+							"parent": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 1.0,
+									"base_coefficient": 1.0,
+									"intrinsic": {
+										"fire": 10.4,
+										"physical": 15.6
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 10.4,
+									"physical": 15.6
+								},
+								"role": "parent",
+								"skill_id": "tornado",
+								"tags": [
+									"hit",
+									"attack",
+									"projectile"
+								]
+							},
+							"secondary": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.0,
+									"base_coefficient": 0.9,
+									"intrinsic": {
+										"fire": 23.400000000000002
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 23.400000000000002
+								},
+								"role": "secondary",
+								"skill_id": "tornado",
+								"tags": [
+									"hit",
+									"area",
+									"secondary",
+									"explosion"
+								]
+							}
+						},
+						"compiled_skill_id": "tornado",
+						"critical": {
+							"primary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							},
+							"secondary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							}
+						},
+						"critical_modifiers": {
+							"base_chance": 0.05,
+							"base_multiplier": 1.5
+						},
+						"critical_roll": {
+							"chance": 0.05,
+							"critical": false,
+							"multiplier": 1.0
+						},
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"initial_count": 3,
+						"modifiers": [
+							{
+								"all_tags": [
+									"attack",
+									"melee"
+								],
+								"damage_types": [
+									"physical"
+								],
+								"id": "melee_physical_increased",
+								"mode": "increased",
+								"value": 0.04
+							}
+						],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"speed": 420.0,
+					"velocity": "(420.0, 0.0)"
+				},
+				{
+					"lifetime": 0.9,
+					"payload": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 1.0,
+							"base_coefficient": 1.0,
+							"intrinsic": {
+								"fire": 10.4,
+								"physical": 15.6
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"fire": 10.4,
+							"physical": 15.6
+						},
+						"role": "parent",
+						"skill_id": "tornado",
+						"tags": [
+							"hit",
+							"attack",
+							"projectile"
+						]
+					},
+					"pierce": -1,
+					"position": "(0.0, 0.0)",
+					"range": 150.0,
+					"slow": 0.0,
+					"snapshot": {
+						"accuracy": 140.0,
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"added_damage_sources": [],
+						"base_damage": 26.0,
+						"compiled_packets": {
+							"child": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.7,
+									"base_coefficient": 0.7,
+									"intrinsic": {
+										"fire": 7.279999999999999,
+										"physical": 10.92
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 7.279999999999999,
+									"physical": 10.92
+								},
+								"role": "child",
+								"skill_id": "tornado",
+								"tags": [
+									"hit",
+									"attack",
+									"projectile"
+								]
+							},
+							"parent": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 1.0,
+									"base_coefficient": 1.0,
+									"intrinsic": {
+										"fire": 10.4,
+										"physical": 15.6
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 10.4,
+									"physical": 15.6
+								},
+								"role": "parent",
+								"skill_id": "tornado",
+								"tags": [
+									"hit",
+									"attack",
+									"projectile"
+								]
+							},
+							"secondary": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.0,
+									"base_coefficient": 0.9,
+									"intrinsic": {
+										"fire": 23.400000000000002
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 23.400000000000002
+								},
+								"role": "secondary",
+								"skill_id": "tornado",
+								"tags": [
+									"hit",
+									"area",
+									"secondary",
+									"explosion"
+								]
+							}
+						},
+						"compiled_skill_id": "tornado",
+						"critical": {
+							"primary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							},
+							"secondary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							}
+						},
+						"critical_modifiers": {
+							"base_chance": 0.05,
+							"base_multiplier": 1.5
+						},
+						"critical_roll": {
+							"chance": 0.05,
+							"critical": false,
+							"multiplier": 1.0
+						},
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"initial_count": 3,
+						"modifiers": [
+							{
+								"all_tags": [
+									"attack",
+									"melee"
+								],
+								"damage_types": [
+									"physical"
+								],
+								"id": "melee_physical_increased",
+								"mode": "increased",
+								"value": 0.04
+							}
+						],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"speed": 420.0,
+					"velocity": "(420.0, 0.0)"
+				},
+				{
+					"lifetime": 0.9,
+					"payload": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 1.0,
+							"base_coefficient": 1.0,
+							"intrinsic": {
+								"fire": 10.4,
+								"physical": 15.6
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"fire": 10.4,
+							"physical": 15.6
+						},
+						"role": "parent",
+						"skill_id": "tornado",
+						"tags": [
+							"hit",
+							"attack",
+							"projectile"
+						]
+					},
+					"pierce": -1,
+					"position": "(0.0, 0.0)",
+					"range": 150.0,
+					"slow": 0.0,
+					"snapshot": {
+						"accuracy": 140.0,
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"added_damage_sources": [],
+						"base_damage": 26.0,
+						"compiled_packets": {
+							"child": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.7,
+									"base_coefficient": 0.7,
+									"intrinsic": {
+										"fire": 7.279999999999999,
+										"physical": 10.92
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 7.279999999999999,
+									"physical": 10.92
+								},
+								"role": "child",
+								"skill_id": "tornado",
+								"tags": [
+									"hit",
+									"attack",
+									"projectile"
+								]
+							},
+							"parent": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 1.0,
+									"base_coefficient": 1.0,
+									"intrinsic": {
+										"fire": 10.4,
+										"physical": 15.6
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 10.4,
+									"physical": 15.6
+								},
+								"role": "parent",
+								"skill_id": "tornado",
+								"tags": [
+									"hit",
+									"attack",
+									"projectile"
+								]
+							},
+							"secondary": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.0,
+									"base_coefficient": 0.9,
+									"intrinsic": {
+										"fire": 23.400000000000002
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 23.400000000000002
+								},
+								"role": "secondary",
+								"skill_id": "tornado",
+								"tags": [
+									"hit",
+									"area",
+									"secondary",
+									"explosion"
+								]
+							}
+						},
+						"compiled_skill_id": "tornado",
+						"critical": {
+							"primary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							},
+							"secondary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							}
+						},
+						"critical_modifiers": {
+							"base_chance": 0.05,
+							"base_multiplier": 1.5
+						},
+						"critical_roll": {
+							"chance": 0.05,
+							"critical": false,
+							"multiplier": 1.0
+						},
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"initial_count": 3,
+						"modifiers": [
+							{
+								"all_tags": [
+									"attack",
+									"melee"
+								],
+								"damage_types": [
+									"physical"
+								],
+								"id": "melee_physical_increased",
+								"mode": "increased",
+								"value": 0.04
+							}
+						],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"speed": 420.0,
+					"velocity": "(420.0, 0.0)"
+				}
+			],
+			"skill": "tornado"
+		},
+		{
+			"facing": "(0.0, -1.0)",
+			"from": "(642.0, 1704.0)",
+			"overlap": false,
+			"skill": "dash",
+			"to": "(642.0, 1529.0)"
+		},
+		{
+			"facing": "(0.0, 0.0)",
+			"from": "(642.0, 1704.0)",
+			"overlap": true,
+			"skill": "dash",
+			"to": "(642.0, 1704.0)"
+		}
+	],
+	"phase": "before",
+	"regular": {
+		"bolt": {
+			"cast_facing": "(0.0, -1.0)",
+			"cooldown": 0.8,
+			"mana": 7.0,
+			"overlap": false,
+			"requested_facing": "(1.0, 0.0)",
+			"shapes": [
+				{
+					"lifetime": 1.7,
+					"payload": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 1.6,
+							"base_coefficient": 1.6,
+							"intrinsic": {
+								"lightning": 41.6
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"lightning": 41.6
+						},
+						"role": "projectile",
+						"skill_id": "bolt",
+						"tags": [
+							"hit",
+							"projectile",
+							"spell"
+						]
+					},
+					"pierce": 1,
+					"position": "(-3.027039, -18.75732)",
+					"range": 650.0,
+					"slow": 0.0,
+					"snapshot": {
+						"accuracy": 140.0,
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"added_damage_sources": [],
+						"base_damage": 26.0,
+						"compiled_packets": {
+							"projectile": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 1.6,
+									"base_coefficient": 1.6,
+									"intrinsic": {
+										"lightning": 41.6
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"lightning": 41.6
+								},
+								"role": "projectile",
+								"skill_id": "bolt",
+								"tags": [
+									"hit",
+									"projectile",
+									"spell"
+								]
+							},
+							"secondary": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.0,
+									"base_coefficient": 0.9,
+									"intrinsic": {
+										"fire": 23.400000000000002
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 23.400000000000002
+								},
+								"role": "secondary",
+								"skill_id": "bolt",
+								"tags": [
+									"hit",
+									"area",
+									"secondary",
+									"explosion"
+								]
+							}
+						},
+						"compiled_skill_id": "bolt",
+						"critical": {
+							"primary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							},
+							"secondary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							}
+						},
+						"critical_modifiers": {
+							"base_chance": 0.05,
+							"base_multiplier": 1.5
+						},
+						"critical_roll": {
+							"chance": 0.05,
+							"critical": false,
+							"multiplier": 1.0
+						},
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"initial_count": 3,
+						"modifiers": [
+							{
+								"all_tags": [
+									"attack",
+									"melee"
+								],
+								"damage_types": [
+									"physical"
+								],
+								"id": "melee_physical_increased",
+								"mode": "increased",
+								"value": 0.04
+							}
+						],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"speed": 780.0,
+					"velocity": "(-124.2682, -770.0373)"
+				},
+				{
+					"lifetime": 1.7,
+					"payload": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 1.6,
+							"base_coefficient": 1.6,
+							"intrinsic": {
+								"lightning": 41.6
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"lightning": 41.6
+						},
+						"role": "projectile",
+						"skill_id": "bolt",
+						"tags": [
+							"hit",
+							"projectile",
+							"spell"
+						]
+					},
+					"pierce": 1,
+					"position": "(0.0, -19.0)",
+					"range": 650.0,
+					"slow": 0.0,
+					"snapshot": {
+						"accuracy": 140.0,
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"added_damage_sources": [],
+						"base_damage": 26.0,
+						"compiled_packets": {
+							"projectile": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 1.6,
+									"base_coefficient": 1.6,
+									"intrinsic": {
+										"lightning": 41.6
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"lightning": 41.6
+								},
+								"role": "projectile",
+								"skill_id": "bolt",
+								"tags": [
+									"hit",
+									"projectile",
+									"spell"
+								]
+							},
+							"secondary": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.0,
+									"base_coefficient": 0.9,
+									"intrinsic": {
+										"fire": 23.400000000000002
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 23.400000000000002
+								},
+								"role": "secondary",
+								"skill_id": "bolt",
+								"tags": [
+									"hit",
+									"area",
+									"secondary",
+									"explosion"
+								]
+							}
+						},
+						"compiled_skill_id": "bolt",
+						"critical": {
+							"primary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							},
+							"secondary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							}
+						},
+						"critical_modifiers": {
+							"base_chance": 0.05,
+							"base_multiplier": 1.5
+						},
+						"critical_roll": {
+							"chance": 0.05,
+							"critical": false,
+							"multiplier": 1.0
+						},
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"initial_count": 3,
+						"modifiers": [
+							{
+								"all_tags": [
+									"attack",
+									"melee"
+								],
+								"damage_types": [
+									"physical"
+								],
+								"id": "melee_physical_increased",
+								"mode": "increased",
+								"value": 0.04
+							}
+						],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"speed": 780.0,
+					"velocity": "(0.0, -780.0)"
+				},
+				{
+					"lifetime": 1.7,
+					"payload": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 1.6,
+							"base_coefficient": 1.6,
+							"intrinsic": {
+								"lightning": 41.6
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"lightning": 41.6
+						},
+						"role": "projectile",
+						"skill_id": "bolt",
+						"tags": [
+							"hit",
+							"projectile",
+							"spell"
+						]
+					},
+					"pierce": 1,
+					"position": "(3.027039, -18.75732)",
+					"range": 650.0,
+					"slow": 0.0,
+					"snapshot": {
+						"accuracy": 140.0,
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"added_damage_sources": [],
+						"base_damage": 26.0,
+						"compiled_packets": {
+							"projectile": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 1.6,
+									"base_coefficient": 1.6,
+									"intrinsic": {
+										"lightning": 41.6
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"lightning": 41.6
+								},
+								"role": "projectile",
+								"skill_id": "bolt",
+								"tags": [
+									"hit",
+									"projectile",
+									"spell"
+								]
+							},
+							"secondary": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.0,
+									"base_coefficient": 0.9,
+									"intrinsic": {
+										"fire": 23.400000000000002
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 23.400000000000002
+								},
+								"role": "secondary",
+								"skill_id": "bolt",
+								"tags": [
+									"hit",
+									"area",
+									"secondary",
+									"explosion"
+								]
+							}
+						},
+						"compiled_skill_id": "bolt",
+						"critical": {
+							"primary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							},
+							"secondary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							}
+						},
+						"critical_modifiers": {
+							"base_chance": 0.05,
+							"base_multiplier": 1.5
+						},
+						"critical_roll": {
+							"chance": 0.05,
+							"critical": false,
+							"multiplier": 1.0
+						},
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"initial_count": 3,
+						"modifiers": [
+							{
+								"all_tags": [
+									"attack",
+									"melee"
+								],
+								"damage_types": [
+									"physical"
+								],
+								"id": "melee_physical_increased",
+								"mode": "increased",
+								"value": 0.04
+							}
+						],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"speed": 780.0,
+					"velocity": "(124.2682, -770.0373)"
+				}
+			],
+			"skill": "bolt"
+		},
+		"dash": {
+			"facing": "(0.0, -1.0)",
+			"from": "(642.0, 1704.0)",
+			"overlap": false,
+			"skill": "dash",
+			"to": "(642.0, 1529.0)"
+		},
+		"frost": {
+			"cast_facing": "(0.0, -1.0)",
+			"cooldown": 4.0,
+			"mana": 16.0,
+			"overlap": false,
+			"requested_facing": "(1.0, 0.0)",
+			"shapes": [
+				{
+					"lifetime": 1.7,
+					"payload": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 0.85,
+							"base_coefficient": 0.85,
+							"intrinsic": {
+								"cold": 22.099999999999998
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"cold": 22.099999999999998
+						},
+						"role": "projectile",
+						"skill_id": "frost",
+						"tags": [
+							"hit",
+							"projectile",
+							"spell"
+						]
+					},
+					"pierce": 2,
+					"position": "(-5.250732, -18.26001)",
+					"range": 650.0,
+					"slow": 3.0,
+					"snapshot": {
+						"accuracy": 140.0,
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"added_damage_sources": [],
+						"base_damage": 26.0,
+						"compiled_packets": {
+							"projectile": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.85,
+									"base_coefficient": 0.85,
+									"intrinsic": {
+										"cold": 22.099999999999998
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"cold": 22.099999999999998
+								},
+								"role": "projectile",
+								"skill_id": "frost",
+								"tags": [
+									"hit",
+									"projectile",
+									"spell"
+								]
+							},
+							"secondary": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.0,
+									"base_coefficient": 0.9,
+									"intrinsic": {
+										"fire": 23.400000000000002
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 23.400000000000002
+								},
+								"role": "secondary",
+								"skill_id": "frost",
+								"tags": [
+									"hit",
+									"area",
+									"secondary",
+									"explosion"
+								]
+							}
+						},
+						"compiled_skill_id": "frost",
+						"critical": {
+							"primary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							},
+							"secondary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							}
+						},
+						"critical_modifiers": {
+							"base_chance": 0.05,
+							"base_multiplier": 1.5
+						},
+						"critical_roll": {
+							"chance": 0.05,
+							"critical": false,
+							"multiplier": 1.0
+						},
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"initial_count": 5,
+						"modifiers": [
+							{
+								"all_tags": [
+									"attack",
+									"melee"
+								],
+								"damage_types": [
+									"physical"
+								],
+								"id": "melee_physical_increased",
+								"mode": "increased",
+								"value": 0.04
+							}
+						],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"speed": 520.0,
+					"velocity": "(-143.7049, -499.7488)"
+				},
+				{
+					"lifetime": 1.7,
+					"payload": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 0.85,
+							"base_coefficient": 0.85,
+							"intrinsic": {
+								"cold": 22.099999999999998
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"cold": 22.099999999999998
+						},
+						"role": "projectile",
+						"skill_id": "frost",
+						"tags": [
+							"hit",
+							"projectile",
+							"spell"
+						]
+					},
+					"pierce": 2,
+					"position": "(-2.651306, -18.81409)",
+					"range": 650.0,
+					"slow": 3.0,
+					"snapshot": {
+						"accuracy": 140.0,
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"added_damage_sources": [],
+						"base_damage": 26.0,
+						"compiled_packets": {
+							"projectile": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.85,
+									"base_coefficient": 0.85,
+									"intrinsic": {
+										"cold": 22.099999999999998
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"cold": 22.099999999999998
+								},
+								"role": "projectile",
+								"skill_id": "frost",
+								"tags": [
+									"hit",
+									"projectile",
+									"spell"
+								]
+							},
+							"secondary": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.0,
+									"base_coefficient": 0.9,
+									"intrinsic": {
+										"fire": 23.400000000000002
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 23.400000000000002
+								},
+								"role": "secondary",
+								"skill_id": "frost",
+								"tags": [
+									"hit",
+									"area",
+									"secondary",
+									"explosion"
+								]
+							}
+						},
+						"compiled_skill_id": "frost",
+						"critical": {
+							"primary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							},
+							"secondary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							}
+						},
+						"critical_modifiers": {
+							"base_chance": 0.05,
+							"base_multiplier": 1.5
+						},
+						"critical_roll": {
+							"chance": 0.05,
+							"critical": false,
+							"multiplier": 1.0
+						},
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"initial_count": 5,
+						"modifiers": [
+							{
+								"all_tags": [
+									"attack",
+									"melee"
+								],
+								"damage_types": [
+									"physical"
+								],
+								"id": "melee_physical_increased",
+								"mode": "increased",
+								"value": 0.04
+							}
+						],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"speed": 520.0,
+					"velocity": "(-72.56242, -514.9124)"
+				},
+				{
+					"lifetime": 1.7,
+					"payload": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 0.85,
+							"base_coefficient": 0.85,
+							"intrinsic": {
+								"cold": 22.099999999999998
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"cold": 22.099999999999998
+						},
+						"role": "projectile",
+						"skill_id": "frost",
+						"tags": [
+							"hit",
+							"projectile",
+							"spell"
+						]
+					},
+					"pierce": 2,
+					"position": "(0.0, -19.0)",
+					"range": 650.0,
+					"slow": 3.0,
+					"snapshot": {
+						"accuracy": 140.0,
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"added_damage_sources": [],
+						"base_damage": 26.0,
+						"compiled_packets": {
+							"projectile": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.85,
+									"base_coefficient": 0.85,
+									"intrinsic": {
+										"cold": 22.099999999999998
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"cold": 22.099999999999998
+								},
+								"role": "projectile",
+								"skill_id": "frost",
+								"tags": [
+									"hit",
+									"projectile",
+									"spell"
+								]
+							},
+							"secondary": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.0,
+									"base_coefficient": 0.9,
+									"intrinsic": {
+										"fire": 23.400000000000002
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 23.400000000000002
+								},
+								"role": "secondary",
+								"skill_id": "frost",
+								"tags": [
+									"hit",
+									"area",
+									"secondary",
+									"explosion"
+								]
+							}
+						},
+						"compiled_skill_id": "frost",
+						"critical": {
+							"primary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							},
+							"secondary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							}
+						},
+						"critical_modifiers": {
+							"base_chance": 0.05,
+							"base_multiplier": 1.5
+						},
+						"critical_roll": {
+							"chance": 0.05,
+							"critical": false,
+							"multiplier": 1.0
+						},
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"initial_count": 5,
+						"modifiers": [
+							{
+								"all_tags": [
+									"attack",
+									"melee"
+								],
+								"damage_types": [
+									"physical"
+								],
+								"id": "melee_physical_increased",
+								"mode": "increased",
+								"value": 0.04
+							}
+						],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"speed": 520.0,
+					"velocity": "(0.0, -520.0)"
+				},
+				{
+					"lifetime": 1.7,
+					"payload": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 0.85,
+							"base_coefficient": 0.85,
+							"intrinsic": {
+								"cold": 22.099999999999998
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"cold": 22.099999999999998
+						},
+						"role": "projectile",
+						"skill_id": "frost",
+						"tags": [
+							"hit",
+							"projectile",
+							"spell"
+						]
+					},
+					"pierce": 2,
+					"position": "(2.651306, -18.81409)",
+					"range": 650.0,
+					"slow": 3.0,
+					"snapshot": {
+						"accuracy": 140.0,
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"added_damage_sources": [],
+						"base_damage": 26.0,
+						"compiled_packets": {
+							"projectile": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.85,
+									"base_coefficient": 0.85,
+									"intrinsic": {
+										"cold": 22.099999999999998
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"cold": 22.099999999999998
+								},
+								"role": "projectile",
+								"skill_id": "frost",
+								"tags": [
+									"hit",
+									"projectile",
+									"spell"
+								]
+							},
+							"secondary": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.0,
+									"base_coefficient": 0.9,
+									"intrinsic": {
+										"fire": 23.400000000000002
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 23.400000000000002
+								},
+								"role": "secondary",
+								"skill_id": "frost",
+								"tags": [
+									"hit",
+									"area",
+									"secondary",
+									"explosion"
+								]
+							}
+						},
+						"compiled_skill_id": "frost",
+						"critical": {
+							"primary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							},
+							"secondary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							}
+						},
+						"critical_modifiers": {
+							"base_chance": 0.05,
+							"base_multiplier": 1.5
+						},
+						"critical_roll": {
+							"chance": 0.05,
+							"critical": false,
+							"multiplier": 1.0
+						},
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"initial_count": 5,
+						"modifiers": [
+							{
+								"all_tags": [
+									"attack",
+									"melee"
+								],
+								"damage_types": [
+									"physical"
+								],
+								"id": "melee_physical_increased",
+								"mode": "increased",
+								"value": 0.04
+							}
+						],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"speed": 520.0,
+					"velocity": "(72.56242, -514.9124)"
+				},
+				{
+					"lifetime": 1.7,
+					"payload": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 0.85,
+							"base_coefficient": 0.85,
+							"intrinsic": {
+								"cold": 22.099999999999998
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"cold": 22.099999999999998
+						},
+						"role": "projectile",
+						"skill_id": "frost",
+						"tags": [
+							"hit",
+							"projectile",
+							"spell"
+						]
+					},
+					"pierce": 2,
+					"position": "(5.250732, -18.26001)",
+					"range": 650.0,
+					"slow": 3.0,
+					"snapshot": {
+						"accuracy": 140.0,
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"added_damage_sources": [],
+						"base_damage": 26.0,
+						"compiled_packets": {
+							"projectile": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.85,
+									"base_coefficient": 0.85,
+									"intrinsic": {
+										"cold": 22.099999999999998
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"cold": 22.099999999999998
+								},
+								"role": "projectile",
+								"skill_id": "frost",
+								"tags": [
+									"hit",
+									"projectile",
+									"spell"
+								]
+							},
+							"secondary": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.0,
+									"base_coefficient": 0.9,
+									"intrinsic": {
+										"fire": 23.400000000000002
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 23.400000000000002
+								},
+								"role": "secondary",
+								"skill_id": "frost",
+								"tags": [
+									"hit",
+									"area",
+									"secondary",
+									"explosion"
+								]
+							}
+						},
+						"compiled_skill_id": "frost",
+						"critical": {
+							"primary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							},
+							"secondary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							}
+						},
+						"critical_modifiers": {
+							"base_chance": 0.05,
+							"base_multiplier": 1.5
+						},
+						"critical_roll": {
+							"chance": 0.05,
+							"critical": false,
+							"multiplier": 1.0
+						},
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"initial_count": 5,
+						"modifiers": [
+							{
+								"all_tags": [
+									"attack",
+									"melee"
+								],
+								"damage_types": [
+									"physical"
+								],
+								"id": "melee_physical_increased",
+								"mode": "increased",
+								"value": 0.04
+							}
+						],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"speed": 520.0,
+					"velocity": "(143.7049, -499.7488)"
+				}
+			],
+			"skill": "frost"
+		},
+		"shade_bolt": {
+			"cast_facing": "(0.0, -1.0)",
+			"cooldown": 1.2,
+			"mana": 8.0,
+			"overlap": false,
+			"requested_facing": "(1.0, 0.0)",
+			"shapes": [
+				{
+					"lifetime": 1.7,
+					"payload": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 2.4,
+							"base_coefficient": 2.4,
+							"intrinsic": {
+								"chaos": 62.4
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"chaos": 62.4
+						},
+						"role": "projectile",
+						"skill_id": "shade_bolt",
+						"tags": [
+							"hit",
+							"projectile",
+							"spell"
+						]
+					},
+					"pierce": 0,
+					"position": "(0.0, -19.0)",
+					"range": 650.0,
+					"slow": 0.0,
+					"snapshot": {
+						"accuracy": 140.0,
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"added_damage_sources": [],
+						"base_damage": 26.0,
+						"compiled_packets": {
+							"projectile": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 2.4,
+									"base_coefficient": 2.4,
+									"intrinsic": {
+										"chaos": 62.4
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"chaos": 62.4
+								},
+								"role": "projectile",
+								"skill_id": "shade_bolt",
+								"tags": [
+									"hit",
+									"projectile",
+									"spell"
+								]
+							},
+							"secondary": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.0,
+									"base_coefficient": 0.9,
+									"intrinsic": {
+										"fire": 23.400000000000002
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 23.400000000000002
+								},
+								"role": "secondary",
+								"skill_id": "shade_bolt",
+								"tags": [
+									"hit",
+									"area",
+									"secondary",
+									"explosion"
+								]
+							}
+						},
+						"compiled_skill_id": "shade_bolt",
+						"critical": {
+							"primary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							},
+							"secondary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							}
+						},
+						"critical_modifiers": {
+							"base_chance": 0.05,
+							"base_multiplier": 1.5
+						},
+						"critical_roll": {
+							"chance": 0.05,
+							"critical": false,
+							"multiplier": 1.0
+						},
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"initial_count": 1,
+						"modifiers": [
+							{
+								"all_tags": [
+									"attack",
+									"melee"
+								],
+								"damage_types": [
+									"physical"
+								],
+								"id": "melee_physical_increased",
+								"mode": "increased",
+								"value": 0.04
+							}
+						],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"speed": 620.0,
+					"velocity": "(0.0, -620.0)"
+				}
+			],
+			"skill": "shade_bolt"
+		},
+		"tornado": {
+			"cast_facing": "(0.0, -1.0)",
+			"cooldown": 2.5,
+			"mana": 18.0,
+			"overlap": false,
+			"requested_facing": "(1.0, 0.0)",
+			"shapes": [
+				{
+					"lifetime": 0.9,
+					"payload": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 1.0,
+							"base_coefficient": 1.0,
+							"intrinsic": {
+								"fire": 10.4,
+								"physical": 15.6
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"fire": 10.4,
+							"physical": 15.6
+						},
+						"role": "parent",
+						"skill_id": "tornado",
+						"tags": [
+							"hit",
+							"attack",
+							"projectile"
+						]
+					},
+					"pierce": -1,
+					"position": "(-3.027039, -18.75732)",
+					"range": 150.0,
+					"slow": 0.0,
+					"snapshot": {
+						"accuracy": 140.0,
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"added_damage_sources": [],
+						"base_damage": 26.0,
+						"compiled_packets": {
+							"child": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.7,
+									"base_coefficient": 0.7,
+									"intrinsic": {
+										"fire": 7.279999999999999,
+										"physical": 10.92
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 7.279999999999999,
+									"physical": 10.92
+								},
+								"role": "child",
+								"skill_id": "tornado",
+								"tags": [
+									"hit",
+									"attack",
+									"projectile"
+								]
+							},
+							"parent": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 1.0,
+									"base_coefficient": 1.0,
+									"intrinsic": {
+										"fire": 10.4,
+										"physical": 15.6
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 10.4,
+									"physical": 15.6
+								},
+								"role": "parent",
+								"skill_id": "tornado",
+								"tags": [
+									"hit",
+									"attack",
+									"projectile"
+								]
+							},
+							"secondary": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.0,
+									"base_coefficient": 0.9,
+									"intrinsic": {
+										"fire": 23.400000000000002
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 23.400000000000002
+								},
+								"role": "secondary",
+								"skill_id": "tornado",
+								"tags": [
+									"hit",
+									"area",
+									"secondary",
+									"explosion"
+								]
+							}
+						},
+						"compiled_skill_id": "tornado",
+						"critical": {
+							"primary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							},
+							"secondary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							}
+						},
+						"critical_modifiers": {
+							"base_chance": 0.05,
+							"base_multiplier": 1.5
+						},
+						"critical_roll": {
+							"chance": 0.05,
+							"critical": false,
+							"multiplier": 1.0
+						},
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"initial_count": 3,
+						"modifiers": [
+							{
+								"all_tags": [
+									"attack",
+									"melee"
+								],
+								"damage_types": [
+									"physical"
+								],
+								"id": "melee_physical_increased",
+								"mode": "increased",
+								"value": 0.04
+							}
+						],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"speed": 420.0,
+					"velocity": "(-66.91365, -414.6355)"
+				},
+				{
+					"lifetime": 0.9,
+					"payload": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 1.0,
+							"base_coefficient": 1.0,
+							"intrinsic": {
+								"fire": 10.4,
+								"physical": 15.6
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"fire": 10.4,
+							"physical": 15.6
+						},
+						"role": "parent",
+						"skill_id": "tornado",
+						"tags": [
+							"hit",
+							"attack",
+							"projectile"
+						]
+					},
+					"pierce": -1,
+					"position": "(0.0, -19.0)",
+					"range": 150.0,
+					"slow": 0.0,
+					"snapshot": {
+						"accuracy": 140.0,
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"added_damage_sources": [],
+						"base_damage": 26.0,
+						"compiled_packets": {
+							"child": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.7,
+									"base_coefficient": 0.7,
+									"intrinsic": {
+										"fire": 7.279999999999999,
+										"physical": 10.92
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 7.279999999999999,
+									"physical": 10.92
+								},
+								"role": "child",
+								"skill_id": "tornado",
+								"tags": [
+									"hit",
+									"attack",
+									"projectile"
+								]
+							},
+							"parent": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 1.0,
+									"base_coefficient": 1.0,
+									"intrinsic": {
+										"fire": 10.4,
+										"physical": 15.6
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 10.4,
+									"physical": 15.6
+								},
+								"role": "parent",
+								"skill_id": "tornado",
+								"tags": [
+									"hit",
+									"attack",
+									"projectile"
+								]
+							},
+							"secondary": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.0,
+									"base_coefficient": 0.9,
+									"intrinsic": {
+										"fire": 23.400000000000002
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 23.400000000000002
+								},
+								"role": "secondary",
+								"skill_id": "tornado",
+								"tags": [
+									"hit",
+									"area",
+									"secondary",
+									"explosion"
+								]
+							}
+						},
+						"compiled_skill_id": "tornado",
+						"critical": {
+							"primary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							},
+							"secondary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							}
+						},
+						"critical_modifiers": {
+							"base_chance": 0.05,
+							"base_multiplier": 1.5
+						},
+						"critical_roll": {
+							"chance": 0.05,
+							"critical": false,
+							"multiplier": 1.0
+						},
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"initial_count": 3,
+						"modifiers": [
+							{
+								"all_tags": [
+									"attack",
+									"melee"
+								],
+								"damage_types": [
+									"physical"
+								],
+								"id": "melee_physical_increased",
+								"mode": "increased",
+								"value": 0.04
+							}
+						],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"speed": 420.0,
+					"velocity": "(0.0, -420.0)"
+				},
+				{
+					"lifetime": 0.9,
+					"payload": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 1.0,
+							"base_coefficient": 1.0,
+							"intrinsic": {
+								"fire": 10.4,
+								"physical": 15.6
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"fire": 10.4,
+							"physical": 15.6
+						},
+						"role": "parent",
+						"skill_id": "tornado",
+						"tags": [
+							"hit",
+							"attack",
+							"projectile"
+						]
+					},
+					"pierce": -1,
+					"position": "(3.027039, -18.75732)",
+					"range": 150.0,
+					"slow": 0.0,
+					"snapshot": {
+						"accuracy": 140.0,
+						"added_damage": {
+							"attack": {
+								"fire": 0.0,
+								"physical": 0.0
+							},
+							"spell": {
+								"cold": 0.0,
+								"lightning": 0.0
+							}
+						},
+						"added_damage_sources": [],
+						"base_damage": 26.0,
+						"compiled_packets": {
+							"child": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.7,
+									"base_coefficient": 0.7,
+									"intrinsic": {
+										"fire": 7.279999999999999,
+										"physical": 10.92
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 7.279999999999999,
+									"physical": 10.92
+								},
+								"role": "child",
+								"skill_id": "tornado",
+								"tags": [
+									"hit",
+									"attack",
+									"projectile"
+								]
+							},
+							"parent": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 1.0,
+									"base_coefficient": 1.0,
+									"intrinsic": {
+										"fire": 10.4,
+										"physical": 15.6
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 10.4,
+									"physical": 15.6
+								},
+								"role": "parent",
+								"skill_id": "tornado",
+								"tags": [
+									"hit",
+									"attack",
+									"projectile"
+								]
+							},
+							"secondary": {
+								"assembly": {
+									"added": {
+
+									},
+									"added_effectiveness": 0.0,
+									"base_coefficient": 0.9,
+									"intrinsic": {
+										"fire": 23.400000000000002
+									},
+									"stage": "hit_base"
+								},
+								"base": {
+									"fire": 23.400000000000002
+								},
+								"role": "secondary",
+								"skill_id": "tornado",
+								"tags": [
+									"hit",
+									"area",
+									"secondary",
+									"explosion"
+								]
+							}
+						},
+						"compiled_skill_id": "tornado",
+						"critical": {
+							"primary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							},
+							"secondary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							}
+						},
+						"critical_modifiers": {
+							"base_chance": 0.05,
+							"base_multiplier": 1.5
+						},
+						"critical_roll": {
+							"chance": 0.05,
+							"critical": false,
+							"multiplier": 1.0
+						},
+						"effects": [],
+						"explosion_recipe": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"initial_count": 3,
+						"modifiers": [
+							{
+								"all_tags": [
+									"attack",
+									"melee"
+								],
+								"damage_types": [
+									"physical"
+								],
+								"id": "melee_physical_increased",
+								"mode": "increased",
+								"value": 0.04
+							}
+						],
+						"projectile_count": 0,
+						"tornado_recipe": {
+							"child": {
+								"added_effectiveness": 0.7,
+								"coefficient": 0.7,
+								"lifetime": 1.7,
+								"pierce": -1,
+								"radius": 4.5,
+								"range": 150.0,
+								"role": "child",
+								"speed": 260.0,
+								"split": false
+							},
+							"child_count": 3,
+							"explosion": {
+								"added_effectiveness": 0.0,
+								"coefficient": 0.9,
+								"radius": 76.0
+							},
+							"parent": {
+								"added_effectiveness": 1.0,
+								"coefficient": 1.0,
+								"lifetime": 0.9,
+								"pierce": -1,
+								"radius": 6.0,
+								"range": 150.0,
+								"role": "parent",
+								"speed": 420.0,
+								"split": true
+							},
+							"parent_count": 3,
+							"spread": 0.16
+						}
+					},
+					"speed": 420.0,
+					"velocity": "(66.91365, -414.6355)"
+				}
+			],
+			"skill": "tornado"
+		}
+	}
+}

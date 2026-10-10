@@ -1188,8 +1188,11 @@ func _aim_direction() -> Vector2:
 			return mouse_direction.normalized()
 	var nearest: Dictionary = _nearest_enemy(player_pos)
 	if not nearest.is_empty():
-		return (Vector2(nearest.pos) - player_pos).normalized()
-	return player_facing
+		var offset: Vector2 = Vector2(nearest.pos) - player_pos
+		if not offset.is_zero_approx(): return offset.normalized()
+	# A coincident target gives no heading. Keep the existing facing before
+	# fan rotation and muzzle offset instead of letting every carrier face right.
+	return player_facing if not player_facing.is_zero_approx() else Vector2.RIGHT
 
 
 func _update_auto_attack() -> void:
@@ -1348,11 +1351,7 @@ func _execute_compiled(compiled: Dictionary, group_id: String = "", main_uid: St
 	if not critical.ok:return false
 	mana -= mana_cost
 	if group_id.is_empty(): cooldowns[id] = float(compiled.cooldown)
-	var cast_facing: Vector2 = _aim_direction()
-	# A coincident nearest body has no aim vector, but still intersects cleave.
-	if id == "cleave" and cast_facing.is_zero_approx():
-		cast_facing = player_facing if not player_facing.is_zero_approx() else Vector2.RIGHT
-	player_facing = cast_facing
+	player_facing = _aim_direction()
 	var color: Color = skill.color
 	var context: Dictionary = {"snapshot": critical.snapshot, "cast_id": 0 if id == "tornado" else projectile_runtime.new_cast()}
 	match id:
