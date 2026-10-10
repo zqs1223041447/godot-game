@@ -1,0 +1,72 @@
+{
+	"checks": 25,
+	"failed_labels": [
+		"Use a registered ordinary root from the actual map"
+	],
+	"failures": 1,
+	"scope": "Current canonical Main formal map; controlled mana/shield/target resources and capacity saturation; no models or production code changed",
+	"stages": [
+		{
+			"cues": [
+				{
+					"age": 0.0,
+					"color": "(0.4627, 0.7882, 1.0, 1.0)",
+					"destination": "(362.0, 2184.0)",
+					"direction": "(1.0, 0.0)",
+					"duration": 0.24,
+					"id": 1,
+					"kind": "cast",
+					"origin": "(362.0, 2184.0)",
+					"radius": 20.0,
+					"shielded": false,
+					"skill": "bolt",
+					"target_id": 0
+				}
+			],
+			"dropped": 0,
+			"kills": 0,
+			"next_id": 2,
+			"reward_kills": 0,
+			"rng": "-3909177789937036592",
+			"stage": "accepted cast"
+		},
+		{
+			"cues": [
+				{
+					"age": 0.0,
+					"color": "(0.5961, 0.8941, 0.8353, 1.0)",
+					"destination": "(362.0, 2184.0)",
+					"direction": "(1.0, 0.0)",
+					"duration": 0.24,
+					"id": 1,
+					"kind": "hurt",
+					"origin": "(362.0, 2184.0)",
+					"radius": 20.0,
+					"shielded": false,
+					"skill": "",
+					"target_id": 0
+				},
+				{
+					"age": 0.0,
+					"color": "(0.5961, 0.8941, 0.8353, 1.0)",
+					"destination": "(362.0, 2184.0)",
+					"direction": "(1.0, 0.0)",
+					"duration": 0.24,
+					"id": 2,
+					"kind": "hurt",
+					"origin": "(362.0, 2184.0)",
+					"radius": 20.0,
+					"shielded": true,
+					"skill": "",
+					"target_id": 0
+				}
+			],
+			"dropped": 0,
+			"kills": 0,
+			"next_id": 3,
+			"reward_kills": 0,
+			"rng": "-3909177789937036592",
+			"stage": "player damage"
+		}
+	]
+}

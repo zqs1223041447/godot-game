@@ -49,6 +49,20 @@
     "tests/combat_cues_min_priority_test.gd": "2e27a5582ac09ccb7555accc313b3b5e3473e94e04c24c9012880d1dec75ba1a",
     "tools/diagnostics/combat_cues_min_priority_profile.gd": "c6e3c3eb771aa1f844c98713611fb2ec7e55acaa52b1442c077733378204be16",
     "docs/qa/combat-cues-min-priority/baseline.gd.txt": "e793f12a2c4680f2105350605bba4f97fc22f53209613ea7743f172fdb21d19b",
-    "docs/qa/combat-cues-min-priority/paired.json": "9169e18c465944a0c43acb190ea49ace70bc86e75b248270004c7ce46d0b87e7"
+    "docs/qa/combat-cues-min-priority/paired.json": "9169e18c465944a0c43acb190ea49ace70bc86e75b248270004c7ce46d0b87e7",
+    "tests/canonical_combat_cues_integration_test.gd": "6e2567178789edcc343896111dd4d12a548a5ff47684d76c86def1fa890cbc70",
+    "docs/qa/combat-cues-min-priority/canonical-integration-02.json": "c2dea02bc85326c47e8f3e30f8fa8d04e0acd49c1a8e708e6baa7588c822e624"
+  },
+  "canonical_integration": {
+    "checks": 37,
+    "failures": 0,
+    "result": "canonical-integration-02.json",
+    "initial_fixture_failure": "canonical-integration-01: rarity selector ordinary instead of catalog normal; corrected only the test",
+    "scope": [
+      "actual canonical group rejection: mana, menu, cooldown, capacity",
+      "life and shield hurt/impact cues",
+      "registered root death and duplicate settlement",
+      "effects expiration preserves resources, RNG, cooldowns and persistence"
+    ]
   }
 }

@@ -45,6 +45,23 @@ timeout 45s env XDG_DATA_HOME=/tmp/godot-exploration-diagnostic-cues-review XDG_
 
 正式地图工具沿用受保护的 `/tmp/godot-exploration-diagnostic-` 前缀及canonical临时存档夹具，不读写真实玩家存档。源指纹、逐步时间、完整状态哈希、调用数在 `paired.json` / `verification.json`。
 
-## 下一项可执行非模型任务
+## 后续授权的 canonical 集成补证
 
-为特效集成验收增加一份当前 canonical Main 的合法夹具，复用既有测试的拒绝施放、承伤、击杀与过期断言，优先补回本次旧BuildState无法运行的正式调用链验证。范围限定测试/QA，不修改模型或战斗规则；通过后再独立提交。这里仅列出下一步，不在本批夹带实现。
+`tests/canonical_combat_cues_integration_test.gd`：**37项，0失败**，Godot退出0，无引擎/脚本错误，详见 `canonical-integration-02.json` / `.log`。复用现有正式地图构造器及关闭计时的 Main 包装，真实 canonical 模型在正式破碎遗迹I中持有37个注册敌人；从已有技能组选择可编译的投射物宝石，不赠送或新建技能。
+
+- 实际 `cast_group` 检查魔力不足、背包阻塞、冷却和满投射物容量拒绝。逐字节对照战斗状态、RNG、资源、冷却、存档/保存计数和完整特效池/ID/丢弃计数；合法施放产生一次对应技能/位置的cast特效，并支付编译所得魔力及冷却。
+- 实际 `hit_player_components` 验证生命及全护盾承伤各产生一次hurt，以及无敌期间拒绝不新增特效。实际敌人结算验证shielded/unshielded impact和真实target_id。
+- 在地图中选取已注册normal稀有度根敌人，通过实际伤害/进度事务击杀，验证根击杀进度、奖励击杀和impact→death顺序；重复尸体伤害/死亡结算不新增特效、奖励、随机消耗或保存。
+- 实际 `_update_effects` 先过期短寿命impact并保留death，再全部清空；next_id与dropped不变，资源、模型、磁盘、RNG和冷却不变。
+
+资源、目标血盾和容量为显式受控夹具；满容量使用已合法创建投射物的副本，重复ID期间不执行模拟。伤害消费者测试使用已有 `_damage_enemy` 已结算伤害入口，不宣称完整技能伤害/命中计算覆盖。首轮 `canonical-integration-01` 把稀有度条件误写为生成上下文 `ordinary`，未找到目标；改为目录值 `normal` 后通过。保留该轮25项/1失败及旧legacy失败记录，不合并成通过数量。本次补证只改测试与QA，优化生产代码保持 `7424524` 原样。
+
+复现：
+
+```bash
+timeout 30s env XDG_DATA_HOME=/tmp/godot-exploration-diagnostic-canonical-cues-review XDG_CACHE_HOME=/tmp/godot-exploration-diagnostic-canonical-cues-review-cache CUES_CANONICAL_OUT=/tmp/canonical-cues-review.json godot --headless --path . --script res://tests/canonical_combat_cues_integration_test.gd
+```
+
+## 下一项可执行非模型缺口
+
+本批尚未补回真实龙卷投射物的split→return→explosion特效集成链。旧 `combat_cues_integration_test.gd` 中对应断言仍被legacy启动失败阻断，新增37项不包含这一链路。下一项可用当前canonical合法技能/装备夹具运行真实投射物推进，检查分裂/返回/自然终止爆炸的特效数量、来源ID和顺序，以及取消投射物不伪造自然终止爆炸。限定测试/QA，不改模型、伤害或视觉实现；本批不夹带该实现。
