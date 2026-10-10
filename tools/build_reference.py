@@ -1531,6 +1531,8 @@ def build(data, art):
         if f.get('stage')=='weapon_local':
             body+='<p>阶段：本武器局部物理；只读取当前装备的合资格武器。白蜡长弓仅增强普攻与龙卷箭体，锻纹短刃仅增强裂刃direct；本地数值不进入角色统计，不增益法术或独立爆炸。原技能关联保留普通长弓对照单词缀合法魔法长弓的实际编译结果；短刃的独立实例与消费者矩阵见锻纹短刃规则卡。</p>'
             related=link('weapon_stages','weapon_local')+' · '+links('skills',f['affected_skills'])+' · '+link('rules','basic_attack')+' · '+link('rules','forgeblade')
+        if key == 'ironhide' and 'targeted_reforge_armour' in data['crafting']:
+            body+='<p>现在可用'+link('crafting','targeted_reforge_armour','护甲定向重铸')+'保证取得至少一条铁革；仅灰烬皮甲，魔法16、稀有40碎片。替换全部原词缀，仍按物品等级及原权重抽阶级。</p>'
         cards.append(add('affixes',key,f['name'],f['label'],body,TYPES[f['kind']],meta=tags([TYPES[f['kind']]]+[TYPES[p] for p in f['pools']]),related=related+' · '+link('rules','equipment')))
     for key,e in data['fixed_items'].items():
         cards.append(add('fixed_items',key,e['name'],e['description'],facts([('槽位',SLOTS[e['slot']]),('格数',' × '.join(map(number,e['size'])))]),SLOTS[e['slot']],related=link('rules','projectiles') if e.get('effects') else link('rules','damage')))
@@ -1655,6 +1657,7 @@ def build(data, art):
                 costs=' · '.join(('魔法' if rarity=='magic' else '稀有')+f' <span data-targeted-cost="{key}-{rarity}" data-value="{cost}">{cost}</span> 枚' for rarity,cost in c['cost_by_rarity'].items())
                 eligibility='；'.join(link('equipment',entry['base_id'])+'：'+ ' / '.join(('魔法' if rarity=='magic' else '稀有')+'物品等级≥'+number(level) for rarity,level in entry['minimum_item_level_by_rarity'].items()) for entry in c['eligibility'])
                 body+=facts([('保证目标',esc(c['target_label'])),('目标家族',links('affixes',c['target_family_ids'])),('费用',costs),('最低物品等级',eligibility),('抽取边界',esc(c['selection_note'])),('规则版本',esc(c['rules_version']))])
+            if key == 'targeted_reforge_armour': body+='<p>正式获取路径：装备商人购买灰烬皮甲（8碎片、物品等级1），原赋魔（8碎片）后选择护甲定向重铸（魔法16碎片）。总计32碎片；目标为既有铁革前缀。T1为30–50护甲，物品等级8解锁T2的55–80，等级16解锁T3的85–120；高阶底材来自地图。仍可能抽中低阶，不保留其他原词缀；不新增底材、词缀、护甲公式或存档版本。</p>'
             body+=facts([('可用底材',links('equipment',c['eligible_base_ids'])),('前置条件',preconditions[key]),('风险',esc(c['risk'])),('保存顺序','完整候选验证 → 原子写盘 → 内存提交与刷新'),('失败保护','拒绝或写盘失败不动装备、材料和序号；取消不收费，失败重试保持种子'),('保持字段',preserves[key])])
             if c.get('evidence'):
                 evidence=c['evidence']

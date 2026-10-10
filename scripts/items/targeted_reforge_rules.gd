@@ -24,6 +24,8 @@ const TARGETS: Dictionary = {
 		"families": ["stormward", "ring_stormward"]},
 	"targeted_reforge_chaos_resistance": {"id": "chaos_resistance", "label": "混沌抗性",
 		"families": ["ring_voidward"]},
+	"targeted_reforge_armour": {"id": "armour", "label": "护甲",
+		"families": ["ironhide"]},
 }
 const COSTS: Dictionary = {"magic": 16, "rare": 40}
 
@@ -32,7 +34,7 @@ static func operation_ids() -> Array[String]:
 	return ["targeted_reforge_critical", "targeted_reforge_life_leech",
 		"targeted_reforge_mana_leech", "targeted_reforge_damage",
 		"targeted_reforge_fire_resistance", "targeted_reforge_cold_resistance",
-		"targeted_reforge_lightning_resistance", "targeted_reforge_chaos_resistance"]
+		"targeted_reforge_lightning_resistance", "targeted_reforge_chaos_resistance", "targeted_reforge_armour"]
 
 
 static func metadata(operation: String) -> Dictionary:

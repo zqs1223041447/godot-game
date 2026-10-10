@@ -1,0 +1,11 @@
+127.0.0.1 - - [10/Oct/2026 14:11:56] "GET /index.html HTTP/1.1" 200 -
+127.0.0.1 - - [10/Oct/2026 14:11:56] "GET /art/skills/bolt.png HTTP/1.1" 200 -
+127.0.0.1 - - [10/Oct/2026 14:11:56] "GET /art/skills/chain.png HTTP/1.1" 200 -
+127.0.0.1 - - [10/Oct/2026 14:11:56] "GET /art/skills/cleave.png HTTP/1.1" 200 -
+127.0.0.1 - - [10/Oct/2026 14:11:59] code 404, message File not found
+127.0.0.1 - - [10/Oct/2026 14:11:59] "GET /favicon.ico HTTP/1.1" 404 -
+Traceback (most recent call last):
+  File "/workspace/godot-cues-scan/docs/qa/armour-targeted-reforge/browser_check.py", line 18, in <module>
+    assert word in card.inner_text(),word
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 稀有40

@@ -1,0 +1,89 @@
+{
+  "baseline": "a071697f85496b8dd0f7e63aa68f7e00d74c5d80",
+  "operation": "targeted_reforge_armour",
+  "schema": 61,
+  "vocabulary": 51,
+  "final_results": [
+    {
+      "case": "native current target rules/transactions/formal purchase/UI/Main",
+      "checks": 902,
+      "failures": 0,
+      "exit_code": 0,
+      "report": "native.json"
+    },
+    {
+      "case": "current resistance metadata contract only",
+      "checks": 31,
+      "failures": 0,
+      "exit_code": 0,
+      "log": "current-metadata.log"
+    },
+    {
+      "case": "current resistance controls",
+      "checks": 23,
+      "failures": 0,
+      "exit_code": 0,
+      "log": "controls.log"
+    },
+    {
+      "case": "reference exact diff/generator/browser",
+      "passed": true,
+      "reports": [
+        "reference-verification.json",
+        "browser.json"
+      ]
+    }
+  ],
+  "invalid_or_failed_attempts": [
+    {
+      "case": "parse-attempt",
+      "exit_code": 1
+    },
+    {
+      "case": "incomplete-attempt",
+      "printed_checks": 896,
+      "printed_failures": 0,
+      "exit_code": 0,
+      "valid": false,
+      "reason": "Script error prevented full flow completion; not a pass."
+    },
+    {
+      "case": "controls-before-count-update",
+      "checks": 23,
+      "failures": 1,
+      "exit_code": 1
+    },
+    {
+      "case": "historical-integrity-blocked",
+      "checks": 48,
+      "failures": 2,
+      "exit_code": 1,
+      "unresolved": true,
+      "reason": "Old v103 full dependency guard expects historical damage/defense hashes; both unchanged from this batch baseline. Separate current metadata check is not a replacement for that historical suite."
+    },
+    {
+      "case": "browser-attempt01",
+      "exit_code": 1,
+      "reason": "HTML whitespace expectation"
+    },
+    {
+      "case": "browser-attempt02",
+      "exit_code": 1,
+      "reason": "Target affix card hidden by current category; corrected navigation through existing anchor."
+    }
+  ],
+  "old_plan_fingerprints_compared": 756,
+  "new_target_plans": 192,
+  "limits": [
+    "Controlled legal shard funding, not natural earning",
+    "Native dialog signals, not physical mouse",
+    "No full core/600s/model/export/package",
+    "F8 HTML browser test over loopback, not F8 shortcut"
+  ],
+  "artifact_sha256": {
+    "baseline.json": "c645c8464f0d281304d21c393537d27a7ec927ecc2b2f99c6a9aca86acc74991",
+    "native.json": "e391ce1b89c36e1fc20f8a7bd1bfad1609879409612fc20a8cf24d32abba473e",
+    "confirmation.png": "9b5d51c398ae17a0622bf5cf850b5285b84b5ef8477b872b6160bcd1ffad3636",
+    "f8-armour-card.png": "de230cb49d185021450c96c66a256210e67e9ac9eff91d997e4e3474ba9a98c0"
+  }
+}

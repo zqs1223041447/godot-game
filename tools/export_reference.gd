@@ -785,7 +785,7 @@ static func town_map_examples()->Dictionary:
 		"reserved_character_key":"C","legacy_C_binding":"unbound_with_notice_and_raw_byte_backup"}
 
 
-static func crafting_examples() -> Dictionary:
+static func crafting_examples(selected_operations: Array = []) -> Dictionary:
 	var metadata: Dictionary = Craft.metadata()
 	metadata["integration_status"] = "implemented"
 	var result: Dictionary = {Craft.MATERIAL_ID: {"name": "校准碎片", "kind": "material",
@@ -793,6 +793,7 @@ static func crafting_examples() -> Dictionary:
 		"maximum": Canonical.ShardCatalog.INVENTORY_LIMIT, "rules": metadata,
 		"max_revision": Canonical.Rules.MAX_SERIAL, "save_version": Canonical.Rules.VERSION}}
 	for operation: String in Craft.operation_ids():
+		if not selected_operations.is_empty() and not selected_operations.has(operation): continue
 		var instance: Dictionary = _crafting_example_instance(operation)
 		instance.id = "gear_000001"
 		if operation == "enchant": instance.rarity = "normal"; instance.affixes = []
@@ -835,6 +836,8 @@ static func crafting_examples() -> Dictionary:
 ## The four resistance targets need a legal resistance-bearing base. Keep all
 ## historical operation witnesses exact rather than rerolling their examples.
 static func _crafting_example_instance(operation: String) -> Dictionary:
+	if operation == "targeted_reforge_armour":
+		return _crafting_probe_instance("emberhide_vest", 16, "magic")
 	if operation in ["targeted_reforge_fire_resistance", "targeted_reforge_cold_resistance",
 		"targeted_reforge_lightning_resistance", "targeted_reforge_chaos_resistance"]:
 		return _crafting_probe_instance("nine_slot_etched_ring", 16, "magic")

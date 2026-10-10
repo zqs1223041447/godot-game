@@ -1,0 +1,15 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+ERROR: Shared catalog/dependency unchanged from b7: scripts/combat/damage_resolver.gd
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/resistance_targeted_reforge_test.gd:70)
+       [1] _test_frozen_integrity (res://tests/resistance_targeted_reforge_test.gd:90)
+       [2] _initialize (res://docs/qa/armour-targeted-reforge/resistance_metadata_check.gd:3)
+ERROR: Shared catalog/dependency unchanged from b7: scripts/mechanics/defense_rules.gd
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/resistance_targeted_reforge_test.gd:70)
+       [1] _test_frozen_integrity (res://tests/resistance_targeted_reforge_test.gd:90)
+       [2] _initialize (res://docs/qa/armour-targeted-reforge/resistance_metadata_check.gd:3)
+RESISTANCE_CURRENT_METADATA checks=48 failures=2

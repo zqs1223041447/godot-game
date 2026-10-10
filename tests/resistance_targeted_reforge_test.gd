@@ -93,7 +93,8 @@ func _test_frozen_integrity() -> void:
 func _test_metadata() -> void:
 	var expected: Array[String] = OldTargeted.operation_ids()
 	expected.append_array(TARGETS.keys())
-	check(Targeted.operation_ids() == expected, "Old target order followed by four resistance targets")
+	expected.append("targeted_reforge_armour")
+	check(Targeted.operation_ids() == expected, "Old target order, four resistance targets, then existing-armour target")
 	check(Targeted.COSTS == {"magic": 16, "rare": 40}, "Unchanged magic16/rare40 fee")
 	for operation: String in OldTargeted.operation_ids():
 		_same(Targeted.metadata(operation), OldTargeted.metadata(operation), "Original metadata byte-identical: " + operation)

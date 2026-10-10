@@ -1,0 +1,17 @@
+{
+  "historic_suite_baseline": "b7d98c5b94c2c39f6f258835b28cfc32c4cd34d9",
+  "this_batch_baseline": "a071697f85496b8dd0f7e63aa68f7e00d74c5d80",
+  "unchanged_in_this_batch_mismatches": [
+    {
+      "path": "scripts/combat/damage_resolver.gd",
+      "historic_expected": "720dc69a7446334e8aec3ac15bdf7c1717fa7b96db5657e0c9622513121a4e23",
+      "baseline_and_current": "51a3c503c2cae7b7ec1513976de1ed03f41c3677b892b8b55ab47bdb0b2ef6e5"
+    },
+    {
+      "path": "scripts/mechanics/defense_rules.gd",
+      "historic_expected": "a4d88c005dfd27fe6408e86ea9b96a34fe01c786c24c8965113dd20498224226",
+      "baseline_and_current": "a2efd774c9a8e2e07d485f30ffb2427e8d74b75196c8677a864067d4ae715e9e"
+    }
+  ],
+  "claim": "Historical integrity invocation failed48checks/2; not counted as passing. Current metadata contract31/0 has independent scope;756 current-baseline plan comparisons are new evidence."
+}

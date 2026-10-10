@@ -25,7 +25,7 @@ func run() -> void:
 		entries.append(entry)
 	var original := var_to_bytes(entries)
 	controls.set_operations_context("ring",{"serial":1},100,entries)
-	expect(controls._target_select.item_count == 8 and controls._operation_buttons.size() == 2, "Eight choices share existing row, no extra button grid")
+	expect(controls._target_select.item_count == 9 and controls._operation_buttons.size() == 2, "Nine choices share existing row, no extra button grid")
 	var labels := ["火焰抗性","冰霜抗性","闪电抗性","混沌抗性"]
 	for index in range(4,8):
 		controls._select_target(index)

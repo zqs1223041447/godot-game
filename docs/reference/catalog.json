@@ -9617,6 +9617,21 @@
 						"target_id": "mana_leech",
 						"target_label": "魔力偷取",
 						"targeted": true
+					},
+					"targeted_reforge_armour": {
+						"consumes_item": false,
+						"cost": {
+							"magic": 16,
+							"rare": 40
+						},
+						"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的护甲词缀。",
+						"label": "定向重铸",
+						"operation": "targeted_reforge_armour",
+						"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+						"rules_version": "original-targeted-reforge-v1-affix27",
+						"target_id": "armour",
+						"target_label": "护甲",
+						"targeted": true
 					}
 				},
 				"origin": "original",
@@ -15410,6 +15425,202 @@
 			],
 			"target_id": "chaos_resistance",
 			"target_label": "混沌抗性",
+			"targeted": true
+		},
+		"targeted_reforge_armour": {
+			"catalog_vocabulary": 51,
+			"cost_by_rarity": {
+				"magic": 16,
+				"rare": 40
+			},
+			"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的护甲词缀。",
+			"eligibility": [
+				{
+					"base_id": "emberhide_vest",
+					"minimum_item_level_by_rarity": {
+						"magic": 1,
+						"rare": 1
+					},
+					"target_family_ids": [
+						"ironhide"
+					],
+					"target_tiers_at_maximum_level": [
+						{
+							"group": "armour_rating",
+							"id": "ironhide",
+							"kind": "prefix",
+							"max": 50,
+							"min": 30,
+							"tier": 1,
+							"weight": 100
+						},
+						{
+							"group": "armour_rating",
+							"id": "ironhide",
+							"kind": "prefix",
+							"max": 80,
+							"min": 55,
+							"tier": 2,
+							"weight": 60
+						},
+						{
+							"group": "armour_rating",
+							"id": "ironhide",
+							"kind": "prefix",
+							"max": 120,
+							"min": 85,
+							"tier": 3,
+							"weight": 30
+						}
+					]
+				}
+			],
+			"eligibility_maximum_item_level": 30,
+			"eligibility_note": "仅下列底材存在可达合法结果；物品等级仍限制阶级，最终以当前装备报价为准。普通、固定、已穿戴装备不可用；无合法目标不收费。",
+			"eligible_base_ids": [
+				"emberhide_vest"
+			],
+			"example": {
+				"after_definition": {
+					"added_sources": [],
+					"affix_lines": [
+						"前缀 · 铁革 T1：护甲 +31",
+						"后缀 · 霜回 T1：冰霜伤害提高 +7%"
+					],
+					"base_id": "emberhide_vest",
+					"base_name": "灰烬皮甲",
+					"description": "最大生命 +8，火焰抗性 +15%。火焰抗性降低火焰命中与燃烧伤害；默认上限75%，最大抗性天赋可提高至本游戏安全上限83%，仍需另外取得足够原始抗性。\n前缀 · 铁革 T1：护甲 +31\n后缀 · 霜回 T1：冰霜伤害提高 +7%",
+					"effects": [],
+					"id": "gear_000001",
+					"item_level": 16,
+					"name": "魔法 · 灰烬皮甲",
+					"rarity": "magic",
+					"size": [
+						2,
+						3
+					],
+					"slot": "armor",
+					"stats": {
+						"armour": 31.0,
+						"cold_increased": 0.07,
+						"fire_resistance": 0.15,
+						"max_health": 8.0
+					}
+				},
+				"after_instance": {
+					"affixes": [
+						{
+							"id": "ironhide",
+							"tier": 1,
+							"value": 31
+						},
+						{
+							"id": "rimeecho",
+							"tier": 1,
+							"value": 7
+						}
+					],
+					"base_id": "emberhide_vest",
+					"id": "gear_000001",
+					"item_level": 16,
+					"rarity": "magic"
+				},
+				"balance_after": 84,
+				"balance_before": 100,
+				"before_definition": {
+					"added_sources": [],
+					"affix_lines": [
+						"前缀 · 根泉 T1：最大生命 +8"
+					],
+					"base_id": "emberhide_vest",
+					"base_name": "灰烬皮甲",
+					"description": "最大生命 +8，火焰抗性 +15%。火焰抗性降低火焰命中与燃烧伤害；默认上限75%，最大抗性天赋可提高至本游戏安全上限83%，仍需另外取得足够原始抗性。\n前缀 · 根泉 T1：最大生命 +8",
+					"effects": [],
+					"id": "gear_000001",
+					"item_level": 16,
+					"name": "魔法 · 灰烬皮甲",
+					"rarity": "magic",
+					"size": [
+						2,
+						3
+					],
+					"slot": "armor",
+					"stats": {
+						"fire_resistance": 0.15,
+						"max_health": 16.0
+					}
+				},
+				"example_seed": 20261003,
+				"full_candidate_valid": true,
+				"quote": {
+					"code": "",
+					"consumes_item": false,
+					"cost": {
+						"calibration_shard": 16
+					},
+					"item_id": "gear_000001",
+					"materials": {},
+					"ok": true,
+					"operation": "targeted_reforge_armour",
+					"reason": "",
+					"revision": 0,
+					"rules_version": "original-targeted-reforge-v1-affix27",
+					"source_instance": {
+						"affixes": [
+							{
+								"id": "rootwell",
+								"tier": 1,
+								"value": 8
+							}
+						],
+						"base_id": "emberhide_vest",
+						"id": "gear_000001",
+						"item_level": 16,
+						"rarity": "magic"
+					}
+				},
+				"revision_after": 1,
+				"revision_before": 0,
+				"save_version": 61,
+				"source": {
+					"affixes": [
+						{
+							"id": "rootwell",
+							"tier": 1,
+							"value": 8
+						}
+					],
+					"base_id": "emberhide_vest",
+					"id": "gear_000001",
+					"item_level": 16,
+					"rarity": "magic"
+				}
+			},
+			"kind": "operation",
+			"name": "定向重铸 · 护甲",
+			"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+			"rule": {
+				"consumes_item": false,
+				"cost": {
+					"magic": 16,
+					"rare": 40
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的护甲词缀。",
+				"label": "定向重铸",
+				"operation": "targeted_reforge_armour",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"rules_version": "original-targeted-reforge-v1-affix27",
+				"target_id": "armour",
+				"target_label": "护甲",
+				"targeted": true
+			},
+			"rules_version": "original-targeted-reforge-v1-affix27",
+			"selection_note": "先按目录正权重抽取可完成的目标家族与阶级，再从合法池补足；保持稀有度，不保留原词缀，也不保证高阶或更强。",
+			"target_family_ids": [
+				"ironhide"
+			],
+			"target_id": "armour",
+			"target_label": "护甲",
 			"targeted": true
 		}
 	},
