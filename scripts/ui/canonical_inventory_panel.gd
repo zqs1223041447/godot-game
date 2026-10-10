@@ -279,7 +279,7 @@ func refresh() -> void:
 	_pending.visible = not pending.is_empty()
 	if not pending.is_empty():
 		var title := Label.new()
-		title.text = "待安置 %d 件 · 腾出空间后取回" % pending.size()
+		title.text = "待安置 %d 件 · 悬停详情 · Shift 对比\n腾出空间后点击取回" % pending.size()
 		_pending.add_child(title)
 		var list := HFlowContainer.new()
 		_pending.add_child(list)
@@ -288,7 +288,9 @@ func refresh() -> void:
 			button.text = str(model.item_definition(uid).get("base_name", model.item_definition(uid).name))
 			if model.item(uid).kind == "currency":
 				button.text += " ×%d" % int(model.item(uid).payload.quantity)
-			button.tooltip_text = button.text
+			button.tooltip_text = ""
+			button.mouse_entered.connect(_hover_pending.bind(uid, button))
+			button.mouse_exited.connect(func(): hover_left.emit())
 			button.clip_text = true
 			button.pressed.connect(_return_to_bag.bind(uid))
 			list.add_child(button)
@@ -387,6 +389,8 @@ func _activate_item(uid: String) -> void:
 			target = slot
 			break
 	_move_requested(uid,{"kind":"equipment","slot_id":target},model.revision())
+func _hover_pending(uid: String, button: Button) -> void:
+	item_hovered.emit(uid, button.get_global_rect())
 func _hover_equipment(slot: String) -> void:
 	var target: SlotTarget = _slots[slot]
 	if not target.uid.is_empty(): item_hovered.emit(target.uid,target.get_global_rect())
