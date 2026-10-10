@@ -179,7 +179,7 @@ func _test_right_click_and_hover() -> void:
 func _test_binding_options() -> void:
 	var active_picker: OptionButton = rows_view.find_child("SkillBinding_00", true, false) as OptionButton
 	var inactive_picker: OptionButton = rows_view.find_child("SkillBinding_01", true, false) as OptionButton
-	_expect(active_picker.get_item_count() == 32, "Binding menu includes unbound, digits, approved function keys, and letters")
+	_expect(active_picker.get_item_count() == 31, "Binding menu includes unbound and thirty approved keys; C is reserved for the character panel")
 	_expect(active_picker.get_item_id(0) == 0 and active_picker.get_item_text(0) == "未绑定", "Unbound keycode zero has a distinct menu entry")
 	var digit_zero_index: int = active_picker.get_item_index(KEY_0)
 	_expect(digit_zero_index > 0 and active_picker.get_item_text(digit_zero_index) == "0" and KEY_0 != 0,

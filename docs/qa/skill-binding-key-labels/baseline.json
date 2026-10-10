@@ -1,0 +1,29 @@
+{
+	"checks": 34,
+	"display": "headless",
+	"failed_labels": [
+		"Displayed key matches actual metadata: V",
+		"Displayed key matches actual metadata: N",
+		"Displayed key matches actual metadata: M",
+		"Exactly the canonical allowed keys; reserved C absent and M visible"
+	],
+	"failures": 4,
+	"observed_labels": [
+		{
+			"actual_code": 86,
+			"label": "C"
+		},
+		{
+			"actual_code": 78,
+			"label": "V"
+		},
+		{
+			"actual_code": 77,
+			"label": "N"
+		},
+		{
+			"actual_code": -1,
+			"label": "M"
+		}
+	]
+}

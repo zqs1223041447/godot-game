@@ -28,12 +28,6 @@ const BINDING_CODES: Array[int] = [
 	KEY_F1, KEY_F2, KEY_F3, KEY_F4, KEY_F5, KEY_F9, KEY_F10, KEY_F11, KEY_F12,
 	KEY_E, KEY_F, KEY_G, KEY_H, KEY_J, KEY_L, KEY_Z, KEY_X, KEY_V, KEY_N, KEY_M,
 ]
-const BINDING_LABELS: Array[String] = [
-	"未绑定",
-	"0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
-	"F1", "F2", "F3", "F4", "F5", "F9", "F10", "F11", "F12",
-	"E", "F", "G", "H", "J", "L", "Z", "X", "C", "V", "N", "M",
-]
 
 class PreviewLabel extends Label:
 	func _make_custom_tooltip(text: String) -> Object:
@@ -300,7 +294,7 @@ func _make_binding_picker(row: Dictionary, row_index: int) -> OptionButton:
 	picker.add_theme_font_size_override("font_size", roundi(10.0 * font_scale))
 	DockStyle.style_action(picker,roundi(10.0*font_scale))
 	for index: int in range(BINDING_CODES.size()):
-		picker.add_item(BINDING_LABELS[index])
+		picker.add_item("未绑定" if BINDING_CODES[index] == 0 else OS.get_keycode_string(BINDING_CODES[index]))
 		picker.set_item_id(index, BINDING_CODES[index])
 	picker.select(_binding_index(int(row.binding_keycode)))
 	picker.item_selected.connect(_on_binding_selected.bind(str(row.group_id), _generation))

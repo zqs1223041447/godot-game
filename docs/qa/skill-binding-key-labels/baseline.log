@@ -1,0 +1,32 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+godot-game: playable arena ready
+ERROR: Displayed key matches actual metadata: V
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/flask_purchase_transactions_test.gd:18)
+       [1] run (res://tests/skill_binding_keys_test.gd:41)
+       [2] key (res://tests/skill_binding_keys_test.gd:13)
+       [3] settle (res://tests/skill_binding_keys_test.gd:7)
+ERROR: Displayed key matches actual metadata: N
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/flask_purchase_transactions_test.gd:18)
+       [1] run (res://tests/skill_binding_keys_test.gd:41)
+       [2] key (res://tests/skill_binding_keys_test.gd:13)
+       [3] settle (res://tests/skill_binding_keys_test.gd:7)
+ERROR: Displayed key matches actual metadata: M
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/flask_purchase_transactions_test.gd:18)
+       [1] run (res://tests/skill_binding_keys_test.gd:41)
+       [2] key (res://tests/skill_binding_keys_test.gd:13)
+       [3] settle (res://tests/skill_binding_keys_test.gd:7)
+ERROR: Exactly the canonical allowed keys; reserved C absent and M visible
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/flask_purchase_transactions_test.gd:18)
+       [1] run (res://tests/skill_binding_keys_test.gd:43)
+       [2] key (res://tests/skill_binding_keys_test.gd:13)
+       [3] settle (res://tests/skill_binding_keys_test.gd:7)
+SKILL_BINDING_KEYS {"checks":34,"display":"headless","failed_labels":["Displayed key matches actual metadata: V","Displayed key matches actual metadata: N","Displayed key matches actual metadata: M","Exactly the canonical allowed keys; reserved C absent and M visible"],"failures":4,"observed_labels":[{"actual_code":86,"label":"C"},{"actual_code":78,"label":"V"},{"actual_code":77,"label":"N"},{"actual_code":-1,"label":"M"}]}
