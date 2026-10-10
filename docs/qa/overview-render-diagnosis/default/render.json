@@ -1,0 +1,6296 @@
+{
+	"checks": 22,
+	"cpu_max": "",
+	"display": "X11",
+	"failed_labels": [],
+	"failures": 0,
+	"fixture_digest": "281696ff4a3170f536d3cfcae30e86718a50a5bfe3611ca79e7c8948b1998404",
+	"low_processor_usage_mode": false,
+	"lp_num_threads": "",
+	"max_fps": 0,
+	"method": "Original37 durable dense actors and fixed admission/combat seed. Eight-frame windows; five warm frames after changes. Same timers, render measurements, per-window cgroup observations. Retained/no-text/empty are diagnostic omissions, not gameplay candidates. CPU/GPU API values are last-frame render timing, not total frame time.",
+	"renderer": "llvmpipe (LLVM 19.1.7, 256 bits)",
+	"rendering_method": "gl_compatibility",
+	"root_size": "(1280, 720)",
+	"viewport_size": "(1280.0, 720.0)",
+	"vsync_mode": 0,
+	"window_size": "(1280, 720)",
+	"windows": [
+		{
+			"cpu_delta": {
+
+			},
+			"frames": [
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"game_step",
+							22124638,
+							22128793,
+							14
+						],
+						[
+							"game_step",
+							22128799,
+							22132800,
+							14
+						],
+						[
+							"game_step",
+							22132804,
+							22136906,
+							14
+						],
+						[
+							"game_step",
+							22136910,
+							22141069,
+							14
+						],
+						[
+							"game_step",
+							22141073,
+							22146064,
+							14
+						],
+						[
+							"game_step",
+							22146067,
+							22149818,
+							14
+						],
+						[
+							"game_step",
+							22149822,
+							22155579,
+							14
+						],
+						[
+							"game_step",
+							22155583,
+							22159291,
+							14
+						],
+						[
+							"main_process",
+							22124601,
+							22159299,
+							14
+						],
+						[
+							"overview_tick",
+							22159339,
+							22159343,
+							14
+						],
+						[
+							"outpost_scan",
+							22159387,
+							22159467,
+							14
+						],
+						[
+							"cleanup_query",
+							22159353,
+							22159495,
+							14
+						],
+						[
+							"cleanup_refresh",
+							22159350,
+							22159546,
+							14
+						],
+						[
+							"hud_process",
+							22159313,
+							22160856,
+							14
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 69676,
+					"frame_setup_cpu_ms": 0.011,
+					"projectiles": 0,
+					"sim_elapsed": 1.86666666666666,
+					"viewport_cpu_ms": 37.798999786377,
+					"viewport_gpu_ms": 73.4850006103516,
+					"wall_us": 115896
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"game_step",
+							22240883,
+							22245298,
+							15
+						],
+						[
+							"game_step",
+							22245302,
+							22249352,
+							15
+						],
+						[
+							"game_step",
+							22249355,
+							22253422,
+							15
+						],
+						[
+							"game_step",
+							22253425,
+							22257071,
+							15
+						],
+						[
+							"game_step",
+							22257074,
+							22261059,
+							15
+						],
+						[
+							"game_step",
+							22261063,
+							22264791,
+							15
+						],
+						[
+							"game_step",
+							22264794,
+							22268551,
+							15
+						],
+						[
+							"main_process",
+							22240853,
+							22268558,
+							15
+						],
+						[
+							"overview_tick",
+							22268593,
+							22268597,
+							15
+						],
+						[
+							"hud_process",
+							22268570,
+							22269990,
+							15
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 69417,
+					"frame_setup_cpu_ms": 0.008,
+					"projectiles": 0,
+					"sim_elapsed": 1.98333333333333,
+					"viewport_cpu_ms": 51.1300010681152,
+					"viewport_gpu_ms": 118.752998352051,
+					"wall_us": 106739
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"game_step",
+							22347736,
+							22352084,
+							16
+						],
+						[
+							"game_step",
+							22352088,
+							22355894,
+							16
+						],
+						[
+							"game_step",
+							22355897,
+							22359465,
+							16
+						],
+						[
+							"game_step",
+							22359468,
+							22362857,
+							16
+						],
+						[
+							"game_step",
+							22362860,
+							22366272,
+							16
+						],
+						[
+							"game_step",
+							22366275,
+							22370022,
+							16
+						],
+						[
+							"game_step",
+							22370026,
+							22373429,
+							16
+						],
+						[
+							"main_process",
+							22347707,
+							22373435,
+							16
+						],
+						[
+							"overview_tick",
+							22373467,
+							22373470,
+							16
+						],
+						[
+							"outpost_scan",
+							22373512,
+							22373590,
+							16
+						],
+						[
+							"cleanup_query",
+							22373480,
+							22373620,
+							16
+						],
+						[
+							"cleanup_refresh",
+							22373477,
+							22373665,
+							16
+						],
+						[
+							"hud_process",
+							22373445,
+							22374924,
+							16
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 75117,
+					"frame_setup_cpu_ms": 0.008,
+					"projectiles": 0,
+					"sim_elapsed": 2.1,
+					"viewport_cpu_ms": 37.3680000305176,
+					"viewport_gpu_ms": 80.6330032348633,
+					"wall_us": 110350
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"game_step",
+							22458039,
+							22461742,
+							17
+						],
+						[
+							"game_step",
+							22461747,
+							22465759,
+							17
+						],
+						[
+							"game_step",
+							22465762,
+							22469411,
+							17
+						],
+						[
+							"game_step",
+							22469415,
+							22472972,
+							17
+						],
+						[
+							"game_step",
+							22472975,
+							22476436,
+							17
+						],
+						[
+							"game_step",
+							22476439,
+							22479835,
+							17
+						],
+						[
+							"main_process",
+							22458007,
+							22479841,
+							17
+						],
+						[
+							"overview_tick",
+							22479873,
+							22479877,
+							17
+						],
+						[
+							"hud_process",
+							22479850,
+							22481133,
+							17
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 72713,
+					"frame_setup_cpu_ms": 0.009,
+					"projectiles": 0,
+					"sim_elapsed": 2.2,
+					"viewport_cpu_ms": 50.8919982910156,
+					"viewport_gpu_ms": 121.996002197266,
+					"wall_us": 104582
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"game_step",
+							22562613,
+							22566269,
+							18
+						],
+						[
+							"game_step",
+							22566274,
+							22569742,
+							18
+						],
+						[
+							"game_step",
+							22569746,
+							22573440,
+							18
+						],
+						[
+							"game_step",
+							22573443,
+							22577068,
+							18
+						],
+						[
+							"game_step",
+							22577071,
+							22580502,
+							18
+						],
+						[
+							"game_step",
+							22580505,
+							22583958,
+							18
+						],
+						[
+							"game_step",
+							22583961,
+							22587170,
+							18
+						],
+						[
+							"main_process",
+							22562583,
+							22587175,
+							18
+						],
+						[
+							"overview_tick",
+							22587207,
+							22587211,
+							18
+						],
+						[
+							"outpost_scan",
+							22587277,
+							22587355,
+							18
+						],
+						[
+							"cleanup_query",
+							22587221,
+							22587384,
+							18
+						],
+						[
+							"cleanup_refresh",
+							22587219,
+							22587433,
+							18
+						],
+						[
+							"hud_process",
+							22587186,
+							22588681,
+							18
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 70154,
+					"frame_setup_cpu_ms": 0.009,
+					"projectiles": 0,
+					"sim_elapsed": 2.31666666666666,
+					"viewport_cpu_ms": 34.8079986572266,
+					"viewport_gpu_ms": 80.7570037841797,
+					"wall_us": 104632
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"game_step",
+							22667415,
+							22672066,
+							19
+						],
+						[
+							"game_step",
+							22672072,
+							22675844,
+							19
+						],
+						[
+							"game_step",
+							22675847,
+							22679379,
+							19
+						],
+						[
+							"game_step",
+							22679382,
+							22682719,
+							19
+						],
+						[
+							"game_step",
+							22682722,
+							22689123,
+							19
+						],
+						[
+							"game_step",
+							22689128,
+							22694144,
+							19
+						],
+						[
+							"main_process",
+							22667377,
+							22694151,
+							19
+						],
+						[
+							"overview_tick",
+							22694188,
+							22694191,
+							19
+						],
+						[
+							"hud_process",
+							22694165,
+							22695617,
+							19
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 64532,
+					"frame_setup_cpu_ms": 0.009,
+					"projectiles": 0,
+					"sim_elapsed": 2.41666666666666,
+					"viewport_cpu_ms": 54.4539985656738,
+					"viewport_gpu_ms": 83.2900009155273,
+					"wall_us": 101040
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"game_step",
+							22768491,
+							22772840,
+							20
+						],
+						[
+							"game_step",
+							22772846,
+							22776452,
+							20
+						],
+						[
+							"game_step",
+							22776456,
+							22779686,
+							20
+						],
+						[
+							"game_step",
+							22779689,
+							22782896,
+							20
+						],
+						[
+							"game_step",
+							22782899,
+							22786364,
+							20
+						],
+						[
+							"game_step",
+							22786367,
+							22789921,
+							20
+						],
+						[
+							"main_process",
+							22768451,
+							22789956,
+							20
+						],
+						[
+							"overview_tick",
+							22789993,
+							22789996,
+							20
+						],
+						[
+							"outpost_scan",
+							22790040,
+							22790120,
+							20
+						],
+						[
+							"cleanup_query",
+							22790006,
+							22790148,
+							20
+						],
+						[
+							"cleanup_refresh",
+							22790004,
+							22790196,
+							20
+						],
+						[
+							"hud_process",
+							22789968,
+							22791523,
+							20
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 64906,
+					"frame_setup_cpu_ms": 0.01,
+					"projectiles": 0,
+					"sim_elapsed": 2.51666666666666,
+					"viewport_cpu_ms": 36.8370018005371,
+					"viewport_gpu_ms": 65.9599990844727,
+					"wall_us": 96520
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"game_step",
+							22865024,
+							22870206,
+							21
+						],
+						[
+							"game_step",
+							22870213,
+							22874598,
+							21
+						],
+						[
+							"game_step",
+							22874602,
+							22878202,
+							21
+						],
+						[
+							"game_step",
+							22878205,
+							22881537,
+							21
+						],
+						[
+							"game_step",
+							22881541,
+							22885190,
+							21
+						],
+						[
+							"game_step",
+							22885193,
+							22888877,
+							21
+						],
+						[
+							"main_process",
+							22864984,
+							22888884,
+							21
+						],
+						[
+							"overview_tick",
+							22888922,
+							22888927,
+							21
+						],
+						[
+							"hud_process",
+							22888897,
+							22890299,
+							21
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 64928,
+					"frame_setup_cpu_ms": 0.01,
+					"projectiles": 0,
+					"sim_elapsed": 2.61666666666666,
+					"viewport_cpu_ms": 32.3699989318848,
+					"viewport_gpu_ms": 65.3779983520508,
+					"wall_us": 99823
+				}
+			],
+			"label": "0",
+			"mode": "closed",
+			"sim_seconds": 0.88333333333333
+		},
+		{
+			"cpu_delta": {
+
+			},
+			"frames": [
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"game_step",
+							23648866,
+							23653187,
+							28
+						],
+						[
+							"game_step",
+							23653193,
+							23656865,
+							28
+						],
+						[
+							"game_step",
+							23656869,
+							23660502,
+							28
+						],
+						[
+							"game_step",
+							23660506,
+							23664064,
+							28
+						],
+						[
+							"game_step",
+							23664067,
+							23667887,
+							28
+						],
+						[
+							"game_step",
+							23667891,
+							23671293,
+							28
+						],
+						[
+							"main_process",
+							23648831,
+							23671324,
+							28
+						],
+						[
+							"overview_player",
+							23671390,
+							23671393,
+							28
+						],
+						[
+							"overview_tick",
+							23671359,
+							23671394,
+							28
+						],
+						[
+							"hud_process",
+							23671336,
+							23672679,
+							28
+						],
+						[
+							"overview_draw",
+							23674620,
+							23675050,
+							28
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 75295,
+					"frame_setup_cpu_ms": 0.01,
+					"projectiles": 0,
+					"sim_elapsed": 3.38333333333333,
+					"viewport_cpu_ms": 33.6980018615723,
+					"viewport_gpu_ms": 70.0,
+					"wall_us": 107718
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"game_step",
+							23756588,
+							23760459,
+							29
+						],
+						[
+							"game_step",
+							23760463,
+							23763864,
+							29
+						],
+						[
+							"game_step",
+							23763867,
+							23767289,
+							29
+						],
+						[
+							"game_step",
+							23767292,
+							23770697,
+							29
+						],
+						[
+							"game_step",
+							23770700,
+							23774388,
+							29
+						],
+						[
+							"game_step",
+							23774391,
+							23778169,
+							29
+						],
+						[
+							"game_step",
+							23778173,
+							23781715,
+							29
+						],
+						[
+							"main_process",
+							23756553,
+							23781721,
+							29
+						],
+						[
+							"camp_scan",
+							23781963,
+							23782104,
+							29
+						],
+						[
+							"outpost_scan",
+							23782107,
+							23782187,
+							29
+						],
+						[
+							"world_context",
+							23781785,
+							23782215,
+							29
+						],
+						[
+							"overview_player",
+							23782263,
+							23782268,
+							29
+						],
+						[
+							"overview_state",
+							23782218,
+							23782269,
+							29
+						],
+						[
+							"overview_tick",
+							23781755,
+							23782275,
+							29
+						],
+						[
+							"outpost_scan",
+							23782357,
+							23782417,
+							29
+						],
+						[
+							"cleanup_query",
+							23782284,
+							23782444,
+							29
+						],
+						[
+							"cleanup_refresh",
+							23782282,
+							23782493,
+							29
+						],
+						[
+							"hud_process",
+							23781732,
+							23783780,
+							29
+						],
+						[
+							"overview_draw",
+							23785821,
+							23786103,
+							29
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 68598,
+					"frame_setup_cpu_ms": 0.01,
+					"projectiles": 0,
+					"sim_elapsed": 3.49999999999999,
+					"viewport_cpu_ms": 34.0040016174316,
+					"viewport_gpu_ms": 75.4940032958984,
+					"wall_us": 104245
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"game_step",
+							23860879,
+							23865112,
+							30
+						],
+						[
+							"game_step",
+							23865117,
+							23868907,
+							30
+						],
+						[
+							"game_step",
+							23868911,
+							23872449,
+							30
+						],
+						[
+							"game_step",
+							23872452,
+							23876163,
+							30
+						],
+						[
+							"game_step",
+							23876166,
+							23879600,
+							30
+						],
+						[
+							"game_step",
+							23879603,
+							23883035,
+							30
+						],
+						[
+							"main_process",
+							23860840,
+							23883042,
+							30
+						],
+						[
+							"overview_player",
+							23883107,
+							23883110,
+							30
+						],
+						[
+							"overview_tick",
+							23883076,
+							23883111,
+							30
+						],
+						[
+							"hud_process",
+							23883053,
+							23884415,
+							30
+						],
+						[
+							"overview_draw",
+							23886418,
+							23886663,
+							30
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 73157,
+					"frame_setup_cpu_ms": 0.01,
+					"projectiles": 0,
+					"sim_elapsed": 3.59999999999999,
+					"viewport_cpu_ms": 34.3089981079102,
+					"viewport_gpu_ms": 70.3779983520508,
+					"wall_us": 105566
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"game_step",
+							23966491,
+							23971487,
+							31
+						],
+						[
+							"game_step",
+							23971492,
+							23975114,
+							31
+						],
+						[
+							"game_step",
+							23975116,
+							23978996,
+							31
+						],
+						[
+							"game_step",
+							23978999,
+							23982691,
+							31
+						],
+						[
+							"game_step",
+							23982694,
+							23986112,
+							31
+						],
+						[
+							"game_step",
+							23986115,
+							23989605,
+							31
+						],
+						[
+							"game_step",
+							23989608,
+							23993020,
+							31
+						],
+						[
+							"main_process",
+							23966456,
+							23993025,
+							31
+						],
+						[
+							"camp_scan",
+							23993272,
+							23993385,
+							31
+						],
+						[
+							"outpost_scan",
+							23993388,
+							23993467,
+							31
+						],
+						[
+							"world_context",
+							23993089,
+							23993494,
+							31
+						],
+						[
+							"overview_player",
+							23993542,
+							23993545,
+							31
+						],
+						[
+							"overview_state",
+							23993498,
+							23993546,
+							31
+						],
+						[
+							"overview_tick",
+							23993059,
+							23993552,
+							31
+						],
+						[
+							"outpost_scan",
+							23993612,
+							23993670,
+							31
+						],
+						[
+							"cleanup_query",
+							23993562,
+							23993697,
+							31
+						],
+						[
+							"cleanup_refresh",
+							23993559,
+							23993744,
+							31
+						],
+						[
+							"hud_process",
+							23993036,
+							23995051,
+							31
+						],
+						[
+							"overview_draw",
+							23996928,
+							23997165,
+							31
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 73424,
+					"frame_setup_cpu_ms": 0.01,
+					"projectiles": 0,
+					"sim_elapsed": 3.71666666666666,
+					"viewport_cpu_ms": 47.306999206543,
+					"viewport_gpu_ms": 73.8840026855469,
+					"wall_us": 110414
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"game_step",
+							24076932,
+							24081618,
+							32
+						],
+						[
+							"game_step",
+							24081626,
+							24085188,
+							32
+						],
+						[
+							"game_step",
+							24085191,
+							24088752,
+							32
+						],
+						[
+							"game_step",
+							24088755,
+							24092183,
+							32
+						],
+						[
+							"game_step",
+							24092186,
+							24096429,
+							32
+						],
+						[
+							"game_step",
+							24096433,
+							24100456,
+							32
+						],
+						[
+							"main_process",
+							24076889,
+							24100463,
+							32
+						],
+						[
+							"overview_player",
+							24100534,
+							24100538,
+							32
+						],
+						[
+							"overview_tick",
+							24100502,
+							24100539,
+							32
+						],
+						[
+							"hud_process",
+							24100477,
+							24102027,
+							32
+						],
+						[
+							"overview_draw",
+							24104077,
+							24104356,
+							32
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 73352,
+					"frame_setup_cpu_ms": 0.01,
+					"projectiles": 0,
+					"sim_elapsed": 3.81666666666666,
+					"viewport_cpu_ms": 34.5999984741211,
+					"viewport_gpu_ms": 71.4209976196289,
+					"wall_us": 107288
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"game_step",
+							24184197,
+							24188321,
+							33
+						],
+						[
+							"game_step",
+							24188347,
+							24191941,
+							33
+						],
+						[
+							"game_step",
+							24191944,
+							24195684,
+							33
+						],
+						[
+							"game_step",
+							24195688,
+							24199319,
+							33
+						],
+						[
+							"game_step",
+							24199340,
+							24202831,
+							33
+						],
+						[
+							"game_step",
+							24202834,
+							24208933,
+							33
+						],
+						[
+							"game_step",
+							24208937,
+							24212476,
+							33
+						],
+						[
+							"main_process",
+							24184168,
+							24212482,
+							33
+						],
+						[
+							"camp_scan",
+							24212724,
+							24212816,
+							33
+						],
+						[
+							"outpost_scan",
+							24212820,
+							24212898,
+							33
+						],
+						[
+							"world_context",
+							24212544,
+							24212924,
+							33
+						],
+						[
+							"overview_player",
+							24212968,
+							24212972,
+							33
+						],
+						[
+							"overview_state",
+							24212927,
+							24212973,
+							33
+						],
+						[
+							"overview_tick",
+							24212515,
+							24212979,
+							33
+						],
+						[
+							"outpost_scan",
+							24213030,
+							24213087,
+							33
+						],
+						[
+							"cleanup_query",
+							24212987,
+							24213113,
+							33
+						],
+						[
+							"cleanup_refresh",
+							24212985,
+							24213159,
+							33
+						],
+						[
+							"hud_process",
+							24212493,
+							24214488,
+							33
+						],
+						[
+							"overview_draw",
+							24216498,
+							24216733,
+							33
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 71808,
+					"frame_setup_cpu_ms": 0.009,
+					"projectiles": 0,
+					"sim_elapsed": 3.93333333333332,
+					"viewport_cpu_ms": 33.2910003662109,
+					"viewport_gpu_ms": 68.5810012817383,
+					"wall_us": 112215
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"game_step",
+							24296467,
+							24300823,
+							34
+						],
+						[
+							"game_step",
+							24300828,
+							24304683,
+							34
+						],
+						[
+							"game_step",
+							24304686,
+							24308131,
+							34
+						],
+						[
+							"game_step",
+							24308134,
+							24311613,
+							34
+						],
+						[
+							"game_step",
+							24311616,
+							24315023,
+							34
+						],
+						[
+							"game_step",
+							24315026,
+							24318467,
+							34
+						],
+						[
+							"main_process",
+							24296433,
+							24318473,
+							34
+						],
+						[
+							"overview_player",
+							24318536,
+							24318539,
+							34
+						],
+						[
+							"overview_tick",
+							24318505,
+							24318540,
+							34
+						],
+						[
+							"hud_process",
+							24318483,
+							24319810,
+							34
+						],
+						[
+							"overview_draw",
+							24322150,
+							24322448,
+							34
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 66722,
+					"frame_setup_cpu_ms": 0.009,
+					"projectiles": 0,
+					"sim_elapsed": 4.03333333333332,
+					"viewport_cpu_ms": 34.7900009155273,
+					"viewport_gpu_ms": 71.754997253418,
+					"wall_us": 100372
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"game_step",
+							24396875,
+							24400830,
+							35
+						],
+						[
+							"game_step",
+							24400835,
+							24404569,
+							35
+						],
+						[
+							"game_step",
+							24404572,
+							24407973,
+							35
+						],
+						[
+							"game_step",
+							24407976,
+							24411456,
+							35
+						],
+						[
+							"game_step",
+							24411459,
+							24414862,
+							35
+						],
+						[
+							"game_step",
+							24414864,
+							24418239,
+							35
+						],
+						[
+							"game_step",
+							24418242,
+							24421578,
+							35
+						],
+						[
+							"main_process",
+							24396842,
+							24421584,
+							35
+						],
+						[
+							"camp_scan",
+							24421827,
+							24421917,
+							35
+						],
+						[
+							"outpost_scan",
+							24421920,
+							24422058,
+							35
+						],
+						[
+							"world_context",
+							24421648,
+							24422085,
+							35
+						],
+						[
+							"overview_player",
+							24422130,
+							24422135,
+							35
+						],
+						[
+							"overview_state",
+							24422089,
+							24422136,
+							35
+						],
+						[
+							"overview_tick",
+							24421617,
+							24422141,
+							35
+						],
+						[
+							"outpost_scan",
+							24422196,
+							24422255,
+							35
+						],
+						[
+							"cleanup_query",
+							24422150,
+							24422282,
+							35
+						],
+						[
+							"cleanup_refresh",
+							24422148,
+							24422329,
+							35
+						],
+						[
+							"hud_process",
+							24421595,
+							24423608,
+							35
+						],
+						[
+							"overview_draw",
+							24425864,
+							24426165,
+							35
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 66586,
+					"frame_setup_cpu_ms": 0.009,
+					"projectiles": 0,
+					"sim_elapsed": 4.14999999999999,
+					"viewport_cpu_ms": 41.4889984130859,
+					"viewport_gpu_ms": 64.7580032348633,
+					"wall_us": 103145
+				}
+			],
+			"label": "1",
+			"mode": "full",
+			"sim_seconds": 0.866666666666664
+		},
+		{
+			"cpu_delta": {
+
+			},
+			"frames": [
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"game_step",
+							25797725,
+							25802462,
+							41
+						],
+						[
+							"game_step",
+							25802469,
+							25808765,
+							41
+						],
+						[
+							"game_step",
+							25808771,
+							25812261,
+							41
+						],
+						[
+							"game_step",
+							25812264,
+							25816505,
+							41
+						],
+						[
+							"game_step",
+							25816509,
+							25819756,
+							41
+						],
+						[
+							"game_step",
+							25819759,
+							25826368,
+							41
+						],
+						[
+							"game_step",
+							25826373,
+							25829600,
+							41
+						],
+						[
+							"game_step",
+							25829603,
+							25832817,
+							41
+						],
+						[
+							"game_step",
+							25832820,
+							25835985,
+							41
+						],
+						[
+							"main_process",
+							25797650,
+							25835993,
+							41
+						],
+						[
+							"camp_scan",
+							25836255,
+							25836350,
+							41
+						],
+						[
+							"outpost_scan",
+							25836353,
+							25836467,
+							41
+						],
+						[
+							"world_context",
+							25836070,
+							25836495,
+							41
+						],
+						[
+							"overview_player",
+							25836551,
+							25836555,
+							41
+						],
+						[
+							"overview_state",
+							25836499,
+							25836556,
+							41
+						],
+						[
+							"overview_tick",
+							25836036,
+							25836562,
+							41
+						],
+						[
+							"outpost_scan",
+							25836621,
+							25836678,
+							41
+						],
+						[
+							"cleanup_query",
+							25836572,
+							25836704,
+							41
+						],
+						[
+							"cleanup_refresh",
+							25836569,
+							25836760,
+							41
+						],
+						[
+							"hud_process",
+							25836006,
+							25838061,
+							41
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 107315,
+					"frame_setup_cpu_ms": 0.012,
+					"projectiles": 0,
+					"sim_elapsed": 4.89999999999999,
+					"viewport_cpu_ms": 41.6910018920898,
+					"viewport_gpu_ms": 63.0449981689453,
+					"wall_us": 162865
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"game_step",
+							25955184,
+							25959641,
+							42
+						],
+						[
+							"game_step",
+							25959648,
+							25964587,
+							42
+						],
+						[
+							"game_step",
+							25964590,
+							25967983,
+							42
+						],
+						[
+							"game_step",
+							25967987,
+							25971369,
+							42
+						],
+						[
+							"game_step",
+							25971372,
+							25974832,
+							42
+						],
+						[
+							"game_step",
+							25974835,
+							25978103,
+							42
+						],
+						[
+							"game_step",
+							25978107,
+							25981491,
+							42
+						],
+						[
+							"main_process",
+							25955133,
+							25981499,
+							42
+						],
+						[
+							"overview_player",
+							25981574,
+							25981577,
+							42
+						],
+						[
+							"overview_tick",
+							25981539,
+							25981579,
+							42
+						],
+						[
+							"hud_process",
+							25981512,
+							25982908,
+							42
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 252842,
+					"frame_setup_cpu_ms": 0.011,
+					"projectiles": 0,
+					"sim_elapsed": 5.01666666666665,
+					"viewport_cpu_ms": 32.3300018310547,
+					"viewport_gpu_ms": 67.9729995727539,
+					"wall_us": 299122
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"game_step",
+							26254221,
+							26267764,
+							43
+						],
+						[
+							"game_step",
+							26267773,
+							26278633,
+							43
+						],
+						[
+							"game_step",
+							26278640,
+							26291413,
+							43
+						],
+						[
+							"game_step",
+							26291420,
+							26311698,
+							43
+						],
+						[
+							"game_step",
+							26311703,
+							26320188,
+							43
+						],
+						[
+							"game_step",
+							26320193,
+							26329692,
+							43
+						],
+						[
+							"game_step",
+							26329696,
+							26344937,
+							43
+						],
+						[
+							"game_step",
+							26344942,
+							26348414,
+							43
+						],
+						[
+							"game_step",
+							26348418,
+							26355122,
+							43
+						],
+						[
+							"main_process",
+							26254149,
+							26355132,
+							43
+						],
+						[
+							"camp_scan",
+							26355489,
+							26355587,
+							43
+						],
+						[
+							"outpost_scan",
+							26355591,
+							26355688,
+							43
+						],
+						[
+							"world_context",
+							26355218,
+							26355717,
+							43
+						],
+						[
+							"overview_player",
+							26355771,
+							26355775,
+							43
+						],
+						[
+							"overview_state",
+							26355721,
+							26355776,
+							43
+						],
+						[
+							"overview_tick",
+							26355183,
+							26355782,
+							43
+						],
+						[
+							"outpost_scan",
+							26355841,
+							26355898,
+							43
+						],
+						[
+							"cleanup_query",
+							26355792,
+							26355926,
+							43
+						],
+						[
+							"cleanup_refresh",
+							26355789,
+							26355981,
+							43
+						],
+						[
+							"hud_process",
+							26355149,
+							26357327,
+							43
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 299698,
+					"frame_setup_cpu_ms": 0.012,
+					"projectiles": 0,
+					"sim_elapsed": 5.16666666666665,
+					"viewport_cpu_ms": 35.9290008544922,
+					"viewport_gpu_ms": 179.75,
+					"wall_us": 415833
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"game_step",
+							26674350,
+							26678758,
+							44
+						],
+						[
+							"game_step",
+							26678765,
+							26682245,
+							44
+						],
+						[
+							"game_step",
+							26682248,
+							26685555,
+							44
+						],
+						[
+							"game_step",
+							26685558,
+							26689176,
+							44
+						],
+						[
+							"game_step",
+							26689180,
+							26692676,
+							44
+						],
+						[
+							"game_step",
+							26692679,
+							26696241,
+							44
+						],
+						[
+							"game_step",
+							26696245,
+							26700118,
+							44
+						],
+						[
+							"game_step",
+							26700121,
+							26705372,
+							44
+						],
+						[
+							"main_process",
+							26674286,
+							26705381,
+							44
+						],
+						[
+							"overview_player",
+							26707363,
+							26707367,
+							44
+						],
+						[
+							"overview_tick",
+							26705432,
+							26707370,
+							44
+						],
+						[
+							"hud_process",
+							26705399,
+							26710514,
+							44
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 124839,
+					"frame_setup_cpu_ms": 0.011,
+					"projectiles": 0,
+					"sim_elapsed": 5.29999999999999,
+					"viewport_cpu_ms": 200.910995483398,
+					"viewport_gpu_ms": 223.276000976562,
+					"wall_us": 179112
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"game_step",
+							26849187,
+							26853717,
+							45
+						],
+						[
+							"game_step",
+							26853726,
+							26857197,
+							45
+						],
+						[
+							"game_step",
+							26857200,
+							26860382,
+							45
+						],
+						[
+							"game_step",
+							26860385,
+							26863613,
+							45
+						],
+						[
+							"game_step",
+							26863617,
+							26866690,
+							45
+						],
+						[
+							"game_step",
+							26866692,
+							26869887,
+							45
+						],
+						[
+							"game_step",
+							26869890,
+							26874893,
+							45
+						],
+						[
+							"main_process",
+							26849131,
+							26874902,
+							45
+						],
+						[
+							"camp_scan",
+							26875334,
+							26875437,
+							45
+						],
+						[
+							"outpost_scan",
+							26875442,
+							26875554,
+							45
+						],
+						[
+							"world_context",
+							26874978,
+							26875584,
+							45
+						],
+						[
+							"overview_player",
+							26875635,
+							26875639,
+							45
+						],
+						[
+							"overview_state",
+							26875588,
+							26875640,
+							45
+						],
+						[
+							"overview_tick",
+							26874944,
+							26875646,
+							45
+						],
+						[
+							"outpost_scan",
+							26875693,
+							26875750,
+							45
+						],
+						[
+							"cleanup_query",
+							26875656,
+							26875779,
+							45
+						],
+						[
+							"cleanup_refresh",
+							26875654,
+							26875834,
+							45
+						],
+						[
+							"hud_process",
+							26874918,
+							26877153,
+							45
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 91792,
+					"frame_setup_cpu_ms": 0.011,
+					"projectiles": 0,
+					"sim_elapsed": 5.41666666666665,
+					"viewport_cpu_ms": 37.4850006103516,
+					"viewport_gpu_ms": 92.9179992675781,
+					"wall_us": 131044
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"game_step",
+							26980251,
+							26984367,
+							46
+						],
+						[
+							"game_step",
+							26984374,
+							26987833,
+							46
+						],
+						[
+							"game_step",
+							26987836,
+							26991092,
+							46
+						],
+						[
+							"game_step",
+							26991095,
+							26994434,
+							46
+						],
+						[
+							"game_step",
+							26994437,
+							26997922,
+							46
+						],
+						[
+							"game_step",
+							26997925,
+							27001145,
+							46
+						],
+						[
+							"game_step",
+							27001148,
+							27004333,
+							46
+						],
+						[
+							"game_step",
+							27004335,
+							27007372,
+							46
+						],
+						[
+							"main_process",
+							26980204,
+							27007379,
+							46
+						],
+						[
+							"overview_player",
+							27007451,
+							27007474,
+							46
+						],
+						[
+							"overview_tick",
+							27007418,
+							27007476,
+							46
+						],
+						[
+							"hud_process",
+							27007391,
+							27008783,
+							46
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 88332,
+					"frame_setup_cpu_ms": 0.012,
+					"projectiles": 0,
+					"sim_elapsed": 5.54999999999999,
+					"viewport_cpu_ms": 51.1749992370605,
+					"viewport_gpu_ms": 205.908996582031,
+					"wall_us": 126796
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"game_step",
+							27107094,
+							27111104,
+							47
+						],
+						[
+							"game_step",
+							27111110,
+							27114443,
+							47
+						],
+						[
+							"game_step",
+							27114446,
+							27117655,
+							47
+						],
+						[
+							"game_step",
+							27117657,
+							27120876,
+							47
+						],
+						[
+							"game_step",
+							27120879,
+							27124084,
+							47
+						],
+						[
+							"game_step",
+							27124087,
+							27127234,
+							47
+						],
+						[
+							"game_step",
+							27127236,
+							27130358,
+							47
+						],
+						[
+							"main_process",
+							27107042,
+							27130364,
+							47
+						],
+						[
+							"camp_scan",
+							27130640,
+							27130731,
+							47
+						],
+						[
+							"outpost_scan",
+							27130735,
+							27130821,
+							47
+						],
+						[
+							"world_context",
+							27130435,
+							27130848,
+							47
+						],
+						[
+							"overview_player",
+							27130895,
+							27130898,
+							47
+						],
+						[
+							"overview_state",
+							27130852,
+							27130900,
+							47
+						],
+						[
+							"overview_tick",
+							27130402,
+							27130906,
+							47
+						],
+						[
+							"outpost_scan",
+							27130961,
+							27131019,
+							47
+						],
+						[
+							"cleanup_query",
+							27130915,
+							27131046,
+							47
+						],
+						[
+							"cleanup_refresh",
+							27130913,
+							27131093,
+							47
+						],
+						[
+							"hud_process",
+							27130375,
+							27132389,
+							47
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 66406,
+					"frame_setup_cpu_ms": 0.017,
+					"projectiles": 0,
+					"sim_elapsed": 5.66666666666665,
+					"viewport_cpu_ms": 82.8440017700195,
+					"viewport_gpu_ms": 100.860000610352,
+					"wall_us": 100293
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"game_step",
+							27207458,
+							27211256,
+							48
+						],
+						[
+							"game_step",
+							27211261,
+							27214435,
+							48
+						],
+						[
+							"game_step",
+							27214438,
+							27217570,
+							48
+						],
+						[
+							"game_step",
+							27217573,
+							27220692,
+							48
+						],
+						[
+							"game_step",
+							27220695,
+							27223852,
+							48
+						],
+						[
+							"game_step",
+							27223855,
+							27226980,
+							48
+						],
+						[
+							"main_process",
+							27207419,
+							27226986,
+							48
+						],
+						[
+							"overview_player",
+							27227046,
+							27227049,
+							48
+						],
+						[
+							"overview_tick",
+							27227017,
+							27227050,
+							48
+						],
+						[
+							"hud_process",
+							27226994,
+							27228405,
+							48
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 135558,
+					"frame_setup_cpu_ms": 0.01,
+					"projectiles": 0,
+					"sim_elapsed": 5.76666666666665,
+					"viewport_cpu_ms": 39.306999206543,
+					"viewport_gpu_ms": 225.386993408203,
+					"wall_us": 164756
+				}
+			],
+			"label": "2",
+			"mode": "retained",
+			"sim_seconds": 1.01666666666666
+		},
+		{
+			"cpu_delta": {
+
+			},
+			"frames": [
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"game_step",
+							28445756,
+							28449447,
+							54
+						],
+						[
+							"game_step",
+							28449452,
+							28452680,
+							54
+						],
+						[
+							"game_step",
+							28452683,
+							28455828,
+							54
+						],
+						[
+							"game_step",
+							28455831,
+							28459184,
+							54
+						],
+						[
+							"game_step",
+							28459187,
+							28462318,
+							54
+						],
+						[
+							"game_step",
+							28462321,
+							28465427,
+							54
+						],
+						[
+							"game_step",
+							28465430,
+							28468847,
+							54
+						],
+						[
+							"main_process",
+							28445722,
+							28468853,
+							54
+						],
+						[
+							"overview_player",
+							28468916,
+							28468920,
+							54
+						],
+						[
+							"overview_tick",
+							28468886,
+							28468922,
+							54
+						],
+						[
+							"hud_process",
+							28468864,
+							28470479,
+							54
+						],
+						[
+							"overview_draw",
+							28472464,
+							28472746,
+							54
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 110567,
+					"frame_setup_cpu_ms": 0.015,
+					"projectiles": 0,
+					"sim_elapsed": 6.56666666666665,
+					"viewport_cpu_ms": 35.4140014648438,
+					"viewport_gpu_ms": 117.703002929688,
+					"wall_us": 146076
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"game_step",
+							28589610,
+							28593670,
+							55
+						],
+						[
+							"game_step",
+							28593677,
+							28597100,
+							55
+						],
+						[
+							"game_step",
+							28597103,
+							28601436,
+							55
+						],
+						[
+							"game_step",
+							28601440,
+							28604845,
+							55
+						],
+						[
+							"game_step",
+							28604849,
+							28608231,
+							55
+						],
+						[
+							"game_step",
+							28608235,
+							28611498,
+							55
+						],
+						[
+							"game_step",
+							28611501,
+							28614765,
+							55
+						],
+						[
+							"game_step",
+							28614768,
+							28617888,
+							55
+						],
+						[
+							"main_process",
+							28589559,
+							28617896,
+							55
+						],
+						[
+							"camp_scan",
+							28618151,
+							28618291,
+							55
+						],
+						[
+							"outpost_scan",
+							28618294,
+							28618377,
+							55
+						],
+						[
+							"world_context",
+							28617968,
+							28618403,
+							55
+						],
+						[
+							"overview_player",
+							28618455,
+							28618461,
+							55
+						],
+						[
+							"overview_state",
+							28618407,
+							28618462,
+							55
+						],
+						[
+							"overview_tick",
+							28617935,
+							28618468,
+							55
+						],
+						[
+							"outpost_scan",
+							28618524,
+							28618601,
+							55
+						],
+						[
+							"cleanup_query",
+							28618478,
+							28618628,
+							55
+						],
+						[
+							"cleanup_refresh",
+							28618475,
+							28618678,
+							55
+						],
+						[
+							"hud_process",
+							28617909,
+							28620093,
+							55
+						],
+						[
+							"overview_draw",
+							28622094,
+							28622396,
+							55
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 83658,
+					"frame_setup_cpu_ms": 0.011,
+					"projectiles": 0,
+					"sim_elapsed": 6.69999999999998,
+					"viewport_cpu_ms": 37.2270011901855,
+					"viewport_gpu_ms": 75.0770034790039,
+					"wall_us": 123666
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"game_step",
+							28713292,
+							28717235,
+							56
+						],
+						[
+							"game_step",
+							28717241,
+							28720497,
+							56
+						],
+						[
+							"game_step",
+							28720500,
+							28724413,
+							56
+						],
+						[
+							"game_step",
+							28724418,
+							28729428,
+							56
+						],
+						[
+							"game_step",
+							28729433,
+							28732745,
+							56
+						],
+						[
+							"game_step",
+							28732749,
+							28735834,
+							56
+						],
+						[
+							"game_step",
+							28735837,
+							28738809,
+							56
+						],
+						[
+							"game_step",
+							28738812,
+							28741811,
+							56
+						],
+						[
+							"main_process",
+							28713249,
+							28741818,
+							56
+						],
+						[
+							"overview_player",
+							28741887,
+							28741891,
+							56
+						],
+						[
+							"overview_tick",
+							28741854,
+							28741892,
+							56
+						],
+						[
+							"hud_process",
+							28741829,
+							28743202,
+							56
+						],
+						[
+							"overview_draw",
+							28745202,
+							28745449,
+							56
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 76168,
+					"frame_setup_cpu_ms": 0.01,
+					"projectiles": 0,
+					"sim_elapsed": 6.83333333333331,
+					"viewport_cpu_ms": 36.0629997253418,
+					"viewport_gpu_ms": 121.03800201416,
+					"wall_us": 116144
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"game_step",
+							28829375,
+							28832981,
+							57
+						],
+						[
+							"game_step",
+							28832985,
+							28836398,
+							57
+						],
+						[
+							"game_step",
+							28836401,
+							28839471,
+							57
+						],
+						[
+							"game_step",
+							28839474,
+							28842451,
+							57
+						],
+						[
+							"game_step",
+							28842453,
+							28845468,
+							57
+						],
+						[
+							"game_step",
+							28845471,
+							28848384,
+							57
+						],
+						[
+							"game_step",
+							28848386,
+							28851292,
+							57
+						],
+						[
+							"main_process",
+							28829341,
+							28851298,
+							57
+						],
+						[
+							"camp_scan",
+							28851533,
+							28851648,
+							57
+						],
+						[
+							"outpost_scan",
+							28851651,
+							28851729,
+							57
+						],
+						[
+							"world_context",
+							28851356,
+							28851755,
+							57
+						],
+						[
+							"overview_player",
+							28851801,
+							28851805,
+							57
+						],
+						[
+							"overview_state",
+							28851758,
+							28851806,
+							57
+						],
+						[
+							"overview_tick",
+							28851328,
+							28851812,
+							57
+						],
+						[
+							"outpost_scan",
+							28851864,
+							28851918,
+							57
+						],
+						[
+							"cleanup_query",
+							28851821,
+							28851943,
+							57
+						],
+						[
+							"cleanup_refresh",
+							28851819,
+							28851990,
+							57
+						],
+						[
+							"hud_process",
+							28851306,
+							28853167,
+							57
+						],
+						[
+							"overview_draw",
+							28854975,
+							28855210,
+							57
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 92746,
+					"frame_setup_cpu_ms": 0.009,
+					"projectiles": 0,
+					"sim_elapsed": 6.94999999999998,
+					"viewport_cpu_ms": 53.1769981384277,
+					"viewport_gpu_ms": 66.2839965820312,
+					"wall_us": 125333
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"game_step",
+							28954814,
+							28958530,
+							58
+						],
+						[
+							"game_step",
+							28958536,
+							28961614,
+							58
+						],
+						[
+							"game_step",
+							28961617,
+							28964708,
+							58
+						],
+						[
+							"game_step",
+							28964711,
+							28968112,
+							58
+						],
+						[
+							"game_step",
+							28968116,
+							28971272,
+							58
+						],
+						[
+							"game_step",
+							28971274,
+							28974303,
+							58
+						],
+						[
+							"game_step",
+							28974306,
+							28977317,
+							58
+						],
+						[
+							"game_step",
+							28977319,
+							28980455,
+							58
+						],
+						[
+							"main_process",
+							28954774,
+							28980461,
+							58
+						],
+						[
+							"overview_player",
+							28980529,
+							28980532,
+							58
+						],
+						[
+							"overview_tick",
+							28980498,
+							28980533,
+							58
+						],
+						[
+							"hud_process",
+							28980472,
+							28982775,
+							58
+						],
+						[
+							"overview_draw",
+							28985752,
+							28986002,
+							58
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 88493,
+					"frame_setup_cpu_ms": 0.01,
+					"projectiles": 0,
+					"sim_elapsed": 7.08333333333331,
+					"viewport_cpu_ms": 52.4220008850098,
+					"viewport_gpu_ms": 123.582000732422,
+					"wall_us": 126610
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"game_step",
+							29081387,
+							29085340,
+							59
+						],
+						[
+							"game_step",
+							29085345,
+							29088645,
+							59
+						],
+						[
+							"game_step",
+							29088648,
+							29091908,
+							59
+						],
+						[
+							"game_step",
+							29091911,
+							29095047,
+							59
+						],
+						[
+							"game_step",
+							29095050,
+							29098333,
+							59
+						],
+						[
+							"game_step",
+							29098335,
+							29101551,
+							59
+						],
+						[
+							"game_step",
+							29101578,
+							29105057,
+							59
+						],
+						[
+							"main_process",
+							29081350,
+							29105064,
+							59
+						],
+						[
+							"camp_scan",
+							29105318,
+							29105408,
+							59
+						],
+						[
+							"outpost_scan",
+							29105411,
+							29105493,
+							59
+						],
+						[
+							"world_context",
+							29105131,
+							29105520,
+							59
+						],
+						[
+							"overview_player",
+							29105598,
+							29105602,
+							59
+						],
+						[
+							"overview_state",
+							29105523,
+							29105604,
+							59
+						],
+						[
+							"overview_tick",
+							29105100,
+							29105610,
+							59
+						],
+						[
+							"outpost_scan",
+							29105663,
+							29105721,
+							59
+						],
+						[
+							"cleanup_query",
+							29105619,
+							29105748,
+							59
+						],
+						[
+							"cleanup_refresh",
+							29105617,
+							29105797,
+							59
+						],
+						[
+							"hud_process",
+							29105075,
+							29107176,
+							59
+						],
+						[
+							"overview_draw",
+							29109098,
+							29109348,
+							59
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 77980,
+					"frame_setup_cpu_ms": 0.01,
+					"projectiles": 0,
+					"sim_elapsed": 7.19999999999998,
+					"viewport_cpu_ms": 36.0349998474121,
+					"viewport_gpu_ms": 72.6750030517578,
+					"wall_us": 111954
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"game_step",
+							29193384,
+							29198087,
+							60
+						],
+						[
+							"game_step",
+							29198091,
+							29201464,
+							60
+						],
+						[
+							"game_step",
+							29201468,
+							29204830,
+							60
+						],
+						[
+							"game_step",
+							29204833,
+							29208129,
+							60
+						],
+						[
+							"game_step",
+							29208132,
+							29211290,
+							60
+						],
+						[
+							"game_step",
+							29211292,
+							29214500,
+							60
+						],
+						[
+							"game_step",
+							29214503,
+							29217662,
+							60
+						],
+						[
+							"main_process",
+							29193354,
+							29217667,
+							60
+						],
+						[
+							"overview_player",
+							29217723,
+							29217726,
+							60
+						],
+						[
+							"overview_tick",
+							29217696,
+							29217728,
+							60
+						],
+						[
+							"hud_process",
+							29217676,
+							29218986,
+							60
+						],
+						[
+							"overview_draw",
+							29220863,
+							29221097,
+							60
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 71620,
+					"frame_setup_cpu_ms": 0.009,
+					"projectiles": 0,
+					"sim_elapsed": 7.31666666666665,
+					"viewport_cpu_ms": 52.2569999694824,
+					"viewport_gpu_ms": 104.728996276855,
+					"wall_us": 104888
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"game_step",
+							29298334,
+							29301963,
+							61
+						],
+						[
+							"game_step",
+							29301967,
+							29305299,
+							61
+						],
+						[
+							"game_step",
+							29305302,
+							29308593,
+							61
+						],
+						[
+							"game_step",
+							29308596,
+							29311742,
+							61
+						],
+						[
+							"game_step",
+							29311745,
+							29314886,
+							61
+						],
+						[
+							"game_step",
+							29314889,
+							29317986,
+							61
+						],
+						[
+							"main_process",
+							29298301,
+							29317991,
+							61
+						],
+						[
+							"camp_scan",
+							29318276,
+							29318370,
+							61
+						],
+						[
+							"outpost_scan",
+							29318373,
+							29318456,
+							61
+						],
+						[
+							"world_context",
+							29318049,
+							29318483,
+							61
+						],
+						[
+							"overview_player",
+							29318526,
+							29318531,
+							61
+						],
+						[
+							"overview_state",
+							29318486,
+							29318532,
+							61
+						],
+						[
+							"overview_tick",
+							29318020,
+							29318538,
+							61
+						],
+						[
+							"outpost_scan",
+							29318622,
+							29318682,
+							61
+						],
+						[
+							"cleanup_query",
+							29318547,
+							29318708,
+							61
+						],
+						[
+							"cleanup_refresh",
+							29318544,
+							29318755,
+							61
+						],
+						[
+							"hud_process",
+							29318000,
+							29319999,
+							61
+						],
+						[
+							"overview_draw",
+							29321837,
+							29322072,
+							61
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 148212,
+					"frame_setup_cpu_ms": 0.009,
+					"projectiles": 0,
+					"sim_elapsed": 7.41666666666665,
+					"viewport_cpu_ms": 36.2900009155273,
+					"viewport_gpu_ms": 75.5960006713867,
+					"wall_us": 178028
+				}
+			],
+			"label": "3",
+			"mode": "full",
+			"sim_seconds": 0.966666666666663
+		},
+		{
+			"cpu_delta": {
+
+			},
+			"frames": [
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"game_step",
+							30358911,
+							30362949,
+							67
+						],
+						[
+							"game_step",
+							30362956,
+							30366374,
+							67
+						],
+						[
+							"game_step",
+							30366378,
+							30370010,
+							67
+						],
+						[
+							"game_step",
+							30370013,
+							30373771,
+							67
+						],
+						[
+							"game_step",
+							30373775,
+							30377113,
+							67
+						],
+						[
+							"game_step",
+							30377116,
+							30380375,
+							67
+						],
+						[
+							"game_step",
+							30380378,
+							30384129,
+							67
+						],
+						[
+							"game_step",
+							30384133,
+							30387286,
+							67
+						],
+						[
+							"main_process",
+							30358870,
+							30387293,
+							67
+						],
+						[
+							"camp_scan",
+							30387646,
+							30387742,
+							67
+						],
+						[
+							"outpost_scan",
+							30387746,
+							30387833,
+							67
+						],
+						[
+							"world_context",
+							30387361,
+							30387861,
+							67
+						],
+						[
+							"overview_player",
+							30387911,
+							30387916,
+							67
+						],
+						[
+							"overview_state",
+							30387864,
+							30387917,
+							67
+						],
+						[
+							"overview_tick",
+							30387330,
+							30387923,
+							67
+						],
+						[
+							"outpost_scan",
+							30387980,
+							30388038,
+							67
+						],
+						[
+							"cleanup_query",
+							30387933,
+							30388065,
+							67
+						],
+						[
+							"cleanup_refresh",
+							30387930,
+							30388119,
+							67
+						],
+						[
+							"hud_process",
+							30387306,
+							30389432,
+							67
+						],
+						[
+							"overview_draw",
+							30391681,
+							30391860,
+							67
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 116821,
+					"frame_setup_cpu_ms": 0.012,
+					"projectiles": 0,
+					"sim_elapsed": 8.19999999999999,
+					"viewport_cpu_ms": 50.7470016479492,
+					"viewport_gpu_ms": 138.47900390625,
+					"wall_us": 156779
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"game_step",
+							30515732,
+							30519712,
+							68
+						],
+						[
+							"game_step",
+							30519718,
+							30525433,
+							68
+						],
+						[
+							"game_step",
+							30525438,
+							30529414,
+							68
+						],
+						[
+							"game_step",
+							30529419,
+							30532800,
+							68
+						],
+						[
+							"game_step",
+							30532803,
+							30536107,
+							68
+						],
+						[
+							"game_step",
+							30536110,
+							30539258,
+							68
+						],
+						[
+							"game_step",
+							30539261,
+							30542823,
+							68
+						],
+						[
+							"game_step",
+							30542825,
+							30546099,
+							68
+						],
+						[
+							"main_process",
+							30515691,
+							30546105,
+							68
+						],
+						[
+							"overview_player",
+							30546175,
+							30546179,
+							68
+						],
+						[
+							"overview_tick",
+							30546144,
+							30546180,
+							68
+						],
+						[
+							"hud_process",
+							30546118,
+							30547711,
+							68
+						],
+						[
+							"overview_draw",
+							30549712,
+							30549898,
+							68
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 95829,
+					"frame_setup_cpu_ms": 0.01,
+					"projectiles": 0,
+					"sim_elapsed": 8.33333333333333,
+					"viewport_cpu_ms": 101.369003295898,
+					"viewport_gpu_ms": 111.210998535156,
+					"wall_us": 137449
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"game_step",
+							30653070,
+							30664231,
+							69
+						],
+						[
+							"game_step",
+							30664237,
+							30673251,
+							69
+						],
+						[
+							"game_step",
+							30673256,
+							30684351,
+							69
+						],
+						[
+							"game_step",
+							30684357,
+							30751929,
+							69
+						],
+						[
+							"game_step",
+							30751937,
+							30782965,
+							69
+						],
+						[
+							"game_step",
+							30782973,
+							30787597,
+							69
+						],
+						[
+							"game_step",
+							30787602,
+							30790965,
+							69
+						],
+						[
+							"game_step",
+							30790968,
+							30794212,
+							69
+						],
+						[
+							"main_process",
+							30653034,
+							30794219,
+							69
+						],
+						[
+							"camp_scan",
+							30794523,
+							30794706,
+							69
+						],
+						[
+							"outpost_scan",
+							30794714,
+							30794804,
+							69
+						],
+						[
+							"world_context",
+							30794353,
+							30794832,
+							69
+						],
+						[
+							"overview_player",
+							30794887,
+							30794893,
+							69
+						],
+						[
+							"overview_state",
+							30794836,
+							30794894,
+							69
+						],
+						[
+							"overview_tick",
+							30794263,
+							30794901,
+							69
+						],
+						[
+							"outpost_scan",
+							30794960,
+							30795020,
+							69
+						],
+						[
+							"cleanup_query",
+							30794911,
+							30795047,
+							69
+						],
+						[
+							"cleanup_refresh",
+							30794909,
+							30795104,
+							69
+						],
+						[
+							"hud_process",
+							30794235,
+							30796608,
+							69
+						],
+						[
+							"overview_draw",
+							30798823,
+							30799003,
+							69
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 124071,
+					"frame_setup_cpu_ms": 0.012,
+					"projectiles": 0,
+					"sim_elapsed": 8.46666666666667,
+					"viewport_cpu_ms": 36.9970016479492,
+					"viewport_gpu_ms": 189.895004272461,
+					"wall_us": 277299
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"game_step",
+							30931784,
+							30959258,
+							70
+						],
+						[
+							"game_step",
+							30959266,
+							30967222,
+							70
+						],
+						[
+							"game_step",
+							30967228,
+							30970897,
+							70
+						],
+						[
+							"game_step",
+							30970901,
+							30974122,
+							70
+						],
+						[
+							"game_step",
+							30974125,
+							30977499,
+							70
+						],
+						[
+							"game_step",
+							30977502,
+							30980826,
+							70
+						],
+						[
+							"game_step",
+							30980829,
+							30984547,
+							70
+						],
+						[
+							"game_step",
+							30984550,
+							30988121,
+							70
+						],
+						[
+							"game_step",
+							30988124,
+							30991578,
+							70
+						],
+						[
+							"main_process",
+							30931716,
+							30991587,
+							70
+						],
+						[
+							"overview_player",
+							30991690,
+							30991693,
+							70
+						],
+						[
+							"overview_tick",
+							30991631,
+							30991695,
+							70
+						],
+						[
+							"hud_process",
+							30991602,
+							30993079,
+							70
+						],
+						[
+							"overview_draw",
+							30995327,
+							30995501,
+							70
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 100918,
+					"frame_setup_cpu_ms": 0.012,
+					"projectiles": 0,
+					"sim_elapsed": 8.61666666666667,
+					"viewport_cpu_ms": 37.0719985961914,
+					"viewport_gpu_ms": 97.1920013427734,
+					"wall_us": 173277
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"game_step",
+							31103766,
+							31107633,
+							71
+						],
+						[
+							"game_step",
+							31107637,
+							31111489,
+							71
+						],
+						[
+							"game_step",
+							31111493,
+							31115041,
+							71
+						],
+						[
+							"game_step",
+							31115044,
+							31118174,
+							71
+						],
+						[
+							"game_step",
+							31118177,
+							31121558,
+							71
+						],
+						[
+							"game_step",
+							31121561,
+							31124835,
+							71
+						],
+						[
+							"game_step",
+							31124838,
+							31127982,
+							71
+						],
+						[
+							"main_process",
+							31103731,
+							31127988,
+							71
+						],
+						[
+							"camp_scan",
+							31128233,
+							31128324,
+							71
+						],
+						[
+							"outpost_scan",
+							31128328,
+							31128412,
+							71
+						],
+						[
+							"world_context",
+							31128051,
+							31128437,
+							71
+						],
+						[
+							"overview_player",
+							31128483,
+							31128487,
+							71
+						],
+						[
+							"overview_state",
+							31128440,
+							31128489,
+							71
+						],
+						[
+							"overview_tick",
+							31128021,
+							31128495,
+							71
+						],
+						[
+							"outpost_scan",
+							31128547,
+							31128604,
+							71
+						],
+						[
+							"cleanup_query",
+							31128504,
+							31128630,
+							71
+						],
+						[
+							"cleanup_refresh",
+							31128501,
+							31128704,
+							71
+						],
+						[
+							"hud_process",
+							31127999,
+							31130000,
+							71
+						],
+						[
+							"overview_draw",
+							31131959,
+							31132121,
+							71
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 112899,
+					"frame_setup_cpu_ms": 0.011,
+					"projectiles": 0,
+					"sim_elapsed": 8.73333333333335,
+					"viewport_cpu_ms": 50.4630012512207,
+					"viewport_gpu_ms": 64.5240020751953,
+					"wall_us": 148012
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"game_step",
+							31251905,
+							31270175,
+							72
+						],
+						[
+							"game_step",
+							31270181,
+							31284967,
+							72
+						],
+						[
+							"game_step",
+							31284973,
+							31383562,
+							72
+						],
+						[
+							"game_step",
+							31383571,
+							31387412,
+							72
+						],
+						[
+							"game_step",
+							31387417,
+							31390865,
+							72
+						],
+						[
+							"game_step",
+							31390868,
+							31394041,
+							72
+						],
+						[
+							"game_step",
+							31394044,
+							31397450,
+							72
+						],
+						[
+							"game_step",
+							31397454,
+							31401461,
+							72
+						],
+						[
+							"main_process",
+							31251855,
+							31401470,
+							72
+						],
+						[
+							"overview_player",
+							31401555,
+							31401560,
+							72
+						],
+						[
+							"overview_tick",
+							31401518,
+							31401561,
+							72
+						],
+						[
+							"hud_process",
+							31401488,
+							31403255,
+							72
+						],
+						[
+							"overview_draw",
+							31405795,
+							31406093,
+							72
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 67417,
+					"frame_setup_cpu_ms": 0.012,
+					"projectiles": 0,
+					"sim_elapsed": 8.86666666666669,
+					"viewport_cpu_ms": 36.6080017089844,
+					"viewport_gpu_ms": 123.112998962402,
+					"wall_us": 229090
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"game_step",
+							31480908,
+							31484548,
+							73
+						],
+						[
+							"game_step",
+							31484553,
+							31487810,
+							73
+						],
+						[
+							"game_step",
+							31487813,
+							31490963,
+							73
+						],
+						[
+							"game_step",
+							31490966,
+							31494082,
+							73
+						],
+						[
+							"game_step",
+							31494085,
+							31497182,
+							73
+						],
+						[
+							"game_step",
+							31497185,
+							31500454,
+							73
+						],
+						[
+							"game_step",
+							31500456,
+							31504207,
+							73
+						],
+						[
+							"game_step",
+							31504211,
+							31507998,
+							73
+						],
+						[
+							"game_step",
+							31508001,
+							31513102,
+							73
+						],
+						[
+							"main_process",
+							31480870,
+							31513110,
+							73
+						],
+						[
+							"camp_scan",
+							31513375,
+							31513466,
+							73
+						],
+						[
+							"outpost_scan",
+							31513469,
+							31513553,
+							73
+						],
+						[
+							"world_context",
+							31513187,
+							31513579,
+							73
+						],
+						[
+							"overview_player",
+							31513623,
+							31513627,
+							73
+						],
+						[
+							"overview_state",
+							31513582,
+							31513628,
+							73
+						],
+						[
+							"overview_tick",
+							31513153,
+							31513634,
+							73
+						],
+						[
+							"outpost_scan",
+							31513715,
+							31513777,
+							73
+						],
+						[
+							"cleanup_query",
+							31513643,
+							31513805,
+							73
+						],
+						[
+							"cleanup_refresh",
+							31513640,
+							31513855,
+							73
+						],
+						[
+							"hud_process",
+							31513125,
+							31515335,
+							73
+						],
+						[
+							"overview_draw",
+							31517252,
+							31517417,
+							73
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 131876,
+					"frame_setup_cpu_ms": 0.013,
+					"projectiles": 0,
+					"sim_elapsed": 9.01666666666669,
+					"viewport_cpu_ms": 51.6650009155273,
+					"viewport_gpu_ms": 109.585998535156,
+					"wall_us": 180452
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"game_step",
+							31661563,
+							31671836,
+							74
+						],
+						[
+							"game_step",
+							31671845,
+							31789764,
+							74
+						],
+						[
+							"game_step",
+							31789775,
+							31798838,
+							74
+						],
+						[
+							"game_step",
+							31798846,
+							31807226,
+							74
+						],
+						[
+							"game_step",
+							31807233,
+							31811238,
+							74
+						],
+						[
+							"game_step",
+							31811243,
+							31814592,
+							74
+						],
+						[
+							"game_step",
+							31814595,
+							31818802,
+							74
+						],
+						[
+							"main_process",
+							31661496,
+							31818812,
+							74
+						],
+						[
+							"overview_player",
+							31818903,
+							31818907,
+							74
+						],
+						[
+							"overview_tick",
+							31818864,
+							31818909,
+							74
+						],
+						[
+							"hud_process",
+							31818829,
+							31820408,
+							74
+						],
+						[
+							"overview_draw",
+							31822729,
+							31822916,
+							74
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 68967,
+					"frame_setup_cpu_ms": 0.013,
+					"projectiles": 0,
+					"sim_elapsed": 9.13333333333337,
+					"viewport_cpu_ms": 75.177001953125,
+					"viewport_gpu_ms": 78.9140014648438,
+					"wall_us": 238285
+				}
+			],
+			"label": "4",
+			"mode": "no_text",
+			"sim_seconds": 1.06666666666672
+		},
+		{
+			"cpu_delta": {
+
+			},
+			"frames": [
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"game_step",
+							32817793,
+							32822683,
+							80
+						],
+						[
+							"game_step",
+							32822691,
+							32826037,
+							80
+						],
+						[
+							"game_step",
+							32826040,
+							32829216,
+							80
+						],
+						[
+							"game_step",
+							32829219,
+							32832358,
+							80
+						],
+						[
+							"game_step",
+							32832361,
+							32835473,
+							80
+						],
+						[
+							"game_step",
+							32835475,
+							32838644,
+							80
+						],
+						[
+							"game_step",
+							32838646,
+							32841708,
+							80
+						],
+						[
+							"main_process",
+							32817713,
+							32841715,
+							80
+						],
+						[
+							"overview_player",
+							32841814,
+							32841818,
+							80
+						],
+						[
+							"overview_tick",
+							32841778,
+							32841820,
+							80
+						],
+						[
+							"hud_process",
+							32841747,
+							32843242,
+							80
+						],
+						[
+							"overview_draw",
+							32845245,
+							32845507,
+							80
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 156883,
+					"frame_setup_cpu_ms": 0.012,
+					"projectiles": 0,
+					"sim_elapsed": 9.91666666666674,
+					"viewport_cpu_ms": 34.2169990539551,
+					"viewport_gpu_ms": 65.1320037841797,
+					"wall_us": 191483
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"game_step",
+							33011897,
+							33025650,
+							81
+						],
+						[
+							"game_step",
+							33025657,
+							33032335,
+							81
+						],
+						[
+							"game_step",
+							33032343,
+							33036329,
+							81
+						],
+						[
+							"game_step",
+							33036334,
+							33041787,
+							81
+						],
+						[
+							"game_step",
+							33041792,
+							33045230,
+							81
+						],
+						[
+							"game_step",
+							33045233,
+							33048939,
+							81
+						],
+						[
+							"game_step",
+							33048943,
+							33052314,
+							81
+						],
+						[
+							"game_step",
+							33052317,
+							33055475,
+							81
+						],
+						[
+							"main_process",
+							33011831,
+							33055483,
+							81
+						],
+						[
+							"camp_scan",
+							33055873,
+							33055971,
+							81
+						],
+						[
+							"outpost_scan",
+							33055974,
+							33056062,
+							81
+						],
+						[
+							"world_context",
+							33055645,
+							33056091,
+							81
+						],
+						[
+							"overview_player",
+							33056151,
+							33056157,
+							81
+						],
+						[
+							"overview_state",
+							33056095,
+							33056158,
+							81
+						],
+						[
+							"overview_tick",
+							33055526,
+							33056164,
+							81
+						],
+						[
+							"outpost_scan",
+							33056223,
+							33056282,
+							81
+						],
+						[
+							"cleanup_query",
+							33056175,
+							33056309,
+							81
+						],
+						[
+							"cleanup_refresh",
+							33056172,
+							33056364,
+							81
+						],
+						[
+							"hud_process",
+							33055496,
+							33057720,
+							81
+						],
+						[
+							"overview_draw",
+							33060004,
+							33060282,
+							81
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 74892,
+					"frame_setup_cpu_ms": 0.011,
+					"projectiles": 0,
+					"sim_elapsed": 10.0500000000001,
+					"viewport_cpu_ms": 44.8740005493164,
+					"viewport_gpu_ms": 134.783996582031,
+					"wall_us": 135099
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"game_step",
+							33144366,
+							33152359,
+							82
+						],
+						[
+							"game_step",
+							33152364,
+							33156274,
+							82
+						],
+						[
+							"game_step",
+							33156278,
+							33159546,
+							82
+						],
+						[
+							"game_step",
+							33159549,
+							33162931,
+							82
+						],
+						[
+							"game_step",
+							33162934,
+							33166142,
+							82
+						],
+						[
+							"game_step",
+							33166145,
+							33169407,
+							82
+						],
+						[
+							"game_step",
+							33169410,
+							33172621,
+							82
+						],
+						[
+							"game_step",
+							33172624,
+							33175941,
+							82
+						],
+						[
+							"main_process",
+							33144329,
+							33175947,
+							82
+						],
+						[
+							"overview_player",
+							33176017,
+							33176021,
+							82
+						],
+						[
+							"overview_tick",
+							33175985,
+							33176022,
+							82
+						],
+						[
+							"hud_process",
+							33175960,
+							33177328,
+							82
+						],
+						[
+							"overview_draw",
+							33179210,
+							33179457,
+							82
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 108937,
+					"frame_setup_cpu_ms": 0.01,
+					"projectiles": 0,
+					"sim_elapsed": 10.1833333333334,
+					"viewport_cpu_ms": 34.8549995422363,
+					"viewport_gpu_ms": 99.947998046875,
+					"wall_us": 151283
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"game_step",
+							33295819,
+							33299552,
+							83
+						],
+						[
+							"game_step",
+							33299558,
+							33303977,
+							83
+						],
+						[
+							"game_step",
+							33303981,
+							33307235,
+							83
+						],
+						[
+							"game_step",
+							33307238,
+							33310542,
+							83
+						],
+						[
+							"game_step",
+							33310546,
+							33313923,
+							83
+						],
+						[
+							"game_step",
+							33313926,
+							33317252,
+							83
+						],
+						[
+							"game_step",
+							33317255,
+							33325342,
+							83
+						],
+						[
+							"game_step",
+							33325347,
+							33328698,
+							83
+						],
+						[
+							"game_step",
+							33328702,
+							33332048,
+							83
+						],
+						[
+							"main_process",
+							33295776,
+							33332056,
+							83
+						],
+						[
+							"camp_scan",
+							33332300,
+							33332391,
+							83
+						],
+						[
+							"outpost_scan",
+							33332394,
+							33332477,
+							83
+						],
+						[
+							"world_context",
+							33332126,
+							33332503,
+							83
+						],
+						[
+							"overview_player",
+							33332549,
+							33332553,
+							83
+						],
+						[
+							"overview_state",
+							33332506,
+							33332554,
+							83
+						],
+						[
+							"overview_tick",
+							33332095,
+							33332560,
+							83
+						],
+						[
+							"outpost_scan",
+							33332615,
+							33332673,
+							83
+						],
+						[
+							"cleanup_query",
+							33332569,
+							33332699,
+							83
+						],
+						[
+							"cleanup_refresh",
+							33332567,
+							33332778,
+							83
+						],
+						[
+							"hud_process",
+							33332069,
+							33334160,
+							83
+						],
+						[
+							"overview_draw",
+							33336337,
+							33336594,
+							83
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 130371,
+					"frame_setup_cpu_ms": 0.009,
+					"projectiles": 0,
+					"sim_elapsed": 10.3333333333334,
+					"viewport_cpu_ms": 45.9790000915527,
+					"viewport_gpu_ms": 80.6549987792969,
+					"wall_us": 178101
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"game_step",
+							33473922,
+							33478007,
+							84
+						],
+						[
+							"game_step",
+							33478012,
+							33481445,
+							84
+						],
+						[
+							"game_step",
+							33481448,
+							33484783,
+							84
+						],
+						[
+							"game_step",
+							33484786,
+							33488093,
+							84
+						],
+						[
+							"game_step",
+							33488096,
+							33491674,
+							84
+						],
+						[
+							"game_step",
+							33491677,
+							33495135,
+							84
+						],
+						[
+							"game_step",
+							33495139,
+							33498390,
+							84
+						],
+						[
+							"game_step",
+							33498393,
+							33501683,
+							84
+						],
+						[
+							"main_process",
+							33473878,
+							33501690,
+							84
+						],
+						[
+							"overview_player",
+							33501788,
+							33501792,
+							84
+						],
+						[
+							"overview_tick",
+							33501730,
+							33501793,
+							84
+						],
+						[
+							"hud_process",
+							33501703,
+							33503190,
+							84
+						],
+						[
+							"overview_draw",
+							33505350,
+							33505621,
+							84
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 79211,
+					"frame_setup_cpu_ms": 0.011,
+					"projectiles": 0,
+					"sim_elapsed": 10.4666666666668,
+					"viewport_cpu_ms": 32.7369995117188,
+					"viewport_gpu_ms": 220.886993408203,
+					"wall_us": 117955
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"game_step",
+							33594155,
+							33597982,
+							85
+						],
+						[
+							"game_step",
+							33597986,
+							33601474,
+							85
+						],
+						[
+							"game_step",
+							33601478,
+							33604758,
+							85
+						],
+						[
+							"game_step",
+							33604761,
+							33608037,
+							85
+						],
+						[
+							"game_step",
+							33608040,
+							33611190,
+							85
+						],
+						[
+							"game_step",
+							33611193,
+							33614376,
+							85
+						],
+						[
+							"game_step",
+							33614379,
+							33617649,
+							85
+						],
+						[
+							"main_process",
+							33594116,
+							33617656,
+							85
+						],
+						[
+							"camp_scan",
+							33617930,
+							33618020,
+							85
+						],
+						[
+							"outpost_scan",
+							33618024,
+							33618107,
+							85
+						],
+						[
+							"world_context",
+							33617725,
+							33618133,
+							85
+						],
+						[
+							"overview_player",
+							33618182,
+							33618187,
+							85
+						],
+						[
+							"overview_state",
+							33618136,
+							33618188,
+							85
+						],
+						[
+							"overview_tick",
+							33617694,
+							33618194,
+							85
+						],
+						[
+							"outpost_scan",
+							33618249,
+							33618307,
+							85
+						],
+						[
+							"cleanup_query",
+							33618204,
+							33618334,
+							85
+						],
+						[
+							"cleanup_refresh",
+							33618201,
+							33618383,
+							85
+						],
+						[
+							"hud_process",
+							33617668,
+							33619894,
+							85
+						],
+						[
+							"overview_draw",
+							33621798,
+							33622052,
+							85
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 97765,
+					"frame_setup_cpu_ms": 0.01,
+					"projectiles": 0,
+					"sim_elapsed": 10.5833333333334,
+					"viewport_cpu_ms": 42.5019989013672,
+					"viewport_gpu_ms": 141.432998657227,
+					"wall_us": 134585
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"game_step",
+							33730190,
+							33733992,
+							86
+						],
+						[
+							"game_step",
+							33733997,
+							33737200,
+							86
+						],
+						[
+							"game_step",
+							33737203,
+							33740388,
+							86
+						],
+						[
+							"game_step",
+							33740391,
+							33743393,
+							86
+						],
+						[
+							"game_step",
+							33743395,
+							33746705,
+							86
+						],
+						[
+							"game_step",
+							33746708,
+							33749946,
+							86
+						],
+						[
+							"game_step",
+							33749949,
+							33753129,
+							86
+						],
+						[
+							"game_step",
+							33753132,
+							33756517,
+							86
+						],
+						[
+							"main_process",
+							33730150,
+							33756529,
+							86
+						],
+						[
+							"overview_player",
+							33756602,
+							33756606,
+							86
+						],
+						[
+							"overview_tick",
+							33756569,
+							33756607,
+							86
+						],
+						[
+							"hud_process",
+							33756542,
+							33757918,
+							86
+						],
+						[
+							"overview_draw",
+							33759936,
+							33760183,
+							86
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 131976,
+					"frame_setup_cpu_ms": 0.01,
+					"projectiles": 0,
+					"sim_elapsed": 10.7166666666668,
+					"viewport_cpu_ms": 46.9560012817383,
+					"viewport_gpu_ms": 149.371002197266,
+					"wall_us": 171755
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"game_step",
+							33898483,
+							33902760,
+							87
+						],
+						[
+							"game_step",
+							33902767,
+							33907368,
+							87
+						],
+						[
+							"game_step",
+							33907374,
+							33911088,
+							87
+						],
+						[
+							"game_step",
+							33911092,
+							33914680,
+							87
+						],
+						[
+							"game_step",
+							33914684,
+							33918023,
+							87
+						],
+						[
+							"game_step",
+							33918026,
+							33922274,
+							87
+						],
+						[
+							"game_step",
+							33922278,
+							33925652,
+							87
+						],
+						[
+							"game_step",
+							33925655,
+							33928910,
+							87
+						],
+						[
+							"main_process",
+							33898405,
+							33928916,
+							87
+						],
+						[
+							"camp_scan",
+							33929175,
+							33929268,
+							87
+						],
+						[
+							"outpost_scan",
+							33929271,
+							33929354,
+							87
+						],
+						[
+							"world_context",
+							33928988,
+							33929381,
+							87
+						],
+						[
+							"overview_player",
+							33929431,
+							33929435,
+							87
+						],
+						[
+							"overview_state",
+							33929384,
+							33929436,
+							87
+						],
+						[
+							"overview_tick",
+							33928954,
+							33929442,
+							87
+						],
+						[
+							"outpost_scan",
+							33929498,
+							33929557,
+							87
+						],
+						[
+							"cleanup_query",
+							33929452,
+							33929584,
+							87
+						],
+						[
+							"cleanup_refresh",
+							33929449,
+							33929634,
+							87
+						],
+						[
+							"hud_process",
+							33928928,
+							33931097,
+							87
+						],
+						[
+							"overview_draw",
+							33933208,
+							33933457,
+							87
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 67948,
+					"frame_setup_cpu_ms": 0.01,
+					"projectiles": 0,
+					"sim_elapsed": 10.8500000000001,
+					"viewport_cpu_ms": 39.7140007019043,
+					"viewport_gpu_ms": 69.984001159668,
+					"wall_us": 109731
+				}
+			],
+			"label": "5",
+			"mode": "full",
+			"sim_seconds": 1.05000000000005
+		},
+		{
+			"cpu_delta": {
+
+			},
+			"frames": [
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"game_step",
+							34468568,
+							34472131,
+							93
+						],
+						[
+							"game_step",
+							34472136,
+							34475333,
+							93
+						],
+						[
+							"game_step",
+							34475336,
+							34478354,
+							93
+						],
+						[
+							"game_step",
+							34478357,
+							34482243,
+							93
+						],
+						[
+							"game_step",
+							34482246,
+							34485058,
+							93
+						],
+						[
+							"main_process",
+							34468542,
+							34485063,
+							93
+						],
+						[
+							"overview_player",
+							34485116,
+							34485119,
+							93
+						],
+						[
+							"overview_tick",
+							34485091,
+							34485120,
+							93
+						],
+						[
+							"hud_process",
+							34485073,
+							34486198,
+							93
+						],
+						[
+							"overview_draw",
+							34487853,
+							34487856,
+							93
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 60879,
+					"frame_setup_cpu_ms": 0.009,
+					"projectiles": 0,
+					"sim_elapsed": 11.4333333333335,
+					"viewport_cpu_ms": 37.0849990844727,
+					"viewport_gpu_ms": 64.3160018920898,
+					"wall_us": 85706
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"game_step",
+							34554281,
+							34558005,
+							94
+						],
+						[
+							"game_step",
+							34558010,
+							34561057,
+							94
+						],
+						[
+							"game_step",
+							34561060,
+							34564067,
+							94
+						],
+						[
+							"game_step",
+							34564070,
+							34567007,
+							94
+						],
+						[
+							"game_step",
+							34567010,
+							34569901,
+							94
+						],
+						[
+							"game_step",
+							34569904,
+							34572795,
+							94
+						],
+						[
+							"main_process",
+							34554253,
+							34572800,
+							94
+						],
+						[
+							"overview_player",
+							34572874,
+							34572877,
+							94
+						],
+						[
+							"overview_tick",
+							34572847,
+							34572879,
+							94
+						],
+						[
+							"hud_process",
+							34572827,
+							34574071,
+							94
+						],
+						[
+							"overview_draw",
+							34575780,
+							34575784,
+							94
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 66906,
+					"frame_setup_cpu_ms": 0.008,
+					"projectiles": 0,
+					"sim_elapsed": 11.5333333333335,
+					"viewport_cpu_ms": 34.5130004882812,
+					"viewport_gpu_ms": 62.2779998779297,
+					"wall_us": 94123
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"game_step",
+							34648437,
+							34652154,
+							95
+						],
+						[
+							"game_step",
+							34652159,
+							34658533,
+							95
+						],
+						[
+							"game_step",
+							34658538,
+							34661952,
+							95
+						],
+						[
+							"game_step",
+							34661955,
+							34665142,
+							95
+						],
+						[
+							"game_step",
+							34665145,
+							34668393,
+							95
+						],
+						[
+							"main_process",
+							34648405,
+							34668400,
+							95
+						],
+						[
+							"camp_scan",
+							34668642,
+							34668733,
+							95
+						],
+						[
+							"outpost_scan",
+							34668737,
+							34668846,
+							95
+						],
+						[
+							"world_context",
+							34668461,
+							34668872,
+							95
+						],
+						[
+							"overview_player",
+							34668918,
+							34668922,
+							95
+						],
+						[
+							"overview_state",
+							34668876,
+							34668923,
+							95
+						],
+						[
+							"overview_tick",
+							34668432,
+							34668929,
+							95
+						],
+						[
+							"outpost_scan",
+							34668983,
+							34669042,
+							95
+						],
+						[
+							"cleanup_query",
+							34668937,
+							34669069,
+							95
+						],
+						[
+							"cleanup_refresh",
+							34668935,
+							34669115,
+							95
+						],
+						[
+							"hud_process",
+							34668410,
+							34670337,
+							95
+						],
+						[
+							"overview_draw",
+							34672342,
+							34672346,
+							95
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 63326,
+					"frame_setup_cpu_ms": 0.008,
+					"projectiles": 0,
+					"sim_elapsed": 11.6166666666668,
+					"viewport_cpu_ms": 50.9570007324219,
+					"viewport_gpu_ms": 60.3269996643066,
+					"wall_us": 92976
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"game_step",
+							34741450,
+							34744796,
+							96
+						],
+						[
+							"game_step",
+							34744800,
+							34748044,
+							96
+						],
+						[
+							"game_step",
+							34748047,
+							34751120,
+							96
+						],
+						[
+							"game_step",
+							34751123,
+							34754051,
+							96
+						],
+						[
+							"game_step",
+							34754053,
+							34757075,
+							96
+						],
+						[
+							"game_step",
+							34757077,
+							34760084,
+							96
+						],
+						[
+							"main_process",
+							34741422,
+							34760090,
+							96
+						],
+						[
+							"overview_player",
+							34760145,
+							34760148,
+							96
+						],
+						[
+							"overview_tick",
+							34760119,
+							34760149,
+							96
+						],
+						[
+							"hud_process",
+							34760098,
+							34761342,
+							96
+						],
+						[
+							"overview_draw",
+							34763055,
+							34763058,
+							96
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 60179,
+					"frame_setup_cpu_ms": 0.008,
+					"projectiles": 0,
+					"sim_elapsed": 11.7166666666668,
+					"viewport_cpu_ms": 34.5699996948242,
+					"viewport_gpu_ms": 58.9339981079102,
+					"wall_us": 87624
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"game_step",
+							34829100,
+							34832502,
+							97
+						],
+						[
+							"game_step",
+							34832506,
+							34835530,
+							97
+						],
+						[
+							"game_step",
+							34835533,
+							34838583,
+							97
+						],
+						[
+							"game_step",
+							34838585,
+							34841817,
+							97
+						],
+						[
+							"game_step",
+							34841840,
+							34844771,
+							97
+						],
+						[
+							"main_process",
+							34829068,
+							34844776,
+							97
+						],
+						[
+							"overview_player",
+							34844852,
+							34844855,
+							97
+						],
+						[
+							"overview_tick",
+							34844804,
+							34844857,
+							97
+						],
+						[
+							"hud_process",
+							34844785,
+							34846065,
+							97
+						],
+						[
+							"overview_draw",
+							34847786,
+							34847789,
+							97
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 61091,
+					"frame_setup_cpu_ms": 0.008,
+					"projectiles": 0,
+					"sim_elapsed": 11.8000000000002,
+					"viewport_cpu_ms": 34.015998840332,
+					"viewport_gpu_ms": 59.9109992980957,
+					"wall_us": 85570
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"game_step",
+							34914803,
+							34918214,
+							98
+						],
+						[
+							"game_step",
+							34918218,
+							34921270,
+							98
+						],
+						[
+							"game_step",
+							34921273,
+							34924215,
+							98
+						],
+						[
+							"game_step",
+							34924218,
+							34927221,
+							98
+						],
+						[
+							"game_step",
+							34927224,
+							34930284,
+							98
+						],
+						[
+							"main_process",
+							34914770,
+							34930290,
+							98
+						],
+						[
+							"camp_scan",
+							34930579,
+							34930691,
+							98
+						],
+						[
+							"outpost_scan",
+							34930694,
+							34930777,
+							98
+						],
+						[
+							"world_context",
+							34930344,
+							34930806,
+							98
+						],
+						[
+							"overview_player",
+							34930876,
+							34930881,
+							98
+						],
+						[
+							"overview_state",
+							34930810,
+							34930882,
+							98
+						],
+						[
+							"overview_tick",
+							34930318,
+							34930888,
+							98
+						],
+						[
+							"outpost_scan",
+							34930947,
+							34931005,
+							98
+						],
+						[
+							"cleanup_query",
+							34930898,
+							34931032,
+							98
+						],
+						[
+							"cleanup_refresh",
+							34930895,
+							34931080,
+							98
+						],
+						[
+							"hud_process",
+							34930299,
+							34932308,
+							98
+						],
+						[
+							"overview_draw",
+							34934067,
+							34934071,
+							98
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 63323,
+					"frame_setup_cpu_ms": 0.008,
+					"projectiles": 0,
+					"sim_elapsed": 11.8833333333335,
+					"viewport_cpu_ms": 33.8470001220703,
+					"viewport_gpu_ms": 57.3300018310547,
+					"wall_us": 88582
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"game_step",
+							35003360,
+							35006986,
+							99
+						],
+						[
+							"game_step",
+							35006990,
+							35011476,
+							99
+						],
+						[
+							"game_step",
+							35011480,
+							35014728,
+							99
+						],
+						[
+							"game_step",
+							35014731,
+							35017856,
+							99
+						],
+						[
+							"game_step",
+							35017859,
+							35021038,
+							99
+						],
+						[
+							"game_step",
+							35021041,
+							35024165,
+							99
+						],
+						[
+							"main_process",
+							35003325,
+							35024171,
+							99
+						],
+						[
+							"overview_player",
+							35024231,
+							35024234,
+							99
+						],
+						[
+							"overview_tick",
+							35024203,
+							35024236,
+							99
+						],
+						[
+							"hud_process",
+							35024181,
+							35025474,
+							99
+						],
+						[
+							"overview_draw",
+							35027451,
+							35027455,
+							99
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 61671,
+					"frame_setup_cpu_ms": 0.008,
+					"projectiles": 0,
+					"sim_elapsed": 11.9833333333335,
+					"viewport_cpu_ms": 44.7270011901855,
+					"viewport_gpu_ms": 57.7350006103516,
+					"wall_us": 91959
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"game_step",
+							35095335,
+							35098959,
+							100
+						],
+						[
+							"game_step",
+							35098963,
+							35104166,
+							100
+						],
+						[
+							"game_step",
+							35104170,
+							35109449,
+							100
+						],
+						[
+							"game_step",
+							35109454,
+							35114917,
+							100
+						],
+						[
+							"game_step",
+							35114921,
+							35118244,
+							100
+						],
+						[
+							"main_process",
+							35095303,
+							35118250,
+							100
+						],
+						[
+							"overview_player",
+							35118312,
+							35118316,
+							100
+						],
+						[
+							"overview_tick",
+							35118283,
+							35118316,
+							100
+						],
+						[
+							"hud_process",
+							35118261,
+							35119735,
+							100
+						],
+						[
+							"overview_draw",
+							35121513,
+							35121517,
+							100
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 66909,
+					"frame_setup_cpu_ms": 0.009,
+					"projectiles": 0,
+					"sim_elapsed": 12.0666666666668,
+					"viewport_cpu_ms": 38.0110015869141,
+					"viewport_gpu_ms": 63.6110000610352,
+					"wall_us": 99326
+				}
+			],
+			"label": "6",
+			"mode": "empty",
+			"sim_seconds": 0.716666666666702
+		},
+		{
+			"cpu_delta": {
+
+			},
+			"frames": [
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"game_step",
+							35748953,
+							35752888,
+							107
+						],
+						[
+							"game_step",
+							35752893,
+							35756310,
+							107
+						],
+						[
+							"game_step",
+							35756314,
+							35759393,
+							107
+						],
+						[
+							"game_step",
+							35759396,
+							35762353,
+							107
+						],
+						[
+							"game_step",
+							35762355,
+							35765314,
+							107
+						],
+						[
+							"main_process",
+							35748918,
+							35765320,
+							107
+						],
+						[
+							"overview_tick",
+							35765352,
+							35765356,
+							107
+						],
+						[
+							"outpost_scan",
+							35765398,
+							35765477,
+							107
+						],
+						[
+							"cleanup_query",
+							35765365,
+							35765503,
+							107
+						],
+						[
+							"cleanup_refresh",
+							35765363,
+							35765553,
+							107
+						],
+						[
+							"hud_process",
+							35765330,
+							35766883,
+							107
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 62076,
+					"frame_setup_cpu_ms": 0.008,
+					"projectiles": 0,
+					"sim_elapsed": 12.7000000000002,
+					"viewport_cpu_ms": 34.9809989929199,
+					"viewport_gpu_ms": 60.173999786377,
+					"wall_us": 87995
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"game_step",
+							35836986,
+							35840499,
+							108
+						],
+						[
+							"game_step",
+							35840503,
+							35843719,
+							108
+						],
+						[
+							"game_step",
+							35843722,
+							35846754,
+							108
+						],
+						[
+							"game_step",
+							35846757,
+							35849737,
+							108
+						],
+						[
+							"game_step",
+							35849739,
+							35852723,
+							108
+						],
+						[
+							"game_step",
+							35852726,
+							35855670,
+							108
+						],
+						[
+							"main_process",
+							35836949,
+							35855676,
+							108
+						],
+						[
+							"overview_tick",
+							35855708,
+							35855712,
+							108
+						],
+						[
+							"hud_process",
+							35855685,
+							35856984,
+							108
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 65470,
+					"frame_setup_cpu_ms": 0.01,
+					"projectiles": 0,
+					"sim_elapsed": 12.8000000000002,
+					"viewport_cpu_ms": 33.2980003356934,
+					"viewport_gpu_ms": 60.5909996032715,
+					"wall_us": 93351
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"game_step",
+							35930341,
+							35934217,
+							109
+						],
+						[
+							"game_step",
+							35934222,
+							35937451,
+							109
+						],
+						[
+							"game_step",
+							35937454,
+							35940598,
+							109
+						],
+						[
+							"game_step",
+							35940601,
+							35943576,
+							109
+						],
+						[
+							"game_step",
+							35943579,
+							35949398,
+							109
+						],
+						[
+							"main_process",
+							35930303,
+							35949407,
+							109
+						],
+						[
+							"overview_tick",
+							35949449,
+							35949453,
+							109
+						],
+						[
+							"hud_process",
+							35949422,
+							35951100,
+							109
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 62218,
+					"frame_setup_cpu_ms": 0.01,
+					"projectiles": 0,
+					"sim_elapsed": 12.8833333333336,
+					"viewport_cpu_ms": 34.8470001220703,
+					"viewport_gpu_ms": 59.7270011901855,
+					"wall_us": 93304
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"game_step",
+							36023666,
+							36027362,
+							110
+						],
+						[
+							"game_step",
+							36027367,
+							36030834,
+							110
+						],
+						[
+							"game_step",
+							36030837,
+							36033997,
+							110
+						],
+						[
+							"game_step",
+							36034000,
+							36037098,
+							110
+						],
+						[
+							"game_step",
+							36037101,
+							36040084,
+							110
+						],
+						[
+							"game_step",
+							36040086,
+							36044100,
+							110
+						],
+						[
+							"main_process",
+							36023631,
+							36044106,
+							110
+						],
+						[
+							"overview_tick",
+							36044138,
+							36044142,
+							110
+						],
+						[
+							"outpost_scan",
+							36044197,
+							36044277,
+							110
+						],
+						[
+							"cleanup_query",
+							36044162,
+							36044303,
+							110
+						],
+						[
+							"cleanup_refresh",
+							36044148,
+							36044352,
+							110
+						],
+						[
+							"hud_process",
+							36044115,
+							36045575,
+							110
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 65799,
+					"frame_setup_cpu_ms": 0.009,
+					"projectiles": 0,
+					"sim_elapsed": 12.9833333333336,
+					"viewport_cpu_ms": 49.9900016784668,
+					"viewport_gpu_ms": 59.9799995422363,
+					"wall_us": 95485
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"game_step",
+							36119237,
+							36123106,
+							111
+						],
+						[
+							"game_step",
+							36123113,
+							36126329,
+							111
+						],
+						[
+							"game_step",
+							36126332,
+							36129900,
+							111
+						],
+						[
+							"game_step",
+							36129906,
+							36136115,
+							111
+						],
+						[
+							"game_step",
+							36136121,
+							36140710,
+							111
+						],
+						[
+							"game_step",
+							36140716,
+							36144112,
+							111
+						],
+						[
+							"main_process",
+							36119194,
+							36144119,
+							111
+						],
+						[
+							"overview_tick",
+							36144159,
+							36144163,
+							111
+						],
+						[
+							"hud_process",
+							36144132,
+							36145491,
+							111
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 66474,
+					"frame_setup_cpu_ms": 0.01,
+					"projectiles": 0,
+					"sim_elapsed": 13.0833333333336,
+					"viewport_cpu_ms": 37.7140007019043,
+					"viewport_gpu_ms": 63.806999206543,
+					"wall_us": 101558
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"game_step",
+							36220791,
+							36224487,
+							112
+						],
+						[
+							"game_step",
+							36224491,
+							36227831,
+							112
+						],
+						[
+							"game_step",
+							36227834,
+							36231032,
+							112
+						],
+						[
+							"game_step",
+							36231035,
+							36234267,
+							112
+						],
+						[
+							"game_step",
+							36234270,
+							36237448,
+							112
+						],
+						[
+							"game_step",
+							36237451,
+							36240663,
+							112
+						],
+						[
+							"main_process",
+							36220757,
+							36240669,
+							112
+						],
+						[
+							"overview_tick",
+							36240702,
+							36240706,
+							112
+						],
+						[
+							"hud_process",
+							36240680,
+							36242033,
+							112
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 64678,
+					"frame_setup_cpu_ms": 0.009,
+					"projectiles": 0,
+					"sim_elapsed": 13.1833333333336,
+					"viewport_cpu_ms": 48.8120002746582,
+					"viewport_gpu_ms": 59.2589988708496,
+					"wall_us": 93902
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"game_step",
+							36314946,
+							36318445,
+							113
+						],
+						[
+							"game_step",
+							36318449,
+							36322651,
+							113
+						],
+						[
+							"game_step",
+							36322655,
+							36325879,
+							113
+						],
+						[
+							"game_step",
+							36325881,
+							36329600,
+							113
+						],
+						[
+							"game_step",
+							36329604,
+							36333113,
+							113
+						],
+						[
+							"main_process",
+							36314888,
+							36333119,
+							113
+						],
+						[
+							"overview_tick",
+							36333151,
+							36333155,
+							113
+						],
+						[
+							"outpost_scan",
+							36333199,
+							36333294,
+							113
+						],
+						[
+							"cleanup_query",
+							36333165,
+							36333321,
+							113
+						],
+						[
+							"cleanup_refresh",
+							36333162,
+							36333368,
+							113
+						],
+						[
+							"hud_process",
+							36333130,
+							36334626,
+							113
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 66549,
+					"frame_setup_cpu_ms": 0.008,
+					"projectiles": 0,
+					"sim_elapsed": 13.2666666666669,
+					"viewport_cpu_ms": 43.3880004882812,
+					"viewport_gpu_ms": 57.5089988708496,
+					"wall_us": 94508
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"game_step",
+							36409310,
+							36413084,
+							114
+						],
+						[
+							"game_step",
+							36413088,
+							36416475,
+							114
+						],
+						[
+							"game_step",
+							36416478,
+							36419787,
+							114
+						],
+						[
+							"game_step",
+							36419790,
+							36423188,
+							114
+						],
+						[
+							"game_step",
+							36423191,
+							36426443,
+							114
+						],
+						[
+							"game_step",
+							36426446,
+							36429649,
+							114
+						],
+						[
+							"main_process",
+							36409275,
+							36429655,
+							114
+						],
+						[
+							"overview_tick",
+							36429687,
+							36429691,
+							114
+						],
+						[
+							"hud_process",
+							36429666,
+							36431094,
+							114
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 59856,
+					"frame_setup_cpu_ms": 0.008,
+					"projectiles": 0,
+					"sim_elapsed": 13.3666666666669,
+					"viewport_cpu_ms": 34.4539985656738,
+					"viewport_gpu_ms": 60.0400009155273,
+					"wall_us": 89971
+				}
+			],
+			"label": "7",
+			"mode": "closed",
+			"sim_seconds": 0.750000000000037
+		}
+	]
+}

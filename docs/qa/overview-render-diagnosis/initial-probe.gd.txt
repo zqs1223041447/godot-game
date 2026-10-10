@@ -1,0 +1,75 @@
+extends "res://tests/overview_live_short_test.gd"
+## Diagnostic ablations deliberately freeze/omit overlay pixels; never production modes.
+const Profile=preload("res://docs/qa/overview-performance/profile.gd")
+var windows:Array=[]
+var fixture_digest:=""
+var draw_before:=0
+var draw_after:=0
+var phase_marks:Array=[]
+func cpu_stats()->Dictionary:
+	var result:Dictionary={}
+	for line:String in FileAccess.get_file_as_string("/sys/fs/cgroup/cpu.stat").split("\n",false):
+		var parts:=line.split(" ",false)
+		if parts.size()==2:result[parts[0]]=int(parts[1])
+	return result
+func pre_draw()->void:
+	draw_before=Time.get_ticks_usec()
+func post_draw()->void:
+	draw_after=Time.get_ticks_usec()
+func window(label:String,mode:String)->void:
+	Profile.enabled=false
+	var opened:bool=mode!="closed"
+	overview.set_meta("probe_retain",false);overview.set_meta("probe_no_text",mode=="no_text");overview.set_meta("probe_empty",mode=="empty")
+	if overview.visible!=opened:await key(KEY_TAB)
+	overview.queue_redraw()
+	for warm:int in range(3):await RenderingServer.frame_post_draw
+	if mode=="retained":overview.set_meta("probe_retain",true)
+	for warm:int in range(2):await RenderingServer.frame_post_draw
+	check(overview.visible==opened and arena.is_processing() and arena.hud.is_processing(),label+": expected normal processing and visibility")
+	var frames:Array=[];var before:Dictionary=cpu_stats();var sim_start:float=arena.elapsed
+	for index:int in range(8):
+		Profile.take();var started:=Time.get_ticks_usec();Profile.enabled=true
+		await RenderingServer.frame_post_draw
+		Profile.enabled=false
+		var completed:=Time.get_ticks_usec()
+		var viewport_rid:RID=root.get_viewport_rid()
+		frames.append({"wall_us":completed-started,"draw_signal_interval_us":draw_after-draw_before,
+			"frame_setup_cpu_ms":RenderingServer.get_frame_setup_time_cpu(),
+			"viewport_cpu_ms":RenderingServer.viewport_get_measured_render_time_cpu(viewport_rid),
+			"viewport_gpu_ms":RenderingServer.viewport_get_measured_render_time_gpu(viewport_rid),
+			"draw_calls":RenderingServer.viewport_get_render_info(viewport_rid,RenderingServer.VIEWPORT_RENDER_INFO_TYPE_VISIBLE,RenderingServer.VIEWPORT_RENDER_INFO_DRAW_CALLS_IN_FRAME),
+			"calls":Profile.take(),"actors":arena.enemies.size(),"sim_elapsed":arena.elapsed,"projectiles":arena.projectiles.size()})
+	var after:=cpu_stats();var cpu_delta:Dictionary={}
+	for name:String in before:cpu_delta[name]=int(after[name])-int(before[name])
+	windows.append({"label":label,"mode":mode,"frames":frames,"cpu_delta":cpu_delta,"sim_seconds":arena.elapsed-sim_start})
+	check(arena.alive and arena.enemies.size()==37 and arena.elapsed>sim_start,label+": existing dense actors keep fighting")
+func run()->void:
+	if not OS.get_environment("XDG_DATA_HOME").begins_with("/tmp/godot-overview-render-"):quit(78);return
+	var model:=FaultModel.new();check(model.save_build("user://build_save.json")==OK,"Fresh canonical fixture")
+	arena=load("res://scenes/main.tscn").instantiate();arena.set_script(load("/tmp/godot-overview-profile-src/main.gd"));arena.state=model;arena.build_save_path="user://build_save.json"
+	root.add_child(arena);pause();await settle();overview=arena.hud._exploration_overview
+	arena.rng.seed=526917
+	if not formal_entry("ginkgo_arcade"):finish();return
+	arena.rng.seed=526917
+	arena._stats.max_health=1000000.0;arena.health=1000000.0;arena.shield=0.0;arena.invulnerable=0.0
+	for index:int in range(arena.enemies.size()):
+		var enemy:Dictionary=arena.enemies[index]
+		enemy.pos=arena._geometry.legal_point(arena.player_pos+Vector2.RIGHT.rotated(index*TAU/37.0)*(80+index%3*25),float(enemy.radius))
+		enemy.health=1000000.0;enemy.max_health=1000000.0;enemy.spawn=0.0
+	fixture_digest=var_to_bytes([arena.enemies,arena.player_pos,arena.rng.seed,arena.rng.state]).hex_encode().sha256_text()
+	RenderingServer.viewport_set_measure_render_time(root.get_viewport_rid(),true)
+	RenderingServer.frame_pre_draw.connect(pre_draw);RenderingServer.frame_post_draw.connect(post_draw)
+	arena.auto_fire=true;arena.set_process(true);arena.hud.set_process(true)
+	for index:int in range(8):await RenderingServer.frame_post_draw
+	var modes:Array=["closed","full","retained","full","no_text","full","empty","closed"]
+	if OS.get_environment("OVERVIEW_RENDER_CONTROL")=="1":modes=["closed","full","full","closed"]
+	for index:int in range(modes.size()):await window(str(index),modes[index])
+	check(not arena.incoming_damage_trace.is_empty(),"Actual enemy hits occur")
+	var report:Dictionary={"fixture_digest":fixture_digest,"checks":checks,"failures":failures,"failed_labels":labels,"windows":windows,
+		"display":DisplayServer.get_name(),"renderer":RenderingServer.get_video_adapter_name(),"rendering_method":RenderingServer.get_current_rendering_method(),
+		"window_size":DisplayServer.window_get_size(),"root_size":root.size,"viewport_size":root.get_visible_rect().size,
+		"max_fps":Engine.max_fps,"low_processor_usage_mode":OS.low_processor_usage_mode,"vsync_mode":DisplayServer.window_get_vsync_mode(),
+		"cpu_max":FileAccess.get_file_as_string("/sys/fs/cgroup/cpu.max").strip_edges(),"lp_num_threads":OS.get_environment("LP_NUM_THREADS"),
+		"method":"Original37 durable dense actors and fixed admission/combat seed. Eight-frame windows; five warm frames after changes. Same timers, render measurements, per-window cgroup observations. Retained/no-text/empty are diagnostic omissions, not gameplay candidates. CPU/GPU API values are last-frame render timing, not total frame time."}
+	FileAccess.open(OS.get_environment("OVERVIEW_OUTPUT").path_join("render.json"),FileAccess.WRITE).store_string(JSON.stringify(report,"\t")+"\n")
+	print("OVERVIEW_RENDER checks=%d failures=%d windows=%d"%[checks,failures,windows.size()]);quit(1 if failures else 0)

@@ -1,0 +1,589 @@
+{
+	"checks": 14,
+	"cpu_max": "400000 100000",
+	"display": "X11",
+	"failed_labels": [],
+	"failures": 0,
+	"fixture_digest": "281696ff4a3170f536d3cfcae30e86718a50a5bfe3611ca79e7c8948b1998404",
+	"frozen": true,
+	"low_processor_usage_mode": false,
+	"lp_num_threads": "1",
+	"max_fps": 0,
+	"method": "Original37 durable dense actors and fixed admission/combat seed. Frozen mode pauses Main/HUD and forces only the diagnostic full/no-text/empty overlay redraw each frame; retained keeps the prior command list. Eight-frame windows; five warm frames after changes. Same timers, render measurements, per-window cgroup observations. Retained/no-text/empty are diagnostic omissions, not gameplay candidates. CPU/GPU API values are last-frame render timing, not total frame time.",
+	"renderer": "llvmpipe (LLVM 19.1.7, 256 bits)",
+	"rendering_method": "gl_compatibility",
+	"root_size": "(1280, 720)",
+	"viewport_size": "(1280.0, 720.0)",
+	"vsync_mode": 0,
+	"window_size": "(1280, 720)",
+	"windows": [
+		{
+			"cpu_delta": {
+				"burst_usec": 0,
+				"nice_usec": 0,
+				"nr_bursts": 0,
+				"nr_periods": 20,
+				"nr_throttled": 0,
+				"system_usec": 97916,
+				"throttled_usec": 0,
+				"usage_usec": 2202481,
+				"user_usec": 2104565
+			},
+			"frames": [
+				{
+					"actors": 37,
+					"calls": [],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 204289,
+					"frame_setup_cpu_ms": 0.01,
+					"projectiles": 0,
+					"sim_elapsed": 1.03333333333333,
+					"viewport_cpu_ms": 36.023998260498,
+					"viewport_gpu_ms": 151.802993774414,
+					"wall_us": 207454
+				},
+				{
+					"actors": 37,
+					"calls": [],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 153218,
+					"frame_setup_cpu_ms": 0.032,
+					"projectiles": 0,
+					"sim_elapsed": 1.03333333333333,
+					"viewport_cpu_ms": 39.1650009155273,
+					"viewport_gpu_ms": 147.535003662109,
+					"wall_us": 153582
+				},
+				{
+					"actors": 37,
+					"calls": [],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 328458,
+					"frame_setup_cpu_ms": 0.009,
+					"projectiles": 0,
+					"sim_elapsed": 1.03333333333333,
+					"viewport_cpu_ms": 33.8600006103516,
+					"viewport_gpu_ms": 141.371002197266,
+					"wall_us": 329033
+				},
+				{
+					"actors": 37,
+					"calls": [],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 233691,
+					"frame_setup_cpu_ms": 0.052,
+					"projectiles": 0,
+					"sim_elapsed": 1.03333333333333,
+					"viewport_cpu_ms": 50.9150009155273,
+					"viewport_gpu_ms": 174.123001098633,
+					"wall_us": 235884
+				},
+				{
+					"actors": 37,
+					"calls": [],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 216660,
+					"frame_setup_cpu_ms": 0.071,
+					"projectiles": 0,
+					"sim_elapsed": 1.03333333333333,
+					"viewport_cpu_ms": 49.6759986877441,
+					"viewport_gpu_ms": 184.561996459961,
+					"wall_us": 222364
+				},
+				{
+					"actors": 37,
+					"calls": [],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 289636,
+					"frame_setup_cpu_ms": 0.009,
+					"projectiles": 0,
+					"sim_elapsed": 1.03333333333333,
+					"viewport_cpu_ms": 93.0429992675781,
+					"viewport_gpu_ms": 179.908996582031,
+					"wall_us": 290057
+				},
+				{
+					"actors": 37,
+					"calls": [],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 362503,
+					"frame_setup_cpu_ms": 0.01,
+					"projectiles": 0,
+					"sim_elapsed": 1.03333333333333,
+					"viewport_cpu_ms": 94.1259994506836,
+					"viewport_gpu_ms": 196.425003051758,
+					"wall_us": 364892
+				},
+				{
+					"actors": 37,
+					"calls": [],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 181367,
+					"frame_setup_cpu_ms": 0.092,
+					"projectiles": 0,
+					"sim_elapsed": 1.03333333333333,
+					"viewport_cpu_ms": 37.6399993896484,
+					"viewport_gpu_ms": 141.089004516602,
+					"wall_us": 182179
+				}
+			],
+			"label": "0",
+			"mode": "closed",
+			"sim_seconds": 0.0
+		},
+		{
+			"cpu_delta": {
+				"burst_usec": 0,
+				"nice_usec": 0,
+				"nr_bursts": 0,
+				"nr_periods": 13,
+				"nr_throttled": 0,
+				"system_usec": 0,
+				"throttled_usec": 0,
+				"usage_usec": 1411376,
+				"user_usec": 1411376
+			},
+			"frames": [
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"overview_draw",
+							32819965,
+							32820744,
+							28
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 160910,
+					"frame_setup_cpu_ms": 0.009,
+					"projectiles": 0,
+					"sim_elapsed": 1.03333333333333,
+					"viewport_cpu_ms": 123.195999145508,
+					"viewport_gpu_ms": 208.214996337891,
+					"wall_us": 162250
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"overview_draw",
+							32982207,
+							32982681,
+							29
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 157858,
+					"frame_setup_cpu_ms": 0.008,
+					"projectiles": 0,
+					"sim_elapsed": 1.03333333333333,
+					"viewport_cpu_ms": 170.796997070312,
+					"viewport_gpu_ms": 289.859985351562,
+					"wall_us": 158856
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"overview_draw",
+							33141034,
+							33141416,
+							30
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 168689,
+					"frame_setup_cpu_ms": 0.008,
+					"projectiles": 0,
+					"sim_elapsed": 1.03333333333333,
+					"viewport_cpu_ms": 74.4970016479492,
+					"viewport_gpu_ms": 180.992004394531,
+					"wall_us": 169532
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"overview_draw",
+							33310669,
+							33311035,
+							31
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 163243,
+					"frame_setup_cpu_ms": 0.01,
+					"projectiles": 0,
+					"sim_elapsed": 1.03333333333333,
+					"viewport_cpu_ms": 112.319000244141,
+					"viewport_gpu_ms": 217.539993286133,
+					"wall_us": 164267
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"overview_draw",
+							33474951,
+							33475413,
+							32
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 155335,
+					"frame_setup_cpu_ms": 0.009,
+					"projectiles": 0,
+					"sim_elapsed": 1.03333333333333,
+					"viewport_cpu_ms": 33.4539985656738,
+					"viewport_gpu_ms": 145.352996826172,
+					"wall_us": 156316
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"overview_draw",
+							33631358,
+							33631736,
+							33
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 166364,
+					"frame_setup_cpu_ms": 0.01,
+					"projectiles": 0,
+					"sim_elapsed": 1.03333333333333,
+					"viewport_cpu_ms": 33.5029983520508,
+					"viewport_gpu_ms": 150.613998413086,
+					"wall_us": 167242
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"overview_draw",
+							33798740,
+							33799091,
+							34
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 164846,
+					"frame_setup_cpu_ms": 0.009,
+					"projectiles": 0,
+					"sim_elapsed": 1.03333333333333,
+					"viewport_cpu_ms": 34.0929985046387,
+					"viewport_gpu_ms": 153.811004638672,
+					"wall_us": 165728
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"overview_draw",
+							33964451,
+							33964841,
+							35
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 161930,
+					"frame_setup_cpu_ms": 0.009,
+					"projectiles": 0,
+					"sim_elapsed": 1.03333333333333,
+					"viewport_cpu_ms": 34.6720008850098,
+					"viewport_gpu_ms": 150.651000976562,
+					"wall_us": 162778
+				}
+			],
+			"label": "1",
+			"mode": "full",
+			"sim_seconds": 0.0
+		},
+		{
+			"cpu_delta": {
+				"burst_usec": 0,
+				"nice_usec": 0,
+				"nr_bursts": 0,
+				"nr_periods": 13,
+				"nr_throttled": 0,
+				"system_usec": 0,
+				"throttled_usec": 0,
+				"usage_usec": 1384124,
+				"user_usec": 1384124
+			},
+			"frames": [
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"overview_draw",
+							35102231,
+							35102622,
+							41
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 165257,
+					"frame_setup_cpu_ms": 0.009,
+					"projectiles": 0,
+					"sim_elapsed": 1.03333333333333,
+					"viewport_cpu_ms": 37.5989990234375,
+					"viewport_gpu_ms": 154.688003540039,
+					"wall_us": 166129
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"overview_draw",
+							35268514,
+							35268885,
+							42
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 162622,
+					"frame_setup_cpu_ms": 0.009,
+					"projectiles": 0,
+					"sim_elapsed": 1.03333333333333,
+					"viewport_cpu_ms": 39.7270011901855,
+					"viewport_gpu_ms": 162.542007446289,
+					"wall_us": 163574
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"overview_draw",
+							35431978,
+							35432337,
+							43
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 156410,
+					"frame_setup_cpu_ms": 0.009,
+					"projectiles": 0,
+					"sim_elapsed": 1.03333333333333,
+					"viewport_cpu_ms": 40.0019989013672,
+					"viewport_gpu_ms": 159.029998779297,
+					"wall_us": 157214
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"overview_draw",
+							35589247,
+							35589649,
+							44
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 154387,
+					"frame_setup_cpu_ms": 0.009,
+					"projectiles": 0,
+					"sim_elapsed": 1.03333333333333,
+					"viewport_cpu_ms": 58.1469993591309,
+					"viewport_gpu_ms": 283.597991943359,
+					"wall_us": 155241
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"overview_draw",
+							35744587,
+							35744970,
+							45
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 161144,
+					"frame_setup_cpu_ms": 0.009,
+					"projectiles": 0,
+					"sim_elapsed": 1.03333333333333,
+					"viewport_cpu_ms": 39.1580009460449,
+					"viewport_gpu_ms": 156.664001464844,
+					"wall_us": 162000
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"overview_draw",
+							35906656,
+							35907002,
+							46
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 161922,
+					"frame_setup_cpu_ms": 0.01,
+					"projectiles": 0,
+					"sim_elapsed": 1.03333333333333,
+					"viewport_cpu_ms": 36.0639991760254,
+					"viewport_gpu_ms": 156.337005615234,
+					"wall_us": 162825
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"overview_draw",
+							36069496,
+							36069876,
+							47
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 157539,
+					"frame_setup_cpu_ms": 0.009,
+					"projectiles": 0,
+					"sim_elapsed": 1.03333333333333,
+					"viewport_cpu_ms": 34.6920013427734,
+					"viewport_gpu_ms": 155.897003173828,
+					"wall_us": 158372
+				},
+				{
+					"actors": 37,
+					"calls": [
+						[
+							"overview_draw",
+							36227904,
+							36228253,
+							48
+						]
+					],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 162604,
+					"frame_setup_cpu_ms": 0.009,
+					"projectiles": 0,
+					"sim_elapsed": 1.03333333333333,
+					"viewport_cpu_ms": 40.1629981994629,
+					"viewport_gpu_ms": 154.569000244141,
+					"wall_us": 163376
+				}
+			],
+			"label": "2",
+			"mode": "full",
+			"sim_seconds": 0.0
+		},
+		{
+			"cpu_delta": {
+				"burst_usec": 0,
+				"nice_usec": 0,
+				"nr_bursts": 0,
+				"nr_periods": 12,
+				"nr_throttled": 0,
+				"system_usec": 0,
+				"throttled_usec": 0,
+				"usage_usec": 1376712,
+				"user_usec": 1376713
+			},
+			"frames": [
+				{
+					"actors": 37,
+					"calls": [],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 178679,
+					"frame_setup_cpu_ms": 0.009,
+					"projectiles": 0,
+					"sim_elapsed": 1.03333333333333,
+					"viewport_cpu_ms": 34.1150016784668,
+					"viewport_gpu_ms": 157.138000488281,
+					"wall_us": 179054
+				},
+				{
+					"actors": 37,
+					"calls": [],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 168576,
+					"frame_setup_cpu_ms": 0.009,
+					"projectiles": 0,
+					"sim_elapsed": 1.03333333333333,
+					"viewport_cpu_ms": 34.007999420166,
+					"viewport_gpu_ms": 142.0,
+					"wall_us": 168960
+				},
+				{
+					"actors": 37,
+					"calls": [],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 155710,
+					"frame_setup_cpu_ms": 0.008,
+					"projectiles": 0,
+					"sim_elapsed": 1.03333333333333,
+					"viewport_cpu_ms": 37.1430015563965,
+					"viewport_gpu_ms": 154.212005615234,
+					"wall_us": 156018
+				},
+				{
+					"actors": 37,
+					"calls": [],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 150405,
+					"frame_setup_cpu_ms": 0.008,
+					"projectiles": 0,
+					"sim_elapsed": 1.03333333333333,
+					"viewport_cpu_ms": 35.2299995422363,
+					"viewport_gpu_ms": 149.149002075195,
+					"wall_us": 150736
+				},
+				{
+					"actors": 37,
+					"calls": [],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 150848,
+					"frame_setup_cpu_ms": 0.008,
+					"projectiles": 0,
+					"sim_elapsed": 1.03333333333333,
+					"viewport_cpu_ms": 34.4150009155273,
+					"viewport_gpu_ms": 165.164001464844,
+					"wall_us": 151186
+				},
+				{
+					"actors": 37,
+					"calls": [],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 150045,
+					"frame_setup_cpu_ms": 0.009,
+					"projectiles": 0,
+					"sim_elapsed": 1.03333333333333,
+					"viewport_cpu_ms": 65.9390029907227,
+					"viewport_gpu_ms": 193.223999023438,
+					"wall_us": 150440
+				},
+				{
+					"actors": 37,
+					"calls": [],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 156884,
+					"frame_setup_cpu_ms": 0.009,
+					"projectiles": 0,
+					"sim_elapsed": 1.03333333333333,
+					"viewport_cpu_ms": 34.9309997558594,
+					"viewport_gpu_ms": 170.955993652344,
+					"wall_us": 157421
+				},
+				{
+					"actors": 37,
+					"calls": [],
+					"draw_calls": 0,
+					"draw_signal_interval_us": 165199,
+					"frame_setup_cpu_ms": 0.112,
+					"projectiles": 0,
+					"sim_elapsed": 1.03333333333333,
+					"viewport_cpu_ms": 33.5029983520508,
+					"viewport_gpu_ms": 160.996002197266,
+					"wall_us": 166448
+				}
+			],
+			"label": "3",
+			"mode": "closed",
+			"sim_seconds": 0.0
+		}
+	]
+}
