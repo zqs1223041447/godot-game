@@ -1,0 +1,4749 @@
+{
+	"compatible": [
+		"breadth",
+		"concentrate",
+		"efficiency",
+		"quickcast",
+		"physical_focus",
+		"inward_pull",
+		"encircling_cleave"
+	],
+	"examples": {
+		"fresh": [
+			{
+				"area_impulse_profile": {
+					"direction": "toward_origin",
+					"enabled": true,
+					"impulse_speed": 190.0,
+					"mana_multiplier": 1.2
+				},
+				"cooldown": 1.4,
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n命中牵引至爆发圆心，受墙体与怪物分离影响；不改变伤害或触发半径。\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 140，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n扇形范围：半径 95.00 → 95.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n近身扇区 180 度；近战、攻击与范围标签生效。锻纹短刃的本地物理伤害参与本次斩击，白蜡长弓不参与。没有命中时也正常支付。\n每次命中：物理 75.71\n固有：物理 72.80；附加：无；附加效用 2.80",
+				"initial_count": 0,
+				"mana": 14.399999999999999,
+				"packets": [
+					{
+						"active": true,
+						"known_target_resolved": {
+							"components": {
+								"physical": 75.712
+							},
+							"details": [
+								{
+									"base": 72.8,
+									"before_defense": 75.712,
+									"final": 75.712,
+									"increased": 0.04,
+									"modifiers": [
+										"melee_physical_increased"
+									],
+									"more": 1.0,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"total": 75.712
+						},
+						"known_target_settlement": {
+							"components": {
+								"physical": 75.712
+							},
+							"damage_total": 75.712,
+							"details": [
+								{
+									"base": 72.8,
+									"before_defense": 75.712,
+									"final": 75.712,
+									"increased": 0.04,
+									"modifiers": [
+										"melee_physical_increased"
+									],
+									"more": 1.0,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"health_lost": 75.712,
+							"mitigated_components": {
+								"physical": 0.0
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"physical": 75.712
+							},
+							"reason": "",
+							"remaining_health": 237.788,
+							"remaining_shield": 0.0,
+							"shield_spent": 0.0
+						},
+						"label": "每次命中",
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.8,
+								"base_coefficient": 2.8,
+								"intrinsic": {
+									"physical": 72.8
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"physical": 72.8
+							},
+							"role": "direct",
+							"skill_id": "cleave",
+							"tags": [
+								"hit",
+								"attack",
+								"melee",
+								"area"
+							]
+						},
+						"resolved": {
+							"components": {
+								"physical": 75.712
+							},
+							"details": [
+								{
+									"base": 72.8,
+									"before_defense": 75.712,
+									"final": 75.712,
+									"increased": 0.04,
+									"modifiers": [
+										"melee_physical_increased"
+									],
+									"more": 1.0,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"total": 75.712
+						}
+					}
+				],
+				"recipe": {
+					"half_angle": 1.5707963267948966,
+					"radius": 95.0
+				},
+				"summary": "非暴击命中预估（未计敌方防御）：每次命中 75.71",
+				"supports": [
+					"inward_pull"
+				]
+			},
+			{
+				"area_impulse_profile": {
+					"direction": "toward_origin",
+					"enabled": true,
+					"impulse_speed": 190.0,
+					"mana_multiplier": 1.2
+				},
+				"cooldown": 1.4,
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n命中牵引至爆发圆心，受墙体与怪物分离影响；不改变伤害或触发半径。\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 140，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n扇形范围：半径 95.00 → 114.00；面积 ×1.4400，半径 ×1.2000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n近身扇区 180 度；近战、攻击与范围标签生效。锻纹短刃的本地物理伤害参与本次斩击，白蜡长弓不参与。没有命中时也正常支付。\n每次命中：物理 64.36\n固有：物理 72.80；附加：无；附加效用 2.80",
+				"initial_count": 0,
+				"mana": 17.279999999999998,
+				"packets": [
+					{
+						"active": true,
+						"known_target_resolved": {
+							"components": {
+								"physical": 64.3552
+							},
+							"details": [
+								{
+									"base": 72.8,
+									"before_defense": 64.3552,
+									"final": 64.3552,
+									"increased": 0.04,
+									"modifiers": [
+										"melee_physical_increased",
+										"support:breadth"
+									],
+									"more": 0.85,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"total": 64.3552
+						},
+						"known_target_settlement": {
+							"components": {
+								"physical": 64.3552
+							},
+							"damage_total": 64.3552,
+							"details": [
+								{
+									"base": 72.8,
+									"before_defense": 64.3552,
+									"final": 64.3552,
+									"increased": 0.04,
+									"modifiers": [
+										"melee_physical_increased",
+										"support:breadth"
+									],
+									"more": 0.85,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"health_lost": 64.3552,
+							"mitigated_components": {
+								"physical": 0.0
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"physical": 64.3552
+							},
+							"reason": "",
+							"remaining_health": 249.1448,
+							"remaining_shield": 0.0,
+							"shield_spent": 0.0
+						},
+						"label": "每次命中",
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.8,
+								"base_coefficient": 2.8,
+								"intrinsic": {
+									"physical": 72.8
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"physical": 72.8
+							},
+							"role": "direct",
+							"skill_id": "cleave",
+							"tags": [
+								"hit",
+								"attack",
+								"melee",
+								"area"
+							]
+						},
+						"resolved": {
+							"components": {
+								"physical": 64.3552
+							},
+							"details": [
+								{
+									"base": 72.8,
+									"before_defense": 64.3552,
+									"final": 64.3552,
+									"increased": 0.04,
+									"modifiers": [
+										"melee_physical_increased",
+										"support:breadth"
+									],
+									"more": 0.85,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"total": 64.3552
+						}
+					}
+				],
+				"recipe": {
+					"area_multiplier": 1.44,
+					"base_radius": 95.0,
+					"half_angle": 1.5707963267948966,
+					"radius": 114.0
+				},
+				"summary": "非暴击命中预估（未计敌方防御）：每次命中 64.36",
+				"supports": [
+					"breadth",
+					"inward_pull"
+				]
+			},
+			{
+				"area_impulse_profile": {
+					"direction": "toward_origin",
+					"enabled": true,
+					"impulse_speed": 190.0,
+					"mana_multiplier": 1.2
+				},
+				"cooldown": 1.4,
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n命中牵引至爆发圆心，受墙体与怪物分离影响；不改变伤害或触发半径。\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 140，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n扇形范围：半径 95.00 → 76.00；面积 ×0.6400，半径 ×0.8000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n近身扇区 180 度；近战、攻击与范围标签生效。锻纹短刃的本地物理伤害参与本次斩击，白蜡长弓不参与。没有命中时也正常支付。\n每次命中：物理 94.64\n固有：物理 72.80；附加：无；附加效用 2.80",
+				"initial_count": 0,
+				"mana": 17.279999999999998,
+				"packets": [
+					{
+						"active": true,
+						"known_target_resolved": {
+							"components": {
+								"physical": 94.64
+							},
+							"details": [
+								{
+									"base": 72.8,
+									"before_defense": 94.64,
+									"final": 94.64,
+									"increased": 0.04,
+									"modifiers": [
+										"melee_physical_increased",
+										"support:concentrate"
+									],
+									"more": 1.25,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"total": 94.64
+						},
+						"known_target_settlement": {
+							"components": {
+								"physical": 94.64
+							},
+							"damage_total": 94.64,
+							"details": [
+								{
+									"base": 72.8,
+									"before_defense": 94.64,
+									"final": 94.64,
+									"increased": 0.04,
+									"modifiers": [
+										"melee_physical_increased",
+										"support:concentrate"
+									],
+									"more": 1.25,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"health_lost": 94.64,
+							"mitigated_components": {
+								"physical": 0.0
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"physical": 94.64
+							},
+							"reason": "",
+							"remaining_health": 218.86,
+							"remaining_shield": 0.0,
+							"shield_spent": 0.0
+						},
+						"label": "每次命中",
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.8,
+								"base_coefficient": 2.8,
+								"intrinsic": {
+									"physical": 72.8
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"physical": 72.8
+							},
+							"role": "direct",
+							"skill_id": "cleave",
+							"tags": [
+								"hit",
+								"attack",
+								"melee",
+								"area"
+							]
+						},
+						"resolved": {
+							"components": {
+								"physical": 94.64
+							},
+							"details": [
+								{
+									"base": 72.8,
+									"before_defense": 94.64,
+									"final": 94.64,
+									"increased": 0.04,
+									"modifiers": [
+										"melee_physical_increased",
+										"support:concentrate"
+									],
+									"more": 1.25,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"total": 94.64
+						}
+					}
+				],
+				"recipe": {
+					"area_multiplier": 0.64,
+					"base_radius": 95.0,
+					"half_angle": 1.5707963267948966,
+					"radius": 76.0
+				},
+				"summary": "非暴击命中预估（未计敌方防御）：每次命中 94.64",
+				"supports": [
+					"concentrate",
+					"inward_pull"
+				]
+			},
+			{
+				"area_impulse_profile": {
+					"direction": "toward_origin",
+					"enabled": true,
+					"impulse_speed": 190.0,
+					"mana_multiplier": 1.2
+				},
+				"cooldown": 1.6099999999999999,
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n命中牵引至爆发圆心，受墙体与怪物分离影响；不改变伤害或触发半径。\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 140，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n扇形范围：半径 95.00 → 95.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n近身扇区 180 度；近战、攻击与范围标签生效。锻纹短刃的本地物理伤害参与本次斩击，白蜡长弓不参与。没有命中时也正常支付。\n每次命中：物理 75.71\n固有：物理 72.80；附加：无；附加效用 2.80",
+				"initial_count": 0,
+				"mana": 11.52,
+				"packets": [
+					{
+						"active": true,
+						"known_target_resolved": {
+							"components": {
+								"physical": 75.712
+							},
+							"details": [
+								{
+									"base": 72.8,
+									"before_defense": 75.712,
+									"final": 75.712,
+									"increased": 0.04,
+									"modifiers": [
+										"melee_physical_increased"
+									],
+									"more": 1.0,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"total": 75.712
+						},
+						"known_target_settlement": {
+							"components": {
+								"physical": 75.712
+							},
+							"damage_total": 75.712,
+							"details": [
+								{
+									"base": 72.8,
+									"before_defense": 75.712,
+									"final": 75.712,
+									"increased": 0.04,
+									"modifiers": [
+										"melee_physical_increased"
+									],
+									"more": 1.0,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"health_lost": 75.712,
+							"mitigated_components": {
+								"physical": 0.0
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"physical": 75.712
+							},
+							"reason": "",
+							"remaining_health": 237.788,
+							"remaining_shield": 0.0,
+							"shield_spent": 0.0
+						},
+						"label": "每次命中",
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.8,
+								"base_coefficient": 2.8,
+								"intrinsic": {
+									"physical": 72.8
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"physical": 72.8
+							},
+							"role": "direct",
+							"skill_id": "cleave",
+							"tags": [
+								"hit",
+								"attack",
+								"melee",
+								"area"
+							]
+						},
+						"resolved": {
+							"components": {
+								"physical": 75.712
+							},
+							"details": [
+								{
+									"base": 72.8,
+									"before_defense": 75.712,
+									"final": 75.712,
+									"increased": 0.04,
+									"modifiers": [
+										"melee_physical_increased"
+									],
+									"more": 1.0,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"total": 75.712
+						}
+					}
+				],
+				"recipe": {
+					"half_angle": 1.5707963267948966,
+					"radius": 95.0
+				},
+				"summary": "非暴击命中预估（未计敌方防御）：每次命中 75.71",
+				"supports": [
+					"efficiency",
+					"inward_pull"
+				]
+			},
+			{
+				"area_impulse_profile": {
+					"direction": "toward_origin",
+					"enabled": true,
+					"impulse_speed": 190.0,
+					"mana_multiplier": 1.2
+				},
+				"cooldown": 1.1199999999999999,
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n命中牵引至爆发圆心，受墙体与怪物分离影响；不改变伤害或触发半径。\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 140，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n扇形范围：半径 95.00 → 95.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n近身扇区 180 度；近战、攻击与范围标签生效。锻纹短刃的本地物理伤害参与本次斩击，白蜡长弓不参与。没有命中时也正常支付。\n每次命中：物理 75.71\n固有：物理 72.80；附加：无；附加效用 2.80",
+				"initial_count": 0,
+				"mana": 20.16,
+				"packets": [
+					{
+						"active": true,
+						"known_target_resolved": {
+							"components": {
+								"physical": 75.712
+							},
+							"details": [
+								{
+									"base": 72.8,
+									"before_defense": 75.712,
+									"final": 75.712,
+									"increased": 0.04,
+									"modifiers": [
+										"melee_physical_increased"
+									],
+									"more": 1.0,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"total": 75.712
+						},
+						"known_target_settlement": {
+							"components": {
+								"physical": 75.712
+							},
+							"damage_total": 75.712,
+							"details": [
+								{
+									"base": 72.8,
+									"before_defense": 75.712,
+									"final": 75.712,
+									"increased": 0.04,
+									"modifiers": [
+										"melee_physical_increased"
+									],
+									"more": 1.0,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"health_lost": 75.712,
+							"mitigated_components": {
+								"physical": 0.0
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"physical": 75.712
+							},
+							"reason": "",
+							"remaining_health": 237.788,
+							"remaining_shield": 0.0,
+							"shield_spent": 0.0
+						},
+						"label": "每次命中",
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.8,
+								"base_coefficient": 2.8,
+								"intrinsic": {
+									"physical": 72.8
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"physical": 72.8
+							},
+							"role": "direct",
+							"skill_id": "cleave",
+							"tags": [
+								"hit",
+								"attack",
+								"melee",
+								"area"
+							]
+						},
+						"resolved": {
+							"components": {
+								"physical": 75.712
+							},
+							"details": [
+								{
+									"base": 72.8,
+									"before_defense": 75.712,
+									"final": 75.712,
+									"increased": 0.04,
+									"modifiers": [
+										"melee_physical_increased"
+									],
+									"more": 1.0,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"total": 75.712
+						}
+					}
+				],
+				"recipe": {
+					"half_angle": 1.5707963267948966,
+					"radius": 95.0
+				},
+				"summary": "非暴击命中预估（未计敌方防御）：每次命中 75.71",
+				"supports": [
+					"inward_pull",
+					"quickcast"
+				]
+			},
+			{
+				"area_impulse_profile": {
+					"direction": "toward_origin",
+					"enabled": true,
+					"impulse_speed": 190.0,
+					"mana_multiplier": 1.2
+				},
+				"cooldown": 1.4,
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n命中牵引至爆发圆心，受墙体与怪物分离影响；不改变伤害或触发半径。\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 140，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n扇形范围：半径 95.00 → 95.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n近身扇区 180 度；近战、攻击与范围标签生效。锻纹短刃的本地物理伤害参与本次斩击，白蜡长弓不参与。没有命中时也正常支付。\n每次命中：物理 90.85\n固有：物理 72.80；附加：无；附加效用 2.80",
+				"initial_count": 0,
+				"mana": 16.56,
+				"packets": [
+					{
+						"active": true,
+						"known_target_resolved": {
+							"components": {
+								"physical": 90.8544
+							},
+							"details": [
+								{
+									"base": 72.8,
+									"before_defense": 90.8544,
+									"final": 90.8544,
+									"increased": 0.04,
+									"modifiers": [
+										"melee_physical_increased",
+										"support:physical_focus"
+									],
+									"more": 1.2,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"total": 90.8544
+						},
+						"known_target_settlement": {
+							"components": {
+								"physical": 90.8544
+							},
+							"damage_total": 90.8544,
+							"details": [
+								{
+									"base": 72.8,
+									"before_defense": 90.8544,
+									"final": 90.8544,
+									"increased": 0.04,
+									"modifiers": [
+										"melee_physical_increased",
+										"support:physical_focus"
+									],
+									"more": 1.2,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"health_lost": 90.8544,
+							"mitigated_components": {
+								"physical": 0.0
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"physical": 90.8544
+							},
+							"reason": "",
+							"remaining_health": 222.6456,
+							"remaining_shield": 0.0,
+							"shield_spent": 0.0
+						},
+						"label": "每次命中",
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.8,
+								"base_coefficient": 2.8,
+								"intrinsic": {
+									"physical": 72.8
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"physical": 72.8
+							},
+							"role": "direct",
+							"skill_id": "cleave",
+							"tags": [
+								"hit",
+								"attack",
+								"melee",
+								"area"
+							]
+						},
+						"resolved": {
+							"components": {
+								"physical": 90.8544
+							},
+							"details": [
+								{
+									"base": 72.8,
+									"before_defense": 90.8544,
+									"final": 90.8544,
+									"increased": 0.04,
+									"modifiers": [
+										"melee_physical_increased",
+										"support:physical_focus"
+									],
+									"more": 1.2,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"total": 90.8544
+						}
+					}
+				],
+				"recipe": {
+					"half_angle": 1.5707963267948966,
+					"radius": 95.0
+				},
+				"summary": "非暴击命中预估（未计敌方防御）：每次命中 90.85",
+				"supports": [
+					"inward_pull",
+					"physical_focus"
+				]
+			},
+			{
+				"area_impulse_profile": {
+					"direction": "toward_origin",
+					"enabled": true,
+					"impulse_speed": 190.0,
+					"mana_multiplier": 1.2
+				},
+				"cooldown": 1.4,
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n命中牵引至爆发圆心，受墙体与怪物分离影响；不改变伤害或触发半径。\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 140，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n周身范围：半径 95.00 → 95.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n环斩覆盖 360 度；命中伤害额外降低 25%，魔力消耗倍率 125%。\n角度扩大不增加半径；上方面积倍率仅指范围词缀，每个目标最多命中一次。\n近身扇区 360 度；近战、攻击与范围标签生效。锻纹短刃的本地物理伤害参与本次斩击，白蜡长弓不参与。没有命中时也正常支付。\n每次命中：物理 56.78\n固有：物理 72.80；附加：无；附加效用 2.80",
+				"initial_count": 0,
+				"mana": 18.0,
+				"packets": [
+					{
+						"active": true,
+						"known_target_resolved": {
+							"components": {
+								"physical": 56.784000000000006
+							},
+							"details": [
+								{
+									"base": 72.8,
+									"before_defense": 56.784000000000006,
+									"final": 56.784000000000006,
+									"increased": 0.04,
+									"modifiers": [
+										"melee_physical_increased",
+										"support:encircling_cleave"
+									],
+									"more": 0.75,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"total": 56.784000000000006
+						},
+						"known_target_settlement": {
+							"components": {
+								"physical": 56.784000000000006
+							},
+							"damage_total": 56.784000000000006,
+							"details": [
+								{
+									"base": 72.8,
+									"before_defense": 56.784000000000006,
+									"final": 56.784000000000006,
+									"increased": 0.04,
+									"modifiers": [
+										"melee_physical_increased",
+										"support:encircling_cleave"
+									],
+									"more": 0.75,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"health_lost": 56.784000000000006,
+							"mitigated_components": {
+								"physical": 0.0
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"physical": 56.784000000000006
+							},
+							"reason": "",
+							"remaining_health": 256.716,
+							"remaining_shield": 0.0,
+							"shield_spent": 0.0
+						},
+						"label": "每次命中",
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.8,
+								"base_coefficient": 2.8,
+								"intrinsic": {
+									"physical": 72.8
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"physical": 72.8
+							},
+							"role": "direct",
+							"skill_id": "cleave",
+							"tags": [
+								"hit",
+								"attack",
+								"melee",
+								"area"
+							]
+						},
+						"resolved": {
+							"components": {
+								"physical": 56.784000000000006
+							},
+							"details": [
+								{
+									"base": 72.8,
+									"before_defense": 56.784000000000006,
+									"final": 56.784000000000006,
+									"increased": 0.04,
+									"modifiers": [
+										"melee_physical_increased",
+										"support:encircling_cleave"
+									],
+									"more": 0.75,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"total": 56.784000000000006
+						}
+					}
+				],
+				"recipe": {
+					"half_angle": 3.141592653589793,
+					"radius": 95.0
+				},
+				"summary": "非暴击命中预估（未计敌方防御）：每次命中 56.78",
+				"supports": [
+					"encircling_cleave",
+					"inward_pull"
+				]
+			}
+		],
+		"full_tornado": [
+			{
+				"area_impulse_profile": {
+					"direction": "toward_origin",
+					"enabled": true,
+					"impulse_speed": 190.0,
+					"mana_multiplier": 1.2
+				},
+				"cooldown": 1.4,
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n命中牵引至爆发圆心，受墙体与怪物分离影响；不改变伤害或触发半径。\n扇形范围：半径 95.00 → 95.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n近身扇区 180 度；近战、攻击与范围标签生效。锻纹短刃的本地物理伤害参与本次斩击，白蜡长弓不参与。没有命中时也正常支付。\n独立爆炸半径 76.00 · 面积 ×1.0000\n每次命中：物理 73.92\n固有：物理 61.60；附加：无；附加效用 2.80",
+				"initial_count": 0,
+				"mana": 14.399999999999999,
+				"packets": [
+					{
+						"active": true,
+						"known_target_resolved": {
+							"components": {
+								"physical": 73.91999999999999
+							},
+							"details": [
+								{
+									"base": 61.599999999999994,
+									"before_defense": 73.91999999999999,
+									"final": 73.91999999999999,
+									"increased": 0.2,
+									"modifiers": [
+										"global_increased"
+									],
+									"more": 1.0,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"total": 73.91999999999999
+						},
+						"known_target_settlement": {
+							"components": {
+								"physical": 73.91999999999999
+							},
+							"damage_total": 73.91999999999999,
+							"details": [
+								{
+									"base": 61.599999999999994,
+									"before_defense": 73.91999999999999,
+									"final": 73.91999999999999,
+									"increased": 0.2,
+									"modifiers": [
+										"global_increased"
+									],
+									"more": 1.0,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"health_lost": 73.91999999999999,
+							"mitigated_components": {
+								"physical": 0.0
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"physical": 73.91999999999999
+							},
+							"reason": "",
+							"remaining_health": 239.58,
+							"remaining_shield": 0.0,
+							"shield_spent": 0.0
+						},
+						"label": "每次命中",
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.8,
+								"base_coefficient": 2.8,
+								"intrinsic": {
+									"physical": 61.599999999999994
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"physical": 61.599999999999994
+							},
+							"role": "direct",
+							"skill_id": "cleave",
+							"tags": [
+								"hit",
+								"attack",
+								"melee",
+								"area"
+							]
+						},
+						"resolved": {
+							"components": {
+								"physical": 73.91999999999999
+							},
+							"details": [
+								{
+									"base": 61.599999999999994,
+									"before_defense": 73.91999999999999,
+									"final": 73.91999999999999,
+									"increased": 0.2,
+									"modifiers": [
+										"global_increased"
+									],
+									"more": 1.0,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"total": 73.91999999999999
+						}
+					}
+				],
+				"recipe": {
+					"half_angle": 1.5707963267948966,
+					"radius": 95.0
+				},
+				"summary": "命中预估（未计敌方防御）：每次命中 73.92",
+				"supports": [
+					"inward_pull"
+				]
+			},
+			{
+				"area_impulse_profile": {
+					"direction": "toward_origin",
+					"enabled": true,
+					"impulse_speed": 190.0,
+					"mana_multiplier": 1.2
+				},
+				"cooldown": 1.4,
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n命中牵引至爆发圆心，受墙体与怪物分离影响；不改变伤害或触发半径。\n扇形范围：半径 95.00 → 114.00；面积 ×1.4400，半径 ×1.2000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n近身扇区 180 度；近战、攻击与范围标签生效。锻纹短刃的本地物理伤害参与本次斩击，白蜡长弓不参与。没有命中时也正常支付。\n独立爆炸半径 76.00 · 面积 ×1.0000\n每次命中：物理 62.83\n固有：物理 61.60；附加：无；附加效用 2.80",
+				"initial_count": 0,
+				"mana": 17.279999999999998,
+				"packets": [
+					{
+						"active": true,
+						"known_target_resolved": {
+							"components": {
+								"physical": 62.83199999999999
+							},
+							"details": [
+								{
+									"base": 61.599999999999994,
+									"before_defense": 62.83199999999999,
+									"final": 62.83199999999999,
+									"increased": 0.2,
+									"modifiers": [
+										"global_increased",
+										"support:breadth"
+									],
+									"more": 0.85,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"total": 62.83199999999999
+						},
+						"known_target_settlement": {
+							"components": {
+								"physical": 62.83199999999999
+							},
+							"damage_total": 62.83199999999999,
+							"details": [
+								{
+									"base": 61.599999999999994,
+									"before_defense": 62.83199999999999,
+									"final": 62.83199999999999,
+									"increased": 0.2,
+									"modifiers": [
+										"global_increased",
+										"support:breadth"
+									],
+									"more": 0.85,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"health_lost": 62.83199999999999,
+							"mitigated_components": {
+								"physical": 0.0
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"physical": 62.83199999999999
+							},
+							"reason": "",
+							"remaining_health": 250.668,
+							"remaining_shield": 0.0,
+							"shield_spent": 0.0
+						},
+						"label": "每次命中",
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.8,
+								"base_coefficient": 2.8,
+								"intrinsic": {
+									"physical": 61.599999999999994
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"physical": 61.599999999999994
+							},
+							"role": "direct",
+							"skill_id": "cleave",
+							"tags": [
+								"hit",
+								"attack",
+								"melee",
+								"area"
+							]
+						},
+						"resolved": {
+							"components": {
+								"physical": 62.83199999999999
+							},
+							"details": [
+								{
+									"base": 61.599999999999994,
+									"before_defense": 62.83199999999999,
+									"final": 62.83199999999999,
+									"increased": 0.2,
+									"modifiers": [
+										"global_increased",
+										"support:breadth"
+									],
+									"more": 0.85,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"total": 62.83199999999999
+						}
+					}
+				],
+				"recipe": {
+					"area_multiplier": 1.44,
+					"base_radius": 95.0,
+					"half_angle": 1.5707963267948966,
+					"radius": 114.0
+				},
+				"summary": "命中预估（未计敌方防御）：每次命中 62.83",
+				"supports": [
+					"breadth",
+					"inward_pull"
+				]
+			},
+			{
+				"area_impulse_profile": {
+					"direction": "toward_origin",
+					"enabled": true,
+					"impulse_speed": 190.0,
+					"mana_multiplier": 1.2
+				},
+				"cooldown": 1.4,
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n命中牵引至爆发圆心，受墙体与怪物分离影响；不改变伤害或触发半径。\n扇形范围：半径 95.00 → 76.00；面积 ×0.6400，半径 ×0.8000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n近身扇区 180 度；近战、攻击与范围标签生效。锻纹短刃的本地物理伤害参与本次斩击，白蜡长弓不参与。没有命中时也正常支付。\n独立爆炸半径 76.00 · 面积 ×1.0000\n每次命中：物理 92.40\n固有：物理 61.60；附加：无；附加效用 2.80",
+				"initial_count": 0,
+				"mana": 17.279999999999998,
+				"packets": [
+					{
+						"active": true,
+						"known_target_resolved": {
+							"components": {
+								"physical": 92.39999999999998
+							},
+							"details": [
+								{
+									"base": 61.599999999999994,
+									"before_defense": 92.39999999999998,
+									"final": 92.39999999999998,
+									"increased": 0.2,
+									"modifiers": [
+										"global_increased",
+										"support:concentrate"
+									],
+									"more": 1.25,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"total": 92.39999999999998
+						},
+						"known_target_settlement": {
+							"components": {
+								"physical": 92.39999999999998
+							},
+							"damage_total": 92.39999999999998,
+							"details": [
+								{
+									"base": 61.599999999999994,
+									"before_defense": 92.39999999999998,
+									"final": 92.39999999999998,
+									"increased": 0.2,
+									"modifiers": [
+										"global_increased",
+										"support:concentrate"
+									],
+									"more": 1.25,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"health_lost": 92.39999999999998,
+							"mitigated_components": {
+								"physical": 0.0
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"physical": 92.39999999999998
+							},
+							"reason": "",
+							"remaining_health": 221.10000000000002,
+							"remaining_shield": 0.0,
+							"shield_spent": 0.0
+						},
+						"label": "每次命中",
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.8,
+								"base_coefficient": 2.8,
+								"intrinsic": {
+									"physical": 61.599999999999994
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"physical": 61.599999999999994
+							},
+							"role": "direct",
+							"skill_id": "cleave",
+							"tags": [
+								"hit",
+								"attack",
+								"melee",
+								"area"
+							]
+						},
+						"resolved": {
+							"components": {
+								"physical": 92.39999999999998
+							},
+							"details": [
+								{
+									"base": 61.599999999999994,
+									"before_defense": 92.39999999999998,
+									"final": 92.39999999999998,
+									"increased": 0.2,
+									"modifiers": [
+										"global_increased",
+										"support:concentrate"
+									],
+									"more": 1.25,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"total": 92.39999999999998
+						}
+					}
+				],
+				"recipe": {
+					"area_multiplier": 0.64,
+					"base_radius": 95.0,
+					"half_angle": 1.5707963267948966,
+					"radius": 76.0
+				},
+				"summary": "命中预估（未计敌方防御）：每次命中 92.40",
+				"supports": [
+					"concentrate",
+					"inward_pull"
+				]
+			},
+			{
+				"area_impulse_profile": {
+					"direction": "toward_origin",
+					"enabled": true,
+					"impulse_speed": 190.0,
+					"mana_multiplier": 1.2
+				},
+				"cooldown": 1.6099999999999999,
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n命中牵引至爆发圆心，受墙体与怪物分离影响；不改变伤害或触发半径。\n扇形范围：半径 95.00 → 95.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n近身扇区 180 度；近战、攻击与范围标签生效。锻纹短刃的本地物理伤害参与本次斩击，白蜡长弓不参与。没有命中时也正常支付。\n独立爆炸半径 76.00 · 面积 ×1.0000\n每次命中：物理 73.92\n固有：物理 61.60；附加：无；附加效用 2.80",
+				"initial_count": 0,
+				"mana": 11.52,
+				"packets": [
+					{
+						"active": true,
+						"known_target_resolved": {
+							"components": {
+								"physical": 73.91999999999999
+							},
+							"details": [
+								{
+									"base": 61.599999999999994,
+									"before_defense": 73.91999999999999,
+									"final": 73.91999999999999,
+									"increased": 0.2,
+									"modifiers": [
+										"global_increased"
+									],
+									"more": 1.0,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"total": 73.91999999999999
+						},
+						"known_target_settlement": {
+							"components": {
+								"physical": 73.91999999999999
+							},
+							"damage_total": 73.91999999999999,
+							"details": [
+								{
+									"base": 61.599999999999994,
+									"before_defense": 73.91999999999999,
+									"final": 73.91999999999999,
+									"increased": 0.2,
+									"modifiers": [
+										"global_increased"
+									],
+									"more": 1.0,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"health_lost": 73.91999999999999,
+							"mitigated_components": {
+								"physical": 0.0
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"physical": 73.91999999999999
+							},
+							"reason": "",
+							"remaining_health": 239.58,
+							"remaining_shield": 0.0,
+							"shield_spent": 0.0
+						},
+						"label": "每次命中",
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.8,
+								"base_coefficient": 2.8,
+								"intrinsic": {
+									"physical": 61.599999999999994
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"physical": 61.599999999999994
+							},
+							"role": "direct",
+							"skill_id": "cleave",
+							"tags": [
+								"hit",
+								"attack",
+								"melee",
+								"area"
+							]
+						},
+						"resolved": {
+							"components": {
+								"physical": 73.91999999999999
+							},
+							"details": [
+								{
+									"base": 61.599999999999994,
+									"before_defense": 73.91999999999999,
+									"final": 73.91999999999999,
+									"increased": 0.2,
+									"modifiers": [
+										"global_increased"
+									],
+									"more": 1.0,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"total": 73.91999999999999
+						}
+					}
+				],
+				"recipe": {
+					"half_angle": 1.5707963267948966,
+					"radius": 95.0
+				},
+				"summary": "命中预估（未计敌方防御）：每次命中 73.92",
+				"supports": [
+					"efficiency",
+					"inward_pull"
+				]
+			},
+			{
+				"area_impulse_profile": {
+					"direction": "toward_origin",
+					"enabled": true,
+					"impulse_speed": 190.0,
+					"mana_multiplier": 1.2
+				},
+				"cooldown": 1.1199999999999999,
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n命中牵引至爆发圆心，受墙体与怪物分离影响；不改变伤害或触发半径。\n扇形范围：半径 95.00 → 95.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n近身扇区 180 度；近战、攻击与范围标签生效。锻纹短刃的本地物理伤害参与本次斩击，白蜡长弓不参与。没有命中时也正常支付。\n独立爆炸半径 76.00 · 面积 ×1.0000\n每次命中：物理 73.92\n固有：物理 61.60；附加：无；附加效用 2.80",
+				"initial_count": 0,
+				"mana": 20.16,
+				"packets": [
+					{
+						"active": true,
+						"known_target_resolved": {
+							"components": {
+								"physical": 73.91999999999999
+							},
+							"details": [
+								{
+									"base": 61.599999999999994,
+									"before_defense": 73.91999999999999,
+									"final": 73.91999999999999,
+									"increased": 0.2,
+									"modifiers": [
+										"global_increased"
+									],
+									"more": 1.0,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"total": 73.91999999999999
+						},
+						"known_target_settlement": {
+							"components": {
+								"physical": 73.91999999999999
+							},
+							"damage_total": 73.91999999999999,
+							"details": [
+								{
+									"base": 61.599999999999994,
+									"before_defense": 73.91999999999999,
+									"final": 73.91999999999999,
+									"increased": 0.2,
+									"modifiers": [
+										"global_increased"
+									],
+									"more": 1.0,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"health_lost": 73.91999999999999,
+							"mitigated_components": {
+								"physical": 0.0
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"physical": 73.91999999999999
+							},
+							"reason": "",
+							"remaining_health": 239.58,
+							"remaining_shield": 0.0,
+							"shield_spent": 0.0
+						},
+						"label": "每次命中",
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.8,
+								"base_coefficient": 2.8,
+								"intrinsic": {
+									"physical": 61.599999999999994
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"physical": 61.599999999999994
+							},
+							"role": "direct",
+							"skill_id": "cleave",
+							"tags": [
+								"hit",
+								"attack",
+								"melee",
+								"area"
+							]
+						},
+						"resolved": {
+							"components": {
+								"physical": 73.91999999999999
+							},
+							"details": [
+								{
+									"base": 61.599999999999994,
+									"before_defense": 73.91999999999999,
+									"final": 73.91999999999999,
+									"increased": 0.2,
+									"modifiers": [
+										"global_increased"
+									],
+									"more": 1.0,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"total": 73.91999999999999
+						}
+					}
+				],
+				"recipe": {
+					"half_angle": 1.5707963267948966,
+					"radius": 95.0
+				},
+				"summary": "命中预估（未计敌方防御）：每次命中 73.92",
+				"supports": [
+					"inward_pull",
+					"quickcast"
+				]
+			},
+			{
+				"area_impulse_profile": {
+					"direction": "toward_origin",
+					"enabled": true,
+					"impulse_speed": 190.0,
+					"mana_multiplier": 1.2
+				},
+				"cooldown": 1.4,
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n命中牵引至爆发圆心，受墙体与怪物分离影响；不改变伤害或触发半径。\n扇形范围：半径 95.00 → 95.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n近身扇区 180 度；近战、攻击与范围标签生效。锻纹短刃的本地物理伤害参与本次斩击，白蜡长弓不参与。没有命中时也正常支付。\n独立爆炸半径 76.00 · 面积 ×1.0000\n每次命中：物理 88.70\n固有：物理 61.60；附加：无；附加效用 2.80",
+				"initial_count": 0,
+				"mana": 16.56,
+				"packets": [
+					{
+						"active": true,
+						"known_target_resolved": {
+							"components": {
+								"physical": 88.70399999999998
+							},
+							"details": [
+								{
+									"base": 61.599999999999994,
+									"before_defense": 88.70399999999998,
+									"final": 88.70399999999998,
+									"increased": 0.2,
+									"modifiers": [
+										"global_increased",
+										"support:physical_focus"
+									],
+									"more": 1.2,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"total": 88.70399999999998
+						},
+						"known_target_settlement": {
+							"components": {
+								"physical": 88.70399999999998
+							},
+							"damage_total": 88.70399999999998,
+							"details": [
+								{
+									"base": 61.599999999999994,
+									"before_defense": 88.70399999999998,
+									"final": 88.70399999999998,
+									"increased": 0.2,
+									"modifiers": [
+										"global_increased",
+										"support:physical_focus"
+									],
+									"more": 1.2,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"health_lost": 88.70399999999998,
+							"mitigated_components": {
+								"physical": 0.0
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"physical": 88.70399999999998
+							},
+							"reason": "",
+							"remaining_health": 224.79600000000002,
+							"remaining_shield": 0.0,
+							"shield_spent": 0.0
+						},
+						"label": "每次命中",
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.8,
+								"base_coefficient": 2.8,
+								"intrinsic": {
+									"physical": 61.599999999999994
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"physical": 61.599999999999994
+							},
+							"role": "direct",
+							"skill_id": "cleave",
+							"tags": [
+								"hit",
+								"attack",
+								"melee",
+								"area"
+							]
+						},
+						"resolved": {
+							"components": {
+								"physical": 88.70399999999998
+							},
+							"details": [
+								{
+									"base": 61.599999999999994,
+									"before_defense": 88.70399999999998,
+									"final": 88.70399999999998,
+									"increased": 0.2,
+									"modifiers": [
+										"global_increased",
+										"support:physical_focus"
+									],
+									"more": 1.2,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"total": 88.70399999999998
+						}
+					}
+				],
+				"recipe": {
+					"half_angle": 1.5707963267948966,
+					"radius": 95.0
+				},
+				"summary": "命中预估（未计敌方防御）：每次命中 88.70",
+				"supports": [
+					"inward_pull",
+					"physical_focus"
+				]
+			},
+			{
+				"area_impulse_profile": {
+					"direction": "toward_origin",
+					"enabled": true,
+					"impulse_speed": 190.0,
+					"mana_multiplier": 1.2
+				},
+				"cooldown": 1.4,
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n命中牵引至爆发圆心，受墙体与怪物分离影响；不改变伤害或触发半径。\n周身范围：半径 95.00 → 95.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n环斩覆盖 360 度；命中伤害额外降低 25%，魔力消耗倍率 125%。\n角度扩大不增加半径；上方面积倍率仅指范围词缀，每个目标最多命中一次。\n近身扇区 360 度；近战、攻击与范围标签生效。锻纹短刃的本地物理伤害参与本次斩击，白蜡长弓不参与。没有命中时也正常支付。\n独立爆炸半径 76.00 · 面积 ×1.0000\n每次命中：物理 55.44\n固有：物理 61.60；附加：无；附加效用 2.80",
+				"initial_count": 0,
+				"mana": 18.0,
+				"packets": [
+					{
+						"active": true,
+						"known_target_resolved": {
+							"components": {
+								"physical": 55.43999999999999
+							},
+							"details": [
+								{
+									"base": 61.599999999999994,
+									"before_defense": 55.43999999999999,
+									"final": 55.43999999999999,
+									"increased": 0.2,
+									"modifiers": [
+										"global_increased",
+										"support:encircling_cleave"
+									],
+									"more": 0.75,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"total": 55.43999999999999
+						},
+						"known_target_settlement": {
+							"components": {
+								"physical": 55.43999999999999
+							},
+							"damage_total": 55.43999999999999,
+							"details": [
+								{
+									"base": 61.599999999999994,
+									"before_defense": 55.43999999999999,
+									"final": 55.43999999999999,
+									"increased": 0.2,
+									"modifiers": [
+										"global_increased",
+										"support:encircling_cleave"
+									],
+									"more": 0.75,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"health_lost": 55.43999999999999,
+							"mitigated_components": {
+								"physical": 0.0
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"physical": 55.43999999999999
+							},
+							"reason": "",
+							"remaining_health": 258.06,
+							"remaining_shield": 0.0,
+							"shield_spent": 0.0
+						},
+						"label": "每次命中",
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.8,
+								"base_coefficient": 2.8,
+								"intrinsic": {
+									"physical": 61.599999999999994
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"physical": 61.599999999999994
+							},
+							"role": "direct",
+							"skill_id": "cleave",
+							"tags": [
+								"hit",
+								"attack",
+								"melee",
+								"area"
+							]
+						},
+						"resolved": {
+							"components": {
+								"physical": 55.43999999999999
+							},
+							"details": [
+								{
+									"base": 61.599999999999994,
+									"before_defense": 55.43999999999999,
+									"final": 55.43999999999999,
+									"increased": 0.2,
+									"modifiers": [
+										"global_increased",
+										"support:encircling_cleave"
+									],
+									"more": 0.75,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"total": 55.43999999999999
+						}
+					}
+				],
+				"recipe": {
+					"half_angle": 3.141592653589793,
+					"radius": 95.0
+				},
+				"summary": "命中预估（未计敌方防御）：每次命中 55.44",
+				"supports": [
+					"encircling_cleave",
+					"inward_pull"
+				]
+			}
+		],
+		"local_max": [
+			{
+				"area_impulse_profile": {
+					"direction": "toward_origin",
+					"enabled": true,
+					"impulse_speed": 190.0,
+					"mana_multiplier": 1.2
+				},
+				"cooldown": 1.4,
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n命中牵引至爆发圆心，受墙体与怪物分离影响；不改变伤害或触发半径。\n扇形范围：半径 95.00 → 95.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n近身扇区 180 度；近战、攻击与范围标签生效。锻纹短刃的本地物理伤害参与本次斩击，白蜡长弓不参与。没有命中时也正常支付。\n每次命中：物理 50.40\n固有：物理 50.40；附加：无；附加效用 2.80",
+				"initial_count": 0,
+				"mana": 14.399999999999999,
+				"packets": [
+					{
+						"active": true,
+						"known_target_resolved": {
+							"components": {
+								"physical": 50.4
+							},
+							"details": [
+								{
+									"base": 50.4,
+									"before_defense": 50.4,
+									"final": 50.4,
+									"increased": 0.0,
+									"modifiers": [],
+									"more": 1.0,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"total": 50.4
+						},
+						"known_target_settlement": {
+							"components": {
+								"physical": 50.4
+							},
+							"damage_total": 50.4,
+							"details": [
+								{
+									"base": 50.4,
+									"before_defense": 50.4,
+									"final": 50.4,
+									"increased": 0.0,
+									"modifiers": [],
+									"more": 1.0,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"health_lost": 50.4,
+							"mitigated_components": {
+								"physical": 0.0
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"physical": 50.4
+							},
+							"reason": "",
+							"remaining_health": 263.1,
+							"remaining_shield": 0.0,
+							"shield_spent": 0.0
+						},
+						"label": "每次命中",
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.8,
+								"base_coefficient": 2.8,
+								"intrinsic": {
+									"physical": 50.4
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"physical": 50.4
+							},
+							"role": "direct",
+							"skill_id": "cleave",
+							"tags": [
+								"hit",
+								"attack",
+								"melee",
+								"area"
+							]
+						},
+						"resolved": {
+							"components": {
+								"physical": 50.4
+							},
+							"details": [
+								{
+									"base": 50.4,
+									"before_defense": 50.4,
+									"final": 50.4,
+									"increased": 0.0,
+									"modifiers": [],
+									"more": 1.0,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"total": 50.4
+						}
+					}
+				],
+				"recipe": {
+					"half_angle": 1.5707963267948966,
+					"radius": 95.0
+				},
+				"summary": "命中预估（未计敌方防御）：每次命中 50.40",
+				"supports": [
+					"inward_pull"
+				]
+			},
+			{
+				"area_impulse_profile": {
+					"direction": "toward_origin",
+					"enabled": true,
+					"impulse_speed": 190.0,
+					"mana_multiplier": 1.2
+				},
+				"cooldown": 1.4,
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n命中牵引至爆发圆心，受墙体与怪物分离影响；不改变伤害或触发半径。\n扇形范围：半径 95.00 → 114.00；面积 ×1.4400，半径 ×1.2000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n近身扇区 180 度；近战、攻击与范围标签生效。锻纹短刃的本地物理伤害参与本次斩击，白蜡长弓不参与。没有命中时也正常支付。\n每次命中：物理 42.84\n固有：物理 50.40；附加：无；附加效用 2.80",
+				"initial_count": 0,
+				"mana": 17.279999999999998,
+				"packets": [
+					{
+						"active": true,
+						"known_target_resolved": {
+							"components": {
+								"physical": 42.839999999999996
+							},
+							"details": [
+								{
+									"base": 50.4,
+									"before_defense": 42.839999999999996,
+									"final": 42.839999999999996,
+									"increased": 0.0,
+									"modifiers": [
+										"support:breadth"
+									],
+									"more": 0.85,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"total": 42.839999999999996
+						},
+						"known_target_settlement": {
+							"components": {
+								"physical": 42.839999999999996
+							},
+							"damage_total": 42.839999999999996,
+							"details": [
+								{
+									"base": 50.4,
+									"before_defense": 42.839999999999996,
+									"final": 42.839999999999996,
+									"increased": 0.0,
+									"modifiers": [
+										"support:breadth"
+									],
+									"more": 0.85,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"health_lost": 42.839999999999996,
+							"mitigated_components": {
+								"physical": 0.0
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"physical": 42.839999999999996
+							},
+							"reason": "",
+							"remaining_health": 270.66,
+							"remaining_shield": 0.0,
+							"shield_spent": 0.0
+						},
+						"label": "每次命中",
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.8,
+								"base_coefficient": 2.8,
+								"intrinsic": {
+									"physical": 50.4
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"physical": 50.4
+							},
+							"role": "direct",
+							"skill_id": "cleave",
+							"tags": [
+								"hit",
+								"attack",
+								"melee",
+								"area"
+							]
+						},
+						"resolved": {
+							"components": {
+								"physical": 42.839999999999996
+							},
+							"details": [
+								{
+									"base": 50.4,
+									"before_defense": 42.839999999999996,
+									"final": 42.839999999999996,
+									"increased": 0.0,
+									"modifiers": [
+										"support:breadth"
+									],
+									"more": 0.85,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"total": 42.839999999999996
+						}
+					}
+				],
+				"recipe": {
+					"area_multiplier": 1.44,
+					"base_radius": 95.0,
+					"half_angle": 1.5707963267948966,
+					"radius": 114.0
+				},
+				"summary": "命中预估（未计敌方防御）：每次命中 42.84",
+				"supports": [
+					"breadth",
+					"inward_pull"
+				]
+			},
+			{
+				"area_impulse_profile": {
+					"direction": "toward_origin",
+					"enabled": true,
+					"impulse_speed": 190.0,
+					"mana_multiplier": 1.2
+				},
+				"cooldown": 1.4,
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n命中牵引至爆发圆心，受墙体与怪物分离影响；不改变伤害或触发半径。\n扇形范围：半径 95.00 → 76.00；面积 ×0.6400，半径 ×0.8000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n近身扇区 180 度；近战、攻击与范围标签生效。锻纹短刃的本地物理伤害参与本次斩击，白蜡长弓不参与。没有命中时也正常支付。\n每次命中：物理 63.00\n固有：物理 50.40；附加：无；附加效用 2.80",
+				"initial_count": 0,
+				"mana": 17.279999999999998,
+				"packets": [
+					{
+						"active": true,
+						"known_target_resolved": {
+							"components": {
+								"physical": 63.0
+							},
+							"details": [
+								{
+									"base": 50.4,
+									"before_defense": 63.0,
+									"final": 63.0,
+									"increased": 0.0,
+									"modifiers": [
+										"support:concentrate"
+									],
+									"more": 1.25,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"total": 63.0
+						},
+						"known_target_settlement": {
+							"components": {
+								"physical": 63.0
+							},
+							"damage_total": 63.0,
+							"details": [
+								{
+									"base": 50.4,
+									"before_defense": 63.0,
+									"final": 63.0,
+									"increased": 0.0,
+									"modifiers": [
+										"support:concentrate"
+									],
+									"more": 1.25,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"health_lost": 63.0,
+							"mitigated_components": {
+								"physical": 0.0
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"physical": 63.0
+							},
+							"reason": "",
+							"remaining_health": 250.5,
+							"remaining_shield": 0.0,
+							"shield_spent": 0.0
+						},
+						"label": "每次命中",
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.8,
+								"base_coefficient": 2.8,
+								"intrinsic": {
+									"physical": 50.4
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"physical": 50.4
+							},
+							"role": "direct",
+							"skill_id": "cleave",
+							"tags": [
+								"hit",
+								"attack",
+								"melee",
+								"area"
+							]
+						},
+						"resolved": {
+							"components": {
+								"physical": 63.0
+							},
+							"details": [
+								{
+									"base": 50.4,
+									"before_defense": 63.0,
+									"final": 63.0,
+									"increased": 0.0,
+									"modifiers": [
+										"support:concentrate"
+									],
+									"more": 1.25,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"total": 63.0
+						}
+					}
+				],
+				"recipe": {
+					"area_multiplier": 0.64,
+					"base_radius": 95.0,
+					"half_angle": 1.5707963267948966,
+					"radius": 76.0
+				},
+				"summary": "命中预估（未计敌方防御）：每次命中 63.00",
+				"supports": [
+					"concentrate",
+					"inward_pull"
+				]
+			},
+			{
+				"area_impulse_profile": {
+					"direction": "toward_origin",
+					"enabled": true,
+					"impulse_speed": 190.0,
+					"mana_multiplier": 1.2
+				},
+				"cooldown": 1.6099999999999999,
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n命中牵引至爆发圆心，受墙体与怪物分离影响；不改变伤害或触发半径。\n扇形范围：半径 95.00 → 95.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n近身扇区 180 度；近战、攻击与范围标签生效。锻纹短刃的本地物理伤害参与本次斩击，白蜡长弓不参与。没有命中时也正常支付。\n每次命中：物理 50.40\n固有：物理 50.40；附加：无；附加效用 2.80",
+				"initial_count": 0,
+				"mana": 11.52,
+				"packets": [
+					{
+						"active": true,
+						"known_target_resolved": {
+							"components": {
+								"physical": 50.4
+							},
+							"details": [
+								{
+									"base": 50.4,
+									"before_defense": 50.4,
+									"final": 50.4,
+									"increased": 0.0,
+									"modifiers": [],
+									"more": 1.0,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"total": 50.4
+						},
+						"known_target_settlement": {
+							"components": {
+								"physical": 50.4
+							},
+							"damage_total": 50.4,
+							"details": [
+								{
+									"base": 50.4,
+									"before_defense": 50.4,
+									"final": 50.4,
+									"increased": 0.0,
+									"modifiers": [],
+									"more": 1.0,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"health_lost": 50.4,
+							"mitigated_components": {
+								"physical": 0.0
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"physical": 50.4
+							},
+							"reason": "",
+							"remaining_health": 263.1,
+							"remaining_shield": 0.0,
+							"shield_spent": 0.0
+						},
+						"label": "每次命中",
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.8,
+								"base_coefficient": 2.8,
+								"intrinsic": {
+									"physical": 50.4
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"physical": 50.4
+							},
+							"role": "direct",
+							"skill_id": "cleave",
+							"tags": [
+								"hit",
+								"attack",
+								"melee",
+								"area"
+							]
+						},
+						"resolved": {
+							"components": {
+								"physical": 50.4
+							},
+							"details": [
+								{
+									"base": 50.4,
+									"before_defense": 50.4,
+									"final": 50.4,
+									"increased": 0.0,
+									"modifiers": [],
+									"more": 1.0,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"total": 50.4
+						}
+					}
+				],
+				"recipe": {
+					"half_angle": 1.5707963267948966,
+					"radius": 95.0
+				},
+				"summary": "命中预估（未计敌方防御）：每次命中 50.40",
+				"supports": [
+					"efficiency",
+					"inward_pull"
+				]
+			},
+			{
+				"area_impulse_profile": {
+					"direction": "toward_origin",
+					"enabled": true,
+					"impulse_speed": 190.0,
+					"mana_multiplier": 1.2
+				},
+				"cooldown": 1.1199999999999999,
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n命中牵引至爆发圆心，受墙体与怪物分离影响；不改变伤害或触发半径。\n扇形范围：半径 95.00 → 95.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n近身扇区 180 度；近战、攻击与范围标签生效。锻纹短刃的本地物理伤害参与本次斩击，白蜡长弓不参与。没有命中时也正常支付。\n每次命中：物理 50.40\n固有：物理 50.40；附加：无；附加效用 2.80",
+				"initial_count": 0,
+				"mana": 20.16,
+				"packets": [
+					{
+						"active": true,
+						"known_target_resolved": {
+							"components": {
+								"physical": 50.4
+							},
+							"details": [
+								{
+									"base": 50.4,
+									"before_defense": 50.4,
+									"final": 50.4,
+									"increased": 0.0,
+									"modifiers": [],
+									"more": 1.0,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"total": 50.4
+						},
+						"known_target_settlement": {
+							"components": {
+								"physical": 50.4
+							},
+							"damage_total": 50.4,
+							"details": [
+								{
+									"base": 50.4,
+									"before_defense": 50.4,
+									"final": 50.4,
+									"increased": 0.0,
+									"modifiers": [],
+									"more": 1.0,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"health_lost": 50.4,
+							"mitigated_components": {
+								"physical": 0.0
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"physical": 50.4
+							},
+							"reason": "",
+							"remaining_health": 263.1,
+							"remaining_shield": 0.0,
+							"shield_spent": 0.0
+						},
+						"label": "每次命中",
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.8,
+								"base_coefficient": 2.8,
+								"intrinsic": {
+									"physical": 50.4
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"physical": 50.4
+							},
+							"role": "direct",
+							"skill_id": "cleave",
+							"tags": [
+								"hit",
+								"attack",
+								"melee",
+								"area"
+							]
+						},
+						"resolved": {
+							"components": {
+								"physical": 50.4
+							},
+							"details": [
+								{
+									"base": 50.4,
+									"before_defense": 50.4,
+									"final": 50.4,
+									"increased": 0.0,
+									"modifiers": [],
+									"more": 1.0,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"total": 50.4
+						}
+					}
+				],
+				"recipe": {
+					"half_angle": 1.5707963267948966,
+					"radius": 95.0
+				},
+				"summary": "命中预估（未计敌方防御）：每次命中 50.40",
+				"supports": [
+					"inward_pull",
+					"quickcast"
+				]
+			},
+			{
+				"area_impulse_profile": {
+					"direction": "toward_origin",
+					"enabled": true,
+					"impulse_speed": 190.0,
+					"mana_multiplier": 1.2
+				},
+				"cooldown": 1.4,
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n命中牵引至爆发圆心，受墙体与怪物分离影响；不改变伤害或触发半径。\n扇形范围：半径 95.00 → 95.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n近身扇区 180 度；近战、攻击与范围标签生效。锻纹短刃的本地物理伤害参与本次斩击，白蜡长弓不参与。没有命中时也正常支付。\n每次命中：物理 60.48\n固有：物理 50.40；附加：无；附加效用 2.80",
+				"initial_count": 0,
+				"mana": 16.56,
+				"packets": [
+					{
+						"active": true,
+						"known_target_resolved": {
+							"components": {
+								"physical": 60.48
+							},
+							"details": [
+								{
+									"base": 50.4,
+									"before_defense": 60.48,
+									"final": 60.48,
+									"increased": 0.0,
+									"modifiers": [
+										"support:physical_focus"
+									],
+									"more": 1.2,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"total": 60.48
+						},
+						"known_target_settlement": {
+							"components": {
+								"physical": 60.48
+							},
+							"damage_total": 60.48,
+							"details": [
+								{
+									"base": 50.4,
+									"before_defense": 60.48,
+									"final": 60.48,
+									"increased": 0.0,
+									"modifiers": [
+										"support:physical_focus"
+									],
+									"more": 1.2,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"health_lost": 60.48,
+							"mitigated_components": {
+								"physical": 0.0
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"physical": 60.48
+							},
+							"reason": "",
+							"remaining_health": 253.02,
+							"remaining_shield": 0.0,
+							"shield_spent": 0.0
+						},
+						"label": "每次命中",
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.8,
+								"base_coefficient": 2.8,
+								"intrinsic": {
+									"physical": 50.4
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"physical": 50.4
+							},
+							"role": "direct",
+							"skill_id": "cleave",
+							"tags": [
+								"hit",
+								"attack",
+								"melee",
+								"area"
+							]
+						},
+						"resolved": {
+							"components": {
+								"physical": 60.48
+							},
+							"details": [
+								{
+									"base": 50.4,
+									"before_defense": 60.48,
+									"final": 60.48,
+									"increased": 0.0,
+									"modifiers": [
+										"support:physical_focus"
+									],
+									"more": 1.2,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"total": 60.48
+						}
+					}
+				],
+				"recipe": {
+					"half_angle": 1.5707963267948966,
+					"radius": 95.0
+				},
+				"summary": "命中预估（未计敌方防御）：每次命中 60.48",
+				"supports": [
+					"inward_pull",
+					"physical_focus"
+				]
+			},
+			{
+				"area_impulse_profile": {
+					"direction": "toward_origin",
+					"enabled": true,
+					"impulse_speed": 190.0,
+					"mana_multiplier": 1.2
+				},
+				"cooldown": 1.4,
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n命中牵引至爆发圆心，受墙体与怪物分离影响；不改变伤害或触发半径。\n周身范围：半径 95.00 → 95.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n环斩覆盖 360 度；命中伤害额外降低 25%，魔力消耗倍率 125%。\n角度扩大不增加半径；上方面积倍率仅指范围词缀，每个目标最多命中一次。\n近身扇区 360 度；近战、攻击与范围标签生效。锻纹短刃的本地物理伤害参与本次斩击，白蜡长弓不参与。没有命中时也正常支付。\n每次命中：物理 37.80\n固有：物理 50.40；附加：无；附加效用 2.80",
+				"initial_count": 0,
+				"mana": 18.0,
+				"packets": [
+					{
+						"active": true,
+						"known_target_resolved": {
+							"components": {
+								"physical": 37.8
+							},
+							"details": [
+								{
+									"base": 50.4,
+									"before_defense": 37.8,
+									"final": 37.8,
+									"increased": 0.0,
+									"modifiers": [
+										"support:encircling_cleave"
+									],
+									"more": 0.75,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"total": 37.8
+						},
+						"known_target_settlement": {
+							"components": {
+								"physical": 37.8
+							},
+							"damage_total": 37.8,
+							"details": [
+								{
+									"base": 50.4,
+									"before_defense": 37.8,
+									"final": 37.8,
+									"increased": 0.0,
+									"modifiers": [
+										"support:encircling_cleave"
+									],
+									"more": 0.75,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"health_lost": 37.8,
+							"mitigated_components": {
+								"physical": 0.0
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"physical": 37.8
+							},
+							"reason": "",
+							"remaining_health": 275.7,
+							"remaining_shield": 0.0,
+							"shield_spent": 0.0
+						},
+						"label": "每次命中",
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.8,
+								"base_coefficient": 2.8,
+								"intrinsic": {
+									"physical": 50.4
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"physical": 50.4
+							},
+							"role": "direct",
+							"skill_id": "cleave",
+							"tags": [
+								"hit",
+								"attack",
+								"melee",
+								"area"
+							]
+						},
+						"resolved": {
+							"components": {
+								"physical": 37.8
+							},
+							"details": [
+								{
+									"base": 50.4,
+									"before_defense": 37.8,
+									"final": 37.8,
+									"increased": 0.0,
+									"modifiers": [
+										"support:encircling_cleave"
+									],
+									"more": 0.75,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"total": 37.8
+						}
+					}
+				],
+				"recipe": {
+					"half_angle": 3.141592653589793,
+					"radius": 95.0
+				},
+				"summary": "命中预估（未计敌方防御）：每次命中 37.80",
+				"supports": [
+					"encircling_cleave",
+					"inward_pull"
+				]
+			}
+		],
+		"local_normal": [
+			{
+				"area_impulse_profile": {
+					"direction": "toward_origin",
+					"enabled": true,
+					"impulse_speed": 190.0,
+					"mana_multiplier": 1.2
+				},
+				"cooldown": 1.4,
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n命中牵引至爆发圆心，受墙体与怪物分离影响；不改变伤害或触发半径。\n扇形范围：半径 95.00 → 95.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n近身扇区 180 度；近战、攻击与范围标签生效。锻纹短刃的本地物理伤害参与本次斩击，白蜡长弓不参与。没有命中时也正常支付。\n每次命中：物理 50.40\n固有：物理 50.40；附加：无；附加效用 2.80",
+				"initial_count": 0,
+				"mana": 14.399999999999999,
+				"packets": [
+					{
+						"active": true,
+						"known_target_resolved": {
+							"components": {
+								"physical": 50.4
+							},
+							"details": [
+								{
+									"base": 50.4,
+									"before_defense": 50.4,
+									"final": 50.4,
+									"increased": 0.0,
+									"modifiers": [],
+									"more": 1.0,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"total": 50.4
+						},
+						"known_target_settlement": {
+							"components": {
+								"physical": 50.4
+							},
+							"damage_total": 50.4,
+							"details": [
+								{
+									"base": 50.4,
+									"before_defense": 50.4,
+									"final": 50.4,
+									"increased": 0.0,
+									"modifiers": [],
+									"more": 1.0,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"health_lost": 50.4,
+							"mitigated_components": {
+								"physical": 0.0
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"physical": 50.4
+							},
+							"reason": "",
+							"remaining_health": 263.1,
+							"remaining_shield": 0.0,
+							"shield_spent": 0.0
+						},
+						"label": "每次命中",
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.8,
+								"base_coefficient": 2.8,
+								"intrinsic": {
+									"physical": 50.4
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"physical": 50.4
+							},
+							"role": "direct",
+							"skill_id": "cleave",
+							"tags": [
+								"hit",
+								"attack",
+								"melee",
+								"area"
+							]
+						},
+						"resolved": {
+							"components": {
+								"physical": 50.4
+							},
+							"details": [
+								{
+									"base": 50.4,
+									"before_defense": 50.4,
+									"final": 50.4,
+									"increased": 0.0,
+									"modifiers": [],
+									"more": 1.0,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"total": 50.4
+						}
+					}
+				],
+				"recipe": {
+					"half_angle": 1.5707963267948966,
+					"radius": 95.0
+				},
+				"summary": "命中预估（未计敌方防御）：每次命中 50.40",
+				"supports": [
+					"inward_pull"
+				]
+			},
+			{
+				"area_impulse_profile": {
+					"direction": "toward_origin",
+					"enabled": true,
+					"impulse_speed": 190.0,
+					"mana_multiplier": 1.2
+				},
+				"cooldown": 1.4,
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n命中牵引至爆发圆心，受墙体与怪物分离影响；不改变伤害或触发半径。\n扇形范围：半径 95.00 → 114.00；面积 ×1.4400，半径 ×1.2000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n近身扇区 180 度；近战、攻击与范围标签生效。锻纹短刃的本地物理伤害参与本次斩击，白蜡长弓不参与。没有命中时也正常支付。\n每次命中：物理 42.84\n固有：物理 50.40；附加：无；附加效用 2.80",
+				"initial_count": 0,
+				"mana": 17.279999999999998,
+				"packets": [
+					{
+						"active": true,
+						"known_target_resolved": {
+							"components": {
+								"physical": 42.839999999999996
+							},
+							"details": [
+								{
+									"base": 50.4,
+									"before_defense": 42.839999999999996,
+									"final": 42.839999999999996,
+									"increased": 0.0,
+									"modifiers": [
+										"support:breadth"
+									],
+									"more": 0.85,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"total": 42.839999999999996
+						},
+						"known_target_settlement": {
+							"components": {
+								"physical": 42.839999999999996
+							},
+							"damage_total": 42.839999999999996,
+							"details": [
+								{
+									"base": 50.4,
+									"before_defense": 42.839999999999996,
+									"final": 42.839999999999996,
+									"increased": 0.0,
+									"modifiers": [
+										"support:breadth"
+									],
+									"more": 0.85,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"health_lost": 42.839999999999996,
+							"mitigated_components": {
+								"physical": 0.0
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"physical": 42.839999999999996
+							},
+							"reason": "",
+							"remaining_health": 270.66,
+							"remaining_shield": 0.0,
+							"shield_spent": 0.0
+						},
+						"label": "每次命中",
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.8,
+								"base_coefficient": 2.8,
+								"intrinsic": {
+									"physical": 50.4
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"physical": 50.4
+							},
+							"role": "direct",
+							"skill_id": "cleave",
+							"tags": [
+								"hit",
+								"attack",
+								"melee",
+								"area"
+							]
+						},
+						"resolved": {
+							"components": {
+								"physical": 42.839999999999996
+							},
+							"details": [
+								{
+									"base": 50.4,
+									"before_defense": 42.839999999999996,
+									"final": 42.839999999999996,
+									"increased": 0.0,
+									"modifiers": [
+										"support:breadth"
+									],
+									"more": 0.85,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"total": 42.839999999999996
+						}
+					}
+				],
+				"recipe": {
+					"area_multiplier": 1.44,
+					"base_radius": 95.0,
+					"half_angle": 1.5707963267948966,
+					"radius": 114.0
+				},
+				"summary": "命中预估（未计敌方防御）：每次命中 42.84",
+				"supports": [
+					"breadth",
+					"inward_pull"
+				]
+			},
+			{
+				"area_impulse_profile": {
+					"direction": "toward_origin",
+					"enabled": true,
+					"impulse_speed": 190.0,
+					"mana_multiplier": 1.2
+				},
+				"cooldown": 1.4,
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n命中牵引至爆发圆心，受墙体与怪物分离影响；不改变伤害或触发半径。\n扇形范围：半径 95.00 → 76.00；面积 ×0.6400，半径 ×0.8000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n近身扇区 180 度；近战、攻击与范围标签生效。锻纹短刃的本地物理伤害参与本次斩击，白蜡长弓不参与。没有命中时也正常支付。\n每次命中：物理 63.00\n固有：物理 50.40；附加：无；附加效用 2.80",
+				"initial_count": 0,
+				"mana": 17.279999999999998,
+				"packets": [
+					{
+						"active": true,
+						"known_target_resolved": {
+							"components": {
+								"physical": 63.0
+							},
+							"details": [
+								{
+									"base": 50.4,
+									"before_defense": 63.0,
+									"final": 63.0,
+									"increased": 0.0,
+									"modifiers": [
+										"support:concentrate"
+									],
+									"more": 1.25,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"total": 63.0
+						},
+						"known_target_settlement": {
+							"components": {
+								"physical": 63.0
+							},
+							"damage_total": 63.0,
+							"details": [
+								{
+									"base": 50.4,
+									"before_defense": 63.0,
+									"final": 63.0,
+									"increased": 0.0,
+									"modifiers": [
+										"support:concentrate"
+									],
+									"more": 1.25,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"health_lost": 63.0,
+							"mitigated_components": {
+								"physical": 0.0
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"physical": 63.0
+							},
+							"reason": "",
+							"remaining_health": 250.5,
+							"remaining_shield": 0.0,
+							"shield_spent": 0.0
+						},
+						"label": "每次命中",
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.8,
+								"base_coefficient": 2.8,
+								"intrinsic": {
+									"physical": 50.4
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"physical": 50.4
+							},
+							"role": "direct",
+							"skill_id": "cleave",
+							"tags": [
+								"hit",
+								"attack",
+								"melee",
+								"area"
+							]
+						},
+						"resolved": {
+							"components": {
+								"physical": 63.0
+							},
+							"details": [
+								{
+									"base": 50.4,
+									"before_defense": 63.0,
+									"final": 63.0,
+									"increased": 0.0,
+									"modifiers": [
+										"support:concentrate"
+									],
+									"more": 1.25,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"total": 63.0
+						}
+					}
+				],
+				"recipe": {
+					"area_multiplier": 0.64,
+					"base_radius": 95.0,
+					"half_angle": 1.5707963267948966,
+					"radius": 76.0
+				},
+				"summary": "命中预估（未计敌方防御）：每次命中 63.00",
+				"supports": [
+					"concentrate",
+					"inward_pull"
+				]
+			},
+			{
+				"area_impulse_profile": {
+					"direction": "toward_origin",
+					"enabled": true,
+					"impulse_speed": 190.0,
+					"mana_multiplier": 1.2
+				},
+				"cooldown": 1.6099999999999999,
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n命中牵引至爆发圆心，受墙体与怪物分离影响；不改变伤害或触发半径。\n扇形范围：半径 95.00 → 95.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n近身扇区 180 度；近战、攻击与范围标签生效。锻纹短刃的本地物理伤害参与本次斩击，白蜡长弓不参与。没有命中时也正常支付。\n每次命中：物理 50.40\n固有：物理 50.40；附加：无；附加效用 2.80",
+				"initial_count": 0,
+				"mana": 11.52,
+				"packets": [
+					{
+						"active": true,
+						"known_target_resolved": {
+							"components": {
+								"physical": 50.4
+							},
+							"details": [
+								{
+									"base": 50.4,
+									"before_defense": 50.4,
+									"final": 50.4,
+									"increased": 0.0,
+									"modifiers": [],
+									"more": 1.0,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"total": 50.4
+						},
+						"known_target_settlement": {
+							"components": {
+								"physical": 50.4
+							},
+							"damage_total": 50.4,
+							"details": [
+								{
+									"base": 50.4,
+									"before_defense": 50.4,
+									"final": 50.4,
+									"increased": 0.0,
+									"modifiers": [],
+									"more": 1.0,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"health_lost": 50.4,
+							"mitigated_components": {
+								"physical": 0.0
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"physical": 50.4
+							},
+							"reason": "",
+							"remaining_health": 263.1,
+							"remaining_shield": 0.0,
+							"shield_spent": 0.0
+						},
+						"label": "每次命中",
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.8,
+								"base_coefficient": 2.8,
+								"intrinsic": {
+									"physical": 50.4
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"physical": 50.4
+							},
+							"role": "direct",
+							"skill_id": "cleave",
+							"tags": [
+								"hit",
+								"attack",
+								"melee",
+								"area"
+							]
+						},
+						"resolved": {
+							"components": {
+								"physical": 50.4
+							},
+							"details": [
+								{
+									"base": 50.4,
+									"before_defense": 50.4,
+									"final": 50.4,
+									"increased": 0.0,
+									"modifiers": [],
+									"more": 1.0,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"total": 50.4
+						}
+					}
+				],
+				"recipe": {
+					"half_angle": 1.5707963267948966,
+					"radius": 95.0
+				},
+				"summary": "命中预估（未计敌方防御）：每次命中 50.40",
+				"supports": [
+					"efficiency",
+					"inward_pull"
+				]
+			},
+			{
+				"area_impulse_profile": {
+					"direction": "toward_origin",
+					"enabled": true,
+					"impulse_speed": 190.0,
+					"mana_multiplier": 1.2
+				},
+				"cooldown": 1.1199999999999999,
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n命中牵引至爆发圆心，受墙体与怪物分离影响；不改变伤害或触发半径。\n扇形范围：半径 95.00 → 95.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n近身扇区 180 度；近战、攻击与范围标签生效。锻纹短刃的本地物理伤害参与本次斩击，白蜡长弓不参与。没有命中时也正常支付。\n每次命中：物理 50.40\n固有：物理 50.40；附加：无；附加效用 2.80",
+				"initial_count": 0,
+				"mana": 20.16,
+				"packets": [
+					{
+						"active": true,
+						"known_target_resolved": {
+							"components": {
+								"physical": 50.4
+							},
+							"details": [
+								{
+									"base": 50.4,
+									"before_defense": 50.4,
+									"final": 50.4,
+									"increased": 0.0,
+									"modifiers": [],
+									"more": 1.0,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"total": 50.4
+						},
+						"known_target_settlement": {
+							"components": {
+								"physical": 50.4
+							},
+							"damage_total": 50.4,
+							"details": [
+								{
+									"base": 50.4,
+									"before_defense": 50.4,
+									"final": 50.4,
+									"increased": 0.0,
+									"modifiers": [],
+									"more": 1.0,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"health_lost": 50.4,
+							"mitigated_components": {
+								"physical": 0.0
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"physical": 50.4
+							},
+							"reason": "",
+							"remaining_health": 263.1,
+							"remaining_shield": 0.0,
+							"shield_spent": 0.0
+						},
+						"label": "每次命中",
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.8,
+								"base_coefficient": 2.8,
+								"intrinsic": {
+									"physical": 50.4
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"physical": 50.4
+							},
+							"role": "direct",
+							"skill_id": "cleave",
+							"tags": [
+								"hit",
+								"attack",
+								"melee",
+								"area"
+							]
+						},
+						"resolved": {
+							"components": {
+								"physical": 50.4
+							},
+							"details": [
+								{
+									"base": 50.4,
+									"before_defense": 50.4,
+									"final": 50.4,
+									"increased": 0.0,
+									"modifiers": [],
+									"more": 1.0,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"total": 50.4
+						}
+					}
+				],
+				"recipe": {
+					"half_angle": 1.5707963267948966,
+					"radius": 95.0
+				},
+				"summary": "命中预估（未计敌方防御）：每次命中 50.40",
+				"supports": [
+					"inward_pull",
+					"quickcast"
+				]
+			},
+			{
+				"area_impulse_profile": {
+					"direction": "toward_origin",
+					"enabled": true,
+					"impulse_speed": 190.0,
+					"mana_multiplier": 1.2
+				},
+				"cooldown": 1.4,
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n命中牵引至爆发圆心，受墙体与怪物分离影响；不改变伤害或触发半径。\n扇形范围：半径 95.00 → 95.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n近身扇区 180 度；近战、攻击与范围标签生效。锻纹短刃的本地物理伤害参与本次斩击，白蜡长弓不参与。没有命中时也正常支付。\n每次命中：物理 60.48\n固有：物理 50.40；附加：无；附加效用 2.80",
+				"initial_count": 0,
+				"mana": 16.56,
+				"packets": [
+					{
+						"active": true,
+						"known_target_resolved": {
+							"components": {
+								"physical": 60.48
+							},
+							"details": [
+								{
+									"base": 50.4,
+									"before_defense": 60.48,
+									"final": 60.48,
+									"increased": 0.0,
+									"modifiers": [
+										"support:physical_focus"
+									],
+									"more": 1.2,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"total": 60.48
+						},
+						"known_target_settlement": {
+							"components": {
+								"physical": 60.48
+							},
+							"damage_total": 60.48,
+							"details": [
+								{
+									"base": 50.4,
+									"before_defense": 60.48,
+									"final": 60.48,
+									"increased": 0.0,
+									"modifiers": [
+										"support:physical_focus"
+									],
+									"more": 1.2,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"health_lost": 60.48,
+							"mitigated_components": {
+								"physical": 0.0
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"physical": 60.48
+							},
+							"reason": "",
+							"remaining_health": 253.02,
+							"remaining_shield": 0.0,
+							"shield_spent": 0.0
+						},
+						"label": "每次命中",
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.8,
+								"base_coefficient": 2.8,
+								"intrinsic": {
+									"physical": 50.4
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"physical": 50.4
+							},
+							"role": "direct",
+							"skill_id": "cleave",
+							"tags": [
+								"hit",
+								"attack",
+								"melee",
+								"area"
+							]
+						},
+						"resolved": {
+							"components": {
+								"physical": 60.48
+							},
+							"details": [
+								{
+									"base": 50.4,
+									"before_defense": 60.48,
+									"final": 60.48,
+									"increased": 0.0,
+									"modifiers": [
+										"support:physical_focus"
+									],
+									"more": 1.2,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"total": 60.48
+						}
+					}
+				],
+				"recipe": {
+					"half_angle": 1.5707963267948966,
+					"radius": 95.0
+				},
+				"summary": "命中预估（未计敌方防御）：每次命中 60.48",
+				"supports": [
+					"inward_pull",
+					"physical_focus"
+				]
+			},
+			{
+				"area_impulse_profile": {
+					"direction": "toward_origin",
+					"enabled": true,
+					"impulse_speed": 190.0,
+					"mana_multiplier": 1.2
+				},
+				"cooldown": 1.4,
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n命中牵引至爆发圆心，受墙体与怪物分离影响；不改变伤害或触发半径。\n周身范围：半径 95.00 → 95.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n环斩覆盖 360 度；命中伤害额外降低 25%，魔力消耗倍率 125%。\n角度扩大不增加半径；上方面积倍率仅指范围词缀，每个目标最多命中一次。\n近身扇区 360 度；近战、攻击与范围标签生效。锻纹短刃的本地物理伤害参与本次斩击，白蜡长弓不参与。没有命中时也正常支付。\n每次命中：物理 37.80\n固有：物理 50.40；附加：无；附加效用 2.80",
+				"initial_count": 0,
+				"mana": 18.0,
+				"packets": [
+					{
+						"active": true,
+						"known_target_resolved": {
+							"components": {
+								"physical": 37.8
+							},
+							"details": [
+								{
+									"base": 50.4,
+									"before_defense": 37.8,
+									"final": 37.8,
+									"increased": 0.0,
+									"modifiers": [
+										"support:encircling_cleave"
+									],
+									"more": 0.75,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"total": 37.8
+						},
+						"known_target_settlement": {
+							"components": {
+								"physical": 37.8
+							},
+							"damage_total": 37.8,
+							"details": [
+								{
+									"base": 50.4,
+									"before_defense": 37.8,
+									"final": 37.8,
+									"increased": 0.0,
+									"modifiers": [
+										"support:encircling_cleave"
+									],
+									"more": 0.75,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"health_lost": 37.8,
+							"mitigated_components": {
+								"physical": 0.0
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"physical": 37.8
+							},
+							"reason": "",
+							"remaining_health": 275.7,
+							"remaining_shield": 0.0,
+							"shield_spent": 0.0
+						},
+						"label": "每次命中",
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.8,
+								"base_coefficient": 2.8,
+								"intrinsic": {
+									"physical": 50.4
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"physical": 50.4
+							},
+							"role": "direct",
+							"skill_id": "cleave",
+							"tags": [
+								"hit",
+								"attack",
+								"melee",
+								"area"
+							]
+						},
+						"resolved": {
+							"components": {
+								"physical": 37.8
+							},
+							"details": [
+								{
+									"base": 50.4,
+									"before_defense": 37.8,
+									"final": 37.8,
+									"increased": 0.0,
+									"modifiers": [
+										"support:encircling_cleave"
+									],
+									"more": 0.75,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"total": 37.8
+						}
+					}
+				],
+				"recipe": {
+					"half_angle": 3.141592653589793,
+					"radius": 95.0
+				},
+				"summary": "命中预估（未计敌方防御）：每次命中 37.80",
+				"supports": [
+					"encircling_cleave",
+					"inward_pull"
+				]
+			}
+		]
+	},
+	"gem": {
+		"capabilities": [],
+		"definition_id": "support:inward_pull",
+		"description": "奥能新星、陨星坠落与裂刃斩成功命中后，将敌人拉向本次技能中心，初始速度190，沿原击退衰减、地形与分离规则；裂刃未命中不牵引。魔力×1.20，伤害、范围与冷却不变，占用1个辅助槽。",
+		"family": "inward_pull",
+		"glyph": "",
+		"icon": "res://assets/ui/grimoire/inward_pull.png",
+		"icon_texture": "res://assets/ui/grimoire/inward_pull.png",
+		"kind": "support_gem",
+		"name": "牵引辅助",
+		"requires": [],
+		"short_name": "牵引辅助",
+		"size": [
+			1,
+			1
+		],
+		"skill_id": "",
+		"skills": [
+			"nova",
+			"meteor",
+			"cleave"
+		],
+		"support_id": "inward_pull"
+	},
+	"inward_pull": {
+		"damage_scope": "新星与陨星仍是原direct法术、范围、命中；裂刃仍是攻击、近战、范围、命中；不添加trap伤害标签，不开放陷阱伤害、牵引词族或新的源树消费者",
+		"direction": "新星与陨星将原向外冲量反转为朝本次技能中心；新星使用施放圆心、陨星使用实际落点、伏击使用已放置符印位置；裂刃只在原攻击成功命中结算后，朝施放时角色位置施加同速冲量，闪避、出生保护与遮挡均不牵引；目标与中心重合时冲量为零",
+		"equipment_vocabulary": 51,
+		"example_scope": "同一新建角色的真实战斗快照，仅在对应辅助组合加入牵引并调用生产Compiler.compile_group；显示非暴击、防御前单次命中与冻结配置，不是DPS或实际战斗位移",
+		"example_stats": {
+			"accuracy": 140.0,
+			"accuracy_increased": 0.0,
+			"additional_skill_slots": 0.0,
+			"area_increased": 0.0,
+			"area_size_increased": 0.0,
+			"armour": 0.0,
+			"armour_increased": 0.0,
+			"attack_added_fire": 0.0,
+			"attack_added_physical": 0.0,
+			"attack_crit_chance_increased": 0.0,
+			"attack_elemental_increased": 0.0,
+			"attack_life_leech": 0.0,
+			"attack_mana_leech": 0.0,
+			"attack_physical_increased": 0.0,
+			"attack_speed": 1.7,
+			"attack_speed_increased": 0.0,
+			"chaos_increased": 0.0,
+			"cold_ailment_duration_increased": 0.0,
+			"cold_increased": 0.0,
+			"cold_resistance": 0.0,
+			"crit_base_chance": 0.05,
+			"crit_base_multiplier": 1.5,
+			"crit_chance_increased": 0.0,
+			"crit_multiplier_add": 0.0,
+			"damage": 26.0,
+			"damage_taken_from_mana_before_life": 0.0,
+			"damaging_ailments_faster": 0.0,
+			"dexterity": 20.0,
+			"elemental_increased": 0.0,
+			"evasion": 15.600000000000001,
+			"evasion_increased": 0.0,
+			"fire_dot_multiplier_add": 0.0,
+			"fire_increased": 0.0,
+			"fire_resistance": 0.0,
+			"flask_charges_gained_increased": 0.0,
+			"flask_life_recovery_increased": 0.0,
+			"flask_mana_recovery_increased": 0.0,
+			"global_increased": 0.0,
+			"intelligence": 20.0,
+			"life_leech_max_rate_increased": 0.0,
+			"life_leech_rate_increased": 0.0,
+			"life_regen": 0.0,
+			"life_regen_percent": 0.0,
+			"lightning_increased": 0.0,
+			"lightning_resistance": 0.0,
+			"mana_cost_efficiency_increased": 0.0,
+			"mana_cost_increased": 0.0,
+			"mana_leech_max_rate_increased": 0.0,
+			"mana_leech_rate_increased": 0.0,
+			"mana_regen": 12.0,
+			"mana_regen_increased": 0.0,
+			"max_health": 130.0,
+			"max_mana": 140.0,
+			"max_shield": 91.8,
+			"maximum_cold_resistance_add": 0.0,
+			"maximum_fire_resistance_add": 0.0,
+			"maximum_lightning_resistance_add": 0.0,
+			"melee_area_size_increased": 0.0,
+			"melee_crit_chance_increased": 0.0,
+			"melee_crit_multiplier_add": 0.0,
+			"melee_physical_increased": 0.04,
+			"move_speed": 240.0,
+			"move_speed_increased": 0.0,
+			"physical_attack_life_leech": 0.0,
+			"physical_attack_mana_leech": 0.0,
+			"physical_increased": 0.0,
+			"projectile_attack_crit_chance_increased": 0.0,
+			"projectile_attack_crit_multiplier_add": 0.0,
+			"projectile_count": 0.0,
+			"projectile_increased": 0.0,
+			"projectile_speed_increased": 0.0,
+			"resolute_technique": 0.0,
+			"shield_recharge_delay": 4.0,
+			"shield_recharge_rate": 16.0,
+			"shield_recharge_rate_increased": 0.0,
+			"shield_recharge_start_faster": 0.0,
+			"shield_regen": 16.0,
+			"spell_added_cold": 0.0,
+			"spell_added_lightning": 0.0,
+			"spell_area_size_increased": 0.0,
+			"spell_crit_chance_increased": 0.0,
+			"spell_crit_multiplier_add": 0.0,
+			"spell_increased": 0.0,
+			"strength": 20.0
+		},
+		"examples": {
+			"cleave": {
+				"base": {
+					"after": {
+						"area_impulse_profile": {
+							"direction": "toward_origin",
+							"enabled": true,
+							"impulse_speed": 190.0,
+							"mana_multiplier": 1.2
+						},
+						"cooldown": 1.4,
+						"critical": {
+							"primary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							}
+						},
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n命中牵引至爆发圆心，受墙体与怪物分离影响；不改变伤害或触发半径。\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 140，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n扇形范围：半径 95.00 → 95.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n近身扇区 180 度；近战、攻击与范围标签生效。锻纹短刃的本地物理伤害参与本次斩击，白蜡长弓不参与。没有命中时也正常支付。\n每次命中：物理 75.71\n固有：物理 72.80；附加：无；附加效用 2.80",
+						"initial_count": 0,
+						"mana": 14.399999999999999,
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.8,
+								"base_coefficient": 2.8,
+								"intrinsic": {
+									"physical": 72.8
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"physical": 72.8
+							},
+							"role": "direct",
+							"skill_id": "cleave",
+							"tags": [
+								"hit",
+								"attack",
+								"melee",
+								"area"
+							]
+						},
+						"recipe": {
+							"half_angle": 1.5707963267948966,
+							"radius": 95.0
+						},
+						"resolved": {
+							"components": {
+								"physical": 75.712
+							},
+							"details": [
+								{
+									"base": 72.8,
+									"before_defense": 75.712,
+									"final": 75.712,
+									"increased": 0.04,
+									"modifiers": [
+										"melee_physical_increased"
+									],
+									"more": 1.0,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"total": 75.712
+						},
+						"snapshot": {
+							"area_impulse_policy": {
+								"direction": "toward_origin",
+								"enabled": true,
+								"impulse_speed": 190.0,
+								"mana_multiplier": 1.2
+							}
+						},
+						"summary": "非暴击命中预估（未计敌方防御）：每次命中 75.71",
+						"support_ids": [
+							"inward_pull"
+						]
+					},
+					"before": {
+						"cooldown": 1.4,
+						"critical": {
+							"primary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							}
+						},
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 140，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n扇形范围：半径 95.00 → 95.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n近身扇区 180 度；近战、攻击与范围标签生效。锻纹短刃的本地物理伤害参与本次斩击，白蜡长弓不参与。没有命中时也正常支付。\n每次命中：物理 75.71\n固有：物理 72.80；附加：无；附加效用 2.80",
+						"initial_count": 0,
+						"mana": 12.0,
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.8,
+								"base_coefficient": 2.8,
+								"intrinsic": {
+									"physical": 72.8
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"physical": 72.8
+							},
+							"role": "direct",
+							"skill_id": "cleave",
+							"tags": [
+								"hit",
+								"attack",
+								"melee",
+								"area"
+							]
+						},
+						"recipe": {
+							"half_angle": 1.5707963267948966,
+							"radius": 95.0
+						},
+						"resolved": {
+							"components": {
+								"physical": 75.712
+							},
+							"details": [
+								{
+									"base": 72.8,
+									"before_defense": 75.712,
+									"final": 75.712,
+									"increased": 0.04,
+									"modifiers": [
+										"melee_physical_increased"
+									],
+									"more": 1.0,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"total": 75.712
+						},
+						"snapshot": {
+
+						},
+						"summary": "非暴击命中预估（未计敌方防御）：每次命中 75.71",
+						"support_ids": []
+					}
+				},
+				"ring_area": {
+					"after": {
+						"area_impulse_profile": {
+							"direction": "toward_origin",
+							"enabled": true,
+							"impulse_speed": 190.0,
+							"mana_multiplier": 1.2
+						},
+						"cooldown": 1.6099999999999999,
+						"critical": {
+							"primary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							}
+						},
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n命中牵引至爆发圆心，受墙体与怪物分离影响；不改变伤害或触发半径。\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 140，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n周身范围：半径 95.00 → 114.00；面积 ×1.4400，半径 ×1.2000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n环斩覆盖 360 度；命中伤害额外降低 25%，魔力消耗倍率 125%。\n角度扩大不增加半径；上方面积倍率仅指范围词缀，每个目标最多命中一次。\n近身扇区 360 度；近战、攻击与范围标签生效。锻纹短刃的本地物理伤害参与本次斩击，白蜡长弓不参与。没有命中时也正常支付。\n每次命中：物理 57.92\n固有：物理 72.80；附加：无；附加效用 2.80",
+						"initial_count": 0,
+						"mana": 19.871999999999996,
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.8,
+								"base_coefficient": 2.8,
+								"intrinsic": {
+									"physical": 72.8
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"physical": 72.8
+							},
+							"role": "direct",
+							"skill_id": "cleave",
+							"tags": [
+								"hit",
+								"attack",
+								"melee",
+								"area"
+							]
+						},
+						"recipe": {
+							"area_multiplier": 1.44,
+							"base_radius": 95.0,
+							"half_angle": 3.141592653589793,
+							"radius": 114.0
+						},
+						"resolved": {
+							"components": {
+								"physical": 57.91968000000001
+							},
+							"details": [
+								{
+									"base": 72.8,
+									"before_defense": 57.91968000000001,
+									"final": 57.91968000000001,
+									"increased": 0.04,
+									"modifiers": [
+										"melee_physical_increased",
+										"support:breadth",
+										"support:physical_focus",
+										"support:encircling_cleave"
+									],
+									"more": 0.765,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"total": 57.91968000000001
+						},
+						"snapshot": {
+							"area_impulse_policy": {
+								"direction": "toward_origin",
+								"enabled": true,
+								"impulse_speed": 190.0,
+								"mana_multiplier": 1.2
+							}
+						},
+						"summary": "非暴击命中预估（未计敌方防御）：每次命中 57.92",
+						"support_ids": [
+							"breadth",
+							"efficiency",
+							"encircling_cleave",
+							"inward_pull",
+							"physical_focus"
+						]
+					},
+					"before": {
+						"cooldown": 1.6099999999999999,
+						"critical": {
+							"primary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							}
+						},
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 140，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n周身范围：半径 95.00 → 114.00；面积 ×1.4400，半径 ×1.2000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n环斩覆盖 360 度；命中伤害额外降低 25%，魔力消耗倍率 125%。\n角度扩大不增加半径；上方面积倍率仅指范围词缀，每个目标最多命中一次。\n近身扇区 360 度；近战、攻击与范围标签生效。锻纹短刃的本地物理伤害参与本次斩击，白蜡长弓不参与。没有命中时也正常支付。\n每次命中：物理 57.92\n固有：物理 72.80；附加：无；附加效用 2.80",
+						"initial_count": 0,
+						"mana": 16.56,
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.8,
+								"base_coefficient": 2.8,
+								"intrinsic": {
+									"physical": 72.8
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"physical": 72.8
+							},
+							"role": "direct",
+							"skill_id": "cleave",
+							"tags": [
+								"hit",
+								"attack",
+								"melee",
+								"area"
+							]
+						},
+						"recipe": {
+							"area_multiplier": 1.44,
+							"base_radius": 95.0,
+							"half_angle": 3.141592653589793,
+							"radius": 114.0
+						},
+						"resolved": {
+							"components": {
+								"physical": 57.91968000000001
+							},
+							"details": [
+								{
+									"base": 72.8,
+									"before_defense": 57.91968000000001,
+									"final": 57.91968000000001,
+									"increased": 0.04,
+									"modifiers": [
+										"melee_physical_increased",
+										"support:breadth",
+										"support:physical_focus",
+										"support:encircling_cleave"
+									],
+									"more": 0.765,
+									"resistance": 0.0,
+									"type": "physical"
+								}
+							],
+							"total": 57.91968000000001
+						},
+						"snapshot": {
+
+						},
+						"summary": "非暴击命中预估（未计敌方防御）：每次命中 57.92",
+						"support_ids": [
+							"breadth",
+							"efficiency",
+							"encircling_cleave",
+							"physical_focus"
+						]
+					}
+				}
+			},
+			"meteor": {
+				"ambush_ember_area": {
+					"after": {
+						"area_impulse_profile": {
+							"direction": "toward_origin",
+							"enabled": true,
+							"impulse_speed": 190.0,
+							"mana_multiplier": 1.2
+						},
+						"burn_profile": {
+							"duration": 3.0,
+							"enabled": true,
+							"hit_multiplier": 0.75,
+							"mana_multiplier": 1.3,
+							"proliferation": {
+								"enabled": true,
+								"max_hops": 1,
+								"max_targets": 8,
+								"preserves_expiry": true,
+								"radius": 120.0
+							},
+							"rate_fraction": 0.2,
+							"roles": {
+								"direct": {
+									"dps": 15.14540625,
+									"fire_before_defense": 75.72703125,
+									"total": 45.43621875
+								}
+							},
+							"stacking": "strongest_refresh_equal"
+						},
+						"cooldown": 8.0,
+						"critical": {
+							"primary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							}
+						},
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n点燃 3.0 秒 · 非暴击、未计火抗\n每秒 15.15 火焰 · 完整持续 45.44\n同一目标不叠加；强点燃覆盖，同强度刷新。\n死亡扩散：半径 120 · 最多 8 个目标 · 受墙体阻挡\n保留原燃烧强度和剩余时间；扩散所得燃烧不再传播。\n脚下布置 · 0.35 秒后布防 · 触发半径 70\n保留 12 秒 · 所有技能组共享 3 枚；满额不消耗魔力或冷却。\n放置时固定伤害与暴击；敌人靠近后释放一次，到期消失。触发需视线，范围增幅只改变爆发范围。\n命中牵引至爆发圆心，受墙体与怪物分离影响；不改变伤害或触发半径。\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 140，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n圆形范围：半径 110.00 → 105.60；面积 ×0.9216，半径 ×0.9600（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n每次命中：火焰 75.73\n固有：火焰 111.80；附加：无；附加效用 4.30",
+						"initial_count": 0,
+						"mana": 89.856,
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 4.3,
+								"base_coefficient": 4.3,
+								"intrinsic": {
+									"fire": 111.8
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 111.8
+							},
+							"role": "direct",
+							"skill_id": "meteor",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						},
+						"recipe": {
+							"area_multiplier": 0.9216,
+							"base_radius": 110.0,
+							"radius": 105.6
+						},
+						"resolved": {
+							"components": {
+								"fire": 75.72703125
+							},
+							"details": [
+								{
+									"base": 111.8,
+									"before_defense": 75.72703125,
+									"final": 75.72703125,
+									"increased": 0.0,
+									"modifiers": [
+										"support:breadth",
+										"support:concentrate",
+										"support:ember_proliferation",
+										"support:ambush"
+									],
+									"more": 0.67734375,
+									"resistance": 0.0,
+									"type": "fire"
+								}
+							],
+							"total": 75.72703125
+						},
+						"snapshot": {
+							"area_impulse_policy": {
+								"direction": "toward_origin",
+								"enabled": true,
+								"impulse_speed": 190.0,
+								"mana_multiplier": 1.2
+							}
+						},
+						"summary": "非暴击命中预估（未计敌方防御）：每次命中 75.73",
+						"support_ids": [
+							"ambush",
+							"breadth",
+							"concentrate",
+							"ember_proliferation",
+							"inward_pull"
+						],
+						"trap_profile": {
+							"arming_seconds": 0.35,
+							"enabled": true,
+							"hit_multiplier": 0.85,
+							"lifetime_seconds": 12.0,
+							"mana_multiplier": 1.25,
+							"maximum_traps": 3,
+							"trigger_radius": 70.0
+						}
+					},
+					"before": {
+						"burn_profile": {
+							"duration": 3.0,
+							"enabled": true,
+							"hit_multiplier": 0.75,
+							"mana_multiplier": 1.3,
+							"proliferation": {
+								"enabled": true,
+								"max_hops": 1,
+								"max_targets": 8,
+								"preserves_expiry": true,
+								"radius": 120.0
+							},
+							"rate_fraction": 0.2,
+							"roles": {
+								"direct": {
+									"dps": 15.14540625,
+									"fire_before_defense": 75.72703125,
+									"total": 45.43621875
+								}
+							},
+							"stacking": "strongest_refresh_equal"
+						},
+						"cooldown": 8.0,
+						"critical": {
+							"primary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							}
+						},
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n点燃 3.0 秒 · 非暴击、未计火抗\n每秒 15.15 火焰 · 完整持续 45.44\n同一目标不叠加；强点燃覆盖，同强度刷新。\n死亡扩散：半径 120 · 最多 8 个目标 · 受墙体阻挡\n保留原燃烧强度和剩余时间；扩散所得燃烧不再传播。\n脚下布置 · 0.35 秒后布防 · 触发半径 70\n保留 12 秒 · 所有技能组共享 3 枚；满额不消耗魔力或冷却。\n放置时固定伤害与暴击；敌人靠近后释放一次，到期消失。触发需视线，范围增幅只改变爆发范围。\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 140，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n圆形范围：半径 110.00 → 105.60；面积 ×0.9216，半径 ×0.9600（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n每次命中：火焰 75.73\n固有：火焰 111.80；附加：无；附加效用 4.30",
+						"initial_count": 0,
+						"mana": 74.88,
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 4.3,
+								"base_coefficient": 4.3,
+								"intrinsic": {
+									"fire": 111.8
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 111.8
+							},
+							"role": "direct",
+							"skill_id": "meteor",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						},
+						"recipe": {
+							"area_multiplier": 0.9216,
+							"base_radius": 110.0,
+							"radius": 105.6
+						},
+						"resolved": {
+							"components": {
+								"fire": 75.72703125
+							},
+							"details": [
+								{
+									"base": 111.8,
+									"before_defense": 75.72703125,
+									"final": 75.72703125,
+									"increased": 0.0,
+									"modifiers": [
+										"support:breadth",
+										"support:concentrate",
+										"support:ember_proliferation",
+										"support:ambush"
+									],
+									"more": 0.67734375,
+									"resistance": 0.0,
+									"type": "fire"
+								}
+							],
+							"total": 75.72703125
+						},
+						"snapshot": {
+
+						},
+						"summary": "非暴击命中预估（未计敌方防御）：每次命中 75.73",
+						"support_ids": [
+							"ambush",
+							"breadth",
+							"concentrate",
+							"ember_proliferation"
+						],
+						"trap_profile": {
+							"arming_seconds": 0.35,
+							"enabled": true,
+							"hit_multiplier": 0.85,
+							"lifetime_seconds": 12.0,
+							"mana_multiplier": 1.25,
+							"maximum_traps": 3,
+							"trigger_radius": 70.0
+						}
+					}
+				},
+				"base": {
+					"after": {
+						"area_impulse_profile": {
+							"direction": "toward_origin",
+							"enabled": true,
+							"impulse_speed": 190.0,
+							"mana_multiplier": 1.2
+						},
+						"cooldown": 8.0,
+						"critical": {
+							"primary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							}
+						},
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n命中牵引至爆发圆心，受墙体与怪物分离影响；不改变伤害或触发半径。\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 140，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n圆形范围：半径 110.00 → 110.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n每次命中：火焰 111.80\n固有：火焰 111.80；附加：无；附加效用 4.30",
+						"initial_count": 0,
+						"mana": 38.4,
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 4.3,
+								"base_coefficient": 4.3,
+								"intrinsic": {
+									"fire": 111.8
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 111.8
+							},
+							"role": "direct",
+							"skill_id": "meteor",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						},
+						"recipe": {
+							"radius": 110.0
+						},
+						"resolved": {
+							"components": {
+								"fire": 111.8
+							},
+							"details": [
+								{
+									"base": 111.8,
+									"before_defense": 111.8,
+									"final": 111.8,
+									"increased": 0.0,
+									"modifiers": [],
+									"more": 1.0,
+									"resistance": 0.0,
+									"type": "fire"
+								}
+							],
+							"total": 111.8
+						},
+						"snapshot": {
+							"area_impulse_policy": {
+								"direction": "toward_origin",
+								"enabled": true,
+								"impulse_speed": 190.0,
+								"mana_multiplier": 1.2
+							}
+						},
+						"summary": "非暴击命中预估（未计敌方防御）：每次命中 111.80",
+						"support_ids": [
+							"inward_pull"
+						]
+					},
+					"before": {
+						"cooldown": 8.0,
+						"critical": {
+							"primary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							}
+						},
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 140，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n圆形范围：半径 110.00 → 110.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n每次命中：火焰 111.80\n固有：火焰 111.80；附加：无；附加效用 4.30",
+						"initial_count": 0,
+						"mana": 32.0,
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 4.3,
+								"base_coefficient": 4.3,
+								"intrinsic": {
+									"fire": 111.8
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 111.8
+							},
+							"role": "direct",
+							"skill_id": "meteor",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						},
+						"recipe": {
+							"radius": 110.0
+						},
+						"resolved": {
+							"components": {
+								"fire": 111.8
+							},
+							"details": [
+								{
+									"base": 111.8,
+									"before_defense": 111.8,
+									"final": 111.8,
+									"increased": 0.0,
+									"modifiers": [],
+									"more": 1.0,
+									"resistance": 0.0,
+									"type": "fire"
+								}
+							],
+							"total": 111.8
+						},
+						"snapshot": {
+
+						},
+						"summary": "非暴击命中预估（未计敌方防御）：每次命中 111.80",
+						"support_ids": []
+					}
+				}
+			},
+			"nova": {
+				"ambush_shock": {
+					"after": {
+						"area_impulse_profile": {
+							"direction": "toward_origin",
+							"enabled": true,
+							"impulse_speed": 190.0,
+							"mana_multiplier": 1.2
+						},
+						"cooldown": 6.0,
+						"critical": {
+							"primary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							}
+						},
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n感电 2.0 秒 · 后续命中承受伤害提高 15%\n闪电命中结算后施加；不追溯增强本次命中，不影响持续伤害。同强度刷新，不叠加。\n脚下布置 · 0.35 秒后布防 · 触发半径 70\n保留 12 秒 · 所有技能组共享 3 枚；满额不消耗魔力或冷却。\n放置时固定伤害与暴击；敌人靠近后释放一次，到期消失。触发需视线，范围增幅只改变爆发范围。\n命中牵引至爆发圆心，受墙体与怪物分离影响；不改变伤害或触发半径。\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 140，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n圆形范围：半径 155.00 → 155.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n每次命中：闪电 47.74\n固有：闪电 70.20；附加：无；附加效用 2.70",
+						"initial_count": 0,
+						"mana": 43.199999999999996,
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.7,
+								"base_coefficient": 2.7,
+								"intrinsic": {
+									"lightning": 70.2
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"lightning": 70.2
+							},
+							"role": "direct",
+							"skill_id": "nova",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						},
+						"recipe": {
+							"radius": 155.0
+						},
+						"resolved": {
+							"components": {
+								"lightning": 47.736000000000004
+							},
+							"details": [
+								{
+									"base": 70.2,
+									"before_defense": 47.736000000000004,
+									"final": 47.736000000000004,
+									"increased": 0.0,
+									"modifiers": [
+										"support:shock",
+										"support:ambush"
+									],
+									"more": 0.68,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 47.736000000000004
+						},
+						"shock_profile": {
+							"affects_dot": false,
+							"affects_hits_only": true,
+							"applies_after_current_hit": true,
+							"duration": 2.0,
+							"enabled": true,
+							"hit_damage_taken_increased": 0.15,
+							"hit_multiplier": 0.8,
+							"mana_multiplier": 1.2,
+							"roles": [
+								"direct"
+							],
+							"stacking": "refresh_equal",
+							"trigger": "positive_lightning_hit_after_settlement"
+						},
+						"snapshot": {
+							"area_impulse_policy": {
+								"direction": "toward_origin",
+								"enabled": true,
+								"impulse_speed": 190.0,
+								"mana_multiplier": 1.2
+							}
+						},
+						"summary": "非暴击命中预估（未计敌方防御）：每次命中 47.74",
+						"support_ids": [
+							"ambush",
+							"inward_pull",
+							"shock"
+						],
+						"trap_profile": {
+							"arming_seconds": 0.35,
+							"enabled": true,
+							"hit_multiplier": 0.85,
+							"lifetime_seconds": 12.0,
+							"mana_multiplier": 1.25,
+							"maximum_traps": 3,
+							"trigger_radius": 70.0
+						}
+					},
+					"before": {
+						"cooldown": 6.0,
+						"critical": {
+							"primary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							}
+						},
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n感电 2.0 秒 · 后续命中承受伤害提高 15%\n闪电命中结算后施加；不追溯增强本次命中，不影响持续伤害。同强度刷新，不叠加。\n脚下布置 · 0.35 秒后布防 · 触发半径 70\n保留 12 秒 · 所有技能组共享 3 枚；满额不消耗魔力或冷却。\n放置时固定伤害与暴击；敌人靠近后释放一次，到期消失。触发需视线，范围增幅只改变爆发范围。\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 140，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n圆形范围：半径 155.00 → 155.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n每次命中：闪电 47.74\n固有：闪电 70.20；附加：无；附加效用 2.70",
+						"initial_count": 0,
+						"mana": 36.0,
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.7,
+								"base_coefficient": 2.7,
+								"intrinsic": {
+									"lightning": 70.2
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"lightning": 70.2
+							},
+							"role": "direct",
+							"skill_id": "nova",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						},
+						"recipe": {
+							"radius": 155.0
+						},
+						"resolved": {
+							"components": {
+								"lightning": 47.736000000000004
+							},
+							"details": [
+								{
+									"base": 70.2,
+									"before_defense": 47.736000000000004,
+									"final": 47.736000000000004,
+									"increased": 0.0,
+									"modifiers": [
+										"support:shock",
+										"support:ambush"
+									],
+									"more": 0.68,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 47.736000000000004
+						},
+						"shock_profile": {
+							"affects_dot": false,
+							"affects_hits_only": true,
+							"applies_after_current_hit": true,
+							"duration": 2.0,
+							"enabled": true,
+							"hit_damage_taken_increased": 0.15,
+							"hit_multiplier": 0.8,
+							"mana_multiplier": 1.2,
+							"roles": [
+								"direct"
+							],
+							"stacking": "refresh_equal",
+							"trigger": "positive_lightning_hit_after_settlement"
+						},
+						"snapshot": {
+
+						},
+						"summary": "非暴击命中预估（未计敌方防御）：每次命中 47.74",
+						"support_ids": [
+							"ambush",
+							"shock"
+						],
+						"trap_profile": {
+							"arming_seconds": 0.35,
+							"enabled": true,
+							"hit_multiplier": 0.85,
+							"lifetime_seconds": 12.0,
+							"mana_multiplier": 1.25,
+							"maximum_traps": 3,
+							"trigger_radius": 70.0
+						}
+					}
+				},
+				"base": {
+					"after": {
+						"area_impulse_profile": {
+							"direction": "toward_origin",
+							"enabled": true,
+							"impulse_speed": 190.0,
+							"mana_multiplier": 1.2
+						},
+						"cooldown": 6.0,
+						"critical": {
+							"primary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							}
+						},
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n命中牵引至爆发圆心，受墙体与怪物分离影响；不改变伤害或触发半径。\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 140，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n圆形范围：半径 155.00 → 155.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n每次命中：闪电 70.20\n固有：闪电 70.20；附加：无；附加效用 2.70",
+						"initial_count": 0,
+						"mana": 28.799999999999997,
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.7,
+								"base_coefficient": 2.7,
+								"intrinsic": {
+									"lightning": 70.2
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"lightning": 70.2
+							},
+							"role": "direct",
+							"skill_id": "nova",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						},
+						"recipe": {
+							"radius": 155.0
+						},
+						"resolved": {
+							"components": {
+								"lightning": 70.2
+							},
+							"details": [
+								{
+									"base": 70.2,
+									"before_defense": 70.2,
+									"final": 70.2,
+									"increased": 0.0,
+									"modifiers": [],
+									"more": 1.0,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 70.2
+						},
+						"snapshot": {
+							"area_impulse_policy": {
+								"direction": "toward_origin",
+								"enabled": true,
+								"impulse_speed": 190.0,
+								"mana_multiplier": 1.2
+							}
+						},
+						"summary": "非暴击命中预估（未计敌方防御）：每次命中 70.20",
+						"support_ids": [
+							"inward_pull"
+						]
+					},
+					"before": {
+						"cooldown": 6.0,
+						"critical": {
+							"primary": {
+								"chance": 0.05,
+								"multiplier": 1.5
+							}
+						},
+						"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 140，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n圆形范围：半径 155.00 → 155.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n每次命中：闪电 70.20\n固有：闪电 70.20；附加：无；附加效用 2.70",
+						"initial_count": 0,
+						"mana": 24.0,
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.7,
+								"base_coefficient": 2.7,
+								"intrinsic": {
+									"lightning": 70.2
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"lightning": 70.2
+							},
+							"role": "direct",
+							"skill_id": "nova",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						},
+						"recipe": {
+							"radius": 155.0
+						},
+						"resolved": {
+							"components": {
+								"lightning": 70.2
+							},
+							"details": [
+								{
+									"base": 70.2,
+									"before_defense": 70.2,
+									"final": 70.2,
+									"increased": 0.0,
+									"modifiers": [],
+									"more": 1.0,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 70.2
+						},
+						"snapshot": {
+
+						},
+						"summary": "非暴击命中预估（未计敌方防御）：每次命中 70.20",
+						"support_ids": []
+					}
+				}
+			}
+		},
+		"icon_file": "originals/inward_pull.png",
+		"icon_source": "res://assets/ui/grimoire/inward_pull.png",
+		"merchant_quote": {
+			"code": "",
+			"cost": {
+				"calibration_shard": 4
+			},
+			"definition_id": "support:inward_pull",
+			"materials": {
+
+			},
+			"name": "牵引辅助",
+			"ok": true,
+			"operation": "buy",
+			"reason": "",
+			"target": "support:inward_pull"
+		},
+		"migration": "牵引原始最低存档版本为43，历史42→43迁移先严格校验并保留原字节备份；本次裂刃兼容扩展保持现行schema61，不赠宝石或碎片，不改既有里程碑奖励身份表",
+		"minimum_save_version": 43,
+		"movement": "圆形法术替换原190冲量方向，裂刃成功命中新增190牵引；沿用原520/秒衰减、怪物移动、分离和墙体碰撞；没有持续吸附、瞬移、自动追踪或强制汇聚，不保证拉到圆心",
+		"normal_reward_definition_count": 26,
+		"normal_reward_pool_includes_support": false,
+		"policy": {
+			"direction": "toward_origin",
+			"enabled": true,
+			"impulse_speed": 190.0,
+			"mana_multiplier": 1.2
+		},
+		"risk": "自心新星与裂刃会把敌人拉近角色，也可能增加贴身风险；地形、分离、敌人原移动与离散步长都会影响实际位移",
+		"scope": "奥能新星、陨星坠落与裂刃斩可装配；占用一个辅助槽，魔力乘1.20，伤害、冷却、范围与伏击触发半径不变；裂刃保留前方180度，搭配环斩才覆盖360度；没有牵引时不新增空策略字段，裂刃没有该冲量，原法术向外冲量保持",
+		"skills": [
+			"nova",
+			"meteor",
+			"cleave"
+		],
+		"snapshot": "compiled.area_impulse_profile与snapshot.area_impulse_policy保存独立副本；裂刃使用本次冻结策略与施放原点，拆卸不撤销已施加的冲量；符印伏击在放置时冻结牵引，之后换装、退款或拆卸辅助不改变已有符印",
+		"source_policy": 61,
+		"statuses": "感电、点燃或余烬扩散继续使用原准入与结算顺序；牵引不改变它们的数值，点燃与余烬仍互斥",
+		"support_id": "inward_pull",
+		"test_offer": {
+			"available": true,
+			"catalog_id": "support:inward_pull",
+			"category": "",
+			"definition_id": "support:inward_pull",
+			"description": "奥能新星、陨星坠落与裂刃斩成功命中后，将敌人拉向本次技能中心，初始速度190，沿原击退衰减、地形与分离规则；裂刃未命中不牵引。魔力×1.20，伤害、范围与冷却不变，占用1个辅助槽。",
+			"icon_path": "",
+			"id": "support:inward_pull",
+			"kind": "support_gem",
+			"name": "牵引辅助",
+			"preview": {
+				"capabilities": [],
+				"category": "",
+				"definition_id": "support:inward_pull",
+				"description": "奥能新星、陨星坠落与裂刃斩成功命中后，将敌人拉向本次技能中心，初始速度190，沿原击退衰减、地形与分离规则；裂刃未命中不牵引。魔力×1.20，伤害、范围与冷却不变，占用1个辅助槽。",
+				"family": "inward_pull",
+				"glyph": "",
+				"icon": "res://assets/ui/grimoire/inward_pull.png",
+				"icon_texture": "res://assets/ui/grimoire/inward_pull.png",
+				"kind": "support_gem",
+				"name": "牵引辅助",
+				"requires": [],
+				"short_name": "牵引辅助",
+				"size": [
+					1,
+					1
+				],
+				"skill_id": "",
+				"skills": [
+					"nova",
+					"meteor",
+					"cleave"
+				],
+				"support_id": "inward_pull",
+				"uid": "item_000001"
+			},
+			"price_label": "测试免费",
+			"quantity": 1,
+			"reason": "",
+			"size": [
+				1,
+				1
+			],
+			"supply_kind": "gem"
+		}
+	},
+	"program_example": {
+		"after": {
+			"area_impulse_profile": {
+				"direction": "toward_origin",
+				"enabled": true,
+				"impulse_speed": 190.0,
+				"mana_multiplier": 1.2
+			},
+			"cooldown": 1.4,
+			"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n命中牵引至爆发圆心，受墙体与怪物分离影响；不改变伤害或触发半径。\n扇形范围：半径 95.00 → 95.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n近身扇区 180 度；近战、攻击与范围标签生效。锻纹短刃的本地物理伤害参与本次斩击，白蜡长弓不参与。没有命中时也正常支付。\n每次命中：物理 72.80\n固有：物理 72.80；附加：无；附加效用 2.80",
+			"initial_count": 0,
+			"mana": 14.399999999999999,
+			"recipe": {
+				"half_angle": 1.5707963267948966,
+				"radius": 95.0
+			},
+			"summary": "命中预估（未计敌方防御）：每次命中 72.80"
+		},
+		"before": {
+			"cooldown": 1.4,
+			"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n扇形范围：半径 95.00 → 95.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n近身扇区 180 度；近战、攻击与范围标签生效。锻纹短刃的本地物理伤害参与本次斩击，白蜡长弓不参与。没有命中时也正常支付。\n每次命中：物理 72.80\n固有：物理 72.80；附加：无；附加效用 2.80",
+			"initial_count": 0,
+			"mana": 12.0,
+			"recipe": {
+				"half_angle": 1.5707963267948966,
+				"radius": 95.0
+			},
+			"summary": "命中预估（未计敌方防御）：每次命中 72.80"
+		}
+	},
+	"support": {
+		"description": "奥能新星、陨星坠落与裂刃斩成功命中后，将敌人拉向本次技能中心，初始速度190，沿原击退衰减、地形与分离规则；裂刃未命中不牵引。魔力×1.20，伤害、范围与冷却不变，占用1个辅助槽。",
+		"family": "inward_pull",
+		"name": "牵引辅助",
+		"operations": [
+			{
+				"op": "mana_multiplier",
+				"value": 1.2
+			}
+		],
+		"requires": [],
+		"skills": [
+			"nova",
+			"meteor",
+			"cleave"
+		]
+	}
+}

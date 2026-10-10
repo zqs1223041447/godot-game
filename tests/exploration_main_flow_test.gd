@@ -66,6 +66,7 @@ func write_json(name: String, value: Variant) -> void:
 	file.close()
 
 func enter(map_id: String, detailed: bool=false) -> bool:
+	var balance_before: int=arena.state.crafting_balance()
 	if not accepted(arena.craft_normal_map(map_id,1,[],[],arena.map_draft().revision),"Formal tierI draft: "+map_id):return false
 	var before: Dictionary=observation()
 	var opened: Dictionary=arena.start_map(arena.map_draft().revision)
@@ -81,7 +82,7 @@ func enter(map_id: String, detailed: bool=false) -> bool:
 	check(arena._map_run.snapshot().admitted==count-1 and arena.ordinary_admissions==count-1 and arena._map_run.boss_id>0,"Finite ledger already owns entire initial roster: "+map_id)
 	check(arena.monster_runtime.next_id==int(before.runtime.next_id)+count and arena.monster_runtime.queue.is_empty(),"All root IDs allocated once, no spawn queue: "+map_id)
 	check(arena.rng.state==before.rng,"Detached layout does not consume gameplay RNG: "+map_id)
-	check(world.fee_paid==0 and arena.state.crafting_balance()==0,"Original free tierI entry economics: "+map_id)
+	check(world.fee_paid==0 and arena.state.crafting_balance()==balance_before,"Free tierI entry preserves existing balance: "+map_id)
 	check(arena.player_pos==arena.world_geometry().landmarks.entry,"Actual player starts at authored exploration entrance: "+map_id)
 	check(arena.get_node("WorldCamera").zoom==Vector2(0.65,0.65) and arena.get_node("WorldCamera").position.distance_to(View.follow_position(arena.player_pos,arena.ARENA))<0.001,"Main camera follows entry immediately at 0.65: "+map_id)
 	check(arena.map_mechanism_state()=={"config":{},"optional_encounters":[]},"Empty future-mechanism shell remains empty: "+map_id)

@@ -1,0 +1,214 @@
+{
+	"active_uid": "item_000008",
+	"checks": 425,
+	"comparisons": 164,
+	"failures": 0,
+	"fixture_sha256": "4b1a8dae93c0a541158972284590461e1f57ffee4c07d7079982ebcd297263df",
+	"labels": [],
+	"samples": [
+		{
+			"admissions": [
+				{
+					"actor": "monster",
+					"chance": 1.0,
+					"hit": true,
+					"target_id": 1
+				},
+				{
+					"actor": "monster",
+					"chance": 0.05,
+					"hit": false,
+					"target_id": 5
+				}
+			],
+			"damage": {
+				"components": {
+					"physical": 75.712
+				},
+				"details": [
+					{
+						"base": 72.8,
+						"before_defense": 75.712,
+						"final": 75.712,
+						"increased": 0.04,
+						"modifiers": [
+							"melee_physical_increased"
+						],
+						"more": 1.0,
+						"resistance": 0.0,
+						"type": "physical"
+					}
+				],
+				"total": 75.712
+			},
+			"knockback": [
+				"(0.0, 0.0)",
+				"(0.0, 0.0)"
+			],
+			"links": [],
+			"recipe": {
+				"half_angle": 1.5707963267948966,
+				"radius": 95.0
+			}
+		},
+		{
+			"admissions": [
+				{
+					"actor": "monster",
+					"chance": 1.0,
+					"hit": true,
+					"target_id": 1
+				},
+				{
+					"actor": "monster",
+					"chance": 0.05,
+					"hit": false,
+					"target_id": 5
+				}
+			],
+			"damage": {
+				"components": {
+					"physical": 75.712
+				},
+				"details": [
+					{
+						"base": 72.8,
+						"before_defense": 75.712,
+						"final": 75.712,
+						"increased": 0.04,
+						"modifiers": [
+							"melee_physical_increased"
+						],
+						"more": 1.0,
+						"resistance": 0.0,
+						"type": "physical"
+					}
+				],
+				"total": 75.712
+			},
+			"knockback": [
+				"(-190.0, 0.0)",
+				"(0.0, 0.0)"
+			],
+			"links": [
+				"inward_pull"
+			],
+			"recipe": {
+				"half_angle": 1.5707963267948966,
+				"radius": 95.0
+			}
+		},
+		{
+			"admissions": [
+				{
+					"actor": "monster",
+					"chance": 1.0,
+					"hit": true,
+					"target_id": 1
+				},
+				{
+					"actor": "monster",
+					"chance": 1.0,
+					"hit": true,
+					"target_id": 2
+				},
+				{
+					"actor": "monster",
+					"chance": 0.05,
+					"hit": false,
+					"target_id": 5
+				}
+			],
+			"damage": {
+				"components": {
+					"physical": 56.784000000000006
+				},
+				"details": [
+					{
+						"base": 72.8,
+						"before_defense": 56.784000000000006,
+						"final": 56.784000000000006,
+						"increased": 0.04,
+						"modifiers": [
+							"melee_physical_increased",
+							"support:encircling_cleave"
+						],
+						"more": 0.75,
+						"resistance": 0.0,
+						"type": "physical"
+					}
+				],
+				"total": 56.784000000000006
+			},
+			"knockback": [
+				"(-190.0, 0.0)",
+				"(190.0, 0.0)"
+			],
+			"links": [
+				"encircling_cleave",
+				"inward_pull"
+			],
+			"recipe": {
+				"half_angle": 3.141592653589793,
+				"radius": 95.0
+			}
+		},
+		{
+			"admissions": [
+				{
+					"actor": "monster",
+					"chance": 1.0,
+					"hit": true,
+					"target_id": 1
+				},
+				{
+					"actor": "monster",
+					"chance": 0.05,
+					"hit": false,
+					"target_id": 5
+				}
+			],
+			"damage": {
+				"components": {
+					"physical": 144.79919999999998
+				},
+				"details": [
+					{
+						"base": 72.8,
+						"before_defense": 144.79919999999998,
+						"final": 144.79919999999998,
+						"increased": 0.04,
+						"modifiers": [
+							"melee_physical_increased",
+							"support:breadth",
+							"support:concentrate",
+							"support:physical_focus"
+						],
+						"more": 1.275,
+						"resistance": 0.0,
+						"type": "physical"
+					}
+				],
+				"total": 144.79919999999998
+			},
+			"knockback": [
+				"(-190.0, 0.0)",
+				"(0.0, 0.0)"
+			],
+			"links": [
+				"breadth",
+				"concentrate",
+				"physical_focus",
+				"efficiency",
+				"inward_pull"
+			],
+			"recipe": {
+				"area_multiplier": 0.9216,
+				"base_radius": 95.0,
+				"half_angle": 1.5707963267948966,
+				"radius": 91.2
+			}
+		}
+	],
+	"support_uid": "item_000010"
+}

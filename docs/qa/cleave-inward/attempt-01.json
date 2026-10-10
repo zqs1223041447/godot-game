@@ -1,0 +1,58 @@
+{
+	"active_uid": "item_000008",
+	"checks": 283,
+	"comparisons": 164,
+	"failures": 1,
+	"fixture_sha256": "4b1a8dae93c0a541158972284590461e1f57ffee4c07d7079982ebcd297263df",
+	"labels": [
+		"Original free tierI entry economics: old_garden"
+	],
+	"samples": [
+		{
+			"admissions": [
+				{
+					"actor": "monster",
+					"chance": 1.0,
+					"hit": true,
+					"target_id": 1
+				},
+				{
+					"actor": "monster",
+					"chance": 0.05,
+					"hit": false,
+					"target_id": 5
+				}
+			],
+			"damage": {
+				"components": {
+					"physical": 75.712
+				},
+				"details": [
+					{
+						"base": 72.8,
+						"before_defense": 75.712,
+						"final": 75.712,
+						"increased": 0.04,
+						"modifiers": [
+							"melee_physical_increased"
+						],
+						"more": 1.0,
+						"resistance": 0.0,
+						"type": "physical"
+					}
+				],
+				"total": 75.712
+			},
+			"knockback": [
+				"(0.0, 0.0)",
+				"(0.0, 0.0)"
+			],
+			"links": [],
+			"recipe": {
+				"half_angle": 1.5707963267948966,
+				"radius": 95.0
+			}
+		}
+	],
+	"support_uid": "item_000010"
+}

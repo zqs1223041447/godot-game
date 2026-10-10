@@ -30,7 +30,7 @@ RULE_TITLES['ambush'] = '符印伏击：预置、触发与冻结快照'
 RULE_TITLES['elemental_conversion'] = '三元素转换与命中穿透：统一分配与实际来源'
 RULE_TITLES['physical_fire_conversion'] = '物理转火焰：40%转换与伤害来源'
 RULE_TITLES['precise_technique'] = '精准技艺：严格命中条件与全局禁暴击'
-RULE_TITLES['inward_pull'] = '牵引辅助：朝真实爆发圆心反转冲量'
+RULE_TITLES['inward_pull'] = '牵引辅助：朝技能中心施加冲量'
 RULE_TITLES['glove_ring_affixes'] = '精瞄手套与三抗戒指：前后缀取舍'
 RULE_TITLES['frost_lock'] = '霜锁辅助：短冻结、解冻免疫与攻击接续'
 RULE_TITLES['jewel_crafting'] = '普通珠宝：回收与整体重铸'
@@ -1000,9 +1000,9 @@ def inward_pull_rule(data,link,facts,details):
     rule=data['inward_pull'];policy=rule['policy']
     def value(key,amount):
         return f'<strong data-inward-pull-value="{esc(key)}" data-value="{esc(amount)}">{format(amount, ".10g")}</strong>'
-    body=facts([('适配技能',' · '.join(link('skills',key) for key in rule['skills'])),('存档 / 源政策 / 装备词汇',value('save-version',rule['minimum_save_version'])+' / '+value('source-policy',rule['source_policy'])+' / '+value('vocabulary',rule['equipment_vocabulary'])),('初始冲量速度',value('impulse-speed',policy['impulse_speed'])),('魔力倍率',value('mana-multiplier',policy['mana_multiplier'])),('方向',esc(policy['direction'])+' · 朝本次真实爆发圆心')])
+    body=facts([('适配技能',' · '.join(link('skills',key) for key in rule['skills'])),('存档 / 源政策 / 装备词汇',value('save-version',rule['minimum_save_version'])+' / '+value('source-policy',rule['source_policy'])+' / '+value('vocabulary',rule['equipment_vocabulary'])),('初始冲量速度',value('impulse-speed',policy['impulse_speed'])),('魔力倍率',value('mana-multiplier',policy['mana_multiplier'])),('方向',esc(policy['direction'])+' · 朝本次技能中心')])
     body+=''.join('<p>'+esc(rule[key])+'。</p>' for key in ['scope','direction','movement','snapshot'])
-    body+='<h3>四组代表组合 · 加入牵引前后</h3><p>'+esc(rule['example_scope'])+'。每行保持其他辅助相同，右值只新增牵引；数值直接读取生产编译结果。</p>'
+    body+='<h3>代表组合 · 加入牵引前后</h3><p>'+esc(rule['example_scope'])+'。每行保持其他辅助相同，右值只新增牵引；数值直接读取生产编译结果。</p>'
     for skill,examples in rule['examples'].items():
         rows=[];status_rows=[]
         for mode,pair in examples.items():
@@ -1023,7 +1023,7 @@ def inward_pull_rule(data,link,facts,details):
         body+='<h4>'+link('skills',skill)+'</h4><div class="table-scroll"><table><thead><tr><th>辅助组合</th><th>防御前单击</th><th>魔力</th><th>冷却秒</th><th>爆发半径</th><th>伏击触发半径</th></tr></thead><tbody>'+''.join(rows)+'</tbody></table></div>'+''.join(status_rows)
     body+=''.join('<p>'+esc(rule[key])+'。</p>' for key in ['statuses','damage_scope','risk'])
     body+='<p>正式宝石商人售价 '+value('merchant-cost',rule['merchant_quote']['cost']['calibration_shard'])+' 碎片；独立测试目录免费供应。原里程碑奖励仍为 '+value('reward-count',rule['normal_reward_definition_count'])+' 枚固定身份，牵引不插入其序列。</p><p>'+esc(rule['migration'])+'。</p>'
-    body+='<p>'+link('supports','inward_pull')+' · '+link('rules','ambush')+' · '+link('rules','shock')+' · '+link('rules','ember_proliferation')+' · <a href="../INWARD_PULL_SUPPORT.zh-CN.md">完整牵引辅助规则</a> · <a href="../qa/v067-reference/README.md">本批图鉴验证</a></p>'
+    body+='<p>'+link('supports','inward_pull')+' · '+link('rules','ambush')+' · '+link('rules','shock')+' · '+link('rules','ember_proliferation')+' · <a href="../INWARD_PULL_SUPPORT.zh-CN.md">完整牵引辅助规则</a> · <a href="../qa/v067-reference/README.md">原牵引图鉴验证</a> · <a href="../CLEAVE_INWARD_SUPPORT.zh-CN.md">裂刃牵引与本批验收</a></p>'
     return body
 
 
@@ -1456,7 +1456,7 @@ def build(data, art):
             body+='<p>符印伏击改为脚下预置，成功放置时支付魔力；触发后才命中。'+link('rules','ambush','查看伏击、感电、燃烧与范围组合的代表编译示例')+'。</p>'
             related+=' · '+link('rules','ambush')
         if 'inward_pull' in compatible:
-            body+='<p>牵引辅助把原击退冲量反转为朝本次真实爆发圆心，魔力乘1.20。'+link('rules','inward_pull','查看牵引与伏击冻结快照的代表编译示例')+'。</p>'
+            body+='<p>'+('牵引辅助在裂刃成功命中后向施放原点施加190冲量，闪避不牵引；魔力乘1.20。' if key=='cleave' else '牵引辅助把原击退冲量反转为朝本次真实爆发圆心，魔力乘1.20。')+link('rules','inward_pull','查看牵引与冻结快照的代表编译示例')+'。</p>'
             related+=' · '+link('rules','inward_pull')
         if 'frost_lock' in compatible:
             body+='<p>霜锁辅助提供短冻结窗口，与寒意延长互斥；保留原3秒移动减缓。'+link('rules','frost_lock','查看冻结、免疫与原攻击接续')+'。</p>'
@@ -1487,7 +1487,7 @@ def build(data, art):
             body+='<p>放置时不立即命中；脚下固定符印等待活敌触发。共享三枚，未触发过期不爆炸；范围只影响爆发圈。'+link('rules','ambush','查看冻结快照、魔力与冷却、原异常组合及生命周期')+'。</p>'
             related+=' · '+link('rules','ambush')+' · '+link('town_services','skill_merchant','宝石商人')
         if key=='inward_pull':
-            body+='<p>沿用原冲量衰减、墙体碰撞与分离规则，不保证拉到圆心；可与符印伏击同用并在放置时冻结。'+link('rules','inward_pull','查看实际圆心、魔力代价与伤害不变的同源示例')+'。</p>'
+            body+='<p>沿用原冲量衰减、墙体碰撞与分离规则，不保证拉到中心；裂刃只牵引成功命中的目标，新星与陨星可搭配符印伏击并在放置时冻结。'+link('rules','inward_pull','查看实际圆心、魔力代价与伤害不变的同源示例')+'。</p>'
             related+=' · '+link('rules','inward_pull')+' · '+link('rules','ambush')+' · '+link('town_services','skill_merchant','宝石商人')
         if key in ['frost_lock','lingering_chill']:
             body+='<p>霜锁辅助与寒意延长辅助不能同时装配；冻结只暂停自主行为，外力和资源状态继续。'+link('rules','frost_lock','查看完整准入与时间边界')+'。</p>'

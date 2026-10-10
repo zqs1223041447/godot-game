@@ -1320,6 +1320,9 @@ func _execute_compiled(compiled: Dictionary, group_id: String = "", main_uid: St
 		return false
 	var id: String = str(compiled.skill_id)
 	if not Data.SKILLS.has(id): return false
+	if id == "cleave" and compiled.snapshot.has("area_impulse_policy") and not InwardPull.policy_error(compiled.snapshot.area_impulse_policy).is_empty():
+		hud.notify("牵引配置无效")
+		return false
 	var stride_selected: bool = compiled.get("support_ids", []).has("long_stride")
 	if stride_selected or compiled.has("long_stride_profile"):
 		if id!="dash" or not stride_selected or not LongStride.profile_error(compiled.get("long_stride_profile")).is_empty():
@@ -1367,9 +1370,11 @@ func _execute_compiled(compiled: Dictionary, group_id: String = "", main_uid: St
 					int(recipe.pierce), float(recipe.slow), float(recipe.speed), context)
 		"cleave":
 			# Damage admission, direction and geometry are frozen once for this cast.
+			var cleave_context: Dictionary = {"cast_id":context.cast_id}
+			if context.snapshot.has("area_impulse_policy"): cleave_context.impulse_origin = player_pos
 			for enemy: Dictionary in enemies:
 				if float(enemy.health)>0.0 and float(enemy.spawn)<=0.0 and AreaRules.contains_sector_target(player_pos,player_facing,Vector2(enemy.pos),float(compiled.recipe.radius),float(compiled.recipe.half_angle),float(enemy.radius)) and _terrain_visible(player_pos,enemy.pos):
-					_apply_damage_packet(enemy,compiled.packets.direct,context.snapshot,color,0.0,{"cast_id":context.cast_id})
+					_apply_damage_packet(enemy,compiled.packets.direct,context.snapshot,color,0.0,cleave_context)
 			visual_cues.emit_cue("cleave",player_pos,{"radius":float(compiled.recipe.radius),"half_angle":float(compiled.recipe.half_angle),"direction":player_facing,"color":color})
 		"nova":
 			_area_damage(player_pos, float(compiled.recipe.radius), compiled.packets.direct, color, 0.6, context.snapshot)
@@ -1697,6 +1702,10 @@ func _apply_damage_packet(enemy: Dictionary, packet: Dictionary, snapshot: Dicti
 			if attached.get("applied", false):
 				var frozen: Dictionary = freeze_runtime.state_for(int(enemy.id))
 				record.freeze_applied = {"at":elapsed, "frozen_until":frozen.frozen_until, "immune_until":frozen.immune_until}
+	# Apply only after the original hit admission and settlement succeeded. In
+	# particular, an evaded cleave must not move its target or roll accuracy twice.
+	if packet.skill_id == "cleave" and packet.get("role", "") == "direct" and snapshot.has("area_impulse_policy") and provenance.get("impulse_origin") is Vector2:
+		enemy.knockback = InwardPull.impulse(provenance.impulse_origin, Vector2(enemy.pos), snapshot.area_impulse_policy)
 
 
 func _projectile_contact_admitted(shot: Dictionary,target_id: int) -> bool:

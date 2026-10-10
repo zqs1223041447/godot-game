@@ -1,16 +1,16 @@
 class_name InwardPullSupportRules
 extends RefCounted
-## Reverse the two existing circular spells' impulse without adding a carrier,
-## damage modifier, timing rule, or movement consumer.
+## Circular spells reverse their impulse; a successful cleave gains the same
+## inward impulse. No new carrier, damage modifier or movement consumer.
 const Program = preload("res://scripts/combat/support_program.gd")
 const SAVE_VERSION: int = 43
-const SKILLS: Array[String] = ["nova", "meteor"]
+const SKILLS: Array[String] = ["nova", "meteor", "cleave"]
 const POLICY: Dictionary = {
 	"impulse_speed": 190.0, "mana_multiplier": 1.20, "direction": "toward_origin",
 }
 const SUPPORTS: Dictionary = {"inward_pull": {
 	"name": "牵引辅助",
-	"description": "奥能新星与陨星坠落的范围命中改为将敌人拉向本次爆发中心，初始牵引速度190，沿原击退衰减、地形与分离规则；魔力×1.20，伤害与冷却不变。占用1个辅助槽。",
+	"description": "奥能新星、陨星坠落与裂刃斩成功命中后，将敌人拉向本次技能中心，初始速度190，沿原击退衰减、地形与分离规则；裂刃未命中不牵引。魔力×1.20，伤害、范围与冷却不变，占用1个辅助槽。",
 	"skills": SKILLS, "requires": [], "family": "inward_pull",
 	"operations": [{"op": "mana_multiplier", "value": 1.20}],
 }}

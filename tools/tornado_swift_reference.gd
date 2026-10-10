@@ -9,9 +9,10 @@ const Damage = preload("res://scripts/combat/damage_resolver.gd")
 const Defense = preload("res://scripts/mechanics/defense_rules.gd")
 func _initialize() -> void:
 	var args := OS.get_cmdline_user_args()
-	var support_id: String = args[0] if args.size() == 2 else "swift_projectiles"
-	var output: String = args[1] if args.size() == 2 else "res://docs/qa/tornado-swift/reference-fragment.json"
-	assert(support_id in ["swift_projectiles","heavy_projectiles"])
+	var support_id: String = args[0] if args.size() >= 2 else "swift_projectiles"
+	var output: String = args[1] if args.size() >= 2 else "res://docs/qa/tornado-swift/reference-fragment.json"
+	var skill_id: String = args[2] if args.size() >= 3 else "tornado"
+	assert((skill_id == "tornado" and support_id in ["swift_projectiles","heavy_projectiles"]) or (skill_id == "cleave" and support_id == "inward_pull"))
 	var catalog: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://docs/reference/catalog.json"))
 	var full := Exporter.Build.new()
 	for id: String in Exporter.Data.COMBAT_STARTER_ITEMS: full.equip(id)
@@ -23,10 +24,10 @@ func _initialize() -> void:
 	for config: String in builds:
 		examples[config] = []
 		var choices: Array = [[support_id]]
-		for id: String in Registry.supports_for_skill("tornado"):
+		for id: String in Registry.supports_for_skill(skill_id):
 			if id != support_id: choices.append([id,support_id])
 		for selection: Array in choices:
-			var cast := Compiler.compile_skill("tornado",builds[config].get_combat_snapshot(),selection)
+			var cast := Compiler.compile_skill(skill_id,builds[config].get_combat_snapshot(),selection)
 			assert(cast.ok)
 			var packets: Array = []
 			for entry: Dictionary in Preview.entries(cast):
@@ -39,9 +40,10 @@ func _initialize() -> void:
 			examples[config].append(brief)
 	var snapshot: Dictionary = Exporter.Build.new().get_combat_snapshot()
 	var fragment := {"support":Registry.get_definition(support_id),"gem":Gems.definition("support:"+support_id),
-		"compatible":Registry.supports_for_skill("tornado"),"examples":examples,
-		"program_example":{"before":Exporter.support_cast_brief(Compiler.compile_skill("tornado",snapshot,[])),
-			"after":Exporter.support_cast_brief(Compiler.compile_skill("tornado",snapshot,[support_id]))}}
+		"compatible":Registry.supports_for_skill(skill_id),"examples":examples,
+		"program_example":{"before":Exporter.support_cast_brief(Compiler.compile_skill(skill_id,snapshot,[])),
+			"after":Exporter.support_cast_brief(Compiler.compile_skill(skill_id,snapshot,[support_id]))}}
+	if support_id == "inward_pull": fragment.inward_pull = Exporter.inward_pull_examples()
 	FileAccess.open(output,FileAccess.WRITE).store_string(JSON.stringify(Exporter.clean(fragment),"\t",true,true)+"\n")
-	print("TORNADO_SUPPORT_REFERENCE ",support_id," four existing builds projected")
+	print("BOUNDED_SUPPORT_REFERENCE ",skill_id," / ",support_id," four existing builds projected")
 	quit()

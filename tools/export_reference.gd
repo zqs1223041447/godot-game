@@ -1431,6 +1431,7 @@ static func inward_pull_examples() -> Dictionary:
 	var selections: Dictionary = {
 		"nova": {"base": [], "ambush_shock": ["ambush", "shock"]},
 		"meteor": {"base": [], "ambush_ember_area": ["ambush", "ember_proliferation", "breadth", "concentrate"]},
+		"cleave": {"base": [], "ring_area": ["encircling_cleave", "breadth", "physical_focus", "efficiency"]},
 	}
 	for skill_id: String in selections:
 		var rows: Dictionary = {}
@@ -1461,14 +1462,14 @@ static func inward_pull_examples() -> Dictionary:
 		"normal_reward_pool_includes_support": Canonical.Journey.GEM_DEFINITIONS.has("support:inward_pull"),
 		"normal_reward_definition_count": Canonical.Journey.GEM_DEFINITIONS.size(),
 		"example_scope": "同一新建角色的真实战斗快照，仅在对应辅助组合加入牵引并调用生产Compiler.compile_group；显示非暴击、防御前单次命中与冻结配置，不是DPS或实际战斗位移",
-		"direction": "命中照常结算后，将原向外冲量反转为朝本次真实爆发圆心；新星使用施放圆心、陨星使用实际落点、伏击使用已放置符印位置；目标恰好在圆心时冲量为零",
-		"movement": "只替换原190冲量方向，沿用原520/秒衰减、怪物移动、分离和墙体碰撞；没有持续吸附、瞬移、自动追踪或强制汇聚，不保证拉到圆心",
-		"snapshot": "compiled.area_impulse_profile与snapshot.area_impulse_policy保存独立副本；符印伏击在放置时冻结牵引，之后换装、退款或拆卸辅助不改变已有符印",
-		"scope": "仅奥能新星与陨星坠落可装配；占用一个辅助槽，魔力乘1.20，伤害、冷却、爆发半径与伏击触发半径不变；没有牵引时不新增空策略字段，原向外冲量保持",
+		"direction": "新星与陨星将原向外冲量反转为朝本次技能中心；新星使用施放圆心、陨星使用实际落点、伏击使用已放置符印位置；裂刃只在原攻击成功命中结算后，朝施放时角色位置施加同速冲量，闪避、出生保护与遮挡均不牵引；目标与中心重合时冲量为零",
+		"movement": "圆形法术替换原190冲量方向，裂刃成功命中新增190牵引；沿用原520/秒衰减、怪物移动、分离和墙体碰撞；没有持续吸附、瞬移、自动追踪或强制汇聚，不保证拉到圆心",
+		"snapshot": "compiled.area_impulse_profile与snapshot.area_impulse_policy保存独立副本；裂刃使用本次冻结策略与施放原点，拆卸不撤销已施加的冲量；符印伏击在放置时冻结牵引，之后换装、退款或拆卸辅助不改变已有符印",
+		"scope": "奥能新星、陨星坠落与裂刃斩可装配；占用一个辅助槽，魔力乘1.20，伤害、冷却、范围与伏击触发半径不变；裂刃保留前方180度，搭配环斩才覆盖360度；没有牵引时不新增空策略字段，裂刃没有该冲量，原法术向外冲量保持",
 		"statuses": "感电、点燃或余烬扩散继续使用原准入与结算顺序；牵引不改变它们的数值，点燃与余烬仍互斥",
-		"damage_scope": "仍是原direct法术、范围、命中；不添加trap伤害标签，不开放陷阱伤害、牵引词族或新的源树消费者",
-		"risk": "自心新星会把敌人拉近角色，也可能增加贴身风险；地形、分离、敌人原移动与离散步长都会影响实际位移",
-		"migration": "严格校验旧schema42并保留原字节备份后升级43；不赠新石，不改变源政策41、装备词汇39或既有26枚里程碑奖励身份表"}
+		"damage_scope": "新星与陨星仍是原direct法术、范围、命中；裂刃仍是攻击、近战、范围、命中；不添加trap伤害标签，不开放陷阱伤害、牵引词族或新的源树消费者",
+		"risk": "自心新星与裂刃会把敌人拉近角色，也可能增加贴身风险；地形、分离、敌人原移动与离散步长都会影响实际位移",
+		"migration": "牵引原始最低存档版本为43，历史42→43迁移先严格校验并保留原字节备份；本次裂刃兼容扩展保持现行schema61，不赠宝石或碎片，不改既有里程碑奖励身份表"}
 
 
 static func _inward_pull_cast_brief(cast: Dictionary) -> Dictionary:
