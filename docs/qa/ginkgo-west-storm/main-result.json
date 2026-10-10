@@ -1,0 +1,184 @@
+{
+	"checks": 211,
+	"completed": 2,
+	"failures": 0,
+	"method": "Actual Main with genuine migrated v49 fixture. Prior-tier unlocks use existing model transactions. RNG seed, high player health, stationary nonselected actors and lethal settlements are controlled QA probes, not natural combat footage.",
+	"tiers": [
+		{
+			"claimed_shards": 8,
+			"descendants": 12,
+			"dodge_trace": [
+				{
+					"applied": false,
+					"attack_age": 0.7,
+					"attack_id": 2,
+					"balance_version": "original-telegraphed-area-v1",
+					"center": "(1359.0, 2264.0)",
+					"inside": false,
+					"packet": {
+						"base": {
+							"lightning": 16.099999999999998
+						},
+						"skill_id": "locked_circle",
+						"tags": [
+							"attack",
+							"area",
+							"hit"
+						]
+					},
+					"player_position": "(1359.0, 2384.0)",
+					"profile": {
+						"damage_multiplier": 1.4,
+						"radius": 65.0,
+						"recovery_seconds": 1.6,
+						"windup_seconds": 0.7
+					},
+					"profile_id": "locked_circle",
+					"radius": 65.0,
+					"schema_version": 1,
+					"shape": "circle",
+					"shock_policy": {
+						"duration": 1.0,
+						"hit_damage_taken_increased": 0.15
+					},
+					"source_id": 3,
+					"step_time": 0.2,
+					"type": "circle_attack",
+					"visual_pattern": "storm_shock"
+				}
+			],
+			"rng_seed": 2,
+			"root_rewards": 37,
+			"selected_spawn_key": "ginkgo_arcade/616926600279464626/camp_west/3",
+			"stay_trace": [
+				{
+					"applied": true,
+					"attack_age": 0.7,
+					"attack_id": 1,
+					"balance_version": "original-telegraphed-area-v1",
+					"center": "(1359.0, 2264.0)",
+					"inside": true,
+					"packet": {
+						"base": {
+							"lightning": 16.099999999999998
+						},
+						"skill_id": "locked_circle",
+						"tags": [
+							"attack",
+							"area",
+							"hit"
+						]
+					},
+					"player_position": "(1359.0, 2264.0)",
+					"profile": {
+						"damage_multiplier": 1.4,
+						"radius": 65.0,
+						"recovery_seconds": 1.6,
+						"windup_seconds": 0.7
+					},
+					"profile_id": "locked_circle",
+					"radius": 65.0,
+					"schema_version": 1,
+					"shape": "circle",
+					"shock_policy": {
+						"duration": 1.0,
+						"hit_damage_taken_increased": 0.15
+					},
+					"source_id": 3,
+					"step_time": 0.0010000000000000009,
+					"type": "circle_attack",
+					"visual_pattern": "storm_shock"
+				}
+			],
+			"tier": 2
+		},
+		{
+			"claimed_shards": 12,
+			"descendants": 15,
+			"dodge_trace": [
+				{
+					"applied": false,
+					"attack_age": 0.7,
+					"attack_id": 4,
+					"balance_version": "original-telegraphed-area-v1",
+					"center": "(1359.0, 2264.0)",
+					"inside": false,
+					"packet": {
+						"base": {
+							"lightning": 20.02
+						},
+						"skill_id": "locked_circle",
+						"tags": [
+							"attack",
+							"area",
+							"hit"
+						]
+					},
+					"player_position": "(1359.0, 2384.0)",
+					"profile": {
+						"damage_multiplier": 1.4,
+						"radius": 65.0,
+						"recovery_seconds": 1.6,
+						"windup_seconds": 0.7
+					},
+					"profile_id": "locked_circle",
+					"radius": 65.0,
+					"schema_version": 1,
+					"shape": "circle",
+					"shock_policy": {
+						"duration": 1.0,
+						"hit_damage_taken_increased": 0.15
+					},
+					"source_id": 58,
+					"step_time": 0.2,
+					"type": "circle_attack",
+					"visual_pattern": "storm_shock"
+				}
+			],
+			"rng_seed": 2,
+			"root_rewards": 37,
+			"selected_spawn_key": "ginkgo_arcade/267999434233973137/camp_west/3",
+			"stay_trace": [
+				{
+					"applied": true,
+					"attack_age": 0.7,
+					"attack_id": 3,
+					"balance_version": "original-telegraphed-area-v1",
+					"center": "(1359.0, 2264.0)",
+					"inside": true,
+					"packet": {
+						"base": {
+							"lightning": 20.02
+						},
+						"skill_id": "locked_circle",
+						"tags": [
+							"attack",
+							"area",
+							"hit"
+						]
+					},
+					"player_position": "(1359.0, 2264.0)",
+					"profile": {
+						"damage_multiplier": 1.4,
+						"radius": 65.0,
+						"recovery_seconds": 1.6,
+						"windup_seconds": 0.7
+					},
+					"profile_id": "locked_circle",
+					"radius": 65.0,
+					"schema_version": 1,
+					"shape": "circle",
+					"shock_policy": {
+						"duration": 1.0,
+						"hit_damage_taken_increased": 0.15
+					},
+					"source_id": 58,
+					"step_time": 0.0010000000000000009,
+					"type": "circle_attack",
+					"visual_pattern": "storm_shock"
+				}
+			],
+			"tier": 3
+		}
+	]
+}

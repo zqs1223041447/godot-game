@@ -32,3 +32,21 @@ static func species_roll(roll: Dictionary, template_id: String) -> Dictionary:
 	result.template = str(Monsters.ELEMENTAL_ENCOUNTERS[template_id].source_template) \
 		if Monsters.ELEMENTAL_ENCOUNTERS.has(template_id) else template_id
 	return result
+
+
+## One normal root in the first west outpost gains an existing locked lightning
+## attack. Final patrols, rarity, death-spawn templates and all other slots win.
+static func west_storm_index(profile: Dictionary, camp_id: String, entries: Array[Dictionary]) -> int:
+	if profile.get("id") != "ginkgo_arcade" or camp_id != "camp_west" or entries.size() < 3:
+		return -1
+	if not profile.get("normal_map") is bool or not profile.normal_map:
+		return -1
+	var tier: Variant = profile.get("journey_tier")
+	var wave: Variant = profile.get("wave")
+	if not tier is int or not wave is int or not ((tier == 2 and wave == 6) or (tier == 3 and wave == 10)):
+		return -1
+	var entry: Dictionary = entries[2]
+	if entry.get("template_id") == "skitter" and entry.get("rarity") == "normal" \
+			and entry.get("mechanisms") is Array and entry.mechanisms.is_empty():
+		return 2
+	return -1

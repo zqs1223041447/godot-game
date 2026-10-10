@@ -410,6 +410,9 @@ def exploration_map_body(data, map_id, link, facts, details):
             ('探索路线', '同源路线宽 ' + number(route_distribution['route_width']) + '，全宽经几何可走性验证；木牌仅指路，不触发出生'),
             ('来源编排', '原3个来源组各拆为2处空间驻点；来源组只保留物种、稀有度与奖励编排，不表示3个可见怪群'),
             ('驻点旗标', '未接战、交战中、已清理按真实成员和有限后代状态显示；仍有活后代或待出生队列时不会提前清理')])
+    if map_id == 'ginkgo_arcade' and 'ginkgo_west_storm' in data:
+        west = data['ginkgo_west_storm']
+        body += '<h4>II/III档 · 西叶追击与雷圈</h4><p>' + esc(west['scope']) + '</p><p>' + link('monsters', 'storm_skitter', '雷纹掠行体') + '：' + esc(west['combat']) + '</p><p>' + esc(west['budget']) + '</p><p>' + esc(west['history']) + ' <a href="../qa/ginkgo-west-storm/README.md">本次编排与战斗记录</a></p>'
     rows = []
     for tier in entry['tiers']:
         profile = tier['profile']

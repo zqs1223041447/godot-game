@@ -137,6 +137,7 @@ static func collect() -> Dictionary:
 	result["currencies"] = currency_examples()
 	result["flasks"] = flask_examples()
 	result["town_maps"] = town_map_examples()
+	result["ginkgo_west_storm"] = preload("res://tools/ginkgo_west_storm_reference.gd").collect()
 	result["map_camps"]={}
 	for map_id:String in Maps.MAPS:
 		var camp_layout:Dictionary=CampLayoutData.layout(map_id,LEGACY_REFERENCE_BOUNDS)

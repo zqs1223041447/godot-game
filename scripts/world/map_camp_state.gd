@@ -67,6 +67,9 @@ func begin(profile: Variant, landmarks: Variant, seed_value: Variant,
 		var mist_index := MistSkitter.replacement_index(profile, roster)
 		if mist_index >= 0:
 			roster[mist_index].template_id = "mist_skitter"
+		var storm_index := Ginkgo.west_storm_index(profile, camp_id, roster)
+		if storm_index >= 0:
+			roster[storm_index].template_id = "storm_skitter"
 		camps.append({"id": camp_id, "entries": roster, "root_ids": []})
 	# Publish only after validation and complete deterministic roster generation.
 	_state = {"profile": profile.duplicate(true), "landmarks": landmarks.duplicate(true),
