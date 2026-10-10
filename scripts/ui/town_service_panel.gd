@@ -37,6 +37,9 @@ var _normal := {}
 var _special := {}
 var _map_summary: Label
 var _map_preview: Label
+var _map_notes: Label
+var _map_notes_toggle: Button
+var _map_descriptions: Dictionary = {}
 var _map_launch: Button
 var _map_prepare: Button
 var _map_gate_status: Label
@@ -234,6 +237,9 @@ func open_service(id: String = "") -> void:
 func _clear() -> void:
 	_map_summary = null
 	_map_preview = null
+	_map_notes = null
+	_map_notes_toggle = null
+	_map_descriptions.clear()
 	_map_launch = null
 	_map_prepare = null
 	_map_gate_status = null
@@ -381,10 +387,35 @@ func _build_map() -> void:
 	for entry: Dictionary in options.maps:
 		_map_select.add_item(str(entry.name))
 		_map_select.set_item_metadata(_map_select.item_count-1,str(entry.id))
+		_map_descriptions[str(entry.id)] = entry.get("description", "")
 		if str(entry.id) == str(draft.map_id): _map_select.select(_map_select.item_count-1)
 	_tier_select = OptionButton.new()
 	_content.add_child(_tier_select)
 	_update_tiers(options, int(draft.get("tier", 1)))
+	var notes_card := PanelContainer.new()
+	notes_card.name = "MapFieldNotes"
+	notes_card.add_theme_stylebox_override("panel", ThemeStyle.panel(Color("f8ecd0"), Color("8c6b42"), 5, 1, 4))
+	_content.add_child(notes_card)
+	var notes_body := VBoxContainer.new()
+	notes_card.add_child(notes_body)
+	_map_notes_toggle = Button.new()
+	_map_notes_toggle.flat = true
+	_map_notes_toggle.toggle_mode = true
+	_map_notes_toggle.alignment = HORIZONTAL_ALIGNMENT_LEFT
+	_map_notes_toggle.add_theme_font_size_override("font_size", 13)
+	var notes_button_style := StyleBoxEmpty.new()
+	notes_button_style.content_margin_top = 2
+	notes_button_style.content_margin_bottom = 2
+	for state: String in ["normal", "hover", "pressed", "disabled"]:
+		_map_notes_toggle.add_theme_stylebox_override(state, notes_button_style)
+	notes_body.add_child(_map_notes_toggle)
+	_map_notes = Label.new()
+	_map_notes.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_map_notes.add_theme_font_size_override("font_size", 13)
+	_map_notes.add_theme_color_override("font_color", ThemeStyle.TEXT)
+	notes_body.add_child(_map_notes)
+	_map_notes_toggle.toggled.connect(func(_expanded: bool): _update_map_description())
+	_update_map_description()
 	_map_preview = Label.new()
 	_map_preview.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_map_preview.visible = false
@@ -434,6 +465,7 @@ func _build_map() -> void:
 	launch.pressed.connect(_launch_map.bind(revision))
 	_content.add_child(launch)
 	_map_select.item_selected.connect(func(_index: int):
+		_update_map_description()
 		_update_tiers(options, 1)
 		_mark_map_selection_dirty())
 	_tier_select.item_selected.connect(func(_index: int): _mark_map_selection_dirty())
@@ -441,6 +473,17 @@ func _build_map() -> void:
 		check.toggled.connect(func(_value: bool): _mark_map_selection_dirty())
 	_update_map_modifier_gates()
 	_update_map_selection_preview()
+
+func _update_map_description() -> void:
+	if not is_instance_valid(_map_notes) or not is_instance_valid(_map_notes_toggle): return
+	var raw: Variant = _map_descriptions.get(str(_map_select.get_selected_metadata()), "") if _map_select.selected >= 0 else ""
+	var description: String = raw.strip_edges() if raw is String else ""
+	var expanded := _map_notes_toggle.button_pressed
+	_map_notes_toggle.disabled = description.is_empty()
+	_map_notes_toggle.text = "地图手记 · 暂无说明" if description.is_empty() else ("▾ 布局与首领 · 收起" if expanded else "▸ 布局与首领 · 展开")
+	_map_notes.max_lines_visible = -1 if expanded else 1
+	_map_notes.text_overrun_behavior = TextServer.OVERRUN_NO_TRIMMING if expanded else TextServer.OVERRUN_TRIM_ELLIPSIS
+	_map_notes.text = "这张地图暂时没有可用说明。" if description.is_empty() else (description if expanded else description.get_slice("。", 0) + ("。" if description.contains("。") else ""))
 
 func _update_map_selection_preview() -> void:
 	if not is_instance_valid(_map_preview): return
