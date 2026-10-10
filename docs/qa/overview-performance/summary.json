@@ -1,0 +1,6350 @@
+{
+  "exploratory-baseline-a": {
+    "checks": 19,
+    "failures": 0,
+    "windows": [
+      {
+        "label": "0",
+        "open": false,
+        "wall": {
+          "count": 8,
+          "median_us": 90110.5,
+          "p95_us": 95324,
+          "mean_us": 90286.25,
+          "max_us": 95324
+        },
+        "functions": {
+          "world_context": {
+            "count": 0
+          },
+          "camp_scan": {
+            "count": 0
+          },
+          "outpost_scan": {
+            "count": 3,
+            "median_us": 81,
+            "p95_us": 82,
+            "mean_us": 80.33333333333333,
+            "max_us": 82
+          },
+          "cleanup_query": {
+            "count": 3,
+            "median_us": 163,
+            "p95_us": 168,
+            "mean_us": 157.66666666666666,
+            "max_us": 168
+          },
+          "cleanup_refresh": {
+            "count": 3,
+            "median_us": 215,
+            "p95_us": 217,
+            "mean_us": 208.33333333333334,
+            "max_us": 217
+          },
+          "hud_world_refresh": {
+            "count": 0
+          },
+          "overview_state": {
+            "count": 0
+          },
+          "overview_player": {
+            "count": 0
+          },
+          "overview_tick": {
+            "count": 8,
+            "median_us": 3.5,
+            "p95_us": 4,
+            "mean_us": 3.5,
+            "max_us": 4
+          },
+          "overview_draw": {
+            "count": 0
+          },
+          "hud_process": {
+            "count": 8,
+            "median_us": 1328.5,
+            "p95_us": 1570,
+            "mean_us": 1378,
+            "max_us": 1570
+          },
+          "game_step": {
+            "count": 43,
+            "median_us": 3065,
+            "p95_us": 3517,
+            "mean_us": 3146.1162790697676,
+            "max_us": 4195
+          },
+          "main_process": {
+            "count": 8,
+            "median_us": 16481.5,
+            "p95_us": 19015,
+            "mean_us": 16964.375,
+            "max_us": 19015
+          }
+        },
+        "per_frame_sum": {
+          "world_context": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "camp_scan": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "outpost_scan": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 82,
+            "mean_us": 30.125,
+            "max_us": 82
+          },
+          "cleanup_query": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 168,
+            "mean_us": 59.125,
+            "max_us": 168
+          },
+          "cleanup_refresh": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 217,
+            "mean_us": 78.125,
+            "max_us": 217
+          },
+          "hud_world_refresh": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "overview_state": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "overview_player": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "overview_tick": {
+            "count": 8,
+            "median_us": 3.5,
+            "p95_us": 4,
+            "mean_us": 3.5,
+            "max_us": 4
+          },
+          "overview_draw": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "hud_process": {
+            "count": 8,
+            "median_us": 1328.5,
+            "p95_us": 1570,
+            "mean_us": 1378,
+            "max_us": 1570
+          },
+          "game_step": {
+            "count": 8,
+            "median_us": 16428.5,
+            "p95_us": 18963,
+            "mean_us": 16910.375,
+            "max_us": 18963
+          },
+          "main_process": {
+            "count": 8,
+            "median_us": 16481.5,
+            "p95_us": 19015,
+            "mean_us": 16964.375,
+            "max_us": 19015
+          }
+        }
+      },
+      {
+        "label": "1",
+        "open": true,
+        "wall": {
+          "count": 8,
+          "median_us": 99106.0,
+          "p95_us": 100900,
+          "mean_us": 98860.625,
+          "max_us": 100900
+        },
+        "functions": {
+          "world_context": {
+            "count": 3,
+            "median_us": 424,
+            "p95_us": 462,
+            "mean_us": 435,
+            "max_us": 462
+          },
+          "camp_scan": {
+            "count": 3,
+            "median_us": 149,
+            "p95_us": 153,
+            "mean_us": 150,
+            "max_us": 153
+          },
+          "outpost_scan": {
+            "count": 6,
+            "median_us": 69.5,
+            "p95_us": 83,
+            "mean_us": 69.33333333333333,
+            "max_us": 83
+          },
+          "cleanup_query": {
+            "count": 3,
+            "median_us": 132,
+            "p95_us": 160,
+            "mean_us": 140,
+            "max_us": 160
+          },
+          "cleanup_refresh": {
+            "count": 3,
+            "median_us": 184,
+            "p95_us": 210,
+            "mean_us": 191.33333333333334,
+            "max_us": 210
+          },
+          "hud_world_refresh": {
+            "count": 0
+          },
+          "overview_state": {
+            "count": 3,
+            "median_us": 48,
+            "p95_us": 53,
+            "mean_us": 49.333333333333336,
+            "max_us": 53
+          },
+          "overview_player": {
+            "count": 8,
+            "median_us": 2.0,
+            "p95_us": 2,
+            "mean_us": 1.625,
+            "max_us": 2
+          },
+          "overview_tick": {
+            "count": 8,
+            "median_us": 34.0,
+            "p95_us": 551,
+            "mean_us": 216.75,
+            "max_us": 551
+          },
+          "overview_draw": {
+            "count": 8,
+            "median_us": 249.5,
+            "p95_us": 292,
+            "mean_us": 255.875,
+            "max_us": 292
+          },
+          "hud_process": {
+            "count": 8,
+            "median_us": 1435.0,
+            "p95_us": 2145,
+            "mean_us": 1648.25,
+            "max_us": 2145
+          },
+          "game_step": {
+            "count": 48,
+            "median_us": 3168.0,
+            "p95_us": 3812,
+            "mean_us": 3272.8958333333335,
+            "max_us": 5239
+          },
+          "main_process": {
+            "count": 8,
+            "median_us": 19672.5,
+            "p95_us": 22737,
+            "mean_us": 19707.125,
+            "max_us": 22737
+          }
+        },
+        "per_frame_sum": {
+          "world_context": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 462,
+            "mean_us": 163.125,
+            "max_us": 462
+          },
+          "camp_scan": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 153,
+            "mean_us": 56.25,
+            "max_us": 153
+          },
+          "outpost_scan": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 141,
+            "mean_us": 52,
+            "max_us": 141
+          },
+          "cleanup_query": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 160,
+            "mean_us": 52.5,
+            "max_us": 160
+          },
+          "cleanup_refresh": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 210,
+            "mean_us": 71.75,
+            "max_us": 210
+          },
+          "hud_world_refresh": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "overview_state": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 53,
+            "mean_us": 18.5,
+            "max_us": 53
+          },
+          "overview_player": {
+            "count": 8,
+            "median_us": 2.0,
+            "p95_us": 2,
+            "mean_us": 1.625,
+            "max_us": 2
+          },
+          "overview_tick": {
+            "count": 8,
+            "median_us": 34.0,
+            "p95_us": 551,
+            "mean_us": 216.75,
+            "max_us": 551
+          },
+          "overview_draw": {
+            "count": 8,
+            "median_us": 249.5,
+            "p95_us": 292,
+            "mean_us": 255.875,
+            "max_us": 292
+          },
+          "hud_process": {
+            "count": 8,
+            "median_us": 1435.0,
+            "p95_us": 2145,
+            "mean_us": 1648.25,
+            "max_us": 2145
+          },
+          "game_step": {
+            "count": 8,
+            "median_us": 19610.5,
+            "p95_us": 22678,
+            "mean_us": 19637.375,
+            "max_us": 22678
+          },
+          "main_process": {
+            "count": 8,
+            "median_us": 19672.5,
+            "p95_us": 22737,
+            "mean_us": 19707.125,
+            "max_us": 22737
+          }
+        }
+      },
+      {
+        "label": "2",
+        "open": false,
+        "wall": {
+          "count": 8,
+          "median_us": 92181.5,
+          "p95_us": 95586,
+          "mean_us": 92247.375,
+          "max_us": 95586
+        },
+        "functions": {
+          "world_context": {
+            "count": 0
+          },
+          "camp_scan": {
+            "count": 0
+          },
+          "outpost_scan": {
+            "count": 2,
+            "median_us": 81.5,
+            "p95_us": 82,
+            "mean_us": 81.5,
+            "max_us": 82
+          },
+          "cleanup_query": {
+            "count": 2,
+            "median_us": 143.5,
+            "p95_us": 145,
+            "mean_us": 143.5,
+            "max_us": 145
+          },
+          "cleanup_refresh": {
+            "count": 2,
+            "median_us": 193.5,
+            "p95_us": 196,
+            "mean_us": 193.5,
+            "max_us": 196
+          },
+          "hud_world_refresh": {
+            "count": 0
+          },
+          "overview_state": {
+            "count": 0
+          },
+          "overview_player": {
+            "count": 0
+          },
+          "overview_tick": {
+            "count": 8,
+            "median_us": 3.5,
+            "p95_us": 4,
+            "mean_us": 3.5,
+            "max_us": 4
+          },
+          "overview_draw": {
+            "count": 0
+          },
+          "hud_process": {
+            "count": 8,
+            "median_us": 1313.5,
+            "p95_us": 1530,
+            "mean_us": 1344.25,
+            "max_us": 1530
+          },
+          "game_step": {
+            "count": 45,
+            "median_us": 3157,
+            "p95_us": 3809,
+            "mean_us": 3256.2,
+            "max_us": 4067
+          },
+          "main_process": {
+            "count": 8,
+            "median_us": 19238.0,
+            "p95_us": 19656,
+            "mean_us": 18370.125,
+            "max_us": 19656
+          }
+        },
+        "per_frame_sum": {
+          "world_context": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "camp_scan": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "outpost_scan": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 82,
+            "mean_us": 20.375,
+            "max_us": 82
+          },
+          "cleanup_query": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 145,
+            "mean_us": 35.875,
+            "max_us": 145
+          },
+          "cleanup_refresh": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 196,
+            "mean_us": 48.375,
+            "max_us": 196
+          },
+          "hud_world_refresh": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "overview_state": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "overview_player": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "overview_tick": {
+            "count": 8,
+            "median_us": 3.5,
+            "p95_us": 4,
+            "mean_us": 3.5,
+            "max_us": 4
+          },
+          "overview_draw": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "hud_process": {
+            "count": 8,
+            "median_us": 1313.5,
+            "p95_us": 1530,
+            "mean_us": 1344.25,
+            "max_us": 1530
+          },
+          "game_step": {
+            "count": 8,
+            "median_us": 19184.0,
+            "p95_us": 19602,
+            "mean_us": 18316.125,
+            "max_us": 19602
+          },
+          "main_process": {
+            "count": 8,
+            "median_us": 19238.0,
+            "p95_us": 19656,
+            "mean_us": 18370.125,
+            "max_us": 19656
+          }
+        }
+      },
+      {
+        "label": "3",
+        "open": true,
+        "wall": {
+          "count": 8,
+          "median_us": 95171.5,
+          "p95_us": 97906,
+          "mean_us": 94781.625,
+          "max_us": 97906
+        },
+        "functions": {
+          "world_context": {
+            "count": 2,
+            "median_us": 441.5,
+            "p95_us": 458,
+            "mean_us": 441.5,
+            "max_us": 458
+          },
+          "camp_scan": {
+            "count": 2,
+            "median_us": 151.0,
+            "p95_us": 151,
+            "mean_us": 151,
+            "max_us": 151
+          },
+          "outpost_scan": {
+            "count": 5,
+            "median_us": 81,
+            "p95_us": 82,
+            "mean_us": 79.8,
+            "max_us": 82
+          },
+          "cleanup_query": {
+            "count": 3,
+            "median_us": 140,
+            "p95_us": 146,
+            "mean_us": 139,
+            "max_us": 146
+          },
+          "cleanup_refresh": {
+            "count": 3,
+            "median_us": 189,
+            "p95_us": 194,
+            "mean_us": 186.33333333333334,
+            "max_us": 194
+          },
+          "hud_world_refresh": {
+            "count": 0
+          },
+          "overview_state": {
+            "count": 2,
+            "median_us": 48.0,
+            "p95_us": 48,
+            "mean_us": 48,
+            "max_us": 48
+          },
+          "overview_player": {
+            "count": 8,
+            "median_us": 2.0,
+            "p95_us": 2,
+            "mean_us": 1.75,
+            "max_us": 2
+          },
+          "overview_tick": {
+            "count": 8,
+            "median_us": 33.0,
+            "p95_us": 545,
+            "mean_us": 158.125,
+            "max_us": 545
+          },
+          "overview_draw": {
+            "count": 8,
+            "median_us": 249.0,
+            "p95_us": 286,
+            "mean_us": 249.375,
+            "max_us": 286
+          },
+          "hud_process": {
+            "count": 8,
+            "median_us": 1483.5,
+            "p95_us": 1862,
+            "mean_us": 1523,
+            "max_us": 1862
+          },
+          "game_step": {
+            "count": 45,
+            "median_us": 3193,
+            "p95_us": 3794,
+            "mean_us": 3285.266666666667,
+            "max_us": 4150
+          },
+          "main_process": {
+            "count": 8,
+            "median_us": 19263.0,
+            "p95_us": 20819,
+            "mean_us": 18533.375,
+            "max_us": 20819
+          }
+        },
+        "per_frame_sum": {
+          "world_context": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 458,
+            "mean_us": 110.375,
+            "max_us": 458
+          },
+          "camp_scan": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 151,
+            "mean_us": 37.75,
+            "max_us": 151
+          },
+          "outpost_scan": {
+            "count": 8,
+            "median_us": 77.0,
+            "p95_us": 82,
+            "mean_us": 49.875,
+            "max_us": 82
+          },
+          "cleanup_query": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 146,
+            "mean_us": 52.125,
+            "max_us": 146
+          },
+          "cleanup_refresh": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 194,
+            "mean_us": 69.875,
+            "max_us": 194
+          },
+          "hud_world_refresh": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "overview_state": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 48,
+            "mean_us": 12,
+            "max_us": 48
+          },
+          "overview_player": {
+            "count": 8,
+            "median_us": 2.0,
+            "p95_us": 2,
+            "mean_us": 1.75,
+            "max_us": 2
+          },
+          "overview_tick": {
+            "count": 8,
+            "median_us": 33.0,
+            "p95_us": 545,
+            "mean_us": 158.125,
+            "max_us": 545
+          },
+          "overview_draw": {
+            "count": 8,
+            "median_us": 249.0,
+            "p95_us": 286,
+            "mean_us": 249.375,
+            "max_us": 286
+          },
+          "hud_process": {
+            "count": 8,
+            "median_us": 1483.5,
+            "p95_us": 1862,
+            "mean_us": 1523,
+            "max_us": 1862
+          },
+          "game_step": {
+            "count": 8,
+            "median_us": 19209.0,
+            "p95_us": 20756,
+            "mean_us": 18479.625,
+            "max_us": 20756
+          },
+          "main_process": {
+            "count": 8,
+            "median_us": 19263.0,
+            "p95_us": 20819,
+            "mean_us": 18533.375,
+            "max_us": 20819
+          }
+        }
+      },
+      {
+        "label": "4",
+        "open": false,
+        "wall": {
+          "count": 8,
+          "median_us": 88996.0,
+          "p95_us": 92544,
+          "mean_us": 89546.375,
+          "max_us": 92544
+        },
+        "functions": {
+          "world_context": {
+            "count": 0
+          },
+          "camp_scan": {
+            "count": 0
+          },
+          "outpost_scan": {
+            "count": 3,
+            "median_us": 80,
+            "p95_us": 81,
+            "mean_us": 80,
+            "max_us": 81
+          },
+          "cleanup_query": {
+            "count": 3,
+            "median_us": 141,
+            "p95_us": 141,
+            "mean_us": 140.66666666666666,
+            "max_us": 141
+          },
+          "cleanup_refresh": {
+            "count": 3,
+            "median_us": 188,
+            "p95_us": 190,
+            "mean_us": 188.33333333333334,
+            "max_us": 190
+          },
+          "hud_world_refresh": {
+            "count": 0
+          },
+          "overview_state": {
+            "count": 0
+          },
+          "overview_player": {
+            "count": 0
+          },
+          "overview_tick": {
+            "count": 8,
+            "median_us": 4.0,
+            "p95_us": 4,
+            "mean_us": 3.625,
+            "max_us": 4
+          },
+          "overview_draw": {
+            "count": 0
+          },
+          "hud_process": {
+            "count": 8,
+            "median_us": 1331.5,
+            "p95_us": 1525,
+            "mean_us": 1369.875,
+            "max_us": 1525
+          },
+          "game_step": {
+            "count": 43,
+            "median_us": 3157,
+            "p95_us": 3704,
+            "mean_us": 3251.9767441860463,
+            "max_us": 4061
+          },
+          "main_process": {
+            "count": 8,
+            "median_us": 16324.5,
+            "p95_us": 20301,
+            "mean_us": 17528.875,
+            "max_us": 20301
+          }
+        },
+        "per_frame_sum": {
+          "world_context": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "camp_scan": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "outpost_scan": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 81,
+            "mean_us": 30,
+            "max_us": 81
+          },
+          "cleanup_query": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 141,
+            "mean_us": 52.75,
+            "max_us": 141
+          },
+          "cleanup_refresh": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 190,
+            "mean_us": 70.625,
+            "max_us": 190
+          },
+          "hud_world_refresh": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "overview_state": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "overview_player": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "overview_tick": {
+            "count": 8,
+            "median_us": 4.0,
+            "p95_us": 4,
+            "mean_us": 3.625,
+            "max_us": 4
+          },
+          "overview_draw": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "hud_process": {
+            "count": 8,
+            "median_us": 1331.5,
+            "p95_us": 1525,
+            "mean_us": 1369.875,
+            "max_us": 1525
+          },
+          "game_step": {
+            "count": 8,
+            "median_us": 16277.5,
+            "p95_us": 20253,
+            "mean_us": 17479.375,
+            "max_us": 20253
+          },
+          "main_process": {
+            "count": 8,
+            "median_us": 16324.5,
+            "p95_us": 20301,
+            "mean_us": 17528.875,
+            "max_us": 20301
+          }
+        }
+      },
+      {
+        "label": "5",
+        "open": true,
+        "wall": {
+          "count": 8,
+          "median_us": 95570.5,
+          "p95_us": 99263,
+          "mean_us": 95873.375,
+          "max_us": 99263
+        },
+        "functions": {
+          "world_context": {
+            "count": 2,
+            "median_us": 440.0,
+            "p95_us": 455,
+            "mean_us": 440,
+            "max_us": 455
+          },
+          "camp_scan": {
+            "count": 2,
+            "median_us": 151.0,
+            "p95_us": 152,
+            "mean_us": 151,
+            "max_us": 152
+          },
+          "outpost_scan": {
+            "count": 4,
+            "median_us": 80.0,
+            "p95_us": 87,
+            "mean_us": 76.25,
+            "max_us": 87
+          },
+          "cleanup_query": {
+            "count": 2,
+            "median_us": 144.0,
+            "p95_us": 158,
+            "mean_us": 144,
+            "max_us": 158
+          },
+          "cleanup_refresh": {
+            "count": 2,
+            "median_us": 195.0,
+            "p95_us": 208,
+            "mean_us": 195,
+            "max_us": 208
+          },
+          "hud_world_refresh": {
+            "count": 0
+          },
+          "overview_state": {
+            "count": 2,
+            "median_us": 45.0,
+            "p95_us": 49,
+            "mean_us": 45,
+            "max_us": 49
+          },
+          "overview_player": {
+            "count": 8,
+            "median_us": 2.0,
+            "p95_us": 2,
+            "mean_us": 1.75,
+            "max_us": 2
+          },
+          "overview_tick": {
+            "count": 8,
+            "median_us": 32.5,
+            "p95_us": 543,
+            "mean_us": 158,
+            "max_us": 543
+          },
+          "overview_draw": {
+            "count": 8,
+            "median_us": 238.5,
+            "p95_us": 280,
+            "mean_us": 249.25,
+            "max_us": 280
+          },
+          "hud_process": {
+            "count": 8,
+            "median_us": 1365.0,
+            "p95_us": 2044,
+            "mean_us": 1520.875,
+            "max_us": 2044
+          },
+          "game_step": {
+            "count": 45,
+            "median_us": 3127,
+            "p95_us": 3687,
+            "mean_us": 3236.777777777778,
+            "max_us": 4731
+          },
+          "main_process": {
+            "count": 8,
+            "median_us": 19262.0,
+            "p95_us": 20663,
+            "mean_us": 18260.375,
+            "max_us": 20663
+          }
+        },
+        "per_frame_sum": {
+          "world_context": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 455,
+            "mean_us": 110,
+            "max_us": 455
+          },
+          "camp_scan": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 152,
+            "mean_us": 37.75,
+            "max_us": 152
+          },
+          "outpost_scan": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 166,
+            "mean_us": 38.125,
+            "max_us": 166
+          },
+          "cleanup_query": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 158,
+            "mean_us": 36,
+            "max_us": 158
+          },
+          "cleanup_refresh": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 208,
+            "mean_us": 48.75,
+            "max_us": 208
+          },
+          "hud_world_refresh": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "overview_state": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 49,
+            "mean_us": 11.25,
+            "max_us": 49
+          },
+          "overview_player": {
+            "count": 8,
+            "median_us": 2.0,
+            "p95_us": 2,
+            "mean_us": 1.75,
+            "max_us": 2
+          },
+          "overview_tick": {
+            "count": 8,
+            "median_us": 32.5,
+            "p95_us": 543,
+            "mean_us": 158,
+            "max_us": 543
+          },
+          "overview_draw": {
+            "count": 8,
+            "median_us": 238.5,
+            "p95_us": 280,
+            "mean_us": 249.25,
+            "max_us": 280
+          },
+          "hud_process": {
+            "count": 8,
+            "median_us": 1365.0,
+            "p95_us": 2044,
+            "mean_us": 1520.875,
+            "max_us": 2044
+          },
+          "game_step": {
+            "count": 8,
+            "median_us": 19208.5,
+            "p95_us": 20606,
+            "mean_us": 18206.875,
+            "max_us": 20606
+          },
+          "main_process": {
+            "count": 8,
+            "median_us": 19262.0,
+            "p95_us": 20663,
+            "mean_us": 18260.375,
+            "max_us": 20663
+          }
+        }
+      }
+    ],
+    "direct": {
+      "world_context": {
+        "count": 24,
+        "median_us": 235.0,
+        "p95_us": 264,
+        "mean_us": 246.66666666666666,
+        "max_us": 438
+      },
+      "camp_scan": {
+        "count": 24,
+        "median_us": 112.0,
+        "p95_us": 132,
+        "mean_us": 114.875,
+        "max_us": 139
+      },
+      "outpost_scan": {
+        "count": 48,
+        "median_us": 54.0,
+        "p95_us": 82,
+        "mean_us": 56.895833333333336,
+        "max_us": 94
+      },
+      "cleanup_query": {
+        "count": 24,
+        "median_us": 103.0,
+        "p95_us": 126,
+        "mean_us": 108.66666666666667,
+        "max_us": 132
+      },
+      "cleanup_refresh": {
+        "count": 24,
+        "median_us": 124.0,
+        "p95_us": 154,
+        "mean_us": 130.91666666666666,
+        "max_us": 178
+      },
+      "hud_world_refresh": {
+        "count": 0
+      },
+      "overview_state": {
+        "count": 24,
+        "median_us": 22.0,
+        "p95_us": 23,
+        "mean_us": 22.625,
+        "max_us": 44
+      },
+      "overview_player": {
+        "count": 24,
+        "median_us": 0.0,
+        "p95_us": 1,
+        "mean_us": 0.5833333333333334,
+        "max_us": 5
+      },
+      "overview_tick": {
+        "count": 0
+      },
+      "overview_draw": {
+        "count": 0
+      },
+      "hud_process": {
+        "count": 0
+      },
+      "game_step": {
+        "count": 0
+      },
+      "main_process": {
+        "count": 0
+      }
+    },
+    "observer": {
+      "count": 128,
+      "median_us": 1.0,
+      "p95_us": 1,
+      "mean_us": 0.7109375,
+      "max_us": 10
+    }
+  },
+  "exploratory-baseline-b": {
+    "checks": 19,
+    "failures": 0,
+    "windows": [
+      {
+        "label": "0",
+        "open": true,
+        "wall": {
+          "count": 8,
+          "median_us": 96425.5,
+          "p95_us": 98280,
+          "mean_us": 95585,
+          "max_us": 98280
+        },
+        "functions": {
+          "world_context": {
+            "count": 2,
+            "median_us": 466.0,
+            "p95_us": 483,
+            "mean_us": 466,
+            "max_us": 483
+          },
+          "camp_scan": {
+            "count": 2,
+            "median_us": 164.5,
+            "p95_us": 177,
+            "mean_us": 164.5,
+            "max_us": 177
+          },
+          "outpost_scan": {
+            "count": 4,
+            "median_us": 69.0,
+            "p95_us": 103,
+            "mean_us": 74.5,
+            "max_us": 103
+          },
+          "cleanup_query": {
+            "count": 2,
+            "median_us": 129.0,
+            "p95_us": 129,
+            "mean_us": 129,
+            "max_us": 129
+          },
+          "cleanup_refresh": {
+            "count": 2,
+            "median_us": 178.5,
+            "p95_us": 179,
+            "mean_us": 178.5,
+            "max_us": 179
+          },
+          "hud_world_refresh": {
+            "count": 0
+          },
+          "overview_state": {
+            "count": 2,
+            "median_us": 42.5,
+            "p95_us": 43,
+            "mean_us": 42.5,
+            "max_us": 43
+          },
+          "overview_player": {
+            "count": 8,
+            "median_us": 2.0,
+            "p95_us": 3,
+            "mean_us": 2.125,
+            "max_us": 3
+          },
+          "overview_tick": {
+            "count": 8,
+            "median_us": 32.0,
+            "p95_us": 563,
+            "mean_us": 159.875,
+            "max_us": 563
+          },
+          "overview_draw": {
+            "count": 8,
+            "median_us": 230.5,
+            "p95_us": 269,
+            "mean_us": 239.25,
+            "max_us": 269
+          },
+          "hud_process": {
+            "count": 8,
+            "median_us": 1364.0,
+            "p95_us": 2062,
+            "mean_us": 1536,
+            "max_us": 2062
+          },
+          "game_step": {
+            "count": 46,
+            "median_us": 3326.5,
+            "p95_us": 3899,
+            "mean_us": 3346.891304347826,
+            "max_us": 5053
+          },
+          "main_process": {
+            "count": 8,
+            "median_us": 20211.0,
+            "p95_us": 21274,
+            "mean_us": 19300.875,
+            "max_us": 21274
+          }
+        },
+        "per_frame_sum": {
+          "world_context": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 483,
+            "mean_us": 116.5,
+            "max_us": 483
+          },
+          "camp_scan": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 177,
+            "mean_us": 41.125,
+            "max_us": 177
+          },
+          "outpost_scan": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 160,
+            "mean_us": 37.25,
+            "max_us": 160
+          },
+          "cleanup_query": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 129,
+            "mean_us": 32.25,
+            "max_us": 129
+          },
+          "cleanup_refresh": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 179,
+            "mean_us": 44.625,
+            "max_us": 179
+          },
+          "hud_world_refresh": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "overview_state": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 43,
+            "mean_us": 10.625,
+            "max_us": 43
+          },
+          "overview_player": {
+            "count": 8,
+            "median_us": 2.0,
+            "p95_us": 3,
+            "mean_us": 2.125,
+            "max_us": 3
+          },
+          "overview_tick": {
+            "count": 8,
+            "median_us": 32.0,
+            "p95_us": 563,
+            "mean_us": 159.875,
+            "max_us": 563
+          },
+          "overview_draw": {
+            "count": 8,
+            "median_us": 230.5,
+            "p95_us": 269,
+            "mean_us": 239.25,
+            "max_us": 269
+          },
+          "hud_process": {
+            "count": 8,
+            "median_us": 1364.0,
+            "p95_us": 2062,
+            "mean_us": 1536,
+            "max_us": 2062
+          },
+          "game_step": {
+            "count": 8,
+            "median_us": 20155.5,
+            "p95_us": 21222,
+            "mean_us": 19244.625,
+            "max_us": 21222
+          },
+          "main_process": {
+            "count": 8,
+            "median_us": 20211.0,
+            "p95_us": 21274,
+            "mean_us": 19300.875,
+            "max_us": 21274
+          }
+        }
+      },
+      {
+        "label": "1",
+        "open": false,
+        "wall": {
+          "count": 8,
+          "median_us": 94040.5,
+          "p95_us": 96830,
+          "mean_us": 93829.75,
+          "max_us": 96830
+        },
+        "functions": {
+          "world_context": {
+            "count": 0
+          },
+          "camp_scan": {
+            "count": 0
+          },
+          "outpost_scan": {
+            "count": 3,
+            "median_us": 79,
+            "p95_us": 80,
+            "mean_us": 79,
+            "max_us": 80
+          },
+          "cleanup_query": {
+            "count": 3,
+            "median_us": 140,
+            "p95_us": 141,
+            "mean_us": 140.33333333333334,
+            "max_us": 141
+          },
+          "cleanup_refresh": {
+            "count": 3,
+            "median_us": 189,
+            "p95_us": 191,
+            "mean_us": 189,
+            "max_us": 191
+          },
+          "hud_world_refresh": {
+            "count": 0
+          },
+          "overview_state": {
+            "count": 0
+          },
+          "overview_player": {
+            "count": 0
+          },
+          "overview_tick": {
+            "count": 8,
+            "median_us": 4.0,
+            "p95_us": 4,
+            "mean_us": 3.625,
+            "max_us": 4
+          },
+          "overview_draw": {
+            "count": 0
+          },
+          "hud_process": {
+            "count": 8,
+            "median_us": 1330.5,
+            "p95_us": 1531,
+            "mean_us": 1352.125,
+            "max_us": 1531
+          },
+          "game_step": {
+            "count": 46,
+            "median_us": 3406.0,
+            "p95_us": 4055,
+            "mean_us": 3490.021739130435,
+            "max_us": 4676
+          },
+          "main_process": {
+            "count": 8,
+            "median_us": 20601.5,
+            "p95_us": 22309,
+            "mean_us": 20122,
+            "max_us": 22309
+          }
+        },
+        "per_frame_sum": {
+          "world_context": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "camp_scan": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "outpost_scan": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 80,
+            "mean_us": 29.625,
+            "max_us": 80
+          },
+          "cleanup_query": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 141,
+            "mean_us": 52.625,
+            "max_us": 141
+          },
+          "cleanup_refresh": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 191,
+            "mean_us": 70.875,
+            "max_us": 191
+          },
+          "hud_world_refresh": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "overview_state": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "overview_player": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "overview_tick": {
+            "count": 8,
+            "median_us": 4.0,
+            "p95_us": 4,
+            "mean_us": 3.625,
+            "max_us": 4
+          },
+          "overview_draw": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "hud_process": {
+            "count": 8,
+            "median_us": 1330.5,
+            "p95_us": 1531,
+            "mean_us": 1352.125,
+            "max_us": 1531
+          },
+          "game_step": {
+            "count": 8,
+            "median_us": 20549.5,
+            "p95_us": 22247,
+            "mean_us": 20067.625,
+            "max_us": 22247
+          },
+          "main_process": {
+            "count": 8,
+            "median_us": 20601.5,
+            "p95_us": 22309,
+            "mean_us": 20122,
+            "max_us": 22309
+          }
+        }
+      },
+      {
+        "label": "2",
+        "open": true,
+        "wall": {
+          "count": 8,
+          "median_us": 96680.0,
+          "p95_us": 97310,
+          "mean_us": 96116.625,
+          "max_us": 97310
+        },
+        "functions": {
+          "world_context": {
+            "count": 2,
+            "median_us": 439.0,
+            "p95_us": 452,
+            "mean_us": 439,
+            "max_us": 452
+          },
+          "camp_scan": {
+            "count": 2,
+            "median_us": 165.0,
+            "p95_us": 178,
+            "mean_us": 165,
+            "max_us": 178
+          },
+          "outpost_scan": {
+            "count": 5,
+            "median_us": 80,
+            "p95_us": 81,
+            "mean_us": 79.6,
+            "max_us": 81
+          },
+          "cleanup_query": {
+            "count": 3,
+            "median_us": 142,
+            "p95_us": 143,
+            "mean_us": 141.33333333333334,
+            "max_us": 143
+          },
+          "cleanup_refresh": {
+            "count": 3,
+            "median_us": 193,
+            "p95_us": 216,
+            "mean_us": 198.66666666666666,
+            "max_us": 216
+          },
+          "hud_world_refresh": {
+            "count": 0
+          },
+          "overview_state": {
+            "count": 2,
+            "median_us": 57.0,
+            "p95_us": 68,
+            "mean_us": 57,
+            "max_us": 68
+          },
+          "overview_player": {
+            "count": 8,
+            "median_us": 2.0,
+            "p95_us": 3,
+            "mean_us": 2.125,
+            "max_us": 3
+          },
+          "overview_tick": {
+            "count": 8,
+            "median_us": 33.0,
+            "p95_us": 533,
+            "mean_us": 156.625,
+            "max_us": 533
+          },
+          "overview_draw": {
+            "count": 8,
+            "median_us": 236.0,
+            "p95_us": 267,
+            "mean_us": 237.375,
+            "max_us": 267
+          },
+          "hud_process": {
+            "count": 8,
+            "median_us": 1524.0,
+            "p95_us": 1880,
+            "mean_us": 1534,
+            "max_us": 1880
+          },
+          "game_step": {
+            "count": 46,
+            "median_us": 3407.0,
+            "p95_us": 4111,
+            "mean_us": 3525.195652173913,
+            "max_us": 4955
+          },
+          "main_process": {
+            "count": 8,
+            "median_us": 20896.0,
+            "p95_us": 21042,
+            "mean_us": 20325,
+            "max_us": 21042
+          }
+        },
+        "per_frame_sum": {
+          "world_context": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 452,
+            "mean_us": 109.75,
+            "max_us": 452
+          },
+          "camp_scan": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 178,
+            "mean_us": 41.25,
+            "max_us": 178
+          },
+          "outpost_scan": {
+            "count": 8,
+            "median_us": 78.5,
+            "p95_us": 81,
+            "mean_us": 49.75,
+            "max_us": 81
+          },
+          "cleanup_query": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 143,
+            "mean_us": 53,
+            "max_us": 143
+          },
+          "cleanup_refresh": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 216,
+            "mean_us": 74.5,
+            "max_us": 216
+          },
+          "hud_world_refresh": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "overview_state": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 68,
+            "mean_us": 14.25,
+            "max_us": 68
+          },
+          "overview_player": {
+            "count": 8,
+            "median_us": 2.0,
+            "p95_us": 3,
+            "mean_us": 2.125,
+            "max_us": 3
+          },
+          "overview_tick": {
+            "count": 8,
+            "median_us": 33.0,
+            "p95_us": 533,
+            "mean_us": 156.625,
+            "max_us": 533
+          },
+          "overview_draw": {
+            "count": 8,
+            "median_us": 236.0,
+            "p95_us": 267,
+            "mean_us": 237.375,
+            "max_us": 267
+          },
+          "hud_process": {
+            "count": 8,
+            "median_us": 1524.0,
+            "p95_us": 1880,
+            "mean_us": 1534,
+            "max_us": 1880
+          },
+          "game_step": {
+            "count": 8,
+            "median_us": 20837.5,
+            "p95_us": 20992,
+            "mean_us": 20269.875,
+            "max_us": 20992
+          },
+          "main_process": {
+            "count": 8,
+            "median_us": 20896.0,
+            "p95_us": 21042,
+            "mean_us": 20325,
+            "max_us": 21042
+          }
+        }
+      },
+      {
+        "label": "3",
+        "open": false,
+        "wall": {
+          "count": 8,
+          "median_us": 89560.0,
+          "p95_us": 92195,
+          "mean_us": 89489.875,
+          "max_us": 92195
+        },
+        "functions": {
+          "world_context": {
+            "count": 0
+          },
+          "camp_scan": {
+            "count": 0
+          },
+          "outpost_scan": {
+            "count": 2,
+            "median_us": 82.5,
+            "p95_us": 83,
+            "mean_us": 82.5,
+            "max_us": 83
+          },
+          "cleanup_query": {
+            "count": 2,
+            "median_us": 146.0,
+            "p95_us": 148,
+            "mean_us": 146,
+            "max_us": 148
+          },
+          "cleanup_refresh": {
+            "count": 2,
+            "median_us": 197.5,
+            "p95_us": 200,
+            "mean_us": 197.5,
+            "max_us": 200
+          },
+          "hud_world_refresh": {
+            "count": 0
+          },
+          "overview_state": {
+            "count": 0
+          },
+          "overview_player": {
+            "count": 0
+          },
+          "overview_tick": {
+            "count": 8,
+            "median_us": 4.0,
+            "p95_us": 4,
+            "mean_us": 3.875,
+            "max_us": 4
+          },
+          "overview_draw": {
+            "count": 0
+          },
+          "hud_process": {
+            "count": 8,
+            "median_us": 1328.0,
+            "p95_us": 1557,
+            "mean_us": 1371.875,
+            "max_us": 1557
+          },
+          "game_step": {
+            "count": 43,
+            "median_us": 3223,
+            "p95_us": 3852,
+            "mean_us": 3343.6976744186045,
+            "max_us": 4774
+          },
+          "main_process": {
+            "count": 8,
+            "median_us": 17288.0,
+            "p95_us": 21277,
+            "mean_us": 18033.125,
+            "max_us": 21277
+          }
+        },
+        "per_frame_sum": {
+          "world_context": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "camp_scan": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "outpost_scan": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 83,
+            "mean_us": 20.625,
+            "max_us": 83
+          },
+          "cleanup_query": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 148,
+            "mean_us": 36.5,
+            "max_us": 148
+          },
+          "cleanup_refresh": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 200,
+            "mean_us": 49.375,
+            "max_us": 200
+          },
+          "hud_world_refresh": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "overview_state": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "overview_player": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "overview_tick": {
+            "count": 8,
+            "median_us": 4.0,
+            "p95_us": 4,
+            "mean_us": 3.875,
+            "max_us": 4
+          },
+          "overview_draw": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "hud_process": {
+            "count": 8,
+            "median_us": 1328.0,
+            "p95_us": 1557,
+            "mean_us": 1371.875,
+            "max_us": 1557
+          },
+          "game_step": {
+            "count": 8,
+            "median_us": 17233.5,
+            "p95_us": 21223,
+            "mean_us": 17972.375,
+            "max_us": 21223
+          },
+          "main_process": {
+            "count": 8,
+            "median_us": 17288.0,
+            "p95_us": 21277,
+            "mean_us": 18033.125,
+            "max_us": 21277
+          }
+        }
+      },
+      {
+        "label": "4",
+        "open": true,
+        "wall": {
+          "count": 8,
+          "median_us": 96973.5,
+          "p95_us": 102679,
+          "mean_us": 97524.125,
+          "max_us": 102679
+        },
+        "functions": {
+          "world_context": {
+            "count": 2,
+            "median_us": 446.0,
+            "p95_us": 461,
+            "mean_us": 446,
+            "max_us": 461
+          },
+          "camp_scan": {
+            "count": 2,
+            "median_us": 167.0,
+            "p95_us": 182,
+            "mean_us": 167,
+            "max_us": 182
+          },
+          "outpost_scan": {
+            "count": 5,
+            "median_us": 79,
+            "p95_us": 82,
+            "mean_us": 80,
+            "max_us": 82
+          },
+          "cleanup_query": {
+            "count": 3,
+            "median_us": 143,
+            "p95_us": 144,
+            "mean_us": 142.66666666666666,
+            "max_us": 144
+          },
+          "cleanup_refresh": {
+            "count": 3,
+            "median_us": 191,
+            "p95_us": 193,
+            "mean_us": 191.33333333333334,
+            "max_us": 193
+          },
+          "hud_world_refresh": {
+            "count": 0
+          },
+          "overview_state": {
+            "count": 2,
+            "median_us": 45.0,
+            "p95_us": 47,
+            "mean_us": 45,
+            "max_us": 47
+          },
+          "overview_player": {
+            "count": 8,
+            "median_us": 2.0,
+            "p95_us": 3,
+            "mean_us": 1.75,
+            "max_us": 3
+          },
+          "overview_tick": {
+            "count": 8,
+            "median_us": 33.5,
+            "p95_us": 546,
+            "mean_us": 156.5,
+            "max_us": 546
+          },
+          "overview_draw": {
+            "count": 8,
+            "median_us": 246.0,
+            "p95_us": 284,
+            "mean_us": 254,
+            "max_us": 284
+          },
+          "hud_process": {
+            "count": 8,
+            "median_us": 1532.0,
+            "p95_us": 2199,
+            "mean_us": 1607.125,
+            "max_us": 2199
+          },
+          "game_step": {
+            "count": 47,
+            "median_us": 3379,
+            "p95_us": 4288,
+            "mean_us": 3519.2340425531916,
+            "max_us": 4564
+          },
+          "main_process": {
+            "count": 8,
+            "median_us": 20931.0,
+            "p95_us": 21862,
+            "mean_us": 20740.375,
+            "max_us": 21862
+          }
+        },
+        "per_frame_sum": {
+          "world_context": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 461,
+            "mean_us": 111.5,
+            "max_us": 461
+          },
+          "camp_scan": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 182,
+            "mean_us": 41.75,
+            "max_us": 182
+          },
+          "outpost_scan": {
+            "count": 8,
+            "median_us": 79.0,
+            "p95_us": 82,
+            "mean_us": 50,
+            "max_us": 82
+          },
+          "cleanup_query": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 144,
+            "mean_us": 53.5,
+            "max_us": 144
+          },
+          "cleanup_refresh": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 193,
+            "mean_us": 71.75,
+            "max_us": 193
+          },
+          "hud_world_refresh": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "overview_state": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 47,
+            "mean_us": 11.25,
+            "max_us": 47
+          },
+          "overview_player": {
+            "count": 8,
+            "median_us": 2.0,
+            "p95_us": 3,
+            "mean_us": 1.75,
+            "max_us": 3
+          },
+          "overview_tick": {
+            "count": 8,
+            "median_us": 33.5,
+            "p95_us": 546,
+            "mean_us": 156.5,
+            "max_us": 546
+          },
+          "overview_draw": {
+            "count": 8,
+            "median_us": 246.0,
+            "p95_us": 284,
+            "mean_us": 254,
+            "max_us": 284
+          },
+          "hud_process": {
+            "count": 8,
+            "median_us": 1532.0,
+            "p95_us": 2199,
+            "mean_us": 1607.125,
+            "max_us": 2199
+          },
+          "game_step": {
+            "count": 8,
+            "median_us": 20871.0,
+            "p95_us": 21793,
+            "mean_us": 20675.5,
+            "max_us": 21793
+          },
+          "main_process": {
+            "count": 8,
+            "median_us": 20931.0,
+            "p95_us": 21862,
+            "mean_us": 20740.375,
+            "max_us": 21862
+          }
+        }
+      },
+      {
+        "label": "5",
+        "open": false,
+        "wall": {
+          "count": 8,
+          "median_us": 92300.0,
+          "p95_us": 95505,
+          "mean_us": 92584.75,
+          "max_us": 95505
+        },
+        "functions": {
+          "world_context": {
+            "count": 0
+          },
+          "camp_scan": {
+            "count": 0
+          },
+          "outpost_scan": {
+            "count": 3,
+            "median_us": 81,
+            "p95_us": 82,
+            "mean_us": 80.66666666666667,
+            "max_us": 82
+          },
+          "cleanup_query": {
+            "count": 3,
+            "median_us": 144,
+            "p95_us": 172,
+            "mean_us": 151.66666666666666,
+            "max_us": 172
+          },
+          "cleanup_refresh": {
+            "count": 3,
+            "median_us": 194,
+            "p95_us": 223,
+            "mean_us": 201,
+            "max_us": 223
+          },
+          "hud_world_refresh": {
+            "count": 0
+          },
+          "overview_state": {
+            "count": 0
+          },
+          "overview_player": {
+            "count": 0
+          },
+          "overview_tick": {
+            "count": 8,
+            "median_us": 4.0,
+            "p95_us": 5,
+            "mean_us": 4,
+            "max_us": 5
+          },
+          "overview_draw": {
+            "count": 0
+          },
+          "hud_process": {
+            "count": 8,
+            "median_us": 1343.0,
+            "p95_us": 1580,
+            "mean_us": 1384.125,
+            "max_us": 1580
+          },
+          "game_step": {
+            "count": 45,
+            "median_us": 3474,
+            "p95_us": 4083,
+            "mean_us": 3615.9777777777776,
+            "max_us": 5078
+          },
+          "main_process": {
+            "count": 8,
+            "median_us": 20863.0,
+            "p95_us": 23030,
+            "mean_us": 20401,
+            "max_us": 23030
+          }
+        },
+        "per_frame_sum": {
+          "world_context": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "camp_scan": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "outpost_scan": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 82,
+            "mean_us": 30.25,
+            "max_us": 82
+          },
+          "cleanup_query": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 172,
+            "mean_us": 56.875,
+            "max_us": 172
+          },
+          "cleanup_refresh": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 223,
+            "mean_us": 75.375,
+            "max_us": 223
+          },
+          "hud_world_refresh": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "overview_state": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "overview_player": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "overview_tick": {
+            "count": 8,
+            "median_us": 4.0,
+            "p95_us": 5,
+            "mean_us": 4,
+            "max_us": 5
+          },
+          "overview_draw": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "hud_process": {
+            "count": 8,
+            "median_us": 1343.0,
+            "p95_us": 1580,
+            "mean_us": 1384.125,
+            "max_us": 1580
+          },
+          "game_step": {
+            "count": 8,
+            "median_us": 20804.0,
+            "p95_us": 22971,
+            "mean_us": 20339.875,
+            "max_us": 22971
+          },
+          "main_process": {
+            "count": 8,
+            "median_us": 20863.0,
+            "p95_us": 23030,
+            "mean_us": 20401,
+            "max_us": 23030
+          }
+        }
+      }
+    ],
+    "direct": {
+      "world_context": {
+        "count": 24,
+        "median_us": 226.0,
+        "p95_us": 305,
+        "mean_us": 240.16666666666666,
+        "max_us": 375
+      },
+      "camp_scan": {
+        "count": 24,
+        "median_us": 105.0,
+        "p95_us": 139,
+        "mean_us": 110.20833333333333,
+        "max_us": 152
+      },
+      "outpost_scan": {
+        "count": 48,
+        "median_us": 52.0,
+        "p95_us": 76,
+        "mean_us": 54.354166666666664,
+        "max_us": 85
+      },
+      "cleanup_query": {
+        "count": 24,
+        "median_us": 100.0,
+        "p95_us": 126,
+        "mean_us": 103.95833333333333,
+        "max_us": 166
+      },
+      "cleanup_refresh": {
+        "count": 24,
+        "median_us": 121.0,
+        "p95_us": 147,
+        "mean_us": 128.04166666666666,
+        "max_us": 218
+      },
+      "hud_world_refresh": {
+        "count": 0
+      },
+      "overview_state": {
+        "count": 24,
+        "median_us": 21.0,
+        "p95_us": 24,
+        "mean_us": 24.333333333333332,
+        "max_us": 98
+      },
+      "overview_player": {
+        "count": 24,
+        "median_us": 0.5,
+        "p95_us": 1,
+        "mean_us": 0.6666666666666666,
+        "max_us": 5
+      },
+      "overview_tick": {
+        "count": 0
+      },
+      "overview_draw": {
+        "count": 0
+      },
+      "hud_process": {
+        "count": 0
+      },
+      "game_step": {
+        "count": 0
+      },
+      "main_process": {
+        "count": 0
+      }
+    },
+    "observer": {
+      "count": 128,
+      "median_us": 1.0,
+      "p95_us": 1,
+      "mean_us": 0.671875,
+      "max_us": 9
+    }
+  },
+  "exploratory-optimized-a": {
+    "checks": 19,
+    "failures": 0,
+    "windows": [
+      {
+        "label": "0",
+        "open": false,
+        "wall": {
+          "count": 8,
+          "median_us": 92892.5,
+          "p95_us": 111307,
+          "mean_us": 94602.125,
+          "max_us": 111307
+        },
+        "functions": {
+          "world_context": {
+            "count": 0
+          },
+          "camp_scan": {
+            "count": 0
+          },
+          "outpost_scan": {
+            "count": 3,
+            "median_us": 82,
+            "p95_us": 129,
+            "mean_us": 96.66666666666667,
+            "max_us": 129
+          },
+          "cleanup_query": {
+            "count": 3,
+            "median_us": 178,
+            "p95_us": 190,
+            "mean_us": 176,
+            "max_us": 190
+          },
+          "cleanup_refresh": {
+            "count": 3,
+            "median_us": 232,
+            "p95_us": 241,
+            "mean_us": 227,
+            "max_us": 241
+          },
+          "hud_world_refresh": {
+            "count": 0
+          },
+          "overview_state": {
+            "count": 0
+          },
+          "overview_player": {
+            "count": 0
+          },
+          "overview_tick": {
+            "count": 8,
+            "median_us": 3.5,
+            "p95_us": 4,
+            "mean_us": 3.5,
+            "max_us": 4
+          },
+          "overview_draw": {
+            "count": 0
+          },
+          "hud_process": {
+            "count": 8,
+            "median_us": 1373.5,
+            "p95_us": 1604,
+            "mean_us": 1420.75,
+            "max_us": 1604
+          },
+          "game_step": {
+            "count": 46,
+            "median_us": 3103.0,
+            "p95_us": 3713,
+            "mean_us": 3202.1304347826085,
+            "max_us": 4131
+          },
+          "main_process": {
+            "count": 8,
+            "median_us": 19129.0,
+            "p95_us": 20618,
+            "mean_us": 18471.5,
+            "max_us": 20618
+          }
+        },
+        "per_frame_sum": {
+          "world_context": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "camp_scan": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "outpost_scan": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 129,
+            "mean_us": 36.25,
+            "max_us": 129
+          },
+          "cleanup_query": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 190,
+            "mean_us": 66,
+            "max_us": 190
+          },
+          "cleanup_refresh": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 241,
+            "mean_us": 85.125,
+            "max_us": 241
+          },
+          "hud_world_refresh": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "overview_state": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "overview_player": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "overview_tick": {
+            "count": 8,
+            "median_us": 3.5,
+            "p95_us": 4,
+            "mean_us": 3.5,
+            "max_us": 4
+          },
+          "overview_draw": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "hud_process": {
+            "count": 8,
+            "median_us": 1373.5,
+            "p95_us": 1604,
+            "mean_us": 1420.75,
+            "max_us": 1604
+          },
+          "game_step": {
+            "count": 8,
+            "median_us": 19059.5,
+            "p95_us": 20561,
+            "mean_us": 18412.25,
+            "max_us": 20561
+          },
+          "main_process": {
+            "count": 8,
+            "median_us": 19129.0,
+            "p95_us": 20618,
+            "mean_us": 18471.5,
+            "max_us": 20618
+          }
+        }
+      },
+      {
+        "label": "1",
+        "open": true,
+        "wall": {
+          "count": 8,
+          "median_us": 98061.0,
+          "p95_us": 111885,
+          "mean_us": 99401.625,
+          "max_us": 111885
+        },
+        "functions": {
+          "world_context": {
+            "count": 4,
+            "median_us": 378.0,
+            "p95_us": 784,
+            "mean_us": 475.75,
+            "max_us": 784
+          },
+          "camp_scan": {
+            "count": 4,
+            "median_us": 103.0,
+            "p95_us": 134,
+            "mean_us": 107.5,
+            "max_us": 134
+          },
+          "outpost_scan": {
+            "count": 7,
+            "median_us": 80,
+            "p95_us": 206,
+            "mean_us": 103.14285714285714,
+            "max_us": 206
+          },
+          "cleanup_query": {
+            "count": 3,
+            "median_us": 144,
+            "p95_us": 173,
+            "mean_us": 152.33333333333334,
+            "max_us": 173
+          },
+          "cleanup_refresh": {
+            "count": 3,
+            "median_us": 193,
+            "p95_us": 224,
+            "mean_us": 201.66666666666666,
+            "max_us": 224
+          },
+          "hud_world_refresh": {
+            "count": 0
+          },
+          "overview_state": {
+            "count": 4,
+            "median_us": 50.0,
+            "p95_us": 76,
+            "mean_us": 55.25,
+            "max_us": 76
+          },
+          "overview_player": {
+            "count": 8,
+            "median_us": 2.0,
+            "p95_us": 3,
+            "mean_us": 2.125,
+            "max_us": 3
+          },
+          "overview_tick": {
+            "count": 8,
+            "median_us": 243.0,
+            "p95_us": 889,
+            "mean_us": 302.75,
+            "max_us": 889
+          },
+          "overview_draw": {
+            "count": 8,
+            "median_us": 246.0,
+            "p95_us": 335,
+            "mean_us": 259.5,
+            "max_us": 335
+          },
+          "hud_process": {
+            "count": 8,
+            "median_us": 1680.5,
+            "p95_us": 2787,
+            "mean_us": 1768.625,
+            "max_us": 2787
+          },
+          "game_step": {
+            "count": 49,
+            "median_us": 3204,
+            "p95_us": 4674,
+            "mean_us": 3368.714285714286,
+            "max_us": 5683
+          },
+          "main_process": {
+            "count": 8,
+            "median_us": 20813.0,
+            "p95_us": 23325,
+            "mean_us": 20714.125,
+            "max_us": 23325
+          }
+        },
+        "per_frame_sum": {
+          "world_context": {
+            "count": 8,
+            "median_us": 181.5,
+            "p95_us": 784,
+            "mean_us": 237.875,
+            "max_us": 784
+          },
+          "camp_scan": {
+            "count": 8,
+            "median_us": 45.0,
+            "p95_us": 134,
+            "mean_us": 53.75,
+            "max_us": 134
+          },
+          "outpost_scan": {
+            "count": 8,
+            "median_us": 80.0,
+            "p95_us": 206,
+            "mean_us": 90.25,
+            "max_us": 206
+          },
+          "cleanup_query": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 173,
+            "mean_us": 57.125,
+            "max_us": 173
+          },
+          "cleanup_refresh": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 224,
+            "mean_us": 75.625,
+            "max_us": 224
+          },
+          "hud_world_refresh": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "overview_state": {
+            "count": 8,
+            "median_us": 22.5,
+            "p95_us": 76,
+            "mean_us": 27.625,
+            "max_us": 76
+          },
+          "overview_player": {
+            "count": 8,
+            "median_us": 2.0,
+            "p95_us": 3,
+            "mean_us": 2.125,
+            "max_us": 3
+          },
+          "overview_tick": {
+            "count": 8,
+            "median_us": 243.0,
+            "p95_us": 889,
+            "mean_us": 302.75,
+            "max_us": 889
+          },
+          "overview_draw": {
+            "count": 8,
+            "median_us": 246.0,
+            "p95_us": 335,
+            "mean_us": 259.5,
+            "max_us": 335
+          },
+          "hud_process": {
+            "count": 8,
+            "median_us": 1680.5,
+            "p95_us": 2787,
+            "mean_us": 1768.625,
+            "max_us": 2787
+          },
+          "game_step": {
+            "count": 8,
+            "median_us": 20761.5,
+            "p95_us": 23266,
+            "mean_us": 20633.375,
+            "max_us": 23266
+          },
+          "main_process": {
+            "count": 8,
+            "median_us": 20813.0,
+            "p95_us": 23325,
+            "mean_us": 20714.125,
+            "max_us": 23325
+          }
+        }
+      },
+      {
+        "label": "2",
+        "open": false,
+        "wall": {
+          "count": 8,
+          "median_us": 93205.5,
+          "p95_us": 102494,
+          "mean_us": 94401.375,
+          "max_us": 102494
+        },
+        "functions": {
+          "world_context": {
+            "count": 0
+          },
+          "camp_scan": {
+            "count": 0
+          },
+          "outpost_scan": {
+            "count": 3,
+            "median_us": 83,
+            "p95_us": 87,
+            "mean_us": 83.33333333333333,
+            "max_us": 87
+          },
+          "cleanup_query": {
+            "count": 3,
+            "median_us": 145,
+            "p95_us": 173,
+            "mean_us": 152.66666666666666,
+            "max_us": 173
+          },
+          "cleanup_refresh": {
+            "count": 3,
+            "median_us": 198,
+            "p95_us": 225,
+            "mean_us": 205,
+            "max_us": 225
+          },
+          "hud_world_refresh": {
+            "count": 0
+          },
+          "overview_state": {
+            "count": 0
+          },
+          "overview_player": {
+            "count": 0
+          },
+          "overview_tick": {
+            "count": 8,
+            "median_us": 4.0,
+            "p95_us": 5,
+            "mean_us": 3.875,
+            "max_us": 5
+          },
+          "overview_draw": {
+            "count": 0
+          },
+          "hud_process": {
+            "count": 8,
+            "median_us": 1536.5,
+            "p95_us": 1706,
+            "mean_us": 1539.25,
+            "max_us": 1706
+          },
+          "game_step": {
+            "count": 45,
+            "median_us": 3333,
+            "p95_us": 4074,
+            "mean_us": 3451.911111111111,
+            "max_us": 4227
+          },
+          "main_process": {
+            "count": 8,
+            "median_us": 19918.5,
+            "p95_us": 22111,
+            "mean_us": 19481.125,
+            "max_us": 22111
+          }
+        },
+        "per_frame_sum": {
+          "world_context": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "camp_scan": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "outpost_scan": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 87,
+            "mean_us": 31.25,
+            "max_us": 87
+          },
+          "cleanup_query": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 173,
+            "mean_us": 57.25,
+            "max_us": 173
+          },
+          "cleanup_refresh": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 225,
+            "mean_us": 76.875,
+            "max_us": 225
+          },
+          "hud_world_refresh": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "overview_state": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "overview_player": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "overview_tick": {
+            "count": 8,
+            "median_us": 4.0,
+            "p95_us": 5,
+            "mean_us": 3.875,
+            "max_us": 5
+          },
+          "overview_draw": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "hud_process": {
+            "count": 8,
+            "median_us": 1536.5,
+            "p95_us": 1706,
+            "mean_us": 1539.25,
+            "max_us": 1706
+          },
+          "game_step": {
+            "count": 8,
+            "median_us": 19859.5,
+            "p95_us": 22016,
+            "mean_us": 19417,
+            "max_us": 22016
+          },
+          "main_process": {
+            "count": 8,
+            "median_us": 19918.5,
+            "p95_us": 22111,
+            "mean_us": 19481.125,
+            "max_us": 22111
+          }
+        }
+      },
+      {
+        "label": "3",
+        "open": true,
+        "wall": {
+          "count": 8,
+          "median_us": 103300.5,
+          "p95_us": 107918,
+          "mean_us": 102862.875,
+          "max_us": 107918
+        },
+        "functions": {
+          "world_context": {
+            "count": 4,
+            "median_us": 380.0,
+            "p95_us": 402,
+            "mean_us": 384.5,
+            "max_us": 402
+          },
+          "camp_scan": {
+            "count": 4,
+            "median_us": 93.0,
+            "p95_us": 94,
+            "mean_us": 92.25,
+            "max_us": 94
+          },
+          "outpost_scan": {
+            "count": 8,
+            "median_us": 79.5,
+            "p95_us": 87,
+            "mean_us": 72.375,
+            "max_us": 87
+          },
+          "cleanup_query": {
+            "count": 4,
+            "median_us": 130.5,
+            "p95_us": 161,
+            "mean_us": 137.25,
+            "max_us": 161
+          },
+          "cleanup_refresh": {
+            "count": 4,
+            "median_us": 183.0,
+            "p95_us": 214,
+            "mean_us": 189.5,
+            "max_us": 214
+          },
+          "hud_world_refresh": {
+            "count": 0
+          },
+          "overview_state": {
+            "count": 4,
+            "median_us": 51.5,
+            "p95_us": 52,
+            "mean_us": 50.5,
+            "max_us": 52
+          },
+          "overview_player": {
+            "count": 8,
+            "median_us": 2.0,
+            "p95_us": 3,
+            "mean_us": 1.75,
+            "max_us": 3
+          },
+          "overview_tick": {
+            "count": 8,
+            "median_us": 249.0,
+            "p95_us": 494,
+            "mean_us": 253.875,
+            "max_us": 494
+          },
+          "overview_draw": {
+            "count": 8,
+            "median_us": 247.0,
+            "p95_us": 296,
+            "mean_us": 259.625,
+            "max_us": 296
+          },
+          "hud_process": {
+            "count": 8,
+            "median_us": 1704.0,
+            "p95_us": 2037,
+            "mean_us": 1688.5,
+            "max_us": 2037
+          },
+          "game_step": {
+            "count": 51,
+            "median_us": 3314,
+            "p95_us": 4111,
+            "mean_us": 3437.4901960784314,
+            "max_us": 4658
+          },
+          "main_process": {
+            "count": 8,
+            "median_us": 21659.0,
+            "p95_us": 24174,
+            "mean_us": 21989.875,
+            "max_us": 24174
+          }
+        },
+        "per_frame_sum": {
+          "world_context": {
+            "count": 8,
+            "median_us": 188.0,
+            "p95_us": 402,
+            "mean_us": 192.25,
+            "max_us": 402
+          },
+          "camp_scan": {
+            "count": 8,
+            "median_us": 44.5,
+            "p95_us": 94,
+            "mean_us": 46.125,
+            "max_us": 94
+          },
+          "outpost_scan": {
+            "count": 8,
+            "median_us": 67.5,
+            "p95_us": 169,
+            "mean_us": 72.375,
+            "max_us": 169
+          },
+          "cleanup_query": {
+            "count": 8,
+            "median_us": 63.5,
+            "p95_us": 161,
+            "mean_us": 68.625,
+            "max_us": 161
+          },
+          "cleanup_refresh": {
+            "count": 8,
+            "median_us": 89.0,
+            "p95_us": 214,
+            "mean_us": 94.75,
+            "max_us": 214
+          },
+          "hud_world_refresh": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "overview_state": {
+            "count": 8,
+            "median_us": 23.5,
+            "p95_us": 52,
+            "mean_us": 25.25,
+            "max_us": 52
+          },
+          "overview_player": {
+            "count": 8,
+            "median_us": 2.0,
+            "p95_us": 3,
+            "mean_us": 1.75,
+            "max_us": 3
+          },
+          "overview_tick": {
+            "count": 8,
+            "median_us": 249.0,
+            "p95_us": 494,
+            "mean_us": 253.875,
+            "max_us": 494
+          },
+          "overview_draw": {
+            "count": 8,
+            "median_us": 247.0,
+            "p95_us": 296,
+            "mean_us": 259.625,
+            "max_us": 296
+          },
+          "hud_process": {
+            "count": 8,
+            "median_us": 1704.0,
+            "p95_us": 2037,
+            "mean_us": 1688.5,
+            "max_us": 2037
+          },
+          "game_step": {
+            "count": 8,
+            "median_us": 21582.0,
+            "p95_us": 24048,
+            "mean_us": 21914,
+            "max_us": 24048
+          },
+          "main_process": {
+            "count": 8,
+            "median_us": 21659.0,
+            "p95_us": 24174,
+            "mean_us": 21989.875,
+            "max_us": 24174
+          }
+        }
+      },
+      {
+        "label": "4",
+        "open": false,
+        "wall": {
+          "count": 8,
+          "median_us": 96830.5,
+          "p95_us": 100161,
+          "mean_us": 96581,
+          "max_us": 100161
+        },
+        "functions": {
+          "world_context": {
+            "count": 0
+          },
+          "camp_scan": {
+            "count": 0
+          },
+          "outpost_scan": {
+            "count": 3,
+            "median_us": 82,
+            "p95_us": 84,
+            "mean_us": 81.66666666666667,
+            "max_us": 84
+          },
+          "cleanup_query": {
+            "count": 3,
+            "median_us": 141,
+            "p95_us": 147,
+            "mean_us": 142,
+            "max_us": 147
+          },
+          "cleanup_refresh": {
+            "count": 3,
+            "median_us": 190,
+            "p95_us": 196,
+            "mean_us": 190,
+            "max_us": 196
+          },
+          "hud_world_refresh": {
+            "count": 0
+          },
+          "overview_state": {
+            "count": 0
+          },
+          "overview_player": {
+            "count": 0
+          },
+          "overview_tick": {
+            "count": 8,
+            "median_us": 3.5,
+            "p95_us": 5,
+            "mean_us": 3.625,
+            "max_us": 5
+          },
+          "overview_draw": {
+            "count": 0
+          },
+          "hud_process": {
+            "count": 8,
+            "median_us": 1391.5,
+            "p95_us": 1866,
+            "mean_us": 1450.125,
+            "max_us": 1866
+          },
+          "game_step": {
+            "count": 46,
+            "median_us": 3325.5,
+            "p95_us": 4157,
+            "mean_us": 3431.5,
+            "max_us": 4453
+          },
+          "main_process": {
+            "count": 8,
+            "median_us": 20087.5,
+            "p95_us": 21716,
+            "mean_us": 19791.125,
+            "max_us": 21716
+          }
+        },
+        "per_frame_sum": {
+          "world_context": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "camp_scan": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "outpost_scan": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 84,
+            "mean_us": 30.625,
+            "max_us": 84
+          },
+          "cleanup_query": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 147,
+            "mean_us": 53.25,
+            "max_us": 147
+          },
+          "cleanup_refresh": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 196,
+            "mean_us": 71.25,
+            "max_us": 196
+          },
+          "hud_world_refresh": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "overview_state": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "overview_player": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "overview_tick": {
+            "count": 8,
+            "median_us": 3.5,
+            "p95_us": 5,
+            "mean_us": 3.625,
+            "max_us": 5
+          },
+          "overview_draw": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "hud_process": {
+            "count": 8,
+            "median_us": 1391.5,
+            "p95_us": 1866,
+            "mean_us": 1450.125,
+            "max_us": 1866
+          },
+          "game_step": {
+            "count": 8,
+            "median_us": 20022.5,
+            "p95_us": 21658,
+            "mean_us": 19731.125,
+            "max_us": 21658
+          },
+          "main_process": {
+            "count": 8,
+            "median_us": 20087.5,
+            "p95_us": 21716,
+            "mean_us": 19791.125,
+            "max_us": 21716
+          }
+        }
+      },
+      {
+        "label": "5",
+        "open": true,
+        "wall": {
+          "count": 8,
+          "median_us": 99921.5,
+          "p95_us": 105693,
+          "mean_us": 100735.75,
+          "max_us": 105693
+        },
+        "functions": {
+          "world_context": {
+            "count": 3,
+            "median_us": 390,
+            "p95_us": 492,
+            "mean_us": 416,
+            "max_us": 492
+          },
+          "camp_scan": {
+            "count": 3,
+            "median_us": 91,
+            "p95_us": 94,
+            "mean_us": 91,
+            "max_us": 94
+          },
+          "outpost_scan": {
+            "count": 6,
+            "median_us": 67.0,
+            "p95_us": 120,
+            "mean_us": 78.83333333333333,
+            "max_us": 120
+          },
+          "cleanup_query": {
+            "count": 3,
+            "median_us": 128,
+            "p95_us": 168,
+            "mean_us": 141,
+            "max_us": 168
+          },
+          "cleanup_refresh": {
+            "count": 3,
+            "median_us": 177,
+            "p95_us": 223,
+            "mean_us": 191.33333333333334,
+            "max_us": 223
+          },
+          "hud_world_refresh": {
+            "count": 0
+          },
+          "overview_state": {
+            "count": 3,
+            "median_us": 45,
+            "p95_us": 61,
+            "mean_us": 49,
+            "max_us": 61
+          },
+          "overview_player": {
+            "count": 8,
+            "median_us": 2.0,
+            "p95_us": 3,
+            "mean_us": 2,
+            "max_us": 3
+          },
+          "overview_tick": {
+            "count": 8,
+            "median_us": 64.5,
+            "p95_us": 656,
+            "mean_us": 223.875,
+            "max_us": 656
+          },
+          "overview_draw": {
+            "count": 8,
+            "median_us": 257.5,
+            "p95_us": 290,
+            "mean_us": 259.125,
+            "max_us": 290
+          },
+          "hud_process": {
+            "count": 8,
+            "median_us": 1730.0,
+            "p95_us": 2426,
+            "mean_us": 1744.125,
+            "max_us": 2426
+          },
+          "game_step": {
+            "count": 47,
+            "median_us": 3291,
+            "p95_us": 4024,
+            "mean_us": 3398.1702127659573,
+            "max_us": 4153
+          },
+          "main_process": {
+            "count": 8,
+            "median_us": 20532.5,
+            "p95_us": 21103,
+            "mean_us": 20021.25,
+            "max_us": 21103
+          }
+        },
+        "per_frame_sum": {
+          "world_context": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 492,
+            "mean_us": 156,
+            "max_us": 492
+          },
+          "camp_scan": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 94,
+            "mean_us": 34.125,
+            "max_us": 94
+          },
+          "outpost_scan": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 177,
+            "mean_us": 59.125,
+            "max_us": 177
+          },
+          "cleanup_query": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 168,
+            "mean_us": 52.875,
+            "max_us": 168
+          },
+          "cleanup_refresh": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 223,
+            "mean_us": 71.75,
+            "max_us": 223
+          },
+          "hud_world_refresh": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "overview_state": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 61,
+            "mean_us": 18.375,
+            "max_us": 61
+          },
+          "overview_player": {
+            "count": 8,
+            "median_us": 2.0,
+            "p95_us": 3,
+            "mean_us": 2,
+            "max_us": 3
+          },
+          "overview_tick": {
+            "count": 8,
+            "median_us": 64.5,
+            "p95_us": 656,
+            "mean_us": 223.875,
+            "max_us": 656
+          },
+          "overview_draw": {
+            "count": 8,
+            "median_us": 257.5,
+            "p95_us": 290,
+            "mean_us": 259.125,
+            "max_us": 290
+          },
+          "hud_process": {
+            "count": 8,
+            "median_us": 1730.0,
+            "p95_us": 2426,
+            "mean_us": 1744.125,
+            "max_us": 2426
+          },
+          "game_step": {
+            "count": 8,
+            "median_us": 20474.0,
+            "p95_us": 21046,
+            "mean_us": 19964.25,
+            "max_us": 21046
+          },
+          "main_process": {
+            "count": 8,
+            "median_us": 20532.5,
+            "p95_us": 21103,
+            "mean_us": 20021.25,
+            "max_us": 21103
+          }
+        }
+      }
+    ],
+    "direct": {
+      "world_context": {
+        "count": 24,
+        "median_us": 178.0,
+        "p95_us": 242,
+        "mean_us": 193.58333333333334,
+        "max_us": 321
+      },
+      "camp_scan": {
+        "count": 24,
+        "median_us": 52.0,
+        "p95_us": 82,
+        "mean_us": 56.083333333333336,
+        "max_us": 86
+      },
+      "outpost_scan": {
+        "count": 48,
+        "median_us": 55.0,
+        "p95_us": 74,
+        "mean_us": 56.520833333333336,
+        "max_us": 76
+      },
+      "cleanup_query": {
+        "count": 24,
+        "median_us": 105.5,
+        "p95_us": 142,
+        "mean_us": 112,
+        "max_us": 155
+      },
+      "cleanup_refresh": {
+        "count": 24,
+        "median_us": 127.0,
+        "p95_us": 164,
+        "mean_us": 135.75,
+        "max_us": 207
+      },
+      "hud_world_refresh": {
+        "count": 0
+      },
+      "overview_state": {
+        "count": 24,
+        "median_us": 22.0,
+        "p95_us": 23,
+        "mean_us": 22.958333333333332,
+        "max_us": 43
+      },
+      "overview_player": {
+        "count": 24,
+        "median_us": 1.0,
+        "p95_us": 1,
+        "mean_us": 0.75,
+        "max_us": 6
+      },
+      "overview_tick": {
+        "count": 0
+      },
+      "overview_draw": {
+        "count": 0
+      },
+      "hud_process": {
+        "count": 0
+      },
+      "game_step": {
+        "count": 0
+      },
+      "main_process": {
+        "count": 0
+      }
+    },
+    "observer": {
+      "count": 128,
+      "median_us": 1.0,
+      "p95_us": 1,
+      "mean_us": 0.8125,
+      "max_us": 9
+    }
+  },
+  "exploratory-optimized-b": {
+    "checks": 19,
+    "failures": 0,
+    "windows": [
+      {
+        "label": "0",
+        "open": true,
+        "wall": {
+          "count": 8,
+          "median_us": 95340.5,
+          "p95_us": 98507,
+          "mean_us": 95749.25,
+          "max_us": 98507
+        },
+        "functions": {
+          "world_context": {
+            "count": 2,
+            "median_us": 399.5,
+            "p95_us": 414,
+            "mean_us": 399.5,
+            "max_us": 414
+          },
+          "camp_scan": {
+            "count": 2,
+            "median_us": 92.5,
+            "p95_us": 93,
+            "mean_us": 92.5,
+            "max_us": 93
+          },
+          "outpost_scan": {
+            "count": 4,
+            "median_us": 68.5,
+            "p95_us": 84,
+            "mean_us": 69.5,
+            "max_us": 84
+          },
+          "cleanup_query": {
+            "count": 2,
+            "median_us": 130.5,
+            "p95_us": 131,
+            "mean_us": 130.5,
+            "max_us": 131
+          },
+          "cleanup_refresh": {
+            "count": 2,
+            "median_us": 179.0,
+            "p95_us": 180,
+            "mean_us": 179,
+            "max_us": 180
+          },
+          "hud_world_refresh": {
+            "count": 0
+          },
+          "overview_state": {
+            "count": 2,
+            "median_us": 45.0,
+            "p95_us": 46,
+            "mean_us": 45,
+            "max_us": 46
+          },
+          "overview_player": {
+            "count": 8,
+            "median_us": 1.5,
+            "p95_us": 2,
+            "mean_us": 1.5,
+            "max_us": 2
+          },
+          "overview_tick": {
+            "count": 8,
+            "median_us": 31.5,
+            "p95_us": 495,
+            "mean_us": 144.125,
+            "max_us": 495
+          },
+          "overview_draw": {
+            "count": 8,
+            "median_us": 250.5,
+            "p95_us": 275,
+            "mean_us": 251.25,
+            "max_us": 275
+          },
+          "hud_process": {
+            "count": 8,
+            "median_us": 1393.0,
+            "p95_us": 2059,
+            "mean_us": 1531,
+            "max_us": 2059
+          },
+          "game_step": {
+            "count": 46,
+            "median_us": 3169.0,
+            "p95_us": 3726,
+            "mean_us": 3269.5434782608695,
+            "max_us": 5167
+          },
+          "main_process": {
+            "count": 8,
+            "median_us": 18894.0,
+            "p95_us": 20670,
+            "mean_us": 18856.625,
+            "max_us": 20670
+          }
+        },
+        "per_frame_sum": {
+          "world_context": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 414,
+            "mean_us": 99.875,
+            "max_us": 414
+          },
+          "camp_scan": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 93,
+            "mean_us": 23.125,
+            "max_us": 93
+          },
+          "outpost_scan": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 141,
+            "mean_us": 34.75,
+            "max_us": 141
+          },
+          "cleanup_query": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 131,
+            "mean_us": 32.625,
+            "max_us": 131
+          },
+          "cleanup_refresh": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 180,
+            "mean_us": 44.75,
+            "max_us": 180
+          },
+          "hud_world_refresh": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "overview_state": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 46,
+            "mean_us": 11.25,
+            "max_us": 46
+          },
+          "overview_player": {
+            "count": 8,
+            "median_us": 1.5,
+            "p95_us": 2,
+            "mean_us": 1.5,
+            "max_us": 2
+          },
+          "overview_tick": {
+            "count": 8,
+            "median_us": 31.5,
+            "p95_us": 495,
+            "mean_us": 144.125,
+            "max_us": 495
+          },
+          "overview_draw": {
+            "count": 8,
+            "median_us": 250.5,
+            "p95_us": 275,
+            "mean_us": 251.25,
+            "max_us": 275
+          },
+          "hud_process": {
+            "count": 8,
+            "median_us": 1393.0,
+            "p95_us": 2059,
+            "mean_us": 1531,
+            "max_us": 2059
+          },
+          "game_step": {
+            "count": 8,
+            "median_us": 18833.5,
+            "p95_us": 20610,
+            "mean_us": 18799.875,
+            "max_us": 20610
+          },
+          "main_process": {
+            "count": 8,
+            "median_us": 18894.0,
+            "p95_us": 20670,
+            "mean_us": 18856.625,
+            "max_us": 20670
+          }
+        }
+      },
+      {
+        "label": "1",
+        "open": false,
+        "wall": {
+          "count": 8,
+          "median_us": 93854.5,
+          "p95_us": 98700,
+          "mean_us": 93990.25,
+          "max_us": 98700
+        },
+        "functions": {
+          "world_context": {
+            "count": 0
+          },
+          "camp_scan": {
+            "count": 0
+          },
+          "outpost_scan": {
+            "count": 3,
+            "median_us": 82,
+            "p95_us": 83,
+            "mean_us": 81.33333333333333,
+            "max_us": 83
+          },
+          "cleanup_query": {
+            "count": 3,
+            "median_us": 145,
+            "p95_us": 145,
+            "mean_us": 143.33333333333334,
+            "max_us": 145
+          },
+          "cleanup_refresh": {
+            "count": 3,
+            "median_us": 197,
+            "p95_us": 217,
+            "mean_us": 203.66666666666666,
+            "max_us": 217
+          },
+          "hud_world_refresh": {
+            "count": 0
+          },
+          "overview_state": {
+            "count": 0
+          },
+          "overview_player": {
+            "count": 0
+          },
+          "overview_tick": {
+            "count": 8,
+            "median_us": 4.0,
+            "p95_us": 5,
+            "mean_us": 4.125,
+            "max_us": 5
+          },
+          "overview_draw": {
+            "count": 0
+          },
+          "hud_process": {
+            "count": 8,
+            "median_us": 1372.5,
+            "p95_us": 1550,
+            "mean_us": 1395,
+            "max_us": 1550
+          },
+          "game_step": {
+            "count": 45,
+            "median_us": 3210,
+            "p95_us": 3961,
+            "mean_us": 3332.6444444444446,
+            "max_us": 4648
+          },
+          "main_process": {
+            "count": 8,
+            "median_us": 19365.0,
+            "p95_us": 21198,
+            "mean_us": 18807.875,
+            "max_us": 21198
+          }
+        },
+        "per_frame_sum": {
+          "world_context": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "camp_scan": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "outpost_scan": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 83,
+            "mean_us": 30.5,
+            "max_us": 83
+          },
+          "cleanup_query": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 145,
+            "mean_us": 53.75,
+            "max_us": 145
+          },
+          "cleanup_refresh": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 217,
+            "mean_us": 76.375,
+            "max_us": 217
+          },
+          "hud_world_refresh": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "overview_state": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "overview_player": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "overview_tick": {
+            "count": 8,
+            "median_us": 4.0,
+            "p95_us": 5,
+            "mean_us": 4.125,
+            "max_us": 5
+          },
+          "overview_draw": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "hud_process": {
+            "count": 8,
+            "median_us": 1372.5,
+            "p95_us": 1550,
+            "mean_us": 1395,
+            "max_us": 1550
+          },
+          "game_step": {
+            "count": 8,
+            "median_us": 19304.0,
+            "p95_us": 21112,
+            "mean_us": 18746.125,
+            "max_us": 21112
+          },
+          "main_process": {
+            "count": 8,
+            "median_us": 19365.0,
+            "p95_us": 21198,
+            "mean_us": 18807.875,
+            "max_us": 21198
+          }
+        }
+      },
+      {
+        "label": "2",
+        "open": true,
+        "wall": {
+          "count": 8,
+          "median_us": 96417.5,
+          "p95_us": 98985,
+          "mean_us": 96402.125,
+          "max_us": 98985
+        },
+        "functions": {
+          "world_context": {
+            "count": 2,
+            "median_us": 420.5,
+            "p95_us": 426,
+            "mean_us": 420.5,
+            "max_us": 426
+          },
+          "camp_scan": {
+            "count": 2,
+            "median_us": 108.5,
+            "p95_us": 123,
+            "mean_us": 108.5,
+            "max_us": 123
+          },
+          "outpost_scan": {
+            "count": 5,
+            "median_us": 82,
+            "p95_us": 83,
+            "mean_us": 81.4,
+            "max_us": 83
+          },
+          "cleanup_query": {
+            "count": 3,
+            "median_us": 144,
+            "p95_us": 144,
+            "mean_us": 143.66666666666666,
+            "max_us": 144
+          },
+          "cleanup_refresh": {
+            "count": 3,
+            "median_us": 195,
+            "p95_us": 196,
+            "mean_us": 194.33333333333334,
+            "max_us": 196
+          },
+          "hud_world_refresh": {
+            "count": 0
+          },
+          "overview_state": {
+            "count": 2,
+            "median_us": 53.0,
+            "p95_us": 56,
+            "mean_us": 53,
+            "max_us": 56
+          },
+          "overview_player": {
+            "count": 8,
+            "median_us": 2.0,
+            "p95_us": 3,
+            "mean_us": 2.25,
+            "max_us": 3
+          },
+          "overview_tick": {
+            "count": 8,
+            "median_us": 35.0,
+            "p95_us": 525,
+            "mean_us": 154.375,
+            "max_us": 525
+          },
+          "overview_draw": {
+            "count": 8,
+            "median_us": 263.5,
+            "p95_us": 291,
+            "mean_us": 262.125,
+            "max_us": 291
+          },
+          "hud_process": {
+            "count": 8,
+            "median_us": 1567.0,
+            "p95_us": 1886,
+            "mean_us": 1570.5,
+            "max_us": 1886
+          },
+          "game_step": {
+            "count": 46,
+            "median_us": 3138.0,
+            "p95_us": 4019,
+            "mean_us": 3294.8260869565215,
+            "max_us": 4906
+          },
+          "main_process": {
+            "count": 8,
+            "median_us": 19412.0,
+            "p95_us": 21444,
+            "mean_us": 19013.125,
+            "max_us": 21444
+          }
+        },
+        "per_frame_sum": {
+          "world_context": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 426,
+            "mean_us": 105.125,
+            "max_us": 426
+          },
+          "camp_scan": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 123,
+            "mean_us": 27.125,
+            "max_us": 123
+          },
+          "outpost_scan": {
+            "count": 8,
+            "median_us": 80.0,
+            "p95_us": 83,
+            "mean_us": 50.875,
+            "max_us": 83
+          },
+          "cleanup_query": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 144,
+            "mean_us": 53.875,
+            "max_us": 144
+          },
+          "cleanup_refresh": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 196,
+            "mean_us": 72.875,
+            "max_us": 196
+          },
+          "hud_world_refresh": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "overview_state": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 56,
+            "mean_us": 13.25,
+            "max_us": 56
+          },
+          "overview_player": {
+            "count": 8,
+            "median_us": 2.0,
+            "p95_us": 3,
+            "mean_us": 2.25,
+            "max_us": 3
+          },
+          "overview_tick": {
+            "count": 8,
+            "median_us": 35.0,
+            "p95_us": 525,
+            "mean_us": 154.375,
+            "max_us": 525
+          },
+          "overview_draw": {
+            "count": 8,
+            "median_us": 263.5,
+            "p95_us": 291,
+            "mean_us": 262.125,
+            "max_us": 291
+          },
+          "hud_process": {
+            "count": 8,
+            "median_us": 1567.0,
+            "p95_us": 1886,
+            "mean_us": 1570.5,
+            "max_us": 1886
+          },
+          "game_step": {
+            "count": 8,
+            "median_us": 19351.5,
+            "p95_us": 21370,
+            "mean_us": 18945.25,
+            "max_us": 21370
+          },
+          "main_process": {
+            "count": 8,
+            "median_us": 19412.0,
+            "p95_us": 21444,
+            "mean_us": 19013.125,
+            "max_us": 21444
+          }
+        }
+      },
+      {
+        "label": "3",
+        "open": false,
+        "wall": {
+          "count": 8,
+          "median_us": 92097.5,
+          "p95_us": 94082,
+          "mean_us": 92046.375,
+          "max_us": 94082
+        },
+        "functions": {
+          "world_context": {
+            "count": 0
+          },
+          "camp_scan": {
+            "count": 0
+          },
+          "outpost_scan": {
+            "count": 2,
+            "median_us": 83.5,
+            "p95_us": 85,
+            "mean_us": 83.5,
+            "max_us": 85
+          },
+          "cleanup_query": {
+            "count": 2,
+            "median_us": 146.5,
+            "p95_us": 148,
+            "mean_us": 146.5,
+            "max_us": 148
+          },
+          "cleanup_refresh": {
+            "count": 2,
+            "median_us": 200.5,
+            "p95_us": 201,
+            "mean_us": 200.5,
+            "max_us": 201
+          },
+          "hud_world_refresh": {
+            "count": 0
+          },
+          "overview_state": {
+            "count": 0
+          },
+          "overview_player": {
+            "count": 0
+          },
+          "overview_tick": {
+            "count": 8,
+            "median_us": 4.0,
+            "p95_us": 4,
+            "mean_us": 4,
+            "max_us": 4
+          },
+          "overview_draw": {
+            "count": 0
+          },
+          "hud_process": {
+            "count": 8,
+            "median_us": 1339.0,
+            "p95_us": 1763,
+            "mean_us": 1411.75,
+            "max_us": 1763
+          },
+          "game_step": {
+            "count": 45,
+            "median_us": 3145,
+            "p95_us": 4058,
+            "mean_us": 3300.311111111111,
+            "max_us": 4832
+          },
+          "main_process": {
+            "count": 8,
+            "median_us": 19217.0,
+            "p95_us": 20051,
+            "mean_us": 18626.25,
+            "max_us": 20051
+          }
+        },
+        "per_frame_sum": {
+          "world_context": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "camp_scan": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "outpost_scan": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 85,
+            "mean_us": 20.875,
+            "max_us": 85
+          },
+          "cleanup_query": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 148,
+            "mean_us": 36.625,
+            "max_us": 148
+          },
+          "cleanup_refresh": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 201,
+            "mean_us": 50.125,
+            "max_us": 201
+          },
+          "hud_world_refresh": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "overview_state": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "overview_player": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "overview_tick": {
+            "count": 8,
+            "median_us": 4.0,
+            "p95_us": 4,
+            "mean_us": 4,
+            "max_us": 4
+          },
+          "overview_draw": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "hud_process": {
+            "count": 8,
+            "median_us": 1339.0,
+            "p95_us": 1763,
+            "mean_us": 1411.75,
+            "max_us": 1763
+          },
+          "game_step": {
+            "count": 8,
+            "median_us": 19161.0,
+            "p95_us": 19982,
+            "mean_us": 18564.25,
+            "max_us": 19982
+          },
+          "main_process": {
+            "count": 8,
+            "median_us": 19217.0,
+            "p95_us": 20051,
+            "mean_us": 18626.25,
+            "max_us": 20051
+          }
+        }
+      },
+      {
+        "label": "4",
+        "open": true,
+        "wall": {
+          "count": 8,
+          "median_us": 96585.0,
+          "p95_us": 100872,
+          "mean_us": 97124.375,
+          "max_us": 100872
+        },
+        "functions": {
+          "world_context": {
+            "count": 2,
+            "median_us": 422.5,
+            "p95_us": 439,
+            "mean_us": 422.5,
+            "max_us": 439
+          },
+          "camp_scan": {
+            "count": 2,
+            "median_us": 90.0,
+            "p95_us": 91,
+            "mean_us": 90,
+            "max_us": 91
+          },
+          "outpost_scan": {
+            "count": 5,
+            "median_us": 82,
+            "p95_us": 113,
+            "mean_us": 87.8,
+            "max_us": 113
+          },
+          "cleanup_query": {
+            "count": 3,
+            "median_us": 143,
+            "p95_us": 175,
+            "mean_us": 153,
+            "max_us": 175
+          },
+          "cleanup_refresh": {
+            "count": 3,
+            "median_us": 191,
+            "p95_us": 224,
+            "mean_us": 202,
+            "max_us": 224
+          },
+          "hud_world_refresh": {
+            "count": 0
+          },
+          "overview_state": {
+            "count": 2,
+            "median_us": 45.0,
+            "p95_us": 49,
+            "mean_us": 45,
+            "max_us": 49
+          },
+          "overview_player": {
+            "count": 8,
+            "median_us": 2.0,
+            "p95_us": 2,
+            "mean_us": 1.625,
+            "max_us": 2
+          },
+          "overview_tick": {
+            "count": 8,
+            "median_us": 31.0,
+            "p95_us": 526,
+            "mean_us": 149.75,
+            "max_us": 526
+          },
+          "overview_draw": {
+            "count": 8,
+            "median_us": 236.0,
+            "p95_us": 265,
+            "mean_us": 238.125,
+            "max_us": 265
+          },
+          "hud_process": {
+            "count": 8,
+            "median_us": 1526.5,
+            "p95_us": 1823,
+            "mean_us": 1535,
+            "max_us": 1823
+          },
+          "game_step": {
+            "count": 47,
+            "median_us": 3444,
+            "p95_us": 4145,
+            "mean_us": 3547.8936170212764,
+            "max_us": 4326
+          },
+          "main_process": {
+            "count": 8,
+            "median_us": 21068.0,
+            "p95_us": 22497,
+            "mean_us": 20899.375,
+            "max_us": 22497
+          }
+        },
+        "per_frame_sum": {
+          "world_context": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 439,
+            "mean_us": 105.625,
+            "max_us": 439
+          },
+          "camp_scan": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 91,
+            "mean_us": 22.5,
+            "max_us": 91
+          },
+          "outpost_scan": {
+            "count": 8,
+            "median_us": 80.5,
+            "p95_us": 113,
+            "mean_us": 54.875,
+            "max_us": 113
+          },
+          "cleanup_query": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 175,
+            "mean_us": 57.375,
+            "max_us": 175
+          },
+          "cleanup_refresh": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 224,
+            "mean_us": 75.75,
+            "max_us": 224
+          },
+          "hud_world_refresh": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "overview_state": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 49,
+            "mean_us": 11.25,
+            "max_us": 49
+          },
+          "overview_player": {
+            "count": 8,
+            "median_us": 2.0,
+            "p95_us": 2,
+            "mean_us": 1.625,
+            "max_us": 2
+          },
+          "overview_tick": {
+            "count": 8,
+            "median_us": 31.0,
+            "p95_us": 526,
+            "mean_us": 149.75,
+            "max_us": 526
+          },
+          "overview_draw": {
+            "count": 8,
+            "median_us": 236.0,
+            "p95_us": 265,
+            "mean_us": 238.125,
+            "max_us": 265
+          },
+          "hud_process": {
+            "count": 8,
+            "median_us": 1526.5,
+            "p95_us": 1823,
+            "mean_us": 1535,
+            "max_us": 1823
+          },
+          "game_step": {
+            "count": 8,
+            "median_us": 21011.5,
+            "p95_us": 22434,
+            "mean_us": 20843.875,
+            "max_us": 22434
+          },
+          "main_process": {
+            "count": 8,
+            "median_us": 21068.0,
+            "p95_us": 22497,
+            "mean_us": 20899.375,
+            "max_us": 22497
+          }
+        }
+      },
+      {
+        "label": "5",
+        "open": false,
+        "wall": {
+          "count": 8,
+          "median_us": 94417.0,
+          "p95_us": 96052,
+          "mean_us": 93380.625,
+          "max_us": 96052
+        },
+        "functions": {
+          "world_context": {
+            "count": 0
+          },
+          "camp_scan": {
+            "count": 0
+          },
+          "outpost_scan": {
+            "count": 3,
+            "median_us": 84,
+            "p95_us": 85,
+            "mean_us": 83.33333333333333,
+            "max_us": 85
+          },
+          "cleanup_query": {
+            "count": 3,
+            "median_us": 149,
+            "p95_us": 174,
+            "mean_us": 155.33333333333334,
+            "max_us": 174
+          },
+          "cleanup_refresh": {
+            "count": 3,
+            "median_us": 204,
+            "p95_us": 225,
+            "mean_us": 207,
+            "max_us": 225
+          },
+          "hud_world_refresh": {
+            "count": 0
+          },
+          "overview_state": {
+            "count": 0
+          },
+          "overview_player": {
+            "count": 0
+          },
+          "overview_tick": {
+            "count": 8,
+            "median_us": 4.0,
+            "p95_us": 5,
+            "mean_us": 4.25,
+            "max_us": 5
+          },
+          "overview_draw": {
+            "count": 0
+          },
+          "hud_process": {
+            "count": 8,
+            "median_us": 1342.0,
+            "p95_us": 1548,
+            "mean_us": 1396.25,
+            "max_us": 1548
+          },
+          "game_step": {
+            "count": 45,
+            "median_us": 3385,
+            "p95_us": 4083,
+            "mean_us": 3526.4,
+            "max_us": 4393
+          },
+          "main_process": {
+            "count": 8,
+            "median_us": 20815.5,
+            "p95_us": 21742,
+            "mean_us": 19901.5,
+            "max_us": 21742
+          }
+        },
+        "per_frame_sum": {
+          "world_context": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "camp_scan": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "outpost_scan": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 85,
+            "mean_us": 31.25,
+            "max_us": 85
+          },
+          "cleanup_query": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 174,
+            "mean_us": 58.25,
+            "max_us": 174
+          },
+          "cleanup_refresh": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 225,
+            "mean_us": 77.625,
+            "max_us": 225
+          },
+          "hud_world_refresh": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "overview_state": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "overview_player": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "overview_tick": {
+            "count": 8,
+            "median_us": 4.0,
+            "p95_us": 5,
+            "mean_us": 4.25,
+            "max_us": 5
+          },
+          "overview_draw": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "hud_process": {
+            "count": 8,
+            "median_us": 1342.0,
+            "p95_us": 1548,
+            "mean_us": 1396.25,
+            "max_us": 1548
+          },
+          "game_step": {
+            "count": 8,
+            "median_us": 20749.5,
+            "p95_us": 21686,
+            "mean_us": 19836,
+            "max_us": 21686
+          },
+          "main_process": {
+            "count": 8,
+            "median_us": 20815.5,
+            "p95_us": 21742,
+            "mean_us": 19901.5,
+            "max_us": 21742
+          }
+        }
+      }
+    ],
+    "direct": {
+      "world_context": {
+        "count": 24,
+        "median_us": 179.5,
+        "p95_us": 353,
+        "mean_us": 198.58333333333334,
+        "max_us": 362
+      },
+      "camp_scan": {
+        "count": 24,
+        "median_us": 52.0,
+        "p95_us": 81,
+        "mean_us": 56.125,
+        "max_us": 83
+      },
+      "outpost_scan": {
+        "count": 48,
+        "median_us": 55.0,
+        "p95_us": 79,
+        "mean_us": 58.520833333333336,
+        "max_us": 89
+      },
+      "cleanup_query": {
+        "count": 24,
+        "median_us": 106.0,
+        "p95_us": 120,
+        "mean_us": 107.33333333333333,
+        "max_us": 133
+      },
+      "cleanup_refresh": {
+        "count": 24,
+        "median_us": 127.0,
+        "p95_us": 143,
+        "mean_us": 130.08333333333334,
+        "max_us": 187
+      },
+      "hud_world_refresh": {
+        "count": 0
+      },
+      "overview_state": {
+        "count": 24,
+        "median_us": 22.0,
+        "p95_us": 42,
+        "mean_us": 23.75,
+        "max_us": 45
+      },
+      "overview_player": {
+        "count": 24,
+        "median_us": 0.0,
+        "p95_us": 1,
+        "mean_us": 0.4166666666666667,
+        "max_us": 4
+      },
+      "overview_tick": {
+        "count": 0
+      },
+      "overview_draw": {
+        "count": 0
+      },
+      "hud_process": {
+        "count": 0
+      },
+      "game_step": {
+        "count": 0
+      },
+      "main_process": {
+        "count": 0
+      }
+    },
+    "observer": {
+      "count": 128,
+      "median_us": 1.0,
+      "p95_us": 1,
+      "mean_us": 0.703125,
+      "max_us": 10
+    }
+  },
+  "matched-baseline": {
+    "checks": 15,
+    "failures": 0,
+    "windows": [
+      {
+        "label": "0",
+        "open": false,
+        "wall": {
+          "count": 8,
+          "median_us": 91791.0,
+          "p95_us": 98120,
+          "mean_us": 92694.375,
+          "max_us": 98120
+        },
+        "functions": {
+          "world_context": {
+            "count": 0
+          },
+          "camp_scan": {
+            "count": 0
+          },
+          "outpost_scan": {
+            "count": 3,
+            "median_us": 78,
+            "p95_us": 82,
+            "mean_us": 79,
+            "max_us": 82
+          },
+          "cleanup_query": {
+            "count": 3,
+            "median_us": 140,
+            "p95_us": 145,
+            "mean_us": 140.66666666666666,
+            "max_us": 145
+          },
+          "cleanup_refresh": {
+            "count": 3,
+            "median_us": 190,
+            "p95_us": 194,
+            "mean_us": 190,
+            "max_us": 194
+          },
+          "hud_world_refresh": {
+            "count": 0
+          },
+          "overview_state": {
+            "count": 0
+          },
+          "overview_player": {
+            "count": 0
+          },
+          "overview_tick": {
+            "count": 8,
+            "median_us": 4.0,
+            "p95_us": 4,
+            "mean_us": 3.75,
+            "max_us": 4
+          },
+          "overview_draw": {
+            "count": 0
+          },
+          "hud_process": {
+            "count": 8,
+            "median_us": 1359.0,
+            "p95_us": 1550,
+            "mean_us": 1390.375,
+            "max_us": 1550
+          },
+          "game_step": {
+            "count": 44,
+            "median_us": 3345.5,
+            "p95_us": 3907,
+            "mean_us": 3505.6136363636365,
+            "max_us": 9480
+          },
+          "main_process": {
+            "count": 8,
+            "median_us": 17958.5,
+            "p95_us": 27384,
+            "mean_us": 19340.25,
+            "max_us": 27384
+          }
+        },
+        "per_frame_sum": {
+          "world_context": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "camp_scan": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "outpost_scan": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 82,
+            "mean_us": 29.625,
+            "max_us": 82
+          },
+          "cleanup_query": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 145,
+            "mean_us": 52.75,
+            "max_us": 145
+          },
+          "cleanup_refresh": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 194,
+            "mean_us": 71.25,
+            "max_us": 194
+          },
+          "hud_world_refresh": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "overview_state": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "overview_player": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "overview_tick": {
+            "count": 8,
+            "median_us": 4.0,
+            "p95_us": 4,
+            "mean_us": 3.75,
+            "max_us": 4
+          },
+          "overview_draw": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "hud_process": {
+            "count": 8,
+            "median_us": 1359.0,
+            "p95_us": 1550,
+            "mean_us": 1390.375,
+            "max_us": 1550
+          },
+          "game_step": {
+            "count": 8,
+            "median_us": 17898.0,
+            "p95_us": 27330,
+            "mean_us": 19280.875,
+            "max_us": 27330
+          },
+          "main_process": {
+            "count": 8,
+            "median_us": 17958.5,
+            "p95_us": 27384,
+            "mean_us": 19340.25,
+            "max_us": 27384
+          }
+        }
+      },
+      {
+        "label": "1",
+        "open": true,
+        "wall": {
+          "count": 8,
+          "median_us": 97911.5,
+          "p95_us": 99726,
+          "mean_us": 98074.875,
+          "max_us": 99726
+        },
+        "functions": {
+          "world_context": {
+            "count": 4,
+            "median_us": 432.0,
+            "p95_us": 441,
+            "mean_us": 432.5,
+            "max_us": 441
+          },
+          "camp_scan": {
+            "count": 4,
+            "median_us": 152.5,
+            "p95_us": 154,
+            "mean_us": 151.75,
+            "max_us": 154
+          },
+          "outpost_scan": {
+            "count": 8,
+            "median_us": 77.5,
+            "p95_us": 110,
+            "mean_us": 78.125,
+            "max_us": 110
+          },
+          "cleanup_query": {
+            "count": 4,
+            "median_us": 130.5,
+            "p95_us": 183,
+            "mean_us": 142.75,
+            "max_us": 183
+          },
+          "cleanup_refresh": {
+            "count": 4,
+            "median_us": 181.5,
+            "p95_us": 237,
+            "mean_us": 194,
+            "max_us": 237
+          },
+          "hud_world_refresh": {
+            "count": 0
+          },
+          "overview_state": {
+            "count": 4,
+            "median_us": 51.0,
+            "p95_us": 74,
+            "mean_us": 54,
+            "max_us": 74
+          },
+          "overview_player": {
+            "count": 8,
+            "median_us": 2.0,
+            "p95_us": 3,
+            "mean_us": 1.75,
+            "max_us": 3
+          },
+          "overview_tick": {
+            "count": 8,
+            "median_us": 272.5,
+            "p95_us": 536,
+            "mean_us": 278.125,
+            "max_us": 536
+          },
+          "overview_draw": {
+            "count": 8,
+            "median_us": 241.0,
+            "p95_us": 321,
+            "mean_us": 251.375,
+            "max_us": 321
+          },
+          "hud_process": {
+            "count": 8,
+            "median_us": 1740.5,
+            "p95_us": 2092,
+            "mean_us": 1711.375,
+            "max_us": 2092
+          },
+          "game_step": {
+            "count": 48,
+            "median_us": 3375.0,
+            "p95_us": 4143,
+            "mean_us": 3520.75,
+            "max_us": 4722
+          },
+          "main_process": {
+            "count": 8,
+            "median_us": 21061.0,
+            "p95_us": 22205,
+            "mean_us": 21183.125,
+            "max_us": 22205
+          }
+        },
+        "per_frame_sum": {
+          "world_context": {
+            "count": 8,
+            "median_us": 212.5,
+            "p95_us": 441,
+            "mean_us": 216.25,
+            "max_us": 441
+          },
+          "camp_scan": {
+            "count": 8,
+            "median_us": 74.0,
+            "p95_us": 154,
+            "mean_us": 75.875,
+            "max_us": 154
+          },
+          "outpost_scan": {
+            "count": 8,
+            "median_us": 67.5,
+            "p95_us": 188,
+            "mean_us": 78.125,
+            "max_us": 188
+          },
+          "cleanup_query": {
+            "count": 8,
+            "median_us": 63.5,
+            "p95_us": 183,
+            "mean_us": 71.375,
+            "max_us": 183
+          },
+          "cleanup_refresh": {
+            "count": 8,
+            "median_us": 88.0,
+            "p95_us": 237,
+            "mean_us": 97,
+            "max_us": 237
+          },
+          "hud_world_refresh": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "overview_state": {
+            "count": 8,
+            "median_us": 20.0,
+            "p95_us": 74,
+            "mean_us": 27,
+            "max_us": 74
+          },
+          "overview_player": {
+            "count": 8,
+            "median_us": 2.0,
+            "p95_us": 3,
+            "mean_us": 1.75,
+            "max_us": 3
+          },
+          "overview_tick": {
+            "count": 8,
+            "median_us": 272.5,
+            "p95_us": 536,
+            "mean_us": 278.125,
+            "max_us": 536
+          },
+          "overview_draw": {
+            "count": 8,
+            "median_us": 241.0,
+            "p95_us": 321,
+            "mean_us": 251.375,
+            "max_us": 321
+          },
+          "hud_process": {
+            "count": 8,
+            "median_us": 1740.5,
+            "p95_us": 2092,
+            "mean_us": 1711.375,
+            "max_us": 2092
+          },
+          "game_step": {
+            "count": 8,
+            "median_us": 20998.0,
+            "p95_us": 22155,
+            "mean_us": 21124.5,
+            "max_us": 22155
+          },
+          "main_process": {
+            "count": 8,
+            "median_us": 21061.0,
+            "p95_us": 22205,
+            "mean_us": 21183.125,
+            "max_us": 22205
+          }
+        }
+      },
+      {
+        "label": "2",
+        "open": false,
+        "wall": {
+          "count": 8,
+          "median_us": 93061.5,
+          "p95_us": 101554,
+          "mean_us": 93303.75,
+          "max_us": 101554
+        },
+        "functions": {
+          "world_context": {
+            "count": 0
+          },
+          "camp_scan": {
+            "count": 0
+          },
+          "outpost_scan": {
+            "count": 3,
+            "median_us": 80,
+            "p95_us": 81,
+            "mean_us": 79.66666666666667,
+            "max_us": 81
+          },
+          "cleanup_query": {
+            "count": 3,
+            "median_us": 139,
+            "p95_us": 140,
+            "mean_us": 138.66666666666666,
+            "max_us": 140
+          },
+          "cleanup_refresh": {
+            "count": 3,
+            "median_us": 187,
+            "p95_us": 189,
+            "mean_us": 187,
+            "max_us": 189
+          },
+          "hud_world_refresh": {
+            "count": 0
+          },
+          "overview_state": {
+            "count": 0
+          },
+          "overview_player": {
+            "count": 0
+          },
+          "overview_tick": {
+            "count": 8,
+            "median_us": 4.0,
+            "p95_us": 5,
+            "mean_us": 3.75,
+            "max_us": 5
+          },
+          "overview_draw": {
+            "count": 0
+          },
+          "hud_process": {
+            "count": 8,
+            "median_us": 1307.5,
+            "p95_us": 1469,
+            "mean_us": 1344.625,
+            "max_us": 1469
+          },
+          "game_step": {
+            "count": 45,
+            "median_us": 3438,
+            "p95_us": 4009,
+            "mean_us": 3520.0666666666666,
+            "max_us": 4527
+          },
+          "main_process": {
+            "count": 8,
+            "median_us": 20357.5,
+            "p95_us": 21798,
+            "mean_us": 19852.625,
+            "max_us": 21798
+          }
+        },
+        "per_frame_sum": {
+          "world_context": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "camp_scan": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "outpost_scan": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 81,
+            "mean_us": 29.875,
+            "max_us": 81
+          },
+          "cleanup_query": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 140,
+            "mean_us": 52,
+            "max_us": 140
+          },
+          "cleanup_refresh": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 189,
+            "mean_us": 70.125,
+            "max_us": 189
+          },
+          "hud_world_refresh": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "overview_state": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "overview_player": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "overview_tick": {
+            "count": 8,
+            "median_us": 4.0,
+            "p95_us": 5,
+            "mean_us": 3.75,
+            "max_us": 5
+          },
+          "overview_draw": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "hud_process": {
+            "count": 8,
+            "median_us": 1307.5,
+            "p95_us": 1469,
+            "mean_us": 1344.625,
+            "max_us": 1469
+          },
+          "game_step": {
+            "count": 8,
+            "median_us": 20306.0,
+            "p95_us": 21744,
+            "mean_us": 19800.375,
+            "max_us": 21744
+          },
+          "main_process": {
+            "count": 8,
+            "median_us": 20357.5,
+            "p95_us": 21798,
+            "mean_us": 19852.625,
+            "max_us": 21798
+          }
+        }
+      },
+      {
+        "label": "3",
+        "open": true,
+        "wall": {
+          "count": 8,
+          "median_us": 94856.0,
+          "p95_us": 101038,
+          "mean_us": 95265.75,
+          "max_us": 101038
+        },
+        "functions": {
+          "world_context": {
+            "count": 2,
+            "median_us": 453.5,
+            "p95_us": 454,
+            "mean_us": 453.5,
+            "max_us": 454
+          },
+          "camp_scan": {
+            "count": 2,
+            "median_us": 166.0,
+            "p95_us": 179,
+            "mean_us": 166,
+            "max_us": 179
+          },
+          "outpost_scan": {
+            "count": 5,
+            "median_us": 80,
+            "p95_us": 99,
+            "mean_us": 83.4,
+            "max_us": 99
+          },
+          "cleanup_query": {
+            "count": 3,
+            "median_us": 161,
+            "p95_us": 161,
+            "mean_us": 154,
+            "max_us": 161
+          },
+          "cleanup_refresh": {
+            "count": 3,
+            "median_us": 209,
+            "p95_us": 209,
+            "mean_us": 208,
+            "max_us": 209
+          },
+          "hud_world_refresh": {
+            "count": 0
+          },
+          "overview_state": {
+            "count": 2,
+            "median_us": 43.5,
+            "p95_us": 47,
+            "mean_us": 43.5,
+            "max_us": 47
+          },
+          "overview_player": {
+            "count": 8,
+            "median_us": 1.5,
+            "p95_us": 2,
+            "mean_us": 1.5,
+            "max_us": 2
+          },
+          "overview_tick": {
+            "count": 8,
+            "median_us": 30.5,
+            "p95_us": 539,
+            "mean_us": 156.125,
+            "max_us": 539
+          },
+          "overview_draw": {
+            "count": 8,
+            "median_us": 229.5,
+            "p95_us": 264,
+            "mean_us": 232.875,
+            "max_us": 264
+          },
+          "hud_process": {
+            "count": 8,
+            "median_us": 1493.5,
+            "p95_us": 1823,
+            "mean_us": 1505.625,
+            "max_us": 1823
+          },
+          "game_step": {
+            "count": 46,
+            "median_us": 3177.5,
+            "p95_us": 4103,
+            "mean_us": 3345.4347826086955,
+            "max_us": 4502
+          },
+          "main_process": {
+            "count": 8,
+            "median_us": 19669.5,
+            "p95_us": 21339,
+            "mean_us": 19289.375,
+            "max_us": 21339
+          }
+        },
+        "per_frame_sum": {
+          "world_context": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 454,
+            "mean_us": 113.375,
+            "max_us": 454
+          },
+          "camp_scan": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 179,
+            "mean_us": 41.5,
+            "max_us": 179
+          },
+          "outpost_scan": {
+            "count": 8,
+            "median_us": 79.0,
+            "p95_us": 99,
+            "mean_us": 52.125,
+            "max_us": 99
+          },
+          "cleanup_query": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 161,
+            "mean_us": 57.75,
+            "max_us": 161
+          },
+          "cleanup_refresh": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 209,
+            "mean_us": 78,
+            "max_us": 209
+          },
+          "hud_world_refresh": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "overview_state": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 47,
+            "mean_us": 10.875,
+            "max_us": 47
+          },
+          "overview_player": {
+            "count": 8,
+            "median_us": 1.5,
+            "p95_us": 2,
+            "mean_us": 1.5,
+            "max_us": 2
+          },
+          "overview_tick": {
+            "count": 8,
+            "median_us": 30.5,
+            "p95_us": 539,
+            "mean_us": 156.125,
+            "max_us": 539
+          },
+          "overview_draw": {
+            "count": 8,
+            "median_us": 229.5,
+            "p95_us": 264,
+            "mean_us": 232.875,
+            "max_us": 264
+          },
+          "hud_process": {
+            "count": 8,
+            "median_us": 1493.5,
+            "p95_us": 1823,
+            "mean_us": 1505.625,
+            "max_us": 1823
+          },
+          "game_step": {
+            "count": 8,
+            "median_us": 19618.0,
+            "p95_us": 21278,
+            "mean_us": 19236.25,
+            "max_us": 21278
+          },
+          "main_process": {
+            "count": 8,
+            "median_us": 19669.5,
+            "p95_us": 21339,
+            "mean_us": 19289.375,
+            "max_us": 21339
+          }
+        }
+      }
+    ],
+    "direct": {
+      "world_context": {
+        "count": 24,
+        "median_us": 236.0,
+        "p95_us": 265,
+        "mean_us": 249.41666666666666,
+        "max_us": 405
+      },
+      "camp_scan": {
+        "count": 24,
+        "median_us": 111.0,
+        "p95_us": 115,
+        "mean_us": 112.5,
+        "max_us": 142
+      },
+      "outpost_scan": {
+        "count": 48,
+        "median_us": 55.0,
+        "p95_us": 77,
+        "mean_us": 58.875,
+        "max_us": 99
+      },
+      "cleanup_query": {
+        "count": 24,
+        "median_us": 104.5,
+        "p95_us": 133,
+        "mean_us": 109.04166666666667,
+        "max_us": 142
+      },
+      "cleanup_refresh": {
+        "count": 24,
+        "median_us": 126.5,
+        "p95_us": 168,
+        "mean_us": 131.875,
+        "max_us": 174
+      },
+      "hud_world_refresh": {
+        "count": 0
+      },
+      "overview_state": {
+        "count": 24,
+        "median_us": 22.0,
+        "p95_us": 41,
+        "mean_us": 23.75,
+        "max_us": 49
+      },
+      "overview_player": {
+        "count": 24,
+        "median_us": 1.0,
+        "p95_us": 1,
+        "mean_us": 0.7083333333333334,
+        "max_us": 5
+      },
+      "overview_tick": {
+        "count": 0
+      },
+      "overview_draw": {
+        "count": 0
+      },
+      "hud_process": {
+        "count": 0
+      },
+      "game_step": {
+        "count": 0
+      },
+      "main_process": {
+        "count": 0
+      }
+    },
+    "observer": {
+      "count": 128,
+      "median_us": 0.0,
+      "p95_us": 1,
+      "mean_us": 0.828125,
+      "max_us": 50
+    }
+  },
+  "matched-optimized": {
+    "checks": 15,
+    "failures": 0,
+    "windows": [
+      {
+        "label": "0",
+        "open": false,
+        "wall": {
+          "count": 8,
+          "median_us": 93086.5,
+          "p95_us": 96603,
+          "mean_us": 92453.75,
+          "max_us": 96603
+        },
+        "functions": {
+          "world_context": {
+            "count": 0
+          },
+          "camp_scan": {
+            "count": 0
+          },
+          "outpost_scan": {
+            "count": 3,
+            "median_us": 86,
+            "p95_us": 111,
+            "mean_us": 92.66666666666667,
+            "max_us": 111
+          },
+          "cleanup_query": {
+            "count": 3,
+            "median_us": 149,
+            "p95_us": 173,
+            "mean_us": 154.66666666666666,
+            "max_us": 173
+          },
+          "cleanup_refresh": {
+            "count": 3,
+            "median_us": 200,
+            "p95_us": 223,
+            "mean_us": 206,
+            "max_us": 223
+          },
+          "hud_world_refresh": {
+            "count": 0
+          },
+          "overview_state": {
+            "count": 0
+          },
+          "overview_player": {
+            "count": 0
+          },
+          "overview_tick": {
+            "count": 8,
+            "median_us": 4.0,
+            "p95_us": 5,
+            "mean_us": 4.25,
+            "max_us": 5
+          },
+          "overview_draw": {
+            "count": 0
+          },
+          "hud_process": {
+            "count": 8,
+            "median_us": 1379.0,
+            "p95_us": 1584,
+            "mean_us": 1416.125,
+            "max_us": 1584
+          },
+          "game_step": {
+            "count": 44,
+            "median_us": 3315.0,
+            "p95_us": 3868,
+            "mean_us": 3350.4545454545455,
+            "max_us": 4874
+          },
+          "main_process": {
+            "count": 8,
+            "median_us": 18867.0,
+            "p95_us": 21687,
+            "mean_us": 18488.625,
+            "max_us": 21687
+          }
+        },
+        "per_frame_sum": {
+          "world_context": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "camp_scan": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "outpost_scan": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 111,
+            "mean_us": 34.75,
+            "max_us": 111
+          },
+          "cleanup_query": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 173,
+            "mean_us": 58,
+            "max_us": 173
+          },
+          "cleanup_refresh": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 223,
+            "mean_us": 77.25,
+            "max_us": 223
+          },
+          "hud_world_refresh": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "overview_state": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "overview_player": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "overview_tick": {
+            "count": 8,
+            "median_us": 4.0,
+            "p95_us": 5,
+            "mean_us": 4.25,
+            "max_us": 5
+          },
+          "overview_draw": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "hud_process": {
+            "count": 8,
+            "median_us": 1379.0,
+            "p95_us": 1584,
+            "mean_us": 1416.125,
+            "max_us": 1584
+          },
+          "game_step": {
+            "count": 8,
+            "median_us": 18801.5,
+            "p95_us": 21626,
+            "mean_us": 18427.5,
+            "max_us": 21626
+          },
+          "main_process": {
+            "count": 8,
+            "median_us": 18867.0,
+            "p95_us": 21687,
+            "mean_us": 18488.625,
+            "max_us": 21687
+          }
+        }
+      },
+      {
+        "label": "1",
+        "open": true,
+        "wall": {
+          "count": 8,
+          "median_us": 97738.5,
+          "p95_us": 103204,
+          "mean_us": 97897.125,
+          "max_us": 103204
+        },
+        "functions": {
+          "world_context": {
+            "count": 4,
+            "median_us": 377.5,
+            "p95_us": 395,
+            "mean_us": 378.25,
+            "max_us": 395
+          },
+          "camp_scan": {
+            "count": 4,
+            "median_us": 91.0,
+            "p95_us": 92,
+            "mean_us": 89.75,
+            "max_us": 92
+          },
+          "outpost_scan": {
+            "count": 8,
+            "median_us": 67.0,
+            "p95_us": 83,
+            "mean_us": 68.875,
+            "max_us": 83
+          },
+          "cleanup_query": {
+            "count": 4,
+            "median_us": 129.5,
+            "p95_us": 131,
+            "mean_us": 128.5,
+            "max_us": 131
+          },
+          "cleanup_refresh": {
+            "count": 4,
+            "median_us": 177.0,
+            "p95_us": 179,
+            "mean_us": 175,
+            "max_us": 179
+          },
+          "hud_world_refresh": {
+            "count": 0
+          },
+          "overview_state": {
+            "count": 4,
+            "median_us": 43.5,
+            "p95_us": 54,
+            "mean_us": 45.5,
+            "max_us": 54
+          },
+          "overview_player": {
+            "count": 8,
+            "median_us": 2.0,
+            "p95_us": 3,
+            "mean_us": 1.875,
+            "max_us": 3
+          },
+          "overview_tick": {
+            "count": 8,
+            "median_us": 238.0,
+            "p95_us": 487,
+            "mean_us": 246.375,
+            "max_us": 487
+          },
+          "overview_draw": {
+            "count": 8,
+            "median_us": 231.5,
+            "p95_us": 273,
+            "mean_us": 234.25,
+            "max_us": 273
+          },
+          "hud_process": {
+            "count": 8,
+            "median_us": 1598.0,
+            "p95_us": 1942,
+            "mean_us": 1601.875,
+            "max_us": 1942
+          },
+          "game_step": {
+            "count": 48,
+            "median_us": 3392.5,
+            "p95_us": 3972,
+            "mean_us": 3488.0208333333335,
+            "max_us": 4842
+          },
+          "main_process": {
+            "count": 8,
+            "median_us": 20828.5,
+            "p95_us": 22301,
+            "mean_us": 20989,
+            "max_us": 22301
+          }
+        },
+        "per_frame_sum": {
+          "world_context": {
+            "count": 8,
+            "median_us": 181.5,
+            "p95_us": 395,
+            "mean_us": 189.125,
+            "max_us": 395
+          },
+          "camp_scan": {
+            "count": 8,
+            "median_us": 42.5,
+            "p95_us": 92,
+            "mean_us": 44.875,
+            "max_us": 92
+          },
+          "outpost_scan": {
+            "count": 8,
+            "median_us": 65.5,
+            "p95_us": 142,
+            "mean_us": 68.875,
+            "max_us": 142
+          },
+          "cleanup_query": {
+            "count": 8,
+            "median_us": 62.0,
+            "p95_us": 131,
+            "mean_us": 64.25,
+            "max_us": 131
+          },
+          "cleanup_refresh": {
+            "count": 8,
+            "median_us": 83.5,
+            "p95_us": 179,
+            "mean_us": 87.5,
+            "max_us": 179
+          },
+          "hud_world_refresh": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "overview_state": {
+            "count": 8,
+            "median_us": 20.5,
+            "p95_us": 54,
+            "mean_us": 22.75,
+            "max_us": 54
+          },
+          "overview_player": {
+            "count": 8,
+            "median_us": 2.0,
+            "p95_us": 3,
+            "mean_us": 1.875,
+            "max_us": 3
+          },
+          "overview_tick": {
+            "count": 8,
+            "median_us": 238.0,
+            "p95_us": 487,
+            "mean_us": 246.375,
+            "max_us": 487
+          },
+          "overview_draw": {
+            "count": 8,
+            "median_us": 231.5,
+            "p95_us": 273,
+            "mean_us": 234.25,
+            "max_us": 273
+          },
+          "hud_process": {
+            "count": 8,
+            "median_us": 1598.0,
+            "p95_us": 1942,
+            "mean_us": 1601.875,
+            "max_us": 1942
+          },
+          "game_step": {
+            "count": 8,
+            "median_us": 20757.5,
+            "p95_us": 22240,
+            "mean_us": 20928.125,
+            "max_us": 22240
+          },
+          "main_process": {
+            "count": 8,
+            "median_us": 20828.5,
+            "p95_us": 22301,
+            "mean_us": 20989,
+            "max_us": 22301
+          }
+        }
+      },
+      {
+        "label": "2",
+        "open": false,
+        "wall": {
+          "count": 8,
+          "median_us": 98191.0,
+          "p95_us": 103661,
+          "mean_us": 98136.25,
+          "max_us": 103661
+        },
+        "functions": {
+          "world_context": {
+            "count": 0
+          },
+          "camp_scan": {
+            "count": 0
+          },
+          "outpost_scan": {
+            "count": 2,
+            "median_us": 80.5,
+            "p95_us": 85,
+            "mean_us": 80.5,
+            "max_us": 85
+          },
+          "cleanup_query": {
+            "count": 2,
+            "median_us": 141.0,
+            "p95_us": 147,
+            "mean_us": 141,
+            "max_us": 147
+          },
+          "cleanup_refresh": {
+            "count": 2,
+            "median_us": 192.5,
+            "p95_us": 199,
+            "mean_us": 192.5,
+            "max_us": 199
+          },
+          "hud_world_refresh": {
+            "count": 0
+          },
+          "overview_state": {
+            "count": 0
+          },
+          "overview_player": {
+            "count": 0
+          },
+          "overview_tick": {
+            "count": 8,
+            "median_us": 4.0,
+            "p95_us": 5,
+            "mean_us": 4.375,
+            "max_us": 5
+          },
+          "overview_draw": {
+            "count": 0
+          },
+          "hud_process": {
+            "count": 8,
+            "median_us": 1327.0,
+            "p95_us": 1763,
+            "mean_us": 1405.5,
+            "max_us": 1763
+          },
+          "game_step": {
+            "count": 47,
+            "median_us": 3502,
+            "p95_us": 4522,
+            "mean_us": 3712.7872340425533,
+            "max_us": 5259
+          },
+          "main_process": {
+            "count": 8,
+            "median_us": 21768.5,
+            "p95_us": 24729,
+            "mean_us": 21878.875,
+            "max_us": 24729
+          }
+        },
+        "per_frame_sum": {
+          "world_context": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "camp_scan": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "outpost_scan": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 85,
+            "mean_us": 20.125,
+            "max_us": 85
+          },
+          "cleanup_query": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 147,
+            "mean_us": 35.25,
+            "max_us": 147
+          },
+          "cleanup_refresh": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 199,
+            "mean_us": 48.125,
+            "max_us": 199
+          },
+          "hud_world_refresh": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "overview_state": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "overview_player": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "overview_tick": {
+            "count": 8,
+            "median_us": 4.0,
+            "p95_us": 5,
+            "mean_us": 4.375,
+            "max_us": 5
+          },
+          "overview_draw": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "hud_process": {
+            "count": 8,
+            "median_us": 1327.0,
+            "p95_us": 1763,
+            "mean_us": 1405.5,
+            "max_us": 1763
+          },
+          "game_step": {
+            "count": 8,
+            "median_us": 21703.5,
+            "p95_us": 24656,
+            "mean_us": 21812.625,
+            "max_us": 24656
+          },
+          "main_process": {
+            "count": 8,
+            "median_us": 21768.5,
+            "p95_us": 24729,
+            "mean_us": 21878.875,
+            "max_us": 24729
+          }
+        }
+      },
+      {
+        "label": "3",
+        "open": true,
+        "wall": {
+          "count": 8,
+          "median_us": 100974.0,
+          "p95_us": 107434,
+          "mean_us": 101109.75,
+          "max_us": 107434
+        },
+        "functions": {
+          "world_context": {
+            "count": 4,
+            "median_us": 370.0,
+            "p95_us": 393,
+            "mean_us": 372.75,
+            "max_us": 393
+          },
+          "camp_scan": {
+            "count": 4,
+            "median_us": 88.5,
+            "p95_us": 91,
+            "mean_us": 87.5,
+            "max_us": 91
+          },
+          "outpost_scan": {
+            "count": 8,
+            "median_us": 81.5,
+            "p95_us": 94,
+            "mean_us": 82.375,
+            "max_us": 94
+          },
+          "cleanup_query": {
+            "count": 4,
+            "median_us": 142.5,
+            "p95_us": 144,
+            "mean_us": 142.75,
+            "max_us": 144
+          },
+          "cleanup_refresh": {
+            "count": 4,
+            "median_us": 192.0,
+            "p95_us": 195,
+            "mean_us": 191.5,
+            "max_us": 195
+          },
+          "hud_world_refresh": {
+            "count": 0
+          },
+          "overview_state": {
+            "count": 4,
+            "median_us": 43.0,
+            "p95_us": 49,
+            "mean_us": 43.5,
+            "max_us": 49
+          },
+          "overview_player": {
+            "count": 8,
+            "median_us": 2.0,
+            "p95_us": 3,
+            "mean_us": 1.875,
+            "max_us": 3
+          },
+          "overview_tick": {
+            "count": 8,
+            "median_us": 234.0,
+            "p95_us": 478,
+            "mean_us": 243.125,
+            "max_us": 478
+          },
+          "overview_draw": {
+            "count": 8,
+            "median_us": 232.5,
+            "p95_us": 287,
+            "mean_us": 243,
+            "max_us": 287
+          },
+          "hud_process": {
+            "count": 8,
+            "median_us": 1660.5,
+            "p95_us": 1957,
+            "mean_us": 1693.5,
+            "max_us": 1957
+          },
+          "game_step": {
+            "count": 49,
+            "median_us": 3257,
+            "p95_us": 4020,
+            "mean_us": 3412.1428571428573,
+            "max_us": 4154
+          },
+          "main_process": {
+            "count": 8,
+            "median_us": 20612.5,
+            "p95_us": 23902,
+            "mean_us": 20995.5,
+            "max_us": 23902
+          }
+        },
+        "per_frame_sum": {
+          "world_context": {
+            "count": 8,
+            "median_us": 179.0,
+            "p95_us": 393,
+            "mean_us": 186.375,
+            "max_us": 393
+          },
+          "camp_scan": {
+            "count": 8,
+            "median_us": 41.0,
+            "p95_us": 91,
+            "mean_us": 43.75,
+            "max_us": 91
+          },
+          "outpost_scan": {
+            "count": 8,
+            "median_us": 81.5,
+            "p95_us": 94,
+            "mean_us": 82.375,
+            "max_us": 94
+          },
+          "cleanup_query": {
+            "count": 8,
+            "median_us": 71.0,
+            "p95_us": 144,
+            "mean_us": 71.375,
+            "max_us": 144
+          },
+          "cleanup_refresh": {
+            "count": 8,
+            "median_us": 93.5,
+            "p95_us": 195,
+            "mean_us": 95.75,
+            "max_us": 195
+          },
+          "hud_world_refresh": {
+            "count": 8,
+            "median_us": 0.0,
+            "p95_us": 0,
+            "mean_us": 0,
+            "max_us": 0
+          },
+          "overview_state": {
+            "count": 8,
+            "median_us": 19.5,
+            "p95_us": 49,
+            "mean_us": 21.75,
+            "max_us": 49
+          },
+          "overview_player": {
+            "count": 8,
+            "median_us": 2.0,
+            "p95_us": 3,
+            "mean_us": 1.875,
+            "max_us": 3
+          },
+          "overview_tick": {
+            "count": 8,
+            "median_us": 234.0,
+            "p95_us": 478,
+            "mean_us": 243.125,
+            "max_us": 478
+          },
+          "overview_draw": {
+            "count": 8,
+            "median_us": 232.5,
+            "p95_us": 287,
+            "mean_us": 243,
+            "max_us": 287
+          },
+          "hud_process": {
+            "count": 8,
+            "median_us": 1660.5,
+            "p95_us": 1957,
+            "mean_us": 1693.5,
+            "max_us": 1957
+          },
+          "game_step": {
+            "count": 8,
+            "median_us": 20549.5,
+            "p95_us": 23836,
+            "mean_us": 20899.375,
+            "max_us": 23836
+          },
+          "main_process": {
+            "count": 8,
+            "median_us": 20612.5,
+            "p95_us": 23902,
+            "mean_us": 20995.5,
+            "max_us": 23902
+          }
+        }
+      }
+    ],
+    "direct": {
+      "world_context": {
+        "count": 24,
+        "median_us": 171.0,
+        "p95_us": 274,
+        "mean_us": 186.45833333333334,
+        "max_us": 339
+      },
+      "camp_scan": {
+        "count": 24,
+        "median_us": 51.0,
+        "p95_us": 81,
+        "mean_us": 55.375,
+        "max_us": 82
+      },
+      "outpost_scan": {
+        "count": 48,
+        "median_us": 53.0,
+        "p95_us": 84,
+        "mean_us": 57.083333333333336,
+        "max_us": 137
+      },
+      "cleanup_query": {
+        "count": 24,
+        "median_us": 103.0,
+        "p95_us": 190,
+        "mean_us": 121.58333333333333,
+        "max_us": 342
+      },
+      "cleanup_refresh": {
+        "count": 24,
+        "median_us": 123.5,
+        "p95_us": 215,
+        "mean_us": 143.95833333333334,
+        "max_us": 395
+      },
+      "hud_world_refresh": {
+        "count": 0
+      },
+      "overview_state": {
+        "count": 24,
+        "median_us": 22.0,
+        "p95_us": 24,
+        "mean_us": 22.375,
+        "max_us": 41
+      },
+      "overview_player": {
+        "count": 24,
+        "median_us": 1.0,
+        "p95_us": 1,
+        "mean_us": 0.6666666666666666,
+        "max_us": 4
+      },
+      "overview_tick": {
+        "count": 0
+      },
+      "overview_draw": {
+        "count": 0
+      },
+      "hud_process": {
+        "count": 0
+      },
+      "game_step": {
+        "count": 0
+      },
+      "main_process": {
+        "count": 0
+      }
+    },
+    "observer": {
+      "count": 128,
+      "median_us": 1.0,
+      "p95_us": 1,
+      "mean_us": 0.6796875,
+      "max_us": 7
+    }
+  }
+}

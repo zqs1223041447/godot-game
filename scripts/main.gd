@@ -2483,12 +2483,18 @@ func _camp_states()->Array[Dictionary]:
 	var result:Array[Dictionary]=[]
 	if _world_mode not in ["map","map_complete"]:return result
 	result.assign(_map_camps.states(_map_run.defeated))
-	for entry:Dictionary in result:
-		entry.reason="";entry.awake_count=0
+	# Aggregate once per query, never across frames: waking, death and retry are
+	# visible immediately without invalidation or stale presentation snapshots.
+	var awake:Dictionary={}
+	for entry:Dictionary in result:awake[entry.id]=0
+	if not awake.is_empty():
 		for enemy:Dictionary in enemies:
 			if float(enemy.health)<=0.0 or int(enemy.get("generation",0))!=0 or not bool(enemy.get("exploration_awake",false)):continue
 			var record:Dictionary=_map_spawn_records.get(int(enemy.root_id),{})
-			if record.get("source_group","")==entry.id:entry.awake_count+=1
+			var group:Variant=record.get("source_group","")
+			if awake.has(group):awake[group]+=1
+	for entry:Dictionary in result:
+		entry.reason="";entry.awake_count=awake[entry.id]
 	return result
 
 func _boss_phase()->String:

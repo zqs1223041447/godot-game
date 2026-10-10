@@ -1,0 +1,33 @@
+{
+  "scripts/ui/exploration_map_overview.gd": {
+    "sha256": "17044e7c153670ee4123e0df0acfad975e187161671f0dc87446532c529d1974",
+    "instrumented_sha256": "cc62fd33c509299f578079764804503e2721bcbcda529d9b1c9f8863ae329720",
+    "functions": [
+      "_draw",
+      "update_live",
+      "update_player"
+    ]
+  },
+  "scripts/game_hud.gd": {
+    "sha256": "ebdb63d80d32dd02a150a6fb4c57a9eb18cb95a83e905df1670858de1e41b699",
+    "instrumented_sha256": "57cbd4c91844b3ea528fe549ed88767b73e7f7fb8a79311cb8f76b408d17e993",
+    "functions": [
+      "_refresh_world",
+      "_tick_overview",
+      "_refresh_cleanup_hint",
+      "_process"
+    ]
+  },
+  "scripts/main.gd": {
+    "sha256": "1aa5e6a6a46aeb897c7eaadbc0abb056a95fb7ec345df4e30f2b82ac9bdcabb3",
+    "instrumented_sha256": "c245a5ba30fe72792badd8d11c55fec5a3a3a3d1777f060c383b37ad2859edc7",
+    "functions": [
+      "world_context",
+      "_camp_states",
+      "_outpost_states",
+      "exploration_cleanup_hint",
+      "tick",
+      "_process"
+    ]
+  }
+}

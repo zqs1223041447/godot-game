@@ -1,0 +1,167 @@
+{
+  "fixture_digest": "281696ff4a3170f536d3cfcae30e86718a50a5bfe3611ca79e7c8948b1998404",
+  "baseline": "160e05992d69a7d407cbff54947e116bea21031d",
+  "direct_query_median_us": [
+    236.0,
+    171.0
+  ],
+  "direct_camp_scan_median_us": [
+    111.0,
+    51.0
+  ],
+  "windows": [
+    {
+      "run": "matched-baseline",
+      "window": "0",
+      "open": false,
+      "wall_median_us": 91791.0,
+      "main_process_per_frame_median_us": 17958.5,
+      "game_step_median_us": 3345.5,
+      "overview_draw_per_frame_median_us": 0.0,
+      "world_context": {
+        "count": 0
+      },
+      "overview_state": {
+        "count": 0
+      }
+    },
+    {
+      "run": "matched-baseline",
+      "window": "1",
+      "open": true,
+      "wall_median_us": 97911.5,
+      "main_process_per_frame_median_us": 21061.0,
+      "game_step_median_us": 3375.0,
+      "overview_draw_per_frame_median_us": 241.0,
+      "world_context": {
+        "count": 4,
+        "median_us": 432.0,
+        "p95_us": 441,
+        "mean_us": 432.5,
+        "max_us": 441
+      },
+      "overview_state": {
+        "count": 4,
+        "median_us": 51.0,
+        "p95_us": 74,
+        "mean_us": 54,
+        "max_us": 74
+      }
+    },
+    {
+      "run": "matched-baseline",
+      "window": "2",
+      "open": false,
+      "wall_median_us": 93061.5,
+      "main_process_per_frame_median_us": 20357.5,
+      "game_step_median_us": 3438,
+      "overview_draw_per_frame_median_us": 0.0,
+      "world_context": {
+        "count": 0
+      },
+      "overview_state": {
+        "count": 0
+      }
+    },
+    {
+      "run": "matched-baseline",
+      "window": "3",
+      "open": true,
+      "wall_median_us": 94856.0,
+      "main_process_per_frame_median_us": 19669.5,
+      "game_step_median_us": 3177.5,
+      "overview_draw_per_frame_median_us": 229.5,
+      "world_context": {
+        "count": 2,
+        "median_us": 453.5,
+        "p95_us": 454,
+        "mean_us": 453.5,
+        "max_us": 454
+      },
+      "overview_state": {
+        "count": 2,
+        "median_us": 43.5,
+        "p95_us": 47,
+        "mean_us": 43.5,
+        "max_us": 47
+      }
+    },
+    {
+      "run": "matched-optimized",
+      "window": "0",
+      "open": false,
+      "wall_median_us": 93086.5,
+      "main_process_per_frame_median_us": 18867.0,
+      "game_step_median_us": 3315.0,
+      "overview_draw_per_frame_median_us": 0.0,
+      "world_context": {
+        "count": 0
+      },
+      "overview_state": {
+        "count": 0
+      }
+    },
+    {
+      "run": "matched-optimized",
+      "window": "1",
+      "open": true,
+      "wall_median_us": 97738.5,
+      "main_process_per_frame_median_us": 20828.5,
+      "game_step_median_us": 3392.5,
+      "overview_draw_per_frame_median_us": 231.5,
+      "world_context": {
+        "count": 4,
+        "median_us": 377.5,
+        "p95_us": 395,
+        "mean_us": 378.25,
+        "max_us": 395
+      },
+      "overview_state": {
+        "count": 4,
+        "median_us": 43.5,
+        "p95_us": 54,
+        "mean_us": 45.5,
+        "max_us": 54
+      }
+    },
+    {
+      "run": "matched-optimized",
+      "window": "2",
+      "open": false,
+      "wall_median_us": 98191.0,
+      "main_process_per_frame_median_us": 21768.5,
+      "game_step_median_us": 3502,
+      "overview_draw_per_frame_median_us": 0.0,
+      "world_context": {
+        "count": 0
+      },
+      "overview_state": {
+        "count": 0
+      }
+    },
+    {
+      "run": "matched-optimized",
+      "window": "3",
+      "open": true,
+      "wall_median_us": 100974.0,
+      "main_process_per_frame_median_us": 20612.5,
+      "game_step_median_us": 3257,
+      "overview_draw_per_frame_median_us": 232.5,
+      "world_context": {
+        "count": 4,
+        "median_us": 370.0,
+        "p95_us": 393,
+        "mean_us": 372.75,
+        "max_us": 393
+      },
+      "overview_state": {
+        "count": 4,
+        "median_us": 43.0,
+        "p95_us": 49,
+        "mean_us": 43.5,
+        "max_us": 49
+      }
+    }
+  ],
+  "conclusion": "Only local CPU query reduction established. Overall overview frame-time performance remains unresolved; no performance pass. Four earlier exploratory runs had unfixed admission seeds and are excluded from matched before/after claims."
+}

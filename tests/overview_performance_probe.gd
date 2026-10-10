@@ -1,0 +1,56 @@
+extends "res://tests/overview_live_short_test.gd"
+## Same original dense37 runtime fixture; equal timing hooks in both visibility states.
+const Profile=preload("res://docs/qa/overview-performance/profile.gd")
+var windows:Array=[]
+var direct:Array=[]
+var fixture_digest:=""
+func sample_window(label:String,opened:bool)->void:
+	Profile.enabled=false
+	if overview.visible!=opened:await key(KEY_TAB)
+	for warm:int in range(2):await RenderingServer.frame_post_draw
+	check(overview.visible==opened and arena.is_processing() and arena.hud.is_processing(),"Expected live visibility "+label)
+	var frames:Array=[];var sim_start:float=arena.elapsed
+	for index:int in range(8):
+		Profile.take();var started:=Time.get_ticks_usec();Profile.enabled=true
+		await RenderingServer.frame_post_draw
+		Profile.enabled=false
+		frames.append({"wall_us":Time.get_ticks_usec()-started,"calls":Profile.take(),"actors":arena.enemies.size(),"sim_elapsed":arena.elapsed,"projectiles":arena.projectiles.size()})
+	windows.append({"label":label,"open":opened,"frames":frames,"sim_seconds":arena.elapsed-sim_start})
+	check(arena.alive and arena.enemies.size()==37 and arena.elapsed>sim_start,"Dense live fixture persists "+label)
+func run()->void:
+	if not OS.get_environment("XDG_DATA_HOME").begins_with("/tmp/godot-overview-perf-"):quit(78);return
+	var model:=FaultModel.new();check(model.save_build("user://build_save.json")==OK,"Fresh canonical fixture")
+	arena=load("res://scenes/main.tscn").instantiate();arena.set_script(load("/tmp/godot-overview-profile-src/main.gd"));arena.state=model;arena.build_save_path="user://build_save.json"
+	root.add_child(arena);pause();await settle();overview=arena.hud._exploration_overview
+	arena.rng.seed=526917
+	if not formal_entry("ginkgo_arcade"):finish();return
+	arena.rng.seed=526917
+	arena._stats.max_health=1000000.0;arena.health=1000000.0;arena.shield=0.0;arena.invulnerable=0.0
+	for index:int in range(arena.enemies.size()):
+		var enemy:Dictionary=arena.enemies[index]
+		enemy.pos=arena._geometry.legal_point(arena.player_pos+Vector2.RIGHT.rotated(index*TAU/37.0)*(80+index%3*25),float(enemy.radius))
+		enemy.health=1000000.0;enemy.max_health=1000000.0;enemy.spawn=0.0
+	fixture_digest=var_to_bytes([arena.enemies,arena.player_pos,arena.rng.seed,arena.rng.state]).hex_encode().sha256_text()
+	arena.auto_fire=true;arena.set_process(true);arena.hud.set_process(true)
+	for index:int in range(8):await RenderingServer.frame_post_draw
+	var reversed:bool=OS.get_environment("OVERVIEW_PERF_REVERSE")=="1"
+	for index:int in range(4):await sample_window(str(index),(index%2==1)!=reversed)
+	check(not arena.incoming_damage_trace.is_empty(),"Original enemy attacks actually settle during samples")
+	# Fixed dense state, independent direct CPU timings; no simulation between samples.
+	pause()
+	if not overview.visible:await key(KEY_TAB)
+	var before:=strict_observation()
+	for index:int in range(24):
+		Profile.take();Profile.enabled=true
+		var world:Dictionary=arena.world_context()
+		overview.update_live(world,arena.player_pos,arena.player_facing)
+		arena.hud._refresh_cleanup_hint()
+		Profile.enabled=false;direct.append(Profile.take())
+	check(before==strict_observation(),"Direct observations preserve combat, RNG and exact save")
+	var costs:Array=[]
+	for index:int in range(128):
+		var started:=Time.get_ticks_usec();var ended:=Time.get_ticks_usec();Profile.enabled=true;Profile.record("observer_calibration",started,ended);Profile.enabled=false
+		costs.append(Time.get_ticks_usec()-started);Profile.take()
+	var report:Dictionary={"fixture_digest":fixture_digest,"checks":checks,"failures":failures,"failed_labels":labels,"display":DisplayServer.get_name(),"reverse":reversed,"windows":windows,"direct":direct,"observer_calibration_us":costs,"renderer":RenderingServer.get_video_adapter_name(),"method":"Four alternating eight-frame; seed fixed before entry; normal Main/HUD windows, two unsampled warm frames each. Identical unconditional wrappers, original function bodies, calls recorded in memory in both states. Existing37 durable actors; observer work outside timer interval. GPU completion wall time is not CPU function time. Direct samples are paused at one fixed state."}
+	FileAccess.open(OS.get_environment("OVERVIEW_OUTPUT").path_join("profile.json"),FileAccess.WRITE).store_string(JSON.stringify(report,"\t")+"\n")
+	print("OVERVIEW_PROFILE checks=%d failures=%d windows=%d"%[checks,failures,windows.size()]);quit(1 if failures else 0)
