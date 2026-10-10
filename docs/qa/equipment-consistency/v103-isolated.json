@@ -1,0 +1,1610 @@
+{
+	"baseline_commit": "b7d98c5b94c2c39f6f258835b28cfc32c4cd34d9",
+	"checks": 20270,
+	"current_base_count": 15,
+	"elapsed_msec": 9751,
+	"equality": "var_to_bytes on entire quote and plan dictionaries, including typed numbers, array and dictionary order; JSON is reporting only",
+	"failures": 0,
+	"generated_witnesses": [
+		{
+			"generation": {
+				"candidate_number": 3,
+				"method": "Catalog.generate_for_pool",
+				"pool_id": "build_nine_slot_v51",
+				"rng_seed": 103103,
+				"vocabulary": 51
+			},
+			"operation": "targeted_reforge_fire_resistance",
+			"plan_seed": 0,
+			"result": {
+				"code": "",
+				"cost": {
+					"calibration_shard": 16
+				},
+				"definition": {
+					"added_sources": [],
+					"affix_lines": [
+						"后缀 · 护火 T3：火焰抗性 +21%",
+						"前缀 · 厚障 T1：最大护盾 +3"
+					],
+					"base_id": "nine_slot_etched_ring",
+					"base_name": "纹刻指环",
+					"description": "最大生命 +4，最大魔力 +2。\n后缀 · 护火 T3：火焰抗性 +21%\n前缀 · 厚障 T1：最大护盾 +3",
+					"effects": [],
+					"id": "gear_103001",
+					"item_level": 30,
+					"name": "魔法 · 纹刻指环",
+					"rarity": "magic",
+					"size": "(1, 1)",
+					"slot": "ring",
+					"stats": {
+						"fire_resistance": 0.21,
+						"max_health": 4.0,
+						"max_mana": 2.0,
+						"max_shield": 3.0
+					}
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的火焰抗性词缀。",
+				"eligible_target_tiers": 3,
+				"instance": {
+					"affixes": [
+						{
+							"id": "ring_emberward",
+							"tier": 3,
+							"value": 21
+						},
+						{
+							"id": "nine_slot_prefix_aegis",
+							"tier": 1,
+							"value": 3
+						}
+					],
+					"base_id": "nine_slot_etched_ring",
+					"id": "gear_103001",
+					"item_level": 30,
+					"rarity": "magic"
+				},
+				"label": "定向重铸",
+				"ok": true,
+				"operation": "targeted_reforge_fire_resistance",
+				"reachable_counts": [
+					1,
+					2
+				],
+				"reason": "",
+				"result_rarity": "magic",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "fire_resistance",
+				"target_label": "火焰抗性",
+				"targeted": true
+			},
+			"source": {
+				"affixes": [
+					{
+						"id": "nine_slot_prefix_vitality",
+						"tier": 1,
+						"value": 5
+					},
+					{
+						"id": "ring_stormward",
+						"tier": 1,
+						"value": 10
+					}
+				],
+				"base_id": "nine_slot_etched_ring",
+				"id": "gear_103001",
+				"item_level": 30,
+				"rarity": "magic"
+			}
+		},
+		{
+			"generation": {
+				"candidate_number": 3,
+				"method": "Catalog.generate_for_pool",
+				"pool_id": "build_nine_slot_v51",
+				"rng_seed": 103103,
+				"vocabulary": 51
+			},
+			"operation": "targeted_reforge_cold_resistance",
+			"plan_seed": 0,
+			"result": {
+				"code": "",
+				"cost": {
+					"calibration_shard": 16
+				},
+				"definition": {
+					"added_sources": [],
+					"affix_lines": [
+						"后缀 · 护寒 T3：冰霜抗性 +21%",
+						"前缀 · 厚障 T1：最大护盾 +3"
+					],
+					"base_id": "nine_slot_etched_ring",
+					"base_name": "纹刻指环",
+					"description": "最大生命 +4，最大魔力 +2。\n后缀 · 护寒 T3：冰霜抗性 +21%\n前缀 · 厚障 T1：最大护盾 +3",
+					"effects": [],
+					"id": "gear_103001",
+					"item_level": 30,
+					"name": "魔法 · 纹刻指环",
+					"rarity": "magic",
+					"size": "(1, 1)",
+					"slot": "ring",
+					"stats": {
+						"cold_resistance": 0.21,
+						"max_health": 4.0,
+						"max_mana": 2.0,
+						"max_shield": 3.0
+					}
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的冰霜抗性词缀。",
+				"eligible_target_tiers": 3,
+				"instance": {
+					"affixes": [
+						{
+							"id": "ring_rimeward",
+							"tier": 3,
+							"value": 21
+						},
+						{
+							"id": "nine_slot_prefix_aegis",
+							"tier": 1,
+							"value": 3
+						}
+					],
+					"base_id": "nine_slot_etched_ring",
+					"id": "gear_103001",
+					"item_level": 30,
+					"rarity": "magic"
+				},
+				"label": "定向重铸",
+				"ok": true,
+				"operation": "targeted_reforge_cold_resistance",
+				"reachable_counts": [
+					1,
+					2
+				],
+				"reason": "",
+				"result_rarity": "magic",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "cold_resistance",
+				"target_label": "冰霜抗性",
+				"targeted": true
+			},
+			"source": {
+				"affixes": [
+					{
+						"id": "nine_slot_prefix_vitality",
+						"tier": 1,
+						"value": 5
+					},
+					{
+						"id": "ring_stormward",
+						"tier": 1,
+						"value": 10
+					}
+				],
+				"base_id": "nine_slot_etched_ring",
+				"id": "gear_103001",
+				"item_level": 30,
+				"rarity": "magic"
+			}
+		},
+		{
+			"generation": {
+				"candidate_number": 3,
+				"method": "Catalog.generate_for_pool",
+				"pool_id": "build_nine_slot_v51",
+				"rng_seed": 103103,
+				"vocabulary": 51
+			},
+			"operation": "targeted_reforge_lightning_resistance",
+			"plan_seed": 0,
+			"result": {
+				"code": "",
+				"cost": {
+					"calibration_shard": 16
+				},
+				"definition": {
+					"added_sources": [],
+					"affix_lines": [
+						"后缀 · 护雷 T3：闪电抗性 +21%",
+						"前缀 · 厚障 T1：最大护盾 +3"
+					],
+					"base_id": "nine_slot_etched_ring",
+					"base_name": "纹刻指环",
+					"description": "最大生命 +4，最大魔力 +2。\n后缀 · 护雷 T3：闪电抗性 +21%\n前缀 · 厚障 T1：最大护盾 +3",
+					"effects": [],
+					"id": "gear_103001",
+					"item_level": 30,
+					"name": "魔法 · 纹刻指环",
+					"rarity": "magic",
+					"size": "(1, 1)",
+					"slot": "ring",
+					"stats": {
+						"lightning_resistance": 0.21,
+						"max_health": 4.0,
+						"max_mana": 2.0,
+						"max_shield": 3.0
+					}
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的闪电抗性词缀。",
+				"eligible_target_tiers": 3,
+				"instance": {
+					"affixes": [
+						{
+							"id": "ring_stormward",
+							"tier": 3,
+							"value": 21
+						},
+						{
+							"id": "nine_slot_prefix_aegis",
+							"tier": 1,
+							"value": 3
+						}
+					],
+					"base_id": "nine_slot_etched_ring",
+					"id": "gear_103001",
+					"item_level": 30,
+					"rarity": "magic"
+				},
+				"label": "定向重铸",
+				"ok": true,
+				"operation": "targeted_reforge_lightning_resistance",
+				"reachable_counts": [
+					1,
+					2
+				],
+				"reason": "",
+				"result_rarity": "magic",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "lightning_resistance",
+				"target_label": "闪电抗性",
+				"targeted": true
+			},
+			"source": {
+				"affixes": [
+					{
+						"id": "nine_slot_prefix_vitality",
+						"tier": 1,
+						"value": 5
+					},
+					{
+						"id": "ring_stormward",
+						"tier": 1,
+						"value": 10
+					}
+				],
+				"base_id": "nine_slot_etched_ring",
+				"id": "gear_103001",
+				"item_level": 30,
+				"rarity": "magic"
+			}
+		},
+		{
+			"generation": {
+				"candidate_number": 3,
+				"method": "Catalog.generate_for_pool",
+				"pool_id": "build_nine_slot_v51",
+				"rng_seed": 103103,
+				"vocabulary": 51
+			},
+			"operation": "targeted_reforge_chaos_resistance",
+			"plan_seed": 0,
+			"result": {
+				"code": "",
+				"cost": {
+					"calibration_shard": 16
+				},
+				"definition": {
+					"added_sources": [],
+					"affix_lines": [
+						"后缀 · 护虚 T3：混沌抗性 +21%",
+						"前缀 · 厚障 T1：最大护盾 +3"
+					],
+					"base_id": "nine_slot_etched_ring",
+					"base_name": "纹刻指环",
+					"description": "最大生命 +4，最大魔力 +2。\n后缀 · 护虚 T3：混沌抗性 +21%\n前缀 · 厚障 T1：最大护盾 +3",
+					"effects": [],
+					"id": "gear_103001",
+					"item_level": 30,
+					"name": "魔法 · 纹刻指环",
+					"rarity": "magic",
+					"size": "(1, 1)",
+					"slot": "ring",
+					"stats": {
+						"chaos_resistance": 0.21,
+						"max_health": 4.0,
+						"max_mana": 2.0,
+						"max_shield": 3.0
+					}
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的混沌抗性词缀。",
+				"eligible_target_tiers": 3,
+				"instance": {
+					"affixes": [
+						{
+							"id": "ring_voidward",
+							"tier": 3,
+							"value": 21
+						},
+						{
+							"id": "nine_slot_prefix_aegis",
+							"tier": 1,
+							"value": 3
+						}
+					],
+					"base_id": "nine_slot_etched_ring",
+					"id": "gear_103001",
+					"item_level": 30,
+					"rarity": "magic"
+				},
+				"label": "定向重铸",
+				"ok": true,
+				"operation": "targeted_reforge_chaos_resistance",
+				"reachable_counts": [
+					1,
+					2
+				],
+				"reason": "",
+				"result_rarity": "magic",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "chaos_resistance",
+				"target_label": "混沌抗性",
+				"targeted": true
+			},
+			"source": {
+				"affixes": [
+					{
+						"id": "nine_slot_prefix_vitality",
+						"tier": 1,
+						"value": 5
+					},
+					{
+						"id": "ring_stormward",
+						"tier": 1,
+						"value": 10
+					}
+				],
+				"base_id": "nine_slot_etched_ring",
+				"id": "gear_103001",
+				"item_level": 30,
+				"rarity": "magic"
+			}
+		},
+		{
+			"generation": {
+				"candidate_number": 2,
+				"method": "Catalog.generate_for_pool",
+				"pool_id": "build_nine_slot_v51",
+				"rng_seed": 103103,
+				"vocabulary": 51
+			},
+			"operation": "targeted_reforge_fire_resistance",
+			"plan_seed": 0,
+			"result": {
+				"code": "",
+				"cost": {
+					"calibration_shard": 40
+				},
+				"definition": {
+					"added_sources": [],
+					"affix_lines": [
+						"后缀 · 护火 T3：火焰抗性 +21%",
+						"后缀 · 泉行 T1：魔力恢复速度提高 +3%",
+						"后缀 · 护雷 T1：闪电抗性 +10%",
+						"前缀 · 灵汲 T2：攻击伤害偷取为魔力 +0.23%",
+						"前缀 · 厚障 T1：最大护盾 +3",
+						"前缀 · 坚生 T1：最大生命 +5"
+					],
+					"base_id": "nine_slot_etched_ring",
+					"base_name": "纹刻指环",
+					"description": "最大生命 +4，最大魔力 +2。\n后缀 · 护火 T3：火焰抗性 +21%\n后缀 · 泉行 T1：魔力恢复速度提高 +3%\n后缀 · 护雷 T1：闪电抗性 +10%\n前缀 · 灵汲 T2：攻击伤害偷取为魔力 +0.23%\n前缀 · 厚障 T1：最大护盾 +3\n前缀 · 坚生 T1：最大生命 +5",
+					"effects": [],
+					"id": "gear_103001",
+					"item_level": 30,
+					"name": "稀有 · 纹刻指环",
+					"rarity": "rare",
+					"size": "(1, 1)",
+					"slot": "ring",
+					"stats": {
+						"attack_mana_leech": 0.0023,
+						"fire_resistance": 0.21,
+						"lightning_resistance": 0.1,
+						"mana_regen_increased": 0.03,
+						"max_health": 9.0,
+						"max_mana": 2.0,
+						"max_shield": 3.0
+					}
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的火焰抗性词缀。",
+				"eligible_target_tiers": 3,
+				"instance": {
+					"affixes": [
+						{
+							"id": "ring_emberward",
+							"tier": 3,
+							"value": 21
+						},
+						{
+							"id": "nine_slot_suffix_mana_flow",
+							"tier": 1,
+							"value": 3
+						},
+						{
+							"id": "ring_stormward",
+							"tier": 1,
+							"value": 10
+						},
+						{
+							"id": "attack_mana_leech",
+							"tier": 2,
+							"value": 23
+						},
+						{
+							"id": "nine_slot_prefix_aegis",
+							"tier": 1,
+							"value": 3
+						},
+						{
+							"id": "nine_slot_prefix_vitality",
+							"tier": 1,
+							"value": 5
+						}
+					],
+					"base_id": "nine_slot_etched_ring",
+					"id": "gear_103001",
+					"item_level": 30,
+					"rarity": "rare"
+				},
+				"label": "定向重铸",
+				"ok": true,
+				"operation": "targeted_reforge_fire_resistance",
+				"reachable_counts": [
+					4,
+					5,
+					6
+				],
+				"reason": "",
+				"result_rarity": "rare",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "fire_resistance",
+				"target_label": "火焰抗性",
+				"targeted": true
+			},
+			"source": {
+				"affixes": [
+					{
+						"id": "attack_mana_leech",
+						"tier": 1,
+						"value": 12
+					},
+					{
+						"id": "nine_slot_prefix_aegis",
+						"tier": 2,
+						"value": 5
+					},
+					{
+						"id": "global_critical_multiplier",
+						"tier": 2,
+						"value": 10
+					},
+					{
+						"id": "ring_voidward",
+						"tier": 2,
+						"value": 15
+					},
+					{
+						"id": "ring_stormward",
+						"tier": 3,
+						"value": 21
+					}
+				],
+				"base_id": "nine_slot_etched_ring",
+				"id": "gear_103001",
+				"item_level": 30,
+				"rarity": "rare"
+			}
+		},
+		{
+			"generation": {
+				"candidate_number": 2,
+				"method": "Catalog.generate_for_pool",
+				"pool_id": "build_nine_slot_v51",
+				"rng_seed": 103103,
+				"vocabulary": 51
+			},
+			"operation": "targeted_reforge_cold_resistance",
+			"plan_seed": 0,
+			"result": {
+				"code": "",
+				"cost": {
+					"calibration_shard": 40
+				},
+				"definition": {
+					"added_sources": [],
+					"affix_lines": [
+						"后缀 · 护寒 T3：冰霜抗性 +21%",
+						"后缀 · 泉行 T1：魔力恢复速度提高 +3%",
+						"后缀 · 护雷 T1：闪电抗性 +10%",
+						"前缀 · 灵汲 T2：攻击伤害偷取为魔力 +0.23%",
+						"前缀 · 厚障 T1：最大护盾 +3",
+						"前缀 · 坚生 T1：最大生命 +5"
+					],
+					"base_id": "nine_slot_etched_ring",
+					"base_name": "纹刻指环",
+					"description": "最大生命 +4，最大魔力 +2。\n后缀 · 护寒 T3：冰霜抗性 +21%\n后缀 · 泉行 T1：魔力恢复速度提高 +3%\n后缀 · 护雷 T1：闪电抗性 +10%\n前缀 · 灵汲 T2：攻击伤害偷取为魔力 +0.23%\n前缀 · 厚障 T1：最大护盾 +3\n前缀 · 坚生 T1：最大生命 +5",
+					"effects": [],
+					"id": "gear_103001",
+					"item_level": 30,
+					"name": "稀有 · 纹刻指环",
+					"rarity": "rare",
+					"size": "(1, 1)",
+					"slot": "ring",
+					"stats": {
+						"attack_mana_leech": 0.0023,
+						"cold_resistance": 0.21,
+						"lightning_resistance": 0.1,
+						"mana_regen_increased": 0.03,
+						"max_health": 9.0,
+						"max_mana": 2.0,
+						"max_shield": 3.0
+					}
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的冰霜抗性词缀。",
+				"eligible_target_tiers": 3,
+				"instance": {
+					"affixes": [
+						{
+							"id": "ring_rimeward",
+							"tier": 3,
+							"value": 21
+						},
+						{
+							"id": "nine_slot_suffix_mana_flow",
+							"tier": 1,
+							"value": 3
+						},
+						{
+							"id": "ring_stormward",
+							"tier": 1,
+							"value": 10
+						},
+						{
+							"id": "attack_mana_leech",
+							"tier": 2,
+							"value": 23
+						},
+						{
+							"id": "nine_slot_prefix_aegis",
+							"tier": 1,
+							"value": 3
+						},
+						{
+							"id": "nine_slot_prefix_vitality",
+							"tier": 1,
+							"value": 5
+						}
+					],
+					"base_id": "nine_slot_etched_ring",
+					"id": "gear_103001",
+					"item_level": 30,
+					"rarity": "rare"
+				},
+				"label": "定向重铸",
+				"ok": true,
+				"operation": "targeted_reforge_cold_resistance",
+				"reachable_counts": [
+					4,
+					5,
+					6
+				],
+				"reason": "",
+				"result_rarity": "rare",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "cold_resistance",
+				"target_label": "冰霜抗性",
+				"targeted": true
+			},
+			"source": {
+				"affixes": [
+					{
+						"id": "attack_mana_leech",
+						"tier": 1,
+						"value": 12
+					},
+					{
+						"id": "nine_slot_prefix_aegis",
+						"tier": 2,
+						"value": 5
+					},
+					{
+						"id": "global_critical_multiplier",
+						"tier": 2,
+						"value": 10
+					},
+					{
+						"id": "ring_voidward",
+						"tier": 2,
+						"value": 15
+					},
+					{
+						"id": "ring_stormward",
+						"tier": 3,
+						"value": 21
+					}
+				],
+				"base_id": "nine_slot_etched_ring",
+				"id": "gear_103001",
+				"item_level": 30,
+				"rarity": "rare"
+			}
+		},
+		{
+			"generation": {
+				"candidate_number": 2,
+				"method": "Catalog.generate_for_pool",
+				"pool_id": "build_nine_slot_v51",
+				"rng_seed": 103103,
+				"vocabulary": 51
+			},
+			"operation": "targeted_reforge_lightning_resistance",
+			"plan_seed": 0,
+			"result": {
+				"code": "",
+				"cost": {
+					"calibration_shard": 40
+				},
+				"definition": {
+					"added_sources": [],
+					"affix_lines": [
+						"后缀 · 护雷 T3：闪电抗性 +21%",
+						"后缀 · 泉行 T1：魔力恢复速度提高 +3%",
+						"后缀 · 护寒 T1：冰霜抗性 +10%",
+						"前缀 · 灵汲 T2：攻击伤害偷取为魔力 +0.23%",
+						"前缀 · 厚障 T1：最大护盾 +3",
+						"前缀 · 坚生 T1：最大生命 +5"
+					],
+					"base_id": "nine_slot_etched_ring",
+					"base_name": "纹刻指环",
+					"description": "最大生命 +4，最大魔力 +2。\n后缀 · 护雷 T3：闪电抗性 +21%\n后缀 · 泉行 T1：魔力恢复速度提高 +3%\n后缀 · 护寒 T1：冰霜抗性 +10%\n前缀 · 灵汲 T2：攻击伤害偷取为魔力 +0.23%\n前缀 · 厚障 T1：最大护盾 +3\n前缀 · 坚生 T1：最大生命 +5",
+					"effects": [],
+					"id": "gear_103001",
+					"item_level": 30,
+					"name": "稀有 · 纹刻指环",
+					"rarity": "rare",
+					"size": "(1, 1)",
+					"slot": "ring",
+					"stats": {
+						"attack_mana_leech": 0.0023,
+						"cold_resistance": 0.1,
+						"lightning_resistance": 0.21,
+						"mana_regen_increased": 0.03,
+						"max_health": 9.0,
+						"max_mana": 2.0,
+						"max_shield": 3.0
+					}
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的闪电抗性词缀。",
+				"eligible_target_tiers": 3,
+				"instance": {
+					"affixes": [
+						{
+							"id": "ring_stormward",
+							"tier": 3,
+							"value": 21
+						},
+						{
+							"id": "nine_slot_suffix_mana_flow",
+							"tier": 1,
+							"value": 3
+						},
+						{
+							"id": "ring_rimeward",
+							"tier": 1,
+							"value": 10
+						},
+						{
+							"id": "attack_mana_leech",
+							"tier": 2,
+							"value": 23
+						},
+						{
+							"id": "nine_slot_prefix_aegis",
+							"tier": 1,
+							"value": 3
+						},
+						{
+							"id": "nine_slot_prefix_vitality",
+							"tier": 1,
+							"value": 5
+						}
+					],
+					"base_id": "nine_slot_etched_ring",
+					"id": "gear_103001",
+					"item_level": 30,
+					"rarity": "rare"
+				},
+				"label": "定向重铸",
+				"ok": true,
+				"operation": "targeted_reforge_lightning_resistance",
+				"reachable_counts": [
+					4,
+					5,
+					6
+				],
+				"reason": "",
+				"result_rarity": "rare",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "lightning_resistance",
+				"target_label": "闪电抗性",
+				"targeted": true
+			},
+			"source": {
+				"affixes": [
+					{
+						"id": "attack_mana_leech",
+						"tier": 1,
+						"value": 12
+					},
+					{
+						"id": "nine_slot_prefix_aegis",
+						"tier": 2,
+						"value": 5
+					},
+					{
+						"id": "global_critical_multiplier",
+						"tier": 2,
+						"value": 10
+					},
+					{
+						"id": "ring_voidward",
+						"tier": 2,
+						"value": 15
+					},
+					{
+						"id": "ring_stormward",
+						"tier": 3,
+						"value": 21
+					}
+				],
+				"base_id": "nine_slot_etched_ring",
+				"id": "gear_103001",
+				"item_level": 30,
+				"rarity": "rare"
+			}
+		},
+		{
+			"generation": {
+				"candidate_number": 2,
+				"method": "Catalog.generate_for_pool",
+				"pool_id": "build_nine_slot_v51",
+				"rng_seed": 103103,
+				"vocabulary": 51
+			},
+			"operation": "targeted_reforge_chaos_resistance",
+			"plan_seed": 0,
+			"result": {
+				"code": "",
+				"cost": {
+					"calibration_shard": 40
+				},
+				"definition": {
+					"added_sources": [],
+					"affix_lines": [
+						"后缀 · 护虚 T3：混沌抗性 +21%",
+						"后缀 · 泉行 T1：魔力恢复速度提高 +3%",
+						"后缀 · 护寒 T1：冰霜抗性 +10%",
+						"前缀 · 灵汲 T2：攻击伤害偷取为魔力 +0.23%",
+						"前缀 · 厚障 T1：最大护盾 +3",
+						"前缀 · 坚生 T1：最大生命 +5"
+					],
+					"base_id": "nine_slot_etched_ring",
+					"base_name": "纹刻指环",
+					"description": "最大生命 +4，最大魔力 +2。\n后缀 · 护虚 T3：混沌抗性 +21%\n后缀 · 泉行 T1：魔力恢复速度提高 +3%\n后缀 · 护寒 T1：冰霜抗性 +10%\n前缀 · 灵汲 T2：攻击伤害偷取为魔力 +0.23%\n前缀 · 厚障 T1：最大护盾 +3\n前缀 · 坚生 T1：最大生命 +5",
+					"effects": [],
+					"id": "gear_103001",
+					"item_level": 30,
+					"name": "稀有 · 纹刻指环",
+					"rarity": "rare",
+					"size": "(1, 1)",
+					"slot": "ring",
+					"stats": {
+						"attack_mana_leech": 0.0023,
+						"chaos_resistance": 0.21,
+						"cold_resistance": 0.1,
+						"mana_regen_increased": 0.03,
+						"max_health": 9.0,
+						"max_mana": 2.0,
+						"max_shield": 3.0
+					}
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的混沌抗性词缀。",
+				"eligible_target_tiers": 3,
+				"instance": {
+					"affixes": [
+						{
+							"id": "ring_voidward",
+							"tier": 3,
+							"value": 21
+						},
+						{
+							"id": "nine_slot_suffix_mana_flow",
+							"tier": 1,
+							"value": 3
+						},
+						{
+							"id": "ring_rimeward",
+							"tier": 1,
+							"value": 10
+						},
+						{
+							"id": "attack_mana_leech",
+							"tier": 2,
+							"value": 23
+						},
+						{
+							"id": "nine_slot_prefix_aegis",
+							"tier": 1,
+							"value": 3
+						},
+						{
+							"id": "nine_slot_prefix_vitality",
+							"tier": 1,
+							"value": 5
+						}
+					],
+					"base_id": "nine_slot_etched_ring",
+					"id": "gear_103001",
+					"item_level": 30,
+					"rarity": "rare"
+				},
+				"label": "定向重铸",
+				"ok": true,
+				"operation": "targeted_reforge_chaos_resistance",
+				"reachable_counts": [
+					4,
+					5,
+					6
+				],
+				"reason": "",
+				"result_rarity": "rare",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "chaos_resistance",
+				"target_label": "混沌抗性",
+				"targeted": true
+			},
+			"source": {
+				"affixes": [
+					{
+						"id": "attack_mana_leech",
+						"tier": 1,
+						"value": 12
+					},
+					{
+						"id": "nine_slot_prefix_aegis",
+						"tier": 2,
+						"value": 5
+					},
+					{
+						"id": "global_critical_multiplier",
+						"tier": 2,
+						"value": 10
+					},
+					{
+						"id": "ring_voidward",
+						"tier": 2,
+						"value": 15
+					},
+					{
+						"id": "ring_stormward",
+						"tier": 3,
+						"value": 21
+					}
+				],
+				"base_id": "nine_slot_etched_ring",
+				"id": "gear_103001",
+				"item_level": 30,
+				"rarity": "rare"
+			}
+		},
+		{
+			"generation": {
+				"candidate_number": 1,
+				"method": "Catalog.generate_for_pool",
+				"pool_id": "defense_v39",
+				"rng_seed": 103103,
+				"vocabulary": 51
+			},
+			"operation": "targeted_reforge_fire_resistance",
+			"plan_seed": 0,
+			"result": {
+				"code": "",
+				"cost": {
+					"calibration_shard": 16
+				},
+				"definition": {
+					"added_sources": [],
+					"affix_lines": [
+						"后缀 · 护火 T3：火焰抗性 +21%",
+						"前缀 · 灯帷 T1：全局最大护盾 +7"
+					],
+					"base_id": "emberhide_vest",
+					"base_name": "灰烬皮甲",
+					"description": "最大生命 +8，火焰抗性 +15%。火焰抗性降低火焰命中与燃烧伤害；默认上限75%，最大抗性天赋可提高至本游戏安全上限83%，仍需另外取得足够原始抗性。\n后缀 · 护火 T3：火焰抗性 +21%\n前缀 · 灯帷 T1：全局最大护盾 +7",
+					"effects": [],
+					"id": "gear_103001",
+					"item_level": 30,
+					"name": "魔法 · 灰烬皮甲",
+					"rarity": "magic",
+					"size": "(2, 3)",
+					"slot": "armor",
+					"stats": {
+						"fire_resistance": 0.36,
+						"max_health": 8.0,
+						"max_shield": 7.0
+					}
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的火焰抗性词缀。",
+				"eligible_target_tiers": 3,
+				"instance": {
+					"affixes": [
+						{
+							"id": "emberward",
+							"tier": 3,
+							"value": 21
+						},
+						{
+							"id": "lanternveil",
+							"tier": 1,
+							"value": 7
+						}
+					],
+					"base_id": "emberhide_vest",
+					"id": "gear_103001",
+					"item_level": 30,
+					"rarity": "magic"
+				},
+				"label": "定向重铸",
+				"ok": true,
+				"operation": "targeted_reforge_fire_resistance",
+				"reachable_counts": [
+					1,
+					2
+				],
+				"reason": "",
+				"result_rarity": "magic",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "fire_resistance",
+				"target_label": "火焰抗性",
+				"targeted": true
+			},
+			"source": {
+				"affixes": [
+					{
+						"id": "mistweave",
+						"tier": 1,
+						"value": 237
+					}
+				],
+				"base_id": "emberhide_vest",
+				"id": "gear_103001",
+				"item_level": 30,
+				"rarity": "magic"
+			}
+		},
+		{
+			"generation": {
+				"candidate_number": 1,
+				"method": "Catalog.generate_for_pool",
+				"pool_id": "defense_v39",
+				"rng_seed": 103103,
+				"vocabulary": 51
+			},
+			"operation": "targeted_reforge_cold_resistance",
+			"plan_seed": 0,
+			"result": {
+				"code": "",
+				"cost": {
+					"calibration_shard": 16
+				},
+				"definition": {
+					"added_sources": [],
+					"affix_lines": [
+						"后缀 · 护寒 T3：冰霜抗性 +21%",
+						"前缀 · 灯帷 T1：全局最大护盾 +7"
+					],
+					"base_id": "emberhide_vest",
+					"base_name": "灰烬皮甲",
+					"description": "最大生命 +8，火焰抗性 +15%。火焰抗性降低火焰命中与燃烧伤害；默认上限75%，最大抗性天赋可提高至本游戏安全上限83%，仍需另外取得足够原始抗性。\n后缀 · 护寒 T3：冰霜抗性 +21%\n前缀 · 灯帷 T1：全局最大护盾 +7",
+					"effects": [],
+					"id": "gear_103001",
+					"item_level": 30,
+					"name": "魔法 · 灰烬皮甲",
+					"rarity": "magic",
+					"size": "(2, 3)",
+					"slot": "armor",
+					"stats": {
+						"cold_resistance": 0.21,
+						"fire_resistance": 0.15,
+						"max_health": 8.0,
+						"max_shield": 7.0
+					}
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的冰霜抗性词缀。",
+				"eligible_target_tiers": 3,
+				"instance": {
+					"affixes": [
+						{
+							"id": "rimeward",
+							"tier": 3,
+							"value": 21
+						},
+						{
+							"id": "lanternveil",
+							"tier": 1,
+							"value": 7
+						}
+					],
+					"base_id": "emberhide_vest",
+					"id": "gear_103001",
+					"item_level": 30,
+					"rarity": "magic"
+				},
+				"label": "定向重铸",
+				"ok": true,
+				"operation": "targeted_reforge_cold_resistance",
+				"reachable_counts": [
+					1,
+					2
+				],
+				"reason": "",
+				"result_rarity": "magic",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "cold_resistance",
+				"target_label": "冰霜抗性",
+				"targeted": true
+			},
+			"source": {
+				"affixes": [
+					{
+						"id": "mistweave",
+						"tier": 1,
+						"value": 237
+					}
+				],
+				"base_id": "emberhide_vest",
+				"id": "gear_103001",
+				"item_level": 30,
+				"rarity": "magic"
+			}
+		},
+		{
+			"generation": {
+				"candidate_number": 1,
+				"method": "Catalog.generate_for_pool",
+				"pool_id": "defense_v39",
+				"rng_seed": 103103,
+				"vocabulary": 51
+			},
+			"operation": "targeted_reforge_lightning_resistance",
+			"plan_seed": 0,
+			"result": {
+				"code": "",
+				"cost": {
+					"calibration_shard": 16
+				},
+				"definition": {
+					"added_sources": [],
+					"affix_lines": [
+						"后缀 · 护雷 T3：闪电抗性 +21%",
+						"前缀 · 灯帷 T1：全局最大护盾 +7"
+					],
+					"base_id": "emberhide_vest",
+					"base_name": "灰烬皮甲",
+					"description": "最大生命 +8，火焰抗性 +15%。火焰抗性降低火焰命中与燃烧伤害；默认上限75%，最大抗性天赋可提高至本游戏安全上限83%，仍需另外取得足够原始抗性。\n后缀 · 护雷 T3：闪电抗性 +21%\n前缀 · 灯帷 T1：全局最大护盾 +7",
+					"effects": [],
+					"id": "gear_103001",
+					"item_level": 30,
+					"name": "魔法 · 灰烬皮甲",
+					"rarity": "magic",
+					"size": "(2, 3)",
+					"slot": "armor",
+					"stats": {
+						"fire_resistance": 0.15,
+						"lightning_resistance": 0.21,
+						"max_health": 8.0,
+						"max_shield": 7.0
+					}
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的闪电抗性词缀。",
+				"eligible_target_tiers": 3,
+				"instance": {
+					"affixes": [
+						{
+							"id": "stormward",
+							"tier": 3,
+							"value": 21
+						},
+						{
+							"id": "lanternveil",
+							"tier": 1,
+							"value": 7
+						}
+					],
+					"base_id": "emberhide_vest",
+					"id": "gear_103001",
+					"item_level": 30,
+					"rarity": "magic"
+				},
+				"label": "定向重铸",
+				"ok": true,
+				"operation": "targeted_reforge_lightning_resistance",
+				"reachable_counts": [
+					1,
+					2
+				],
+				"reason": "",
+				"result_rarity": "magic",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "lightning_resistance",
+				"target_label": "闪电抗性",
+				"targeted": true
+			},
+			"source": {
+				"affixes": [
+					{
+						"id": "mistweave",
+						"tier": 1,
+						"value": 237
+					}
+				],
+				"base_id": "emberhide_vest",
+				"id": "gear_103001",
+				"item_level": 30,
+				"rarity": "magic"
+			}
+		},
+		{
+			"generation": {
+				"candidate_number": 1,
+				"method": "Catalog.generate_for_pool",
+				"pool_id": "defense_v39",
+				"rng_seed": 103103,
+				"vocabulary": 51
+			},
+			"operation": "targeted_reforge_fire_resistance",
+			"plan_seed": 0,
+			"result": {
+				"code": "",
+				"cost": {
+					"calibration_shard": 40
+				},
+				"definition": {
+					"added_sources": [],
+					"affix_lines": [
+						"后缀 · 护火 T3：火焰抗性 +21%",
+						"前缀 · 铁革 T1：护甲 +45",
+						"后缀 · 藏炭 T1：火焰伤害提高 +6%",
+						"前缀 · 雾织 T2：闪避值 +278",
+						"后缀 · 循迹 T1：移动速度提高 +2%",
+						"前缀 · 根泉 T1：最大生命 +8"
+					],
+					"base_id": "emberhide_vest",
+					"base_name": "灰烬皮甲",
+					"description": "最大生命 +8，火焰抗性 +15%。火焰抗性降低火焰命中与燃烧伤害；默认上限75%，最大抗性天赋可提高至本游戏安全上限83%，仍需另外取得足够原始抗性。\n后缀 · 护火 T3：火焰抗性 +21%\n前缀 · 铁革 T1：护甲 +45\n后缀 · 藏炭 T1：火焰伤害提高 +6%\n前缀 · 雾织 T2：闪避值 +278\n后缀 · 循迹 T1：移动速度提高 +2%\n前缀 · 根泉 T1：最大生命 +8",
+					"effects": [],
+					"id": "gear_103001",
+					"item_level": 30,
+					"name": "稀有 · 灰烬皮甲",
+					"rarity": "rare",
+					"size": "(2, 3)",
+					"slot": "armor",
+					"stats": {
+						"armour": 45.0,
+						"evasion": 278.0,
+						"fire_increased": 0.06,
+						"fire_resistance": 0.36,
+						"max_health": 16.0,
+						"move_speed_increased": 0.02
+					}
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的火焰抗性词缀。",
+				"eligible_target_tiers": 3,
+				"instance": {
+					"affixes": [
+						{
+							"id": "emberward",
+							"tier": 3,
+							"value": 21
+						},
+						{
+							"id": "ironhide",
+							"tier": 1,
+							"value": 45
+						},
+						{
+							"id": "coalglow",
+							"tier": 1,
+							"value": 6
+						},
+						{
+							"id": "mistweave",
+							"tier": 2,
+							"value": 278
+						},
+						{
+							"id": "trailstep",
+							"tier": 1,
+							"value": 2
+						},
+						{
+							"id": "rootwell",
+							"tier": 1,
+							"value": 8
+						}
+					],
+					"base_id": "emberhide_vest",
+					"id": "gear_103001",
+					"item_level": 30,
+					"rarity": "rare"
+				},
+				"label": "定向重铸",
+				"ok": true,
+				"operation": "targeted_reforge_fire_resistance",
+				"reachable_counts": [
+					4,
+					5,
+					6
+				],
+				"reason": "",
+				"result_rarity": "rare",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "fire_resistance",
+				"target_label": "火焰抗性",
+				"targeted": true
+			},
+			"source": {
+				"affixes": [
+					{
+						"id": "mistweave",
+						"tier": 1,
+						"value": 237
+					},
+					{
+						"id": "deepwell",
+						"tier": 1,
+						"value": 5
+					},
+					{
+						"id": "rootwell",
+						"tier": 1,
+						"value": 11
+					},
+					{
+						"id": "coalglow",
+						"tier": 1,
+						"value": 7
+					},
+					{
+						"id": "sparkthread",
+						"tier": 3,
+						"value": 20
+					}
+				],
+				"base_id": "emberhide_vest",
+				"id": "gear_103001",
+				"item_level": 30,
+				"rarity": "rare"
+			}
+		},
+		{
+			"generation": {
+				"candidate_number": 1,
+				"method": "Catalog.generate_for_pool",
+				"pool_id": "defense_v39",
+				"rng_seed": 103103,
+				"vocabulary": 51
+			},
+			"operation": "targeted_reforge_cold_resistance",
+			"plan_seed": 0,
+			"result": {
+				"code": "",
+				"cost": {
+					"calibration_shard": 40
+				},
+				"definition": {
+					"added_sources": [],
+					"affix_lines": [
+						"后缀 · 护寒 T3：冰霜抗性 +21%",
+						"前缀 · 铁革 T1：护甲 +45",
+						"后缀 · 藏炭 T1：火焰伤害提高 +6%",
+						"前缀 · 雾织 T2：闪避值 +278",
+						"后缀 · 循迹 T1：移动速度提高 +2%",
+						"前缀 · 根泉 T1：最大生命 +8"
+					],
+					"base_id": "emberhide_vest",
+					"base_name": "灰烬皮甲",
+					"description": "最大生命 +8，火焰抗性 +15%。火焰抗性降低火焰命中与燃烧伤害；默认上限75%，最大抗性天赋可提高至本游戏安全上限83%，仍需另外取得足够原始抗性。\n后缀 · 护寒 T3：冰霜抗性 +21%\n前缀 · 铁革 T1：护甲 +45\n后缀 · 藏炭 T1：火焰伤害提高 +6%\n前缀 · 雾织 T2：闪避值 +278\n后缀 · 循迹 T1：移动速度提高 +2%\n前缀 · 根泉 T1：最大生命 +8",
+					"effects": [],
+					"id": "gear_103001",
+					"item_level": 30,
+					"name": "稀有 · 灰烬皮甲",
+					"rarity": "rare",
+					"size": "(2, 3)",
+					"slot": "armor",
+					"stats": {
+						"armour": 45.0,
+						"cold_resistance": 0.21,
+						"evasion": 278.0,
+						"fire_increased": 0.06,
+						"fire_resistance": 0.15,
+						"max_health": 16.0,
+						"move_speed_increased": 0.02
+					}
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的冰霜抗性词缀。",
+				"eligible_target_tiers": 3,
+				"instance": {
+					"affixes": [
+						{
+							"id": "rimeward",
+							"tier": 3,
+							"value": 21
+						},
+						{
+							"id": "ironhide",
+							"tier": 1,
+							"value": 45
+						},
+						{
+							"id": "coalglow",
+							"tier": 1,
+							"value": 6
+						},
+						{
+							"id": "mistweave",
+							"tier": 2,
+							"value": 278
+						},
+						{
+							"id": "trailstep",
+							"tier": 1,
+							"value": 2
+						},
+						{
+							"id": "rootwell",
+							"tier": 1,
+							"value": 8
+						}
+					],
+					"base_id": "emberhide_vest",
+					"id": "gear_103001",
+					"item_level": 30,
+					"rarity": "rare"
+				},
+				"label": "定向重铸",
+				"ok": true,
+				"operation": "targeted_reforge_cold_resistance",
+				"reachable_counts": [
+					4,
+					5,
+					6
+				],
+				"reason": "",
+				"result_rarity": "rare",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "cold_resistance",
+				"target_label": "冰霜抗性",
+				"targeted": true
+			},
+			"source": {
+				"affixes": [
+					{
+						"id": "mistweave",
+						"tier": 1,
+						"value": 237
+					},
+					{
+						"id": "deepwell",
+						"tier": 1,
+						"value": 5
+					},
+					{
+						"id": "rootwell",
+						"tier": 1,
+						"value": 11
+					},
+					{
+						"id": "coalglow",
+						"tier": 1,
+						"value": 7
+					},
+					{
+						"id": "sparkthread",
+						"tier": 3,
+						"value": 20
+					}
+				],
+				"base_id": "emberhide_vest",
+				"id": "gear_103001",
+				"item_level": 30,
+				"rarity": "rare"
+			}
+		},
+		{
+			"generation": {
+				"candidate_number": 1,
+				"method": "Catalog.generate_for_pool",
+				"pool_id": "defense_v39",
+				"rng_seed": 103103,
+				"vocabulary": 51
+			},
+			"operation": "targeted_reforge_lightning_resistance",
+			"plan_seed": 0,
+			"result": {
+				"code": "",
+				"cost": {
+					"calibration_shard": 40
+				},
+				"definition": {
+					"added_sources": [],
+					"affix_lines": [
+						"后缀 · 护雷 T3：闪电抗性 +21%",
+						"前缀 · 铁革 T1：护甲 +45",
+						"后缀 · 藏炭 T1：火焰伤害提高 +6%",
+						"前缀 · 雾织 T2：闪避值 +278",
+						"后缀 · 循迹 T1：移动速度提高 +2%",
+						"前缀 · 根泉 T1：最大生命 +8"
+					],
+					"base_id": "emberhide_vest",
+					"base_name": "灰烬皮甲",
+					"description": "最大生命 +8，火焰抗性 +15%。火焰抗性降低火焰命中与燃烧伤害；默认上限75%，最大抗性天赋可提高至本游戏安全上限83%，仍需另外取得足够原始抗性。\n后缀 · 护雷 T3：闪电抗性 +21%\n前缀 · 铁革 T1：护甲 +45\n后缀 · 藏炭 T1：火焰伤害提高 +6%\n前缀 · 雾织 T2：闪避值 +278\n后缀 · 循迹 T1：移动速度提高 +2%\n前缀 · 根泉 T1：最大生命 +8",
+					"effects": [],
+					"id": "gear_103001",
+					"item_level": 30,
+					"name": "稀有 · 灰烬皮甲",
+					"rarity": "rare",
+					"size": "(2, 3)",
+					"slot": "armor",
+					"stats": {
+						"armour": 45.0,
+						"evasion": 278.0,
+						"fire_increased": 0.06,
+						"fire_resistance": 0.15,
+						"lightning_resistance": 0.21,
+						"max_health": 16.0,
+						"move_speed_increased": 0.02
+					}
+				},
+				"description": "保持稀有度，替换全部词缀；保证至少一条符合底材与物品等级的闪电抗性词缀。",
+				"eligible_target_tiers": 3,
+				"instance": {
+					"affixes": [
+						{
+							"id": "stormward",
+							"tier": 3,
+							"value": 21
+						},
+						{
+							"id": "ironhide",
+							"tier": 1,
+							"value": 45
+						},
+						{
+							"id": "coalglow",
+							"tier": 1,
+							"value": 6
+						},
+						{
+							"id": "mistweave",
+							"tier": 2,
+							"value": 278
+						},
+						{
+							"id": "trailstep",
+							"tier": 1,
+							"value": 2
+						},
+						{
+							"id": "rootwell",
+							"tier": 1,
+							"value": 8
+						}
+					],
+					"base_id": "emberhide_vest",
+					"id": "gear_103001",
+					"item_level": 30,
+					"rarity": "rare"
+				},
+				"label": "定向重铸",
+				"ok": true,
+				"operation": "targeted_reforge_lightning_resistance",
+				"reachable_counts": [
+					4,
+					5,
+					6
+				],
+				"reason": "",
+				"result_rarity": "rare",
+				"risk": "全部原词缀会被替换，不保证高阶或更强；结果可能相同或更差，碎片仍会消耗。",
+				"target_id": "lightning_resistance",
+				"target_label": "闪电抗性",
+				"targeted": true
+			},
+			"source": {
+				"affixes": [
+					{
+						"id": "mistweave",
+						"tier": 1,
+						"value": 237
+					},
+					{
+						"id": "deepwell",
+						"tier": 1,
+						"value": 5
+					},
+					{
+						"id": "rootwell",
+						"tier": 1,
+						"value": 11
+					},
+					{
+						"id": "coalglow",
+						"tier": 1,
+						"value": 7
+					},
+					{
+						"id": "sparkthread",
+						"tier": 3,
+						"value": 20
+					}
+				],
+				"base_id": "emberhide_vest",
+				"id": "gear_103001",
+				"item_level": 30,
+				"rarity": "rare"
+			}
+		}
+	],
+	"historical_plans": 40,
+	"historical_quotes": 40,
+	"levels": [
+		1,
+		8,
+		16,
+		30
+	],
+	"matrix_plans": 448,
+	"matrix_quotes": 480,
+	"observed_counts_at_level30": {
+		"magic": {
+			"1": true,
+			"2": true
+		},
+		"rare": {
+			"4": true,
+			"5": true,
+			"6": true
+		}
+	},
+	"observed_guaranteed_tiers_at_level30": [
+		3,
+		1
+	],
+	"old_six_plans": 192,
+	"old_six_quotes": 24,
+	"old_target_plans": 768,
+	"old_target_quotes": 96,
+	"oracle": "Original frozen b7 rules and 13 dependency hashes retained; six scripts privately reloaded with preload redirection; historical DefenseRules and DamageResolver isolated from live scripts",
+	"rng_scope": "Pure rules prove untouched global RNG and deterministic private seeded RNG only. External item/currency/global RNG ownership is tested by the separate model suite.",
+	"scope": "full_focused_suite",
+	"seeds": [
+		0,
+		1,
+		7,
+		42,
+		103,
+		49049,
+		-103,
+		2147483647
+	]
+}

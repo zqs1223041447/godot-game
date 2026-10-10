@@ -1,5 +1,7 @@
 # v103 resistance targeted reforge rules
 
+Current follow-up: [original-hash dependency isolation](../equipment-consistency/README.md) repairs later shared-dependency drift without changing this historical manifest, sources or recorded results. The evidence below remains the original v103 scope.
+
 The focused contract passes using the final affected rerun and unchanged evidence
 from the initial run. No production defect or production edit was needed in this
 QA batch. This is a pure-rules check, not a model transaction or UI check.

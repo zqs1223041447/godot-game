@@ -5,8 +5,9 @@ const Catalog = preload("res://scripts/items/equipment_catalog.gd")
 const Expansion = preload("res://scripts/items/crafting_expansion_rules.gd")
 const Targeted = preload("res://scripts/items/targeted_reforge_rules.gd")
 const Craft = preload("res://scripts/items/crafting_rules.gd")
-const OldTargeted = preload("res://docs/qa/v103-rules/frozen/targeted_reforge_rules.gd")
-const OldCraft = preload("res://docs/qa/v103-rules/frozen/crafting_rules.gd")
+const FrozenOracle = preload("res://tests/fixtures/v103_dependency_isolation/oracle_loader.gd")
+var OldTargeted: GDScript
+var OldCraft: GDScript
 const TARGETS: Dictionary = {
 	"targeted_reforge_fire_resistance": ["emberward", "ring_emberward"],
 	"targeted_reforge_cold_resistance": ["rimeward", "ring_rimeward"],
@@ -87,10 +88,22 @@ func _test_frozen_integrity() -> void:
 		if entry.original_path == "scripts/items/crafting_rules.gd":
 			check(FileAccess.get_sha256("res://" + entry.original_path) == entry.source_sha256, "CraftingRules source unchanged from b7")
 	for entry: Dictionary in manifest.shared_unchanged_dependencies:
-		check(FileAccess.get_sha256("res://" + entry.path) == entry.sha256, "Shared catalog/dependency unchanged from b7: " + entry.path)
+		check(FrozenOracle.source_text("res://" + entry.path).sha256_text() == entry.sha256, "Oracle dependency retains original b7 hash: " + entry.path)
+	_load_frozen_oracle()
+
+
+func _load_frozen_oracle() -> void:
+	if OldTargeted != null and OldCraft != null: return
+	var loaded := FrozenOracle.load_oracle()
+	check(loaded.has_all(["targeted","craft"]), "Original-hash dependency closure loads in isolated user directory")
+	if loaded.is_empty(): return
+	OldTargeted = loaded.targeted; OldCraft = loaded.craft
+	check(OldTargeted.Catalog == OldCraft.Catalog and OldCraft.Catalog != Catalog, "Old rules share isolated Catalog, never the live Catalog")
+	check(OldCraft.Catalog.DefenseRules != Catalog.DefenseRules and OldCraft.Catalog.DefenseRules.Damage != Catalog.DefenseRules.Damage, "Frozen defense and damage are distinct from live production scripts")
 
 
 func _test_metadata() -> void:
+	_load_frozen_oracle()
 	var expected: Array[String] = OldTargeted.operation_ids()
 	expected.append_array(TARGETS.keys())
 	expected.append("targeted_reforge_armour")
@@ -371,7 +384,7 @@ func _write_report() -> void:
 		"historical_quotes": historical_quotes, "historical_plans": historical_plans, "old_target_quotes": old_target_quotes, "old_target_plans": old_target_plans,
 		"old_six_quotes": old_six_quotes, "old_six_plans": old_six_plans, "elapsed_msec": Time.get_ticks_msec() - start_msec,
 		"equality": "var_to_bytes on entire quote and plan dictionaries, including typed numbers, array and dictionary order; JSON is reporting only",
-		"oracle": "Stripped-class b7 TargetedReforgeRules and CraftingRules (targeted preload relocated); 13 shared unchanged dependencies SHA-256 guarded",
+		"oracle": "Original frozen b7 rules and 13 dependency hashes retained; six scripts privately reloaded with preload redirection; historical DefenseRules and DamageResolver isolated from live scripts",
 		"rng_scope": "Pure rules prove untouched global RNG and deterministic private seeded RNG only. External item/currency/global RNG ownership is tested by the separate model suite.",
 		"observed_counts_at_level30": observed_counts, "observed_guaranteed_tiers_at_level30": observed_tiers.keys(), "generated_witnesses": witnesses}
 	var path: String = OS.get_environment("V103_RESISTANCE_RULES_REPORT")
