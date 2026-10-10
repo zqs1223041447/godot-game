@@ -1,0 +1,24 @@
+{
+	"cases": [
+		{
+			"balance": 0,
+			"case": "insufficient_funds",
+			"rows": 17
+		},
+		{
+			"balance": 8,
+			"case": "full_capacity",
+			"rows": 17
+		},
+		{
+			"case": "two_paid_flasks",
+			"normal_cost": 16,
+			"normal_purchase_count": 2
+		}
+	],
+	"checks": 49,
+	"display": "X11",
+	"failed_labels": [],
+	"failures": 0,
+	"fixture": "Existing lawful balance/full-bag fixtures; not natural currency acquisition"
+}

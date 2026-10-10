@@ -65,7 +65,7 @@ func run() -> void:
 		var result := service.execute(model,quote.handle,row.definition_id,context)
 		check(result.ok and model.item(result.uid)==expected and model.location(result.uid).kind=="bag","Exact existing bottle enters bag: "+row.definition_id)
 		check(model.crafting_balance()==balance-8 and model.successful_saves==saves+1 and model.snapshot().next_item_serial==prior.next_item_serial+1,"Eight physical shards, one UID and one save commit together")
-		check(model.snapshot().version==55 and model.snapshot().journey==prior.journey and model.item(result.uid).payload.is_empty(),"Schema55, gift/reward counters and empty bottle payload stay unchanged")
+		check(model.snapshot().version==prior.version and model.snapshot().journey==prior.journey and model.item(result.uid).payload.is_empty(),"Current schema, gift/reward counters and empty bottle payload stay unchanged")
 		reject(model,func():return model.crafting_quote("salvage",result.uid,PATH),"Flask cannot generate an equipment/jewel salvage credit")
 		reject(model,func():return model.gem_trade_quote("recycle",result.uid,model.revision(),PATH),"Flask cannot generate a gem recycling credit")
 		var restored := Model.new()

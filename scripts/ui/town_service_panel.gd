@@ -33,6 +33,9 @@ var _gem_pending: Dictionary = {}
 var _stock_model: RefCounted
 var _stock_revision := -1
 var _stock_refresh_queued := false
+var _stock_categories: HBoxContainer
+var _stock_category_buttons: Dictionary = {}
+var _stock_category := "equipment"
 var _normal := {}
 var _special := {}
 var _map_summary: Label
@@ -78,6 +81,22 @@ func setup(value: Node) -> void:
 		button.pressed.connect(_select.bind(str(entry.id)))
 		services.add_child(button)
 		_service_buttons[str(entry.id)] = button
+	_stock_categories = HBoxContainer.new()
+	_stock_categories.hide()
+	_body.add_child(_stock_categories)
+	var stock_group := ButtonGroup.new()
+	for entry: Dictionary in [{"id":"equipment","name":"装备"},{"id":"flask","name":"药剂"}]:
+		var category := Button.new()
+		category.name = "StockCategory_" + str(entry.id)
+		category.text = str(entry.name)
+		for color_name: String in ["font_pressed_color", "font_hover_pressed_color", "font_hover_color", "font_focus_color"]:
+			category.add_theme_color_override(color_name, ThemeStyle.TEXT)
+		category.toggle_mode = true
+		category.button_group = stock_group
+		category.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		category.pressed.connect(_select_stock_category.bind(str(entry.id)))
+		_stock_categories.add_child(category)
+		_stock_category_buttons[str(entry.id)] = category
 	var scroll := ScrollContainer.new()
 	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
@@ -257,6 +276,7 @@ func _select(id: String) -> void:
 	_cancel_gem_purchase()
 	if not bool(arena.world_context().get("test_mode", false)) and id not in ["map_device", "crafter", "passive_reset", "skill_merchant", "equipment_merchant", "jewel_merchant"]: id = "map_device"
 	_service = id
+	_stock_categories.visible = id == "equipment_merchant" and not bool(arena.world_context().get("test_mode", false))
 	_clear()
 	if id == "map_device":
 		_build_map()
@@ -275,6 +295,7 @@ func _select(id: String) -> void:
 		return
 	for offer: Dictionary in arena.town_stock(id):
 		var row := HBoxContainer.new()
+		row.set_meta("purchase_kind", str(offer.get("purchase_kind", "")))
 		row.add_theme_constant_override("separation", 8)
 		_content.add_child(row)
 		var icon: Control = JewelArt.new() if str(offer.kind) == "jewel" else (ShardIcon.new() if str(offer.kind) == "currency" else TextureRect.new())
@@ -311,6 +332,21 @@ func _select(id: String) -> void:
 			buy.pressed.connect(func(): _result(arena.town_buy(str(offer.id),arena.state.revision())))
 		row.add_child(buy)
 	_stock_revision = arena.state.revision()
+	_apply_stock_category()
+
+func _select_stock_category(category: String) -> void:
+	if not _stock_categories.visible or category not in _stock_category_buttons or category == _stock_category: return
+	_cancel_gem_purchase()
+	_stock_category = category
+	_apply_stock_category()
+
+func _apply_stock_category() -> void:
+	if not _stock_categories.visible: return
+	for id: String in _stock_category_buttons:
+		_stock_category_buttons[id].button_pressed = id == _stock_category
+	for row: Control in _content.get_children():
+		row.visible = (str(row.get_meta("purchase_kind", "")) == "flask") == (_stock_category == "flask")
+	(_content.get_parent() as ScrollContainer).scroll_vertical = 0
 
 func _request_gem_purchase(definition_id: String) -> void:
 	_cancel_gem_purchase()
