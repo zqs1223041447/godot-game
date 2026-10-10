@@ -1,0 +1,53 @@
+{
+  "baseline": "a5d21226161bf568bfb715ea8302c0bd213478a0",
+  "schema": 60,
+  "runtime_changes": false,
+  "results": {
+    "chaos_defense": {
+      "checks": 1188,
+      "failures": 0,
+      "exit": 0
+    },
+    "ci_migration": {
+      "checks": 77,
+      "failures": 0,
+      "exit": 0
+    },
+    "ci_mechanism": {
+      "checks": 111,
+      "failures": 0,
+      "exit": 0
+    },
+    "purity_refund": {
+      "checks": 100,
+      "failures": 0,
+      "exit": 0
+    },
+    "reference_verification": {
+      "exit": 0
+    },
+    "reference_build_check": {
+      "exit": 0
+    },
+    "browser": {
+      "exit": 0,
+      "file_url_blocked": true,
+      "loopback_preview": true
+    }
+  },
+  "sha256": {
+    "docs/reference/catalog.json": "93478a45fef85b7e8d37fae4974a0e6fa5ff2d3064a71719085c769fd2f2389c",
+    "docs/reference/index.html": "97a2899aec855942581523c4c0dcb11843774f92ac5c0713d29de82fe77f6a71",
+    "docs/reference/source-tree-coverage.json": "03b2d9a3f72e85a6fcabf9410bebdcf0efc72173f1d0862953651d2dfd580666",
+    "tests/chaos_inoculation_migration_test.gd": "887cb024ecec9317242d388e70081c9064f957b8a46e362388f829d426241701",
+    "tests/chaos_inoculation_test.gd": "207ac63ad8ebdc43ca73cfebd9aae05af7b3e9705e6394b6082bb425d2adf3a6",
+    "tests/chaos_resistance_rules_test.gd": "ef2146c04016dcf9d5ca41d5a0f28e20c71d36f64697b8faea6f2ea3a06393ab",
+    "tests/purity_of_flesh_test.gd": "0ce227c0bc189c3e5c5f7680a648b583addcc244e26d99e62b2665eb63d75c9f",
+    "tools/build_reference.py": "bf315cf0f3044de8a1f8060024fe850a7e5fe6b2df32b58dfe85dbea79129594",
+    "tools/export_reference.gd": "f84d8c485885456c12dc658b47eb43d9ee583b24d0881bf6c71b7e18cd9d4401",
+    "tools/purity_of_flesh_reference.gd": "139776a049040c4f24609b9a9e3b1506ee73edad7fee7e8a8777806fb303b0ce",
+    "tools/merge_purity_of_flesh_reference.py": "45deff13043db14bbb77e480655c2f81ac942ce67b7c77a0995dfc9b843d09f0",
+    "tools/verify_purity_of_flesh_reference.py": "4aa0f7b8a4e7a1d938c10fe5fb9ea23c02011849d4322a32bcbd64c6f93336a3",
+    "tests/fixtures/chaos_v92_frozen/damage_resolver.gd": "3c119801c1642e1b2590ef520b2c1da1e959e045324932b226a9f94e3f6bbafd"
+  }
+}

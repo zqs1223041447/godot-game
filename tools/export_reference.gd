@@ -168,6 +168,7 @@ static func collect() -> Dictionary:
 	result["forgeblade"] = forgeblade_examples()
 	result["melee_basic"] = melee_basic_examples(result.forgeblade)
 	result["normal_gem_trading"]={"offers":Canonical.GemTrade.offers(),"recycle_credit":Canonical.GemTrade.RECYCLE_CREDIT,"currency":Canonical.GemTrade.MATERIAL_ID,"location":"normal_town","level":1,"quality":0,"recycle_location":"bag","schema":Canonical.Rules.VERSION,"test_supply_separate":true,"pricing":"初版可调整预算；每次无词缀地图净得4碎片"}
+	result["purity_of_flesh"] = purity_of_flesh_reference()
 	result["source_tree"] = source_tree_reference()
 	result["source_tree_localization"] = source_tree_localization_reference(result.source_tree)
 	result["source_spatial"] = source_spatial_examples()
@@ -3302,3 +3303,12 @@ static func elemental_conversion_examples() -> Dictionary:
 		"migration":"严格验证并备份旧47原字节后升48；源执行政策48、装备词汇46，不赠点物，不重掷，不改UID；旧文件注入新词汇拒绝",
 		"monster_metadata":"当前五个怪物源定义仅刷新源政策45→48的溯源metadata，数值不变，也未获得转换或穿透；旧actor出生快照冻结，不宣称新生actor全字节不变",
 		"historical":"旧机制章节保留上批导出快照及数值；其中当前一词指该历史快照当时。当前开放状态以源节点条目、本章和source-tree-coverage.json为准"}
+
+
+## Exact existing58218; shared by full and bounded reference export.
+static func purity_of_flesh_reference() -> Dictionary:
+	assert(SourceTree.node_effect("58218").status == "full")
+	return {"node_id":"58218","minimum_save_version":60,"previous_save_version":59,
+		"backup_suffix":".v59-backup.json","equipment_vocabulary":Canonical.Rules.equipment_vocabulary_for_save_version(60),
+		"grants":SourceTree.node_effect("58218").grants,
+		"templar_paid_points":10,"templar_route":["61525","63965","14151","27564","17735","58402","6764","14057","9386","5743","58218"]}

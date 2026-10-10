@@ -182,11 +182,13 @@ func run() -> void:
 		return
 	var bytes: PackedByteArray = FileAccess.get_file_as_bytes(BASELINE_PATH)
 	check(FileAccess.get_sha256(BASELINE_PATH) == BASELINE_SHA256, "Frozen defense is exact 897dbfc source")
-	var dependencies: Dictionary = {"res://scripts/combat/damage_resolver.gd": "720dc69a7446334e8aec3ac15bdf7c1717fa7b96db5657e0c9622513121a4e23", "res://scripts/combat/hit_penetration_rules.gd": "6b0733c563548a9034cd5169b1736287cbffc4b40a14cdf71f37a729c377fc88"}
+	var frozen_damage := FileAccess.get_file_as_string("res://tests/fixtures/chaos_v92_frozen/damage_resolver.gd")
+	check(("class_name DamageResolver\n"+frozen_damage).sha256_text() == "720dc69a7446334e8aec3ac15bdf7c1717fa7b96db5657e0c9622513121a4e23", "Frozen oracle DamageResolver is exact897dbfc apart from removed global class name")
+	var dependencies: Dictionary = {"res://scripts/combat/hit_penetration_rules.gd": "6b0733c563548a9034cd5169b1736287cbffc4b40a14cdf71f37a729c377fc88"}
 	for path: String in dependencies:
 		check(FileAccess.get_sha256(path) == dependencies[path], "Frozen oracle dependency stays unchanged: " + path)
 	var script := GDScript.new()
-	script.source_code = bytes.get_string_from_utf8().replace("class_name DefenseRules\n", "")
+	script.source_code = bytes.get_string_from_utf8().replace("class_name DefenseRules\n", "").replace("res://scripts/combat/damage_resolver.gd", "res://tests/fixtures/chaos_v92_frozen/damage_resolver.gd")
 	var error: Error = script.reload()
 	check(error == OK, "Frozen single-file oracle compiles")
 	if error != OK or failures > 0:

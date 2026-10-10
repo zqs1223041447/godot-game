@@ -1,0 +1,10 @@
+{
+  "historical_commit": "897dbfc16c1308b2b6916fa9ba52792d9d82c293",
+  "expected_old_damage_sha256": "720dc69a7446334e8aec3ac15bdf7c1717fa7b96db5657e0c9622513121a4e23",
+  "baseline_damage_sha256": {
+    "9b6d28d1831cf9b34ea469e439e88807f4598227": "51a3c503c2cae7b7ec1513976de1ed03f41c3677b892b8b55ab47bdb0b2ef6e5",
+    "a5d21226161bf568bfb715ea8302c0bd213478a0": "51a3c503c2cae7b7ec1513976de1ed03f41c3677b892b8b55ab47bdb0b2ef6e5"
+  },
+  "cause_commit": "47f31d0aeab2651f19a3590dbe6031ffb4a60830",
+  "fix": "Use exact old DamageResolver in frozen defense oracle, retaining live HitPenetration dependency hash and every comparison assertion"
+}

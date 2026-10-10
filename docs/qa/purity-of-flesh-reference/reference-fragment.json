@@ -1,0 +1,158 @@
+{
+	"chaos_defense_metadata": {
+		"balance_version": "original-chaos-defense-v1",
+		"damage_type": "chaos",
+		"description": "本项目原创混沌命中防御，玩家与怪物共享；有效抗性为 0%–75%，独立于火焰、冰冷、闪电及其最大抗性加成。减伤后依次消耗护盾、可选魔力分担和生命；不会绕过护盾，不产生中毒或其他持续伤害，来源天赋当前仅接入58218纯净的血肉的混沌抗性+8%，其他混沌抗性天赋仍以各自实装状态为准。",
+		"id": "chaos_resistance",
+		"kind": "hit_defense",
+		"maximum_effective": 0.75,
+		"minimum_effective": 0.0,
+		"name": "混沌抗性",
+		"origin": "original",
+		"schema_version": 1,
+		"settlement_order": [
+			"resistance",
+			"shield",
+			"mana_guard",
+			"health"
+		],
+		"source_refs": [],
+		"stacking": "additive_raw_then_clamp",
+		"stage": "hit_mitigation",
+		"stat": "chaos_resistance",
+		"supported_actors": [
+			"player",
+			"monster"
+		],
+		"unsupported": [
+			"other_source_talent_grants",
+			"maximum_chaos_resistance_add",
+			"chaos_bypass",
+			"poison",
+			"penetration"
+		]
+	},
+	"localized_line": {
+		"status": {
+			"grants": [
+				{
+					"mode": "flat",
+					"stat": "chaos_resistance",
+					"value": 0.08
+				}
+			],
+			"implemented": true,
+			"missing_consumers": [],
+			"parser_supported": true
+		},
+		"text": "混沌抗性+8%"
+	},
+	"localized_node": {
+		"mastery_choices": {
+
+		},
+		"name": "纯净的血肉",
+		"partition": "标准主树",
+		"stats": "最大能量护盾提高8%\n最大生命提高10%\n混沌抗性+8%"
+	},
+	"node": {
+		"blighted_only": false,
+		"execution": {
+			"grants": [
+				{
+					"mode": "increased",
+					"stat": "max_shield",
+					"value": 0.08
+				},
+				{
+					"mode": "increased",
+					"stat": "max_health",
+					"value": 0.1
+				},
+				{
+					"mode": "flat",
+					"stat": "chaos_resistance",
+					"value": 0.08
+				}
+			],
+			"status": "full",
+			"supported": [
+				"8% increased maximum Energy Shield",
+				"10% increased maximum Life",
+				"+8% to Chaos Resistance"
+			],
+			"unsupported": []
+		},
+		"has_position": true,
+		"id": "58218",
+		"mastery_choices": [],
+		"name": "Purity of Flesh",
+		"neighbors": [
+			"5743",
+			"32241"
+		],
+		"ordinary_reachable_class_ids": [
+			0,
+			1,
+			2,
+			3,
+			4,
+			5,
+			6
+		],
+		"partition": "standard",
+		"position": [
+			-6105.39990234375,
+			-4723.53369140625
+		],
+		"source_proxy": false,
+		"standard_graph": true,
+		"stats": [
+			"8% increased maximum Energy Shield",
+			"10% increased maximum Life",
+			"+8% to Chaos Resistance"
+		],
+		"type": "notable"
+	},
+	"purity_of_flesh": {
+		"backup_suffix": ".v59-backup.json",
+		"equipment_vocabulary": 51,
+		"grants": [
+			{
+				"mode": "increased",
+				"stat": "max_shield",
+				"value": 0.08
+			},
+			{
+				"mode": "increased",
+				"stat": "max_health",
+				"value": 0.1
+			},
+			{
+				"mode": "flat",
+				"stat": "chaos_resistance",
+				"value": 0.08
+			}
+		],
+		"minimum_save_version": 60,
+		"node_id": "58218",
+		"previous_save_version": 59,
+		"templar_paid_points": 10,
+		"templar_route": [
+			"61525",
+			"63965",
+			"14151",
+			"27564",
+			"17735",
+			"58402",
+			"6764",
+			"14057",
+			"9386",
+			"5743",
+			"58218"
+		]
+	},
+	"save_version": 60,
+	"source_policy": 60,
+	"source_sha256": "7e9f755e33152129ebf36c2ebdad639c527e4ad70d274b1fefb860f30ca01122"
+}

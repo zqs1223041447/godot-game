@@ -14,7 +14,7 @@ func check(ok:bool,label:String)->void:
 func clean(value:Variant)->Variant:return JSON.parse_string(JSON.stringify(value,"",true,true))
 func selected()->Dictionary:
 	var candidate:Dictionary=Rules.decode_v58(JSON.parse_string(FileAccess.get_file_as_string(QA+"schema58-town.json")))
-	candidate.version=59;candidate.talents.allocated.append(CI);candidate.talents.normal_points-=1
+	candidate.version=Rules.VERSION;candidate.talents.allocated.append(CI);candidate.talents.normal_points-=1
 	check(Rules.reason(candidate).is_empty(),"Complete legal eleven-point Witch CI selection")
 	return candidate
 func source_checks()->void:
@@ -45,7 +45,7 @@ func arithmetic_checks()->void:
 	var projected:=stats.duplicate(true);projected.erase("chaos_inoculation");projected.max_health=before.max_health
 	check(projected==before,"Inactive zero-regeneration fixture changes only life capacity and CI flag")
 	var oracle:Dictionary=JSON.parse_string(FileAccess.get_file_as_string(QA+"schema58-oracle.json"))
-	check(clean(before)==oracle.stats,"Unselected59 stats equal original58 production bytes")
+	check(clean(before)==oracle.stats,"Unselected current stats equal original58 production bytes")
 	var packets:Array=[{"chaos":100.0},{"chaos":100.0,"physical":50.0,"fire":30.0},{"physical":50.0,"cold":30.0}]
 	for index:int in range(packets.size()):check(clean(Defense.incoming_source_hit(packets[index],before,40.0,50.0))==oracle.hits[index],"Unselected hit matches exact frozen58 oracle")
 	for shield:float in [0.0,0.25,50.0]:
@@ -165,7 +165,7 @@ func transaction_checks()->void:
 	check(game.snapshot().talents.allocated==CI_ROUTE and game.talent_points==0 and game.successful_saves==saves+1,"Actual button pays eleventh route point and commits once")
 	check(arena._stats.max_health==1.0 and arena.health==0.6,"Allocation clamps capacity without healing damaged Life")
 	var after:=game.snapshot();var reopened:=Game.new()
-	check(reopened.load_build(SAVE) and reopened.snapshot()==after and reopened.get_stats().max_health==1.0 and reopened.save_attempts==0,"Allocated59 reload preserves selection without rewriting")
+	check(reopened.load_build(SAVE) and reopened.snapshot()==after and reopened.get_stats().max_health==1.0 and reopened.save_attempts==0,"Allocated current reload preserves selection without rewriting")
 	check(not game.refund_passive("60440",game.revision(),SAVE).ok and game.snapshot()==after,"Cannot remove the required bridge behind allocated keystone")
 	actual_hits(arena)
 	# New live fixture for refund; allocation/refund must never revive a dead actor.

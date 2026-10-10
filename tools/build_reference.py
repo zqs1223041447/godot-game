@@ -82,6 +82,15 @@ def iron_will_save_rule(rule):
     return '<p>57→58步骤先完整验证冻结旧57，再写原字节备份'+esc(rule['backup_suffix'])+'，仅升级版本并开放完整铁意志机制。原分配、点数、物品、技能和旅程保全，不赠点、不赠物。原56→57保持固定终点，旧合法集合不扩张；完整加载只备份最初版本并保存/发布一次。备份失败或冲突、外部修改及最终原子写失败沿用原保护。</p><p>旧57程序拒绝58文件。回退需先另存58，再人工恢复升级前57备份；备份不含升级后进度，不能手改版本伪装回退。进行中地图字段保全不等于重建战斗，启动离场按既有规则。保存不承诺任意并发时序或断电级持久性。</p>'
 
 
+def purity_of_flesh_effect(rule):
+    route=' → '.join(esc(node) for node in rule['templar_route'])
+    return '<p>schema '+str(rule['minimum_save_version'])+'：三个原始效果均已接入。最大生命提高10%、最大能量护盾提高8%按原同类提高加算；混沌抗性+8%与已装备戒指相加，沿用有效抗性75%上限。单独点出时100混沌命中结算92，搭配25%戒指为67；双最高戒指加此节点合计58%，不是75%。混沌仍先消耗护盾，不新增中毒、绕盾或最大混沌抗性。</p><p>普通圣堂武僧路线（起点免费，共10点）：'+route+'。最早6级预算可分配，仍需真实连通和付点；旧59拒绝整个节点。分配提高容量不会补血或补盾；退款将超出新上限的当前生命和护盾下夹，不凭空治疗。</p>'
+
+
+def purity_of_flesh_save_rule(rule):
+    return '<p>当前60：59→60先完整验证冻结旧59，再保全原字节备份'+esc(rule['backup_suffix'])+'，仅升级版本并开放纯净的血肉。原物品、点数、分配、技能与旅程保持，不赠物或赠点；58→59步骤保持固定终点。全链仅备份最初版本、保存并发布一次，备份冲突、外部修改及原子写失败沿用原保护。</p>'
+
+
 def chaos_inoculation_effect(rule):
     route=' → '.join(esc(node) for node in rule['witch_route'])
     return '<p>schema '+str(rule['minimum_save_version'])+'：全部容量加成结算后，最终最大生命固定为1；混沌伤害分量明确免疫，不是提高混沌抗性。原混抗数值和上限保持，混合包其余分量仍按抗性/护甲、护盾、可选魔力分担、生命结算。本游戏混沌原本不绕盾；没有新增绕盾、中毒或混沌持续伤害系统。</p><p>代价是失去生命缓冲：物理、元素和既有火焰燃烧仍可致死。生命百分比再生和偷取上限读取最终1生命；狂信者的誓约仍按护盾容量再生，生命药剂不变成护盾药剂。分配只钳制当前生命，退款恢复容量但不免费补血。纯免疫保留原伤害/减免记录，沿既有零伤害拒绝路径，不触发受伤无敌或重置充能。</p><p>普通女巫路线（起点免费，共11点）：'+route+'。最早7级预算仅代表可分配，不代表护盾构筑已安全；旧58继续拒绝此基石。现有蚀影巡逻可验证纯混沌攻击，其他怪物伤害仍需应对。</p>'
@@ -121,13 +130,15 @@ def chaos_defense_rule(data, link, facts):
     rule=data['chaos_defense']; meta=rule['metadata']; family=data['affixes'][rule['affix_id']]
     value=chaos_value
     body='<p>'+esc(meta['description'])+'</p>'+facts([
-        ('当前存档 / 装备词汇 / 源政策',value('save-version',rule['save_version'])+' / '+value('equipment-vocabulary',rule['equipment_vocabulary'])+' / '+value('source-policy',rule['source_policy'])),
+        ('装备投放历史存档 / 装备词汇 / 源政策' if 'purity_of_flesh' in data else '当前存档 / 装备词汇 / 源政策',value('save-version',rule['save_version'])+' / '+value('equipment-vocabulary',rule['equipment_vocabulary'])+' / '+value('source-policy',rule['source_policy'])),
         ('有效混抗下限 / 规则上限',value('minimum',meta['minimum_effective'],True)+' / '+value('cap',meta['maximum_effective'],True)),
         ('当前装备可达',link('equipment',rule['base_id'])+'，仅戒指一与戒指二；双最高掷值 '+value('equipped-effective',rule['equipped_profile']['effective'],True)),
         ('结算顺序','各伤害类型抗性 → 护盾 → 可选魔力分担 → 生命')])
     rows=''.join('<tr><th>T'+number(t['tier'])+'</th><td>'+value('tier-'+number(t['tier'])+'-level',t['level'])+'</td><td>'+value('tier-'+number(t['tier'])+'-min',t['min'])+'%–'+value('tier-'+number(t['tier'])+'-max',t['max'])+'%</td><td>'+value('tier-'+number(t['tier'])+'-weight',t['weight'])+'</td></tr>' for t in family['tiers'])
     body+='<h3>一条后缀的取舍</h3><p>'+link('affixes',rule['affix_id'])+'只可出现在原纹刻指环。魔法仍最多1后缀，稀有仍最多3后缀；混抗与火、冰、电抗及其他后缀竞争，同族不重复。双25%合计50%；75%是规则上限，当前双戒不能单独达到。</p><div class="table-scroll"><table><thead><tr><th>阶级</th><th>物等门槛</th><th>掷值（含端点）</th><th>权重</th></tr></thead><tbody>'+rows+'</tbody></table></div>'
     body+='<p>原始混抗同类相加，有效值限制0%–75%；三元素抗性、三元素最大抗性与元素穿透不会提供混抗。没有混沌绕盾、毒、混沌最大抗性加成或新源天赋授权。</p>'
+    if 'purity_of_flesh' in data:
+        body=body.replace('或新源天赋授权','；源天赋仅开放'+link('source_passives','58218','纯净的血肉')+'的混沌抗性+8%')
     body+='<h3>当前来源与历史回放</h3><p>当前 '+esc(rule['current_loot_profile_id'])+' 仅将原30%九槽入口改为 '+esc(rule['pool_id'])+'。新掉落分布和主动制作候选会变化；显式旧池、旧词汇的结果与RNG回放保持，既有物品不自动重掷。不能把旧池回放保持理解为当前新掉落结果相同。</p><p>沿既有赋魔、升格、补缀、重铸取得当前合法词族；校准保留已有族与档位，回收沿原规则，没有防御定向按钮。取消、拒绝或保存失败不改变物品与材料。schema50严格校验并备份原字节后迁移51，只开放新词汇，不赠物品、点数或材料。</p>'
     rows=[]
     for row in rule['hit_examples']:
@@ -1554,6 +1565,7 @@ def build(data, art):
         if key == '12926' and 'iron_grip' in data: body+=iron_grip_effect(data['iron_grip'])
         if key == '50288' and 'iron_will' in data: body+=iron_will_effect(data['iron_will'])
         if key == '11455' and 'chaos_inoculation' in data: body+=chaos_inoculation_effect(data['chaos_inoculation'])
+        if key == '58218' and 'purity_of_flesh' in data: body+=purity_of_flesh_effect(data['purity_of_flesh'])
         for choice in p['mastery_choices']:
             label='已执行' if allowed and choice['execution']['status']=='full' else '未完整执行 · 不可选择'
             body+=details(f'精通 {choice["effect"]} · {label}','<p>'+lines(localized['mastery_choices'][str(choice['effect'])])+'</p>')
@@ -2179,7 +2191,9 @@ def build(data, art):
         if key == 'source_tree' and 'one_with_nature' in data: body+=one_with_nature_save_rule(data['one_with_nature'])
         if key == 'source_tree' and 'iron_grip' in data: body+=iron_grip_save_rule(data['iron_grip'])
         if key == 'source_tree' and 'iron_will' in data: body+=iron_will_save_rule(data['iron_will'])
-        if key == 'source_tree' and 'chaos_inoculation' in data: body+=chaos_inoculation_save_rule(data['chaos_inoculation'])
+        if key == 'source_tree' and 'chaos_inoculation' in data: body+=chaos_inoculation_save_rule(data['chaos_inoculation']).replace('当前59先','58→59步骤先') if 'purity_of_flesh' in data else chaos_inoculation_save_rule(data['chaos_inoculation'])
+        if key == 'source_tree' and 'purity_of_flesh' in data: body+=purity_of_flesh_save_rule(data['purity_of_flesh'])
+        if key == 'source_defenses' and 'purity_of_flesh' in data: body+='<p>'+link('source_passives','58218','纯净的血肉')+'完整开放：生命提高10%、护盾提高8%、混沌抗性+8%；后者与原装备抗性相加并受75%上限约束，其他混沌抗性天赋仍按各自实装状态。</p>'
         if key == 'source_defenses' and 'chaos_inoculation' in data: body+='<p>'+link('source_passives','11455','混沌防护')+'将最终最大生命固定为1并明确免疫混沌分量；其他伤害、护盾/魔力/生命顺序和抗性上限保持，退款不补血。具体取舍与11点女巫路线见基石。</p>'
         if key == 'source_defenses' and 'iron_grip' in data: body+='<p>分配'+link('source_passives','12926','铁握持')+'后，力量原生物理伤害提高同时适用投射物攻击，双标签只计一次；不会把其他近战INC转移。实际收益、转换范围与14点游侠路线见该基石说明。</p>'
         if key == 'source_defenses' and 'iron_will' in data: body+='<p>分配'+link('source_passives','50288','铁意志')+'后，力量自身的每5点取整1%收益也适用全部法术伤害类型，不复制近战INC。原力量生命和近战收益保持；具体范围、8点贵族路线与在途快照见该基石说明。</p>'

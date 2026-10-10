@@ -130,8 +130,12 @@ func live_checks() -> void:
 	close(game.get_stats().chaos_resistance,0.33,"Equipped ring and actual passive sum to33%, not replace")
 	hit(arena,0.33)
 	var owned_before:=game.snapshot();var stats_with:=game.get_stats();disk=FileAccess.get_file_as_bytes(SAVE)
+	arena.health=stats_with.max_health;arena.shield=stats_with.max_shield
+	var pools_before:=[arena.health,arena.shield]
+	check(arena.health>stats_before.max_health and arena.shield>stats_before.max_shield,"Real Main refund fixture starts above both lower post-refund caps")
 	check(DirAccess.make_dir_absolute(SAVE+".tmp")==OK,"Inject atomic refund write fault")
 	check(not game.refund_passive(TARGET,game.revision(),SAVE).ok and game.snapshot()==owned_before and game.get_stats()==stats_with and FileAccess.get_file_as_bytes(SAVE)==disk,"Failed refund keeps selected stats, points, ownership and disk")
+	check([arena.health,arena.shield]==pools_before,"Failed refund leaves above-cap current pools untouched")
 	check(DirAccess.remove_absolute(SAVE+".tmp")==OK,"Remove only isolated refund fault")
 	await settle()
 	check(not panel._refund.disabled,"Original deferred UI refresh enables selected leaf refund")
@@ -140,6 +144,7 @@ func live_checks() -> void:
 	else:await click(panel._refund)
 	check(game.talent_points==1 and not game.snapshot().talents.allocated.has(TARGET) and game.successful_saves==saves+1,"Actual T refund returns one point and persists once")
 	close(game.get_stats().chaos_resistance,0.25,"Refund removes exactly8%, retaining equipped source")
+	check(arena.health==game.get_stats().max_health and arena.shield==game.get_stats().max_shield and arena.health<pools_before[0] and arena.shield<pools_before[1],"Real refund clamps Life and ES down to new caps without any healing")
 	for field:String in Rules.FIELDS:
 		if field not in ["revision","talents"]:check(game.snapshot()[field]==owned_before[field],"Refund leaves canonical domain unchanged: "+field)
 	hit(arena,0.25)
