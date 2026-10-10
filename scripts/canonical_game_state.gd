@@ -669,7 +669,9 @@ func load_build(path: String = "user://build_save.json") -> bool:
 	var loaded:=super.load_build(path)
 	if loaded and old_version>0 and old_version<Rules.VERSION:
 		migrated_from_legacy=true
-		if old_version == Rules.V58_VERSION:
+		if old_version == Rules.V59_VERSION:
+			migration_message="旧存档已原字节备份，纯净的血肉已开放：最大能量护盾提高8%、最大生命提高10%、混沌抗性+8%；原物品、天赋点与旅程保持，不额外赠物或赠点。"
+		elif old_version == Rules.V58_VERSION:
 			migration_message="旧存档已原字节备份，混沌防护已开放：最大生命变为1，免疫混沌伤害；原物品、天赋点与旅程保持，不额外赠物或赠点。"
 		elif old_version == Rules.V57_VERSION:
 			migration_message="旧存档已原字节备份，铁意志已开放：力量自身的伤害加成同时用于全部法术伤害；原物品、天赋点与旅程保持，不额外赠物或赠点。"

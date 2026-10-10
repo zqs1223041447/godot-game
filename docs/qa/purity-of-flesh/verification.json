@@ -1,0 +1,71 @@
+{
+  "baseline": "9b6d28d1831cf9b34ea469e439e88807f4598227",
+  "checks": {
+    "migration": {
+      "checks": 77,
+      "failures": 0,
+      "exit": 0
+    },
+    "headless": {
+      "checks": 97,
+      "failures": 0,
+      "exit": 0
+    },
+    "native": {
+      "checks": 98,
+      "failures": 0,
+      "exit": 0,
+      "note": "Before final metadata-only change and additional metadata assertion; no UI or arithmetic changes afterwards"
+    },
+    "localization": {
+      "checks": 38246,
+      "failures": 0,
+      "exit": 0
+    },
+    "presentation": {
+      "checks": 13,
+      "failures": 0,
+      "exit": 0
+    },
+    "historical_defense": {
+      "exit": 1,
+      "passed": false,
+      "reason": "Pre-existing frozen dependency hash mismatch before suite execution"
+    }
+  },
+  "sha256": {
+    "docs/qa/purity-of-flesh/.gdignore": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "docs/qa/purity-of-flesh/README.md": "6e1923520cc693092f611951912dd5b6b82cecb8a5911a8a966d65bd5046d0de",
+    "docs/qa/purity-of-flesh/allocated.png": "c837de9c79080b0dab0d7634174d6c05b5b724d51ebfbb45d2c4f7311e7c36a4",
+    "docs/qa/purity-of-flesh/available.png": "16f07e0742a4fc426b4b07e972533e38b2a7119ae0ea7a9dc398674361e3f217",
+    "docs/qa/purity-of-flesh/capture-schema59.gd": "abfb8565953221b3a151b85e439adf81b0efedb35add91db9f8360518be4f310",
+    "docs/qa/purity-of-flesh/capture.log": "1516e66a07fe38d8f14dac90f8d2953e9cf0414a221eb0dcf2ff4b035dd00c4b",
+    "docs/qa/purity-of-flesh/headless-initial.log": "6de10e7deb871a1b4e5334c20dedbfc8808af5e0b03c76e8b02115396339a7e3",
+    "docs/qa/purity-of-flesh/headless.json": "94988881c20d3a47fbb0b9093b31e39a674fe2235bf548e2ab5b12d19ef439e1",
+    "docs/qa/purity-of-flesh/headless.log": "1cda78539acacbdfb091263f98b1250b10a7242d948c9846411bed8fc0ac7b4e",
+    "docs/qa/purity-of-flesh/historical-defense-blocked.log": "1236c3cb67198cc4f18b69c6af46ca097b88ed9ad92fc204db7e72f16889c00b",
+    "docs/qa/purity-of-flesh/localization.log": "afdc36dac7914d807d88bbfe88dc7c7f00d7dc6f2595f92934b2debd932a5447",
+    "docs/qa/purity-of-flesh/mechanism-attempt01.json": "4294c925ec2e47efb3610a32ccbd3d1224a41288daa7777d78c7c0edb5f8aac0",
+    "docs/qa/purity-of-flesh/mechanism-attempt01.log": "3ea3ebb79f548560b65cac51fc3eee8176f502b8092511b4a895503819d80d5e",
+    "docs/qa/purity-of-flesh/migration.json": "543ec7f1c5964981c528996292e79008746cbd7f493e47195192fbf419ca8372",
+    "docs/qa/purity-of-flesh/migration.log": "9a44a8c1064fbc59f3d91fdf7f4fc9f65ef939ce332c59450e7b3b61155530c5",
+    "docs/qa/purity-of-flesh/native.json": "75894e5a31d1c7373e60d8c748197f5472ce9579965d4ef7cf616f62d1c0fb84",
+    "docs/qa/purity-of-flesh/native.log": "6e77301139a30cea1a4ede2d7ec150c923a9d9e504c02bae08aa08a152555df5",
+    "docs/qa/purity-of-flesh/presentation.log": "60bc3d3822e636440ebdabb9b979bdcbf3d823fd4b0b1f9e0167d919c8e8e5b6",
+    "docs/qa/purity-of-flesh/schema59-active.json": "f6da863c469f77bbb931c0a413c771101e19ce7134afb2404703b8a999936b13",
+    "docs/qa/purity-of-flesh/schema59-oracle.json": "ba51bee9d9850b395768c73d20ede981847dea2ceda834601e7655025f564b26",
+    "docs/qa/purity-of-flesh/schema59-town.json": "a406598265de768a42bfc3b81efb4be63abd13bf2b5a678131f674d5df118091",
+    "scripts/canonical_game_state.gd": "41f9ffaa24fcc3aaa82c86aae6f3aea907d63c49dd33cabdd5f9d780e588f8f8",
+    "scripts/mechanics/defense_rules.gd": "a2efd774c9a8e2e07d485f30ffb2427e8d74b75196c8677a864067d4ae715e9e",
+    "scripts/passives/source_stat_patterns.gd": "d22827a1f796d052ec48f1f47b900ac71b2c466acd0d5e4301aa9f90e6d436f1",
+    "scripts/passives/source_tree_localization.gd": "54400ccc59bda2293c4c386a1351ffbced01c0062de4f3e7199fc067ebf9b5a0",
+    "scripts/passives/source_tree_runtime.gd": "b18442743224d5c0858f559a250ea9eedae800d85860360e2a981d21f4325032",
+    "scripts/save/canonical_build_rules.gd": "79195e681f5ecac5ac0e9ca5c6db417419f8de13ab42bfa7902a5fe3e473f272",
+    "scripts/save/canonical_build_store.gd": "3e087c2e54a0f9a98d4b920a7a1f16484652639f11afdd7defaafa69acabc29f",
+    "scripts/save/chaos_inoculation_migration.gd": "54f2c775a2f034bbd7e9e4113ebf121943c1b7d517e852927775e60b8ce3968e",
+    "scripts/save/purity_of_flesh_migration.gd": "3185ca321f380e070306512e9a31afe07607a1569b8a93f204da7e96765330cf",
+    "tests/chaos_resistance_rules_test.gd": "53a4e165538f42bd5ecf04d43d23be7d53cb249b4a674c6a11d761c99d824e68",
+    "tests/purity_of_flesh_migration_test.gd": "399ca5eb8445e905e1412be9162edf9af5f81163dbf2b166c66da675df1843eb",
+    "tests/purity_of_flesh_test.gd": "dc2032c45a299ee0f29cce9a1170e066a13611becdf95122db810867fd676156"
+  }
+}

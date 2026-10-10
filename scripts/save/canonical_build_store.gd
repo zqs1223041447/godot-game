@@ -21,6 +21,7 @@ const RuinsGardenMigration = preload("res://scripts/save/ruins_garden_migration.
 const AttackElementalMigration = preload("res://scripts/save/attack_elemental_passive_migration.gd")
 const OneWithNatureMigration = preload("res://scripts/save/one_with_nature_migration.gd")
 const IronGripMigration = preload("res://scripts/save/iron_grip_migration.gd")
+const PurityOfFleshMigration = preload("res://scripts/save/purity_of_flesh_migration.gd")
 const ChaosInoculationMigration = preload("res://scripts/save/chaos_inoculation_migration.gd")
 const IronWillMigration = preload("res://scripts/save/iron_will_migration.gd")
 const ShockGemMigration = preload("res://scripts/save/shock_gem_migration.gd")
@@ -110,8 +111,9 @@ func _init() -> void:
 	var source_v56: Dictionary = OneWithNatureMigration.migrate_v55(source_v55, _talent_validator, _socket_ids)
 	var source_v57: Dictionary = IronGripMigration.migrate_v56(source_v56, _talent_validator, _socket_ids)
 	var source_v58: Dictionary = IronWillMigration.migrate_v57(source_v57, _talent_validator, _socket_ids)
-	_current = ChaosInoculationMigration.migrate_v58(source_v58, _talent_validator, _socket_ids)
-	assert(not _current.is_empty() and Rules.reason(_current).is_empty(), "The built-in canonical fixture must migrate to v59")
+	var source_v59: Dictionary = ChaosInoculationMigration.migrate_v58(source_v58, _talent_validator, _socket_ids)
+	_current = PurityOfFleshMigration.migrate_v59(source_v59, _talent_validator, _socket_ids)
+	assert(not _current.is_empty() and Rules.reason(_current).is_empty(), "The built-in canonical fixture must migrate to v60")
 	_current.migration_ledger.from_version = 0
 
 
@@ -175,7 +177,9 @@ func load_build(path: String = "user://build_save.json") -> bool:
 	var old_version := int(raw.version)
 	if old_version > Rules.VERSION: return _reject(path, "存档属于未来版本，已保护原文件")
 	var candidate: Dictionary = {}
-	if old_version == Rules.V58_VERSION:
+	if old_version == Rules.V59_VERSION:
+		candidate = Rules.decode_v59(raw)
+	elif old_version == Rules.V58_VERSION:
 		candidate = Rules.decode_v58(raw)
 	elif old_version == Rules.V57_VERSION:
 		candidate = Rules.decode_v57(raw)
@@ -380,8 +384,10 @@ func load_build(path: String = "user://build_save.json") -> bool:
 		candidate = IronGripMigration.migrate_v56(candidate, _talent_validator, _socket_ids)
 	if old_version < Rules.V58_VERSION:
 		candidate = IronWillMigration.migrate_v57(candidate, _talent_validator, _socket_ids)
-	if old_version < Rules.VERSION:
+	if old_version < Rules.V59_VERSION:
 		candidate = ChaosInoculationMigration.migrate_v58(candidate, _talent_validator, _socket_ids)
+	if old_version < Rules.VERSION:
+		candidate = PurityOfFleshMigration.migrate_v59(candidate, _talent_validator, _socket_ids)
 	var reason: String = Rules.reason(candidate, _talent_validator, _socket_ids)
 	if not reason.is_empty(): return _reject(path, reason)
 	var loaded_revision: int = int(candidate.revision)

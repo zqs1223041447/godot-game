@@ -12,6 +12,14 @@ const TERM_NOTE := "词缀说明：提高/降低为同类加算；额外提高/�
 # A parser match is not sufficient by itself. These closed-world groups name
 # the actual runtime paths that consume each parsed stat after SourceTree.apply_stats.
 const STAT_CONSUMER_GROUPS := {
+	"purity_of_flesh": {
+		"evidence":"source_tree_runtime.gd::apply_stats -> defense_rules.gd::chaos_resistance_profile -> main.gd::hit_player_components existing capped chaos settlement",
+		"code_checks":[
+			{"path":"scripts/passives/source_tree_runtime.gd","contains":"elif grant.stat == \"chaos_resistance\":"},
+			{"path":"scripts/mechanics/defense_rules.gd","contains":"static func chaos_resistance_profile"},
+		],
+		"stats":["chaos_resistance"]
+	},
 	"chaos_inoculation": {
 		"evidence":"source_tree_runtime.gd::apply_stats final Life override -> defense_rules.gd::incoming_source_hit explicit chaos immunity -> main.gd::hit_player_components original zero-damage refusal and mixed settlement",
 		"code_checks":[

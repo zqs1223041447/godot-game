@@ -56,7 +56,8 @@ const V55_VERSION := 55
 const V56_VERSION := 56
 const V57_VERSION := 57
 const V58_VERSION := 58
-const VERSION := 59
+const V59_VERSION := 59
+const VERSION := 60
 const LEGACY_MAX_ITEMS := 1024
 const V17_MAX_ITEMS := LEGACY_MAX_ITEMS + 1
 const MAX_ITEMS := V17_MAX_ITEMS + 2 # Two once-only migration bottles; bag capacity is unchanged.
@@ -74,6 +75,12 @@ const BINDABLE_KEYS := [KEY_0, KEY_1, KEY_2, KEY_3, KEY_4, KEY_5, KEY_6, KEY_7, 
 
 static func decode(raw: Variant) -> Dictionary:
 	return _decode(raw, true, VERSION, true)
+
+
+## Complete native59 validation keeps the old passive policy closed.
+static func decode_v59(raw: Variant) -> Dictionary:
+	var decoded := _decode(raw, true, V59_VERSION, true)
+	return decoded if reason_v59(decoded).is_empty() else {}
 
 
 ## Complete native58 validation freezes all domains before the new source policy.
@@ -384,6 +391,12 @@ static func reason_v55(value: Variant, validate_talents: Callable = Callable(), 
 
 static func reason_v56(value: Variant, validate_talents: Callable = Callable(), socket_ids: Array = []) -> String:
 	var native_reason := _reason(value, V56_VERSION, true, true, MAX_ITEMS, Callable(), socket_ids)
+	if not native_reason.is_empty(): return native_reason
+	return str(validate_talents.call(value)) if validate_talents.is_valid() else ""
+
+
+static func reason_v59(value: Variant, validate_talents: Callable = Callable(), socket_ids: Array = []) -> String:
+	var native_reason := _reason(value, V59_VERSION, true, true, MAX_ITEMS, Callable(), socket_ids)
 	if not native_reason.is_empty(): return native_reason
 	return str(validate_talents.call(value)) if validate_talents.is_valid() else ""
 

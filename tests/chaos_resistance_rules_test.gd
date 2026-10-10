@@ -81,7 +81,7 @@ func test_profiles() -> void:
 	var metadata: Dictionary = Defense.chaos_resistance_metadata()
 	check(metadata.origin == "original" and metadata.source_refs.is_empty(), "Original metadata has no false source attribution")
 	check(metadata.settlement_order == ["resistance", "shield", "mana_guard", "health"] and metadata.maximum_effective == 0.75, "Metadata states actual settlement and cap")
-	check(metadata.unsupported.has("source_talent_grants") and String(metadata.description).contains("不表示来源天赋已开放混沌抗性"), "Metadata does not advertise source talent grants")
+	check(metadata.unsupported.has("other_source_talent_grants") and String(metadata.description).contains("仅接入58218"), "Metadata advertises only the implemented source node")
 	metadata.supported_actors.clear()
 	check(Defense.chaos_resistance_metadata().supported_actors == ["player", "monster"], "Metadata is detached")
 

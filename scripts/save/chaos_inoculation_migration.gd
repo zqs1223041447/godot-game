@@ -8,4 +8,4 @@ static func migrate_v58(source: Variant, validate_talents: Callable = Callable()
 	if not Rules.reason_v58(source, validate_talents, socket_ids).is_empty(): return {}
 	var candidate: Dictionary = source.duplicate(true)
 	candidate.version = 59
-	return candidate if Rules.reason(candidate, validate_talents, socket_ids).is_empty() else {}
+	return candidate if Rules.reason_v59(candidate, validate_talents, socket_ids).is_empty() else {}

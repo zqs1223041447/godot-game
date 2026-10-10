@@ -1,0 +1,58 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+ERROR: Same pools retain exact non-chaos settlement
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/attack_elemental_passive_migration_test.gd:22)
+       [1] check (res://tests/purity_of_flesh_test.gd:16)
+       [2] arithmetic_checks (res://tests/purity_of_flesh_test.gd:74)
+       [3] run (res://tests/purity_of_flesh_test.gd:143)
+godot-game: playable arena ready
+ERROR: Actual T refund returns one point and persists once
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/attack_elemental_passive_migration_test.gd:22)
+       [1] check (res://tests/purity_of_flesh_test.gd:16)
+       [2] live_checks (res://tests/purity_of_flesh_test.gd:133)
+       [3] settle (res://tests/purity_of_flesh_test.gd:75)
+ERROR: Refund removes exactly8%, retaining equipped source
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/attack_elemental_passive_migration_test.gd:22)
+       [1] check (res://tests/purity_of_flesh_test.gd:16)
+       [2] close (res://tests/purity_of_flesh_test.gd:17)
+       [3] live_checks (res://tests/purity_of_flesh_test.gd:134)
+       [4] settle (res://tests/purity_of_flesh_test.gd:75)
+ERROR: Actual Main settles compiled resistance
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/attack_elemental_passive_migration_test.gd:22)
+       [1] check (res://tests/purity_of_flesh_test.gd:16)
+       [2] close (res://tests/purity_of_flesh_test.gd:17)
+       [3] hit (res://tests/purity_of_flesh_test.gd:90)
+       [4] live_checks (res://tests/purity_of_flesh_test.gd:137)
+       [5] settle (res://tests/purity_of_flesh_test.gd:75)
+ERROR: Actual shield-first health result
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/attack_elemental_passive_migration_test.gd:22)
+       [1] check (res://tests/purity_of_flesh_test.gd:16)
+       [2] close (res://tests/purity_of_flesh_test.gd:17)
+       [3] hit (res://tests/purity_of_flesh_test.gd:91)
+       [4] live_checks (res://tests/purity_of_flesh_test.gd:137)
+       [5] settle (res://tests/purity_of_flesh_test.gd:75)
+ERROR: Removing final equipped source restores original no-resistance field shape
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/attack_elemental_passive_migration_test.gd:22)
+       [1] check (res://tests/purity_of_flesh_test.gd:16)
+       [2] live_checks (res://tests/purity_of_flesh_test.gd:138)
+       [3] settle (res://tests/purity_of_flesh_test.gd:75)
+ERROR: Allocation/refund/gear round trip restores original compiled stats
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/attack_elemental_passive_migration_test.gd:22)
+       [1] check (res://tests/purity_of_flesh_test.gd:16)
+       [2] live_checks (res://tests/purity_of_flesh_test.gd:139)
+       [3] settle (res://tests/purity_of_flesh_test.gd:75)
+PURITY_OF_FLESH checks=95 failures=7

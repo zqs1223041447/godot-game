@@ -131,8 +131,8 @@ static func chaos_resistance_metadata() -> Dictionary:
 		"origin": "original", "source_refs": [], "balance_version": "original-chaos-defense-v1",
 		"minimum_effective": 0.0, "maximum_effective": CHAOS_RESISTANCE_CAP,
 		"stacking": "additive_raw_then_clamp", "settlement_order": ["resistance", "shield", "mana_guard", "health"],
-		"description": "本项目原创混沌命中防御，玩家与怪物共享；有效抗性为 0%–75%，独立于火焰、冰冷、闪电及其最大抗性加成。减伤后依次消耗护盾、可选魔力分担和生命；不会绕过护盾，不产生中毒或其他持续伤害，也不表示来源天赋已开放混沌抗性。",
-		"unsupported": ["source_talent_grants", "maximum_chaos_resistance_add", "chaos_bypass", "poison", "penetration"],
+		"description": "本项目原创混沌命中防御，玩家与怪物共享；有效抗性为 0%–75%，独立于火焰、冰冷、闪电及其最大抗性加成。减伤后依次消耗护盾、可选魔力分担和生命；不会绕过护盾，不产生中毒或其他持续伤害，来源天赋当前仅接入58218纯净的血肉的混沌抗性+8%，其他混沌抗性天赋仍以各自实装状态为准。",
+		"unsupported": ["other_source_talent_grants", "maximum_chaos_resistance_add", "chaos_bypass", "poison", "penetration"],
 	}
 
 
