@@ -153,6 +153,12 @@ static func compile_skill(skill_id: String, snapshot: Dictionary, support_ids: A
 			recipe.slow = cold_duration.duration
 		if not _number(recipe.speed) or float(recipe.speed) <= 0.0 or float(recipe.speed) > 3000.0 or not _number(recipe.slow) or float(recipe.slow) < 0.0 or float(recipe.slow) > 15.0:
 			return _failure("编译后的速度或减速时长无效")
+	# Nova has an existing generic slow, separate from frost/cold ailments.
+	# Emit a duration only for the new selection, preserving every old cast shape.
+	if skill_id == "nova" and factors.has("slow_duration_multiplier"):
+		recipe.slow = float(skill.slow_duration) * float(factors.slow_duration_multiplier)
+		if not _number(recipe.slow) or float(recipe.slow) <= 0.0 or float(recipe.slow) > 15.0:
+			return _failure("编译后的新星减速时长无效")
 	if skill_id == "chain":
 		recipe.hit.bounce_count += int(factors.get("chain_extra_targets", 0))
 		recipe.followup_range *= float(factors.get("chain_followup_range_multiplier", 1.0))

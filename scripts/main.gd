@@ -1380,7 +1380,7 @@ func _execute_compiled(compiled: Dictionary, group_id: String = "", main_uid: St
 					_apply_damage_packet(enemy,compiled.packets.direct,context.snapshot,color,0.0,cleave_context)
 			visual_cues.emit_cue("cleave",player_pos,{"radius":float(compiled.recipe.radius),"half_angle":float(compiled.recipe.half_angle),"direction":player_facing,"color":color})
 		"nova":
-			_area_damage(player_pos, float(compiled.recipe.radius), compiled.packets.direct, color, 0.6, context.snapshot)
+			_area_damage(player_pos, float(compiled.recipe.radius), compiled.packets.direct, color, float(compiled.recipe.get("slow", skill.slow_duration)), context.snapshot)
 			visual_cues.emit_cue("nova", player_pos, {"radius": float(compiled.recipe.radius), "color": color})
 		"dash":
 			var direction := Input.get_vector("move_left", "move_right", "move_up", "move_down")

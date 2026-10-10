@@ -341,7 +341,16 @@ func rewards_and_cancellation() -> void:
 	clean(); id = equip_links("nova", ["ambush"]); check(arena.cast_group(id), "Map-complete fixture placed")
 	arena.build_save_path = arena.TOWN_TEST_BUILD_PATH
 	check(arena._map_run.begin(arena.MapCompiler.compile("old_garden", [], []).profile), "Valid test map profile admitted")
-	arena._world_mode = "map"; arena._map_run.boss_defeated = true
+	# Current completion requires the complete admitted/defeated identity ledger.
+	var roots: Array = []
+	for index: int in range(int(arena._map_run.profile.ordinary_target)):
+		roots.append({"id":index+1,"root_id":index+1,"generation":0,"reward_eligible":false})
+	var boss: Dictionary = {"id":roots.size()+1,"root_id":roots.size()+1,"generation":0,"reward_eligible":false,"template_id":arena._map_run.profile.boss_id}
+	check(arena._map_run.register_initial_group(roots,boss), "Completed-map fixture registers the full current roster")
+	var settled := true
+	for member: Dictionary in roots+[boss]: settled = arena._map_run.record_death(member) and settled
+	check(settled, "Completed-map fixture settles every registered root and boss")
+	arena._world_mode = "map"
 	arena._check_map_complete()
 	check(arena._world_mode == "map_complete" and arena.trap_runtime.is_empty(), "Actual map completion clears remaining traps")
 

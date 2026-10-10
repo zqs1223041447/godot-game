@@ -1,0 +1,4509 @@
+{
+	"compatible": [
+		"breadth",
+		"concentrate",
+		"efficiency",
+		"quickcast",
+		"lightning_focus",
+		"lingering_chill",
+		"shock",
+		"ambush",
+		"inward_pull"
+	],
+	"examples": {
+		"fresh": [
+			{
+				"cooldown": 6.0,
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 140，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n圆形范围：半径 155.00 → 155.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n新星普通减速 0.90 秒；范围、击退与冷却不变。伏击冻结时长，不受冰霜异常时长加成。\n每次命中：闪电 63.18\n固有：闪电 70.20；附加：无；附加效用 2.70",
+				"initial_count": 0,
+				"mana": 26.400000000000002,
+				"packets": [
+					{
+						"active": true,
+						"known_target_resolved": {
+							"components": {
+								"lightning": 63.18000000000001
+							},
+							"details": [
+								{
+									"base": 70.2,
+									"before_defense": 63.18000000000001,
+									"final": 63.18000000000001,
+									"increased": 0.0,
+									"modifiers": [
+										"support:lingering_chill"
+									],
+									"more": 0.9,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 63.18000000000001
+						},
+						"known_target_settlement": {
+							"components": {
+								"lightning": 63.18000000000001
+							},
+							"damage_total": 63.18000000000001,
+							"details": [
+								{
+									"base": 70.2,
+									"before_defense": 63.18000000000001,
+									"final": 63.18000000000001,
+									"increased": 0.0,
+									"modifiers": [
+										"support:lingering_chill"
+									],
+									"more": 0.9,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"health_lost": 63.18000000000001,
+							"mitigated_components": {
+								"lightning": 0.0
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"lightning": 63.18000000000001
+							},
+							"reason": "",
+							"remaining_health": 250.32,
+							"remaining_shield": 0.0,
+							"shield_spent": 0.0
+						},
+						"label": "每次命中",
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.7,
+								"base_coefficient": 2.7,
+								"intrinsic": {
+									"lightning": 70.2
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"lightning": 70.2
+							},
+							"role": "direct",
+							"skill_id": "nova",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						},
+						"resolved": {
+							"components": {
+								"lightning": 63.18000000000001
+							},
+							"details": [
+								{
+									"base": 70.2,
+									"before_defense": 63.18000000000001,
+									"final": 63.18000000000001,
+									"increased": 0.0,
+									"modifiers": [
+										"support:lingering_chill"
+									],
+									"more": 0.9,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 63.18000000000001
+						}
+					}
+				],
+				"recipe": {
+					"radius": 155.0,
+					"slow": 0.8999999999999999
+				},
+				"summary": "非暴击命中预估（未计敌方防御）：每次命中 63.18",
+				"supports": [
+					"lingering_chill"
+				]
+			},
+			{
+				"cooldown": 6.0,
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 140，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n圆形范围：半径 155.00 → 186.00；面积 ×1.4400，半径 ×1.2000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n新星普通减速 0.90 秒；范围、击退与冷却不变。伏击冻结时长，不受冰霜异常时长加成。\n每次命中：闪电 53.70\n固有：闪电 70.20；附加：无；附加效用 2.70",
+				"initial_count": 0,
+				"mana": 31.68,
+				"packets": [
+					{
+						"active": true,
+						"known_target_resolved": {
+							"components": {
+								"lightning": 53.703
+							},
+							"details": [
+								{
+									"base": 70.2,
+									"before_defense": 53.703,
+									"final": 53.703,
+									"increased": 0.0,
+									"modifiers": [
+										"support:breadth",
+										"support:lingering_chill"
+									],
+									"more": 0.765,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 53.703
+						},
+						"known_target_settlement": {
+							"components": {
+								"lightning": 53.703
+							},
+							"damage_total": 53.703,
+							"details": [
+								{
+									"base": 70.2,
+									"before_defense": 53.703,
+									"final": 53.703,
+									"increased": 0.0,
+									"modifiers": [
+										"support:breadth",
+										"support:lingering_chill"
+									],
+									"more": 0.765,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"health_lost": 53.703,
+							"mitigated_components": {
+								"lightning": 0.0
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"lightning": 53.703
+							},
+							"reason": "",
+							"remaining_health": 259.797,
+							"remaining_shield": 0.0,
+							"shield_spent": 0.0
+						},
+						"label": "每次命中",
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.7,
+								"base_coefficient": 2.7,
+								"intrinsic": {
+									"lightning": 70.2
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"lightning": 70.2
+							},
+							"role": "direct",
+							"skill_id": "nova",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						},
+						"resolved": {
+							"components": {
+								"lightning": 53.703
+							},
+							"details": [
+								{
+									"base": 70.2,
+									"before_defense": 53.703,
+									"final": 53.703,
+									"increased": 0.0,
+									"modifiers": [
+										"support:breadth",
+										"support:lingering_chill"
+									],
+									"more": 0.765,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 53.703
+						}
+					}
+				],
+				"recipe": {
+					"area_multiplier": 1.44,
+					"base_radius": 155.0,
+					"radius": 186.0,
+					"slow": 0.8999999999999999
+				},
+				"summary": "非暴击命中预估（未计敌方防御）：每次命中 53.70",
+				"supports": [
+					"breadth",
+					"lingering_chill"
+				]
+			},
+			{
+				"cooldown": 6.0,
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 140，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n圆形范围：半径 155.00 → 124.00；面积 ×0.6400，半径 ×0.8000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n新星普通减速 0.90 秒；范围、击退与冷却不变。伏击冻结时长，不受冰霜异常时长加成。\n每次命中：闪电 78.98\n固有：闪电 70.20；附加：无；附加效用 2.70",
+				"initial_count": 0,
+				"mana": 31.68,
+				"packets": [
+					{
+						"active": true,
+						"known_target_resolved": {
+							"components": {
+								"lightning": 78.97500000000001
+							},
+							"details": [
+								{
+									"base": 70.2,
+									"before_defense": 78.97500000000001,
+									"final": 78.97500000000001,
+									"increased": 0.0,
+									"modifiers": [
+										"support:concentrate",
+										"support:lingering_chill"
+									],
+									"more": 1.125,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 78.97500000000001
+						},
+						"known_target_settlement": {
+							"components": {
+								"lightning": 78.97500000000001
+							},
+							"damage_total": 78.97500000000001,
+							"details": [
+								{
+									"base": 70.2,
+									"before_defense": 78.97500000000001,
+									"final": 78.97500000000001,
+									"increased": 0.0,
+									"modifiers": [
+										"support:concentrate",
+										"support:lingering_chill"
+									],
+									"more": 1.125,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"health_lost": 78.97500000000001,
+							"mitigated_components": {
+								"lightning": 0.0
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"lightning": 78.97500000000001
+							},
+							"reason": "",
+							"remaining_health": 234.52499999999998,
+							"remaining_shield": 0.0,
+							"shield_spent": 0.0
+						},
+						"label": "每次命中",
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.7,
+								"base_coefficient": 2.7,
+								"intrinsic": {
+									"lightning": 70.2
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"lightning": 70.2
+							},
+							"role": "direct",
+							"skill_id": "nova",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						},
+						"resolved": {
+							"components": {
+								"lightning": 78.97500000000001
+							},
+							"details": [
+								{
+									"base": 70.2,
+									"before_defense": 78.97500000000001,
+									"final": 78.97500000000001,
+									"increased": 0.0,
+									"modifiers": [
+										"support:concentrate",
+										"support:lingering_chill"
+									],
+									"more": 1.125,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 78.97500000000001
+						}
+					}
+				],
+				"recipe": {
+					"area_multiplier": 0.64,
+					"base_radius": 155.0,
+					"radius": 124.0,
+					"slow": 0.8999999999999999
+				},
+				"summary": "非暴击命中预估（未计敌方防御）：每次命中 78.98",
+				"supports": [
+					"concentrate",
+					"lingering_chill"
+				]
+			},
+			{
+				"cooldown": 6.8999999999999995,
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 140，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n圆形范围：半径 155.00 → 155.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n新星普通减速 0.90 秒；范围、击退与冷却不变。伏击冻结时长，不受冰霜异常时长加成。\n每次命中：闪电 63.18\n固有：闪电 70.20；附加：无；附加效用 2.70",
+				"initial_count": 0,
+				"mana": 21.120000000000005,
+				"packets": [
+					{
+						"active": true,
+						"known_target_resolved": {
+							"components": {
+								"lightning": 63.18000000000001
+							},
+							"details": [
+								{
+									"base": 70.2,
+									"before_defense": 63.18000000000001,
+									"final": 63.18000000000001,
+									"increased": 0.0,
+									"modifiers": [
+										"support:lingering_chill"
+									],
+									"more": 0.9,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 63.18000000000001
+						},
+						"known_target_settlement": {
+							"components": {
+								"lightning": 63.18000000000001
+							},
+							"damage_total": 63.18000000000001,
+							"details": [
+								{
+									"base": 70.2,
+									"before_defense": 63.18000000000001,
+									"final": 63.18000000000001,
+									"increased": 0.0,
+									"modifiers": [
+										"support:lingering_chill"
+									],
+									"more": 0.9,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"health_lost": 63.18000000000001,
+							"mitigated_components": {
+								"lightning": 0.0
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"lightning": 63.18000000000001
+							},
+							"reason": "",
+							"remaining_health": 250.32,
+							"remaining_shield": 0.0,
+							"shield_spent": 0.0
+						},
+						"label": "每次命中",
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.7,
+								"base_coefficient": 2.7,
+								"intrinsic": {
+									"lightning": 70.2
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"lightning": 70.2
+							},
+							"role": "direct",
+							"skill_id": "nova",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						},
+						"resolved": {
+							"components": {
+								"lightning": 63.18000000000001
+							},
+							"details": [
+								{
+									"base": 70.2,
+									"before_defense": 63.18000000000001,
+									"final": 63.18000000000001,
+									"increased": 0.0,
+									"modifiers": [
+										"support:lingering_chill"
+									],
+									"more": 0.9,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 63.18000000000001
+						}
+					}
+				],
+				"recipe": {
+					"radius": 155.0,
+					"slow": 0.8999999999999999
+				},
+				"summary": "非暴击命中预估（未计敌方防御）：每次命中 63.18",
+				"supports": [
+					"efficiency",
+					"lingering_chill"
+				]
+			},
+			{
+				"cooldown": 4.800000000000001,
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 140，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n圆形范围：半径 155.00 → 155.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n新星普通减速 0.90 秒；范围、击退与冷却不变。伏击冻结时长，不受冰霜异常时长加成。\n每次命中：闪电 63.18\n固有：闪电 70.20；附加：无；附加效用 2.70",
+				"initial_count": 0,
+				"mana": 36.96,
+				"packets": [
+					{
+						"active": true,
+						"known_target_resolved": {
+							"components": {
+								"lightning": 63.18000000000001
+							},
+							"details": [
+								{
+									"base": 70.2,
+									"before_defense": 63.18000000000001,
+									"final": 63.18000000000001,
+									"increased": 0.0,
+									"modifiers": [
+										"support:lingering_chill"
+									],
+									"more": 0.9,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 63.18000000000001
+						},
+						"known_target_settlement": {
+							"components": {
+								"lightning": 63.18000000000001
+							},
+							"damage_total": 63.18000000000001,
+							"details": [
+								{
+									"base": 70.2,
+									"before_defense": 63.18000000000001,
+									"final": 63.18000000000001,
+									"increased": 0.0,
+									"modifiers": [
+										"support:lingering_chill"
+									],
+									"more": 0.9,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"health_lost": 63.18000000000001,
+							"mitigated_components": {
+								"lightning": 0.0
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"lightning": 63.18000000000001
+							},
+							"reason": "",
+							"remaining_health": 250.32,
+							"remaining_shield": 0.0,
+							"shield_spent": 0.0
+						},
+						"label": "每次命中",
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.7,
+								"base_coefficient": 2.7,
+								"intrinsic": {
+									"lightning": 70.2
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"lightning": 70.2
+							},
+							"role": "direct",
+							"skill_id": "nova",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						},
+						"resolved": {
+							"components": {
+								"lightning": 63.18000000000001
+							},
+							"details": [
+								{
+									"base": 70.2,
+									"before_defense": 63.18000000000001,
+									"final": 63.18000000000001,
+									"increased": 0.0,
+									"modifiers": [
+										"support:lingering_chill"
+									],
+									"more": 0.9,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 63.18000000000001
+						}
+					}
+				],
+				"recipe": {
+					"radius": 155.0,
+					"slow": 0.8999999999999999
+				},
+				"summary": "非暴击命中预估（未计敌方防御）：每次命中 63.18",
+				"supports": [
+					"lingering_chill",
+					"quickcast"
+				]
+			},
+			{
+				"cooldown": 6.0,
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 140，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n圆形范围：半径 155.00 → 155.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n新星普通减速 0.90 秒；范围、击退与冷却不变。伏击冻结时长，不受冰霜异常时长加成。\n每次命中：闪电 75.82\n固有：闪电 70.20；附加：无；附加效用 2.70",
+				"initial_count": 0,
+				"mana": 30.36,
+				"packets": [
+					{
+						"active": true,
+						"known_target_resolved": {
+							"components": {
+								"lightning": 75.816
+							},
+							"details": [
+								{
+									"base": 70.2,
+									"before_defense": 75.816,
+									"final": 75.816,
+									"increased": 0.0,
+									"modifiers": [
+										"support:lightning_focus",
+										"support:lingering_chill"
+									],
+									"more": 1.08,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 75.816
+						},
+						"known_target_settlement": {
+							"components": {
+								"lightning": 75.816
+							},
+							"damage_total": 75.816,
+							"details": [
+								{
+									"base": 70.2,
+									"before_defense": 75.816,
+									"final": 75.816,
+									"increased": 0.0,
+									"modifiers": [
+										"support:lightning_focus",
+										"support:lingering_chill"
+									],
+									"more": 1.08,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"health_lost": 75.816,
+							"mitigated_components": {
+								"lightning": 0.0
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"lightning": 75.816
+							},
+							"reason": "",
+							"remaining_health": 237.684,
+							"remaining_shield": 0.0,
+							"shield_spent": 0.0
+						},
+						"label": "每次命中",
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.7,
+								"base_coefficient": 2.7,
+								"intrinsic": {
+									"lightning": 70.2
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"lightning": 70.2
+							},
+							"role": "direct",
+							"skill_id": "nova",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						},
+						"resolved": {
+							"components": {
+								"lightning": 75.816
+							},
+							"details": [
+								{
+									"base": 70.2,
+									"before_defense": 75.816,
+									"final": 75.816,
+									"increased": 0.0,
+									"modifiers": [
+										"support:lightning_focus",
+										"support:lingering_chill"
+									],
+									"more": 1.08,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 75.816
+						}
+					}
+				],
+				"recipe": {
+					"radius": 155.0,
+					"slow": 0.8999999999999999
+				},
+				"summary": "非暴击命中预估（未计敌方防御）：每次命中 75.82",
+				"supports": [
+					"lightning_focus",
+					"lingering_chill"
+				]
+			},
+			{
+				"cooldown": 6.0,
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n感电 2.0 秒 · 后续命中承受伤害提高 15%\n闪电命中结算后施加；不追溯增强本次命中，不影响持续伤害。同强度刷新，不叠加。\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 140，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n圆形范围：半径 155.00 → 155.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n新星普通减速 0.90 秒；范围、击退与冷却不变。伏击冻结时长，不受冰霜异常时长加成。\n每次命中：闪电 50.54\n固有：闪电 70.20；附加：无；附加效用 2.70",
+				"initial_count": 0,
+				"mana": 31.68,
+				"packets": [
+					{
+						"active": true,
+						"known_target_resolved": {
+							"components": {
+								"lightning": 50.54400000000001
+							},
+							"details": [
+								{
+									"base": 70.2,
+									"before_defense": 50.54400000000001,
+									"final": 50.54400000000001,
+									"increased": 0.0,
+									"modifiers": [
+										"support:lingering_chill",
+										"support:shock"
+									],
+									"more": 0.7200000000000001,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 50.54400000000001
+						},
+						"known_target_settlement": {
+							"components": {
+								"lightning": 50.54400000000001
+							},
+							"damage_total": 50.54400000000001,
+							"details": [
+								{
+									"base": 70.2,
+									"before_defense": 50.54400000000001,
+									"final": 50.54400000000001,
+									"increased": 0.0,
+									"modifiers": [
+										"support:lingering_chill",
+										"support:shock"
+									],
+									"more": 0.7200000000000001,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"health_lost": 50.54400000000001,
+							"mitigated_components": {
+								"lightning": 0.0
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"lightning": 50.54400000000001
+							},
+							"reason": "",
+							"remaining_health": 262.956,
+							"remaining_shield": 0.0,
+							"shield_spent": 0.0
+						},
+						"label": "每次命中",
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.7,
+								"base_coefficient": 2.7,
+								"intrinsic": {
+									"lightning": 70.2
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"lightning": 70.2
+							},
+							"role": "direct",
+							"skill_id": "nova",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						},
+						"resolved": {
+							"components": {
+								"lightning": 50.54400000000001
+							},
+							"details": [
+								{
+									"base": 70.2,
+									"before_defense": 50.54400000000001,
+									"final": 50.54400000000001,
+									"increased": 0.0,
+									"modifiers": [
+										"support:lingering_chill",
+										"support:shock"
+									],
+									"more": 0.7200000000000001,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 50.54400000000001
+						}
+					}
+				],
+				"recipe": {
+					"radius": 155.0,
+					"slow": 0.8999999999999999
+				},
+				"summary": "非暴击命中预估（未计敌方防御）：每次命中 50.54",
+				"supports": [
+					"lingering_chill",
+					"shock"
+				]
+			},
+			{
+				"cooldown": 6.0,
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n脚下布置 · 0.35 秒后布防 · 触发半径 70\n保留 12 秒 · 所有技能组共享 3 枚；满额不消耗魔力或冷却。\n放置时固定伤害与暴击；敌人靠近后释放一次，到期消失。触发需视线，范围增幅只改变爆发范围。\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 140，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n圆形范围：半径 155.00 → 155.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n新星普通减速 0.90 秒；范围、击退与冷却不变。伏击冻结时长，不受冰霜异常时长加成。\n每次命中：闪电 53.70\n固有：闪电 70.20；附加：无；附加效用 2.70",
+				"initial_count": 0,
+				"mana": 33.0,
+				"packets": [
+					{
+						"active": true,
+						"known_target_resolved": {
+							"components": {
+								"lightning": 53.703
+							},
+							"details": [
+								{
+									"base": 70.2,
+									"before_defense": 53.703,
+									"final": 53.703,
+									"increased": 0.0,
+									"modifiers": [
+										"support:lingering_chill",
+										"support:ambush"
+									],
+									"more": 0.765,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 53.703
+						},
+						"known_target_settlement": {
+							"components": {
+								"lightning": 53.703
+							},
+							"damage_total": 53.703,
+							"details": [
+								{
+									"base": 70.2,
+									"before_defense": 53.703,
+									"final": 53.703,
+									"increased": 0.0,
+									"modifiers": [
+										"support:lingering_chill",
+										"support:ambush"
+									],
+									"more": 0.765,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"health_lost": 53.703,
+							"mitigated_components": {
+								"lightning": 0.0
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"lightning": 53.703
+							},
+							"reason": "",
+							"remaining_health": 259.797,
+							"remaining_shield": 0.0,
+							"shield_spent": 0.0
+						},
+						"label": "每次命中",
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.7,
+								"base_coefficient": 2.7,
+								"intrinsic": {
+									"lightning": 70.2
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"lightning": 70.2
+							},
+							"role": "direct",
+							"skill_id": "nova",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						},
+						"resolved": {
+							"components": {
+								"lightning": 53.703
+							},
+							"details": [
+								{
+									"base": 70.2,
+									"before_defense": 53.703,
+									"final": 53.703,
+									"increased": 0.0,
+									"modifiers": [
+										"support:lingering_chill",
+										"support:ambush"
+									],
+									"more": 0.765,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 53.703
+						}
+					}
+				],
+				"recipe": {
+					"radius": 155.0,
+					"slow": 0.8999999999999999
+				},
+				"summary": "非暴击命中预估（未计敌方防御）：每次命中 53.70",
+				"supports": [
+					"ambush",
+					"lingering_chill"
+				],
+				"trap_profile": {
+					"arming_seconds": 0.35,
+					"enabled": true,
+					"hit_multiplier": 0.85,
+					"lifetime_seconds": 12.0,
+					"mana_multiplier": 1.25,
+					"maximum_traps": 3,
+					"trigger_radius": 70.0
+				}
+			},
+			{
+				"area_impulse_profile": {
+					"direction": "toward_origin",
+					"enabled": true,
+					"impulse_speed": 190.0,
+					"mana_multiplier": 1.2
+				},
+				"cooldown": 6.0,
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n命中牵引至爆发圆心，受墙体与怪物分离影响；不改变伤害或触发半径。\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 140，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n圆形范围：半径 155.00 → 155.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n新星普通减速 0.90 秒；范围、击退与冷却不变。伏击冻结时长，不受冰霜异常时长加成。\n每次命中：闪电 63.18\n固有：闪电 70.20；附加：无；附加效用 2.70",
+				"initial_count": 0,
+				"mana": 31.68,
+				"packets": [
+					{
+						"active": true,
+						"known_target_resolved": {
+							"components": {
+								"lightning": 63.18000000000001
+							},
+							"details": [
+								{
+									"base": 70.2,
+									"before_defense": 63.18000000000001,
+									"final": 63.18000000000001,
+									"increased": 0.0,
+									"modifiers": [
+										"support:lingering_chill"
+									],
+									"more": 0.9,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 63.18000000000001
+						},
+						"known_target_settlement": {
+							"components": {
+								"lightning": 63.18000000000001
+							},
+							"damage_total": 63.18000000000001,
+							"details": [
+								{
+									"base": 70.2,
+									"before_defense": 63.18000000000001,
+									"final": 63.18000000000001,
+									"increased": 0.0,
+									"modifiers": [
+										"support:lingering_chill"
+									],
+									"more": 0.9,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"health_lost": 63.18000000000001,
+							"mitigated_components": {
+								"lightning": 0.0
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"lightning": 63.18000000000001
+							},
+							"reason": "",
+							"remaining_health": 250.32,
+							"remaining_shield": 0.0,
+							"shield_spent": 0.0
+						},
+						"label": "每次命中",
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.7,
+								"base_coefficient": 2.7,
+								"intrinsic": {
+									"lightning": 70.2
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"lightning": 70.2
+							},
+							"role": "direct",
+							"skill_id": "nova",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						},
+						"resolved": {
+							"components": {
+								"lightning": 63.18000000000001
+							},
+							"details": [
+								{
+									"base": 70.2,
+									"before_defense": 63.18000000000001,
+									"final": 63.18000000000001,
+									"increased": 0.0,
+									"modifiers": [
+										"support:lingering_chill"
+									],
+									"more": 0.9,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 63.18000000000001
+						}
+					}
+				],
+				"recipe": {
+					"radius": 155.0,
+					"slow": 0.8999999999999999
+				},
+				"summary": "非暴击命中预估（未计敌方防御）：每次命中 63.18",
+				"supports": [
+					"inward_pull",
+					"lingering_chill"
+				]
+			}
+		],
+		"full_tornado": [
+			{
+				"cooldown": 6.0,
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n圆形范围：半径 155.00 → 155.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n新星普通减速 0.90 秒；范围、击退与冷却不变。伏击冻结时长，不受冰霜异常时长加成。\n独立爆炸半径 76.00 · 面积 ×1.0000\n每次命中：闪电 80.19\n固有：闪电 59.40；附加：无；附加效用 2.70",
+				"initial_count": 0,
+				"mana": 26.400000000000002,
+				"packets": [
+					{
+						"active": true,
+						"known_target_resolved": {
+							"components": {
+								"lightning": 80.19000000000001
+							},
+							"details": [
+								{
+									"base": 59.400000000000006,
+									"before_defense": 80.19000000000001,
+									"final": 80.19000000000001,
+									"increased": 0.5,
+									"modifiers": [
+										"global_increased",
+										"elemental_increased",
+										"support:lingering_chill"
+									],
+									"more": 0.9,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 80.19000000000001
+						},
+						"known_target_settlement": {
+							"components": {
+								"lightning": 80.19000000000001
+							},
+							"damage_total": 80.19000000000001,
+							"details": [
+								{
+									"base": 59.400000000000006,
+									"before_defense": 80.19000000000001,
+									"final": 80.19000000000001,
+									"increased": 0.5,
+									"modifiers": [
+										"global_increased",
+										"elemental_increased",
+										"support:lingering_chill"
+									],
+									"more": 0.9,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"health_lost": 80.19000000000001,
+							"mitigated_components": {
+								"lightning": 0.0
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"lightning": 80.19000000000001
+							},
+							"reason": "",
+							"remaining_health": 233.31,
+							"remaining_shield": 0.0,
+							"shield_spent": 0.0
+						},
+						"label": "每次命中",
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.7,
+								"base_coefficient": 2.7,
+								"intrinsic": {
+									"lightning": 59.400000000000006
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"lightning": 59.400000000000006
+							},
+							"role": "direct",
+							"skill_id": "nova",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						},
+						"resolved": {
+							"components": {
+								"lightning": 80.19000000000001
+							},
+							"details": [
+								{
+									"base": 59.400000000000006,
+									"before_defense": 80.19000000000001,
+									"final": 80.19000000000001,
+									"increased": 0.5,
+									"modifiers": [
+										"global_increased",
+										"elemental_increased",
+										"support:lingering_chill"
+									],
+									"more": 0.9,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 80.19000000000001
+						}
+					}
+				],
+				"recipe": {
+					"radius": 155.0,
+					"slow": 0.8999999999999999
+				},
+				"summary": "命中预估（未计敌方防御）：每次命中 80.19",
+				"supports": [
+					"lingering_chill"
+				]
+			},
+			{
+				"cooldown": 6.0,
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n圆形范围：半径 155.00 → 186.00；面积 ×1.4400，半径 ×1.2000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n新星普通减速 0.90 秒；范围、击退与冷却不变。伏击冻结时长，不受冰霜异常时长加成。\n独立爆炸半径 76.00 · 面积 ×1.0000\n每次命中：闪电 68.16\n固有：闪电 59.40；附加：无；附加效用 2.70",
+				"initial_count": 0,
+				"mana": 31.68,
+				"packets": [
+					{
+						"active": true,
+						"known_target_resolved": {
+							"components": {
+								"lightning": 68.1615
+							},
+							"details": [
+								{
+									"base": 59.400000000000006,
+									"before_defense": 68.1615,
+									"final": 68.1615,
+									"increased": 0.5,
+									"modifiers": [
+										"global_increased",
+										"elemental_increased",
+										"support:breadth",
+										"support:lingering_chill"
+									],
+									"more": 0.765,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 68.1615
+						},
+						"known_target_settlement": {
+							"components": {
+								"lightning": 68.1615
+							},
+							"damage_total": 68.1615,
+							"details": [
+								{
+									"base": 59.400000000000006,
+									"before_defense": 68.1615,
+									"final": 68.1615,
+									"increased": 0.5,
+									"modifiers": [
+										"global_increased",
+										"elemental_increased",
+										"support:breadth",
+										"support:lingering_chill"
+									],
+									"more": 0.765,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"health_lost": 68.1615,
+							"mitigated_components": {
+								"lightning": 0.0
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"lightning": 68.1615
+							},
+							"reason": "",
+							"remaining_health": 245.3385,
+							"remaining_shield": 0.0,
+							"shield_spent": 0.0
+						},
+						"label": "每次命中",
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.7,
+								"base_coefficient": 2.7,
+								"intrinsic": {
+									"lightning": 59.400000000000006
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"lightning": 59.400000000000006
+							},
+							"role": "direct",
+							"skill_id": "nova",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						},
+						"resolved": {
+							"components": {
+								"lightning": 68.1615
+							},
+							"details": [
+								{
+									"base": 59.400000000000006,
+									"before_defense": 68.1615,
+									"final": 68.1615,
+									"increased": 0.5,
+									"modifiers": [
+										"global_increased",
+										"elemental_increased",
+										"support:breadth",
+										"support:lingering_chill"
+									],
+									"more": 0.765,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 68.1615
+						}
+					}
+				],
+				"recipe": {
+					"area_multiplier": 1.44,
+					"base_radius": 155.0,
+					"radius": 186.0,
+					"slow": 0.8999999999999999
+				},
+				"summary": "命中预估（未计敌方防御）：每次命中 68.16",
+				"supports": [
+					"breadth",
+					"lingering_chill"
+				]
+			},
+			{
+				"cooldown": 6.0,
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n圆形范围：半径 155.00 → 124.00；面积 ×0.6400，半径 ×0.8000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n新星普通减速 0.90 秒；范围、击退与冷却不变。伏击冻结时长，不受冰霜异常时长加成。\n独立爆炸半径 76.00 · 面积 ×1.0000\n每次命中：闪电 100.24\n固有：闪电 59.40；附加：无；附加效用 2.70",
+				"initial_count": 0,
+				"mana": 31.68,
+				"packets": [
+					{
+						"active": true,
+						"known_target_resolved": {
+							"components": {
+								"lightning": 100.23750000000001
+							},
+							"details": [
+								{
+									"base": 59.400000000000006,
+									"before_defense": 100.23750000000001,
+									"final": 100.23750000000001,
+									"increased": 0.5,
+									"modifiers": [
+										"global_increased",
+										"elemental_increased",
+										"support:concentrate",
+										"support:lingering_chill"
+									],
+									"more": 1.125,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 100.23750000000001
+						},
+						"known_target_settlement": {
+							"components": {
+								"lightning": 100.23750000000001
+							},
+							"damage_total": 100.23750000000001,
+							"details": [
+								{
+									"base": 59.400000000000006,
+									"before_defense": 100.23750000000001,
+									"final": 100.23750000000001,
+									"increased": 0.5,
+									"modifiers": [
+										"global_increased",
+										"elemental_increased",
+										"support:concentrate",
+										"support:lingering_chill"
+									],
+									"more": 1.125,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"health_lost": 100.23750000000001,
+							"mitigated_components": {
+								"lightning": 0.0
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"lightning": 100.23750000000001
+							},
+							"reason": "",
+							"remaining_health": 213.2625,
+							"remaining_shield": 0.0,
+							"shield_spent": 0.0
+						},
+						"label": "每次命中",
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.7,
+								"base_coefficient": 2.7,
+								"intrinsic": {
+									"lightning": 59.400000000000006
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"lightning": 59.400000000000006
+							},
+							"role": "direct",
+							"skill_id": "nova",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						},
+						"resolved": {
+							"components": {
+								"lightning": 100.23750000000001
+							},
+							"details": [
+								{
+									"base": 59.400000000000006,
+									"before_defense": 100.23750000000001,
+									"final": 100.23750000000001,
+									"increased": 0.5,
+									"modifiers": [
+										"global_increased",
+										"elemental_increased",
+										"support:concentrate",
+										"support:lingering_chill"
+									],
+									"more": 1.125,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 100.23750000000001
+						}
+					}
+				],
+				"recipe": {
+					"area_multiplier": 0.64,
+					"base_radius": 155.0,
+					"radius": 124.0,
+					"slow": 0.8999999999999999
+				},
+				"summary": "命中预估（未计敌方防御）：每次命中 100.24",
+				"supports": [
+					"concentrate",
+					"lingering_chill"
+				]
+			},
+			{
+				"cooldown": 6.8999999999999995,
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n圆形范围：半径 155.00 → 155.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n新星普通减速 0.90 秒；范围、击退与冷却不变。伏击冻结时长，不受冰霜异常时长加成。\n独立爆炸半径 76.00 · 面积 ×1.0000\n每次命中：闪电 80.19\n固有：闪电 59.40；附加：无；附加效用 2.70",
+				"initial_count": 0,
+				"mana": 21.120000000000005,
+				"packets": [
+					{
+						"active": true,
+						"known_target_resolved": {
+							"components": {
+								"lightning": 80.19000000000001
+							},
+							"details": [
+								{
+									"base": 59.400000000000006,
+									"before_defense": 80.19000000000001,
+									"final": 80.19000000000001,
+									"increased": 0.5,
+									"modifiers": [
+										"global_increased",
+										"elemental_increased",
+										"support:lingering_chill"
+									],
+									"more": 0.9,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 80.19000000000001
+						},
+						"known_target_settlement": {
+							"components": {
+								"lightning": 80.19000000000001
+							},
+							"damage_total": 80.19000000000001,
+							"details": [
+								{
+									"base": 59.400000000000006,
+									"before_defense": 80.19000000000001,
+									"final": 80.19000000000001,
+									"increased": 0.5,
+									"modifiers": [
+										"global_increased",
+										"elemental_increased",
+										"support:lingering_chill"
+									],
+									"more": 0.9,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"health_lost": 80.19000000000001,
+							"mitigated_components": {
+								"lightning": 0.0
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"lightning": 80.19000000000001
+							},
+							"reason": "",
+							"remaining_health": 233.31,
+							"remaining_shield": 0.0,
+							"shield_spent": 0.0
+						},
+						"label": "每次命中",
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.7,
+								"base_coefficient": 2.7,
+								"intrinsic": {
+									"lightning": 59.400000000000006
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"lightning": 59.400000000000006
+							},
+							"role": "direct",
+							"skill_id": "nova",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						},
+						"resolved": {
+							"components": {
+								"lightning": 80.19000000000001
+							},
+							"details": [
+								{
+									"base": 59.400000000000006,
+									"before_defense": 80.19000000000001,
+									"final": 80.19000000000001,
+									"increased": 0.5,
+									"modifiers": [
+										"global_increased",
+										"elemental_increased",
+										"support:lingering_chill"
+									],
+									"more": 0.9,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 80.19000000000001
+						}
+					}
+				],
+				"recipe": {
+					"radius": 155.0,
+					"slow": 0.8999999999999999
+				},
+				"summary": "命中预估（未计敌方防御）：每次命中 80.19",
+				"supports": [
+					"efficiency",
+					"lingering_chill"
+				]
+			},
+			{
+				"cooldown": 4.800000000000001,
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n圆形范围：半径 155.00 → 155.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n新星普通减速 0.90 秒；范围、击退与冷却不变。伏击冻结时长，不受冰霜异常时长加成。\n独立爆炸半径 76.00 · 面积 ×1.0000\n每次命中：闪电 80.19\n固有：闪电 59.40；附加：无；附加效用 2.70",
+				"initial_count": 0,
+				"mana": 36.96,
+				"packets": [
+					{
+						"active": true,
+						"known_target_resolved": {
+							"components": {
+								"lightning": 80.19000000000001
+							},
+							"details": [
+								{
+									"base": 59.400000000000006,
+									"before_defense": 80.19000000000001,
+									"final": 80.19000000000001,
+									"increased": 0.5,
+									"modifiers": [
+										"global_increased",
+										"elemental_increased",
+										"support:lingering_chill"
+									],
+									"more": 0.9,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 80.19000000000001
+						},
+						"known_target_settlement": {
+							"components": {
+								"lightning": 80.19000000000001
+							},
+							"damage_total": 80.19000000000001,
+							"details": [
+								{
+									"base": 59.400000000000006,
+									"before_defense": 80.19000000000001,
+									"final": 80.19000000000001,
+									"increased": 0.5,
+									"modifiers": [
+										"global_increased",
+										"elemental_increased",
+										"support:lingering_chill"
+									],
+									"more": 0.9,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"health_lost": 80.19000000000001,
+							"mitigated_components": {
+								"lightning": 0.0
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"lightning": 80.19000000000001
+							},
+							"reason": "",
+							"remaining_health": 233.31,
+							"remaining_shield": 0.0,
+							"shield_spent": 0.0
+						},
+						"label": "每次命中",
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.7,
+								"base_coefficient": 2.7,
+								"intrinsic": {
+									"lightning": 59.400000000000006
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"lightning": 59.400000000000006
+							},
+							"role": "direct",
+							"skill_id": "nova",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						},
+						"resolved": {
+							"components": {
+								"lightning": 80.19000000000001
+							},
+							"details": [
+								{
+									"base": 59.400000000000006,
+									"before_defense": 80.19000000000001,
+									"final": 80.19000000000001,
+									"increased": 0.5,
+									"modifiers": [
+										"global_increased",
+										"elemental_increased",
+										"support:lingering_chill"
+									],
+									"more": 0.9,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 80.19000000000001
+						}
+					}
+				],
+				"recipe": {
+					"radius": 155.0,
+					"slow": 0.8999999999999999
+				},
+				"summary": "命中预估（未计敌方防御）：每次命中 80.19",
+				"supports": [
+					"lingering_chill",
+					"quickcast"
+				]
+			},
+			{
+				"cooldown": 6.0,
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n圆形范围：半径 155.00 → 155.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n新星普通减速 0.90 秒；范围、击退与冷却不变。伏击冻结时长，不受冰霜异常时长加成。\n独立爆炸半径 76.00 · 面积 ×1.0000\n每次命中：闪电 96.23\n固有：闪电 59.40；附加：无；附加效用 2.70",
+				"initial_count": 0,
+				"mana": 30.36,
+				"packets": [
+					{
+						"active": true,
+						"known_target_resolved": {
+							"components": {
+								"lightning": 96.22800000000001
+							},
+							"details": [
+								{
+									"base": 59.400000000000006,
+									"before_defense": 96.22800000000001,
+									"final": 96.22800000000001,
+									"increased": 0.5,
+									"modifiers": [
+										"global_increased",
+										"elemental_increased",
+										"support:lightning_focus",
+										"support:lingering_chill"
+									],
+									"more": 1.08,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 96.22800000000001
+						},
+						"known_target_settlement": {
+							"components": {
+								"lightning": 96.22800000000001
+							},
+							"damage_total": 96.22800000000001,
+							"details": [
+								{
+									"base": 59.400000000000006,
+									"before_defense": 96.22800000000001,
+									"final": 96.22800000000001,
+									"increased": 0.5,
+									"modifiers": [
+										"global_increased",
+										"elemental_increased",
+										"support:lightning_focus",
+										"support:lingering_chill"
+									],
+									"more": 1.08,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"health_lost": 96.22800000000001,
+							"mitigated_components": {
+								"lightning": 0.0
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"lightning": 96.22800000000001
+							},
+							"reason": "",
+							"remaining_health": 217.272,
+							"remaining_shield": 0.0,
+							"shield_spent": 0.0
+						},
+						"label": "每次命中",
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.7,
+								"base_coefficient": 2.7,
+								"intrinsic": {
+									"lightning": 59.400000000000006
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"lightning": 59.400000000000006
+							},
+							"role": "direct",
+							"skill_id": "nova",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						},
+						"resolved": {
+							"components": {
+								"lightning": 96.22800000000001
+							},
+							"details": [
+								{
+									"base": 59.400000000000006,
+									"before_defense": 96.22800000000001,
+									"final": 96.22800000000001,
+									"increased": 0.5,
+									"modifiers": [
+										"global_increased",
+										"elemental_increased",
+										"support:lightning_focus",
+										"support:lingering_chill"
+									],
+									"more": 1.08,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 96.22800000000001
+						}
+					}
+				],
+				"recipe": {
+					"radius": 155.0,
+					"slow": 0.8999999999999999
+				},
+				"summary": "命中预估（未计敌方防御）：每次命中 96.23",
+				"supports": [
+					"lightning_focus",
+					"lingering_chill"
+				]
+			},
+			{
+				"cooldown": 6.0,
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n感电 2.0 秒 · 后续命中承受伤害提高 15%\n闪电命中结算后施加；不追溯增强本次命中，不影响持续伤害。同强度刷新，不叠加。\n圆形范围：半径 155.00 → 155.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n新星普通减速 0.90 秒；范围、击退与冷却不变。伏击冻结时长，不受冰霜异常时长加成。\n独立爆炸半径 76.00 · 面积 ×1.0000\n每次命中：闪电 64.15\n固有：闪电 59.40；附加：无；附加效用 2.70",
+				"initial_count": 0,
+				"mana": 31.68,
+				"packets": [
+					{
+						"active": true,
+						"known_target_resolved": {
+							"components": {
+								"lightning": 64.15200000000002
+							},
+							"details": [
+								{
+									"base": 59.400000000000006,
+									"before_defense": 64.15200000000002,
+									"final": 64.15200000000002,
+									"increased": 0.5,
+									"modifiers": [
+										"global_increased",
+										"elemental_increased",
+										"support:lingering_chill",
+										"support:shock"
+									],
+									"more": 0.7200000000000001,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 64.15200000000002
+						},
+						"known_target_settlement": {
+							"components": {
+								"lightning": 64.15200000000002
+							},
+							"damage_total": 64.15200000000002,
+							"details": [
+								{
+									"base": 59.400000000000006,
+									"before_defense": 64.15200000000002,
+									"final": 64.15200000000002,
+									"increased": 0.5,
+									"modifiers": [
+										"global_increased",
+										"elemental_increased",
+										"support:lingering_chill",
+										"support:shock"
+									],
+									"more": 0.7200000000000001,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"health_lost": 64.15200000000002,
+							"mitigated_components": {
+								"lightning": 0.0
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"lightning": 64.15200000000002
+							},
+							"reason": "",
+							"remaining_health": 249.34799999999998,
+							"remaining_shield": 0.0,
+							"shield_spent": 0.0
+						},
+						"label": "每次命中",
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.7,
+								"base_coefficient": 2.7,
+								"intrinsic": {
+									"lightning": 59.400000000000006
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"lightning": 59.400000000000006
+							},
+							"role": "direct",
+							"skill_id": "nova",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						},
+						"resolved": {
+							"components": {
+								"lightning": 64.15200000000002
+							},
+							"details": [
+								{
+									"base": 59.400000000000006,
+									"before_defense": 64.15200000000002,
+									"final": 64.15200000000002,
+									"increased": 0.5,
+									"modifiers": [
+										"global_increased",
+										"elemental_increased",
+										"support:lingering_chill",
+										"support:shock"
+									],
+									"more": 0.7200000000000001,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 64.15200000000002
+						}
+					}
+				],
+				"recipe": {
+					"radius": 155.0,
+					"slow": 0.8999999999999999
+				},
+				"summary": "命中预估（未计敌方防御）：每次命中 64.15",
+				"supports": [
+					"lingering_chill",
+					"shock"
+				]
+			},
+			{
+				"cooldown": 6.0,
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n脚下布置 · 0.35 秒后布防 · 触发半径 70\n保留 12 秒 · 所有技能组共享 3 枚；满额不消耗魔力或冷却。\n放置时固定伤害与暴击；敌人靠近后释放一次，到期消失。触发需视线，范围增幅只改变爆发范围。\n圆形范围：半径 155.00 → 155.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n新星普通减速 0.90 秒；范围、击退与冷却不变。伏击冻结时长，不受冰霜异常时长加成。\n独立爆炸半径 76.00 · 面积 ×1.0000\n每次命中：闪电 68.16\n固有：闪电 59.40；附加：无；附加效用 2.70",
+				"initial_count": 0,
+				"mana": 33.0,
+				"packets": [
+					{
+						"active": true,
+						"known_target_resolved": {
+							"components": {
+								"lightning": 68.1615
+							},
+							"details": [
+								{
+									"base": 59.400000000000006,
+									"before_defense": 68.1615,
+									"final": 68.1615,
+									"increased": 0.5,
+									"modifiers": [
+										"global_increased",
+										"elemental_increased",
+										"support:lingering_chill",
+										"support:ambush"
+									],
+									"more": 0.765,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 68.1615
+						},
+						"known_target_settlement": {
+							"components": {
+								"lightning": 68.1615
+							},
+							"damage_total": 68.1615,
+							"details": [
+								{
+									"base": 59.400000000000006,
+									"before_defense": 68.1615,
+									"final": 68.1615,
+									"increased": 0.5,
+									"modifiers": [
+										"global_increased",
+										"elemental_increased",
+										"support:lingering_chill",
+										"support:ambush"
+									],
+									"more": 0.765,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"health_lost": 68.1615,
+							"mitigated_components": {
+								"lightning": 0.0
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"lightning": 68.1615
+							},
+							"reason": "",
+							"remaining_health": 245.3385,
+							"remaining_shield": 0.0,
+							"shield_spent": 0.0
+						},
+						"label": "每次命中",
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.7,
+								"base_coefficient": 2.7,
+								"intrinsic": {
+									"lightning": 59.400000000000006
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"lightning": 59.400000000000006
+							},
+							"role": "direct",
+							"skill_id": "nova",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						},
+						"resolved": {
+							"components": {
+								"lightning": 68.1615
+							},
+							"details": [
+								{
+									"base": 59.400000000000006,
+									"before_defense": 68.1615,
+									"final": 68.1615,
+									"increased": 0.5,
+									"modifiers": [
+										"global_increased",
+										"elemental_increased",
+										"support:lingering_chill",
+										"support:ambush"
+									],
+									"more": 0.765,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 68.1615
+						}
+					}
+				],
+				"recipe": {
+					"radius": 155.0,
+					"slow": 0.8999999999999999
+				},
+				"summary": "命中预估（未计敌方防御）：每次命中 68.16",
+				"supports": [
+					"ambush",
+					"lingering_chill"
+				],
+				"trap_profile": {
+					"arming_seconds": 0.35,
+					"enabled": true,
+					"hit_multiplier": 0.85,
+					"lifetime_seconds": 12.0,
+					"mana_multiplier": 1.25,
+					"maximum_traps": 3,
+					"trigger_radius": 70.0
+				}
+			},
+			{
+				"area_impulse_profile": {
+					"direction": "toward_origin",
+					"enabled": true,
+					"impulse_speed": 190.0,
+					"mana_multiplier": 1.2
+				},
+				"cooldown": 6.0,
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n命中牵引至爆发圆心，受墙体与怪物分离影响；不改变伤害或触发半径。\n圆形范围：半径 155.00 → 155.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n新星普通减速 0.90 秒；范围、击退与冷却不变。伏击冻结时长，不受冰霜异常时长加成。\n独立爆炸半径 76.00 · 面积 ×1.0000\n每次命中：闪电 80.19\n固有：闪电 59.40；附加：无；附加效用 2.70",
+				"initial_count": 0,
+				"mana": 31.68,
+				"packets": [
+					{
+						"active": true,
+						"known_target_resolved": {
+							"components": {
+								"lightning": 80.19000000000001
+							},
+							"details": [
+								{
+									"base": 59.400000000000006,
+									"before_defense": 80.19000000000001,
+									"final": 80.19000000000001,
+									"increased": 0.5,
+									"modifiers": [
+										"global_increased",
+										"elemental_increased",
+										"support:lingering_chill"
+									],
+									"more": 0.9,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 80.19000000000001
+						},
+						"known_target_settlement": {
+							"components": {
+								"lightning": 80.19000000000001
+							},
+							"damage_total": 80.19000000000001,
+							"details": [
+								{
+									"base": 59.400000000000006,
+									"before_defense": 80.19000000000001,
+									"final": 80.19000000000001,
+									"increased": 0.5,
+									"modifiers": [
+										"global_increased",
+										"elemental_increased",
+										"support:lingering_chill"
+									],
+									"more": 0.9,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"health_lost": 80.19000000000001,
+							"mitigated_components": {
+								"lightning": 0.0
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"lightning": 80.19000000000001
+							},
+							"reason": "",
+							"remaining_health": 233.31,
+							"remaining_shield": 0.0,
+							"shield_spent": 0.0
+						},
+						"label": "每次命中",
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.7,
+								"base_coefficient": 2.7,
+								"intrinsic": {
+									"lightning": 59.400000000000006
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"lightning": 59.400000000000006
+							},
+							"role": "direct",
+							"skill_id": "nova",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						},
+						"resolved": {
+							"components": {
+								"lightning": 80.19000000000001
+							},
+							"details": [
+								{
+									"base": 59.400000000000006,
+									"before_defense": 80.19000000000001,
+									"final": 80.19000000000001,
+									"increased": 0.5,
+									"modifiers": [
+										"global_increased",
+										"elemental_increased",
+										"support:lingering_chill"
+									],
+									"more": 0.9,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 80.19000000000001
+						}
+					}
+				],
+				"recipe": {
+					"radius": 155.0,
+					"slow": 0.8999999999999999
+				},
+				"summary": "命中预估（未计敌方防御）：每次命中 80.19",
+				"supports": [
+					"inward_pull",
+					"lingering_chill"
+				]
+			}
+		],
+		"local_max": [
+			{
+				"cooldown": 6.0,
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n圆形范围：半径 155.00 → 155.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n新星普通减速 0.90 秒；范围、击退与冷却不变。伏击冻结时长，不受冰霜异常时长加成。\n每次命中：闪电 43.74\n固有：闪电 48.60；附加：无；附加效用 2.70",
+				"initial_count": 0,
+				"mana": 26.400000000000002,
+				"packets": [
+					{
+						"active": true,
+						"known_target_resolved": {
+							"components": {
+								"lightning": 43.74
+							},
+							"details": [
+								{
+									"base": 48.6,
+									"before_defense": 43.74,
+									"final": 43.74,
+									"increased": 0.0,
+									"modifiers": [
+										"support:lingering_chill"
+									],
+									"more": 0.9,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 43.74
+						},
+						"known_target_settlement": {
+							"components": {
+								"lightning": 43.74
+							},
+							"damage_total": 43.74,
+							"details": [
+								{
+									"base": 48.6,
+									"before_defense": 43.74,
+									"final": 43.74,
+									"increased": 0.0,
+									"modifiers": [
+										"support:lingering_chill"
+									],
+									"more": 0.9,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"health_lost": 43.74,
+							"mitigated_components": {
+								"lightning": 0.0
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"lightning": 43.74
+							},
+							"reason": "",
+							"remaining_health": 269.76,
+							"remaining_shield": 0.0,
+							"shield_spent": 0.0
+						},
+						"label": "每次命中",
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.7,
+								"base_coefficient": 2.7,
+								"intrinsic": {
+									"lightning": 48.6
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"lightning": 48.6
+							},
+							"role": "direct",
+							"skill_id": "nova",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						},
+						"resolved": {
+							"components": {
+								"lightning": 43.74
+							},
+							"details": [
+								{
+									"base": 48.6,
+									"before_defense": 43.74,
+									"final": 43.74,
+									"increased": 0.0,
+									"modifiers": [
+										"support:lingering_chill"
+									],
+									"more": 0.9,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 43.74
+						}
+					}
+				],
+				"recipe": {
+					"radius": 155.0,
+					"slow": 0.8999999999999999
+				},
+				"summary": "命中预估（未计敌方防御）：每次命中 43.74",
+				"supports": [
+					"lingering_chill"
+				]
+			},
+			{
+				"cooldown": 6.0,
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n圆形范围：半径 155.00 → 186.00；面积 ×1.4400，半径 ×1.2000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n新星普通减速 0.90 秒；范围、击退与冷却不变。伏击冻结时长，不受冰霜异常时长加成。\n每次命中：闪电 37.18\n固有：闪电 48.60；附加：无；附加效用 2.70",
+				"initial_count": 0,
+				"mana": 31.68,
+				"packets": [
+					{
+						"active": true,
+						"known_target_resolved": {
+							"components": {
+								"lightning": 37.179
+							},
+							"details": [
+								{
+									"base": 48.6,
+									"before_defense": 37.179,
+									"final": 37.179,
+									"increased": 0.0,
+									"modifiers": [
+										"support:breadth",
+										"support:lingering_chill"
+									],
+									"more": 0.765,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 37.179
+						},
+						"known_target_settlement": {
+							"components": {
+								"lightning": 37.179
+							},
+							"damage_total": 37.179,
+							"details": [
+								{
+									"base": 48.6,
+									"before_defense": 37.179,
+									"final": 37.179,
+									"increased": 0.0,
+									"modifiers": [
+										"support:breadth",
+										"support:lingering_chill"
+									],
+									"more": 0.765,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"health_lost": 37.179,
+							"mitigated_components": {
+								"lightning": 0.0
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"lightning": 37.179
+							},
+							"reason": "",
+							"remaining_health": 276.321,
+							"remaining_shield": 0.0,
+							"shield_spent": 0.0
+						},
+						"label": "每次命中",
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.7,
+								"base_coefficient": 2.7,
+								"intrinsic": {
+									"lightning": 48.6
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"lightning": 48.6
+							},
+							"role": "direct",
+							"skill_id": "nova",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						},
+						"resolved": {
+							"components": {
+								"lightning": 37.179
+							},
+							"details": [
+								{
+									"base": 48.6,
+									"before_defense": 37.179,
+									"final": 37.179,
+									"increased": 0.0,
+									"modifiers": [
+										"support:breadth",
+										"support:lingering_chill"
+									],
+									"more": 0.765,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 37.179
+						}
+					}
+				],
+				"recipe": {
+					"area_multiplier": 1.44,
+					"base_radius": 155.0,
+					"radius": 186.0,
+					"slow": 0.8999999999999999
+				},
+				"summary": "命中预估（未计敌方防御）：每次命中 37.18",
+				"supports": [
+					"breadth",
+					"lingering_chill"
+				]
+			},
+			{
+				"cooldown": 6.0,
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n圆形范围：半径 155.00 → 124.00；面积 ×0.6400，半径 ×0.8000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n新星普通减速 0.90 秒；范围、击退与冷却不变。伏击冻结时长，不受冰霜异常时长加成。\n每次命中：闪电 54.68\n固有：闪电 48.60；附加：无；附加效用 2.70",
+				"initial_count": 0,
+				"mana": 31.68,
+				"packets": [
+					{
+						"active": true,
+						"known_target_resolved": {
+							"components": {
+								"lightning": 54.675000000000004
+							},
+							"details": [
+								{
+									"base": 48.6,
+									"before_defense": 54.675000000000004,
+									"final": 54.675000000000004,
+									"increased": 0.0,
+									"modifiers": [
+										"support:concentrate",
+										"support:lingering_chill"
+									],
+									"more": 1.125,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 54.675000000000004
+						},
+						"known_target_settlement": {
+							"components": {
+								"lightning": 54.675000000000004
+							},
+							"damage_total": 54.675000000000004,
+							"details": [
+								{
+									"base": 48.6,
+									"before_defense": 54.675000000000004,
+									"final": 54.675000000000004,
+									"increased": 0.0,
+									"modifiers": [
+										"support:concentrate",
+										"support:lingering_chill"
+									],
+									"more": 1.125,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"health_lost": 54.675000000000004,
+							"mitigated_components": {
+								"lightning": 0.0
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"lightning": 54.675000000000004
+							},
+							"reason": "",
+							"remaining_health": 258.825,
+							"remaining_shield": 0.0,
+							"shield_spent": 0.0
+						},
+						"label": "每次命中",
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.7,
+								"base_coefficient": 2.7,
+								"intrinsic": {
+									"lightning": 48.6
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"lightning": 48.6
+							},
+							"role": "direct",
+							"skill_id": "nova",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						},
+						"resolved": {
+							"components": {
+								"lightning": 54.675000000000004
+							},
+							"details": [
+								{
+									"base": 48.6,
+									"before_defense": 54.675000000000004,
+									"final": 54.675000000000004,
+									"increased": 0.0,
+									"modifiers": [
+										"support:concentrate",
+										"support:lingering_chill"
+									],
+									"more": 1.125,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 54.675000000000004
+						}
+					}
+				],
+				"recipe": {
+					"area_multiplier": 0.64,
+					"base_radius": 155.0,
+					"radius": 124.0,
+					"slow": 0.8999999999999999
+				},
+				"summary": "命中预估（未计敌方防御）：每次命中 54.68",
+				"supports": [
+					"concentrate",
+					"lingering_chill"
+				]
+			},
+			{
+				"cooldown": 6.8999999999999995,
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n圆形范围：半径 155.00 → 155.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n新星普通减速 0.90 秒；范围、击退与冷却不变。伏击冻结时长，不受冰霜异常时长加成。\n每次命中：闪电 43.74\n固有：闪电 48.60；附加：无；附加效用 2.70",
+				"initial_count": 0,
+				"mana": 21.120000000000005,
+				"packets": [
+					{
+						"active": true,
+						"known_target_resolved": {
+							"components": {
+								"lightning": 43.74
+							},
+							"details": [
+								{
+									"base": 48.6,
+									"before_defense": 43.74,
+									"final": 43.74,
+									"increased": 0.0,
+									"modifiers": [
+										"support:lingering_chill"
+									],
+									"more": 0.9,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 43.74
+						},
+						"known_target_settlement": {
+							"components": {
+								"lightning": 43.74
+							},
+							"damage_total": 43.74,
+							"details": [
+								{
+									"base": 48.6,
+									"before_defense": 43.74,
+									"final": 43.74,
+									"increased": 0.0,
+									"modifiers": [
+										"support:lingering_chill"
+									],
+									"more": 0.9,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"health_lost": 43.74,
+							"mitigated_components": {
+								"lightning": 0.0
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"lightning": 43.74
+							},
+							"reason": "",
+							"remaining_health": 269.76,
+							"remaining_shield": 0.0,
+							"shield_spent": 0.0
+						},
+						"label": "每次命中",
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.7,
+								"base_coefficient": 2.7,
+								"intrinsic": {
+									"lightning": 48.6
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"lightning": 48.6
+							},
+							"role": "direct",
+							"skill_id": "nova",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						},
+						"resolved": {
+							"components": {
+								"lightning": 43.74
+							},
+							"details": [
+								{
+									"base": 48.6,
+									"before_defense": 43.74,
+									"final": 43.74,
+									"increased": 0.0,
+									"modifiers": [
+										"support:lingering_chill"
+									],
+									"more": 0.9,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 43.74
+						}
+					}
+				],
+				"recipe": {
+					"radius": 155.0,
+					"slow": 0.8999999999999999
+				},
+				"summary": "命中预估（未计敌方防御）：每次命中 43.74",
+				"supports": [
+					"efficiency",
+					"lingering_chill"
+				]
+			},
+			{
+				"cooldown": 4.800000000000001,
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n圆形范围：半径 155.00 → 155.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n新星普通减速 0.90 秒；范围、击退与冷却不变。伏击冻结时长，不受冰霜异常时长加成。\n每次命中：闪电 43.74\n固有：闪电 48.60；附加：无；附加效用 2.70",
+				"initial_count": 0,
+				"mana": 36.96,
+				"packets": [
+					{
+						"active": true,
+						"known_target_resolved": {
+							"components": {
+								"lightning": 43.74
+							},
+							"details": [
+								{
+									"base": 48.6,
+									"before_defense": 43.74,
+									"final": 43.74,
+									"increased": 0.0,
+									"modifiers": [
+										"support:lingering_chill"
+									],
+									"more": 0.9,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 43.74
+						},
+						"known_target_settlement": {
+							"components": {
+								"lightning": 43.74
+							},
+							"damage_total": 43.74,
+							"details": [
+								{
+									"base": 48.6,
+									"before_defense": 43.74,
+									"final": 43.74,
+									"increased": 0.0,
+									"modifiers": [
+										"support:lingering_chill"
+									],
+									"more": 0.9,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"health_lost": 43.74,
+							"mitigated_components": {
+								"lightning": 0.0
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"lightning": 43.74
+							},
+							"reason": "",
+							"remaining_health": 269.76,
+							"remaining_shield": 0.0,
+							"shield_spent": 0.0
+						},
+						"label": "每次命中",
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.7,
+								"base_coefficient": 2.7,
+								"intrinsic": {
+									"lightning": 48.6
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"lightning": 48.6
+							},
+							"role": "direct",
+							"skill_id": "nova",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						},
+						"resolved": {
+							"components": {
+								"lightning": 43.74
+							},
+							"details": [
+								{
+									"base": 48.6,
+									"before_defense": 43.74,
+									"final": 43.74,
+									"increased": 0.0,
+									"modifiers": [
+										"support:lingering_chill"
+									],
+									"more": 0.9,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 43.74
+						}
+					}
+				],
+				"recipe": {
+					"radius": 155.0,
+					"slow": 0.8999999999999999
+				},
+				"summary": "命中预估（未计敌方防御）：每次命中 43.74",
+				"supports": [
+					"lingering_chill",
+					"quickcast"
+				]
+			},
+			{
+				"cooldown": 6.0,
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n圆形范围：半径 155.00 → 155.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n新星普通减速 0.90 秒；范围、击退与冷却不变。伏击冻结时长，不受冰霜异常时长加成。\n每次命中：闪电 52.49\n固有：闪电 48.60；附加：无；附加效用 2.70",
+				"initial_count": 0,
+				"mana": 30.36,
+				"packets": [
+					{
+						"active": true,
+						"known_target_resolved": {
+							"components": {
+								"lightning": 52.48800000000001
+							},
+							"details": [
+								{
+									"base": 48.6,
+									"before_defense": 52.48800000000001,
+									"final": 52.48800000000001,
+									"increased": 0.0,
+									"modifiers": [
+										"support:lightning_focus",
+										"support:lingering_chill"
+									],
+									"more": 1.08,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 52.48800000000001
+						},
+						"known_target_settlement": {
+							"components": {
+								"lightning": 52.48800000000001
+							},
+							"damage_total": 52.48800000000001,
+							"details": [
+								{
+									"base": 48.6,
+									"before_defense": 52.48800000000001,
+									"final": 52.48800000000001,
+									"increased": 0.0,
+									"modifiers": [
+										"support:lightning_focus",
+										"support:lingering_chill"
+									],
+									"more": 1.08,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"health_lost": 52.48800000000001,
+							"mitigated_components": {
+								"lightning": 0.0
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"lightning": 52.48800000000001
+							},
+							"reason": "",
+							"remaining_health": 261.012,
+							"remaining_shield": 0.0,
+							"shield_spent": 0.0
+						},
+						"label": "每次命中",
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.7,
+								"base_coefficient": 2.7,
+								"intrinsic": {
+									"lightning": 48.6
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"lightning": 48.6
+							},
+							"role": "direct",
+							"skill_id": "nova",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						},
+						"resolved": {
+							"components": {
+								"lightning": 52.48800000000001
+							},
+							"details": [
+								{
+									"base": 48.6,
+									"before_defense": 52.48800000000001,
+									"final": 52.48800000000001,
+									"increased": 0.0,
+									"modifiers": [
+										"support:lightning_focus",
+										"support:lingering_chill"
+									],
+									"more": 1.08,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 52.48800000000001
+						}
+					}
+				],
+				"recipe": {
+					"radius": 155.0,
+					"slow": 0.8999999999999999
+				},
+				"summary": "命中预估（未计敌方防御）：每次命中 52.49",
+				"supports": [
+					"lightning_focus",
+					"lingering_chill"
+				]
+			},
+			{
+				"cooldown": 6.0,
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n感电 2.0 秒 · 后续命中承受伤害提高 15%\n闪电命中结算后施加；不追溯增强本次命中，不影响持续伤害。同强度刷新，不叠加。\n圆形范围：半径 155.00 → 155.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n新星普通减速 0.90 秒；范围、击退与冷却不变。伏击冻结时长，不受冰霜异常时长加成。\n每次命中：闪电 34.99\n固有：闪电 48.60；附加：无；附加效用 2.70",
+				"initial_count": 0,
+				"mana": 31.68,
+				"packets": [
+					{
+						"active": true,
+						"known_target_resolved": {
+							"components": {
+								"lightning": 34.992000000000004
+							},
+							"details": [
+								{
+									"base": 48.6,
+									"before_defense": 34.992000000000004,
+									"final": 34.992000000000004,
+									"increased": 0.0,
+									"modifiers": [
+										"support:lingering_chill",
+										"support:shock"
+									],
+									"more": 0.7200000000000001,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 34.992000000000004
+						},
+						"known_target_settlement": {
+							"components": {
+								"lightning": 34.992000000000004
+							},
+							"damage_total": 34.992000000000004,
+							"details": [
+								{
+									"base": 48.6,
+									"before_defense": 34.992000000000004,
+									"final": 34.992000000000004,
+									"increased": 0.0,
+									"modifiers": [
+										"support:lingering_chill",
+										"support:shock"
+									],
+									"more": 0.7200000000000001,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"health_lost": 34.992000000000004,
+							"mitigated_components": {
+								"lightning": 0.0
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"lightning": 34.992000000000004
+							},
+							"reason": "",
+							"remaining_health": 278.508,
+							"remaining_shield": 0.0,
+							"shield_spent": 0.0
+						},
+						"label": "每次命中",
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.7,
+								"base_coefficient": 2.7,
+								"intrinsic": {
+									"lightning": 48.6
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"lightning": 48.6
+							},
+							"role": "direct",
+							"skill_id": "nova",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						},
+						"resolved": {
+							"components": {
+								"lightning": 34.992000000000004
+							},
+							"details": [
+								{
+									"base": 48.6,
+									"before_defense": 34.992000000000004,
+									"final": 34.992000000000004,
+									"increased": 0.0,
+									"modifiers": [
+										"support:lingering_chill",
+										"support:shock"
+									],
+									"more": 0.7200000000000001,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 34.992000000000004
+						}
+					}
+				],
+				"recipe": {
+					"radius": 155.0,
+					"slow": 0.8999999999999999
+				},
+				"summary": "命中预估（未计敌方防御）：每次命中 34.99",
+				"supports": [
+					"lingering_chill",
+					"shock"
+				]
+			},
+			{
+				"cooldown": 6.0,
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n脚下布置 · 0.35 秒后布防 · 触发半径 70\n保留 12 秒 · 所有技能组共享 3 枚；满额不消耗魔力或冷却。\n放置时固定伤害与暴击；敌人靠近后释放一次，到期消失。触发需视线，范围增幅只改变爆发范围。\n圆形范围：半径 155.00 → 155.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n新星普通减速 0.90 秒；范围、击退与冷却不变。伏击冻结时长，不受冰霜异常时长加成。\n每次命中：闪电 37.18\n固有：闪电 48.60；附加：无；附加效用 2.70",
+				"initial_count": 0,
+				"mana": 33.0,
+				"packets": [
+					{
+						"active": true,
+						"known_target_resolved": {
+							"components": {
+								"lightning": 37.179
+							},
+							"details": [
+								{
+									"base": 48.6,
+									"before_defense": 37.179,
+									"final": 37.179,
+									"increased": 0.0,
+									"modifiers": [
+										"support:lingering_chill",
+										"support:ambush"
+									],
+									"more": 0.765,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 37.179
+						},
+						"known_target_settlement": {
+							"components": {
+								"lightning": 37.179
+							},
+							"damage_total": 37.179,
+							"details": [
+								{
+									"base": 48.6,
+									"before_defense": 37.179,
+									"final": 37.179,
+									"increased": 0.0,
+									"modifiers": [
+										"support:lingering_chill",
+										"support:ambush"
+									],
+									"more": 0.765,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"health_lost": 37.179,
+							"mitigated_components": {
+								"lightning": 0.0
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"lightning": 37.179
+							},
+							"reason": "",
+							"remaining_health": 276.321,
+							"remaining_shield": 0.0,
+							"shield_spent": 0.0
+						},
+						"label": "每次命中",
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.7,
+								"base_coefficient": 2.7,
+								"intrinsic": {
+									"lightning": 48.6
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"lightning": 48.6
+							},
+							"role": "direct",
+							"skill_id": "nova",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						},
+						"resolved": {
+							"components": {
+								"lightning": 37.179
+							},
+							"details": [
+								{
+									"base": 48.6,
+									"before_defense": 37.179,
+									"final": 37.179,
+									"increased": 0.0,
+									"modifiers": [
+										"support:lingering_chill",
+										"support:ambush"
+									],
+									"more": 0.765,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 37.179
+						}
+					}
+				],
+				"recipe": {
+					"radius": 155.0,
+					"slow": 0.8999999999999999
+				},
+				"summary": "命中预估（未计敌方防御）：每次命中 37.18",
+				"supports": [
+					"ambush",
+					"lingering_chill"
+				],
+				"trap_profile": {
+					"arming_seconds": 0.35,
+					"enabled": true,
+					"hit_multiplier": 0.85,
+					"lifetime_seconds": 12.0,
+					"mana_multiplier": 1.25,
+					"maximum_traps": 3,
+					"trigger_radius": 70.0
+				}
+			},
+			{
+				"area_impulse_profile": {
+					"direction": "toward_origin",
+					"enabled": true,
+					"impulse_speed": 190.0,
+					"mana_multiplier": 1.2
+				},
+				"cooldown": 6.0,
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n命中牵引至爆发圆心，受墙体与怪物分离影响；不改变伤害或触发半径。\n圆形范围：半径 155.00 → 155.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n新星普通减速 0.90 秒；范围、击退与冷却不变。伏击冻结时长，不受冰霜异常时长加成。\n每次命中：闪电 43.74\n固有：闪电 48.60；附加：无；附加效用 2.70",
+				"initial_count": 0,
+				"mana": 31.68,
+				"packets": [
+					{
+						"active": true,
+						"known_target_resolved": {
+							"components": {
+								"lightning": 43.74
+							},
+							"details": [
+								{
+									"base": 48.6,
+									"before_defense": 43.74,
+									"final": 43.74,
+									"increased": 0.0,
+									"modifiers": [
+										"support:lingering_chill"
+									],
+									"more": 0.9,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 43.74
+						},
+						"known_target_settlement": {
+							"components": {
+								"lightning": 43.74
+							},
+							"damage_total": 43.74,
+							"details": [
+								{
+									"base": 48.6,
+									"before_defense": 43.74,
+									"final": 43.74,
+									"increased": 0.0,
+									"modifiers": [
+										"support:lingering_chill"
+									],
+									"more": 0.9,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"health_lost": 43.74,
+							"mitigated_components": {
+								"lightning": 0.0
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"lightning": 43.74
+							},
+							"reason": "",
+							"remaining_health": 269.76,
+							"remaining_shield": 0.0,
+							"shield_spent": 0.0
+						},
+						"label": "每次命中",
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.7,
+								"base_coefficient": 2.7,
+								"intrinsic": {
+									"lightning": 48.6
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"lightning": 48.6
+							},
+							"role": "direct",
+							"skill_id": "nova",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						},
+						"resolved": {
+							"components": {
+								"lightning": 43.74
+							},
+							"details": [
+								{
+									"base": 48.6,
+									"before_defense": 43.74,
+									"final": 43.74,
+									"increased": 0.0,
+									"modifiers": [
+										"support:lingering_chill"
+									],
+									"more": 0.9,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 43.74
+						}
+					}
+				],
+				"recipe": {
+					"radius": 155.0,
+					"slow": 0.8999999999999999
+				},
+				"summary": "命中预估（未计敌方防御）：每次命中 43.74",
+				"supports": [
+					"inward_pull",
+					"lingering_chill"
+				]
+			}
+		],
+		"local_normal": [
+			{
+				"cooldown": 6.0,
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n圆形范围：半径 155.00 → 155.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n新星普通减速 0.90 秒；范围、击退与冷却不变。伏击冻结时长，不受冰霜异常时长加成。\n每次命中：闪电 43.74\n固有：闪电 48.60；附加：无；附加效用 2.70",
+				"initial_count": 0,
+				"mana": 26.400000000000002,
+				"packets": [
+					{
+						"active": true,
+						"known_target_resolved": {
+							"components": {
+								"lightning": 43.74
+							},
+							"details": [
+								{
+									"base": 48.6,
+									"before_defense": 43.74,
+									"final": 43.74,
+									"increased": 0.0,
+									"modifiers": [
+										"support:lingering_chill"
+									],
+									"more": 0.9,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 43.74
+						},
+						"known_target_settlement": {
+							"components": {
+								"lightning": 43.74
+							},
+							"damage_total": 43.74,
+							"details": [
+								{
+									"base": 48.6,
+									"before_defense": 43.74,
+									"final": 43.74,
+									"increased": 0.0,
+									"modifiers": [
+										"support:lingering_chill"
+									],
+									"more": 0.9,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"health_lost": 43.74,
+							"mitigated_components": {
+								"lightning": 0.0
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"lightning": 43.74
+							},
+							"reason": "",
+							"remaining_health": 269.76,
+							"remaining_shield": 0.0,
+							"shield_spent": 0.0
+						},
+						"label": "每次命中",
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.7,
+								"base_coefficient": 2.7,
+								"intrinsic": {
+									"lightning": 48.6
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"lightning": 48.6
+							},
+							"role": "direct",
+							"skill_id": "nova",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						},
+						"resolved": {
+							"components": {
+								"lightning": 43.74
+							},
+							"details": [
+								{
+									"base": 48.6,
+									"before_defense": 43.74,
+									"final": 43.74,
+									"increased": 0.0,
+									"modifiers": [
+										"support:lingering_chill"
+									],
+									"more": 0.9,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 43.74
+						}
+					}
+				],
+				"recipe": {
+					"radius": 155.0,
+					"slow": 0.8999999999999999
+				},
+				"summary": "命中预估（未计敌方防御）：每次命中 43.74",
+				"supports": [
+					"lingering_chill"
+				]
+			},
+			{
+				"cooldown": 6.0,
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n圆形范围：半径 155.00 → 186.00；面积 ×1.4400，半径 ×1.2000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n新星普通减速 0.90 秒；范围、击退与冷却不变。伏击冻结时长，不受冰霜异常时长加成。\n每次命中：闪电 37.18\n固有：闪电 48.60；附加：无；附加效用 2.70",
+				"initial_count": 0,
+				"mana": 31.68,
+				"packets": [
+					{
+						"active": true,
+						"known_target_resolved": {
+							"components": {
+								"lightning": 37.179
+							},
+							"details": [
+								{
+									"base": 48.6,
+									"before_defense": 37.179,
+									"final": 37.179,
+									"increased": 0.0,
+									"modifiers": [
+										"support:breadth",
+										"support:lingering_chill"
+									],
+									"more": 0.765,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 37.179
+						},
+						"known_target_settlement": {
+							"components": {
+								"lightning": 37.179
+							},
+							"damage_total": 37.179,
+							"details": [
+								{
+									"base": 48.6,
+									"before_defense": 37.179,
+									"final": 37.179,
+									"increased": 0.0,
+									"modifiers": [
+										"support:breadth",
+										"support:lingering_chill"
+									],
+									"more": 0.765,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"health_lost": 37.179,
+							"mitigated_components": {
+								"lightning": 0.0
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"lightning": 37.179
+							},
+							"reason": "",
+							"remaining_health": 276.321,
+							"remaining_shield": 0.0,
+							"shield_spent": 0.0
+						},
+						"label": "每次命中",
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.7,
+								"base_coefficient": 2.7,
+								"intrinsic": {
+									"lightning": 48.6
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"lightning": 48.6
+							},
+							"role": "direct",
+							"skill_id": "nova",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						},
+						"resolved": {
+							"components": {
+								"lightning": 37.179
+							},
+							"details": [
+								{
+									"base": 48.6,
+									"before_defense": 37.179,
+									"final": 37.179,
+									"increased": 0.0,
+									"modifiers": [
+										"support:breadth",
+										"support:lingering_chill"
+									],
+									"more": 0.765,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 37.179
+						}
+					}
+				],
+				"recipe": {
+					"area_multiplier": 1.44,
+					"base_radius": 155.0,
+					"radius": 186.0,
+					"slow": 0.8999999999999999
+				},
+				"summary": "命中预估（未计敌方防御）：每次命中 37.18",
+				"supports": [
+					"breadth",
+					"lingering_chill"
+				]
+			},
+			{
+				"cooldown": 6.0,
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n圆形范围：半径 155.00 → 124.00；面积 ×0.6400，半径 ×0.8000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n新星普通减速 0.90 秒；范围、击退与冷却不变。伏击冻结时长，不受冰霜异常时长加成。\n每次命中：闪电 54.68\n固有：闪电 48.60；附加：无；附加效用 2.70",
+				"initial_count": 0,
+				"mana": 31.68,
+				"packets": [
+					{
+						"active": true,
+						"known_target_resolved": {
+							"components": {
+								"lightning": 54.675000000000004
+							},
+							"details": [
+								{
+									"base": 48.6,
+									"before_defense": 54.675000000000004,
+									"final": 54.675000000000004,
+									"increased": 0.0,
+									"modifiers": [
+										"support:concentrate",
+										"support:lingering_chill"
+									],
+									"more": 1.125,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 54.675000000000004
+						},
+						"known_target_settlement": {
+							"components": {
+								"lightning": 54.675000000000004
+							},
+							"damage_total": 54.675000000000004,
+							"details": [
+								{
+									"base": 48.6,
+									"before_defense": 54.675000000000004,
+									"final": 54.675000000000004,
+									"increased": 0.0,
+									"modifiers": [
+										"support:concentrate",
+										"support:lingering_chill"
+									],
+									"more": 1.125,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"health_lost": 54.675000000000004,
+							"mitigated_components": {
+								"lightning": 0.0
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"lightning": 54.675000000000004
+							},
+							"reason": "",
+							"remaining_health": 258.825,
+							"remaining_shield": 0.0,
+							"shield_spent": 0.0
+						},
+						"label": "每次命中",
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.7,
+								"base_coefficient": 2.7,
+								"intrinsic": {
+									"lightning": 48.6
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"lightning": 48.6
+							},
+							"role": "direct",
+							"skill_id": "nova",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						},
+						"resolved": {
+							"components": {
+								"lightning": 54.675000000000004
+							},
+							"details": [
+								{
+									"base": 48.6,
+									"before_defense": 54.675000000000004,
+									"final": 54.675000000000004,
+									"increased": 0.0,
+									"modifiers": [
+										"support:concentrate",
+										"support:lingering_chill"
+									],
+									"more": 1.125,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 54.675000000000004
+						}
+					}
+				],
+				"recipe": {
+					"area_multiplier": 0.64,
+					"base_radius": 155.0,
+					"radius": 124.0,
+					"slow": 0.8999999999999999
+				},
+				"summary": "命中预估（未计敌方防御）：每次命中 54.68",
+				"supports": [
+					"concentrate",
+					"lingering_chill"
+				]
+			},
+			{
+				"cooldown": 6.8999999999999995,
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n圆形范围：半径 155.00 → 155.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n新星普通减速 0.90 秒；范围、击退与冷却不变。伏击冻结时长，不受冰霜异常时长加成。\n每次命中：闪电 43.74\n固有：闪电 48.60；附加：无；附加效用 2.70",
+				"initial_count": 0,
+				"mana": 21.120000000000005,
+				"packets": [
+					{
+						"active": true,
+						"known_target_resolved": {
+							"components": {
+								"lightning": 43.74
+							},
+							"details": [
+								{
+									"base": 48.6,
+									"before_defense": 43.74,
+									"final": 43.74,
+									"increased": 0.0,
+									"modifiers": [
+										"support:lingering_chill"
+									],
+									"more": 0.9,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 43.74
+						},
+						"known_target_settlement": {
+							"components": {
+								"lightning": 43.74
+							},
+							"damage_total": 43.74,
+							"details": [
+								{
+									"base": 48.6,
+									"before_defense": 43.74,
+									"final": 43.74,
+									"increased": 0.0,
+									"modifiers": [
+										"support:lingering_chill"
+									],
+									"more": 0.9,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"health_lost": 43.74,
+							"mitigated_components": {
+								"lightning": 0.0
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"lightning": 43.74
+							},
+							"reason": "",
+							"remaining_health": 269.76,
+							"remaining_shield": 0.0,
+							"shield_spent": 0.0
+						},
+						"label": "每次命中",
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.7,
+								"base_coefficient": 2.7,
+								"intrinsic": {
+									"lightning": 48.6
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"lightning": 48.6
+							},
+							"role": "direct",
+							"skill_id": "nova",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						},
+						"resolved": {
+							"components": {
+								"lightning": 43.74
+							},
+							"details": [
+								{
+									"base": 48.6,
+									"before_defense": 43.74,
+									"final": 43.74,
+									"increased": 0.0,
+									"modifiers": [
+										"support:lingering_chill"
+									],
+									"more": 0.9,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 43.74
+						}
+					}
+				],
+				"recipe": {
+					"radius": 155.0,
+					"slow": 0.8999999999999999
+				},
+				"summary": "命中预估（未计敌方防御）：每次命中 43.74",
+				"supports": [
+					"efficiency",
+					"lingering_chill"
+				]
+			},
+			{
+				"cooldown": 4.800000000000001,
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n圆形范围：半径 155.00 → 155.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n新星普通减速 0.90 秒；范围、击退与冷却不变。伏击冻结时长，不受冰霜异常时长加成。\n每次命中：闪电 43.74\n固有：闪电 48.60；附加：无；附加效用 2.70",
+				"initial_count": 0,
+				"mana": 36.96,
+				"packets": [
+					{
+						"active": true,
+						"known_target_resolved": {
+							"components": {
+								"lightning": 43.74
+							},
+							"details": [
+								{
+									"base": 48.6,
+									"before_defense": 43.74,
+									"final": 43.74,
+									"increased": 0.0,
+									"modifiers": [
+										"support:lingering_chill"
+									],
+									"more": 0.9,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 43.74
+						},
+						"known_target_settlement": {
+							"components": {
+								"lightning": 43.74
+							},
+							"damage_total": 43.74,
+							"details": [
+								{
+									"base": 48.6,
+									"before_defense": 43.74,
+									"final": 43.74,
+									"increased": 0.0,
+									"modifiers": [
+										"support:lingering_chill"
+									],
+									"more": 0.9,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"health_lost": 43.74,
+							"mitigated_components": {
+								"lightning": 0.0
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"lightning": 43.74
+							},
+							"reason": "",
+							"remaining_health": 269.76,
+							"remaining_shield": 0.0,
+							"shield_spent": 0.0
+						},
+						"label": "每次命中",
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.7,
+								"base_coefficient": 2.7,
+								"intrinsic": {
+									"lightning": 48.6
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"lightning": 48.6
+							},
+							"role": "direct",
+							"skill_id": "nova",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						},
+						"resolved": {
+							"components": {
+								"lightning": 43.74
+							},
+							"details": [
+								{
+									"base": 48.6,
+									"before_defense": 43.74,
+									"final": 43.74,
+									"increased": 0.0,
+									"modifiers": [
+										"support:lingering_chill"
+									],
+									"more": 0.9,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 43.74
+						}
+					}
+				],
+				"recipe": {
+					"radius": 155.0,
+					"slow": 0.8999999999999999
+				},
+				"summary": "命中预估（未计敌方防御）：每次命中 43.74",
+				"supports": [
+					"lingering_chill",
+					"quickcast"
+				]
+			},
+			{
+				"cooldown": 6.0,
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n圆形范围：半径 155.00 → 155.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n新星普通减速 0.90 秒；范围、击退与冷却不变。伏击冻结时长，不受冰霜异常时长加成。\n每次命中：闪电 52.49\n固有：闪电 48.60；附加：无；附加效用 2.70",
+				"initial_count": 0,
+				"mana": 30.36,
+				"packets": [
+					{
+						"active": true,
+						"known_target_resolved": {
+							"components": {
+								"lightning": 52.48800000000001
+							},
+							"details": [
+								{
+									"base": 48.6,
+									"before_defense": 52.48800000000001,
+									"final": 52.48800000000001,
+									"increased": 0.0,
+									"modifiers": [
+										"support:lightning_focus",
+										"support:lingering_chill"
+									],
+									"more": 1.08,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 52.48800000000001
+						},
+						"known_target_settlement": {
+							"components": {
+								"lightning": 52.48800000000001
+							},
+							"damage_total": 52.48800000000001,
+							"details": [
+								{
+									"base": 48.6,
+									"before_defense": 52.48800000000001,
+									"final": 52.48800000000001,
+									"increased": 0.0,
+									"modifiers": [
+										"support:lightning_focus",
+										"support:lingering_chill"
+									],
+									"more": 1.08,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"health_lost": 52.48800000000001,
+							"mitigated_components": {
+								"lightning": 0.0
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"lightning": 52.48800000000001
+							},
+							"reason": "",
+							"remaining_health": 261.012,
+							"remaining_shield": 0.0,
+							"shield_spent": 0.0
+						},
+						"label": "每次命中",
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.7,
+								"base_coefficient": 2.7,
+								"intrinsic": {
+									"lightning": 48.6
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"lightning": 48.6
+							},
+							"role": "direct",
+							"skill_id": "nova",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						},
+						"resolved": {
+							"components": {
+								"lightning": 52.48800000000001
+							},
+							"details": [
+								{
+									"base": 48.6,
+									"before_defense": 52.48800000000001,
+									"final": 52.48800000000001,
+									"increased": 0.0,
+									"modifiers": [
+										"support:lightning_focus",
+										"support:lingering_chill"
+									],
+									"more": 1.08,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 52.48800000000001
+						}
+					}
+				],
+				"recipe": {
+					"radius": 155.0,
+					"slow": 0.8999999999999999
+				},
+				"summary": "命中预估（未计敌方防御）：每次命中 52.49",
+				"supports": [
+					"lightning_focus",
+					"lingering_chill"
+				]
+			},
+			{
+				"cooldown": 6.0,
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n感电 2.0 秒 · 后续命中承受伤害提高 15%\n闪电命中结算后施加；不追溯增强本次命中，不影响持续伤害。同强度刷新，不叠加。\n圆形范围：半径 155.00 → 155.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n新星普通减速 0.90 秒；范围、击退与冷却不变。伏击冻结时长，不受冰霜异常时长加成。\n每次命中：闪电 34.99\n固有：闪电 48.60；附加：无；附加效用 2.70",
+				"initial_count": 0,
+				"mana": 31.68,
+				"packets": [
+					{
+						"active": true,
+						"known_target_resolved": {
+							"components": {
+								"lightning": 34.992000000000004
+							},
+							"details": [
+								{
+									"base": 48.6,
+									"before_defense": 34.992000000000004,
+									"final": 34.992000000000004,
+									"increased": 0.0,
+									"modifiers": [
+										"support:lingering_chill",
+										"support:shock"
+									],
+									"more": 0.7200000000000001,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 34.992000000000004
+						},
+						"known_target_settlement": {
+							"components": {
+								"lightning": 34.992000000000004
+							},
+							"damage_total": 34.992000000000004,
+							"details": [
+								{
+									"base": 48.6,
+									"before_defense": 34.992000000000004,
+									"final": 34.992000000000004,
+									"increased": 0.0,
+									"modifiers": [
+										"support:lingering_chill",
+										"support:shock"
+									],
+									"more": 0.7200000000000001,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"health_lost": 34.992000000000004,
+							"mitigated_components": {
+								"lightning": 0.0
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"lightning": 34.992000000000004
+							},
+							"reason": "",
+							"remaining_health": 278.508,
+							"remaining_shield": 0.0,
+							"shield_spent": 0.0
+						},
+						"label": "每次命中",
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.7,
+								"base_coefficient": 2.7,
+								"intrinsic": {
+									"lightning": 48.6
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"lightning": 48.6
+							},
+							"role": "direct",
+							"skill_id": "nova",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						},
+						"resolved": {
+							"components": {
+								"lightning": 34.992000000000004
+							},
+							"details": [
+								{
+									"base": 48.6,
+									"before_defense": 34.992000000000004,
+									"final": 34.992000000000004,
+									"increased": 0.0,
+									"modifiers": [
+										"support:lingering_chill",
+										"support:shock"
+									],
+									"more": 0.7200000000000001,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 34.992000000000004
+						}
+					}
+				],
+				"recipe": {
+					"radius": 155.0,
+					"slow": 0.8999999999999999
+				},
+				"summary": "命中预估（未计敌方防御）：每次命中 34.99",
+				"supports": [
+					"lingering_chill",
+					"shock"
+				]
+			},
+			{
+				"cooldown": 6.0,
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n脚下布置 · 0.35 秒后布防 · 触发半径 70\n保留 12 秒 · 所有技能组共享 3 枚；满额不消耗魔力或冷却。\n放置时固定伤害与暴击；敌人靠近后释放一次，到期消失。触发需视线，范围增幅只改变爆发范围。\n圆形范围：半径 155.00 → 155.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n新星普通减速 0.90 秒；范围、击退与冷却不变。伏击冻结时长，不受冰霜异常时长加成。\n每次命中：闪电 37.18\n固有：闪电 48.60；附加：无；附加效用 2.70",
+				"initial_count": 0,
+				"mana": 33.0,
+				"packets": [
+					{
+						"active": true,
+						"known_target_resolved": {
+							"components": {
+								"lightning": 37.179
+							},
+							"details": [
+								{
+									"base": 48.6,
+									"before_defense": 37.179,
+									"final": 37.179,
+									"increased": 0.0,
+									"modifiers": [
+										"support:lingering_chill",
+										"support:ambush"
+									],
+									"more": 0.765,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 37.179
+						},
+						"known_target_settlement": {
+							"components": {
+								"lightning": 37.179
+							},
+							"damage_total": 37.179,
+							"details": [
+								{
+									"base": 48.6,
+									"before_defense": 37.179,
+									"final": 37.179,
+									"increased": 0.0,
+									"modifiers": [
+										"support:lingering_chill",
+										"support:ambush"
+									],
+									"more": 0.765,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"health_lost": 37.179,
+							"mitigated_components": {
+								"lightning": 0.0
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"lightning": 37.179
+							},
+							"reason": "",
+							"remaining_health": 276.321,
+							"remaining_shield": 0.0,
+							"shield_spent": 0.0
+						},
+						"label": "每次命中",
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.7,
+								"base_coefficient": 2.7,
+								"intrinsic": {
+									"lightning": 48.6
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"lightning": 48.6
+							},
+							"role": "direct",
+							"skill_id": "nova",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						},
+						"resolved": {
+							"components": {
+								"lightning": 37.179
+							},
+							"details": [
+								{
+									"base": 48.6,
+									"before_defense": 37.179,
+									"final": 37.179,
+									"increased": 0.0,
+									"modifiers": [
+										"support:lingering_chill",
+										"support:ambush"
+									],
+									"more": 0.765,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 37.179
+						}
+					}
+				],
+				"recipe": {
+					"radius": 155.0,
+					"slow": 0.8999999999999999
+				},
+				"summary": "命中预估（未计敌方防御）：每次命中 37.18",
+				"supports": [
+					"ambush",
+					"lingering_chill"
+				],
+				"trap_profile": {
+					"arming_seconds": 0.35,
+					"enabled": true,
+					"hit_multiplier": 0.85,
+					"lifetime_seconds": 12.0,
+					"mana_multiplier": 1.25,
+					"maximum_traps": 3,
+					"trigger_radius": 70.0
+				}
+			},
+			{
+				"area_impulse_profile": {
+					"direction": "toward_origin",
+					"enabled": true,
+					"impulse_speed": 190.0,
+					"mana_multiplier": 1.2
+				},
+				"cooldown": 6.0,
+				"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n命中牵引至爆发圆心，受墙体与怪物分离影响；不改变伤害或触发半径。\n圆形范围：半径 155.00 → 155.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n新星普通减速 0.90 秒；范围、击退与冷却不变。伏击冻结时长，不受冰霜异常时长加成。\n每次命中：闪电 43.74\n固有：闪电 48.60；附加：无；附加效用 2.70",
+				"initial_count": 0,
+				"mana": 31.68,
+				"packets": [
+					{
+						"active": true,
+						"known_target_resolved": {
+							"components": {
+								"lightning": 43.74
+							},
+							"details": [
+								{
+									"base": 48.6,
+									"before_defense": 43.74,
+									"final": 43.74,
+									"increased": 0.0,
+									"modifiers": [
+										"support:lingering_chill"
+									],
+									"more": 0.9,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 43.74
+						},
+						"known_target_settlement": {
+							"components": {
+								"lightning": 43.74
+							},
+							"damage_total": 43.74,
+							"details": [
+								{
+									"base": 48.6,
+									"before_defense": 43.74,
+									"final": 43.74,
+									"increased": 0.0,
+									"modifiers": [
+										"support:lingering_chill"
+									],
+									"more": 0.9,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"health_lost": 43.74,
+							"mitigated_components": {
+								"lightning": 0.0
+							},
+							"ok": true,
+							"overkill": 0.0,
+							"raw_components": {
+								"lightning": 43.74
+							},
+							"reason": "",
+							"remaining_health": 269.76,
+							"remaining_shield": 0.0,
+							"shield_spent": 0.0
+						},
+						"label": "每次命中",
+						"packet": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.7,
+								"base_coefficient": 2.7,
+								"intrinsic": {
+									"lightning": 48.6
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"lightning": 48.6
+							},
+							"role": "direct",
+							"skill_id": "nova",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						},
+						"resolved": {
+							"components": {
+								"lightning": 43.74
+							},
+							"details": [
+								{
+									"base": 48.6,
+									"before_defense": 43.74,
+									"final": 43.74,
+									"increased": 0.0,
+									"modifiers": [
+										"support:lingering_chill"
+									],
+									"more": 0.9,
+									"resistance": 0.0,
+									"type": "lightning"
+								}
+							],
+							"total": 43.74
+						}
+					}
+				],
+				"recipe": {
+					"radius": 155.0,
+					"slow": 0.8999999999999999
+				},
+				"summary": "命中预估（未计敌方防御）：每次命中 43.74",
+				"supports": [
+					"inward_pull",
+					"lingering_chill"
+				]
+			}
+		]
+	},
+	"gem": {
+		"capabilities": [
+			"native_slow"
+		],
+		"definition_id": "support:lingering_chill",
+		"description": "冰霜与奥能新星：原减速时长×1.50，冰霜3秒至4.5秒，新星0.6秒至0.9秒。主命中伤害×0.90，魔力×1.10；新星范围、击退与冷却不变，伏击冻结最终时长。新星仍为普通减速，不受冰霜异常时长属性加成。",
+		"family": "control",
+		"glyph": "",
+		"icon": "res://assets/ui/grimoire/lingering_chill.png",
+		"icon_texture": "res://assets/ui/grimoire/lingering_chill.png",
+		"kind": "support_gem",
+		"name": "寒意延长辅助",
+		"requires": [
+			"native_slow"
+		],
+		"short_name": "寒意延长辅助",
+		"size": [
+			1,
+			1
+		],
+		"skill_id": "",
+		"skills": [
+			"frost",
+			"nova"
+		],
+		"support_id": "lingering_chill"
+	},
+	"native_slow": {
+		"frost": [
+			"initial_projectiles",
+			"projectile_hit",
+			"native_slow"
+		],
+		"nova": [
+			"area_hit",
+			"native_slow"
+		],
+		"nova_base": 0.6
+	},
+	"program_example": {
+		"after": {
+			"cooldown": 6.0,
+			"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n圆形范围：半径 155.00 → 155.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n新星普通减速 0.90 秒；范围、击退与冷却不变。伏击冻结时长，不受冰霜异常时长加成。\n每次命中：闪电 63.18\n固有：闪电 70.20；附加：无；附加效用 2.70",
+			"initial_count": 0,
+			"mana": 26.400000000000002,
+			"recipe": {
+				"radius": 155.0,
+				"slow": 0.8999999999999999
+			},
+			"summary": "命中预估（未计敌方防御）：每次命中 63.18"
+		},
+		"before": {
+			"cooldown": 6.0,
+			"details": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n圆形范围：半径 155.00 → 155.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n每次命中：闪电 70.20\n固有：闪电 70.20；附加：无；附加效用 2.70",
+			"initial_count": 0,
+			"mana": 24.0,
+			"recipe": {
+				"radius": 155.0
+			},
+			"summary": "命中预估（未计敌方防御）：每次命中 70.20"
+		}
+	},
+	"support": {
+		"description": "冰霜与奥能新星：原减速时长×1.50，冰霜3秒至4.5秒，新星0.6秒至0.9秒。主命中伤害×0.90，魔力×1.10；新星范围、击退与冷却不变，伏击冻结最终时长。新星仍为普通减速，不受冰霜异常时长属性加成。",
+		"family": "control",
+		"name": "寒意延长辅助",
+		"operations": [
+			{
+				"op": "slow_duration_multiplier",
+				"value": 1.5
+			},
+			{
+				"op": "primary_hit_more",
+				"value": -0.1
+			},
+			{
+				"op": "mana_multiplier",
+				"value": 1.1
+			}
+		],
+		"requires": [
+			"native_slow"
+		],
+		"skills": [
+			"frost",
+			"nova"
+		]
+	}
+}

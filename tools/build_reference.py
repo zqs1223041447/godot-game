@@ -14,7 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 REF = ROOT / 'docs/reference'
 CATEGORIES = [('skills','主动技能'),('supports','辅助技能'),('equipment','随机装备'),('affixes','装备词缀'),('fixed_items','固定装备'),('jewels','珠宝'),('jewel_affixes','珠宝词缀'),('source_passives','源天赋与精通'),('passives','旧181节点研究'),('mechanisms','共用机制'),('weapon_stages','武器局部阶段'),('defenses','受击与防御'),('flasks','生命与魔力药剂'),('currencies','堆叠材料'),('crafting','制作与回收'),('monsters','怪物图鉴'),('monster_attacks','怪物攻击'),('encounters','本轮挑战'),('town_services','城镇服务'),('maps','有限地图'),('map_specials','地图特殊词缀'),('rules','规则与边界')]
 RULE_TITLES = {'damage':'伤害如何结算','supports':'辅助装配','projectiles':'分裂、返回与飞行结束','equipment':'装备与阶级','character_rates':'恢复、移动与普通攻击速度','basic_attack':'普通攻击与武器贡献','allocation':'天赋与珠宝规则','shared':'玩家和怪物共享机制','boundaries':'尚未实现的源游戏语义','sources':'数据来源与实现边界','ember_proliferation':'余烬扩散与剩余时长','shock':'感电与后续命中','source_fire_dot':'源天赋火焰持续伤害加成','source_faster_burn':'源天赋加速燃烧'}
-CAPABILITIES = {'initial_projectiles':'初始投射物数量','projectile_hit':'投射物命中','finite_projectile_pierce':'有限穿透','area_hit':'直接范围命中','chain_hit':'连锁命中'}
+CAPABILITIES = {'initial_projectiles':'初始投射物数量','projectile_hit':'投射物命中','finite_projectile_pierce':'有限穿透','native_slow':'原生减速','area_hit':'直接范围命中','chain_hit':'连锁命中'}
 SLOTS = {'weapon':'武器','armor':'护甲','charm':'项链','body_armour':'护甲','amulet':'项链','ring':'戒指','ring_1':'戒指一','ring_2':'戒指二','boots':'鞋','belt':'腰带','gloves':'手套','helmet':'头盔'}
 TYPES = {'small':'小天赋','notable':'显著天赋','socket':'珠宝孔','start':'起点','keystone':'基石','mastery':'精通','prefix':'前缀','suffix':'后缀','ordinary':'普通珠宝','special':'特殊珠宝','legacy':'原始词池','expansion':'扩展词池','runewood':'符木点伤池','defense':'火抗防具池','local_weapon':'白蜡长弓池','nine_slot':'九槽装备池','build_legacy_v27':'构筑原底材池','build_nine_slot_v27':'构筑九槽池','forgeblade_v34':'锻纹短刃池'}
 RULE_TITLES['forgeblade'] = '锻纹短刃与裂刃局部物理'
@@ -581,6 +581,7 @@ def support_program_diagram(entry, skills, details):
         metrics=[('魔力',before['mana'],after['mana']),('冷却秒',before['cooldown'],after['cooldown'])]
         br,ar=before['recipe'],after['recipe']
         if 'speed' in ar: metrics += [('投射速度',br['speed'],ar['speed']),('减速秒',br['slow'],ar['slow'])]
+        if skill=='nova' and 'slow' in ar: metrics += [('普通减速秒',skills[skill]['slow_duration'],ar['slow'])]
         if 'hit' in ar: metrics += [('总目标数',br['hit']['bounce_count'],ar['hit']['bounce_count']),('首段距离',br['first_range'],ar['first_range']),('续跳距离',br['followup_range'],ar['followup_range'])]
         if 'radius' in ar: metrics += [('半径',br['radius'],ar['radius']),('面积倍率',br.get('area_multiplier',1),ar.get('area_multiplier',1))]
         if after['initial_count']: metrics += [('初始投射物',before['initial_count'],after['initial_count'])]
@@ -1310,7 +1311,7 @@ def cold_ailment_duration_rule(data,link,facts,details):
     rows=''
     for scenario,label in [('plain-frost','冰霜脉冲'),('lingering-frost','冰霜脉冲＋寒意延长'),('frost-lock','冰霜脉冲＋霜锁')]:
         rows+='<tr><th>'+label+'</th><td>'+value('examples/before-'+scenario+'/recipe/slow')+'</td><td>'+value('examples/after-'+scenario+'/recipe/slow')+'</td></tr>'
-    body+='<h3>真实技能组的冰缓秒数</h3><div class="table-scroll"><table><thead><tr><th>配置</th><th>未取14209</th><th>已取14209</th></tr></thead><tbody>'+rows+'</tbody></table></div><p>先完成辅助时长，再乘1.20：寒意延长为3 × 1.50 × 1.20 = 5.4秒。只改时长，不改0.36移动倍率、max刷新和世界delta计时。Nova原生闪电伤害的0.6秒通用slow，包括伏击交付，仍为0.6秒。</p>'
+    body+='<h3>真实技能组的冰缓秒数</h3><div class="table-scroll"><table><thead><tr><th>配置</th><th>未取14209</th><th>已取14209</th></tr></thead><tbody>'+rows+'</tbody></table></div><p>先完成辅助时长，再乘1.20：寒意延长为3 × 1.50 × 1.20 = 5.4秒。只改时长，不改0.36移动倍率、max刷新和世界delta计时。新星原生闪电伤害的普通减速不受该源属性加成：未接寒意延长仍为0.6秒，接入该辅助才为0.9秒，伏击也保持冻结的对应时长。</p>'
     rows=''
     for rarity,label in [('normal','普通'),('magic','魔法'),('rare','稀有'),('boss','首领')]:
         rows+='<tr><th>'+label+'</th><td>'+value('examples/before-frost-lock/freeze_profile/duration_by_rarity/'+rarity)+'</td><td>'+value('examples/after-frost-lock/freeze_profile/duration_by_rarity/'+rarity)+'</td></tr>'
@@ -1462,6 +1463,7 @@ def build(data, art):
             for example in examples:
                 body += '<div class="example"><h4>'+('无辅助' if not example['supports'] else links('supports',example['supports']))+'</h4>'
                 geometry = [('半径',number(example['recipe']['radius'])),('面积倍率',number(example['recipe'].get('area_multiplier',1.0)))] if 'area_hit' in s['capabilities'] else [('最多目标数',number(example['recipe']['hit']['bounce_count'])),('续跳距离',number(example['recipe']['followup_range']))] if key=='chain' else [('初始投射物',number(example['initial_count']))] if example['initial_count'] else []
+                if key=='nova' and 'slow' in example['recipe']: geometry.append(('普通减速秒',number(example['recipe']['slow'])))
                 body += facts([('消耗',f'{number(example["mana"])} 魔力'),('冷却',f'{number(example["cooldown"])} 秒')]+geometry)
                 body += '<p>'+esc(example['summary'])+'</p>'+details('分量与组装过程', '<p>'+lines(example['details'])+'</p>')
                 target=data['known_target']
@@ -1479,6 +1481,8 @@ def build(data, art):
             body+='<p>有效鼠标瞄准优先；自动瞄准的最近目标与角色重合时保留原朝向，原朝向也为零才向右。先确定方向，再按本技能原扇形和19单位发射偏移创建弹道。<a href="../AIM_OVERLAP_FIX.zh-CN.md">重合瞄准规则与验证</a>。</p>'
         if key=='dash':
             body+='<p>有移动输入时沿移动方向；无移动输入且最近目标重合时保留原朝向，原朝向也为零才向右。恢复方向不会绕过原身体碰撞、墙体或地图边界。<a href="../AIM_OVERLAP_FIX.zh-CN.md">重合瞄准修复</a>。</p>'
+        if key=='nova':
+            body+='<p>寒意延长使原普通减速0.6→0.9秒，伤害×0.90、魔力×1.10；原范围、击退与冷却保持，伏击冻结最终时长。<a href="../NOVA_LINGERING.zh-CN.md">查看新星减速取舍与验证</a>。</p>'
         if 'ambush' in compatible:
             body+='<p>符印伏击改为脚下预置，成功放置时支付魔力；触发后才命中。'+link('rules','ambush','查看伏击、感电、燃烧与范围组合的代表编译示例')+'。</p>'
             related+=' · '+link('rules','ambush')
@@ -1518,6 +1522,8 @@ def build(data, art):
         if key=='inward_pull':
             body+='<p>沿用原冲量衰减、墙体碰撞与分离规则，不保证拉到中心；裂刃只牵引成功命中的目标，新星与陨星可搭配符印伏击并在放置时冻结。'+link('rules','inward_pull','查看实际圆心、魔力代价与伤害不变的同源示例')+'。</p>'
             related+=' · '+link('rules','inward_pull')+' · '+link('rules','ambush')+' · '+link('town_services','skill_merchant','宝石商人')
+        if key=='lingering_chill':
+            body+='<p>奥能新星原有普通减速0.6→0.9秒，移动倍率仍为0.36，同类时长取较大值；伏击在放置时冻结时长。新星不受冰霜异常时长源属性加成。<a href="../NOVA_LINGERING.zh-CN.md">新星延长减速与验收</a>。</p>'
         if key in ['frost_lock','lingering_chill']:
             body+='<p>霜锁辅助与寒意延长辅助不能同时装配；冻结只暂停自主行为，外力和资源状态继续。'+link('rules','frost_lock','查看完整准入与时间边界')+'。</p>'
             related+=' · '+link('rules','frost_lock')

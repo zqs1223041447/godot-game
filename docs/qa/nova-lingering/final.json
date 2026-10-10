@@ -1,0 +1,255 @@
+{
+	"checks": 322,
+	"failures": 0,
+	"group_id": "group_000003",
+	"labels": [],
+	"main_uid": "migration_gem_000003",
+	"old_cast_comparisons": 164,
+	"owned_cast": {
+		"cooldown": 6.0,
+		"critical": {
+			"primary": {
+				"chance": 0.05,
+				"multiplier": 1.5
+			}
+		},
+		"error": "",
+		"group_id": "group_000003",
+		"initial_count": 0,
+		"main_uid": "migration_gem_000003",
+		"mana": 33.0,
+		"ok": true,
+		"packets": {
+			"direct": {
+				"assembly": {
+					"added": {
+
+					},
+					"added_effectiveness": 2.7,
+					"base_coefficient": 2.7,
+					"intrinsic": {
+						"lightning": 70.2
+					},
+					"stage": "hit_base"
+				},
+				"base": {
+					"lightning": 70.2
+				},
+				"role": "direct",
+				"skill_id": "nova",
+				"tags": [
+					"hit",
+					"spell",
+					"area"
+				]
+			}
+		},
+		"recipe": {
+			"radius": 155.0,
+			"slow": 0.8999999999999999
+		},
+		"skill_id": "nova",
+		"snapshot": {
+			"accuracy": 140.0,
+			"added_damage": {
+				"attack": {
+					"fire": 0.0,
+					"physical": 0.0
+				},
+				"spell": {
+					"cold": 0.0,
+					"lightning": 0.0
+				}
+			},
+			"added_damage_sources": [],
+			"base_damage": 26.0,
+			"compiled_packets": {
+				"direct": {
+					"assembly": {
+						"added": {
+
+						},
+						"added_effectiveness": 2.7,
+						"base_coefficient": 2.7,
+						"intrinsic": {
+							"lightning": 70.2
+						},
+						"stage": "hit_base"
+					},
+					"base": {
+						"lightning": 70.2
+					},
+					"role": "direct",
+					"skill_id": "nova",
+					"tags": [
+						"hit",
+						"spell",
+						"area"
+					]
+				}
+			},
+			"compiled_skill_id": "nova",
+			"critical": {
+				"primary": {
+					"chance": 0.05,
+					"multiplier": 1.5
+				}
+			},
+			"critical_modifiers": {
+				"base_chance": 0.05,
+				"base_multiplier": 1.5
+			},
+			"effects": [],
+			"explosion_recipe": {
+				"added_effectiveness": 0.0,
+				"coefficient": 0.9,
+				"radius": 76.0
+			},
+			"modifiers": [
+				{
+					"all_tags": [
+						"attack",
+						"melee"
+					],
+					"damage_types": [
+						"physical"
+					],
+					"id": "melee_physical_increased",
+					"mode": "increased",
+					"value": 0.04
+				},
+				{
+					"all_tags": [
+						"hit",
+						"spell",
+						"area"
+					],
+					"damage_types": [],
+					"id": "support:lingering_chill",
+					"mode": "more",
+					"skills": [
+						"nova"
+					],
+					"value": -0.1
+				},
+				{
+					"all_tags": [
+						"hit",
+						"spell",
+						"area"
+					],
+					"damage_types": [],
+					"id": "support:ambush",
+					"mode": "more",
+					"skills": [
+						"nova"
+					],
+					"value": -0.15
+				}
+			],
+			"projectile_count": 0,
+			"tornado_recipe": {
+				"child": {
+					"added_effectiveness": 0.7,
+					"coefficient": 0.7,
+					"lifetime": 1.7,
+					"pierce": -1,
+					"radius": 4.5,
+					"range": 150.0,
+					"role": "child",
+					"speed": 260.0,
+					"split": false
+				},
+				"child_count": 3,
+				"explosion": {
+					"added_effectiveness": 0.0,
+					"coefficient": 0.9,
+					"radius": 76.0
+				},
+				"parent": {
+					"added_effectiveness": 1.0,
+					"coefficient": 1.0,
+					"lifetime": 0.9,
+					"pierce": -1,
+					"radius": 6.0,
+					"range": 150.0,
+					"role": "parent",
+					"speed": 420.0,
+					"split": true
+				},
+				"parent_count": 3,
+				"spread": 0.16
+			}
+		},
+		"support_ids": [
+			"ambush",
+			"lingering_chill"
+		],
+		"trap_profile": {
+			"arming_seconds": 0.35,
+			"enabled": true,
+			"hit_multiplier": 0.85,
+			"lifetime_seconds": 12.0,
+			"mana_multiplier": 1.25,
+			"maximum_traps": 3,
+			"trigger_radius": 70.0
+		}
+	},
+	"owned_sha256": "cd11bb5a34a9d7a65adecde46e31aa734ce06cc2d15e77fad214a990a913e25e",
+	"samples": [
+		{
+			"duration": 0.6,
+			"hit": 70.2,
+			"links": [],
+			"mana": 24.0,
+			"phase": "direct",
+			"radius": 155.0
+		},
+		{
+			"duration": 0.8999999999999999,
+			"hit": 63.18000000000001,
+			"links": [
+				"lingering_chill"
+			],
+			"mana": 26.400000000000002,
+			"phase": "direct",
+			"radius": 155.0
+		},
+		{
+			"duration": 0.8999999999999999,
+			"hit": 53.703,
+			"links": [
+				"ambush",
+				"lingering_chill"
+			],
+			"mana": 33.0,
+			"phase": "trap",
+			"radius": 155.0
+		},
+		{
+			"duration": 0.8999999999999999,
+			"hit": 36.518040000000006,
+			"links": [
+				"ambush",
+				"lingering_chill",
+				"breadth",
+				"shock",
+				"efficiency"
+			],
+			"mana": 38.016,
+			"phase": "trap",
+			"radius": 186.0
+		},
+		{
+			"duration": 0.8999999999999999,
+			"hit": 63.18000000000001,
+			"links": [
+				"lingering_chill"
+			],
+			"mana": 26.400000000000002,
+			"phase": "direct",
+			"radius": 155.0
+		}
+	],
+	"support_uid": "migration_gem_000019"
+}

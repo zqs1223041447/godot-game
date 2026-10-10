@@ -1,0 +1,21 @@
+{
+	"cases": [
+		{
+			"case": "dead_removed_before_trigger",
+			"dead": 1,
+			"replacement": 3
+		},
+		{
+			"case": "same_tick_and_lethal_chain",
+			"first": 1,
+			"targets": [
+				3,
+				6
+			],
+			"waiting": 2
+		}
+	],
+	"checks": 44,
+	"failures": 0,
+	"labels": []
+}

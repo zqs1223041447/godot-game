@@ -56,7 +56,7 @@ func place(at: Variant, position: Variant, compiled: Variant, frozen_snapshot: V
 	var skill_id: String = compiled.skill_id
 	var entry: Dictionary = {"id": id, "position": position, "skill_id": skill_id,
 		"cast_id": cast_id, "radius": float(compiled.recipe.get("radius", 0.0)),
-		"slow": 0.6 if skill_id == "nova" else 0.0, "color": Data.SKILLS[skill_id].color,
+		"slow": float(compiled.recipe.get("slow", Data.SKILLS.nova.slow_duration)) if skill_id == "nova" else 0.0, "color": Data.SKILLS[skill_id].color,
 		"packet": compiled.packets.get("direct", {}).duplicate(true), "snapshot": frozen_snapshot.duplicate(true),
 		"placed_at": time, "armed_at": time + float(Rules.POLICY.arming_seconds),
 		"expires_at": time + float(Rules.POLICY.lifetime_seconds),
@@ -179,6 +179,11 @@ static func _compiled_error(compiled: Variant) -> String:
 		if not reason.is_empty(): return reason
 		if packets.direct.skill_id != skill_id or packets.direct.role != "direct" or packets.direct.tags != ["hit", "spell", "area"]:
 			return "Trap packet must retain its original spell area hit identity"
+	if skill_id == "nova":
+		var program: Dictionary = Supports.compile_programs(skill_id, links, Supports.GROUP_MAX_SUPPORTS)
+		var expected: float = float(Data.SKILLS.nova.slow_duration) * float(program.recipe_factors.get("slow_duration_multiplier", 1.0))
+		var slow: Variant = recipe.get("slow", Data.SKILLS.nova.slow_duration)
+		if not Program.number(slow) or float(slow) != expected: return "Trap nova slow duration is invalid"
 	var snapshot: Variant = compiled.get("snapshot")
 	if not snapshot is Dictionary or snapshot.get("compiled_skill_id") != skill_id or snapshot.get("compiled_packets") != packets or snapshot.has("critical_roll"):
 		return "Trap snapshot must belong to its unrolled compiled cast"

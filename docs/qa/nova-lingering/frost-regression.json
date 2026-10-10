@@ -1,0 +1,4155 @@
+{
+	"checks": 205,
+	"compiled": {
+		"after-ambush-nova": {
+			"cast": {
+				"cooldown": 6.0,
+				"critical": {
+					"primary": {
+						"chance": 0.05,
+						"multiplier": 1.5
+					}
+				},
+				"error": "",
+				"group_id": "group_000003",
+				"initial_count": 0,
+				"main_uid": "migration_gem_000003",
+				"mana": 30.0,
+				"ok": true,
+				"packets": {
+					"direct": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 2.7,
+							"base_coefficient": 2.7,
+							"intrinsic": {
+								"lightning": 70.2
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"lightning": 70.2
+						},
+						"role": "direct",
+						"skill_id": "nova",
+						"tags": [
+							"hit",
+							"spell",
+							"area"
+						]
+					}
+				},
+				"recipe": {
+					"radius": 155.0
+				},
+				"skill_id": "nova",
+				"snapshot": {
+					"accuracy": 148.0,
+					"added_damage": {
+						"attack": {
+							"fire": 0.0,
+							"physical": 0.0
+						},
+						"spell": {
+							"cold": 0.0,
+							"lightning": 0.0
+						}
+					},
+					"added_damage_sources": [],
+					"base_damage": 26.0,
+					"cold_ailment_duration_increased": 0.2,
+					"compiled_packets": {
+						"direct": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.7,
+								"base_coefficient": 2.7,
+								"intrinsic": {
+									"lightning": 70.2
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"lightning": 70.2
+							},
+							"role": "direct",
+							"skill_id": "nova",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						}
+					},
+					"compiled_skill_id": "nova",
+					"critical": {
+						"primary": {
+							"chance": 0.05,
+							"multiplier": 1.5
+						}
+					},
+					"critical_modifiers": {
+						"base_chance": 0.05,
+						"base_multiplier": 1.5
+					},
+					"effects": [],
+					"explosion_recipe": {
+						"added_effectiveness": 0.0,
+						"coefficient": 0.9,
+						"radius": 76.0
+					},
+					"modifiers": [
+						{
+							"all_tags": [
+								"attack",
+								"melee"
+							],
+							"damage_types": [
+								"physical"
+							],
+							"id": "melee_physical_increased",
+							"mode": "increased",
+							"value": 0.02
+						},
+						{
+							"all_tags": [
+								"hit",
+								"spell",
+								"area"
+							],
+							"damage_types": [],
+							"id": "support:ambush",
+							"mode": "more",
+							"skills": [
+								"nova"
+							],
+							"value": -0.15
+						}
+					],
+					"projectile_count": 0,
+					"tornado_recipe": {
+						"child": {
+							"added_effectiveness": 0.7,
+							"coefficient": 0.7,
+							"lifetime": 1.7,
+							"pierce": -1,
+							"radius": 4.5,
+							"range": 150.0,
+							"role": "child",
+							"speed": 260.0,
+							"split": false
+						},
+						"child_count": 3,
+						"explosion": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"parent": {
+							"added_effectiveness": 1.0,
+							"coefficient": 1.0,
+							"lifetime": 0.9,
+							"pierce": -1,
+							"radius": 6.0,
+							"range": 150.0,
+							"role": "parent",
+							"speed": 420.0,
+							"split": true
+						},
+						"parent_count": 3,
+						"spread": 0.16
+					}
+				},
+				"support_ids": [
+					"ambush"
+				],
+				"trap_profile": {
+					"arming_seconds": 0.35,
+					"enabled": true,
+					"hit_multiplier": 0.85,
+					"lifetime_seconds": 12.0,
+					"mana_multiplier": 1.25,
+					"maximum_traps": 3,
+					"trigger_radius": 70.0
+				}
+			},
+			"group_id": "group_000003",
+			"preview": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n脚下布置 · 0.35 秒后布防 · 触发半径 70\n保留 12 秒 · 所有技能组共享 3 枚；满额不消耗魔力或冷却。\n放置时固定伤害与暴击；敌人靠近后释放一次，到期消失。触发需视线，范围增幅只改变爆发范围。\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 148，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n圆形范围：半径 155.00 → 155.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n每次命中：闪电 59.67\n固有：闪电 70.20；附加：无；附加效用 2.70",
+			"stats": {
+				"accuracy": 148.0,
+				"accuracy_increased": 0.0,
+				"additional_skill_slots": 0.0,
+				"area_increased": 0.0,
+				"area_size_increased": 0.0,
+				"armour": 0.0,
+				"armour_increased": 0.0,
+				"attack_added_fire": 0.0,
+				"attack_added_physical": 0.0,
+				"attack_crit_chance_increased": 0.0,
+				"attack_elemental_increased": 0.0,
+				"attack_life_leech": 0.0,
+				"attack_mana_leech": 0.0,
+				"attack_physical_increased": 0.0,
+				"attack_speed": 1.7,
+				"attack_speed_increased": 0.0,
+				"chaos_increased": 0.0,
+				"cold_ailment_duration_increased": 0.2,
+				"cold_increased": 0.0,
+				"cold_resistance": 0.0,
+				"crit_base_chance": 0.05,
+				"crit_base_multiplier": 1.5,
+				"crit_chance_increased": 0.0,
+				"crit_multiplier_add": 0.0,
+				"damage": 26.0,
+				"damage_taken_from_mana_before_life": 0.0,
+				"damaging_ailments_faster": 0.0,
+				"dexterity": 24.0,
+				"elemental_increased": 0.0,
+				"evasion": 15.600000000000001,
+				"evasion_increased": 0.0,
+				"fire_dot_multiplier_add": 0.0,
+				"fire_increased": 0.0,
+				"fire_resistance": 0.0,
+				"flask_charges_gained_increased": 0.0,
+				"flask_life_recovery_increased": 0.0,
+				"flask_mana_recovery_increased": 0.0,
+				"global_increased": 0.0,
+				"intelligence": 82.0,
+				"life_leech_max_rate_increased": 0.0,
+				"life_leech_rate_increased": 0.0,
+				"life_regen": 0.0,
+				"life_regen_percent": 0.0,
+				"lightning_increased": 0.0,
+				"lightning_resistance": 0.0,
+				"mana_cost_efficiency_increased": 0.0,
+				"mana_cost_increased": 0.0,
+				"mana_leech_max_rate_increased": 0.0,
+				"mana_leech_rate_increased": 0.0,
+				"mana_regen": 12.0,
+				"mana_regen_increased": 0.0,
+				"max_health": 127.0,
+				"max_mana": 187.0,
+				"max_shield": 112.32000000000001,
+				"maximum_cold_resistance_add": 0.0,
+				"maximum_fire_resistance_add": 0.0,
+				"maximum_lightning_resistance_add": 0.0,
+				"melee_area_size_increased": 0.0,
+				"melee_crit_chance_increased": 0.0,
+				"melee_crit_multiplier_add": 0.0,
+				"melee_physical_increased": 0.02,
+				"move_speed": 240.0,
+				"move_speed_increased": 0.0,
+				"physical_attack_life_leech": 0.0,
+				"physical_attack_mana_leech": 0.0,
+				"physical_increased": 0.0,
+				"projectile_attack_crit_chance_increased": 0.0,
+				"projectile_attack_crit_multiplier_add": 0.0,
+				"projectile_count": 0.0,
+				"projectile_increased": 0.0,
+				"projectile_speed_increased": 0.0,
+				"resolute_technique": 0.0,
+				"shield_recharge_delay": 4.0,
+				"shield_recharge_rate": 16.0,
+				"shield_recharge_rate_increased": 0.0,
+				"shield_recharge_start_faster": 0.0,
+				"shield_regen": 16.0,
+				"spell_added_cold": 0.0,
+				"spell_added_lightning": 0.0,
+				"spell_area_size_increased": 0.0,
+				"spell_crit_chance_increased": 0.0,
+				"spell_crit_multiplier_add": 0.0,
+				"spell_increased": 0.0,
+				"strength": 14.0
+			}
+		},
+		"after-frost-lock": {
+			"cast": {
+				"cooldown": 4.0,
+				"critical": {
+					"primary": {
+						"chance": 0.05,
+						"multiplier": 1.5
+					},
+					"secondary": {
+						"chance": 0.05,
+						"multiplier": 1.5
+					}
+				},
+				"error": "",
+				"freeze_profile": {
+					"cold_ailment_duration_increased": 0.2,
+					"duration_by_rarity": {
+						"boss": 0.24,
+						"magic": 0.72,
+						"normal": 0.72,
+						"rare": 0.42
+					},
+					"enabled": true,
+					"hit_multiplier": 0.75,
+					"immunity_seconds": 1.5,
+					"mana_multiplier": 1.2
+				},
+				"group_id": "group_000002",
+				"initial_count": 5,
+				"main_uid": "migration_gem_000002",
+				"mana": 19.2,
+				"ok": true,
+				"packets": {
+					"projectile": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 0.85,
+							"base_coefficient": 0.85,
+							"intrinsic": {
+								"cold": 22.099999999999998
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"cold": 22.099999999999998
+						},
+						"role": "projectile",
+						"skill_id": "frost",
+						"tags": [
+							"hit",
+							"projectile",
+							"spell"
+						]
+					},
+					"secondary": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 0.0,
+							"base_coefficient": 0.9,
+							"intrinsic": {
+								"fire": 23.400000000000002
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"fire": 23.400000000000002
+						},
+						"role": "secondary",
+						"skill_id": "frost",
+						"tags": [
+							"hit",
+							"area",
+							"secondary",
+							"explosion"
+						]
+					}
+				},
+				"recipe": {
+					"added_effectiveness": 0.85,
+					"coefficient": 0.85,
+					"damage_type": "cold",
+					"initial_count": 5,
+					"pierce": 2,
+					"slow": 3.5999999999999996,
+					"speed": 520.0,
+					"spread": 0.14
+				},
+				"skill_id": "frost",
+				"snapshot": {
+					"accuracy": 148.0,
+					"added_damage": {
+						"attack": {
+							"fire": 0.0,
+							"physical": 0.0
+						},
+						"spell": {
+							"cold": 0.0,
+							"lightning": 0.0
+						}
+					},
+					"added_damage_sources": [],
+					"base_damage": 26.0,
+					"cold_ailment_duration_increased": 0.2,
+					"compiled_packets": {
+						"projectile": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 0.85,
+								"base_coefficient": 0.85,
+								"intrinsic": {
+									"cold": 22.099999999999998
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"cold": 22.099999999999998
+							},
+							"role": "projectile",
+							"skill_id": "frost",
+							"tags": [
+								"hit",
+								"projectile",
+								"spell"
+							]
+						},
+						"secondary": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 0.0,
+								"base_coefficient": 0.9,
+								"intrinsic": {
+									"fire": 23.400000000000002
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 23.400000000000002
+							},
+							"role": "secondary",
+							"skill_id": "frost",
+							"tags": [
+								"hit",
+								"area",
+								"secondary",
+								"explosion"
+							]
+						}
+					},
+					"compiled_skill_id": "frost",
+					"critical": {
+						"primary": {
+							"chance": 0.05,
+							"multiplier": 1.5
+						},
+						"secondary": {
+							"chance": 0.05,
+							"multiplier": 1.5
+						}
+					},
+					"critical_modifiers": {
+						"base_chance": 0.05,
+						"base_multiplier": 1.5
+					},
+					"effects": [],
+					"explosion_recipe": {
+						"added_effectiveness": 0.0,
+						"coefficient": 0.9,
+						"radius": 76.0
+					},
+					"freeze_policy": {
+						"cold_ailment_duration_increased": 0.2,
+						"duration_by_rarity": {
+							"boss": 0.24,
+							"magic": 0.72,
+							"normal": 0.72,
+							"rare": 0.42
+						},
+						"hit_multiplier": 0.75,
+						"immunity_seconds": 1.5,
+						"mana_multiplier": 1.2
+					},
+					"initial_count": 5,
+					"modifiers": [
+						{
+							"all_tags": [
+								"attack",
+								"melee"
+							],
+							"damage_types": [
+								"physical"
+							],
+							"id": "melee_physical_increased",
+							"mode": "increased",
+							"value": 0.02
+						},
+						{
+							"all_tags": [
+								"hit",
+								"spell",
+								"projectile"
+							],
+							"damage_types": [],
+							"id": "support:frost_lock",
+							"mode": "more",
+							"skills": [
+								"frost"
+							],
+							"value": -0.25
+						}
+					],
+					"projectile_count": 0,
+					"tornado_recipe": {
+						"child": {
+							"added_effectiveness": 0.7,
+							"coefficient": 0.7,
+							"lifetime": 1.7,
+							"pierce": -1,
+							"radius": 4.5,
+							"range": 150.0,
+							"role": "child",
+							"speed": 260.0,
+							"split": false
+						},
+						"child_count": 3,
+						"explosion": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"parent": {
+							"added_effectiveness": 1.0,
+							"coefficient": 1.0,
+							"lifetime": 0.9,
+							"pierce": -1,
+							"radius": 6.0,
+							"range": 150.0,
+							"role": "parent",
+							"speed": 420.0,
+							"split": true
+						},
+						"parent_count": 3,
+						"spread": 0.16
+					}
+				},
+				"support_ids": [
+					"frost_lock"
+				]
+			},
+			"group_id": "group_000002",
+			"preview": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n霜锁：普通/魔法 0.72 秒 · 稀有 0.42 秒 · 首领 0.24 秒\n冻结不刷新；解冻后 1.50 秒不能再被冻结，所有施法共享。\n暂停自主移动与攻击进度，外力和持续伤害仍生效；不撤销已经发生的攻击。\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 148，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n现有减速时长 3.60 秒。距离、生命周期与穿透分别结算；延长减速不等于新增异常状态。\n实际投射速度 520.00\n投射速度改变飞行快慢，不增加距离上限或存续时间。\n每枚投射物：冰霜 16.57\n固有：冰霜 22.10；附加：无；附加效用 0.85\n独立爆炸：火焰 23.40\n固有：火焰 23.40；附加：无；附加效用 0.00\n仅装备授予时触发；攻击/法术点伤与投射物辅助不作用于独立爆炸。",
+			"stats": {
+				"accuracy": 148.0,
+				"accuracy_increased": 0.0,
+				"additional_skill_slots": 0.0,
+				"area_increased": 0.0,
+				"area_size_increased": 0.0,
+				"armour": 0.0,
+				"armour_increased": 0.0,
+				"attack_added_fire": 0.0,
+				"attack_added_physical": 0.0,
+				"attack_crit_chance_increased": 0.0,
+				"attack_elemental_increased": 0.0,
+				"attack_life_leech": 0.0,
+				"attack_mana_leech": 0.0,
+				"attack_physical_increased": 0.0,
+				"attack_speed": 1.7,
+				"attack_speed_increased": 0.0,
+				"chaos_increased": 0.0,
+				"cold_ailment_duration_increased": 0.2,
+				"cold_increased": 0.0,
+				"cold_resistance": 0.0,
+				"crit_base_chance": 0.05,
+				"crit_base_multiplier": 1.5,
+				"crit_chance_increased": 0.0,
+				"crit_multiplier_add": 0.0,
+				"damage": 26.0,
+				"damage_taken_from_mana_before_life": 0.0,
+				"damaging_ailments_faster": 0.0,
+				"dexterity": 24.0,
+				"elemental_increased": 0.0,
+				"evasion": 15.600000000000001,
+				"evasion_increased": 0.0,
+				"fire_dot_multiplier_add": 0.0,
+				"fire_increased": 0.0,
+				"fire_resistance": 0.0,
+				"flask_charges_gained_increased": 0.0,
+				"flask_life_recovery_increased": 0.0,
+				"flask_mana_recovery_increased": 0.0,
+				"global_increased": 0.0,
+				"intelligence": 82.0,
+				"life_leech_max_rate_increased": 0.0,
+				"life_leech_rate_increased": 0.0,
+				"life_regen": 0.0,
+				"life_regen_percent": 0.0,
+				"lightning_increased": 0.0,
+				"lightning_resistance": 0.0,
+				"mana_cost_efficiency_increased": 0.0,
+				"mana_cost_increased": 0.0,
+				"mana_leech_max_rate_increased": 0.0,
+				"mana_leech_rate_increased": 0.0,
+				"mana_regen": 12.0,
+				"mana_regen_increased": 0.0,
+				"max_health": 127.0,
+				"max_mana": 187.0,
+				"max_shield": 112.32000000000001,
+				"maximum_cold_resistance_add": 0.0,
+				"maximum_fire_resistance_add": 0.0,
+				"maximum_lightning_resistance_add": 0.0,
+				"melee_area_size_increased": 0.0,
+				"melee_crit_chance_increased": 0.0,
+				"melee_crit_multiplier_add": 0.0,
+				"melee_physical_increased": 0.02,
+				"move_speed": 240.0,
+				"move_speed_increased": 0.0,
+				"physical_attack_life_leech": 0.0,
+				"physical_attack_mana_leech": 0.0,
+				"physical_increased": 0.0,
+				"projectile_attack_crit_chance_increased": 0.0,
+				"projectile_attack_crit_multiplier_add": 0.0,
+				"projectile_count": 0.0,
+				"projectile_increased": 0.0,
+				"projectile_speed_increased": 0.0,
+				"resolute_technique": 0.0,
+				"shield_recharge_delay": 4.0,
+				"shield_recharge_rate": 16.0,
+				"shield_recharge_rate_increased": 0.0,
+				"shield_recharge_start_faster": 0.0,
+				"shield_regen": 16.0,
+				"spell_added_cold": 0.0,
+				"spell_added_lightning": 0.0,
+				"spell_area_size_increased": 0.0,
+				"spell_crit_chance_increased": 0.0,
+				"spell_crit_multiplier_add": 0.0,
+				"spell_increased": 0.0,
+				"strength": 14.0
+			}
+		},
+		"after-lingering-frost": {
+			"cast": {
+				"cooldown": 4.0,
+				"critical": {
+					"primary": {
+						"chance": 0.05,
+						"multiplier": 1.5
+					},
+					"secondary": {
+						"chance": 0.05,
+						"multiplier": 1.5
+					}
+				},
+				"error": "",
+				"group_id": "group_000002",
+				"initial_count": 5,
+				"main_uid": "migration_gem_000002",
+				"mana": 17.6,
+				"ok": true,
+				"packets": {
+					"projectile": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 0.85,
+							"base_coefficient": 0.85,
+							"intrinsic": {
+								"cold": 22.099999999999998
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"cold": 22.099999999999998
+						},
+						"role": "projectile",
+						"skill_id": "frost",
+						"tags": [
+							"hit",
+							"projectile",
+							"spell"
+						]
+					},
+					"secondary": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 0.0,
+							"base_coefficient": 0.9,
+							"intrinsic": {
+								"fire": 23.400000000000002
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"fire": 23.400000000000002
+						},
+						"role": "secondary",
+						"skill_id": "frost",
+						"tags": [
+							"hit",
+							"area",
+							"secondary",
+							"explosion"
+						]
+					}
+				},
+				"recipe": {
+					"added_effectiveness": 0.85,
+					"coefficient": 0.85,
+					"damage_type": "cold",
+					"initial_count": 5,
+					"pierce": 2,
+					"slow": 5.3999999999999995,
+					"speed": 520.0,
+					"spread": 0.14
+				},
+				"skill_id": "frost",
+				"snapshot": {
+					"accuracy": 148.0,
+					"added_damage": {
+						"attack": {
+							"fire": 0.0,
+							"physical": 0.0
+						},
+						"spell": {
+							"cold": 0.0,
+							"lightning": 0.0
+						}
+					},
+					"added_damage_sources": [],
+					"base_damage": 26.0,
+					"cold_ailment_duration_increased": 0.2,
+					"compiled_packets": {
+						"projectile": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 0.85,
+								"base_coefficient": 0.85,
+								"intrinsic": {
+									"cold": 22.099999999999998
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"cold": 22.099999999999998
+							},
+							"role": "projectile",
+							"skill_id": "frost",
+							"tags": [
+								"hit",
+								"projectile",
+								"spell"
+							]
+						},
+						"secondary": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 0.0,
+								"base_coefficient": 0.9,
+								"intrinsic": {
+									"fire": 23.400000000000002
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 23.400000000000002
+							},
+							"role": "secondary",
+							"skill_id": "frost",
+							"tags": [
+								"hit",
+								"area",
+								"secondary",
+								"explosion"
+							]
+						}
+					},
+					"compiled_skill_id": "frost",
+					"critical": {
+						"primary": {
+							"chance": 0.05,
+							"multiplier": 1.5
+						},
+						"secondary": {
+							"chance": 0.05,
+							"multiplier": 1.5
+						}
+					},
+					"critical_modifiers": {
+						"base_chance": 0.05,
+						"base_multiplier": 1.5
+					},
+					"effects": [],
+					"explosion_recipe": {
+						"added_effectiveness": 0.0,
+						"coefficient": 0.9,
+						"radius": 76.0
+					},
+					"initial_count": 5,
+					"modifiers": [
+						{
+							"all_tags": [
+								"attack",
+								"melee"
+							],
+							"damage_types": [
+								"physical"
+							],
+							"id": "melee_physical_increased",
+							"mode": "increased",
+							"value": 0.02
+						},
+						{
+							"all_tags": [
+								"hit",
+								"spell",
+								"projectile"
+							],
+							"damage_types": [],
+							"id": "support:lingering_chill",
+							"mode": "more",
+							"skills": [
+								"frost"
+							],
+							"value": -0.1
+						}
+					],
+					"projectile_count": 0,
+					"tornado_recipe": {
+						"child": {
+							"added_effectiveness": 0.7,
+							"coefficient": 0.7,
+							"lifetime": 1.7,
+							"pierce": -1,
+							"radius": 4.5,
+							"range": 150.0,
+							"role": "child",
+							"speed": 260.0,
+							"split": false
+						},
+						"child_count": 3,
+						"explosion": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"parent": {
+							"added_effectiveness": 1.0,
+							"coefficient": 1.0,
+							"lifetime": 0.9,
+							"pierce": -1,
+							"radius": 6.0,
+							"range": 150.0,
+							"role": "parent",
+							"speed": 420.0,
+							"split": true
+						},
+						"parent_count": 3,
+						"spread": 0.16
+					}
+				},
+				"support_ids": [
+					"lingering_chill"
+				]
+			},
+			"group_id": "group_000002",
+			"preview": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 148，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n现有减速时长 5.40 秒。距离、生命周期与穿透分别结算；延长减速不等于新增异常状态。\n实际投射速度 520.00\n投射速度改变飞行快慢，不增加距离上限或存续时间。\n每枚投射物：冰霜 19.89\n固有：冰霜 22.10；附加：无；附加效用 0.85\n独立爆炸：火焰 23.40\n固有：火焰 23.40；附加：无；附加效用 0.00\n仅装备授予时触发；攻击/法术点伤与投射物辅助不作用于独立爆炸。",
+			"stats": {
+				"accuracy": 148.0,
+				"accuracy_increased": 0.0,
+				"additional_skill_slots": 0.0,
+				"area_increased": 0.0,
+				"area_size_increased": 0.0,
+				"armour": 0.0,
+				"armour_increased": 0.0,
+				"attack_added_fire": 0.0,
+				"attack_added_physical": 0.0,
+				"attack_crit_chance_increased": 0.0,
+				"attack_elemental_increased": 0.0,
+				"attack_life_leech": 0.0,
+				"attack_mana_leech": 0.0,
+				"attack_physical_increased": 0.0,
+				"attack_speed": 1.7,
+				"attack_speed_increased": 0.0,
+				"chaos_increased": 0.0,
+				"cold_ailment_duration_increased": 0.2,
+				"cold_increased": 0.0,
+				"cold_resistance": 0.0,
+				"crit_base_chance": 0.05,
+				"crit_base_multiplier": 1.5,
+				"crit_chance_increased": 0.0,
+				"crit_multiplier_add": 0.0,
+				"damage": 26.0,
+				"damage_taken_from_mana_before_life": 0.0,
+				"damaging_ailments_faster": 0.0,
+				"dexterity": 24.0,
+				"elemental_increased": 0.0,
+				"evasion": 15.600000000000001,
+				"evasion_increased": 0.0,
+				"fire_dot_multiplier_add": 0.0,
+				"fire_increased": 0.0,
+				"fire_resistance": 0.0,
+				"flask_charges_gained_increased": 0.0,
+				"flask_life_recovery_increased": 0.0,
+				"flask_mana_recovery_increased": 0.0,
+				"global_increased": 0.0,
+				"intelligence": 82.0,
+				"life_leech_max_rate_increased": 0.0,
+				"life_leech_rate_increased": 0.0,
+				"life_regen": 0.0,
+				"life_regen_percent": 0.0,
+				"lightning_increased": 0.0,
+				"lightning_resistance": 0.0,
+				"mana_cost_efficiency_increased": 0.0,
+				"mana_cost_increased": 0.0,
+				"mana_leech_max_rate_increased": 0.0,
+				"mana_leech_rate_increased": 0.0,
+				"mana_regen": 12.0,
+				"mana_regen_increased": 0.0,
+				"max_health": 127.0,
+				"max_mana": 187.0,
+				"max_shield": 112.32000000000001,
+				"maximum_cold_resistance_add": 0.0,
+				"maximum_fire_resistance_add": 0.0,
+				"maximum_lightning_resistance_add": 0.0,
+				"melee_area_size_increased": 0.0,
+				"melee_crit_chance_increased": 0.0,
+				"melee_crit_multiplier_add": 0.0,
+				"melee_physical_increased": 0.02,
+				"move_speed": 240.0,
+				"move_speed_increased": 0.0,
+				"physical_attack_life_leech": 0.0,
+				"physical_attack_mana_leech": 0.0,
+				"physical_increased": 0.0,
+				"projectile_attack_crit_chance_increased": 0.0,
+				"projectile_attack_crit_multiplier_add": 0.0,
+				"projectile_count": 0.0,
+				"projectile_increased": 0.0,
+				"projectile_speed_increased": 0.0,
+				"resolute_technique": 0.0,
+				"shield_recharge_delay": 4.0,
+				"shield_recharge_rate": 16.0,
+				"shield_recharge_rate_increased": 0.0,
+				"shield_recharge_start_faster": 0.0,
+				"shield_regen": 16.0,
+				"spell_added_cold": 0.0,
+				"spell_added_lightning": 0.0,
+				"spell_area_size_increased": 0.0,
+				"spell_crit_chance_increased": 0.0,
+				"spell_crit_multiplier_add": 0.0,
+				"spell_increased": 0.0,
+				"strength": 14.0
+			}
+		},
+		"after-nova": {
+			"cast": {
+				"cooldown": 6.0,
+				"critical": {
+					"primary": {
+						"chance": 0.05,
+						"multiplier": 1.5
+					}
+				},
+				"error": "",
+				"group_id": "group_000003",
+				"initial_count": 0,
+				"main_uid": "migration_gem_000003",
+				"mana": 24.0,
+				"ok": true,
+				"packets": {
+					"direct": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 2.7,
+							"base_coefficient": 2.7,
+							"intrinsic": {
+								"lightning": 70.2
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"lightning": 70.2
+						},
+						"role": "direct",
+						"skill_id": "nova",
+						"tags": [
+							"hit",
+							"spell",
+							"area"
+						]
+					}
+				},
+				"recipe": {
+					"radius": 155.0
+				},
+				"skill_id": "nova",
+				"snapshot": {
+					"accuracy": 148.0,
+					"added_damage": {
+						"attack": {
+							"fire": 0.0,
+							"physical": 0.0
+						},
+						"spell": {
+							"cold": 0.0,
+							"lightning": 0.0
+						}
+					},
+					"added_damage_sources": [],
+					"base_damage": 26.0,
+					"cold_ailment_duration_increased": 0.2,
+					"compiled_packets": {
+						"direct": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.7,
+								"base_coefficient": 2.7,
+								"intrinsic": {
+									"lightning": 70.2
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"lightning": 70.2
+							},
+							"role": "direct",
+							"skill_id": "nova",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						}
+					},
+					"compiled_skill_id": "nova",
+					"critical": {
+						"primary": {
+							"chance": 0.05,
+							"multiplier": 1.5
+						}
+					},
+					"critical_modifiers": {
+						"base_chance": 0.05,
+						"base_multiplier": 1.5
+					},
+					"effects": [],
+					"explosion_recipe": {
+						"added_effectiveness": 0.0,
+						"coefficient": 0.9,
+						"radius": 76.0
+					},
+					"modifiers": [
+						{
+							"all_tags": [
+								"attack",
+								"melee"
+							],
+							"damage_types": [
+								"physical"
+							],
+							"id": "melee_physical_increased",
+							"mode": "increased",
+							"value": 0.02
+						}
+					],
+					"projectile_count": 0,
+					"tornado_recipe": {
+						"child": {
+							"added_effectiveness": 0.7,
+							"coefficient": 0.7,
+							"lifetime": 1.7,
+							"pierce": -1,
+							"radius": 4.5,
+							"range": 150.0,
+							"role": "child",
+							"speed": 260.0,
+							"split": false
+						},
+						"child_count": 3,
+						"explosion": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"parent": {
+							"added_effectiveness": 1.0,
+							"coefficient": 1.0,
+							"lifetime": 0.9,
+							"pierce": -1,
+							"radius": 6.0,
+							"range": 150.0,
+							"role": "parent",
+							"speed": 420.0,
+							"split": true
+						},
+						"parent_count": 3,
+						"spread": 0.16
+					}
+				},
+				"support_ids": []
+			},
+			"group_id": "group_000003",
+			"preview": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 148，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n圆形范围：半径 155.00 → 155.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n每次命中：闪电 70.20\n固有：闪电 70.20；附加：无；附加效用 2.70",
+			"stats": {
+				"accuracy": 148.0,
+				"accuracy_increased": 0.0,
+				"additional_skill_slots": 0.0,
+				"area_increased": 0.0,
+				"area_size_increased": 0.0,
+				"armour": 0.0,
+				"armour_increased": 0.0,
+				"attack_added_fire": 0.0,
+				"attack_added_physical": 0.0,
+				"attack_crit_chance_increased": 0.0,
+				"attack_elemental_increased": 0.0,
+				"attack_life_leech": 0.0,
+				"attack_mana_leech": 0.0,
+				"attack_physical_increased": 0.0,
+				"attack_speed": 1.7,
+				"attack_speed_increased": 0.0,
+				"chaos_increased": 0.0,
+				"cold_ailment_duration_increased": 0.2,
+				"cold_increased": 0.0,
+				"cold_resistance": 0.0,
+				"crit_base_chance": 0.05,
+				"crit_base_multiplier": 1.5,
+				"crit_chance_increased": 0.0,
+				"crit_multiplier_add": 0.0,
+				"damage": 26.0,
+				"damage_taken_from_mana_before_life": 0.0,
+				"damaging_ailments_faster": 0.0,
+				"dexterity": 24.0,
+				"elemental_increased": 0.0,
+				"evasion": 15.600000000000001,
+				"evasion_increased": 0.0,
+				"fire_dot_multiplier_add": 0.0,
+				"fire_increased": 0.0,
+				"fire_resistance": 0.0,
+				"flask_charges_gained_increased": 0.0,
+				"flask_life_recovery_increased": 0.0,
+				"flask_mana_recovery_increased": 0.0,
+				"global_increased": 0.0,
+				"intelligence": 82.0,
+				"life_leech_max_rate_increased": 0.0,
+				"life_leech_rate_increased": 0.0,
+				"life_regen": 0.0,
+				"life_regen_percent": 0.0,
+				"lightning_increased": 0.0,
+				"lightning_resistance": 0.0,
+				"mana_cost_efficiency_increased": 0.0,
+				"mana_cost_increased": 0.0,
+				"mana_leech_max_rate_increased": 0.0,
+				"mana_leech_rate_increased": 0.0,
+				"mana_regen": 12.0,
+				"mana_regen_increased": 0.0,
+				"max_health": 127.0,
+				"max_mana": 187.0,
+				"max_shield": 112.32000000000001,
+				"maximum_cold_resistance_add": 0.0,
+				"maximum_fire_resistance_add": 0.0,
+				"maximum_lightning_resistance_add": 0.0,
+				"melee_area_size_increased": 0.0,
+				"melee_crit_chance_increased": 0.0,
+				"melee_crit_multiplier_add": 0.0,
+				"melee_physical_increased": 0.02,
+				"move_speed": 240.0,
+				"move_speed_increased": 0.0,
+				"physical_attack_life_leech": 0.0,
+				"physical_attack_mana_leech": 0.0,
+				"physical_increased": 0.0,
+				"projectile_attack_crit_chance_increased": 0.0,
+				"projectile_attack_crit_multiplier_add": 0.0,
+				"projectile_count": 0.0,
+				"projectile_increased": 0.0,
+				"projectile_speed_increased": 0.0,
+				"resolute_technique": 0.0,
+				"shield_recharge_delay": 4.0,
+				"shield_recharge_rate": 16.0,
+				"shield_recharge_rate_increased": 0.0,
+				"shield_recharge_start_faster": 0.0,
+				"shield_regen": 16.0,
+				"spell_added_cold": 0.0,
+				"spell_added_lightning": 0.0,
+				"spell_area_size_increased": 0.0,
+				"spell_crit_chance_increased": 0.0,
+				"spell_crit_multiplier_add": 0.0,
+				"spell_increased": 0.0,
+				"strength": 14.0
+			}
+		},
+		"after-plain-frost": {
+			"cast": {
+				"cooldown": 4.0,
+				"critical": {
+					"primary": {
+						"chance": 0.05,
+						"multiplier": 1.5
+					},
+					"secondary": {
+						"chance": 0.05,
+						"multiplier": 1.5
+					}
+				},
+				"error": "",
+				"group_id": "group_000002",
+				"initial_count": 5,
+				"main_uid": "migration_gem_000002",
+				"mana": 16.0,
+				"ok": true,
+				"packets": {
+					"projectile": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 0.85,
+							"base_coefficient": 0.85,
+							"intrinsic": {
+								"cold": 22.099999999999998
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"cold": 22.099999999999998
+						},
+						"role": "projectile",
+						"skill_id": "frost",
+						"tags": [
+							"hit",
+							"projectile",
+							"spell"
+						]
+					},
+					"secondary": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 0.0,
+							"base_coefficient": 0.9,
+							"intrinsic": {
+								"fire": 23.400000000000002
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"fire": 23.400000000000002
+						},
+						"role": "secondary",
+						"skill_id": "frost",
+						"tags": [
+							"hit",
+							"area",
+							"secondary",
+							"explosion"
+						]
+					}
+				},
+				"recipe": {
+					"added_effectiveness": 0.85,
+					"coefficient": 0.85,
+					"damage_type": "cold",
+					"initial_count": 5,
+					"pierce": 2,
+					"slow": 3.5999999999999996,
+					"speed": 520.0,
+					"spread": 0.14
+				},
+				"skill_id": "frost",
+				"snapshot": {
+					"accuracy": 148.0,
+					"added_damage": {
+						"attack": {
+							"fire": 0.0,
+							"physical": 0.0
+						},
+						"spell": {
+							"cold": 0.0,
+							"lightning": 0.0
+						}
+					},
+					"added_damage_sources": [],
+					"base_damage": 26.0,
+					"cold_ailment_duration_increased": 0.2,
+					"compiled_packets": {
+						"projectile": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 0.85,
+								"base_coefficient": 0.85,
+								"intrinsic": {
+									"cold": 22.099999999999998
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"cold": 22.099999999999998
+							},
+							"role": "projectile",
+							"skill_id": "frost",
+							"tags": [
+								"hit",
+								"projectile",
+								"spell"
+							]
+						},
+						"secondary": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 0.0,
+								"base_coefficient": 0.9,
+								"intrinsic": {
+									"fire": 23.400000000000002
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 23.400000000000002
+							},
+							"role": "secondary",
+							"skill_id": "frost",
+							"tags": [
+								"hit",
+								"area",
+								"secondary",
+								"explosion"
+							]
+						}
+					},
+					"compiled_skill_id": "frost",
+					"critical": {
+						"primary": {
+							"chance": 0.05,
+							"multiplier": 1.5
+						},
+						"secondary": {
+							"chance": 0.05,
+							"multiplier": 1.5
+						}
+					},
+					"critical_modifiers": {
+						"base_chance": 0.05,
+						"base_multiplier": 1.5
+					},
+					"effects": [],
+					"explosion_recipe": {
+						"added_effectiveness": 0.0,
+						"coefficient": 0.9,
+						"radius": 76.0
+					},
+					"initial_count": 5,
+					"modifiers": [
+						{
+							"all_tags": [
+								"attack",
+								"melee"
+							],
+							"damage_types": [
+								"physical"
+							],
+							"id": "melee_physical_increased",
+							"mode": "increased",
+							"value": 0.02
+						}
+					],
+					"projectile_count": 0,
+					"tornado_recipe": {
+						"child": {
+							"added_effectiveness": 0.7,
+							"coefficient": 0.7,
+							"lifetime": 1.7,
+							"pierce": -1,
+							"radius": 4.5,
+							"range": 150.0,
+							"role": "child",
+							"speed": 260.0,
+							"split": false
+						},
+						"child_count": 3,
+						"explosion": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"parent": {
+							"added_effectiveness": 1.0,
+							"coefficient": 1.0,
+							"lifetime": 0.9,
+							"pierce": -1,
+							"radius": 6.0,
+							"range": 150.0,
+							"role": "parent",
+							"speed": 420.0,
+							"split": true
+						},
+						"parent_count": 3,
+						"spread": 0.16
+					}
+				},
+				"support_ids": []
+			},
+			"group_id": "group_000002",
+			"preview": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 148，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n现有减速时长 3.60 秒。距离、生命周期与穿透分别结算；延长减速不等于新增异常状态。\n实际投射速度 520.00\n投射速度改变飞行快慢，不增加距离上限或存续时间。\n每枚投射物：冰霜 22.10\n固有：冰霜 22.10；附加：无；附加效用 0.85\n独立爆炸：火焰 23.40\n固有：火焰 23.40；附加：无；附加效用 0.00\n仅装备授予时触发；攻击/法术点伤与投射物辅助不作用于独立爆炸。",
+			"stats": {
+				"accuracy": 148.0,
+				"accuracy_increased": 0.0,
+				"additional_skill_slots": 0.0,
+				"area_increased": 0.0,
+				"area_size_increased": 0.0,
+				"armour": 0.0,
+				"armour_increased": 0.0,
+				"attack_added_fire": 0.0,
+				"attack_added_physical": 0.0,
+				"attack_crit_chance_increased": 0.0,
+				"attack_elemental_increased": 0.0,
+				"attack_life_leech": 0.0,
+				"attack_mana_leech": 0.0,
+				"attack_physical_increased": 0.0,
+				"attack_speed": 1.7,
+				"attack_speed_increased": 0.0,
+				"chaos_increased": 0.0,
+				"cold_ailment_duration_increased": 0.2,
+				"cold_increased": 0.0,
+				"cold_resistance": 0.0,
+				"crit_base_chance": 0.05,
+				"crit_base_multiplier": 1.5,
+				"crit_chance_increased": 0.0,
+				"crit_multiplier_add": 0.0,
+				"damage": 26.0,
+				"damage_taken_from_mana_before_life": 0.0,
+				"damaging_ailments_faster": 0.0,
+				"dexterity": 24.0,
+				"elemental_increased": 0.0,
+				"evasion": 15.600000000000001,
+				"evasion_increased": 0.0,
+				"fire_dot_multiplier_add": 0.0,
+				"fire_increased": 0.0,
+				"fire_resistance": 0.0,
+				"flask_charges_gained_increased": 0.0,
+				"flask_life_recovery_increased": 0.0,
+				"flask_mana_recovery_increased": 0.0,
+				"global_increased": 0.0,
+				"intelligence": 82.0,
+				"life_leech_max_rate_increased": 0.0,
+				"life_leech_rate_increased": 0.0,
+				"life_regen": 0.0,
+				"life_regen_percent": 0.0,
+				"lightning_increased": 0.0,
+				"lightning_resistance": 0.0,
+				"mana_cost_efficiency_increased": 0.0,
+				"mana_cost_increased": 0.0,
+				"mana_leech_max_rate_increased": 0.0,
+				"mana_leech_rate_increased": 0.0,
+				"mana_regen": 12.0,
+				"mana_regen_increased": 0.0,
+				"max_health": 127.0,
+				"max_mana": 187.0,
+				"max_shield": 112.32000000000001,
+				"maximum_cold_resistance_add": 0.0,
+				"maximum_fire_resistance_add": 0.0,
+				"maximum_lightning_resistance_add": 0.0,
+				"melee_area_size_increased": 0.0,
+				"melee_crit_chance_increased": 0.0,
+				"melee_crit_multiplier_add": 0.0,
+				"melee_physical_increased": 0.02,
+				"move_speed": 240.0,
+				"move_speed_increased": 0.0,
+				"physical_attack_life_leech": 0.0,
+				"physical_attack_mana_leech": 0.0,
+				"physical_increased": 0.0,
+				"projectile_attack_crit_chance_increased": 0.0,
+				"projectile_attack_crit_multiplier_add": 0.0,
+				"projectile_count": 0.0,
+				"projectile_increased": 0.0,
+				"projectile_speed_increased": 0.0,
+				"resolute_technique": 0.0,
+				"shield_recharge_delay": 4.0,
+				"shield_recharge_rate": 16.0,
+				"shield_recharge_rate_increased": 0.0,
+				"shield_recharge_start_faster": 0.0,
+				"shield_regen": 16.0,
+				"spell_added_cold": 0.0,
+				"spell_added_lightning": 0.0,
+				"spell_area_size_increased": 0.0,
+				"spell_crit_chance_increased": 0.0,
+				"spell_crit_multiplier_add": 0.0,
+				"spell_increased": 0.0,
+				"strength": 14.0
+			}
+		},
+		"before-ambush-nova": {
+			"cast": {
+				"cooldown": 6.0,
+				"critical": {
+					"primary": {
+						"chance": 0.05,
+						"multiplier": 1.5
+					}
+				},
+				"error": "",
+				"group_id": "group_000003",
+				"initial_count": 0,
+				"main_uid": "migration_gem_000003",
+				"mana": 30.0,
+				"ok": true,
+				"packets": {
+					"direct": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 2.7,
+							"base_coefficient": 2.7,
+							"intrinsic": {
+								"lightning": 70.2
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"lightning": 70.2
+						},
+						"role": "direct",
+						"skill_id": "nova",
+						"tags": [
+							"hit",
+							"spell",
+							"area"
+						]
+					}
+				},
+				"recipe": {
+					"radius": 155.0
+				},
+				"skill_id": "nova",
+				"snapshot": {
+					"accuracy": 148.0,
+					"added_damage": {
+						"attack": {
+							"fire": 0.0,
+							"physical": 0.0
+						},
+						"spell": {
+							"cold": 0.0,
+							"lightning": 0.0
+						}
+					},
+					"added_damage_sources": [],
+					"base_damage": 26.0,
+					"compiled_packets": {
+						"direct": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.7,
+								"base_coefficient": 2.7,
+								"intrinsic": {
+									"lightning": 70.2
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"lightning": 70.2
+							},
+							"role": "direct",
+							"skill_id": "nova",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						}
+					},
+					"compiled_skill_id": "nova",
+					"critical": {
+						"primary": {
+							"chance": 0.05,
+							"multiplier": 1.5
+						}
+					},
+					"critical_modifiers": {
+						"base_chance": 0.05,
+						"base_multiplier": 1.5
+					},
+					"effects": [],
+					"explosion_recipe": {
+						"added_effectiveness": 0.0,
+						"coefficient": 0.9,
+						"radius": 76.0
+					},
+					"modifiers": [
+						{
+							"all_tags": [
+								"attack",
+								"melee"
+							],
+							"damage_types": [
+								"physical"
+							],
+							"id": "melee_physical_increased",
+							"mode": "increased",
+							"value": 0.02
+						},
+						{
+							"all_tags": [
+								"hit",
+								"spell",
+								"area"
+							],
+							"damage_types": [],
+							"id": "support:ambush",
+							"mode": "more",
+							"skills": [
+								"nova"
+							],
+							"value": -0.15
+						}
+					],
+					"projectile_count": 0,
+					"tornado_recipe": {
+						"child": {
+							"added_effectiveness": 0.7,
+							"coefficient": 0.7,
+							"lifetime": 1.7,
+							"pierce": -1,
+							"radius": 4.5,
+							"range": 150.0,
+							"role": "child",
+							"speed": 260.0,
+							"split": false
+						},
+						"child_count": 3,
+						"explosion": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"parent": {
+							"added_effectiveness": 1.0,
+							"coefficient": 1.0,
+							"lifetime": 0.9,
+							"pierce": -1,
+							"radius": 6.0,
+							"range": 150.0,
+							"role": "parent",
+							"speed": 420.0,
+							"split": true
+						},
+						"parent_count": 3,
+						"spread": 0.16
+					}
+				},
+				"support_ids": [
+					"ambush"
+				],
+				"trap_profile": {
+					"arming_seconds": 0.35,
+					"enabled": true,
+					"hit_multiplier": 0.85,
+					"lifetime_seconds": 12.0,
+					"mana_multiplier": 1.25,
+					"maximum_traps": 3,
+					"trigger_radius": 70.0
+				}
+			},
+			"group_id": "group_000003",
+			"preview": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n脚下布置 · 0.35 秒后布防 · 触发半径 70\n保留 12 秒 · 所有技能组共享 3 枚；满额不消耗魔力或冷却。\n放置时固定伤害与暴击；敌人靠近后释放一次，到期消失。触发需视线，范围增幅只改变爆发范围。\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 148，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n圆形范围：半径 155.00 → 155.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n每次命中：闪电 59.67\n固有：闪电 70.20；附加：无；附加效用 2.70",
+			"stats": {
+				"accuracy": 148.0,
+				"accuracy_increased": 0.0,
+				"additional_skill_slots": 0.0,
+				"area_increased": 0.0,
+				"area_size_increased": 0.0,
+				"armour": 0.0,
+				"armour_increased": 0.0,
+				"attack_added_fire": 0.0,
+				"attack_added_physical": 0.0,
+				"attack_crit_chance_increased": 0.0,
+				"attack_elemental_increased": 0.0,
+				"attack_life_leech": 0.0,
+				"attack_mana_leech": 0.0,
+				"attack_physical_increased": 0.0,
+				"attack_speed": 1.7,
+				"attack_speed_increased": 0.0,
+				"chaos_increased": 0.0,
+				"cold_ailment_duration_increased": 0.0,
+				"cold_increased": 0.0,
+				"cold_resistance": 0.0,
+				"crit_base_chance": 0.05,
+				"crit_base_multiplier": 1.5,
+				"crit_chance_increased": 0.0,
+				"crit_multiplier_add": 0.0,
+				"damage": 26.0,
+				"damage_taken_from_mana_before_life": 0.0,
+				"damaging_ailments_faster": 0.0,
+				"dexterity": 24.0,
+				"elemental_increased": 0.0,
+				"evasion": 15.600000000000001,
+				"evasion_increased": 0.0,
+				"fire_dot_multiplier_add": 0.0,
+				"fire_increased": 0.0,
+				"fire_resistance": 0.0,
+				"flask_charges_gained_increased": 0.0,
+				"flask_life_recovery_increased": 0.0,
+				"flask_mana_recovery_increased": 0.0,
+				"global_increased": 0.0,
+				"intelligence": 82.0,
+				"life_leech_max_rate_increased": 0.0,
+				"life_leech_rate_increased": 0.0,
+				"life_regen": 0.0,
+				"life_regen_percent": 0.0,
+				"lightning_increased": 0.0,
+				"lightning_resistance": 0.0,
+				"mana_cost_efficiency_increased": 0.0,
+				"mana_cost_increased": 0.0,
+				"mana_leech_max_rate_increased": 0.0,
+				"mana_leech_rate_increased": 0.0,
+				"mana_regen": 12.0,
+				"mana_regen_increased": 0.0,
+				"max_health": 127.0,
+				"max_mana": 187.0,
+				"max_shield": 112.32000000000001,
+				"maximum_cold_resistance_add": 0.0,
+				"maximum_fire_resistance_add": 0.0,
+				"maximum_lightning_resistance_add": 0.0,
+				"melee_area_size_increased": 0.0,
+				"melee_crit_chance_increased": 0.0,
+				"melee_crit_multiplier_add": 0.0,
+				"melee_physical_increased": 0.02,
+				"move_speed": 240.0,
+				"move_speed_increased": 0.0,
+				"physical_attack_life_leech": 0.0,
+				"physical_attack_mana_leech": 0.0,
+				"physical_increased": 0.0,
+				"projectile_attack_crit_chance_increased": 0.0,
+				"projectile_attack_crit_multiplier_add": 0.0,
+				"projectile_count": 0.0,
+				"projectile_increased": 0.0,
+				"projectile_speed_increased": 0.0,
+				"resolute_technique": 0.0,
+				"shield_recharge_delay": 4.0,
+				"shield_recharge_rate": 16.0,
+				"shield_recharge_rate_increased": 0.0,
+				"shield_recharge_start_faster": 0.0,
+				"shield_regen": 16.0,
+				"spell_added_cold": 0.0,
+				"spell_added_lightning": 0.0,
+				"spell_area_size_increased": 0.0,
+				"spell_crit_chance_increased": 0.0,
+				"spell_crit_multiplier_add": 0.0,
+				"spell_increased": 0.0,
+				"strength": 14.0
+			}
+		},
+		"before-frost-lock": {
+			"cast": {
+				"cooldown": 4.0,
+				"critical": {
+					"primary": {
+						"chance": 0.05,
+						"multiplier": 1.5
+					},
+					"secondary": {
+						"chance": 0.05,
+						"multiplier": 1.5
+					}
+				},
+				"error": "",
+				"freeze_profile": {
+					"duration_by_rarity": {
+						"boss": 0.2,
+						"magic": 0.6,
+						"normal": 0.6,
+						"rare": 0.35
+					},
+					"enabled": true,
+					"hit_multiplier": 0.75,
+					"immunity_seconds": 1.5,
+					"mana_multiplier": 1.2
+				},
+				"group_id": "group_000002",
+				"initial_count": 5,
+				"main_uid": "migration_gem_000002",
+				"mana": 19.2,
+				"ok": true,
+				"packets": {
+					"projectile": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 0.85,
+							"base_coefficient": 0.85,
+							"intrinsic": {
+								"cold": 22.099999999999998
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"cold": 22.099999999999998
+						},
+						"role": "projectile",
+						"skill_id": "frost",
+						"tags": [
+							"hit",
+							"projectile",
+							"spell"
+						]
+					},
+					"secondary": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 0.0,
+							"base_coefficient": 0.9,
+							"intrinsic": {
+								"fire": 23.400000000000002
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"fire": 23.400000000000002
+						},
+						"role": "secondary",
+						"skill_id": "frost",
+						"tags": [
+							"hit",
+							"area",
+							"secondary",
+							"explosion"
+						]
+					}
+				},
+				"recipe": {
+					"added_effectiveness": 0.85,
+					"coefficient": 0.85,
+					"damage_type": "cold",
+					"initial_count": 5,
+					"pierce": 2,
+					"slow": 3.0,
+					"speed": 520.0,
+					"spread": 0.14
+				},
+				"skill_id": "frost",
+				"snapshot": {
+					"accuracy": 148.0,
+					"added_damage": {
+						"attack": {
+							"fire": 0.0,
+							"physical": 0.0
+						},
+						"spell": {
+							"cold": 0.0,
+							"lightning": 0.0
+						}
+					},
+					"added_damage_sources": [],
+					"base_damage": 26.0,
+					"compiled_packets": {
+						"projectile": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 0.85,
+								"base_coefficient": 0.85,
+								"intrinsic": {
+									"cold": 22.099999999999998
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"cold": 22.099999999999998
+							},
+							"role": "projectile",
+							"skill_id": "frost",
+							"tags": [
+								"hit",
+								"projectile",
+								"spell"
+							]
+						},
+						"secondary": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 0.0,
+								"base_coefficient": 0.9,
+								"intrinsic": {
+									"fire": 23.400000000000002
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 23.400000000000002
+							},
+							"role": "secondary",
+							"skill_id": "frost",
+							"tags": [
+								"hit",
+								"area",
+								"secondary",
+								"explosion"
+							]
+						}
+					},
+					"compiled_skill_id": "frost",
+					"critical": {
+						"primary": {
+							"chance": 0.05,
+							"multiplier": 1.5
+						},
+						"secondary": {
+							"chance": 0.05,
+							"multiplier": 1.5
+						}
+					},
+					"critical_modifiers": {
+						"base_chance": 0.05,
+						"base_multiplier": 1.5
+					},
+					"effects": [],
+					"explosion_recipe": {
+						"added_effectiveness": 0.0,
+						"coefficient": 0.9,
+						"radius": 76.0
+					},
+					"freeze_policy": {
+						"duration_by_rarity": {
+							"boss": 0.2,
+							"magic": 0.6,
+							"normal": 0.6,
+							"rare": 0.35
+						},
+						"hit_multiplier": 0.75,
+						"immunity_seconds": 1.5,
+						"mana_multiplier": 1.2
+					},
+					"initial_count": 5,
+					"modifiers": [
+						{
+							"all_tags": [
+								"attack",
+								"melee"
+							],
+							"damage_types": [
+								"physical"
+							],
+							"id": "melee_physical_increased",
+							"mode": "increased",
+							"value": 0.02
+						},
+						{
+							"all_tags": [
+								"hit",
+								"spell",
+								"projectile"
+							],
+							"damage_types": [],
+							"id": "support:frost_lock",
+							"mode": "more",
+							"skills": [
+								"frost"
+							],
+							"value": -0.25
+						}
+					],
+					"projectile_count": 0,
+					"tornado_recipe": {
+						"child": {
+							"added_effectiveness": 0.7,
+							"coefficient": 0.7,
+							"lifetime": 1.7,
+							"pierce": -1,
+							"radius": 4.5,
+							"range": 150.0,
+							"role": "child",
+							"speed": 260.0,
+							"split": false
+						},
+						"child_count": 3,
+						"explosion": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"parent": {
+							"added_effectiveness": 1.0,
+							"coefficient": 1.0,
+							"lifetime": 0.9,
+							"pierce": -1,
+							"radius": 6.0,
+							"range": 150.0,
+							"role": "parent",
+							"speed": 420.0,
+							"split": true
+						},
+						"parent_count": 3,
+						"spread": 0.16
+					}
+				},
+				"support_ids": [
+					"frost_lock"
+				]
+			},
+			"group_id": "group_000002",
+			"preview": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n霜锁：普通/魔法 0.60 秒 · 稀有 0.35 秒 · 首领 0.20 秒\n冻结不刷新；解冻后 1.50 秒不能再被冻结，所有施法共享。\n暂停自主移动与攻击进度，外力和持续伤害仍生效；不撤销已经发生的攻击。\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 148，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n现有减速时长 3.00 秒。距离、生命周期与穿透分别结算；延长减速不等于新增异常状态。\n实际投射速度 520.00\n投射速度改变飞行快慢，不增加距离上限或存续时间。\n每枚投射物：冰霜 16.57\n固有：冰霜 22.10；附加：无；附加效用 0.85\n独立爆炸：火焰 23.40\n固有：火焰 23.40；附加：无；附加效用 0.00\n仅装备授予时触发；攻击/法术点伤与投射物辅助不作用于独立爆炸。",
+			"stats": {
+				"accuracy": 148.0,
+				"accuracy_increased": 0.0,
+				"additional_skill_slots": 0.0,
+				"area_increased": 0.0,
+				"area_size_increased": 0.0,
+				"armour": 0.0,
+				"armour_increased": 0.0,
+				"attack_added_fire": 0.0,
+				"attack_added_physical": 0.0,
+				"attack_crit_chance_increased": 0.0,
+				"attack_elemental_increased": 0.0,
+				"attack_life_leech": 0.0,
+				"attack_mana_leech": 0.0,
+				"attack_physical_increased": 0.0,
+				"attack_speed": 1.7,
+				"attack_speed_increased": 0.0,
+				"chaos_increased": 0.0,
+				"cold_ailment_duration_increased": 0.0,
+				"cold_increased": 0.0,
+				"cold_resistance": 0.0,
+				"crit_base_chance": 0.05,
+				"crit_base_multiplier": 1.5,
+				"crit_chance_increased": 0.0,
+				"crit_multiplier_add": 0.0,
+				"damage": 26.0,
+				"damage_taken_from_mana_before_life": 0.0,
+				"damaging_ailments_faster": 0.0,
+				"dexterity": 24.0,
+				"elemental_increased": 0.0,
+				"evasion": 15.600000000000001,
+				"evasion_increased": 0.0,
+				"fire_dot_multiplier_add": 0.0,
+				"fire_increased": 0.0,
+				"fire_resistance": 0.0,
+				"flask_charges_gained_increased": 0.0,
+				"flask_life_recovery_increased": 0.0,
+				"flask_mana_recovery_increased": 0.0,
+				"global_increased": 0.0,
+				"intelligence": 82.0,
+				"life_leech_max_rate_increased": 0.0,
+				"life_leech_rate_increased": 0.0,
+				"life_regen": 0.0,
+				"life_regen_percent": 0.0,
+				"lightning_increased": 0.0,
+				"lightning_resistance": 0.0,
+				"mana_cost_efficiency_increased": 0.0,
+				"mana_cost_increased": 0.0,
+				"mana_leech_max_rate_increased": 0.0,
+				"mana_leech_rate_increased": 0.0,
+				"mana_regen": 12.0,
+				"mana_regen_increased": 0.0,
+				"max_health": 127.0,
+				"max_mana": 187.0,
+				"max_shield": 112.32000000000001,
+				"maximum_cold_resistance_add": 0.0,
+				"maximum_fire_resistance_add": 0.0,
+				"maximum_lightning_resistance_add": 0.0,
+				"melee_area_size_increased": 0.0,
+				"melee_crit_chance_increased": 0.0,
+				"melee_crit_multiplier_add": 0.0,
+				"melee_physical_increased": 0.02,
+				"move_speed": 240.0,
+				"move_speed_increased": 0.0,
+				"physical_attack_life_leech": 0.0,
+				"physical_attack_mana_leech": 0.0,
+				"physical_increased": 0.0,
+				"projectile_attack_crit_chance_increased": 0.0,
+				"projectile_attack_crit_multiplier_add": 0.0,
+				"projectile_count": 0.0,
+				"projectile_increased": 0.0,
+				"projectile_speed_increased": 0.0,
+				"resolute_technique": 0.0,
+				"shield_recharge_delay": 4.0,
+				"shield_recharge_rate": 16.0,
+				"shield_recharge_rate_increased": 0.0,
+				"shield_recharge_start_faster": 0.0,
+				"shield_regen": 16.0,
+				"spell_added_cold": 0.0,
+				"spell_added_lightning": 0.0,
+				"spell_area_size_increased": 0.0,
+				"spell_crit_chance_increased": 0.0,
+				"spell_crit_multiplier_add": 0.0,
+				"spell_increased": 0.0,
+				"strength": 14.0
+			}
+		},
+		"before-lingering-frost": {
+			"cast": {
+				"cooldown": 4.0,
+				"critical": {
+					"primary": {
+						"chance": 0.05,
+						"multiplier": 1.5
+					},
+					"secondary": {
+						"chance": 0.05,
+						"multiplier": 1.5
+					}
+				},
+				"error": "",
+				"group_id": "group_000002",
+				"initial_count": 5,
+				"main_uid": "migration_gem_000002",
+				"mana": 17.6,
+				"ok": true,
+				"packets": {
+					"projectile": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 0.85,
+							"base_coefficient": 0.85,
+							"intrinsic": {
+								"cold": 22.099999999999998
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"cold": 22.099999999999998
+						},
+						"role": "projectile",
+						"skill_id": "frost",
+						"tags": [
+							"hit",
+							"projectile",
+							"spell"
+						]
+					},
+					"secondary": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 0.0,
+							"base_coefficient": 0.9,
+							"intrinsic": {
+								"fire": 23.400000000000002
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"fire": 23.400000000000002
+						},
+						"role": "secondary",
+						"skill_id": "frost",
+						"tags": [
+							"hit",
+							"area",
+							"secondary",
+							"explosion"
+						]
+					}
+				},
+				"recipe": {
+					"added_effectiveness": 0.85,
+					"coefficient": 0.85,
+					"damage_type": "cold",
+					"initial_count": 5,
+					"pierce": 2,
+					"slow": 4.5,
+					"speed": 520.0,
+					"spread": 0.14
+				},
+				"skill_id": "frost",
+				"snapshot": {
+					"accuracy": 148.0,
+					"added_damage": {
+						"attack": {
+							"fire": 0.0,
+							"physical": 0.0
+						},
+						"spell": {
+							"cold": 0.0,
+							"lightning": 0.0
+						}
+					},
+					"added_damage_sources": [],
+					"base_damage": 26.0,
+					"compiled_packets": {
+						"projectile": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 0.85,
+								"base_coefficient": 0.85,
+								"intrinsic": {
+									"cold": 22.099999999999998
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"cold": 22.099999999999998
+							},
+							"role": "projectile",
+							"skill_id": "frost",
+							"tags": [
+								"hit",
+								"projectile",
+								"spell"
+							]
+						},
+						"secondary": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 0.0,
+								"base_coefficient": 0.9,
+								"intrinsic": {
+									"fire": 23.400000000000002
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 23.400000000000002
+							},
+							"role": "secondary",
+							"skill_id": "frost",
+							"tags": [
+								"hit",
+								"area",
+								"secondary",
+								"explosion"
+							]
+						}
+					},
+					"compiled_skill_id": "frost",
+					"critical": {
+						"primary": {
+							"chance": 0.05,
+							"multiplier": 1.5
+						},
+						"secondary": {
+							"chance": 0.05,
+							"multiplier": 1.5
+						}
+					},
+					"critical_modifiers": {
+						"base_chance": 0.05,
+						"base_multiplier": 1.5
+					},
+					"effects": [],
+					"explosion_recipe": {
+						"added_effectiveness": 0.0,
+						"coefficient": 0.9,
+						"radius": 76.0
+					},
+					"initial_count": 5,
+					"modifiers": [
+						{
+							"all_tags": [
+								"attack",
+								"melee"
+							],
+							"damage_types": [
+								"physical"
+							],
+							"id": "melee_physical_increased",
+							"mode": "increased",
+							"value": 0.02
+						},
+						{
+							"all_tags": [
+								"hit",
+								"spell",
+								"projectile"
+							],
+							"damage_types": [],
+							"id": "support:lingering_chill",
+							"mode": "more",
+							"skills": [
+								"frost"
+							],
+							"value": -0.1
+						}
+					],
+					"projectile_count": 0,
+					"tornado_recipe": {
+						"child": {
+							"added_effectiveness": 0.7,
+							"coefficient": 0.7,
+							"lifetime": 1.7,
+							"pierce": -1,
+							"radius": 4.5,
+							"range": 150.0,
+							"role": "child",
+							"speed": 260.0,
+							"split": false
+						},
+						"child_count": 3,
+						"explosion": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"parent": {
+							"added_effectiveness": 1.0,
+							"coefficient": 1.0,
+							"lifetime": 0.9,
+							"pierce": -1,
+							"radius": 6.0,
+							"range": 150.0,
+							"role": "parent",
+							"speed": 420.0,
+							"split": true
+						},
+						"parent_count": 3,
+						"spread": 0.16
+					}
+				},
+				"support_ids": [
+					"lingering_chill"
+				]
+			},
+			"group_id": "group_000002",
+			"preview": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 148，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n现有减速时长 4.50 秒。距离、生命周期与穿透分别结算；延长减速不等于新增异常状态。\n实际投射速度 520.00\n投射速度改变飞行快慢，不增加距离上限或存续时间。\n每枚投射物：冰霜 19.89\n固有：冰霜 22.10；附加：无；附加效用 0.85\n独立爆炸：火焰 23.40\n固有：火焰 23.40；附加：无；附加效用 0.00\n仅装备授予时触发；攻击/法术点伤与投射物辅助不作用于独立爆炸。",
+			"stats": {
+				"accuracy": 148.0,
+				"accuracy_increased": 0.0,
+				"additional_skill_slots": 0.0,
+				"area_increased": 0.0,
+				"area_size_increased": 0.0,
+				"armour": 0.0,
+				"armour_increased": 0.0,
+				"attack_added_fire": 0.0,
+				"attack_added_physical": 0.0,
+				"attack_crit_chance_increased": 0.0,
+				"attack_elemental_increased": 0.0,
+				"attack_life_leech": 0.0,
+				"attack_mana_leech": 0.0,
+				"attack_physical_increased": 0.0,
+				"attack_speed": 1.7,
+				"attack_speed_increased": 0.0,
+				"chaos_increased": 0.0,
+				"cold_ailment_duration_increased": 0.0,
+				"cold_increased": 0.0,
+				"cold_resistance": 0.0,
+				"crit_base_chance": 0.05,
+				"crit_base_multiplier": 1.5,
+				"crit_chance_increased": 0.0,
+				"crit_multiplier_add": 0.0,
+				"damage": 26.0,
+				"damage_taken_from_mana_before_life": 0.0,
+				"damaging_ailments_faster": 0.0,
+				"dexterity": 24.0,
+				"elemental_increased": 0.0,
+				"evasion": 15.600000000000001,
+				"evasion_increased": 0.0,
+				"fire_dot_multiplier_add": 0.0,
+				"fire_increased": 0.0,
+				"fire_resistance": 0.0,
+				"flask_charges_gained_increased": 0.0,
+				"flask_life_recovery_increased": 0.0,
+				"flask_mana_recovery_increased": 0.0,
+				"global_increased": 0.0,
+				"intelligence": 82.0,
+				"life_leech_max_rate_increased": 0.0,
+				"life_leech_rate_increased": 0.0,
+				"life_regen": 0.0,
+				"life_regen_percent": 0.0,
+				"lightning_increased": 0.0,
+				"lightning_resistance": 0.0,
+				"mana_cost_efficiency_increased": 0.0,
+				"mana_cost_increased": 0.0,
+				"mana_leech_max_rate_increased": 0.0,
+				"mana_leech_rate_increased": 0.0,
+				"mana_regen": 12.0,
+				"mana_regen_increased": 0.0,
+				"max_health": 127.0,
+				"max_mana": 187.0,
+				"max_shield": 112.32000000000001,
+				"maximum_cold_resistance_add": 0.0,
+				"maximum_fire_resistance_add": 0.0,
+				"maximum_lightning_resistance_add": 0.0,
+				"melee_area_size_increased": 0.0,
+				"melee_crit_chance_increased": 0.0,
+				"melee_crit_multiplier_add": 0.0,
+				"melee_physical_increased": 0.02,
+				"move_speed": 240.0,
+				"move_speed_increased": 0.0,
+				"physical_attack_life_leech": 0.0,
+				"physical_attack_mana_leech": 0.0,
+				"physical_increased": 0.0,
+				"projectile_attack_crit_chance_increased": 0.0,
+				"projectile_attack_crit_multiplier_add": 0.0,
+				"projectile_count": 0.0,
+				"projectile_increased": 0.0,
+				"projectile_speed_increased": 0.0,
+				"resolute_technique": 0.0,
+				"shield_recharge_delay": 4.0,
+				"shield_recharge_rate": 16.0,
+				"shield_recharge_rate_increased": 0.0,
+				"shield_recharge_start_faster": 0.0,
+				"shield_regen": 16.0,
+				"spell_added_cold": 0.0,
+				"spell_added_lightning": 0.0,
+				"spell_area_size_increased": 0.0,
+				"spell_crit_chance_increased": 0.0,
+				"spell_crit_multiplier_add": 0.0,
+				"spell_increased": 0.0,
+				"strength": 14.0
+			}
+		},
+		"before-nova": {
+			"cast": {
+				"cooldown": 6.0,
+				"critical": {
+					"primary": {
+						"chance": 0.05,
+						"multiplier": 1.5
+					}
+				},
+				"error": "",
+				"group_id": "group_000003",
+				"initial_count": 0,
+				"main_uid": "migration_gem_000003",
+				"mana": 24.0,
+				"ok": true,
+				"packets": {
+					"direct": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 2.7,
+							"base_coefficient": 2.7,
+							"intrinsic": {
+								"lightning": 70.2
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"lightning": 70.2
+						},
+						"role": "direct",
+						"skill_id": "nova",
+						"tags": [
+							"hit",
+							"spell",
+							"area"
+						]
+					}
+				},
+				"recipe": {
+					"radius": 155.0
+				},
+				"skill_id": "nova",
+				"snapshot": {
+					"accuracy": 148.0,
+					"added_damage": {
+						"attack": {
+							"fire": 0.0,
+							"physical": 0.0
+						},
+						"spell": {
+							"cold": 0.0,
+							"lightning": 0.0
+						}
+					},
+					"added_damage_sources": [],
+					"base_damage": 26.0,
+					"compiled_packets": {
+						"direct": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 2.7,
+								"base_coefficient": 2.7,
+								"intrinsic": {
+									"lightning": 70.2
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"lightning": 70.2
+							},
+							"role": "direct",
+							"skill_id": "nova",
+							"tags": [
+								"hit",
+								"spell",
+								"area"
+							]
+						}
+					},
+					"compiled_skill_id": "nova",
+					"critical": {
+						"primary": {
+							"chance": 0.05,
+							"multiplier": 1.5
+						}
+					},
+					"critical_modifiers": {
+						"base_chance": 0.05,
+						"base_multiplier": 1.5
+					},
+					"effects": [],
+					"explosion_recipe": {
+						"added_effectiveness": 0.0,
+						"coefficient": 0.9,
+						"radius": 76.0
+					},
+					"modifiers": [
+						{
+							"all_tags": [
+								"attack",
+								"melee"
+							],
+							"damage_types": [
+								"physical"
+							],
+							"id": "melee_physical_increased",
+							"mode": "increased",
+							"value": 0.02
+						}
+					],
+					"projectile_count": 0,
+					"tornado_recipe": {
+						"child": {
+							"added_effectiveness": 0.7,
+							"coefficient": 0.7,
+							"lifetime": 1.7,
+							"pierce": -1,
+							"radius": 4.5,
+							"range": 150.0,
+							"role": "child",
+							"speed": 260.0,
+							"split": false
+						},
+						"child_count": 3,
+						"explosion": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"parent": {
+							"added_effectiveness": 1.0,
+							"coefficient": 1.0,
+							"lifetime": 0.9,
+							"pierce": -1,
+							"radius": 6.0,
+							"range": 150.0,
+							"role": "parent",
+							"speed": 420.0,
+							"split": true
+						},
+						"parent_count": 3,
+						"spread": 0.16
+					}
+				},
+				"support_ids": []
+			},
+			"group_id": "group_000003",
+			"preview": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 148，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n圆形范围：半径 155.00 → 155.00；面积 ×1.0000，半径 ×1.0000（面积倍率的平方根）。目标体型仍参与边界判定；覆盖人数取决于站位。\n每次命中：闪电 70.20\n固有：闪电 70.20；附加：无；附加效用 2.70",
+			"stats": {
+				"accuracy": 148.0,
+				"accuracy_increased": 0.0,
+				"additional_skill_slots": 0.0,
+				"area_increased": 0.0,
+				"area_size_increased": 0.0,
+				"armour": 0.0,
+				"armour_increased": 0.0,
+				"attack_added_fire": 0.0,
+				"attack_added_physical": 0.0,
+				"attack_crit_chance_increased": 0.0,
+				"attack_elemental_increased": 0.0,
+				"attack_life_leech": 0.0,
+				"attack_mana_leech": 0.0,
+				"attack_physical_increased": 0.0,
+				"attack_speed": 1.7,
+				"attack_speed_increased": 0.0,
+				"chaos_increased": 0.0,
+				"cold_ailment_duration_increased": 0.0,
+				"cold_increased": 0.0,
+				"cold_resistance": 0.0,
+				"crit_base_chance": 0.05,
+				"crit_base_multiplier": 1.5,
+				"crit_chance_increased": 0.0,
+				"crit_multiplier_add": 0.0,
+				"damage": 26.0,
+				"damage_taken_from_mana_before_life": 0.0,
+				"damaging_ailments_faster": 0.0,
+				"dexterity": 24.0,
+				"elemental_increased": 0.0,
+				"evasion": 15.600000000000001,
+				"evasion_increased": 0.0,
+				"fire_dot_multiplier_add": 0.0,
+				"fire_increased": 0.0,
+				"fire_resistance": 0.0,
+				"flask_charges_gained_increased": 0.0,
+				"flask_life_recovery_increased": 0.0,
+				"flask_mana_recovery_increased": 0.0,
+				"global_increased": 0.0,
+				"intelligence": 82.0,
+				"life_leech_max_rate_increased": 0.0,
+				"life_leech_rate_increased": 0.0,
+				"life_regen": 0.0,
+				"life_regen_percent": 0.0,
+				"lightning_increased": 0.0,
+				"lightning_resistance": 0.0,
+				"mana_cost_efficiency_increased": 0.0,
+				"mana_cost_increased": 0.0,
+				"mana_leech_max_rate_increased": 0.0,
+				"mana_leech_rate_increased": 0.0,
+				"mana_regen": 12.0,
+				"mana_regen_increased": 0.0,
+				"max_health": 127.0,
+				"max_mana": 187.0,
+				"max_shield": 112.32000000000001,
+				"maximum_cold_resistance_add": 0.0,
+				"maximum_fire_resistance_add": 0.0,
+				"maximum_lightning_resistance_add": 0.0,
+				"melee_area_size_increased": 0.0,
+				"melee_crit_chance_increased": 0.0,
+				"melee_crit_multiplier_add": 0.0,
+				"melee_physical_increased": 0.02,
+				"move_speed": 240.0,
+				"move_speed_increased": 0.0,
+				"physical_attack_life_leech": 0.0,
+				"physical_attack_mana_leech": 0.0,
+				"physical_increased": 0.0,
+				"projectile_attack_crit_chance_increased": 0.0,
+				"projectile_attack_crit_multiplier_add": 0.0,
+				"projectile_count": 0.0,
+				"projectile_increased": 0.0,
+				"projectile_speed_increased": 0.0,
+				"resolute_technique": 0.0,
+				"shield_recharge_delay": 4.0,
+				"shield_recharge_rate": 16.0,
+				"shield_recharge_rate_increased": 0.0,
+				"shield_recharge_start_faster": 0.0,
+				"shield_regen": 16.0,
+				"spell_added_cold": 0.0,
+				"spell_added_lightning": 0.0,
+				"spell_area_size_increased": 0.0,
+				"spell_crit_chance_increased": 0.0,
+				"spell_crit_multiplier_add": 0.0,
+				"spell_increased": 0.0,
+				"strength": 14.0
+			}
+		},
+		"before-plain-frost": {
+			"cast": {
+				"cooldown": 4.0,
+				"critical": {
+					"primary": {
+						"chance": 0.05,
+						"multiplier": 1.5
+					},
+					"secondary": {
+						"chance": 0.05,
+						"multiplier": 1.5
+					}
+				},
+				"error": "",
+				"group_id": "group_000002",
+				"initial_count": 5,
+				"main_uid": "migration_gem_000002",
+				"mana": 16.0,
+				"ok": true,
+				"packets": {
+					"projectile": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 0.85,
+							"base_coefficient": 0.85,
+							"intrinsic": {
+								"cold": 22.099999999999998
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"cold": 22.099999999999998
+						},
+						"role": "projectile",
+						"skill_id": "frost",
+						"tags": [
+							"hit",
+							"projectile",
+							"spell"
+						]
+					},
+					"secondary": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 0.0,
+							"base_coefficient": 0.9,
+							"intrinsic": {
+								"fire": 23.400000000000002
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"fire": 23.400000000000002
+						},
+						"role": "secondary",
+						"skill_id": "frost",
+						"tags": [
+							"hit",
+							"area",
+							"secondary",
+							"explosion"
+						]
+					}
+				},
+				"recipe": {
+					"added_effectiveness": 0.85,
+					"coefficient": 0.85,
+					"damage_type": "cold",
+					"initial_count": 5,
+					"pierce": 2,
+					"slow": 3.0,
+					"speed": 520.0,
+					"spread": 0.14
+				},
+				"skill_id": "frost",
+				"snapshot": {
+					"accuracy": 148.0,
+					"added_damage": {
+						"attack": {
+							"fire": 0.0,
+							"physical": 0.0
+						},
+						"spell": {
+							"cold": 0.0,
+							"lightning": 0.0
+						}
+					},
+					"added_damage_sources": [],
+					"base_damage": 26.0,
+					"compiled_packets": {
+						"projectile": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 0.85,
+								"base_coefficient": 0.85,
+								"intrinsic": {
+									"cold": 22.099999999999998
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"cold": 22.099999999999998
+							},
+							"role": "projectile",
+							"skill_id": "frost",
+							"tags": [
+								"hit",
+								"projectile",
+								"spell"
+							]
+						},
+						"secondary": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 0.0,
+								"base_coefficient": 0.9,
+								"intrinsic": {
+									"fire": 23.400000000000002
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 23.400000000000002
+							},
+							"role": "secondary",
+							"skill_id": "frost",
+							"tags": [
+								"hit",
+								"area",
+								"secondary",
+								"explosion"
+							]
+						}
+					},
+					"compiled_skill_id": "frost",
+					"critical": {
+						"primary": {
+							"chance": 0.05,
+							"multiplier": 1.5
+						},
+						"secondary": {
+							"chance": 0.05,
+							"multiplier": 1.5
+						}
+					},
+					"critical_modifiers": {
+						"base_chance": 0.05,
+						"base_multiplier": 1.5
+					},
+					"effects": [],
+					"explosion_recipe": {
+						"added_effectiveness": 0.0,
+						"coefficient": 0.9,
+						"radius": 76.0
+					},
+					"initial_count": 5,
+					"modifiers": [
+						{
+							"all_tags": [
+								"attack",
+								"melee"
+							],
+							"damage_types": [
+								"physical"
+							],
+							"id": "melee_physical_increased",
+							"mode": "increased",
+							"value": 0.02
+						}
+					],
+					"projectile_count": 0,
+					"tornado_recipe": {
+						"child": {
+							"added_effectiveness": 0.7,
+							"coefficient": 0.7,
+							"lifetime": 1.7,
+							"pierce": -1,
+							"radius": 4.5,
+							"range": 150.0,
+							"role": "child",
+							"speed": 260.0,
+							"split": false
+						},
+						"child_count": 3,
+						"explosion": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"parent": {
+							"added_effectiveness": 1.0,
+							"coefficient": 1.0,
+							"lifetime": 0.9,
+							"pierce": -1,
+							"radius": 6.0,
+							"range": 150.0,
+							"role": "parent",
+							"speed": 420.0,
+							"split": true
+						},
+						"parent_count": 3,
+						"spread": 0.16
+					}
+				},
+				"support_ids": []
+			},
+			"group_id": "group_000002",
+			"preview": "逐次命中，不是总伤害或每秒伤害；最终还会读取敌方当前抗性。\n暴击几率 5.0% · 暴击伤害 150.0%\n上方是成功命中的伤害，未把命中率乘入；攻击命中值 148，实际命中率读取敌方闪避。物理命中另受敌方护甲影响。\n现有减速时长 3.00 秒。距离、生命周期与穿透分别结算；延长减速不等于新增异常状态。\n实际投射速度 520.00\n投射速度改变飞行快慢，不增加距离上限或存续时间。\n每枚投射物：冰霜 22.10\n固有：冰霜 22.10；附加：无；附加效用 0.85\n独立爆炸：火焰 23.40\n固有：火焰 23.40；附加：无；附加效用 0.00\n仅装备授予时触发；攻击/法术点伤与投射物辅助不作用于独立爆炸。",
+			"stats": {
+				"accuracy": 148.0,
+				"accuracy_increased": 0.0,
+				"additional_skill_slots": 0.0,
+				"area_increased": 0.0,
+				"area_size_increased": 0.0,
+				"armour": 0.0,
+				"armour_increased": 0.0,
+				"attack_added_fire": 0.0,
+				"attack_added_physical": 0.0,
+				"attack_crit_chance_increased": 0.0,
+				"attack_elemental_increased": 0.0,
+				"attack_life_leech": 0.0,
+				"attack_mana_leech": 0.0,
+				"attack_physical_increased": 0.0,
+				"attack_speed": 1.7,
+				"attack_speed_increased": 0.0,
+				"chaos_increased": 0.0,
+				"cold_ailment_duration_increased": 0.0,
+				"cold_increased": 0.0,
+				"cold_resistance": 0.0,
+				"crit_base_chance": 0.05,
+				"crit_base_multiplier": 1.5,
+				"crit_chance_increased": 0.0,
+				"crit_multiplier_add": 0.0,
+				"damage": 26.0,
+				"damage_taken_from_mana_before_life": 0.0,
+				"damaging_ailments_faster": 0.0,
+				"dexterity": 24.0,
+				"elemental_increased": 0.0,
+				"evasion": 15.600000000000001,
+				"evasion_increased": 0.0,
+				"fire_dot_multiplier_add": 0.0,
+				"fire_increased": 0.0,
+				"fire_resistance": 0.0,
+				"flask_charges_gained_increased": 0.0,
+				"flask_life_recovery_increased": 0.0,
+				"flask_mana_recovery_increased": 0.0,
+				"global_increased": 0.0,
+				"intelligence": 82.0,
+				"life_leech_max_rate_increased": 0.0,
+				"life_leech_rate_increased": 0.0,
+				"life_regen": 0.0,
+				"life_regen_percent": 0.0,
+				"lightning_increased": 0.0,
+				"lightning_resistance": 0.0,
+				"mana_cost_efficiency_increased": 0.0,
+				"mana_cost_increased": 0.0,
+				"mana_leech_max_rate_increased": 0.0,
+				"mana_leech_rate_increased": 0.0,
+				"mana_regen": 12.0,
+				"mana_regen_increased": 0.0,
+				"max_health": 127.0,
+				"max_mana": 187.0,
+				"max_shield": 112.32000000000001,
+				"maximum_cold_resistance_add": 0.0,
+				"maximum_fire_resistance_add": 0.0,
+				"maximum_lightning_resistance_add": 0.0,
+				"melee_area_size_increased": 0.0,
+				"melee_crit_chance_increased": 0.0,
+				"melee_crit_multiplier_add": 0.0,
+				"melee_physical_increased": 0.02,
+				"move_speed": 240.0,
+				"move_speed_increased": 0.0,
+				"physical_attack_life_leech": 0.0,
+				"physical_attack_mana_leech": 0.0,
+				"physical_increased": 0.0,
+				"projectile_attack_crit_chance_increased": 0.0,
+				"projectile_attack_crit_multiplier_add": 0.0,
+				"projectile_count": 0.0,
+				"projectile_increased": 0.0,
+				"projectile_speed_increased": 0.0,
+				"resolute_technique": 0.0,
+				"shield_recharge_delay": 4.0,
+				"shield_recharge_rate": 16.0,
+				"shield_recharge_rate_increased": 0.0,
+				"shield_recharge_start_faster": 0.0,
+				"shield_regen": 16.0,
+				"spell_added_cold": 0.0,
+				"spell_added_lightning": 0.0,
+				"spell_area_size_increased": 0.0,
+				"spell_crit_chance_increased": 0.0,
+				"spell_crit_multiplier_add": 0.0,
+				"spell_increased": 0.0,
+				"strength": 14.0
+			}
+		}
+	},
+	"failures": 0,
+	"flying": {
+		"allocation": {
+			"before": {
+				"cooldown": 4.0,
+				"critical": {
+					"primary": {
+						"chance": 0.05,
+						"multiplier": 1.5
+					},
+					"secondary": {
+						"chance": 0.05,
+						"multiplier": 1.5
+					}
+				},
+				"error": "",
+				"freeze_profile": {
+					"duration_by_rarity": {
+						"boss": 0.2,
+						"magic": 0.6,
+						"normal": 0.6,
+						"rare": 0.35
+					},
+					"enabled": true,
+					"hit_multiplier": 0.75,
+					"immunity_seconds": 1.5,
+					"mana_multiplier": 1.2
+				},
+				"group_id": "group_000002",
+				"initial_count": 5,
+				"main_uid": "migration_gem_000002",
+				"mana": 19.2,
+				"ok": true,
+				"packets": {
+					"projectile": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 0.85,
+							"base_coefficient": 0.85,
+							"intrinsic": {
+								"cold": 22.099999999999998
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"cold": 22.099999999999998
+						},
+						"role": "projectile",
+						"skill_id": "frost",
+						"tags": [
+							"hit",
+							"projectile",
+							"spell"
+						]
+					},
+					"secondary": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 0.0,
+							"base_coefficient": 0.9,
+							"intrinsic": {
+								"fire": 23.400000000000002
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"fire": 23.400000000000002
+						},
+						"role": "secondary",
+						"skill_id": "frost",
+						"tags": [
+							"hit",
+							"area",
+							"secondary",
+							"explosion"
+						]
+					}
+				},
+				"recipe": {
+					"added_effectiveness": 0.85,
+					"coefficient": 0.85,
+					"damage_type": "cold",
+					"initial_count": 5,
+					"pierce": 2,
+					"slow": 3.0,
+					"speed": 520.0,
+					"spread": 0.14
+				},
+				"skill_id": "frost",
+				"snapshot": {
+					"accuracy": 148.0,
+					"added_damage": {
+						"attack": {
+							"fire": 0.0,
+							"physical": 0.0
+						},
+						"spell": {
+							"cold": 0.0,
+							"lightning": 0.0
+						}
+					},
+					"added_damage_sources": [],
+					"base_damage": 26.0,
+					"compiled_packets": {
+						"projectile": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 0.85,
+								"base_coefficient": 0.85,
+								"intrinsic": {
+									"cold": 22.099999999999998
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"cold": 22.099999999999998
+							},
+							"role": "projectile",
+							"skill_id": "frost",
+							"tags": [
+								"hit",
+								"projectile",
+								"spell"
+							]
+						},
+						"secondary": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 0.0,
+								"base_coefficient": 0.9,
+								"intrinsic": {
+									"fire": 23.400000000000002
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 23.400000000000002
+							},
+							"role": "secondary",
+							"skill_id": "frost",
+							"tags": [
+								"hit",
+								"area",
+								"secondary",
+								"explosion"
+							]
+						}
+					},
+					"compiled_skill_id": "frost",
+					"critical": {
+						"primary": {
+							"chance": 0.05,
+							"multiplier": 1.5
+						},
+						"secondary": {
+							"chance": 0.05,
+							"multiplier": 1.5
+						}
+					},
+					"critical_modifiers": {
+						"base_chance": 0.05,
+						"base_multiplier": 1.5
+					},
+					"effects": [],
+					"explosion_recipe": {
+						"added_effectiveness": 0.0,
+						"coefficient": 0.9,
+						"radius": 76.0
+					},
+					"freeze_policy": {
+						"duration_by_rarity": {
+							"boss": 0.2,
+							"magic": 0.6,
+							"normal": 0.6,
+							"rare": 0.35
+						},
+						"hit_multiplier": 0.75,
+						"immunity_seconds": 1.5,
+						"mana_multiplier": 1.2
+					},
+					"initial_count": 5,
+					"modifiers": [
+						{
+							"all_tags": [
+								"attack",
+								"melee"
+							],
+							"damage_types": [
+								"physical"
+							],
+							"id": "melee_physical_increased",
+							"mode": "increased",
+							"value": 0.02
+						},
+						{
+							"all_tags": [
+								"hit",
+								"spell",
+								"projectile"
+							],
+							"damage_types": [],
+							"id": "support:frost_lock",
+							"mode": "more",
+							"skills": [
+								"frost"
+							],
+							"value": -0.25
+						}
+					],
+					"projectile_count": 0,
+					"tornado_recipe": {
+						"child": {
+							"added_effectiveness": 0.7,
+							"coefficient": 0.7,
+							"lifetime": 1.7,
+							"pierce": -1,
+							"radius": 4.5,
+							"range": 150.0,
+							"role": "child",
+							"speed": 260.0,
+							"split": false
+						},
+						"child_count": 3,
+						"explosion": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"parent": {
+							"added_effectiveness": 1.0,
+							"coefficient": 1.0,
+							"lifetime": 0.9,
+							"pierce": -1,
+							"radius": 6.0,
+							"range": 150.0,
+							"role": "parent",
+							"speed": 420.0,
+							"split": true
+						},
+						"parent_count": 3,
+						"spread": 0.16
+					}
+				},
+				"support_ids": [
+					"frost_lock"
+				]
+			},
+			"future": {
+				"cooldown": 4.0,
+				"critical": {
+					"primary": {
+						"chance": 0.05,
+						"multiplier": 1.5
+					},
+					"secondary": {
+						"chance": 0.05,
+						"multiplier": 1.5
+					}
+				},
+				"error": "",
+				"freeze_profile": {
+					"cold_ailment_duration_increased": 0.2,
+					"duration_by_rarity": {
+						"boss": 0.24,
+						"magic": 0.72,
+						"normal": 0.72,
+						"rare": 0.42
+					},
+					"enabled": true,
+					"hit_multiplier": 0.75,
+					"immunity_seconds": 1.5,
+					"mana_multiplier": 1.2
+				},
+				"group_id": "group_000002",
+				"initial_count": 5,
+				"main_uid": "migration_gem_000002",
+				"mana": 19.2,
+				"ok": true,
+				"packets": {
+					"projectile": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 0.85,
+							"base_coefficient": 0.85,
+							"intrinsic": {
+								"cold": 15.299999999999999
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"cold": 15.299999999999999
+						},
+						"role": "projectile",
+						"skill_id": "frost",
+						"tags": [
+							"hit",
+							"projectile",
+							"spell"
+						]
+					},
+					"secondary": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 0.0,
+							"base_coefficient": 0.9,
+							"intrinsic": {
+								"fire": 16.2
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"fire": 16.2
+						},
+						"role": "secondary",
+						"skill_id": "frost",
+						"tags": [
+							"hit",
+							"area",
+							"secondary",
+							"explosion"
+						]
+					}
+				},
+				"recipe": {
+					"added_effectiveness": 0.85,
+					"coefficient": 0.85,
+					"damage_type": "cold",
+					"initial_count": 5,
+					"pierce": 2,
+					"slow": 3.5999999999999996,
+					"speed": 520.0,
+					"spread": 0.14
+				},
+				"skill_id": "frost",
+				"snapshot": {
+					"accuracy": 148.0,
+					"added_damage": {
+						"attack": {
+							"fire": 0.0,
+							"physical": 0.0
+						},
+						"spell": {
+							"cold": 0.0,
+							"lightning": 0.0
+						}
+					},
+					"added_damage_sources": [],
+					"base_damage": 18.0,
+					"cold_ailment_duration_increased": 0.2,
+					"compiled_packets": {
+						"projectile": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 0.85,
+								"base_coefficient": 0.85,
+								"intrinsic": {
+									"cold": 15.299999999999999
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"cold": 15.299999999999999
+							},
+							"role": "projectile",
+							"skill_id": "frost",
+							"tags": [
+								"hit",
+								"projectile",
+								"spell"
+							]
+						},
+						"secondary": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 0.0,
+								"base_coefficient": 0.9,
+								"intrinsic": {
+									"fire": 16.2
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 16.2
+							},
+							"role": "secondary",
+							"skill_id": "frost",
+							"tags": [
+								"hit",
+								"area",
+								"secondary",
+								"explosion"
+							]
+						}
+					},
+					"compiled_skill_id": "frost",
+					"critical": {
+						"primary": {
+							"chance": 0.05,
+							"multiplier": 1.5
+						},
+						"secondary": {
+							"chance": 0.05,
+							"multiplier": 1.5
+						}
+					},
+					"critical_modifiers": {
+						"base_chance": 0.05,
+						"base_multiplier": 1.5
+					},
+					"effects": [],
+					"explosion_recipe": {
+						"added_effectiveness": 0.0,
+						"coefficient": 0.9,
+						"radius": 76.0
+					},
+					"freeze_policy": {
+						"cold_ailment_duration_increased": 0.2,
+						"duration_by_rarity": {
+							"boss": 0.24,
+							"magic": 0.72,
+							"normal": 0.72,
+							"rare": 0.42
+						},
+						"hit_multiplier": 0.75,
+						"immunity_seconds": 1.5,
+						"mana_multiplier": 1.2
+					},
+					"initial_count": 5,
+					"modifiers": [
+						{
+							"all_tags": [
+								"attack",
+								"melee"
+							],
+							"damage_types": [
+								"physical"
+							],
+							"id": "melee_physical_increased",
+							"mode": "increased",
+							"value": 0.02
+						},
+						{
+							"all_tags": [
+								"hit",
+								"spell",
+								"projectile"
+							],
+							"damage_types": [],
+							"id": "support:frost_lock",
+							"mode": "more",
+							"skills": [
+								"frost"
+							],
+							"value": -0.25
+						}
+					],
+					"projectile_count": 0,
+					"tornado_recipe": {
+						"child": {
+							"added_effectiveness": 0.7,
+							"coefficient": 0.7,
+							"lifetime": 1.7,
+							"pierce": -1,
+							"radius": 4.5,
+							"range": 150.0,
+							"role": "child",
+							"speed": 260.0,
+							"split": false
+						},
+						"child_count": 3,
+						"explosion": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"parent": {
+							"added_effectiveness": 1.0,
+							"coefficient": 1.0,
+							"lifetime": 0.9,
+							"pierce": -1,
+							"radius": 6.0,
+							"range": 150.0,
+							"role": "parent",
+							"speed": 420.0,
+							"split": true
+						},
+						"parent_count": 3,
+						"spread": 0.16
+					}
+				},
+				"support_ids": [
+					"frost_lock"
+				]
+			},
+			"new_freeze": {
+				"frozen_from": 0.25,
+				"frozen_until": 0.97,
+				"immune_until": 2.4699999999999998,
+				"provenance": {
+					"cast_id": 1,
+					"phase": "outbound",
+					"projectile_id": 3,
+					"skill_id": "frost"
+				},
+				"rarity": "normal",
+				"target_id": 1
+			},
+			"old_damage": [
+				{
+					"assembly": {
+						"added": {
+
+						},
+						"added_effectiveness": 0.85,
+						"base_coefficient": 0.85,
+						"intrinsic": {
+							"cold": 22.099999999999998
+						},
+						"stage": "hit_base"
+					},
+					"before_defense_components": {
+						"cold": 16.575
+					},
+					"cast_id": 1,
+					"components": {
+						"cold": 16.575
+					},
+					"critical": {
+						"chance": 0.05,
+						"critical": false,
+						"multiplier": 1.0
+					},
+					"details": [
+						{
+							"base": 22.099999999999998,
+							"before_defense": 16.575,
+							"final": 16.575,
+							"increased": 0.0,
+							"modifiers": [
+								"support:frost_lock"
+							],
+							"more": 0.75,
+							"resistance": 0.0,
+							"type": "cold"
+						}
+					],
+					"effect_id": "",
+					"freeze_applied": {
+						"at": 0.25,
+						"frozen_until": 0.85,
+						"immune_until": 2.35
+					},
+					"health_lost": 16.575,
+					"phase": "outbound",
+					"prevented_components": {
+						"cold": 0.0
+					},
+					"projectile_id": 3,
+					"shield_spent": 0.0,
+					"skill_id": "frost",
+					"tags": [
+						"hit",
+						"projectile",
+						"spell"
+					],
+					"target_id": 1,
+					"total": 16.575
+				}
+			],
+			"old_freeze": {
+				"frozen_from": 0.25,
+				"frozen_until": 0.85,
+				"immune_until": 2.35,
+				"provenance": {
+					"cast_id": 1,
+					"phase": "outbound",
+					"projectile_id": 3,
+					"skill_id": "frost"
+				},
+				"rarity": "normal",
+				"target_id": 1
+			}
+		},
+		"refund": {
+			"before": {
+				"cooldown": 4.0,
+				"critical": {
+					"primary": {
+						"chance": 0.05,
+						"multiplier": 1.5
+					},
+					"secondary": {
+						"chance": 0.05,
+						"multiplier": 1.5
+					}
+				},
+				"error": "",
+				"freeze_profile": {
+					"cold_ailment_duration_increased": 0.2,
+					"duration_by_rarity": {
+						"boss": 0.24,
+						"magic": 0.72,
+						"normal": 0.72,
+						"rare": 0.42
+					},
+					"enabled": true,
+					"hit_multiplier": 0.75,
+					"immunity_seconds": 1.5,
+					"mana_multiplier": 1.2
+				},
+				"group_id": "group_000002",
+				"initial_count": 5,
+				"main_uid": "migration_gem_000002",
+				"mana": 19.2,
+				"ok": true,
+				"packets": {
+					"projectile": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 0.85,
+							"base_coefficient": 0.85,
+							"intrinsic": {
+								"cold": 22.099999999999998
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"cold": 22.099999999999998
+						},
+						"role": "projectile",
+						"skill_id": "frost",
+						"tags": [
+							"hit",
+							"projectile",
+							"spell"
+						]
+					},
+					"secondary": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 0.0,
+							"base_coefficient": 0.9,
+							"intrinsic": {
+								"fire": 23.400000000000002
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"fire": 23.400000000000002
+						},
+						"role": "secondary",
+						"skill_id": "frost",
+						"tags": [
+							"hit",
+							"area",
+							"secondary",
+							"explosion"
+						]
+					}
+				},
+				"recipe": {
+					"added_effectiveness": 0.85,
+					"coefficient": 0.85,
+					"damage_type": "cold",
+					"initial_count": 5,
+					"pierce": 2,
+					"slow": 3.5999999999999996,
+					"speed": 520.0,
+					"spread": 0.14
+				},
+				"skill_id": "frost",
+				"snapshot": {
+					"accuracy": 148.0,
+					"added_damage": {
+						"attack": {
+							"fire": 0.0,
+							"physical": 0.0
+						},
+						"spell": {
+							"cold": 0.0,
+							"lightning": 0.0
+						}
+					},
+					"added_damage_sources": [],
+					"base_damage": 26.0,
+					"cold_ailment_duration_increased": 0.2,
+					"compiled_packets": {
+						"projectile": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 0.85,
+								"base_coefficient": 0.85,
+								"intrinsic": {
+									"cold": 22.099999999999998
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"cold": 22.099999999999998
+							},
+							"role": "projectile",
+							"skill_id": "frost",
+							"tags": [
+								"hit",
+								"projectile",
+								"spell"
+							]
+						},
+						"secondary": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 0.0,
+								"base_coefficient": 0.9,
+								"intrinsic": {
+									"fire": 23.400000000000002
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 23.400000000000002
+							},
+							"role": "secondary",
+							"skill_id": "frost",
+							"tags": [
+								"hit",
+								"area",
+								"secondary",
+								"explosion"
+							]
+						}
+					},
+					"compiled_skill_id": "frost",
+					"critical": {
+						"primary": {
+							"chance": 0.05,
+							"multiplier": 1.5
+						},
+						"secondary": {
+							"chance": 0.05,
+							"multiplier": 1.5
+						}
+					},
+					"critical_modifiers": {
+						"base_chance": 0.05,
+						"base_multiplier": 1.5
+					},
+					"effects": [],
+					"explosion_recipe": {
+						"added_effectiveness": 0.0,
+						"coefficient": 0.9,
+						"radius": 76.0
+					},
+					"freeze_policy": {
+						"cold_ailment_duration_increased": 0.2,
+						"duration_by_rarity": {
+							"boss": 0.24,
+							"magic": 0.72,
+							"normal": 0.72,
+							"rare": 0.42
+						},
+						"hit_multiplier": 0.75,
+						"immunity_seconds": 1.5,
+						"mana_multiplier": 1.2
+					},
+					"initial_count": 5,
+					"modifiers": [
+						{
+							"all_tags": [
+								"attack",
+								"melee"
+							],
+							"damage_types": [
+								"physical"
+							],
+							"id": "melee_physical_increased",
+							"mode": "increased",
+							"value": 0.02
+						},
+						{
+							"all_tags": [
+								"hit",
+								"spell",
+								"projectile"
+							],
+							"damage_types": [],
+							"id": "support:frost_lock",
+							"mode": "more",
+							"skills": [
+								"frost"
+							],
+							"value": -0.25
+						}
+					],
+					"projectile_count": 0,
+					"tornado_recipe": {
+						"child": {
+							"added_effectiveness": 0.7,
+							"coefficient": 0.7,
+							"lifetime": 1.7,
+							"pierce": -1,
+							"radius": 4.5,
+							"range": 150.0,
+							"role": "child",
+							"speed": 260.0,
+							"split": false
+						},
+						"child_count": 3,
+						"explosion": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"parent": {
+							"added_effectiveness": 1.0,
+							"coefficient": 1.0,
+							"lifetime": 0.9,
+							"pierce": -1,
+							"radius": 6.0,
+							"range": 150.0,
+							"role": "parent",
+							"speed": 420.0,
+							"split": true
+						},
+						"parent_count": 3,
+						"spread": 0.16
+					}
+				},
+				"support_ids": [
+					"frost_lock"
+				]
+			},
+			"future": {
+				"cooldown": 4.0,
+				"critical": {
+					"primary": {
+						"chance": 0.05,
+						"multiplier": 1.5
+					},
+					"secondary": {
+						"chance": 0.05,
+						"multiplier": 1.5
+					}
+				},
+				"error": "",
+				"freeze_profile": {
+					"duration_by_rarity": {
+						"boss": 0.2,
+						"magic": 0.6,
+						"normal": 0.6,
+						"rare": 0.35
+					},
+					"enabled": true,
+					"hit_multiplier": 0.75,
+					"immunity_seconds": 1.5,
+					"mana_multiplier": 1.2
+				},
+				"group_id": "group_000002",
+				"initial_count": 5,
+				"main_uid": "migration_gem_000002",
+				"mana": 19.2,
+				"ok": true,
+				"packets": {
+					"projectile": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 0.85,
+							"base_coefficient": 0.85,
+							"intrinsic": {
+								"cold": 15.299999999999999
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"cold": 15.299999999999999
+						},
+						"role": "projectile",
+						"skill_id": "frost",
+						"tags": [
+							"hit",
+							"projectile",
+							"spell"
+						]
+					},
+					"secondary": {
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 0.0,
+							"base_coefficient": 0.9,
+							"intrinsic": {
+								"fire": 16.2
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"fire": 16.2
+						},
+						"role": "secondary",
+						"skill_id": "frost",
+						"tags": [
+							"hit",
+							"area",
+							"secondary",
+							"explosion"
+						]
+					}
+				},
+				"recipe": {
+					"added_effectiveness": 0.85,
+					"coefficient": 0.85,
+					"damage_type": "cold",
+					"initial_count": 5,
+					"pierce": 2,
+					"slow": 3.0,
+					"speed": 520.0,
+					"spread": 0.14
+				},
+				"skill_id": "frost",
+				"snapshot": {
+					"accuracy": 148.0,
+					"added_damage": {
+						"attack": {
+							"fire": 0.0,
+							"physical": 0.0
+						},
+						"spell": {
+							"cold": 0.0,
+							"lightning": 0.0
+						}
+					},
+					"added_damage_sources": [],
+					"base_damage": 18.0,
+					"compiled_packets": {
+						"projectile": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 0.85,
+								"base_coefficient": 0.85,
+								"intrinsic": {
+									"cold": 15.299999999999999
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"cold": 15.299999999999999
+							},
+							"role": "projectile",
+							"skill_id": "frost",
+							"tags": [
+								"hit",
+								"projectile",
+								"spell"
+							]
+						},
+						"secondary": {
+							"assembly": {
+								"added": {
+
+								},
+								"added_effectiveness": 0.0,
+								"base_coefficient": 0.9,
+								"intrinsic": {
+									"fire": 16.2
+								},
+								"stage": "hit_base"
+							},
+							"base": {
+								"fire": 16.2
+							},
+							"role": "secondary",
+							"skill_id": "frost",
+							"tags": [
+								"hit",
+								"area",
+								"secondary",
+								"explosion"
+							]
+						}
+					},
+					"compiled_skill_id": "frost",
+					"critical": {
+						"primary": {
+							"chance": 0.05,
+							"multiplier": 1.5
+						},
+						"secondary": {
+							"chance": 0.05,
+							"multiplier": 1.5
+						}
+					},
+					"critical_modifiers": {
+						"base_chance": 0.05,
+						"base_multiplier": 1.5
+					},
+					"effects": [],
+					"explosion_recipe": {
+						"added_effectiveness": 0.0,
+						"coefficient": 0.9,
+						"radius": 76.0
+					},
+					"freeze_policy": {
+						"duration_by_rarity": {
+							"boss": 0.2,
+							"magic": 0.6,
+							"normal": 0.6,
+							"rare": 0.35
+						},
+						"hit_multiplier": 0.75,
+						"immunity_seconds": 1.5,
+						"mana_multiplier": 1.2
+					},
+					"initial_count": 5,
+					"modifiers": [
+						{
+							"all_tags": [
+								"attack",
+								"melee"
+							],
+							"damage_types": [
+								"physical"
+							],
+							"id": "melee_physical_increased",
+							"mode": "increased",
+							"value": 0.02
+						},
+						{
+							"all_tags": [
+								"hit",
+								"spell",
+								"projectile"
+							],
+							"damage_types": [],
+							"id": "support:frost_lock",
+							"mode": "more",
+							"skills": [
+								"frost"
+							],
+							"value": -0.25
+						}
+					],
+					"projectile_count": 0,
+					"tornado_recipe": {
+						"child": {
+							"added_effectiveness": 0.7,
+							"coefficient": 0.7,
+							"lifetime": 1.7,
+							"pierce": -1,
+							"radius": 4.5,
+							"range": 150.0,
+							"role": "child",
+							"speed": 260.0,
+							"split": false
+						},
+						"child_count": 3,
+						"explosion": {
+							"added_effectiveness": 0.0,
+							"coefficient": 0.9,
+							"radius": 76.0
+						},
+						"parent": {
+							"added_effectiveness": 1.0,
+							"coefficient": 1.0,
+							"lifetime": 0.9,
+							"pierce": -1,
+							"radius": 6.0,
+							"range": 150.0,
+							"role": "parent",
+							"speed": 420.0,
+							"split": true
+						},
+						"parent_count": 3,
+						"spread": 0.16
+					}
+				},
+				"support_ids": [
+					"frost_lock"
+				]
+			},
+			"new_freeze": {
+				"frozen_from": 0.25,
+				"frozen_until": 0.85,
+				"immune_until": 2.35,
+				"provenance": {
+					"cast_id": 1,
+					"phase": "outbound",
+					"projectile_id": 3,
+					"skill_id": "frost"
+				},
+				"rarity": "normal",
+				"target_id": 1
+			},
+			"old_damage": [
+				{
+					"assembly": {
+						"added": {
+
+						},
+						"added_effectiveness": 0.85,
+						"base_coefficient": 0.85,
+						"intrinsic": {
+							"cold": 22.099999999999998
+						},
+						"stage": "hit_base"
+					},
+					"before_defense_components": {
+						"cold": 16.575
+					},
+					"cast_id": 1,
+					"components": {
+						"cold": 16.575
+					},
+					"critical": {
+						"chance": 0.05,
+						"critical": false,
+						"multiplier": 1.0
+					},
+					"details": [
+						{
+							"base": 22.099999999999998,
+							"before_defense": 16.575,
+							"final": 16.575,
+							"increased": 0.0,
+							"modifiers": [
+								"support:frost_lock"
+							],
+							"more": 0.75,
+							"resistance": 0.0,
+							"type": "cold"
+						}
+					],
+					"effect_id": "",
+					"freeze_applied": {
+						"at": 0.25,
+						"frozen_until": 0.97,
+						"immune_until": 2.4699999999999998
+					},
+					"health_lost": 16.575,
+					"phase": "outbound",
+					"prevented_components": {
+						"cold": 0.0
+					},
+					"projectile_id": 3,
+					"shield_spent": 0.0,
+					"skill_id": "frost",
+					"tags": [
+						"hit",
+						"projectile",
+						"spell"
+					],
+					"target_id": 1,
+					"total": 16.575
+				}
+			],
+			"old_freeze": {
+				"frozen_from": 0.25,
+				"frozen_until": 0.97,
+				"immune_until": 2.4699999999999998,
+				"provenance": {
+					"cast_id": 1,
+					"phase": "outbound",
+					"projectile_id": 3,
+					"skill_id": "frost"
+				},
+				"rarity": "normal",
+				"target_id": 1
+			}
+		}
+	},
+	"schema": 61,
+	"scope": "Legal level4 source/ownership fixtures and bounded actual Main. No original combat mutation, historical suite, native UI, or package claim.",
+	"sections": {
+		"compiled_and_preview": {
+			"checks": 150,
+			"failures": 0
+		},
+		"flying_duration_snapshot": {
+			"checks": 55,
+			"failures": 0
+		}
+	}
+}

@@ -151,8 +151,11 @@ static func details(cast: Dictionary) -> String:
 		lines.append("近身扇区 %.0f 度；近战、攻击与范围标签生效。锻纹短刃的本地物理伤害参与本次斩击，白蜡长弓不参与。没有命中时也正常支付。" % rad_to_deg(float(cast.recipe.half_angle)*2.0))
 	if cast.skill_id == "chain" and cast.recipe.has("hit"):
 		lines.append("连锁最多 %d 个目标（含首个）；首段 %.2f，续跳 %.2f。已命中过的目标不重复，每个目标沿原配方递减基础倍率和附加效用。" % [int(cast.recipe.hit.bounce_count), float(cast.recipe.first_range), float(cast.recipe.followup_range)])
-	if cast.skill_id in ["bolt", "frost", "shade_bolt"]:
-		lines.append("现有减速时长 %.2f 秒。距离、生命周期与穿透分别结算；延长减速不等于新增异常状态。" % float(cast.recipe.slow))
+	if cast.skill_id in ["bolt", "frost", "shade_bolt"] or (cast.skill_id == "nova" and cast.recipe.has("slow")):
+		if cast.skill_id == "nova":
+			lines.append("新星普通减速 %.2f 秒；范围、击退与冷却不变。伏击冻结时长，不受冰霜异常时长加成。" % float(cast.recipe.slow))
+		else:
+			lines.append("现有减速时长 %.2f 秒。距离、生命周期与穿透分别结算；延长减速不等于新增异常状态。" % float(cast.recipe.slow))
 	lines.append_array(spatial_details(cast))
 	for entry: Dictionary in entries(cast):
 		var packet: Dictionary = entry.packet

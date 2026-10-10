@@ -28,8 +28,8 @@ const SUPPORTS: Dictionary = {
 	},
 	"lingering_chill": {
 		"name": "寒意延长辅助",
-		"description": "冰霜：现有减速时间 ×1.50（3 秒至 4.5 秒），主命中伤害总降 10%，魔力 ×1.10。",
-		"skills": ["frost"], "requires": ["projectile_hit"], "family": "control",
+		"description": "冰霜与奥能新星：原减速时长×1.50，冰霜3秒至4.5秒，新星0.6秒至0.9秒。主命中伤害×0.90，魔力×1.10；新星范围、击退与冷却不变，伏击冻结最终时长。新星仍为普通减速，不受冰霜异常时长属性加成。",
+		"skills": ["frost", "nova"], "requires": ["native_slow"], "family": "control",
 		"operations": [
 			{"op": "slow_duration_multiplier", "value": 1.50},
 			{"op": "primary_hit_more", "value": -0.10},
@@ -112,7 +112,7 @@ static func definition_error(value: Variant) -> String:
 		return "辅助类别无效"
 	if not Program.strings(value.skills) or not Program.strings(value.requires):
 		return "辅助技能或能力列表无效"
-	var requires: Array = ["chain_hit"] if value.family == "chain" else ["projectile_hit"]
+	var requires: Array = ["chain_hit"] if value.family == "chain" else (["native_slow"] if value.family == "control" else ["projectile_hit"])
 	if value.requires != requires:
 		return "辅助技能或能力与类别不匹配"
 	if not value.operations is Array or value.operations.size() < 2 or value.operations.size() > 3:
@@ -154,7 +154,7 @@ static func definition_error(value: Variant) -> String:
 	if factor.is_empty() or not seen.has("mana_multiplier"):
 		return "辅助缺少配方变换或魔力代价"
 	var fast: bool = factor == "projectile_speed_multiplier" and float(seen[factor]) > 1.0
-	var skills: Array = ["chain"] if value.family == "chain" else (["frost"] if value.family == "control" else ["bolt", "frost", "shade_bolt"])
+	var skills: Array = ["chain"] if value.family == "chain" else (["frost", "nova"] if value.family == "control" else ["bolt", "frost", "shade_bolt"])
 	if factor == "projectile_speed_multiplier": skills.append("tornado")
 	if value.skills != skills:
 		return "辅助技能与配方变换不匹配"

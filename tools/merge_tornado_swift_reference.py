@@ -5,12 +5,12 @@ from merge_ruins_garden_reference import member_span
 
 ROOT = Path(__file__).resolve().parents[1]
 parser = argparse.ArgumentParser()
-parser.add_argument('--support', choices=['swift_projectiles','heavy_projectiles','inward_pull','ambush'], default='swift_projectiles')
+parser.add_argument('--support', choices=['swift_projectiles','heavy_projectiles','inward_pull','ambush','lingering_chill'], default='swift_projectiles')
 parser.add_argument('--qa', type=Path, default=ROOT / 'docs/qa/tornado-swift')
-parser.add_argument('--skill', choices=['tornado','cleave','chain'], default='tornado')
+parser.add_argument('--skill', choices=['tornado','cleave','chain','nova'], default='tornado')
 args = parser.parse_args()
 SKILL = args.skill
-assert (SKILL == 'tornado' and args.support in ['swift_projectiles','heavy_projectiles']) or (SKILL == 'cleave' and args.support == 'inward_pull') or (SKILL == 'chain' and args.support == 'ambush')
+assert (SKILL == 'tornado' and args.support in ['swift_projectiles','heavy_projectiles']) or (SKILL == 'cleave' and args.support == 'inward_pull') or (SKILL == 'chain' and args.support == 'ambush') or (SKILL == 'nova' and args.support == 'lingering_chill')
 SUPPORT = args.support
 QA = args.qa
 catalog = ROOT / 'docs/reference/catalog.json'
@@ -43,12 +43,26 @@ if SUPPORT == 'ambush':
     for skill in ['nova','meteor']:
         assert before['ambush']['examples'][skill] == fragment['ambush']['examples'][skill]
     changes.append((('ambush','examples'),dict(before['ambush']['examples'],chain=fragment['ambush']['examples']['chain'])))
+if SUPPORT == 'lingering_chill':
+    for skill in ['frost','nova']:
+        changes.append((('skills',skill,'capabilities'),fragment['native_slow'][skill]))
+    changes.append((('skills','nova','slow_duration'),fragment['native_slow']['nova_base']))
 expected = json.loads(text)
 spans = []
 for path, value in changes:
     parent = expected
     for key in path[:-1]: parent = parent[key]
     parent[path[-1]] = value
+    old_parent = before
+    for key in path[:-1]: old_parent = old_parent[key]
+    if path[-1] not in old_parent:
+        _, parent_end = member_span(text,path[:-1])
+        end = parent_end-1
+        start = end
+        while text[start-1].isspace(): start -= 1
+        encoded = ',\n'+'\t'*len(path)+json.dumps(path[-1])+': '+json.dumps(value,ensure_ascii=False)+'\n'+'\t'*(len(path)-1)
+        spans.append((start,end,encoded))
+        continue
     start, end = member_span(text, path)
     if path == ('ambush','examples'):
         if before['ambush']['examples'] == value: continue
