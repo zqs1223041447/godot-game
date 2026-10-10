@@ -1,0 +1,72 @@
+{
+	"baseline": true,
+	"checks": 10,
+	"evidence": [
+		{
+			"case": "right-click ring target choice",
+			"label": "Actual Main opens and saves formal town",
+			"ok": true
+		},
+		{
+			"case": "right-click ring target choice",
+			"label": "Select actual free tier-I map: ",
+			"ok": true
+		},
+		{
+			"case": "right-click ring target choice",
+			"label": "Actual map admission: ",
+			"ok": true
+		},
+		{
+			"case": "right-click ring target choice",
+			"label": "Actual map registers 24 ordinary roots and one boss",
+			"ok": true
+		},
+		{
+			"case": "right-click ring target choice",
+			"label": "Bounded oracle finds naturally eligible current-pool ring roll",
+			"ok": true
+		},
+		{
+			"case": "right-click ring target choice",
+			"label": "Lawful pre-owned ring fixture admitted without replacing existing items",
+			"ok": false
+		},
+		{
+			"case": "right-click ring target choice",
+			"label": "Equip pre-owned ring_1: 物品已变化。",
+			"ok": false
+		},
+		{
+			"case": "right-click ring target choice",
+			"label": "Lawful pre-owned ring fixture admitted without replacing existing items",
+			"ok": false
+		},
+		{
+			"case": "right-click ring target choice",
+			"label": "Equip pre-owned ring_2: 物品已变化。",
+			"ok": false
+		},
+		{
+			"case": "right-click ring target choice",
+			"label": "Actual registered boss awards one original equipment roll",
+			"ok": false
+		}
+	],
+	"failures": [
+		"right-click ring target choice: Lawful pre-owned ring fixture admitted without replacing existing items",
+		"right-click ring target choice: Equip pre-owned ring_1: 物品已变化。",
+		"right-click ring target choice: Lawful pre-owned ring fixture admitted without replacing existing items",
+		"right-click ring target choice: Equip pre-owned ring_2: 物品已变化。",
+		"right-click ring target choice: Actual registered boss awards one original equipment roll"
+	],
+	"messages": [],
+	"reward": {
+
+	},
+	"rings": [
+		"gear_000004",
+		"gear_000004"
+	],
+	"seed": 19
+}

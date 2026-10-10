@@ -40,6 +40,8 @@ var _pending_craft: Dictionary = {}
 var _character: Button
 var _discard: Button
 var _pending_discard: Dictionary = {}
+var _equip_menu: PopupMenu
+var _pending_equip: Dictionary = {}
 var _refresh_dirty: bool = true
 var refresh_generation: int = 0
 
@@ -69,6 +71,7 @@ class SlotTarget extends Button:
 		if _can_drop_data(_at, data): owner_panel._move_requested(data.uid, {"kind":"equipment","slot_id":slot_id}, data.revision)
 
 func setup(state: RefCounted, path: String = "user://build_save.json", trade_arena: Node = null) -> void:
+	_cancel_equipment_choice()
 	model = state
 	_trade_arena = trade_arena
 	if _trade_arena != null and not _trade_arena.world_context_changed.is_connected(_on_trade_world_changed):
@@ -82,6 +85,14 @@ func setup(state: RefCounted, path: String = "user://build_save.json", trade_are
 
 
 func _build() -> void:
+	_equip_menu = PopupMenu.new()
+	_equip_menu.name = "EquipmentTargetChoice"
+	# Match the existing owned-gem picker: consume the choice before hiding.
+	_equip_menu.hide_on_item_selection = false
+	_equip_menu.max_size = Vector2i(520,360)
+	_equip_menu.id_pressed.connect(_choose_equipment_target)
+	_equip_menu.popup_hide.connect(_cancel_equipment_choice)
+	add_child(_equip_menu)
 	name = "CanonicalInventoryBody"
 	add_theme_constant_override("separation",5)
 	var top := HBoxContainer.new()
@@ -267,7 +278,7 @@ func refresh() -> void:
 	var columns: int = int(_bag_layout.get("columns", 12))
 	var rows: int = int(_bag_layout.get("rows", 8))
 	_summary.text = "行囊 %d 格" % [page_count * columns * rows]
-	_summary.tooltip_text = "九个装备位 · 装备、珠宝与宝石共用分页行囊。悬停看详情，Shift 对比，右键可装备。"
+	_summary.tooltip_text = "九个装备位 · 装备、珠宝与宝石共用分页行囊。悬停看详情，Shift 对比，右键可装备；双戒指已满时选择替换目标。"
 	_page_label.text = "%d/%d" % [_bag_page + 1, page_count]
 	_page_label.tooltip_text = "%d × %d 格 · 悬停看详情 · Shift 对比 · 拖放摆放" % [columns, rows]
 	_previous_page.disabled = _bag_page <= 0
@@ -302,6 +313,9 @@ func refresh() -> void:
 
 
 func _on_model_changed() -> void:
+	if not _pending_equip.is_empty():
+		_cancel_equipment_choice()
+		feedback.emit("物品已变化，已取消换装选择，请重新操作")
 	if bool(_pending_craft.get("gem", false)): _cancel_craft()
 	_refresh_dirty = true
 	if is_visible_in_tree():
@@ -317,9 +331,11 @@ func _refresh_jewel_crafting_after_commit() -> void:
 
 
 func _on_visibility_changed() -> void:
+	if not is_visible_in_tree(): _cancel_equipment_choice()
 	if is_visible_in_tree() and _refresh_dirty: refresh()
 
 func _on_trade_world_changed() -> void:
+	_cancel_equipment_choice()
 	if bool(_pending_craft.get("gem", false)): _cancel_craft()
 	_refresh_crafting()
 
@@ -383,12 +399,38 @@ func _activate_item(uid: String) -> void:
 	var targets: Array = Slots.targets_for_category(model.item_definition(uid).category)
 	if targets.is_empty(): return
 	var occupied: Dictionary = model.equipped_items()
-	var target: String = targets[0]
 	for slot: String in targets:
 		if not occupied.has(slot):
-			target = slot
-			break
-	_move_requested(uid,{"kind":"equipment","slot_id":target},model.revision())
+			_move_requested(uid,{"kind":"equipment","slot_id":slot},model.revision())
+			return
+	if targets.size() > 1:
+		_cancel_equipment_choice()
+		_pending_equip = {"uid":uid,"revision":model.revision(),"targets":targets}
+		_equip_menu.clear()
+		for index: int in range(targets.size()):
+			var slot: String = targets[index]
+			_equip_menu.add_item("替换%s · %s" % [SLOT_NAMES[slot], model.item_definition(occupied[slot]).name], index)
+		hover_left.emit()
+		_equip_menu.size = Vector2i.ZERO
+		_equip_menu.position = Vector2i(get_viewport().get_mouse_position())
+		if not _equip_menu.is_embedded(): _equip_menu.position += get_window().position
+		_equip_menu.popup()
+		return
+	_move_requested(uid,{"kind":"equipment","slot_id":targets[0]},model.revision())
+
+
+func _choose_equipment_target(index: int) -> void:
+	var request: Dictionary = _pending_equip.duplicate(true)
+	_cancel_equipment_choice()
+	if request.is_empty() or index < 0 or index >= request.targets.size(): return
+	_move_requested(request.uid,{"kind":"equipment","slot_id":request.targets[index]},request.revision)
+
+
+func _cancel_equipment_choice() -> void:
+	_pending_equip.clear()
+	if is_instance_valid(_equip_menu): _equip_menu.hide()
+
+
 func _hover_pending(uid: String, button: Button) -> void:
 	item_hovered.emit(uid, button.get_global_rect())
 func _hover_equipment(slot: String) -> void:
