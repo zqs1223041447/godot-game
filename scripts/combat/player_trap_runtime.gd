@@ -55,12 +55,16 @@ func place(at: Variant, position: Variant, compiled: Variant, frozen_snapshot: V
 	var id: int = _next_id
 	var skill_id: String = compiled.skill_id
 	var entry: Dictionary = {"id": id, "position": position, "skill_id": skill_id,
-		"cast_id": cast_id, "radius": float(compiled.recipe.radius),
+		"cast_id": cast_id, "radius": float(compiled.recipe.get("radius", 0.0)),
 		"slow": 0.6 if skill_id == "nova" else 0.0, "color": Data.SKILLS[skill_id].color,
-		"packet": compiled.packets.direct.duplicate(true), "snapshot": frozen_snapshot.duplicate(true),
+		"packet": compiled.packets.get("direct", {}).duplicate(true), "snapshot": frozen_snapshot.duplicate(true),
 		"placed_at": time, "armed_at": time + float(Rules.POLICY.arming_seconds),
 		"expires_at": time + float(Rules.POLICY.lifetime_seconds),
 		"trigger_radius": float(Rules.POLICY.trigger_radius)}
+	if skill_id == "chain":
+		entry.erase("radius"); entry.erase("packet")
+		entry.recipe = compiled.recipe.duplicate(true)
+		entry.bounces = compiled.packets.bounces.duplicate(true)
 	_expire(time)
 	_entries.append(entry)
 	_clock = time
@@ -162,15 +166,19 @@ static func _compiled_error(compiled: Variant) -> String:
 	if typeof(compiled.get("initial_count")) != TYPE_INT or compiled.initial_count != 0:
 		return "Trap casts cannot emit initial projectiles"
 	var recipe: Variant = compiled.get("recipe")
-	if not recipe is Dictionary or not Program.number(recipe.get("radius")) or float(recipe.radius) <= 0.0 or float(recipe.radius) > 500.0:
-		return "Trap blast radius is invalid"
 	var packets: Variant = compiled.get("packets")
-	if not packets is Dictionary or packets.size() != 1 or not packets.has("direct"):
-		return "Trap cast must retain one direct packet"
-	reason = Base.packet_error(packets.direct)
-	if not reason.is_empty(): return reason
-	if packets.direct.skill_id != skill_id or packets.direct.role != "direct" or packets.direct.tags != ["hit", "spell", "area"]:
-		return "Trap packet must retain its original spell area hit identity"
+	if skill_id == "chain":
+		reason = _chain_payload_error(recipe, packets, links)
+		if not reason.is_empty(): return reason
+	else:
+		if not recipe is Dictionary or not Program.number(recipe.get("radius")) or float(recipe.radius) <= 0.0 or float(recipe.radius) > 500.0:
+			return "Trap blast radius is invalid"
+		if not packets is Dictionary or packets.size() != 1 or not packets.has("direct"):
+			return "Trap cast must retain one direct packet"
+		reason = Base.packet_error(packets.direct)
+		if not reason.is_empty(): return reason
+		if packets.direct.skill_id != skill_id or packets.direct.role != "direct" or packets.direct.tags != ["hit", "spell", "area"]:
+			return "Trap packet must retain its original spell area hit identity"
 	var snapshot: Variant = compiled.get("snapshot")
 	if not snapshot is Dictionary or snapshot.get("compiled_skill_id") != skill_id or snapshot.get("compiled_packets") != packets or snapshot.has("critical_roll"):
 		return "Trap snapshot must belong to its unrolled compiled cast"
@@ -193,6 +201,26 @@ static func _compiled_error(compiled: Variant) -> String:
 			ambush_count += 1
 	if ambush_count != 1: return "Trap hit tradeoff must occur exactly once"
 	return Critical.snapshot_error(snapshot)
+
+
+## One bounded, original chain recipe; supports do not alter the trigger radius.
+static func _chain_payload_error(recipe: Variant, packets: Variant, links: Array) -> String:
+	if not recipe is Dictionary or recipe.size() != 3 or not recipe.has_all(["hit","first_range","followup_range"]): return "Trap chain recipe is invalid"
+	var program: Dictionary = Supports.compile_programs("chain", links, Supports.GROUP_MAX_SUPPORTS)
+	if not program.error.is_empty(): return program.error
+	var hit: Dictionary = Data.SKILLS.chain.hit_recipe.duplicate(true)
+	hit.bounce_count += int(program.recipe_factors.get("chain_extra_targets", 0))
+	if recipe.hit != hit or not Program.number(recipe.first_range) or recipe.first_range != Data.SKILLS.chain.targeting_recipe.first_range:
+		return "Trap chain hit recipe is invalid"
+	var followup: float = float(Data.SKILLS.chain.targeting_recipe.followup_range) * float(program.recipe_factors.get("chain_followup_range_multiplier", 1.0))
+	if not Program.number(recipe.followup_range) or recipe.followup_range != followup: return "Trap chain followup range is invalid"
+	if not packets is Dictionary or packets.size() != 1 or not packets.get("bounces") is Array or packets.bounces.size() != int(hit.bounce_count):
+		return "Trap chain packets are invalid"
+	for packet: Variant in packets.bounces:
+		var reason: String = Base.packet_error(packet)
+		if not reason.is_empty(): return reason
+		if packet.skill_id != "chain" or packet.role != "bounce" or packet.tags != ["hit","spell","chain"]: return "Trap chain packet identity is invalid"
+	return ""
 
 
 static func _frozen_error(snapshot: Variant, compiled: Dictionary) -> String:

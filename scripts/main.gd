@@ -1414,25 +1414,29 @@ func _execute_compiled(compiled: Dictionary, group_id: String = "", main_uid: St
 				_add_particle(target_pos, Vector2.RIGHT.rotated(rng.randf() * TAU) * rng.randf_range(70, 270), color, rng.randf_range(3, 7), 0.6)
 			screen_shake = 4.0
 		"chain":
-			var origin: Vector2 = player_pos
-			var excluded: Array[int] = []
-			for i: int in range(compiled.packets.bounces.size()):
-				var target: Dictionary = _nearest_enemy(origin, float(compiled.recipe.first_range) if i == 0 else float(compiled.recipe.followup_range), excluded)
-				if target.is_empty():
-					break
-				excluded.append(int(target.id))
-				var end: Vector2 = target.pos
-				visual_cues.emit_cue("chain", origin, {"destination": end, "target_id": int(target.id), "color": color})
-				for step: int in range(12):
-					_add_particle(origin.lerp(end, step / 12.0) + Vector2(rng.randf_range(-4, 4), rng.randf_range(-4, 4)), Vector2.ZERO, color, 3.0, 0.25)
-				_apply_damage_packet(target, compiled.packets.bounces[i], context.snapshot, color, 0.35, {"cast_id": context.cast_id})
-				origin = end
+			_chain_damage(player_pos, compiled.packets.bounces, compiled.recipe, context.snapshot, color, {"cast_id":context.cast_id})
 	if not group_id.is_empty() and alive:
 		var began: bool = group_cooldowns.begin(group_id, main_uid, float(compiled.cooldown))
 		assert(began, "Admitted group cast must own a ready cooldown")
 	if id in ["tornado", "bolt", "frost", "shade_bolt"]:
 		visual_cues.emit_cue("cast", player_pos, {"direction": player_facing, "skill": id, "color": color})
 	return true
+
+
+## Direct casts and triggered sigils share target exclusion, LOS, hit order and cues.
+func _chain_damage(origin: Vector2, packets: Array, recipe: Dictionary, snapshot: Dictionary,
+		color: Color, provenance: Dictionary, first_target: Dictionary = {}) -> void:
+	var excluded: Array[int] = []
+	for i: int in range(packets.size()):
+		var target: Dictionary = first_target if i == 0 and not first_target.is_empty() else _nearest_enemy(origin, float(recipe.first_range) if i == 0 else float(recipe.followup_range), excluded)
+		if target.is_empty(): break
+		excluded.append(int(target.id))
+		var end: Vector2 = target.pos
+		visual_cues.emit_cue("chain", origin, {"destination":end, "target_id":int(target.id), "color":color})
+		for step: int in range(12):
+			_add_particle(origin.lerp(end, step / 12.0) + Vector2(rng.randf_range(-4, 4), rng.randf_range(-4, 4)), Vector2.ZERO, color, 3.0, 0.25)
+		_apply_damage_packet(target, packets[i], snapshot, color, 0.35, provenance)
+		origin = end
 
 
 func _area_damage(origin: Vector2, radius: float, packet: Dictionary, color: Color, slow: float,
@@ -1523,9 +1527,13 @@ func _update_traps() -> void:
 		var entry: Dictionary = taken.entry
 		_record_trap_event({"event":"triggered", "id":entry.id, "cast_id":entry.cast_id,
 			"skill_id":entry.skill_id, "position":entry.position, "target_id":int(trigger.id), "at":elapsed})
-		_area_damage(entry.position, float(entry.radius), entry.packet, entry.color, float(entry.slow),
-			entry.snapshot, {"cast_id":entry.cast_id, "phase":"trap"})
-		visual_cues.emit_cue(str(entry.skill_id), entry.position, {"radius":float(entry.radius), "color":entry.color})
+		if entry.skill_id == "chain":
+			_chain_damage(entry.position, entry.bounces, entry.recipe, entry.snapshot, entry.color,
+				{"cast_id":entry.cast_id, "phase":"trap"}, trigger)
+		else:
+			_area_damage(entry.position, float(entry.radius), entry.packet, entry.color, float(entry.slow),
+				entry.snapshot, {"cast_id":entry.cast_id, "phase":"trap"})
+			visual_cues.emit_cue(str(entry.skill_id), entry.position, {"radius":float(entry.radius), "color":entry.color})
 
 
 func _update_projectiles(delta: float) -> void:

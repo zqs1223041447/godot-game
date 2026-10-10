@@ -1,17 +1,17 @@
 class_name AmbushSupportRules
 extends RefCounted
-## Explicit delivery conversion for two existing spell/area hits. Damage keeps
+## Explicit delayed delivery for existing area spells and chain lightning. Damage keeps
 ## its original tags; this support does not enable unimplemented trap stats.
 const Program = preload("res://scripts/combat/support_program.gd")
 const SAVE_VERSION: int = 42
-const SKILLS: Array[String] = ["nova", "meteor"]
+const SKILLS: Array[String] = ["nova", "meteor", "chain"]
 const POLICY: Dictionary = {
 	"arming_seconds": 0.35, "trigger_radius": 70.0, "lifetime_seconds": 12.0,
 	"maximum_traps": 3, "hit_multiplier": 0.85, "mana_multiplier": 1.25,
 }
 const SUPPORTS: Dictionary = {"ambush": {
 	"name": "符印伏击辅助",
-	"description": "奥能新星与陨星坠落改为在脚下放置陷阱：0.35秒后布防，70范围内有活敌时触发原范围命中，12秒后消失。所有技能组共享最多3个；命中伤害×0.85，魔力×1.25，冷却不变。保留法术、范围与命中标签；陷阱专属天赋仍未实装。",
+	"description": "新星、陨星与连锁闪电改为脚下符印：0.35秒后布防，70范围内可见活敌触发，12秒后消失，共享最多3枚。连锁首跳命中触发者，再从目标续跳；另两者保留范围命中。主命中×0.85，魔力×1.25，冷却不变，保留原伤害标签。",
 	"skills": SKILLS, "requires": [], "family": "ambush",
 	"operations": [{"op": "primary_hit_more", "value": -0.15}, {"op": "mana_multiplier", "value": 1.25}],
 }}

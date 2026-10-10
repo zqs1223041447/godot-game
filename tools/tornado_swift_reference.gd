@@ -12,7 +12,7 @@ func _initialize() -> void:
 	var support_id: String = args[0] if args.size() >= 2 else "swift_projectiles"
 	var output: String = args[1] if args.size() >= 2 else "res://docs/qa/tornado-swift/reference-fragment.json"
 	var skill_id: String = args[2] if args.size() >= 3 else "tornado"
-	assert((skill_id == "tornado" and support_id in ["swift_projectiles","heavy_projectiles"]) or (skill_id == "cleave" and support_id == "inward_pull"))
+	assert((skill_id == "tornado" and support_id in ["swift_projectiles","heavy_projectiles"]) or (skill_id == "cleave" and support_id == "inward_pull") or (skill_id == "chain" and support_id == "ambush"))
 	var catalog: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://docs/reference/catalog.json"))
 	var full := Exporter.Build.new()
 	for id: String in Exporter.Data.COMBAT_STARTER_ITEMS: full.equip(id)
@@ -44,6 +44,7 @@ func _initialize() -> void:
 		"program_example":{"before":Exporter.support_cast_brief(Compiler.compile_skill(skill_id,snapshot,[])),
 			"after":Exporter.support_cast_brief(Compiler.compile_skill(skill_id,snapshot,[support_id]))}}
 	if support_id == "inward_pull": fragment.inward_pull = Exporter.inward_pull_examples()
+	if support_id == "ambush": fragment.ambush = Exporter.ambush_examples()
 	FileAccess.open(output,FileAccess.WRITE).store_string(JSON.stringify(Exporter.clean(fragment),"\t",true,true)+"\n")
 	print("BOUNDED_SUPPORT_REFERENCE ",skill_id," / ",support_id," four existing builds projected")
 	quit()

@@ -1,0 +1,508 @@
+{
+	"checks": 492,
+	"failures": 0,
+	"group_id": "group_000006",
+	"labels": [],
+	"main_uid": "migration_gem_000006",
+	"old_cast_comparisons": 162,
+	"owned_cast": {
+		"cooldown": 4.5,
+		"critical": {
+			"primary": {
+				"chance": 0.05,
+				"multiplier": 1.5
+			}
+		},
+		"error": "",
+		"group_id": "group_000006",
+		"initial_count": 0,
+		"main_uid": "migration_gem_000006",
+		"mana": 37.949999999999996,
+		"ok": true,
+		"packets": {
+			"bounces": [
+				{
+					"assembly": {
+						"added": {
+
+						},
+						"added_effectiveness": 2.2,
+						"base_coefficient": 2.2,
+						"intrinsic": {
+							"lightning": 57.2
+						},
+						"stage": "hit_base"
+					},
+					"base": {
+						"lightning": 57.2
+					},
+					"role": "bounce",
+					"skill_id": "chain",
+					"tags": [
+						"hit",
+						"spell",
+						"chain"
+					]
+				},
+				{
+					"assembly": {
+						"added": {
+
+						},
+						"added_effectiveness": 2.0,
+						"base_coefficient": 2.0,
+						"intrinsic": {
+							"lightning": 52.0
+						},
+						"stage": "hit_base"
+					},
+					"base": {
+						"lightning": 52.0
+					},
+					"role": "bounce",
+					"skill_id": "chain",
+					"tags": [
+						"hit",
+						"spell",
+						"chain"
+					]
+				},
+				{
+					"assembly": {
+						"added": {
+
+						},
+						"added_effectiveness": 1.8000000000000003,
+						"base_coefficient": 1.8000000000000003,
+						"intrinsic": {
+							"lightning": 46.800000000000004
+						},
+						"stage": "hit_base"
+					},
+					"base": {
+						"lightning": 46.800000000000004
+					},
+					"role": "bounce",
+					"skill_id": "chain",
+					"tags": [
+						"hit",
+						"spell",
+						"chain"
+					]
+				},
+				{
+					"assembly": {
+						"added": {
+
+						},
+						"added_effectiveness": 1.6,
+						"base_coefficient": 1.6,
+						"intrinsic": {
+							"lightning": 41.6
+						},
+						"stage": "hit_base"
+					},
+					"base": {
+						"lightning": 41.6
+					},
+					"role": "bounce",
+					"skill_id": "chain",
+					"tags": [
+						"hit",
+						"spell",
+						"chain"
+					]
+				},
+				{
+					"assembly": {
+						"added": {
+
+						},
+						"added_effectiveness": 1.4000000000000001,
+						"base_coefficient": 1.4000000000000001,
+						"intrinsic": {
+							"lightning": 36.400000000000006
+						},
+						"stage": "hit_base"
+					},
+					"base": {
+						"lightning": 36.400000000000006
+					},
+					"role": "bounce",
+					"skill_id": "chain",
+					"tags": [
+						"hit",
+						"spell",
+						"chain"
+					]
+				}
+			]
+		},
+		"recipe": {
+			"first_range": 600.0,
+			"followup_range": 286.0,
+			"hit": {
+				"added_effectiveness": 2.2,
+				"added_effectiveness_loss_per_bounce": 0.2,
+				"base_coefficient": 2.2,
+				"base_coefficient_loss_per_bounce": 0.2,
+				"bounce_count": 5,
+				"damage_type": "lightning"
+			}
+		},
+		"shock_profile": {
+			"affects_dot": false,
+			"affects_hits_only": true,
+			"applies_after_current_hit": true,
+			"duration": 2.0,
+			"enabled": true,
+			"hit_damage_taken_increased": 0.15,
+			"hit_multiplier": 0.8,
+			"mana_multiplier": 1.2,
+			"roles": [
+				"bounce"
+			],
+			"stacking": "refresh_equal",
+			"trigger": "positive_lightning_hit_after_settlement"
+		},
+		"skill_id": "chain",
+		"snapshot": {
+			"accuracy": 140.0,
+			"added_damage": {
+				"attack": {
+					"fire": 0.0,
+					"physical": 0.0
+				},
+				"spell": {
+					"cold": 0.0,
+					"lightning": 0.0
+				}
+			},
+			"added_damage_sources": [],
+			"base_damage": 26.0,
+			"compiled_packets": {
+				"bounces": [
+					{
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 2.2,
+							"base_coefficient": 2.2,
+							"intrinsic": {
+								"lightning": 57.2
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"lightning": 57.2
+						},
+						"role": "bounce",
+						"skill_id": "chain",
+						"tags": [
+							"hit",
+							"spell",
+							"chain"
+						]
+					},
+					{
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 2.0,
+							"base_coefficient": 2.0,
+							"intrinsic": {
+								"lightning": 52.0
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"lightning": 52.0
+						},
+						"role": "bounce",
+						"skill_id": "chain",
+						"tags": [
+							"hit",
+							"spell",
+							"chain"
+						]
+					},
+					{
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 1.8000000000000003,
+							"base_coefficient": 1.8000000000000003,
+							"intrinsic": {
+								"lightning": 46.800000000000004
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"lightning": 46.800000000000004
+						},
+						"role": "bounce",
+						"skill_id": "chain",
+						"tags": [
+							"hit",
+							"spell",
+							"chain"
+						]
+					},
+					{
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 1.6,
+							"base_coefficient": 1.6,
+							"intrinsic": {
+								"lightning": 41.6
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"lightning": 41.6
+						},
+						"role": "bounce",
+						"skill_id": "chain",
+						"tags": [
+							"hit",
+							"spell",
+							"chain"
+						]
+					},
+					{
+						"assembly": {
+							"added": {
+
+							},
+							"added_effectiveness": 1.4000000000000001,
+							"base_coefficient": 1.4000000000000001,
+							"intrinsic": {
+								"lightning": 36.400000000000006
+							},
+							"stage": "hit_base"
+						},
+						"base": {
+							"lightning": 36.400000000000006
+						},
+						"role": "bounce",
+						"skill_id": "chain",
+						"tags": [
+							"hit",
+							"spell",
+							"chain"
+						]
+					}
+				]
+			},
+			"compiled_skill_id": "chain",
+			"critical": {
+				"primary": {
+					"chance": 0.05,
+					"multiplier": 1.5
+				}
+			},
+			"critical_modifiers": {
+				"base_chance": 0.05,
+				"base_multiplier": 1.5
+			},
+			"effects": [],
+			"explosion_recipe": {
+				"added_effectiveness": 0.0,
+				"coefficient": 0.9,
+				"radius": 76.0
+			},
+			"modifiers": [
+				{
+					"all_tags": [
+						"attack",
+						"melee"
+					],
+					"damage_types": [
+						"physical"
+					],
+					"id": "melee_physical_increased",
+					"mode": "increased",
+					"value": 0.04
+				},
+				{
+					"all_tags": [
+						"hit",
+						"spell",
+						"chain"
+					],
+					"damage_types": [],
+					"id": "support:chain_reach",
+					"mode": "more",
+					"skills": [
+						"chain"
+					],
+					"value": -0.1
+				},
+				{
+					"all_tags": [
+						"hit",
+						"spell",
+						"chain"
+					],
+					"damage_types": [],
+					"id": "support:shock",
+					"mode": "more",
+					"skills": [
+						"chain"
+					],
+					"value": -0.19999999999999996
+				},
+				{
+					"all_tags": [
+						"hit",
+						"spell",
+						"chain"
+					],
+					"damage_types": [],
+					"id": "support:ambush",
+					"mode": "more",
+					"skills": [
+						"chain"
+					],
+					"value": -0.15
+				}
+			],
+			"projectile_count": 0,
+			"shock_policy": {
+				"duration": 2.0,
+				"hit_damage_taken_increased": 0.15,
+				"hit_multiplier": 0.8,
+				"mana_multiplier": 1.2
+			},
+			"tornado_recipe": {
+				"child": {
+					"added_effectiveness": 0.7,
+					"coefficient": 0.7,
+					"lifetime": 1.7,
+					"pierce": -1,
+					"radius": 4.5,
+					"range": 150.0,
+					"role": "child",
+					"speed": 260.0,
+					"split": false
+				},
+				"child_count": 3,
+				"explosion": {
+					"added_effectiveness": 0.0,
+					"coefficient": 0.9,
+					"radius": 76.0
+				},
+				"parent": {
+					"added_effectiveness": 1.0,
+					"coefficient": 1.0,
+					"lifetime": 0.9,
+					"pierce": -1,
+					"radius": 6.0,
+					"range": 150.0,
+					"role": "parent",
+					"speed": 420.0,
+					"split": true
+				},
+				"parent_count": 3,
+				"spread": 0.16
+			}
+		},
+		"support_ids": [
+			"ambush",
+			"chain_reach",
+			"shock"
+		],
+		"trap_profile": {
+			"arming_seconds": 0.35,
+			"enabled": true,
+			"hit_multiplier": 0.85,
+			"lifetime_seconds": 12.0,
+			"mana_multiplier": 1.25,
+			"maximum_traps": 3,
+			"trigger_radius": 70.0
+		}
+	},
+	"owned_sha256": "b1ca65aba2490c1c8399ecba7a85391e12426d5f296c684e45ba6c4909d64dce",
+	"samples": [
+		{
+			"critical": {
+				"chance": 0.05,
+				"critical": false,
+				"multiplier": 1.0
+			},
+			"damage": [
+				48.620000000000005,
+				44.199999999999996,
+				39.78,
+				35.36,
+				30.940000000000005
+			],
+			"hits": 5,
+			"links": [
+				"ambush"
+			],
+			"mana": 27.5,
+			"placement": "(442.0, 1704.0)",
+			"player_at_trigger": "(1642.0, 2304.0)",
+			"spacing": 200.0
+		},
+		{
+			"critical": {
+				"chance": 0.05,
+				"critical": false,
+				"multiplier": 1.0
+			},
+			"damage": [
+				35.006400000000006,
+				31.824000000000005,
+				28.641600000000007,
+				25.459200000000006,
+				22.27680000000001
+			],
+			"hits": 5,
+			"links": [
+				"ambush",
+				"shock",
+				"chain_reach"
+			],
+			"mana": 37.949999999999996,
+			"placement": "(442.0, 1704.0)",
+			"player_at_trigger": "(1642.0, 2304.0)",
+			"spacing": 250.0
+		},
+		{
+			"critical": {
+				"chance": 0.05,
+				"critical": false,
+				"multiplier": 1.0
+			},
+			"damage": [
+				28.005120000000005,
+				25.459200000000003,
+				22.913280000000004,
+				20.36736,
+				17.821440000000003,
+				15.275520000000002,
+				12.729600000000001
+			],
+			"hits": 7,
+			"links": [
+				"ambush",
+				"shock",
+				"chain_reach",
+				"chain_extension",
+				"efficiency"
+			],
+			"mana": 39.467999999999996,
+			"placement": "(442.0, 1704.0)",
+			"player_at_trigger": "(1642.0, 2304.0)",
+			"spacing": 250.0
+		}
+	],
+	"support_uid": "item_000011"
+}

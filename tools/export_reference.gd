@@ -1490,6 +1490,8 @@ static func ambush_examples() -> Dictionary:
 			"concentrated": ["concentrate"], "combined_area": ["breadth", "concentrate"]},
 		"meteor": {"base": [], "ignite": ["ignite"], "ember": ["ember_proliferation"],
 			"combined_area": ["breadth", "concentrate"]},
+		"chain": {"base": [], "reach_shock": ["chain_reach", "shock"],
+			"extended": ["chain_extension", "chain_reach", "shock", "efficiency"]},
 	}
 	for skill_id: String in selections:
 		var rows: Dictionary = {}
@@ -1502,7 +1504,7 @@ static func ambush_examples() -> Dictionary:
 			assert(before.ok and after.ok and after.has("trap_profile"))
 			assert(Compiler.Ambush.profile_error(after.trap_profile).is_empty())
 			assert(before.recipe == after.recipe and before.cooldown == after.cooldown)
-			assert(not after.packets.direct.tags.has("trap"))
+			assert(not (after.packets.bounces[0] if skill_id == "chain" else after.packets.direct).tags.has("trap"))
 			rows[mode] = {"before": _ambush_cast_brief(before), "after": _ambush_cast_brief(after)}
 		examples[skill_id] = rows
 	var quote: Dictionary = Canonical.GemTrade.quote("buy", "support:ambush")
@@ -1518,21 +1520,26 @@ static func ambush_examples() -> Dictionary:
 		"example_scope": "同一新建角色的真实战斗快照，只替换表列辅助并调用生产Compiler.compile_group；非暴击、未计目标防御的单次命中与原异常配置，不是DPS或实际装配存档",
 		"placement": "按下技能只在脚下固定位置放置，不立即造成命中；所有技能组共享名额，布防完成后由当前活敌、出生门禁、目标体型与真实视线共同判定触发",
 		"payment": "位置、配置、共享容量、魔力和冷却都通过才放置；成功扣费并记录原冷却，满额失败不消耗魔力、冷却、随机抽样或施放ID；符印不占弹体容量",
-		"snapshot": "成功放置时冻结技能、伤害、范围和一次主暴击；之后换装、退款或移除辅助不改变已有符印，也不释放未触发名额；爆发时读取目标当前防御",
-		"geometry": "触发圆与爆发圆不同：范围辅助和源范围属性只改变原技能最终爆发半径，不放大触发距离；爆发保留原减速、击退与技能画面",
+		"snapshot": "成功放置时冻结技能、伤害、范围、连锁跳数及一次主暴击；之后换装、退款或移除辅助不改变已有符印，也不释放未触发名额；触发时读取目标当前防御",
+		"geometry": "触发半径固定70并计入目标体型。新星与陨星仍以符印为圆心范围命中，范围辅助与源范围属性只改变爆发圈；连锁首跳命中实际触发者，再从该目标寻找最近且未命中的可见活敌，沿用原跳数与后续距离。远链只扩大续跳距离，不扩大触发距离；原600首跳寻敌距离不用于符印触发",
 		"timing": "固定模拟tick在该步投射物与燃烧事件结算后观察当前活敌，不承诺连续扫掠；符印按ID逐枚重读活目标，先前击杀不能供下一枚触发；精确到期先于触发，未触发过期直接消失，不爆炸",
 		"lifecycle": "暂停冻结；死亡、重开、地图完成或离开、切换存档取消全部符印；临时符印和计时器不写入存档",
-		"statuses": "新星可与感电同用，先结算本次命中再向存活目标施加，后续命中受益；陨星可接点燃或余烬扩散，两者仍互斥，沿原火分量与持续伤害准入；伏击不额外重复应用伤害倍率",
-		"damage_scope": "爆发仍为原技能direct法术、范围、命中，不添加trap伤害标签，不开放陷阱伤害或其他未实现的源树陷阱属性消费者",
-		"provenance": "只有新增符印向范围入口传递真实cast_id与phase=trap；普通直接Area历史cast_id=0记录本批保留，未一并修正",
-		"migration": "严格校验旧schema41并保留原字节备份后升级42；不赠新石，不改变源政策41、装备词汇39或既有26枚里程碑奖励身份表"}
+		"statuses": "新星与连锁可与感电同用，先结算本次命中再向存活目标施加，后续命中受益；陨星可接点燃或余烬扩散，两者仍互斥，沿原火分量与持续伤害准入；伏击不额外重复应用伤害倍率",
+		"damage_scope": "新星与陨星仍为direct法术、范围、命中；连锁仍为bounce法术、连锁、命中，每跳只应用一次原伏击伤害倍率。不添加trap伤害标签，不开放陷阱伤害或其他未实现的源树陷阱属性消费者",
+		"provenance": "符印向原范围或连锁命中入口传递放置时的真实cast_id与phase=trap；普通直接Area历史cast_id=0记录保留，普通连锁继续使用其原施放ID",
+		"migration": "符印原始最低存档版本42；本次连锁兼容扩展保持当前schema61，不新增宝石ID、不赠宝石或碎片、不改变旧里程碑奖励身份表"}
 
 
 static func _ambush_cast_brief(cast: Dictionary) -> Dictionary:
 	var result: Dictionary = support_cast_brief(cast)
 	result["support_ids"] = cast.support_ids.duplicate()
-	result["packet"] = cast.packets.direct.duplicate(true)
-	result["resolved"] = Damage.resolve(cast.packets.direct, cast.snapshot.modifiers)
+	var packet: Dictionary = cast.packets.bounces[0] if cast.skill_id == "chain" else cast.packets.direct
+	result["packet"] = packet.duplicate(true)
+	result["resolved"] = Damage.resolve(packet, cast.snapshot.modifiers)
+	if cast.skill_id == "chain":
+		result["bounce_totals"] = []
+		for bounce: Dictionary in cast.packets.bounces:
+			result.bounce_totals.append(Damage.resolve(bounce, cast.snapshot.modifiers).total)
 	for field: String in ["burn_profile", "shock_profile", "critical"]:
 		if cast.has(field): result[field] = cast[field].duplicate(true)
 	return result

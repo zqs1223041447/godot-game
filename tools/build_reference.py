@@ -965,7 +965,7 @@ def ambush_rule(data,link,facts,details):
     rule=data['ambush']; policy=rule['policy']
     def value(key,amount):
         return f'<strong data-ambush-value="{esc(key)}" data-value="{esc(amount)}">{format(amount, ".10g")}</strong>'
-    body=facts([('适配技能',' · '.join(link('skills',key) for key in rule['skills'])),('存档 / 源政策 / 装备词汇',value('save-version',rule['minimum_save_version'])+' / '+value('source-policy',rule['source_policy'])+' / '+value('vocabulary',rule['equipment_vocabulary'])),('布防',value('arming',policy['arming_seconds'])+' 秒'),('触发半径',value('trigger-radius',policy['trigger_radius'])),('未触发寿命',value('lifetime',policy['lifetime_seconds'])+' 秒'),('所有技能组共享上限',value('maximum-traps',policy['maximum_traps'])+' 枚'),('主命中倍率',value('hit-multiplier',policy['hit_multiplier'])),('魔力倍率',value('mana-multiplier',policy['mana_multiplier']))])
+    body=facts([('适配技能',' · '.join(link('skills',key) for key in rule['skills'])),('原始最低存档 / 当前源政策 / 装备词汇',value('save-version',rule['minimum_save_version'])+' / '+value('source-policy',rule['source_policy'])+' / '+value('vocabulary',rule['equipment_vocabulary'])),('布防',value('arming',policy['arming_seconds'])+' 秒'),('触发半径',value('trigger-radius',policy['trigger_radius'])),('未触发寿命',value('lifetime',policy['lifetime_seconds'])+' 秒'),('所有技能组共享上限',value('maximum-traps',policy['maximum_traps'])+' 枚'),('主命中倍率',value('hit-multiplier',policy['hit_multiplier'])),('魔力倍率',value('mana-multiplier',policy['mana_multiplier']))])
     body+=''.join('<p>'+esc(rule[key])+'。</p>' for key in ['placement','payment','snapshot','geometry'])
     body+='<h3>少量代表组合 · 加入伏击前后</h3><p>'+esc(rule['example_scope'])+'。每行左值是相同其他辅助下的普通直接施放，右值为加入伏击；数值直接来自生产编译结果。</p>'
     for skill,examples in rule['examples'].items():
@@ -975,10 +975,12 @@ def ambush_rule(data,link,facts,details):
             others=[key for key in after['support_ids'] if key!='ambush']
             label='仅伏击' if not others else '伏击＋'+'＋'.join(data['supports'][key]['name'].removesuffix('辅助') for key in others)
             cells=[]
-            for field,source in [('hit',lambda row:row['resolved']['total']),('mana',lambda row:row['mana']),('cooldown',lambda row:row['cooldown']),('radius',lambda row:row['recipe']['radius'])]:
+            for field,source in [('hit',lambda row:row['resolved']['total']),('mana',lambda row:row['mana']),('cooldown',lambda row:row['cooldown']),('radius',lambda row:row['recipe']['followup_range'] if skill=='chain' else row['recipe']['radius'])]:
                 cells.append(value(prefix+'-'+field+'-before',source(before))+' → '+value(prefix+'-'+field+'-after',source(after)))
             cells.append(value(prefix+'-trigger-radius',after['trap_profile']['trigger_radius']))
             rows.append('<tr><th>'+esc(label)+'</th>'+''.join('<td>'+cell+'</td>' for cell in cells)+'</tr>')
+            if skill=='chain':
+                status_rows.append('<p>'+esc(label)+'：各跳防御前伤害 '+ ' → '.join(format(n,'.10g') for n in after['bounce_totals'])+'；最多 '+str(len(after['bounce_totals']))+' 个不同目标，缺少可见活目标就提前终止。</p>')
             if 'shock_profile' in after:
                 status=after['shock_profile']
                 status_rows.append('<p>'+esc(label)+'：感电 '+value(prefix+'-shock-duration',status['duration'])+' 秒，后续命中承伤增加 '+value(prefix+'-shock-increased',status['hit_damage_taken_increased'])+'（比例）；本次施加命中不享受自己的新感电。</p>')
@@ -988,11 +990,13 @@ def ambush_rule(data,link,facts,details):
                 if 'proliferation' in status:
                     propagation=status['proliferation']
                     status_rows.append('<p>余烬死亡扩散半径 '+value(prefix+'-ember-radius',propagation['radius'])+'，最多 '+value(prefix+'-ember-targets',propagation['max_targets'])+' 个目标；沿原规则保留每秒伤害和剩余时长，不再传播。</p>')
-        body+='<h4>'+link('skills',skill)+'</h4><div class="table-scroll"><table><thead><tr><th>辅助组合</th><th>防御前单击</th><th>魔力</th><th>冷却秒</th><th>爆发半径</th><th>触发半径</th></tr></thead><tbody>'+''.join(rows)+'</tbody></table></div>'+''.join(status_rows)
+        hit_title='防御前首跳' if skill=='chain' else '防御前单击'
+        range_title='后续寻敌距离' if skill=='chain' else '爆发半径'
+        body+='<h4>'+link('skills',skill)+'</h4><div class="table-scroll"><table><thead><tr><th>辅助组合</th><th>'+hit_title+'</th><th>魔力</th><th>冷却秒</th><th>'+range_title+'</th><th>触发半径</th></tr></thead><tbody>'+''.join(rows)+'</tbody></table></div>'+''.join(status_rows)
     body+=''.join('<p>'+esc(rule[key])+'。</p>' for key in ['statuses','timing','lifecycle','damage_scope','provenance'])
     quote=rule['merchant_quote']
     body+='<p>正式宝石商人使用现有交易：'+value('merchant-cost',quote['cost']['calibration_shard'])+' 碎片；独立测试目录免费供应。原里程碑奖励仍是 '+value('reward-count',rule['normal_reward_definition_count'])+' 枚固定身份，符印伏击不插入其序列。</p><p>'+esc(rule['migration'])+'。</p>'
-    body+='<p>'+link('supports','ambush')+' · '+link('rules','shock')+' · '+link('rules','burning')+' · '+link('rules','ember_proliferation')+' · <a href="../AMBUSH_SUPPORT_RULES.zh-CN.md">完整符印伏击规则</a> · <a href="../qa/v066-reference/README.md">本批图鉴验证</a></p>'
+    body+='<p>'+link('supports','ambush')+' · '+link('rules','shock')+' · '+link('rules','burning')+' · '+link('rules','ember_proliferation')+' · <a href="../AMBUSH_SUPPORT_RULES.zh-CN.md">完整符印伏击规则</a> · <a href="../CHAIN_AMBUSH.zh-CN.md">连锁伏击规则与验收</a></p>'
     return body
 
 
@@ -1509,7 +1513,7 @@ def build(data, art):
             body+=facts([('最低保存版本',number(data['shock']['save_version']))])
             related+=' · '+link('rules','shock')+' · '+link('town_services','skill_merchant','宝石商人')
         if key=='ambush':
-            body+='<p>放置时不立即命中；脚下固定符印等待活敌触发。共享三枚，未触发过期不爆炸；范围只影响爆发圈。'+link('rules','ambush','查看冻结快照、魔力与冷却、原异常组合及生命周期')+'。</p>'
+            body+='<p>放置时不立即命中；脚下固定符印等待活敌触发。共享三枚，未触发过期不爆炸；新星与陨星保留范围命中，连锁从触发者开始续跳，范围与远链都不扩大触发距离。'+link('rules','ambush','查看冻结快照、魔力与冷却、原异常组合及生命周期')+'。</p>'
             related+=' · '+link('rules','ambush')+' · '+link('town_services','skill_merchant','宝石商人')
         if key=='inward_pull':
             body+='<p>沿用原冲量衰减、墙体碰撞与分离规则，不保证拉到中心；裂刃只牵引成功命中的目标，新星与陨星可搭配符印伏击并在放置时冻结。'+link('rules','inward_pull','查看实际圆心、魔力代价与伤害不变的同源示例')+'。</p>'

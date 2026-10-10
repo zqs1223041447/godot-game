@@ -1,0 +1,49 @@
+{
+	"checks": 71,
+	"dash_group": "group_000004",
+	"dash_key": 52,
+	"failures": 0,
+	"labels": [],
+	"samples": [
+		{
+			"end": "(642.0, 1529.0)",
+			"facing": "(0.0, -1.0)",
+			"label": "Idle keys and overlap retain original up heading",
+			"mouse_held": false,
+			"movement": "(0.0, 0.0)",
+			"start": "(642.0, 1704.0)"
+		},
+		{
+			"end": "(817.0, 1704.0)",
+			"facing": "(1.0, 0.0)",
+			"label": "Mouse determines idle-input dash",
+			"mouse_held": true,
+			"movement": "(0.0, 0.0)",
+			"start": "(642.0, 1704.0)"
+		},
+		{
+			"end": "(821.0, 1704.0)",
+			"facing": "(-0.016248, -0.999868)",
+			"label": "Moving right overrides upward mouse for dash",
+			"mouse_held": true,
+			"movement": "(1.0, 0.0)",
+			"start": "(646.0, 1704.0)"
+		},
+		{
+			"end": "(765.7437, 1580.256)",
+			"facing": "(0.0, -1.0)",
+			"label": "Diagonal physical keys retain normalized dash distance",
+			"mouse_held": false,
+			"movement": "(0.707107, -0.707107)",
+			"start": "(642.0, 1704.0)"
+		},
+		{
+			"end": "(1146.98, 1234.0)",
+			"facing": "(0.0, -1.0)",
+			"label": "Real held-key dash uses authoritative wall endpoint",
+			"mouse_held": true,
+			"movement": "(1.0, 0.0)",
+			"start": "(1116.0, 1234.0)"
+		}
+	]
+}
