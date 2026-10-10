@@ -1,0 +1,11 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+ERROR: Only27163 changes; all other source nodes/masteries stay frozen
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/attack_elemental_passive_migration_test.gd:22)
+       [1] check (res://tests/arcane_will_test.gd:13)
+       [2] source_checks (res://tests/arcane_will_test.gd:35)
+       [3] run (res://tests/arcane_will_test.gd:131)
+godot-game: playable arena ready
+ARCANE_WILL checks=75 failures=1

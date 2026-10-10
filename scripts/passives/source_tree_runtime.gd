@@ -34,7 +34,8 @@ const IRON_GRIP_SAVE_VERSION:=57
 const IRON_WILL_SAVE_VERSION:=58
 const CHAOS_INOCULATION_SAVE_VERSION:=59
 const PURITY_OF_FLESH_SAVE_VERSION:=60
-const CURRENT_SAVE_VERSION:=PURITY_OF_FLESH_SAVE_VERSION
+const ARCANE_WILL_SAVE_VERSION:=61
+const CURRENT_SAVE_VERSION:=ARCANE_WILL_SAVE_VERSION
 static var _contexts: Dictionary = {}
 static var _line_cache: Dictionary = {}
 static var _node_effect_cache: Dictionary = {}
@@ -65,7 +66,8 @@ static func _execution_policy(version:int)->int:
 	if version<IRON_GRIP_SAVE_VERSION:return ONE_WITH_NATURE_SAVE_VERSION
 	if version<IRON_WILL_SAVE_VERSION:return IRON_GRIP_SAVE_VERSION
 	if version<CHAOS_INOCULATION_SAVE_VERSION:return IRON_WILL_SAVE_VERSION
-	return CHAOS_INOCULATION_SAVE_VERSION if version<PURITY_OF_FLESH_SAVE_VERSION else PURITY_OF_FLESH_SAVE_VERSION
+	if version<PURITY_OF_FLESH_SAVE_VERSION:return CHAOS_INOCULATION_SAVE_VERSION
+	return PURITY_OF_FLESH_SAVE_VERSION if version<ARCANE_WILL_SAVE_VERSION else ARCANE_WILL_SAVE_VERSION
 
 
 static func _context(class_id: int, budget: int) -> Dictionary:
@@ -151,10 +153,10 @@ static func lines_for(id: String, mastery_effect: int = 0) -> Array:
 	return []
 
 
-static func line_effect(line: String, save_version:int=CURRENT_SAVE_VERSION) -> Dictionary:
+static func line_effect(line: String, save_version:int=CURRENT_SAVE_VERSION, node_id:String="") -> Dictionary:
 	var policy:int=_execution_policy(save_version)
-	var key:="%d:%s"%[policy,line]
-	if not _line_cache.has(key): _line_cache[key] = Patterns.parse_line(line,policy>=SPATIAL_SAVE_VERSION,policy>=RECHARGE_SAVE_VERSION,policy>=RESOURCE_SAVE_VERSION,policy>=FLASK_SAVE_VERSION,policy>=CRITICAL_SAVE_VERSION,policy>=LEECH_SAVE_VERSION,policy>=FIRE_DOT_SAVE_VERSION,policy>=FASTER_BURN_SAVE_VERSION,policy>=MANA_GUARD_SAVE_VERSION,policy>=ELEMENTAL_RESISTANCE_CAP_SAVE_VERSION,policy>=RESOLUTE_TECHNIQUE_SAVE_VERSION,policy>=IRON_REFLEXES_SAVE_VERSION,policy>=ZEALOTS_OATH_SAVE_VERSION,policy>=PHYSICAL_FIRE_CONVERSION_SAVE_VERSION,policy>=PRECISE_TECHNIQUE_SAVE_VERSION,policy>=ELEMENTAL_CONVERSION_SAVE_VERSION,policy>=COLD_AILMENT_DURATION_SAVE_VERSION,policy>=ATTACK_ELEMENTAL_SAVE_VERSION,policy>=ONE_WITH_NATURE_SAVE_VERSION,policy>=IRON_GRIP_SAVE_VERSION,policy>=IRON_WILL_SAVE_VERSION,policy>=CHAOS_INOCULATION_SAVE_VERSION,policy>=PURITY_OF_FLESH_SAVE_VERSION)
+	var key:="%d:%s:%s"%[policy,line,node_id if line==Patterns.ARCANE_WILL_ENTRY else ""]
+	if not _line_cache.has(key): _line_cache[key] = Patterns.parse_line(line,policy>=SPATIAL_SAVE_VERSION,policy>=RECHARGE_SAVE_VERSION,policy>=RESOURCE_SAVE_VERSION,policy>=FLASK_SAVE_VERSION,policy>=CRITICAL_SAVE_VERSION,policy>=LEECH_SAVE_VERSION,policy>=FIRE_DOT_SAVE_VERSION,policy>=FASTER_BURN_SAVE_VERSION,policy>=MANA_GUARD_SAVE_VERSION,policy>=ELEMENTAL_RESISTANCE_CAP_SAVE_VERSION,policy>=RESOLUTE_TECHNIQUE_SAVE_VERSION,policy>=IRON_REFLEXES_SAVE_VERSION,policy>=ZEALOTS_OATH_SAVE_VERSION,policy>=PHYSICAL_FIRE_CONVERSION_SAVE_VERSION,policy>=PRECISE_TECHNIQUE_SAVE_VERSION,policy>=ELEMENTAL_CONVERSION_SAVE_VERSION,policy>=COLD_AILMENT_DURATION_SAVE_VERSION,policy>=ATTACK_ELEMENTAL_SAVE_VERSION,policy>=ONE_WITH_NATURE_SAVE_VERSION,policy>=IRON_GRIP_SAVE_VERSION,policy>=IRON_WILL_SAVE_VERSION,policy>=CHAOS_INOCULATION_SAVE_VERSION,policy>=PURITY_OF_FLESH_SAVE_VERSION,policy>=ARCANE_WILL_SAVE_VERSION and node_id=="27163")
 	return _line_cache[key].duplicate(true)
 
 
@@ -168,7 +170,7 @@ static func node_effect(id: String, mastery_effect: int = 0, save_version:int=CU
 	var unsupported: Array = []
 	var grants: Array = []
 	for line: String in lines_for(id,mastery_effect):
-		var parsed := line_effect(line,policy)
+		var parsed := line_effect(line,policy,id)
 		if parsed.supported:
 			supported.append(line)
 			grants.append_array(parsed.grants)

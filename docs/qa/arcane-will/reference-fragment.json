@@ -1,0 +1,129 @@
+{
+	"arcane_will": {
+		"backup_suffix": ".v60-backup.json",
+		"equipment_vocabulary": 51,
+		"grants": [
+			{
+				"mode": "increased",
+				"stat": "max_mana",
+				"value": 0.3
+			},
+			{
+				"mode": "flat",
+				"stat": "mana_regen",
+				"value": 5.0
+			},
+			{
+				"mode": "flat",
+				"stat": "intelligence",
+				"value": 10.0
+			}
+		],
+		"line_status": {
+			"grants": [
+				{
+					"mode": "flat",
+					"stat": "mana_regen",
+					"value": 5.0
+				}
+			],
+			"implemented": true,
+			"missing_consumers": [],
+			"parser_supported": true
+		},
+		"minimum_save_version": 61,
+		"node_id": "27163",
+		"previous_save_version": 60,
+		"witch_paid_points": 8,
+		"witch_route": [
+			"54447",
+			"57226",
+			"21678",
+			"32210",
+			"8948",
+			"27929",
+			"7503",
+			"65203",
+			"27163"
+		]
+	},
+	"localized_line": {
+		"status": {
+			"grants": [],
+			"implemented": false,
+			"missing_consumers": [],
+			"parser_supported": false
+		},
+		"text": "每秒回复5魔力（暂未实装）"
+	},
+	"localized_node": {
+		"mastery_choices": {
+
+		},
+		"name": "奥术意志",
+		"partition": "标准主树",
+		"stats": "最大魔力提高30%\n每秒回复5魔力\n智慧+10"
+	},
+	"node": {
+		"blighted_only": false,
+		"execution": {
+			"grants": [
+				{
+					"mode": "increased",
+					"stat": "max_mana",
+					"value": 0.3
+				},
+				{
+					"mode": "flat",
+					"stat": "mana_regen",
+					"value": 5.0
+				},
+				{
+					"mode": "flat",
+					"stat": "intelligence",
+					"value": 10.0
+				}
+			],
+			"status": "full",
+			"supported": [
+				"30% increased maximum Mana",
+				"Regenerate 5 Mana per second",
+				"+10 to Intelligence"
+			],
+			"unsupported": []
+		},
+		"has_position": true,
+		"id": "27163",
+		"mastery_choices": [],
+		"name": "Arcane Will",
+		"neighbors": [
+			"48514",
+			"65203"
+		],
+		"ordinary_reachable_class_ids": [
+			0,
+			1,
+			2,
+			3,
+			4,
+			5,
+			6
+		],
+		"partition": "standard",
+		"position": [
+			729.72998046875,
+			-5361.2900390625
+		],
+		"source_proxy": false,
+		"standard_graph": true,
+		"stats": [
+			"30% increased maximum Mana",
+			"Regenerate 5 Mana per second",
+			"+10 to Intelligence"
+		],
+		"type": "notable"
+	},
+	"save_version": 61,
+	"source_policy": 61,
+	"source_sha256": "7e9f755e33152129ebf36c2ebdad639c527e4ad70d274b1fefb860f30ca01122"
+}

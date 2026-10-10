@@ -18,7 +18,7 @@ func close(actual: float, wanted: float, label: String) -> void: check(is_equal_
 func clean(value: Variant) -> Variant: return JSON.parse_string(JSON.stringify(value,"",true,true))
 func prefix() -> Dictionary:
 	var source := Rules.decode_v59(JSON.parse_string(FileAccess.get_file_as_string(QA+"schema59-town.json")))
-	source.version=60
+	source.version=Rules.VERSION
 	return source
 func selected() -> Dictionary:
 	var result:=prefix();result.talents.allocated.append(TARGET);result.talents.normal_points-=1
@@ -121,7 +121,7 @@ func live_checks() -> void:
 	check(game.talent_points==0 and game.snapshot().talents.allocated==ROUTE and game.successful_saves==saves+1,"Actual T button allocates target, pays one point and commits once")
 	check(arena.health==50.0 and arena.shield==5.0 and arena._stats==game.get_stats(),"Capacity gain refreshes Main stats without free healing or shield refill")
 	await capture("allocated")
-	var reloaded:=Game.new();check(reloaded.load_build(SAVE) and reloaded.snapshot()==game.snapshot() and reloaded.get_stats()==game.get_stats() and reloaded.save_attempts==0,"Allocated60 reload preserves full build without rewriting")
+	var reloaded:=Game.new();check(reloaded.load_build(SAVE) and reloaded.snapshot()==game.snapshot() and reloaded.get_stats()==game.get_stats() and reloaded.save_attempts==0,"Allocated current reload preserves full build without rewriting")
 	check(not game.refund_passive("5743",game.revision(),SAVE).ok and game.talent_points==0,"Required path bridge cannot be refunded")
 	hit(arena,0.08)
 	# Existing legal equipment fixture, original item admission and equip transactions.

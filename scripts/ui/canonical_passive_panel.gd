@@ -235,7 +235,7 @@ func _load_graph()->void:
 		var effect:=Runtime.node_effect(id)
 		var locked:bool=_subtree!="standard" or node.source.get("isProxy",false) or node.source.get("isBlighted",false) or effect.status in ["partial","unsupported"]
 		nodes[id]={"id":id,"position":node.position,"type":node.type,"name":Localization.node_name(id),
-			"description":Localization.display_lines(node.stats),"status":"locked" if locked else "choice" if effect.status=="choice" else "implemented"}
+			"description":Localization.display_lines(node.stats,"\n",id),"status":"locked" if locked else "choice" if effect.status=="choice" else "implemented"}
 	if _tree.set_tree(nodes,edges,focus):
 		_reset_search()
 		_loaded_graph=key
@@ -270,7 +270,7 @@ func _refresh_details()->void:
 	if is_mastery:
 		for effect:Dictionary in node.mastery_effects:
 			var execution:=Runtime.node_effect(selected_node_id,int(effect.effect))
-			_mastery.add_item(Localization.display_lines(effect.stats," · ") if not effect.stats.is_empty() else "空效果")
+			_mastery.add_item(Localization.display_lines(effect.stats," · ",selected_node_id) if not effect.stats.is_empty() else "空效果")
 			var index:int=_mastery.item_count-1
 			_mastery.set_item_metadata(index,int(effect.effect))
 			_mastery.set_item_disabled(index,execution.status!="full")
@@ -281,7 +281,7 @@ func _refresh_details()->void:
 	var effect_id:int=int(_mastery.get_item_metadata(_mastery.selected)) if is_mastery and _mastery.selected>=0 else 0
 	var execution:=Runtime.node_effect(selected_node_id,effect_id)
 	var lines:Array=Runtime.lines_for(selected_node_id,effect_id)
-	var display_lines:=Localization.display_lines(lines)
+	var display_lines:=Localization.display_lines(lines,"\n",selected_node_id)
 	var status:String="当前节点或所选专精的全部效果均已接入游戏" if execution.status=="full" else "当前节点或所选专精仍有未接入效果 · 不可分配"
 	if _subtree!="standard":status="独立源子树 · 仅浏览，点数与效果未接入"
 	elif not node.has_position:status="无源坐标的定义记录 · 仅浏览"
@@ -349,7 +349,7 @@ func _node_clicked(id:String,button:int,double_click:bool)->void:
 	elif double_click:_allocate_selected()
 func _node_hovered(id:String,_anchor:Rect2)->void:
 	var node:=Data.node(id)
-	_tree.tooltip_text=Localization.node_name(id)+"\n"+Localization.display_lines(node.stats)+"\n点击查看逐条接入状态"
+	_tree.tooltip_text=Localization.node_name(id)+"\n"+Localization.display_lines(node.stats,"\n",id)+"\n点击查看逐条接入状态"
 func _allocate_selected()->void:
 	if _allocate.disabled:return
 	var effect:int=int(_mastery.get_item_metadata(_mastery.selected)) if _mastery.visible and _mastery.selected>=0 else 0

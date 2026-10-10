@@ -58,8 +58,8 @@ func run() -> void:
 		for raw_line: String in source_node.get("stats", []):
 			source_occurrences += 1
 			all_raw_lines[raw_line] = true
-			audit_line(raw_line)
-			var status := Localization.line_status(raw_line)
+			audit_line(raw_line,node_id)
+			var status := Localization.line_status(raw_line,node_id)
 			if status.parser_supported:
 				supported_occurrences += 1
 				if not status.implemented: unsupported_unknown_consumer += 1
@@ -69,8 +69,8 @@ func run() -> void:
 			for raw_line: String in option.get("stats", []):
 				source_occurrences += 1
 				all_raw_lines[raw_line] = true
-				audit_line(raw_line)
-				var status := Localization.line_status(raw_line)
+				audit_line(raw_line,node_id)
+				var status := Localization.line_status(raw_line,node_id)
 				if status.parser_supported:
 					supported_occurrences += 1
 					if not status.implemented: unsupported_unknown_consumer += 1
@@ -268,12 +268,12 @@ func audit_consumer_manifest() -> void:
 	check(seen_stats.has("damaging_ailments_faster"), "Schema 33 timing stat has a consumer-group entry before the latest runtime is integrated")
 
 
-func audit_line(raw_line: String) -> void:
+func audit_line(raw_line: String, node_id:String="") -> void:
 	var translated := Localization.source_effect_line(raw_line)
 	check(translated != "词缀翻译缺失" and not has_ascii(translated), "Exact source effect has Chinese display mapping")
 	check(number_tokens(raw_line) == number_tokens(translated), "Source numeric values and signs are preserved: " + raw_line.left(70).replace("\n", " / "))
-	var status := Localization.line_status(raw_line)
-	var displayed := Localization.display_line(raw_line)
+	var status := Localization.line_status(raw_line,node_id)
+	var displayed := Localization.display_line(raw_line,node_id)
 	var marker_count := displayed.count(Localization.NOT_IMPLEMENTED)
 	check(marker_count == (0 if status.implemented else 1), "One status marker exactly when the complete source line lacks implementation")
 

@@ -12,6 +12,14 @@ const TERM_NOTE := "词缀说明：提高/降低为同类加算；额外提高/�
 # A parser match is not sufficient by itself. These closed-world groups name
 # the actual runtime paths that consume each parsed stat after SourceTree.apply_stats.
 const STAT_CONSUMER_GROUPS := {
+	"arcane_will": {
+		"evidence":"source_tree_runtime.gd::apply_stats additive flat mana_regen -> canonical_game_state.gd::_stats_for existing regeneration increase -> main.gd::tick existing capped resource recovery",
+		"code_checks":[
+			{"path":"scripts/canonical_game_state.gd","contains":"stats[rate] *= 1.0 + float(stats[rate + \"_increased\"])"},
+			{"path":"scripts/main.gd","contains":"mana + float(_stats.mana_regen) * delta"},
+		],
+		"stats":["mana_regen"]
+	},
 	"purity_of_flesh": {
 		"evidence":"source_tree_runtime.gd::apply_stats -> defense_rules.gd::chaos_resistance_profile -> main.gd::hit_player_components existing capped chaos settlement",
 		"code_checks":[
@@ -300,18 +308,19 @@ static func source_effect_line(raw_line: String) -> String:
 	return str(value)
 
 
-static func line_status(raw_line: String) -> Dictionary:
-	if _status_cache.has(raw_line):
-		return _status_cache[raw_line].duplicate(true)
+static func line_status(raw_line: String, node_id:String="") -> Dictionary:
+	var cache_key := raw_line + (":"+node_id if raw_line==Runtime.Patterns.ARCANE_WILL_ENTRY else "")
+	if _status_cache.has(cache_key):
+		return _status_cache[cache_key].duplicate(true)
 	var result := {"implemented": false, "parser_supported": false, "missing_consumers": [], "grants": []}
 	if not ready() or not _lines.has(raw_line):
-		_status_cache[raw_line] = result
+		_status_cache[cache_key] = result
 		return result.duplicate(true)
-	var parsed := Runtime.line_effect(raw_line, Runtime.CURRENT_SAVE_VERSION)
+	var parsed := Runtime.line_effect(raw_line, Runtime.CURRENT_SAVE_VERSION, node_id)
 	result.parser_supported = bool(parsed.get("supported", false))
 	result.grants = parsed.get("grants", []).duplicate(true)
 	if not result.parser_supported or result.grants.is_empty():
-		_status_cache[raw_line] = result
+		_status_cache[cache_key] = result
 		return result.duplicate(true)
 	var missing: Array[String] = []
 	for grant: Dictionary in result.grants:
@@ -324,19 +333,19 @@ static func line_status(raw_line: String) -> Dictionary:
 			missing.append(str(grant.get("stat", "未知统计项")))
 	result.missing_consumers = missing
 	result.implemented = missing.is_empty()
-	_status_cache[raw_line] = result.duplicate(true)
+	_status_cache[cache_key] = result.duplicate(true)
 	return result
 
 
-static func display_line(raw_line: String) -> String:
+static func display_line(raw_line: String, node_id:String="") -> String:
 	var rendered := source_effect_line(raw_line)
 	if rendered == "词缀翻译缺失":
 		return rendered + NOT_IMPLEMENTED
-	return rendered if bool(line_status(raw_line).implemented) else rendered + NOT_IMPLEMENTED
+	return rendered if bool(line_status(raw_line,node_id).implemented) else rendered + NOT_IMPLEMENTED
 
 
-static func display_lines(raw_lines: Array, separator: String = "\n") -> String:
+static func display_lines(raw_lines: Array, separator: String = "\n", node_id:String="") -> String:
 	var rendered: Array[String] = []
 	for raw_line: String in raw_lines:
-		rendered.append(display_line(raw_line))
+		rendered.append(display_line(raw_line,node_id))
 	return separator.join(rendered)

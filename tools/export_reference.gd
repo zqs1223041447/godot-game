@@ -169,6 +169,7 @@ static func collect() -> Dictionary:
 	result["melee_basic"] = melee_basic_examples(result.forgeblade)
 	result["normal_gem_trading"]={"offers":Canonical.GemTrade.offers(),"recycle_credit":Canonical.GemTrade.RECYCLE_CREDIT,"currency":Canonical.GemTrade.MATERIAL_ID,"location":"normal_town","level":1,"quality":0,"recycle_location":"bag","schema":Canonical.Rules.VERSION,"test_supply_separate":true,"pricing":"初版可调整预算；每次无词缀地图净得4碎片"}
 	result["purity_of_flesh"] = purity_of_flesh_reference()
+	result["arcane_will"] = arcane_will_reference()
 	result["source_tree"] = source_tree_reference()
 	result["source_tree_localization"] = source_tree_localization_reference(result.source_tree)
 	result["source_spatial"] = source_spatial_examples()
@@ -722,7 +723,7 @@ static func source_tree_localization_reference(source: Dictionary) -> Dictionary
 		var choices: Dictionary = {}
 		var raw_lines: Array = node.stats.duplicate()
 		for choice: Dictionary in node.mastery_choices:
-			choices[str(int(choice.effect))] = SourceLocalization.display_lines(choice.stats)
+			choices[str(int(choice.effect))] = SourceLocalization.display_lines(choice.stats,"\n",id)
 			raw_lines.append_array(choice.stats)
 		for raw_line: String in raw_lines:
 			if not source_lines.has(raw_line):
@@ -731,7 +732,7 @@ static func source_tree_localization_reference(source: Dictionary) -> Dictionary
 		var partition_label: String = "标准主树" if node.partition == "standard" else "扩展珠宝分区 · 仅浏览" if node.partition == "expansion" else SourceLocalization.partition_label(node.partition)
 		partitions[node.partition] = partition_label
 		nodes[id] = {"name": SourceLocalization.node_name(id),
-			"stats": SourceLocalization.display_lines(node.stats),
+			"stats": SourceLocalization.display_lines(node.stats,"\n",id),
 			"partition": partition_label, "mastery_choices": choices}
 	return {"locale": "zh-CN", "source_sha256": SourceTree.Data.SOURCE_SHA256,
 		"nodes": nodes, "lines": source_lines, "partitions": partitions,
@@ -3223,9 +3224,9 @@ static func elemental_conversion_fragment() -> Dictionary:
 		var localized_choices: Dictionary = {}
 		for choice: Dictionary in raw.mastery_effects:
 			choices.append({"effect":int(choice.effect), "stats":choice.stats, "execution":SourceTree.node_effect(id,int(choice.effect))})
-			localized_choices[str(int(choice.effect))] = SourceLocalization.display_lines(choice.stats)
+			localized_choices[str(int(choice.effect))] = SourceLocalization.display_lines(choice.stats,"\n",id)
 		nodes[id] = {"execution":SourceTree.node_effect(id), "mastery_choices":choices}
-		localized_nodes[id] = {"stats":SourceLocalization.display_lines(raw.stats), "mastery_choices":localized_choices}
+		localized_nodes[id] = {"stats":SourceLocalization.display_lines(raw.stats,"\n",id), "mastery_choices":localized_choices}
 	assert(nodes.size() == 13, "Only two notables and eleven existing mastery entrances change")
 	var mechanisms: Dictionary = {}
 	for id: String in SourceMonster.IDS: mechanisms[id] = mechanism_reference(id)
@@ -3312,3 +3313,13 @@ static func purity_of_flesh_reference() -> Dictionary:
 		"backup_suffix":".v59-backup.json","equipment_vocabulary":Canonical.Rules.equipment_vocabulary_for_save_version(60),
 		"grants":SourceTree.node_effect("58218").grants,
 		"templar_paid_points":10,"templar_route":["61525","63965","14151","27564","17735","58402","6764","14057","9386","5743","58218"]}
+
+
+## Exact existing27163; node context deliberately excludes identical mana masteries.
+static func arcane_will_reference() -> Dictionary:
+	assert(SourceTree.node_effect("27163").status == "full")
+	return {"node_id":"27163","minimum_save_version":61,"previous_save_version":60,
+		"backup_suffix":".v60-backup.json","equipment_vocabulary":Canonical.Rules.equipment_vocabulary_for_save_version(61),
+		"grants":SourceTree.node_effect("27163").grants,
+		"line_status":SourceLocalization.line_status("Regenerate 5 Mana per second","27163"),
+		"witch_paid_points":8,"witch_route":["54447","57226","21678","32210","8948","27929","7503","65203","27163"]}

@@ -61,7 +61,7 @@ func ui_checks() -> void:
 	await capture("refund-preview")
 	await click(panel._refund)
 	check(f.model.get_stats()==bytes_to_var(before.stats) and panel._detail.text.contains("分配后资源上限"),"Actual refund returns caps and refreshes allocation preview")
-	check(economy(f.model.snapshot())==before.economy and f.model.snapshot().version==59,"UI round-trip preserves items/UIDs/economy and schema59")
+	check(economy(f.model.snapshot())==before.economy and f.model.snapshot().version==Rules.VERSION,"UI round-trip preserves items/UIDs/economy and current schema")
 func run() -> void:
 	if not OS.get_environment("XDG_DATA_HOME").begins_with("/tmp/godot-passive-resource-"):quit(78);return
 	var initial:=Model.new();base_source=initial.snapshot()

@@ -1,0 +1,11 @@
+127.0.0.1 - - [10/Oct/2026 13:56:00] "GET /index.html HTTP/1.1" 200 -
+127.0.0.1 - - [10/Oct/2026 13:56:00] "GET /art/skills/bolt.png HTTP/1.1" 200 -
+127.0.0.1 - - [10/Oct/2026 13:56:00] "GET /art/skills/chain.png HTTP/1.1" 200 -
+127.0.0.1 - - [10/Oct/2026 13:56:00] "GET /art/skills/cleave.png HTTP/1.1" 200 -
+127.0.0.1 - - [10/Oct/2026 13:56:04] code 404, message File not found
+127.0.0.1 - - [10/Oct/2026 13:56:04] "GET /favicon.ico HTTP/1.1" 404 -
+Traceback (most recent call last):
+  File "/workspace/godot-cues-scan/docs/qa/arcane-will/browser_check.py", line 28, in <module>
+    assert '暂未实装' in blocked.inner_text()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

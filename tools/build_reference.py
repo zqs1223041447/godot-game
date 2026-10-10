@@ -82,6 +82,15 @@ def iron_will_save_rule(rule):
     return '<p>57→58步骤先完整验证冻结旧57，再写原字节备份'+esc(rule['backup_suffix'])+'，仅升级版本并开放完整铁意志机制。原分配、点数、物品、技能和旅程保全，不赠点、不赠物。原56→57保持固定终点，旧合法集合不扩张；完整加载只备份最初版本并保存/发布一次。备份失败或冲突、外部修改及最终原子写失败沿用原保护。</p><p>旧57程序拒绝58文件。回退需先另存58，再人工恢复升级前57备份；备份不含升级后进度，不能手改版本伪装回退。进行中地图字段保全不等于重建战斗，启动离场按既有规则。保存不承诺任意并发时序或断电级持久性。</p>'
 
 
+def arcane_will_effect(rule):
+    route=' → '.join(esc(node) for node in rule['witch_route'])
+    return '<p>schema '+str(rule['minimum_save_version'])+'：最大魔力提高30%、每秒再生5点魔力、智慧+10完整接入。固定5点先与原固定魔力再生相加，再统一乘已有魔力再生率提高；不是每帧恢复5点，也不是5%最大魔力。智慧仍按原规则提供魔力和护盾容量。施法照常扣原耗魔，之后由原连续恢复阶段再生，到最大魔力停止。</p><p>普通女巫路线（起点免费，共8点）：'+route+'。最早4级预算可分配，仍需连通和实际付点。分配不即时补满魔力或护盾；退款移除本节点收益，当前魔力/护盾超过新上限时下夹，不治疗。仅27163开放；12处同句魔力专精继续锁定，旧60仍拒绝整个节点。</p>'
+
+
+def arcane_will_save_rule(rule):
+    return '<p>当前61：60→61先完整验证冻结旧60，再保全原字节备份'+esc(rule['backup_suffix'])+'，仅改变版本并开放奥术意志。原物品、技能、天赋点与旅程保持，不赠物或赠点；59→60仍为固定单步。全链只备份最初版本、保存并发布一次，沿用备份冲突、外部修改与原子写失败保护。</p>'
+
+
 def purity_of_flesh_effect(rule):
     route=' → '.join(esc(node) for node in rule['templar_route'])
     return '<p>schema '+str(rule['minimum_save_version'])+'：三个原始效果均已接入。最大生命提高10%、最大能量护盾提高8%按原同类提高加算；混沌抗性+8%与已装备戒指相加，沿用有效抗性75%上限。单独点出时100混沌命中结算92，搭配25%戒指为67；双最高戒指加此节点合计58%，不是75%。混沌仍先消耗护盾，不新增中毒、绕盾或最大混沌抗性。</p><p>普通圣堂武僧路线（起点免费，共10点）：'+route+'。最早6级预算可分配，仍需真实连通和付点；旧59拒绝整个节点。分配提高容量不会补血或补盾；退款将超出新上限的当前生命和护盾下夹，不凭空治疗。</p>'
@@ -1566,6 +1575,7 @@ def build(data, art):
         if key == '50288' and 'iron_will' in data: body+=iron_will_effect(data['iron_will'])
         if key == '11455' and 'chaos_inoculation' in data: body+=chaos_inoculation_effect(data['chaos_inoculation'])
         if key == '58218' and 'purity_of_flesh' in data: body+=purity_of_flesh_effect(data['purity_of_flesh'])
+        if key == '27163' and 'arcane_will' in data: body+=arcane_will_effect(data['arcane_will'])
         for choice in p['mastery_choices']:
             label='已执行' if allowed and choice['execution']['status']=='full' else '未完整执行 · 不可选择'
             body+=details(f'精通 {choice["effect"]} · {label}','<p>'+lines(localized['mastery_choices'][str(choice['effect'])])+'</p>')
@@ -2192,7 +2202,9 @@ def build(data, art):
         if key == 'source_tree' and 'iron_grip' in data: body+=iron_grip_save_rule(data['iron_grip'])
         if key == 'source_tree' and 'iron_will' in data: body+=iron_will_save_rule(data['iron_will'])
         if key == 'source_tree' and 'chaos_inoculation' in data: body+=chaos_inoculation_save_rule(data['chaos_inoculation']).replace('当前59先','58→59步骤先') if 'purity_of_flesh' in data else chaos_inoculation_save_rule(data['chaos_inoculation'])
-        if key == 'source_tree' and 'purity_of_flesh' in data: body+=purity_of_flesh_save_rule(data['purity_of_flesh'])
+        if key == 'source_tree' and 'purity_of_flesh' in data: body+=purity_of_flesh_save_rule(data['purity_of_flesh']).replace('当前60：59→60','59→60步骤') if 'arcane_will' in data else purity_of_flesh_save_rule(data['purity_of_flesh'])
+        if key == 'source_tree' and 'arcane_will' in data: body+=arcane_will_save_rule(data['arcane_will'])
+        if key == 'character_rates' and 'arcane_will' in data: body+='<p>'+link('source_passives','27163','奥术意志')+'新增每秒5点固定魔力再生，先与装备/基础固定值相加，再应用原魔力再生率提高；只影响后续资源帧，不退款施法耗魔。同句魔力专精仍未开放。</p>'
         if key == 'source_defenses' and 'purity_of_flesh' in data: body+='<p>'+link('source_passives','58218','纯净的血肉')+'完整开放：生命提高10%、护盾提高8%、混沌抗性+8%；后者与原装备抗性相加并受75%上限约束，其他混沌抗性天赋仍按各自实装状态。</p>'
         if key == 'source_defenses' and 'chaos_inoculation' in data: body+='<p>'+link('source_passives','11455','混沌防护')+'将最终最大生命固定为1并明确免疫混沌分量；其他伤害、护盾/魔力/生命顺序和抗性上限保持，退款不补血。具体取舍与11点女巫路线见基石。</p>'
         if key == 'source_defenses' and 'iron_grip' in data: body+='<p>分配'+link('source_passives','12926','铁握持')+'后，力量原生物理伤害提高同时适用投射物攻击，双标签只计一次；不会把其他近战INC转移。实际收益、转换范围与14点游侠路线见该基石说明。</p>'
