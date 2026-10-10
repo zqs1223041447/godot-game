@@ -1,0 +1,117 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+SCRIPT ERROR: Invalid call. Nonexistent function 'normal_journey' in base 'RefCounted (BuildState)'.
+          at: _recover_normal_active (res://scripts/main.gd:2641)
+          GDScript backtrace (most recent call first):
+              [0] _recover_normal_active (res://scripts/main.gd:2641)
+              [1] _ready (res://scripts/main.gd:197)
+              [2] run (res://tests/combat_cues_integration_test.gd:38)
+SCRIPT ERROR: Invalid call. Nonexistent function 'normal_pending_rewards' in base 'RefCounted (BuildState)'.
+          at: world_context (res://scripts/main.gd:2650)
+          GDScript backtrace (most recent call first):
+              [0] world_context (res://scripts/main.gd:2650)
+              [1] refresh_world (res://scripts/ui/town_service_panel.gd:142)
+              [2] setup (res://scripts/ui/town_service_panel.gd:137)
+              [3] _build_world_controls (res://scripts/game_hud.gd:1722)
+              [4] setup (res://scripts/game_hud.gd:144)
+              [5] _ready (res://scripts/main.gd:221)
+              [6] run (res://tests/combat_cues_integration_test.gd:38)
+SCRIPT ERROR: Invalid call. Nonexistent function 'normal_pending_rewards' in base 'RefCounted (BuildState)'.
+          at: world_context (res://scripts/main.gd:2650)
+          GDScript backtrace (most recent call first):
+              [0] world_context (res://scripts/main.gd:2650)
+              [1] setup (res://scripts/ui/town_service_panel.gd:138)
+              [2] _build_world_controls (res://scripts/game_hud.gd:1722)
+              [3] setup (res://scripts/game_hud.gd:144)
+              [4] _ready (res://scripts/main.gd:221)
+              [5] run (res://tests/combat_cues_integration_test.gd:38)
+SCRIPT ERROR: Invalid call. Nonexistent function 'normal_pending_rewards' in base 'RefCounted (BuildState)'.
+          at: world_context (res://scripts/main.gd:2650)
+          GDScript backtrace (most recent call first):
+              [0] world_context (res://scripts/main.gd:2650)
+              [1] _select (res://scripts/ui/town_service_panel.gd:252)
+              [2] setup (res://scripts/ui/town_service_panel.gd:138)
+              [3] _build_world_controls (res://scripts/game_hud.gd:1722)
+              [4] setup (res://scripts/game_hud.gd:144)
+              [5] _ready (res://scripts/main.gd:221)
+              [6] run (res://tests/combat_cues_integration_test.gd:38)
+SCRIPT ERROR: Invalid call. Nonexistent function 'normal_journey' in base 'RefCounted (BuildState)'.
+          at: map_options (res://scripts/main.gd:2878)
+          GDScript backtrace (most recent call first):
+              [0] map_options (res://scripts/main.gd:2878)
+              [1] _build_map (res://scripts/ui/town_service_panel.gd:377)
+              [2] _select (res://scripts/ui/town_service_panel.gd:256)
+              [3] setup (res://scripts/ui/town_service_panel.gd:138)
+              [4] _build_world_controls (res://scripts/game_hud.gd:1722)
+              [5] setup (res://scripts/game_hud.gd:144)
+              [6] _ready (res://scripts/main.gd:221)
+              [7] run (res://tests/combat_cues_integration_test.gd:38)
+SCRIPT ERROR: Invalid call. Nonexistent function 'normal_journey' in base 'RefCounted (BuildState)'.
+          at: _normal_start_reason (res://scripts/main.gd:2906)
+          GDScript backtrace (most recent call first):
+              [0] _normal_start_reason (res://scripts/main.gd:2906)
+              [1] map_draft (res://scripts/main.gd:2917)
+              [2] _build_map (res://scripts/ui/town_service_panel.gd:378)
+              [3] _select (res://scripts/ui/town_service_panel.gd:256)
+              [4] setup (res://scripts/ui/town_service_panel.gd:138)
+              [5] _build_world_controls (res://scripts/game_hud.gd:1722)
+              [6] setup (res://scripts/game_hud.gd:144)
+              [7] _ready (res://scripts/main.gd:221)
+              [8] run (res://tests/combat_cues_integration_test.gd:38)
+SCRIPT ERROR: Invalid access to property or key 'maps' on a base object of type 'Dictionary'.
+          at: _build_map (res://scripts/ui/town_service_panel.gd:381)
+          GDScript backtrace (most recent call first):
+              [0] _build_map (res://scripts/ui/town_service_panel.gd:381)
+              [1] _select (res://scripts/ui/town_service_panel.gd:256)
+              [2] setup (res://scripts/ui/town_service_panel.gd:138)
+              [3] _build_world_controls (res://scripts/game_hud.gd:1722)
+              [4] setup (res://scripts/game_hud.gd:144)
+              [5] _ready (res://scripts/main.gd:221)
+              [6] run (res://tests/combat_cues_integration_test.gd:38)
+SCRIPT ERROR: Invalid call. Nonexistent function 'normal_pending_rewards' in base 'RefCounted (BuildState)'.
+          at: world_context (res://scripts/main.gd:2650)
+          GDScript backtrace (most recent call first):
+              [0] world_context (res://scripts/main.gd:2650)
+              [1] _refresh_world (res://scripts/game_hud.gd:1737)
+              [2] setup (res://scripts/game_hud.gd:164)
+              [3] _ready (res://scripts/main.gd:221)
+              [4] run (res://tests/combat_cues_integration_test.gd:38)
+SCRIPT ERROR: Invalid access to property or key 'mode' on a base object of type 'Dictionary'.
+          at: GameHUD._refresh_world (res://scripts/game_hud.gd:1740)
+          GDScript backtrace (most recent call first):
+              [0] _refresh_world (res://scripts/game_hud.gd:1740)
+              [1] setup (res://scripts/game_hud.gd:164)
+              [2] _ready (res://scripts/main.gd:221)
+              [3] run (res://tests/combat_cues_integration_test.gd:38)
+SCRIPT ERROR: Invalid call. Nonexistent function 'normal_pending_rewards' in base 'RefCounted (BuildState)'.
+          at: world_context (res://scripts/main.gd:2650)
+          GDScript backtrace (most recent call first):
+              [0] world_context (res://scripts/main.gd:2650)
+              [1] _refresh_world (res://scripts/game_hud.gd:1737)
+              [2] restart_run (res://scripts/main.gd:509)
+              [3] _ready (res://scripts/main.gd:228)
+              [4] run (res://tests/combat_cues_integration_test.gd:38)
+SCRIPT ERROR: Invalid access to property or key 'mode' on a base object of type 'Dictionary'.
+          at: GameHUD._refresh_world (res://scripts/game_hud.gd:1740)
+          GDScript backtrace (most recent call first):
+              [0] _refresh_world (res://scripts/game_hud.gd:1740)
+              [1] restart_run (res://scripts/main.gd:509)
+              [2] _ready (res://scripts/main.gd:228)
+              [3] run (res://tests/combat_cues_integration_test.gd:38)
+SCRIPT ERROR: Invalid call. Nonexistent function 'invalidate_gem_trade_quotes' in base 'RefCounted (BuildState)'.
+          at: _invalidate_normal_gem_quotes (res://scripts/main.gd:2781)
+          GDScript backtrace (most recent call first):
+              [0] _invalidate_normal_gem_quotes (res://scripts/main.gd:2781)
+              [1] restart_run (res://scripts/main.gd:509)
+              [2] _ready (res://scripts/main.gd:228)
+              [3] run (res://tests/combat_cues_integration_test.gd:38)
+SCRIPT ERROR: Invalid access to property or key 'ok' on a base object of type 'Dictionary'.
+          at: _ready (res://scripts/main.gd:229)
+          GDScript backtrace (most recent call first):
+              [0] _ready (res://scripts/main.gd:229)
+              [1] run (res://tests/combat_cues_integration_test.gd:38)
+FAIL: one cue for an admitted volley
+SCRIPT ERROR: Out of bounds get index '0' (on base: 'Array[Dictionary]')
+          at: run (res://tests/combat_cues_integration_test.gd:54)
+          GDScript backtrace (most recent call first):
+              [0] run (res://tests/combat_cues_integration_test.gd:54)

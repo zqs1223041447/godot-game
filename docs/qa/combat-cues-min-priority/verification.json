@@ -1,0 +1,54 @@
+{
+  "baseline_commit": "fabeeb3af1f8336ead5b49eac4bd40c1f216d37c",
+  "production_changed_files": [
+    "scripts/visuals/combat_cues.gd"
+  ],
+  "differential_checks": 1237,
+  "existing_unit_checks": 1046,
+  "valid_test_failures": 0,
+  "paired_steps": 48,
+  "profile_failures": 0,
+  "rounds": [
+    {
+      "round": 0,
+      "before_mean_us": 4542.791666666667,
+      "after_mean_us": 1499.125,
+      "decrease_pairs": 24,
+      "paired_saving_median_us": 3003.5,
+      "full_floor_calls": 4224,
+      "exact_pairs": 24,
+      "tick_before_mean_us": 32049.166666666668,
+      "tick_after_mean_us": 30028.708333333332
+    },
+    {
+      "round": 1,
+      "before_mean_us": 4474.125,
+      "after_mean_us": 1506.0833333333333,
+      "decrease_pairs": 24,
+      "paired_saving_median_us": 3004.5,
+      "full_floor_calls": 4224,
+      "exact_pairs": 24,
+      "tick_before_mean_us": 31928.625,
+      "tick_after_mean_us": 28709.125
+    }
+  ],
+  "final_observation_sha256": "5bcb991fb8d8595153ce1c40065fb7f1ee5342a1a151a8df4ed12882133012c3",
+  "all_four_final_observations_equal": true,
+  "legacy_integration": {
+    "status": "preexisting startup failure on baseline and candidate; no completed pass",
+    "baseline_timeout_seconds": 10,
+    "baseline_exit": 124,
+    "candidate_timeout_seconds": 30,
+    "candidate_exit": 124,
+    "cause": "Legacy BuildState lacks normal_journey and normal_pending_rewards; subsequent cue assertion cannot run to completion."
+  },
+  "schema_or_model_changed": false,
+  "windows_fps_claim": false,
+  "sha256": {
+    "scripts/visuals/combat_cues.gd": "2259faf9d3dd546577119febb3e647218c83f783a31d174cf3c474fd86a308ca",
+    "tests/combat_cues_min_priority_test.gd": "2e27a5582ac09ccb7555accc313b3b5e3473e94e04c24c9012880d1dec75ba1a",
+    "tools/diagnostics/combat_cues_min_priority_profile.gd": "c6e3c3eb771aa1f844c98713611fb2ec7e55acaa52b1442c077733378204be16",
+    "docs/qa/combat-cues-min-priority/baseline.gd.txt": "e793f12a2c4680f2105350605bba4f97fc22f53209613ea7743f172fdb21d19b",
+    "docs/qa/combat-cues-min-priority/paired.json": "9169e18c465944a0c43acb190ea49ace70bc86e75b248270004c7ce46d0b87e7"
+  }
+}

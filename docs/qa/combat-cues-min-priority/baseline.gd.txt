@@ -2,7 +2,6 @@ class_name CombatCues
 extends RefCounted
 ## Presentation-only lifetime pool. Never reads RNG, rolls, saves, or combat state.
 const MAX_CUES: int = 96
-const MIN_PRIORITY: int = 0
 const LIFETIMES: Dictionary = {
 	"cleave":0.28,"cast":0.24,"nova":0.45,"ward":0.60,"meteor":0.65,"chain":0.28,
 	"dash":0.32,"impact":0.20,"hurt":0.24,"death":0.40,
@@ -46,12 +45,10 @@ func emit_cue(kind: String, origin: Vector2, data: Dictionary = {}) -> int:
 	if cues.size() >= MAX_CUES:
 		var incoming: int = int(PRIORITY[kind])
 		var replacement: int = -1
-		# The catalog has no priority below MIN_PRIORITY; skip that impossible scan.
-		if incoming > MIN_PRIORITY:
-			for i: int in range(cues.size()):
-				if int(PRIORITY[cues[i].kind]) < incoming:
-					replacement = i
-					break
+		for i: int in range(cues.size()):
+			if int(PRIORITY[cues[i].kind]) < incoming:
+				replacement = i
+				break
 		if replacement < 0:
 			# Newest feedback wins at the same priority; decorative cues cannot evict boundaries.
 			for i: int in range(cues.size()):
