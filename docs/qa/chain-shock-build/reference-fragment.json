@@ -1,0 +1,154 @@
+{
+	"chain_shock_build": {
+		"acceptance": "docs/qa/chain-shock-build/attempt-01.json",
+		"acceptance_sha256": "c813199ed5d564ded0b0196b1978ffc187814129309551e687706e978338ae13",
+		"actual_sparse_cases": [
+			{
+				"cooldown": 4.5,
+				"damage_after_25_lightning_resistance": [
+					42.900000000000006
+				],
+				"first_distance": 100.0,
+				"hit_count": 1.0,
+				"links": [],
+				"mana": 22.0,
+				"spacing": 250.0
+			},
+			{
+				"cooldown": 4.5,
+				"damage_after_25_lightning_resistance": [
+					38.61,
+					35.1,
+					31.590000000000003,
+					28.080000000000005,
+					24.570000000000004
+				],
+				"first_distance": 100.0,
+				"hit_count": 5.0,
+				"links": [
+					"chain_reach"
+				],
+				"mana": 25.299999999999997,
+				"spacing": 250.0
+			},
+			{
+				"cooldown": 4.5,
+				"damage_after_25_lightning_resistance": [
+					34.32000000000001
+				],
+				"first_distance": 100.0,
+				"hit_count": 1.0,
+				"links": [
+					"shock"
+				],
+				"mana": 26.4,
+				"spacing": 250.0
+			},
+			{
+				"cooldown": 4.5,
+				"damage_after_25_lightning_resistance": [
+					30.888000000000005,
+					28.080000000000005,
+					25.27200000000001,
+					22.46400000000001,
+					19.65600000000001
+				],
+				"first_distance": 100.0,
+				"hit_count": 5.0,
+				"links": [
+					"chain_reach",
+					"shock"
+				],
+				"mana": 30.36,
+				"spacing": 250.0
+			}
+		],
+		"assembly": "正式商人可购买连锁闪电8、远链4、感电4校准碎片；已有宝石直接复用。主动放同组主槽，远链和感电放该组两个辅助槽，保留三个空槽；可再拆卸，schema61不变",
+		"fixture": "docs/qa/chain-shock-build/owned.json",
+		"fixture_sha256": "b880b00526c1e35201879d106c156143dd9e6e23b2ddfa804745b52a6647f1db",
+		"followup": "感电持续2秒，后续命中承伤提高15%；本构筑连锁冷却4.5秒，应接普攻或另一技能。本次实际奥术飞弹接续验证到期前×1.15、到期后×1；不影响持续伤害，不据此宣称总DPS提升",
+		"limits": "没有新增宝石、辅助兼容或战斗机制；纯复用已有组合。验证为有限headless场景，未做画面、完整平衡、导出或封包验收",
+		"prices": {
+			"skill:chain": 8,
+			"support:chain_reach": 4,
+			"support:shock": 4
+		},
+		"role": "适合给分散且相邻距离小于286的敌群施加感电，最多5个不同目标；首个目标仍须小于600且可见，每次续跳也检查墙体。距离按目标中心计，不额外加怪物半径",
+		"rows": [
+			{
+				"cooldown": 4.5,
+				"first_range": 600.0,
+				"followup_range": 220.0,
+				"links": [],
+				"mana": 22.0,
+				"maximum_targets": 5,
+				"noncritical_before_defense": [
+					57.2,
+					52.0,
+					46.800000000000004,
+					41.6,
+					36.400000000000006
+				]
+			},
+			{
+				"cooldown": 4.5,
+				"first_range": 600.0,
+				"followup_range": 286.0,
+				"links": [
+					"chain_reach"
+				],
+				"mana": 25.299999999999997,
+				"maximum_targets": 5,
+				"noncritical_before_defense": [
+					51.480000000000004,
+					46.800000000000004,
+					42.120000000000005,
+					37.440000000000005,
+					32.760000000000005
+				]
+			},
+			{
+				"cooldown": 4.5,
+				"first_range": 600.0,
+				"followup_range": 220.0,
+				"links": [
+					"shock"
+				],
+				"mana": 26.4,
+				"maximum_targets": 5,
+				"noncritical_before_defense": [
+					45.760000000000005,
+					41.6,
+					37.440000000000005,
+					33.28,
+					29.120000000000005
+				]
+			},
+			{
+				"cooldown": 4.5,
+				"first_range": 600.0,
+				"followup_range": 286.0,
+				"links": [
+					"chain_reach",
+					"shock"
+				],
+				"mana": 30.36,
+				"maximum_targets": 5,
+				"noncritical_before_defense": [
+					41.184000000000005,
+					37.440000000000005,
+					33.696000000000005,
+					29.952000000000005,
+					26.208000000000006
+				]
+			}
+		],
+		"scope": "复用已有合法连锁和远链，只从正式商人购买感电4碎片；44→40，实际入包、装配、保存重载及Main施放通过。编译表为同一真实存档、非暴击、防御前各跳伤害；实战队列另用25%闪电抗性与5护盾，不是DPS或自然敌群密度保证",
+		"skill_id": "chain",
+		"support_ids": [
+			"chain_reach",
+			"shock"
+		],
+		"tradeoff": "远链与感电相乘：每跳主命中为原72%，魔力为原138%，原冷却4.5秒；不会新增目标数，触发感电的命中自身不增伤"
+	}
+}

@@ -996,6 +996,25 @@ def ambush_rule(data,link,facts,details):
     return body
 
 
+def chain_shock_build(data,link,facts,details):
+    rule=data['chain_shock_build']
+    body='<h3>实测构筑 · 分散敌群感电</h3>'
+    body+='<p>'+link('skills','chain')+' ＋ '+link('supports','chain_reach')+' ＋ '+link('supports','shock')+'。</p>'
+    body+=''.join('<p>'+esc(rule[key])+'。</p>' for key in ['role','tradeoff','assembly','followup'])
+    rows=[]
+    for index,row in enumerate(rule['rows']):
+        label='无辅助' if not row['links'] else '＋'.join(data['supports'][key]['name'].removesuffix('辅助') for key in row['links'])
+        actual=rule['actual_sparse_cases'][index]
+        cells=[number(row['mana']),number(row['followup_range']),str(actual['hit_count']),
+               ' / '.join(number(value) for value in row['noncritical_before_defense'])]
+        rows.append('<tr><th>'+esc(label)+'</th>'+''.join('<td>'+cell+'</td>' for cell in cells)+'</tr>')
+    body+='<p>实际队列首个目标距角色100，其后目标间距250；六个存活目标均可见。下表命中数来自实际施放，每跳伤害来自同存档重编译。</p>'
+    body+='<div class="table-scroll"><table><thead><tr><th>组合</th><th>魔力</th><th>续跳距离上限</th><th>250间距实测命中数</th><th>非暴击防御前第1～5跳</th></tr></thead><tbody>'+''.join(rows)+'</tbody></table></div>'
+    body+='<p>'+esc(rule['scope'])+'。</p><p>'+esc(rule['limits'])+'。</p>'
+    body+='<p><a href="../CHAIN_SHOCK_BUILD.zh-CN.md">装配与接续说明</a> · <a href="../qa/chain-shock-build/README.md">实际购买、施放与保存证据</a></p>'
+    return body
+
+
 def inward_pull_rule(data,link,facts,details):
     rule=data['inward_pull'];policy=rule['policy']
     def value(key,amount):
@@ -1456,11 +1475,13 @@ def build(data, art):
             body+='<p>符印伏击改为脚下预置，成功放置时支付魔力；触发后才命中。'+link('rules','ambush','查看伏击、感电、燃烧与范围组合的代表编译示例')+'。</p>'
             related+=' · '+link('rules','ambush')
         if 'inward_pull' in compatible:
-            body+='<p>'+('牵引辅助在裂刃成功命中后向施放原点施加190冲量，闪避不牵引；魔力乘1.20。' if key=='cleave' else '牵引辅助把原击退冲量反转为朝本次真实爆发圆心，魔力乘1.20。')+link('rules','inward_pull','查看牵引与冻结快照的代表编译示例')+'。</p>'
+            body+='<p>'+('牵引辅助在裂刃成功命中后向施放原点施加190冲量，闪避不牵引；魔力乘1.20。再次命中覆盖原冲量，重合目标沿原朝向判定并获得零冲量。' if key=='cleave' else '牵引辅助把原击退冲量反转为朝本次真实爆发圆心，魔力乘1.20。')+link('rules','inward_pull','查看牵引与冻结快照的代表编译示例')+'。</p>'
             related+=' · '+link('rules','inward_pull')
         if 'frost_lock' in compatible:
             body+='<p>霜锁辅助提供短冻结窗口，与寒意延长互斥；保留原3秒移动减缓。'+link('rules','frost_lock','查看冻结、免疫与原攻击接续')+'。</p>'
             related+=' · '+link('rules','frost_lock')
+        if key=='chain' and 'chain_shock_build' in data:
+            body+=chain_shock_build(data,link,facts,details)
         if 'encircling_cleave' in compatible:
             body+='<p>环斩把原前方半圆改为周身整圆，主命中×0.75、魔力×1.25，冷却与原半径规则保持。'+link('rules','encircling_cleave','查看同源预览、五槽取舍与命中边界')+'。</p>'
             related+=' · '+link('rules','encircling_cleave')

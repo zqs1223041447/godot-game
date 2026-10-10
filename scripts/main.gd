@@ -1348,7 +1348,11 @@ func _execute_compiled(compiled: Dictionary, group_id: String = "", main_uid: St
 	if not critical.ok:return false
 	mana -= mana_cost
 	if group_id.is_empty(): cooldowns[id] = float(compiled.cooldown)
-	player_facing = _aim_direction()
+	var cast_facing: Vector2 = _aim_direction()
+	# A coincident nearest body has no aim vector, but still intersects cleave.
+	if id == "cleave" and cast_facing.is_zero_approx():
+		cast_facing = player_facing if not player_facing.is_zero_approx() else Vector2.RIGHT
+	player_facing = cast_facing
 	var color: Color = skill.color
 	var context: Dictionary = {"snapshot": critical.snapshot, "cast_id": 0 if id == "tornado" else projectile_runtime.new_cast()}
 	match id:

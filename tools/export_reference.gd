@@ -162,6 +162,7 @@ static func collect() -> Dictionary:
 	result["glove_ring_affixes"] = glove_ring_affix_examples()
 	result["ambush"] = ambush_examples()
 	result["inward_pull"] = inward_pull_examples()
+	result["chain_shock_build"] = chain_shock_build_example()
 	result["frost_lock"] = frost_lock_examples()
 	result["source_monster_movement"] = source_monster_movement_examples()
 	result["source_monster_damage_life"] = source_monster_damage_life_examples()
@@ -3329,3 +3330,43 @@ static func arcane_will_reference() -> Dictionary:
 		"grants":SourceTree.node_effect("27163").grants,
 		"line_status":SourceLocalization.line_status("Regenerate 5 Mana per second","27163"),
 		"witch_paid_points":8,"witch_route":["54447","57226","21678","32210","8948","27929","7503","65203","27163"]}
+
+
+## Read only the actual paid, saved and successfully cast chain build.
+static func chain_shock_build_example() -> Dictionary:
+	var fixture := "docs/qa/chain-shock-build/owned.json"
+	var acceptance_path := "docs/qa/chain-shock-build/attempt-01.json"
+	var acceptance: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://" + acceptance_path))
+	assert(acceptance.failures == 0 and acceptance.cases.size() == 9)
+	assert(FileAccess.get_sha256("res://" + fixture) == acceptance.owned_sha256)
+	var raw: Dictionary = Canonical.Rules.decode(JSON.parse_string(FileAccess.get_file_as_string("res://" + fixture)))
+	assert(not raw.is_empty() and Canonical.Rules.reason(raw).is_empty())
+	var model := Canonical.new()
+	model._accept_memory(raw.duplicate(true))
+	var owned: Dictionary = model.get_group_cast(acceptance.group_id)
+	assert(owned.ok and JSON.parse_string(JSON.stringify(owned,"",true,true)) == acceptance.owned_cast)
+	var rows: Array = []
+	for links: Array in [[],["chain_reach"],["shock"],["chain_reach","shock"]]:
+		var cast: Dictionary = Compiler.compile_group("chain",model.get_combat_snapshot(),links)
+		assert(cast.ok)
+		var hits: Array = []
+		for packet: Dictionary in cast.packets.bounces:
+			hits.append(Damage.resolve(packet,cast.snapshot.modifiers).total)
+		rows.append({"links":cast.support_ids,"mana":cast.mana,"cooldown":cast.cooldown,
+			"first_range":cast.recipe.first_range,"followup_range":cast.recipe.followup_range,
+			"maximum_targets":cast.packets.bounces.size(),"noncritical_before_defense":hits})
+	var prices: Dictionary = {}
+	for definition: String in ["skill:chain","support:chain_reach","support:shock"]:
+		var quote: Dictionary = Canonical.GemTrade.quote("buy",definition)
+		assert(quote.ok)
+		prices[definition] = quote.cost.calibration_shard
+	assert(model.save_attempts == 0 and model.snapshot() == raw)
+	return {"fixture":fixture,"fixture_sha256":acceptance.owned_sha256,"acceptance":acceptance_path,
+		"acceptance_sha256":FileAccess.get_sha256("res://"+acceptance_path),"rows":rows,"prices":prices,
+		"actual_sparse_cases":acceptance.cases.slice(0,4),"skill_id":"chain","support_ids":["chain_reach","shock"],
+		"scope":"复用已有合法连锁和远链，只从正式商人购买感电4碎片；44→40，实际入包、装配、保存重载及Main施放通过。编译表为同一真实存档、非暴击、防御前各跳伤害；实战队列另用25%闪电抗性与5护盾，不是DPS或自然敌群密度保证",
+		"role":"适合给分散且相邻距离小于286的敌群施加感电，最多5个不同目标；首个目标仍须小于600且可见，每次续跳也检查墙体。距离按目标中心计，不额外加怪物半径",
+		"tradeoff":"远链与感电相乘：每跳主命中为原72%，魔力为原138%，原冷却4.5秒；不会新增目标数，触发感电的命中自身不增伤",
+		"followup":"感电持续2秒，后续命中承伤提高15%；本构筑连锁冷却4.5秒，应接普攻或另一技能。本次实际奥术飞弹接续验证到期前×1.15、到期后×1；不影响持续伤害，不据此宣称总DPS提升",
+		"assembly":"正式商人可购买连锁闪电8、远链4、感电4校准碎片；已有宝石直接复用。主动放同组主槽，远链和感电放该组两个辅助槽，保留三个空槽；可再拆卸，schema61不变",
+		"limits":"没有新增宝石、辅助兼容或战斗机制；纯复用已有组合。验证为有限headless场景，未做画面、完整平衡、导出或封包验收"}

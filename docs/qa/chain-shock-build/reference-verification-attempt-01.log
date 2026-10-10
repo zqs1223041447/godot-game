@@ -1,0 +1,6 @@
+Only chain_shock_build section updated
+Traceback (most recent call last):
+  File "/workspace/godot-cues-scan/tools/verify_chain_shock_reference.py", line 24, in <module>
+    for number in ['30.36','286.00','25.30','26.40']:assert number in after['skills-chain'],number
+                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 25.30
