@@ -1,0 +1,63 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+godot-game: playable arena ready
+ERROR: Alt1 routes to flask and never also casts bound skill
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/flask_gameplay_test.gd:10)
+       [1] run (res://tests/flask_gameplay_test.gd:26)
+ERROR: Actual mana use admitted concurrently
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/flask_gameplay_test.gd:10)
+       [1] run (res://tests/flask_gameplay_test.gd:27)
+ERROR: First real tick combines authored flask rate with unchanged regen 10.00000000 / 25.16666667
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/flask_gameplay_test.gd:10)
+       [1] near (res://tests/flask_gameplay_test.gd:11)
+       [2] run (res://tests/flask_gameplay_test.gd:31)
+ERROR: Slot move preserves charge and active resource debt
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/flask_gameplay_test.gd:10)
+       [1] run (res://tests/flask_gameplay_test.gd:33)
+ERROR: Actual life restoration completes exact locked35percent 10.00000000 / 55.50000000
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/flask_gameplay_test.gd:10)
+       [1] near (res://tests/flask_gameplay_test.gd:11)
+       [2] run (res://tests/flask_gameplay_test.gd:36)
+ERROR: Actual mana restoration separate from passive regen 0.00000000 / 85.00000000
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/flask_gameplay_test.gd:10)
+       [1] near (res://tests/flask_gameplay_test.gd:11)
+       [2] run (res://tests/flask_gameplay_test.gd:37)
+ERROR: Unequipped bottle cannot gain charge
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/flask_gameplay_test.gd:10)
+       [1] run (res://tests/flask_gameplay_test.gd:45)
+ERROR: Unequip/re-equip is not refill
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/flask_gameplay_test.gd:10)
+       [1] run (res://tests/flask_gameplay_test.gd:47)
+ERROR: Adding deterministic bottle preserves existing reward and feedback RNG state
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/flask_gameplay_test.gd:10)
+       [1] test_root_reward (res://tests/flask_gameplay_test.gd:66)
+       [2] run (res://tests/flask_gameplay_test.gd:48)
+SCRIPT ERROR: Invalid access to property or key 'item_000005' on a base object of type 'Dictionary'.
+          at: test_root_reward (res://tests/flask_gameplay_test.gd:68)
+          GDScript backtrace (most recent call first):
+              [0] test_root_reward (res://tests/flask_gameplay_test.gd:68)
+              [1] run (res://tests/flask_gameplay_test.gd:48)
+ERROR: Recovery can begin again after expiry
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/flask_gameplay_test.gd:10)
+       [1] run (res://tests/flask_gameplay_test.gd:49)
+Flask gameplay: 61 checks, 10 failures

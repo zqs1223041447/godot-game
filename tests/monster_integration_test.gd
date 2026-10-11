@@ -1,7 +1,7 @@
 extends SceneTree
 ## Real arena/HUD contracts for monster deaths, combat defenses, and safe demos.
 ## Always run under disposable XDG data/config/cache roots (tools/validate.sh).
-const Model = preload("res://scripts/build_state.gd")
+const Model = preload("res://scripts/canonical_game_state.gd")
 const Catalog = preload("res://scripts/monsters/monster_catalog.gd")
 const Registry = preload("res://scripts/mechanics/mechanic_registry.gd")
 const Recipes = preload("res://scripts/combat/combat_data.gd")
@@ -20,10 +20,11 @@ func _run() -> void:
 	var fresh = Model.new()
 	_expect(fresh.save_build() == OK, "Fresh build saves inside disposable integration fixture")
 	arena = load("res://scenes/main.tscn").instantiate()
-	arena.state = preload("res://scripts/build_state.gd").new() # Explicit legacy contract fixture.
 	root.add_child(arena)
 	arena.set_process(false)
 	arena.hud.set_process(false)
+	_expect(arena.world_context().mode == "town", "Fresh canonical character starts in formal town")
+	_expect(arena.leave_normal_town(arena.world_context().revision).ok, "Public town exit admits the legacy arena contracts")
 	_case(_test_root_rewards, "once-only root and rewardless child kills")
 	_case(_test_aoe_deferred, "AoE queue deferral and birth protection")
 	_case(_test_explosion_deferred, "projectile explosion keeps deferred children outside target iteration")
@@ -32,6 +33,8 @@ func _run() -> void:
 	_case(_test_player_death_reset, "death cancellation and clean restart")
 	_case(_test_panel_demo, "F7 pause, no-reward demo and standard restoration")
 	print("Monster integration: %d checks, %d failures" % [checks, failures])
+	arena.queue_free()
+	await process_frame
 	quit(1 if failures > 0 else 0)
 
 
@@ -54,6 +57,7 @@ func _near(value: float, expected: float, label: String) -> void:
 
 func _reset() -> void:
 	arena.restart_run()
+	arena.hud._process(0.0) # Production HUD clears the death latch on its next frame.
 	arena.auto_fire = false
 	arena.enemies.clear()
 	arena.monster_runtime.reset()
@@ -74,7 +78,7 @@ func _kill(enemy: Dictionary) -> void:
 
 func _progress() -> Dictionary:
 	return {"xp": arena.state.xp, "level": arena.state.level, "talent_points": arena.state.talent_points,
-		"jewels": arena.state.jewels.duplicate(true), "next_jewel_id": arena.state.next_jewel_id}
+		"jewels": arena.state.jewels.duplicate(true), "canonical": arena.state.snapshot()}
 
 
 func _test_root_rewards() -> void:
@@ -248,6 +252,7 @@ func _test_player_death_reset() -> void:
 	arena._flush_monster_spawns()
 	_expect(arena.enemies.is_empty() and arena.kills == kills_before and _progress() == progress_before, "Dead-player flush cannot spawn children or award synthetic kills")
 	arena.restart_run()
+	arena.hud._process(0.0) # Production HUD clears the death latch on its next frame.
 	_expect(arena.alive and not arena.demo_mode and arena.kills == 0 and arena.reward_kills == 0, "Restart restores regular living run and both kill counters")
 	_expect(arena.monster_runtime.queue.is_empty() and arena.monster_runtime.trace.is_empty() and arena.damage_trace.is_empty(), "Restart clears pending work and monster/combat damage traces")
 	_expect(arena.monster_runtime.roots.size() == arena.enemies.size() and not arena.monster_runtime.roots.has(old_id), "Restart keeps only fresh starting lineages and discards old root budget")
