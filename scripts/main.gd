@@ -603,9 +603,17 @@ func _unhandled_key_input(event: InputEvent) -> void:
 	elif key >= KEY_1 and key <= KEY_5:
 		cast_skill(key - KEY_1)
 	elif key == KEY_SPACE:
-		var slot: int = state.skill_slots.find("dash")
-		if slot >= 0:
-			cast_skill(slot)
+		if state.has_method("get_group_cast"):
+			# Equipped active rows need not be bound to the legacy 1–5 hotbar.
+			# Reuse canonical selection and casting so Space shares group/gem debt.
+			var dash: Dictionary = state.get_skill_cast("dash")
+			var group_id: String = str(dash.get("group_id", ""))
+			if not group_id.is_empty():
+				cast_group(group_id)
+		else:
+			var slot: int = state.skill_slots.find("dash")
+			if slot >= 0:
+				cast_skill(slot)
 	get_viewport().set_input_as_handled()
 
 
