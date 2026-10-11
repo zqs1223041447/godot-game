@@ -415,7 +415,8 @@ static func settle_with_mana(resolved: Variant, shield: Variant, health: Variant
 
 
 static func _finite_number(value: Variant) -> bool:
-	return typeof(value) in [TYPE_INT, TYPE_FLOAT] and is_finite(float(value))
+	var value_type: int = typeof(value)
+	return (value_type == TYPE_INT or value_type == TYPE_FLOAT) and is_finite(float(value))
 
 
 static func _amount(value: Variant) -> bool:

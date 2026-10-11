@@ -1,0 +1,9 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+ERROR: FAIL: Original defense does not alter sourced passive bundle identities
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] _expect (/tmp/godot-m1-v050-defense-finite/defense-baseline-test.gd:32)
+       [1] _test_support_and_origin (/tmp/godot-m1-v050-defense-finite/defense-baseline-test.gd:58)
+       [2] _run (/tmp/godot-m1-v050-defense-finite/defense-baseline-test.gd:17)
+Shared defense rules: 384 checks, 1 failures
