@@ -259,6 +259,11 @@ func refresh() -> void:
 		entries.append({"uid":uid,"kind":state.items[uid].kind,"size":item_size,"cell":Vector2i(location.x,location.y),
 			"art":definition,"icon":icon,"accent":definition.get("color",Gear.RARITIES.get(definition.get("rarity",""),{}).get("color",Color("aa8c59"))),
 			"short_name":str(definition.get("base_name",definition.get("short_name",definition.name)))})
+	# Grid selection disappears when its item leaves the visible page. Keep
+	# destructive actions and pending confirmations on that same visible target.
+	if not _selected_uid.is_empty() and not entries.any(func(entry: Dictionary) -> bool: return entry.uid == _selected_uid):
+		_cancel_craft()
+		_selected_uid = ""
 	_grid.set_items(entries,model.revision())
 	if model.has_method("flask_slots"):
 		for flask: Dictionary in model.flask_slots():

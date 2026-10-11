@@ -99,6 +99,18 @@ class FontCoverageTests(unittest.TestCase):
         self.assertTrue(set(map(ord, "价报收校片碎例工派艺证资")) <= required)
         self.assertTrue(set(map(ord, "贯穿")) <= required)
 
+    def test_map_preparation_overview_and_study_glyphs_are_bundled(self):
+        # Preserve proper names and terrain descriptions rather than renaming
+        # them to work around an incomplete font subset.
+        required = set(map(ord, "…↑◎亦八古园土址块帧廓拱滞稍究"))
+        self.assertTrue(required <= set(self.locations))
+        self.assertTrue(required <= set(self.font.getBestCmap()))
+        panel = (ROOT / "scripts/ui/town_service_panel.gd").read_text()
+        self.assertIn("− 布局与首领 · 收起", panel)
+        self.assertIn("+ 布局与首领 · 展开", panel)
+        self.assertNotIn("▾", panel)
+        self.assertNotIn("▸", panel)
+
     def test_all_planner_failure_reasons_are_in_the_corpus(self):
         sources = [source for source in self.manifest["supplemental_sources"] if source["path"] == "scripts/items/crafting_transaction_planner.gd"]
         self.assertEqual(len(sources), 1)
@@ -293,16 +305,19 @@ def godot_probe(godot: str, render_dir: Path | None) -> dict:
     ]
     planner_sources = [source for source in manifest["supplemental_sources"] if source["path"] == "scripts/items/crafting_transaction_planner.gd"]
     if planner_sources:
-        # Render original failure.reason strings that collectively contain every
-        # newly added Han glyph, rather than a synthetic replacement UI message.
+        # Render original pinned and runtime strings that collectively contain
+        # every added Han glyph, rather than a synthetic replacement UI message.
         texts = [item["text"] for item in planner_sources[0]["strings"]]
+        texts.extend(text for path in coverage.runtime_paths(ROOT) for _, text in coverage.file_strings(path))
         remaining = {chr(cp) for cp in locations if coverage.is_han(cp)} - set(manifest["baseline"]["characters"])
+        candidates = [(text, set(text) & remaining) for text in texts]
+        candidates = [(text, chars) for text, chars in candidates if chars]
         rows = []
         while remaining:
-            text = max(texts, key=lambda candidate: len(set(candidate) & remaining))
-            hits = set(text) & remaining
+            text, chars = max(candidates, key=lambda candidate: len(candidate[1] & remaining))
+            hits = chars & remaining
             if not hits:
-                raise ValueError("Planner rendering corpus does not cover new Han glyphs")
+                raise ValueError("Runtime rendering corpus does not cover new Han glyphs")
             rows.append(text)
             remaining -= hits
     if render_dir:

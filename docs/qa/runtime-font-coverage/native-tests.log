@@ -1,0 +1,42 @@
+test_all_planner_failure_reasons_are_in_the_corpus (__main__.FontCoverageTests.test_all_planner_failure_reasons_are_in_the_corpus) ... ok
+test_all_runtime_and_pinned_crafting_characters (__main__.FontCoverageTests.test_all_runtime_and_pinned_crafting_characters) ... ok
+test_chinese_can_never_be_exempted (__main__.FontCoverageTests.test_chinese_can_never_be_exempted) ... ok
+test_empty_chinese_glyph_is_detected (__main__.FontCoverageTests.test_empty_chinese_glyph_is_detected) ... ok
+test_existing_glyph_outlines_metrics_and_family (__main__.FontCoverageTests.test_existing_glyph_outlines_metrics_and_family) ... ok
+test_license_and_embedded_license_preserved (__main__.FontCoverageTests.test_license_and_embedded_license_preserved) ... ok
+test_lost_baseline_glyph_is_detected (__main__.FontCoverageTests.test_lost_baseline_glyph_is_detected) ... ok
+test_map_preparation_overview_and_study_glyphs_are_bundled (__main__.FontCoverageTests.test_map_preparation_overview_and_study_glyphs_are_bundled) ... ok
+test_metric_and_outline_regression_is_detected (__main__.FontCoverageTests.test_metric_and_outline_regression_is_detected) ... ok
+test_missing_crafting_glyph_is_detected (__main__.FontCoverageTests.test_missing_crafting_glyph_is_detected) ... ok
+test_more_than_the_six_reported_glyphs_are_protected (__main__.FontCoverageTests.test_more_than_the_six_reported_glyphs_are_protected) ... ok
+test_notdef_mapping_does_not_count_as_coverage (__main__.FontCoverageTests.test_notdef_mapping_does_not_count_as_coverage) ... ok
+test_offline_cli_and_strict_symbol_audit (__main__.FontCoverageTests.test_offline_cli_and_strict_symbol_audit) ... ok
+test_pre_planner_coverage_is_rejected (__main__.FontCoverageTests.test_pre_planner_coverage_is_rejected) ... ok
+test_unverified_source_rejected_before_writing (__main__.FontCoverageTests.test_unverified_source_rejected_before_writing) ... ok
+test_comments_do_not_request_glyphs (__main__.StringScanTests.test_comments_do_not_request_glyphs) ... ok
+test_escaped_quotes_and_continuation (__main__.StringScanTests.test_escaped_quotes_and_continuation) ... ok
+test_json_csv_resources_and_gdignore (__main__.StringScanTests.test_json_csv_resources_and_gdignore) ... ok
+test_malformed_strings_fail (__main__.StringScanTests.test_malformed_strings_fail) ... ok
+test_multiline_raw_names_and_paths (__main__.StringScanTests.test_multiline_raw_names_and_paths) ... ok
+test_non_bmp_chinese_is_required (__main__.StringScanTests.test_non_bmp_chinese_is_required) ... ok
+test_unicode_escapes_and_surrogates (__main__.StringScanTests.test_unicode_escapes_and_surrogates) ... ok
+
+----------------------------------------------------------------------
+Ran 22 tests in 6.961s
+
+OK
+{
+  "display_driver": "headless",
+  "engine": "4.6.3-stable (official)",
+  "fallback": false,
+  "font_rids": 1,
+  "han_rasters": 3112,
+  "native_mappings": 3368,
+  "rendered": false,
+  "sizes": [
+    16,
+    19
+  ],
+  "supported_chars": 1687,
+  "font_sha256": "9799ca31a5158fc20de8ef3c41307ee2b44427dcd6e0e08c202a18369443588c"
+}

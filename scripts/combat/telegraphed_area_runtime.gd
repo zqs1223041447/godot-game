@@ -206,6 +206,11 @@ func active_count() -> int:
 	return _states.size()
 
 
+func has_state(source_id: int) -> bool:
+	# Stored attacks are nonempty until erased; membership needs no visual snapshot.
+	return _states.has(source_id)
+
+
 func state_for(source_id: int) -> Dictionary:
 	var result:Dictionary=_states.get(source_id, {}).duplicate(true)
 	if result.get("visual_pattern","")=="sunwell_echo":

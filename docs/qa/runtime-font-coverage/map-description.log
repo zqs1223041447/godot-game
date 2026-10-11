@@ -1,0 +1,10 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+godot-game: playable arena ready
+ERROR: Actual prepare preserves its existing transaction
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/map_selection_cost_preview_test.gd:18)
+       [1] run (res://tests/map_device_description_test.gd:47)
+       [2] settle (res://tests/map_selection_cost_preview_test.gd:21)
+MAP_NOTES {"checks":90,"display":"headless","failed_labels":["Actual prepare preserves its existing transaction"],"failures":1,"geometry":[{"launch":"[P: (32.0, 463.8), S: (400.0, 39.6)]","prepare":"[P: (32.0, 415.8), S: (400.0, 39.6)]","viewport":"[P: (32.0, 352.8), S: (406.0, 150.0)]"}],"production_scope":"TownServicePanel presentation only","screenshots":"","source":"Main.map_options -> ExplorationLayout.description"}
