@@ -13,6 +13,20 @@ class StudyMarks extends Node2D:
 		CampSigns.draw_ground(self, geometry.get("landmarks", {}))
 		draw_rect(geometry.get("bounds", Rect2()), Color("596647"), false, 2.0)
 
+class RouteStone extends Node2D:
+	var stone: PackedVector2Array
+	var index: int
+	func _draw() -> void:
+		EnvironmentArt.draw_route_stone(self, stone, index)
+
+class EnvironmentDetails extends Node2D:
+	var source: Node2D
+	var ARENA: Rect2
+	var _font: Font
+	func world_geometry() -> Dictionary: return source.world_geometry()
+	func _draw() -> void: EnvironmentArt.draw_details(self)
+
+var _route_parts: Array[Node2D] = []
 var _camp_signs: Node2D
 var ARENA: Rect2 = Rect2()
 var draw_count: int = 0
@@ -27,6 +41,7 @@ func configure(bounds: Rect2, font_resource: Font) -> void:
 	ARENA = bounds
 	_font = font_resource
 	_update_signs()
+	_update_route_parts()
 	queue_redraw()
 func _draw() -> void:
 	draw_count += 1
@@ -34,6 +49,8 @@ func _draw() -> void:
 		# Child quad owns its shader. Marks, flags and module shadows keep their
 		# normal materials; the old opaque tiled floor is not drawn underneath.
 		draw_rect(ARENA.grow(600), Color("45543b"))
+	elif not _route_parts.is_empty():
+		EnvironmentArt.draw_floor(self)
 	else:
 		EnvironmentArt.draw(self)
 
@@ -42,6 +59,7 @@ func set_geometry(value: Dictionary) -> void:
 	_geometry = value.duplicate(true)
 	_update_study_ground()
 	_update_signs()
+	_update_route_parts()
 	queue_redraw()
 
 func _update_signs() -> void:
@@ -75,3 +93,31 @@ func _update_study_ground() -> void:
 	for child: Node2D in [_study_ground, _study_marks]:
 		if is_instance_valid(child): remove_child(child); child.queue_free()
 	_study_ground = null; _study_marks = null
+
+func _update_route_parts() -> void:
+	for part: Node2D in _route_parts:
+		remove_child(part)
+		part.queue_free()
+	_route_parts.clear()
+	if is_instance_valid(_study_ground): return
+	var stones := EnvironmentArt.route_stones(_geometry.get("landmarks", {}).get("route_segments", []))
+	if stones.is_empty(): return
+	# Retain each stone independently so the renderer can cull its exact native
+	# polygon/AA-line bounds against the entire viewport. Keep world coordinates
+	# and the global tint index; no camera math, regrouping or per-frame rebuild.
+	for index: int in range(stones.size()):
+		var part := RouteStone.new()
+		part.stone = stones[index]
+		part.index = index
+		add_child(part)
+		move_child(part, index)
+		_route_parts.append(part)
+	# CanvasItem children draw after the parent's floor, so the rest of the
+	# environment must follow the route children and precede the existing flags.
+	var details := EnvironmentDetails.new()
+	details.source = self
+	details.ARENA = ARENA
+	details._font = _font
+	add_child(details)
+	move_child(details, stones.size())
+	_route_parts.append(details)
