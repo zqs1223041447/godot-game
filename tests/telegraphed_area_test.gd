@@ -351,8 +351,24 @@ func _test_shared_damage_path() -> void:
 		var contact: Dictionary = Monsters.contact_components(actual)
 		_expect(emitted.size() == 1, "Real catalog source emits once: " + template)
 		if emitted.size() == 1:
+			var ember: bool = template == "ember_guard"
+			if ember:
+				# Authored enemy burn contract predates this stale generic assertion:
+				# only half the fire is upfront; physical and the 1.4 area scale stay intact.
+				var expected_policy: Dictionary = {"duration": 3.0, "rate_fraction": 1.0 / 3.0, "upfront_fire_multiplier": 0.50}
+				_expect(Monsters.Burn.ENEMY_POLICY == expected_policy and emitted[0].get("burn_policy", {}) == expected_policy, "Ember emits the fixed three-second half-fire burn contract")
+				# Independent wave-3 rare brute formula, not copied from event output
+				# or runtime policy: species 18 + two wave increments, rarity 1.2.
+				var authored_contact: float = (18.0 + 2.0 * 0.7) * 1.2
+				_near(actual.damage, authored_contact, "Ember catalog keeps the authored wave-3 rare brute damage")
+				_expect(actual.contact_weights == {"physical": 0.5, "fire": 0.5}, "Ember contact budget remains half physical and half fire")
+				_near(emitted[0].packet.base.physical, authored_contact * 0.5 * 1.4, "Ember physical budget is never halved by the burn adapter")
+				_near(emitted[0].packet.base.fire, authored_contact * 0.5 * 1.4 * 0.5, "Ember upfront fire follows the independent authored budget")
+			else:
+				_expect(not emitted[0].has("burn_policy"), "Ordinary source does not acquire ember burn: " + template)
 			for type: String in contact:
-				_near(emitted[0].packet.base[type], float(contact[type]) * 1.4, "Catalog and runtime share contact-base authority: " + template + "/" + type)
+				var upfront: float = 0.5 if ember and type == "fire" else 1.0
+				_near(emitted[0].packet.base[type], float(contact[type]) * 1.4 * upfront, "Catalog contact base and authored upfront policy agree: " + template + "/" + type)
 
 
 func _test_capacity_and_soak() -> void:
