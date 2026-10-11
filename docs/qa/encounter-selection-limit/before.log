@@ -1,0 +1,73 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+ERROR: Unselected options are disabled at the cap
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (/tmp/godot-encounter-limit-before-test.gd:12)
+       [1] _initialize (/tmp/godot-encounter-limit-before-test.gd:25)
+ERROR: Blocked option explains the selection limit
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (/tmp/godot-encounter-limit-before-test.gd:12)
+       [1] _initialize (/tmp/godot-encounter-limit-before-test.gd:26)
+ERROR: Over-limit user callback preserves accepted draft
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (/tmp/godot-encounter-limit-before-test.gd:12)
+       [1] _initialize (/tmp/godot-encounter-limit-before-test.gd:28)
+ERROR: Limit attempt never poisons valid context
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (/tmp/godot-encounter-limit-before-test.gd:12)
+       [1] _initialize (/tmp/godot-encounter-limit-before-test.gd:30)
+ERROR: Confirmation still emits accepted draft
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (/tmp/godot-encounter-limit-before-test.gd:12)
+       [1] _initialize (/tmp/godot-encounter-limit-before-test.gd:32)
+ERROR: Removing a choice clears limit lock and tooltip
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (/tmp/godot-encounter-limit-before-test.gd:12)
+       [1] _initialize (/tmp/godot-encounter-limit-before-test.gd:34)
+ERROR: Replacement can be selected without reopening
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (/tmp/godot-encounter-limit-before-test.gd:12)
+       [1] _initialize (/tmp/godot-encounter-limit-before-test.gd:36)
+ERROR: Repeated deselection restores ordinary encounter
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (/tmp/godot-encounter-limit-before-test.gd:12)
+       [1] _initialize (/tmp/godot-encounter-limit-before-test.gd:39)
+ERROR: Every choice available below cap: enemy_armour_80
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (/tmp/godot-encounter-limit-before-test.gd:12)
+       [1] _initialize (/tmp/godot-encounter-limit-before-test.gd:41)
+ERROR: Every choice available below cap: enemy_attack_speed_110
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (/tmp/godot-encounter-limit-before-test.gd:12)
+       [1] _initialize (/tmp/godot-encounter-limit-before-test.gd:41)
+ERROR: Every choice available below cap: enemy_damage_115
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (/tmp/godot-encounter-limit-before-test.gd:12)
+       [1] _initialize (/tmp/godot-encounter-limit-before-test.gd:41)
+ERROR: Every choice available below cap: enemy_max_health_120
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (/tmp/godot-encounter-limit-before-test.gd:12)
+       [1] _initialize (/tmp/godot-encounter-limit-before-test.gd:41)
+ERROR: Every choice available below cap: enemy_move_speed_110
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (/tmp/godot-encounter-limit-before-test.gd:12)
+       [1] _initialize (/tmp/godot-encounter-limit-before-test.gd:41)
+ERROR: Every choice available below cap: enemy_shield_from_health_20
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] expect (/tmp/godot-encounter-limit-before-test.gd:12)
+       [1] _initialize (/tmp/godot-encounter-limit-before-test.gd:41)
+Encounter selection limit: 34 checks, 14 failures

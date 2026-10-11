@@ -1,0 +1,9 @@
+{
+  "source_commit": "5b700a7890bd86534724732de673bbf300bdaec2",
+  "original_catalog_bytes": 17694725,
+  "compact_catalog_bytes": 11430636,
+  "parsed_catalog_exactly_equal": true,
+  "html_bytes_unchanged": true,
+  "catalog_git_blob": "b1fc55078f4c538e9adb99f473ed3cc37ff591e2",
+  "note": "Whitespace-only compact serialization for the connector 16 MiB request limit. Historical verify_shade_inward_reference.py checks raw pre-compaction JSON prefixes and fails on the new formatting; its original successful evidence remains historical. This check verifies complete parsed equality to the already-validated pre-compaction snapshot, not a new gameplay test."
+}

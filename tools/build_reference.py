@@ -1034,9 +1034,9 @@ def inward_pull_rule(data,link,facts,details):
             others=[key for key in after['support_ids'] if key!='inward_pull']
             label='仅牵引' if not others else '牵引＋'+'＋'.join(data['supports'][key]['name'].removesuffix('辅助') for key in others)
             cells=[]
-            for field,source in [('hit',lambda row:row['resolved']['total']),('mana',lambda row:row['mana']),('cooldown',lambda row:row['cooldown']),('pierce' if skill=='frost' else 'radius',lambda row:row['recipe']['pierce'] if skill=='frost' else row['recipe']['radius'])]:
+            for field,source in [('hit',lambda row:row['resolved']['total']),('mana',lambda row:row['mana']),('cooldown',lambda row:row['cooldown']),('pierce' if skill in ['frost','shade_bolt'] else 'radius',lambda row:row['recipe']['pierce'] if skill in ['frost','shade_bolt'] else row['recipe']['radius'])]:
                 cells.append(value(prefix+'-'+field+'-before',source(before))+' → '+value(prefix+'-'+field+'-after',source(after)))
-            cells.append(value(prefix+'-trigger-radius',after['trap_profile']['trigger_radius']) if 'trap_profile' in after else '发射后命中' if skill=='frost' else '直接施放')
+            cells.append(value(prefix+'-trigger-radius',after['trap_profile']['trigger_radius']) if 'trap_profile' in after else '发射后命中' if skill in ['frost','shade_bolt'] else '直接施放')
             rows.append('<tr><th>'+esc(label)+'</th>'+''.join('<td>'+cell+'</td>' for cell in cells)+'</tr>')
             if skill=='frost':
                 status_rows.append('<p>'+esc(label)+'：初始冰弹 '+value(prefix+'-count',after['initial_count'])+' 枚，原冰缓 '+value(prefix+'-slow',after['recipe']['slow'])+' 秒，加入牵引前后保持。冰弹只在成功命中后拉向本次发射原点。</p>')
@@ -1046,11 +1046,11 @@ def inward_pull_rule(data,link,facts,details):
             if 'burn_profile' in after:
                 status=after['burn_profile'];direct=status['roles']['direct']
                 status_rows.append('<p>'+esc(label)+'：燃烧 '+value(prefix+'-burn-duration',status['duration'])+' 秒，每秒 '+value(prefix+'-burn-dps',direct['dps'])+' 火焰，完整持续 '+value(prefix+'-burn-total',direct['total'])+'；余烬扩散半径 '+value(prefix+'-ember-radius',status['proliferation']['radius'])+'、最多 '+value(prefix+'-ember-targets',status['proliferation']['max_targets'])+' 个目标，均与加入牵引前相同。</p>')
-        range_title='穿透次数' if skill=='frost' else '爆发半径'
+        range_title='穿透次数' if skill in ['frost','shade_bolt'] else '爆发半径'
         body+='<h4>'+link('skills',skill)+'</h4><div class="table-scroll"><table><thead><tr><th>辅助组合</th><th>防御前单击</th><th>魔力</th><th>冷却秒</th><th>'+range_title+'</th><th>伏击触发半径</th></tr></thead><tbody>'+''.join(rows)+'</tbody></table></div>'+''.join(status_rows)
     body+=''.join('<p>'+esc(rule[key])+'。</p>' for key in ['statuses','damage_scope','risk'])
     body+='<p>正式宝石商人售价 '+value('merchant-cost',rule['merchant_quote']['cost']['calibration_shard'])+' 碎片；独立测试目录免费供应。原里程碑奖励仍为 '+value('reward-count',rule['normal_reward_definition_count'])+' 枚固定身份，牵引不插入其序列。</p><p>'+esc(rule['migration'])+'。</p>'
-    body+='<p>'+link('supports','inward_pull')+' · '+link('rules','ambush')+' · '+link('rules','shock')+' · '+link('rules','ember_proliferation')+' · <a href="../INWARD_PULL_SUPPORT.zh-CN.md">完整牵引辅助规则</a> · <a href="../qa/v067-reference/README.md">原牵引图鉴验证</a> · <a href="../CLEAVE_INWARD_SUPPORT.zh-CN.md">裂刃牵引验收</a> · <a href="../FROST_INWARD.zh-CN.md">冰霜牵引与本批验收</a></p>'
+    body+='<p>'+link('supports','inward_pull')+' · '+link('rules','ambush')+' · '+link('rules','shock')+' · '+link('rules','ember_proliferation')+' · <a href="../INWARD_PULL_SUPPORT.zh-CN.md">完整牵引辅助规则</a> · <a href="../qa/v067-reference/README.md">原牵引图鉴验证</a> · <a href="../CLEAVE_INWARD_SUPPORT.zh-CN.md">裂刃牵引验收</a> · <a href="../FROST_INWARD.zh-CN.md">冰霜牵引验收</a> · <a href="../SHADE_INWARD.zh-CN.md">蚀影牵引与本批验收</a></p>'
     return body
 
 
@@ -1484,6 +1484,8 @@ def build(data, art):
             body+='<p>有效鼠标瞄准优先；自动瞄准的最近目标与角色重合时保留原朝向，原朝向也为零才向右。先确定方向，再按本技能原扇形和19单位发射偏移创建弹道。<a href="../AIM_OVERLAP_FIX.zh-CN.md">重合瞄准规则与验证</a>。</p>'
         if key=='dash':
             body+='<p>有移动输入时沿移动方向；无移动输入且最近目标重合时保留原朝向，原朝向也为零才向右。恢复方向不会绕过原身体碰撞、墙体或地图边界。<a href="../AIM_OVERLAP_FIX.zh-CN.md">重合瞄准修复</a>。</p>'
+        if key=='shade_bolt':
+            body+='<p>牵引辅助使蚀影主投射成功命中后拉向发射时角色脚下位置，以190牵引替换原45向外冲量；在途原点冻结，魔力8→9.6，占一个辅助槽。伤害、混沌类型、速度、穿透、射程、寿命与冷却保持；独立爆炸不牵引。<a href="../SHADE_INWARD.zh-CN.md">蚀影牵引规则与验证</a>。</p>'
         if key=='frost':
             body+='<p>牵引辅助使冰弹成功命中后拉向发射时角色位置，替换原向外冲量；在途原点冻结，魔力×1.20。<a href="../FROST_INWARD.zh-CN.md">冰霜牵引规则与验证</a>。</p>'
         if key=='nova':
@@ -1492,7 +1494,7 @@ def build(data, art):
             body+='<p>符印伏击改为脚下预置，成功放置时支付魔力；触发后才命中。'+link('rules','ambush','查看伏击、感电、燃烧与范围组合的代表编译示例')+'。</p>'
             related+=' · '+link('rules','ambush')
         if 'inward_pull' in compatible:
-            body+='<p>'+('牵引辅助在裂刃成功命中后向施放原点施加190冲量，闪避不牵引；魔力乘1.20。再次命中覆盖原冲量，重合目标沿原朝向判定并获得零冲量。' if key=='cleave' else '牵引辅助把原击退冲量反转为朝本次真实爆发圆心，魔力乘1.20。')+link('rules','inward_pull','查看牵引与冻结快照的代表编译示例')+'。</p>'
+            body+='<p>'+('牵引辅助在裂刃成功命中后向施放原点施加190冲量，闪避不牵引；魔力乘1.20。再次命中覆盖原冲量，重合目标沿原朝向判定并获得零冲量。' if key=='cleave' else '牵引辅助在主投射成功命中后拉向发射时角色脚下原点；魔力乘1.20。' if key=='shade_bolt' else '牵引辅助把原击退冲量反转为朝本次真实爆发圆心，魔力乘1.20。')+link('rules','inward_pull','查看牵引与冻结快照的代表编译示例')+'。</p>'
             related+=' · '+link('rules','inward_pull')
         if 'frost_lock' in compatible:
             body+='<p>霜锁辅助提供短冻结窗口，与寒意延长互斥；保留原3秒移动减缓。'+link('rules','frost_lock','查看冻结、免疫与原攻击接续')+'。</p>'
@@ -1525,7 +1527,7 @@ def build(data, art):
             body+='<p>放置时不立即命中；脚下固定符印等待活敌触发。共享三枚，未触发过期不爆炸；新星与陨星保留范围命中，连锁从触发者开始续跳，范围与远链都不扩大触发距离。'+link('rules','ambush','查看冻结快照、魔力与冷却、原异常组合及生命周期')+'。</p>'
             related+=' · '+link('rules','ambush')+' · '+link('town_services','skill_merchant','宝石商人')
         if key=='inward_pull':
-            body+='<p>沿用原冲量衰减、墙体碰撞与分离规则，不保证拉到中心；裂刃只牵引成功命中的目标；冰霜冰弹拉向发射时角色位置，不影响独立爆炸；新星与陨星可搭配符印伏击并在放置时冻结。'+link('rules','inward_pull','查看实际圆心、魔力代价与伤害不变的同源示例')+'。</p>'
+            body+='<p>沿用原冲量衰减、墙体碰撞与分离规则，不保证拉到中心；裂刃只牵引成功命中的目标；冰霜冰弹与蚀影飞弹拉向发射时角色位置，不影响独立爆炸；新星与陨星可搭配符印伏击并在放置时冻结。'+link('rules','inward_pull','查看实际圆心、魔力代价与伤害不变的同源示例')+'。</p>'
             related+=' · '+link('rules','inward_pull')+' · '+link('rules','ambush')+' · '+link('town_services','skill_merchant','宝石商人')
         if key=='lingering_chill':
             body+='<p>奥能新星原有普通减速0.6→0.9秒，移动倍率仍为0.36，同类时长取较大值；伏击在放置时冻结时长。新星不受冰霜异常时长源属性加成。<a href="../NOVA_LINGERING.zh-CN.md">新星延长减速与验收</a>。</p>'

@@ -131,6 +131,11 @@ func _toggle(pressed: bool, id: String) -> void:
 		return
 	var candidate: Array[String] = get_selected_ids()
 	if pressed:
+		# A user reaching the limit must not poison the accepted owner context.
+		# Keep this guard even when the checkbox is disabled: signals can be emitted directly.
+		if candidate.has(id) or candidate.size() >= Catalog.MAX_MODIFIERS:
+			_refresh()
+			return
 		candidate.append(id)
 	else:
 		candidate.erase(id)
@@ -142,8 +147,11 @@ func _refresh() -> void:
 	for id: String in _options:
 		var option: CheckBox = _options[id]
 		option.set_pressed_no_signal(_selected_ids.has(id))
-		option.disabled = blocked
+		var at_limit: bool = not _selected_ids.has(id) and _selected_ids.size() >= Catalog.MAX_MODIFIERS
+		option.disabled = blocked or at_limit
 		option.tooltip_text = _disabled_reason if not _disabled_reason.is_empty() else _selection_error
+		if not blocked and at_limit:
+			option.tooltip_text = "最多选择 %d 个挑战；取消一个已选挑战后可替换。" % Catalog.MAX_MODIFIERS
 	_confirm.disabled = blocked
 	var reasons: PackedStringArray = []
 	if not _selection_error.is_empty():

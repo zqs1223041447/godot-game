@@ -1,0 +1,292 @@
+{
+	"checks": 409,
+	"failures": 0,
+	"group_id": "group_000010",
+	"labels": [],
+	"main_uid": "item_000010",
+	"old_cast_comparisons": 177,
+	"old_projectile_batches": 15,
+	"owned_cast": {
+		"area_impulse_profile": {
+			"direction": "toward_origin",
+			"enabled": true,
+			"impulse_speed": 190.0,
+			"mana_multiplier": 1.2
+		},
+		"cooldown": 1.2,
+		"critical": {
+			"primary": {
+				"chance": 0.05,
+				"multiplier": 1.5
+			},
+			"secondary": {
+				"chance": 0.05,
+				"multiplier": 1.5
+			}
+		},
+		"error": "",
+		"group_id": "group_000010",
+		"initial_count": 1,
+		"main_uid": "item_000010",
+		"mana": 9.6,
+		"ok": true,
+		"packets": {
+			"projectile": {
+				"assembly": {
+					"added": {
+
+					},
+					"added_effectiveness": 2.4,
+					"base_coefficient": 2.4,
+					"intrinsic": {
+						"chaos": 62.4
+					},
+					"stage": "hit_base"
+				},
+				"base": {
+					"chaos": 62.4
+				},
+				"role": "projectile",
+				"skill_id": "shade_bolt",
+				"tags": [
+					"hit",
+					"projectile",
+					"spell"
+				]
+			},
+			"secondary": {
+				"assembly": {
+					"added": {
+
+					},
+					"added_effectiveness": 0.0,
+					"base_coefficient": 0.9,
+					"intrinsic": {
+						"fire": 23.400000000000002
+					},
+					"stage": "hit_base"
+				},
+				"base": {
+					"fire": 23.400000000000002
+				},
+				"role": "secondary",
+				"skill_id": "shade_bolt",
+				"tags": [
+					"hit",
+					"area",
+					"secondary",
+					"explosion"
+				]
+			}
+		},
+		"recipe": {
+			"added_effectiveness": 2.4,
+			"coefficient": 2.4,
+			"damage_type": "chaos",
+			"initial_count": 1,
+			"pierce": 0,
+			"slow": 0.0,
+			"speed": 620.0,
+			"spread": 0.14
+		},
+		"skill_id": "shade_bolt",
+		"snapshot": {
+			"accuracy": 140.0,
+			"added_damage": {
+				"attack": {
+					"fire": 0.0,
+					"physical": 0.0
+				},
+				"spell": {
+					"cold": 0.0,
+					"lightning": 0.0
+				}
+			},
+			"added_damage_sources": [],
+			"area_impulse_policy": {
+				"direction": "toward_origin",
+				"enabled": true,
+				"impulse_speed": 190.0,
+				"mana_multiplier": 1.2
+			},
+			"base_damage": 26.0,
+			"compiled_packets": {
+				"projectile": {
+					"assembly": {
+						"added": {
+
+						},
+						"added_effectiveness": 2.4,
+						"base_coefficient": 2.4,
+						"intrinsic": {
+							"chaos": 62.4
+						},
+						"stage": "hit_base"
+					},
+					"base": {
+						"chaos": 62.4
+					},
+					"role": "projectile",
+					"skill_id": "shade_bolt",
+					"tags": [
+						"hit",
+						"projectile",
+						"spell"
+					]
+				},
+				"secondary": {
+					"assembly": {
+						"added": {
+
+						},
+						"added_effectiveness": 0.0,
+						"base_coefficient": 0.9,
+						"intrinsic": {
+							"fire": 23.400000000000002
+						},
+						"stage": "hit_base"
+					},
+					"base": {
+						"fire": 23.400000000000002
+					},
+					"role": "secondary",
+					"skill_id": "shade_bolt",
+					"tags": [
+						"hit",
+						"area",
+						"secondary",
+						"explosion"
+					]
+				}
+			},
+			"compiled_skill_id": "shade_bolt",
+			"critical": {
+				"primary": {
+					"chance": 0.05,
+					"multiplier": 1.5
+				},
+				"secondary": {
+					"chance": 0.05,
+					"multiplier": 1.5
+				}
+			},
+			"critical_modifiers": {
+				"base_chance": 0.05,
+				"base_multiplier": 1.5
+			},
+			"effects": [],
+			"explosion_recipe": {
+				"added_effectiveness": 0.0,
+				"coefficient": 0.9,
+				"radius": 76.0
+			},
+			"initial_count": 1,
+			"modifiers": [
+				{
+					"all_tags": [
+						"attack",
+						"melee"
+					],
+					"damage_types": [
+						"physical"
+					],
+					"id": "melee_physical_increased",
+					"mode": "increased",
+					"value": 0.04
+				}
+			],
+			"projectile_count": 0,
+			"tornado_recipe": {
+				"child": {
+					"added_effectiveness": 0.7,
+					"coefficient": 0.7,
+					"lifetime": 1.7,
+					"pierce": -1,
+					"radius": 4.5,
+					"range": 150.0,
+					"role": "child",
+					"speed": 260.0,
+					"split": false
+				},
+				"child_count": 3,
+				"explosion": {
+					"added_effectiveness": 0.0,
+					"coefficient": 0.9,
+					"radius": 76.0
+				},
+				"parent": {
+					"added_effectiveness": 1.0,
+					"coefficient": 1.0,
+					"lifetime": 0.9,
+					"pierce": -1,
+					"radius": 6.0,
+					"range": 150.0,
+					"role": "parent",
+					"speed": 420.0,
+					"split": true
+				},
+				"parent_count": 3,
+				"spread": 0.16
+			}
+		},
+		"support_ids": [
+			"inward_pull"
+		]
+	},
+	"owned_sha256": "9d2c6917b179ad9b82e203a0424545fae952d8f284c90dc94f31934f104ca3e8",
+	"samples": [
+		{
+			"hits": 1,
+			"links": [],
+			"mana": 8.0,
+			"moved_player": "(942.0, 2104.0)",
+			"origin": "(442.0, 1704.0)",
+			"pierce": 0,
+			"slow": 0.0
+		},
+		{
+			"hits": 1,
+			"links": [
+				"inward_pull"
+			],
+			"mana": 9.6,
+			"moved_player": "(942.0, 2104.0)",
+			"origin": "(442.0, 1704.0)",
+			"pierce": 0,
+			"slow": 0.0
+		},
+		{
+			"hits": 3,
+			"links": [
+				"inward_pull",
+				"pierce"
+			],
+			"mana": 11.52,
+			"moved_player": "(942.0, 2104.0)",
+			"origin": "(442.0, 1704.0)",
+			"pierce": 2,
+			"slow": 0.0
+		},
+		{
+			"hits": 3,
+			"links": [
+				"inward_pull",
+				"pierce",
+				"heavy_projectiles",
+				"volley",
+				"efficiency"
+			],
+			"mana": 13.777919999999998,
+			"moved_player": "(942.0, 2104.0)",
+			"origin": "(442.0, 1704.0)",
+			"pierce": 2,
+			"slow": 0.0
+		},
+		{
+			"case": "isolated_existing_secondary_effect",
+			"damage": 23.400000000000002,
+			"unchanged_impulse": "(7.0, 9.0)"
+		}
+	],
+	"support_uid": "item_000011"
+}

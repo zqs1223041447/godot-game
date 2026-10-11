@@ -1,0 +1,62 @@
+{
+  "baseline": "6dbf3f9695611f68a21e8d32af1847ce46f8530e",
+  "environment": "dot Linux, Godot 4.6.3",
+  "completion": "Verified locally in dot; saved as a source commit by the parent after review. Not pushed; no Windows build or release.",
+  "tests": {
+    "shade_final": {
+      "checks": 413,
+      "failures": 0,
+      "exit": 0
+    },
+    "old_frost_actual_main": {
+      "checks": 179,
+      "failures": 0,
+      "exit": 0
+    },
+    "old_area_two_legacy_scenarios": {
+      "checks": 103,
+      "failures": 0,
+      "exit": 0
+    }
+  },
+  "files": {
+    "docs/SHADE_INWARD.zh-CN.md": "360e459a7664f0abf775e2083f539456644681187ad75d53bd0e031b98dc1ffc",
+    "docs/qa/shade-inward/README.md": "f2db85d42ee9b7044b8680f1537f8e0734c6a2a6fee8cb7a53b9fb580793c54f",
+    "docs/qa/shade-inward/REFERENCE.zh-CN.md": "4562416ac5719bf90035cdd2155a6dfab160780aa312f595707cef2a28f27e06",
+    "docs/qa/shade-inward/attempt-01.json": "9a58992845c8179167c0c6a420032b3aa523ceddcf6c534e4904589a891a5735",
+    "docs/qa/shade-inward/attempt-01.log": "cfe7625e895240a6dae0103fc2577058406a02ebdba0fe760114857fd156fcd1",
+    "docs/qa/shade-inward/attempt-02.json": "3d2755cb3154f90210d8c2442fefd9a200607802a5c0733450549c4fc06ba61e",
+    "docs/qa/shade-inward/attempt-02.log": "bfb70d327889e4cf6efb0d13c605c236d6cc80b59e2b2bc58a0bd11a7df33266",
+    "docs/qa/shade-inward/attempt-03.json": "9645538325d06bcdb6daaa64ee83c18c46c5ea5641fce3b61438331f4eb3dbe8",
+    "docs/qa/shade-inward/attempt-03.log": "bf4e497f19f69eb766eb34ede144ae730a6c09f31ba6bd24570aa51e68a06992",
+    "docs/qa/shade-inward/baseline.json": "58d14c58b99c46c011853c762d034a4174a43e0bf58fc44c8632c5269697a989",
+    "docs/qa/shade-inward/before.log": "62257170cfd250f3e36f4983555dd7b63bb2e584d2b562ce3d7084cf66c7db22",
+    "docs/qa/shade-inward/old-area.log": "80273ea3b6c6369d7a8620760d3f8c88ef4a0f875905d50c1cbb1a76498f2b3e",
+    "docs/qa/shade-inward/old-frost/owned.json": "ba344d79b841d3ab6e86bcb0a082fc27dec8e71cacf0f8ed0575550226d885d2",
+    "docs/qa/shade-inward/old-frost/report.json": "f1ab3ef055fad592333dc1edd740ea5c2f967c32a6e73f32fc37cc556c4a7dd9",
+    "docs/qa/shade-inward/old-frost/run.log": "b0ebaaf37ae1b602e151384bfc115c0f5588aeac3c650309ca77350166b3b794",
+    "docs/qa/shade-inward/owned.json": "9d2c6917b179ad9b82e203a0424545fae952d8f284c90dc94f31934f104ca3e8",
+    "docs/qa/shade-inward/reference-build.log": "f647f74a492b465bc2a79715bba165323ed77e20149daaadf8a10878e23eabc6",
+    "docs/qa/shade-inward/reference-check.log": "65d47533eaf556129a1f3a295db12ab1bc36a8df0770c71cb9378490d54d03ba",
+    "docs/qa/shade-inward/reference-export.log": "6b489b9e3e2ec68a8b09784a4449e787ce96362ca1667de0622c9724bcf575e1",
+    "docs/qa/shade-inward/reference-fragment.json": "31fa5c5ef10817ce10ec772c99c12413588d21496c263bf96c7bb2ab182ad04a",
+    "docs/qa/shade-inward/reference-merge.log": "ce8988c34152a3e599ae1d06c58991117e9ac3be12ec09d9b4eae0c54ddf1da7",
+    "docs/qa/shade-inward/reference-verification.json": "cf6dd1f0f0d389151e6e68acb5406bb96f85cfc71f2ca0efacc907bf1785306d",
+    "docs/qa/shade-inward/reference-verification.log": "c6e033fc3e068d84f53710303f538440d19a89a27468a5016f07055c4d04f520",
+    "docs/reference/catalog.json": "b61abfbf5db322864afe8a9ecb25d4214a9fabc96f9852ac2624f7ac1b16d0c7",
+    "docs/reference/index.html": "5860dc167139a458677bf9e0c6dc46dd0b4356c9026c70b88e4368396fd4a3f4",
+    "scripts/combat/damage_preview.gd": "20e8dd4a69d9950012b21f6a43efaa275b4469168ada46da2cc1bceffe17edfb",
+    "scripts/combat/inward_pull_support_rules.gd": "85ac095fcbb78f131153d5c7af05f1c8ea98979ad6ea947e5c77daef35b4bc06",
+    "scripts/combat/projectile_runtime.gd": "a2e942d69cc2ce886e4b03e9986715e7d8379f14974a6143d505c76431d0abee",
+    "scripts/main.gd": "0541a5b5a4bffb6993c79df855c5665eee32e654da5c73a88157d1a96104bb45",
+    "tests/shade_inward_area_regression_test.gd": "a13408ff292bc20d6048f8643ab955ececbfc48b0ed4e9c93d2ad3d3abeefd11",
+    "tests/shade_inward_before_test.gd": "66c3fd123a8e9a74120c5b70e365bba878e7f0a65270656421565237de3c9690",
+    "tests/shade_inward_frost_regression_test.gd": "070408e840c576cc361f756775686794d8cc0f559b800d7869ac101dcc85d7dc",
+    "tests/shade_inward_test.gd": "8e5870883fa40d4a0dcb3a62e972c36792e58a5ca494fa6739cff6bcb8fd3ecd",
+    "tools/build_reference.py": "318d68247a275550a6ddd819e6beb45adb68d1c9bf63bc0a5aa6285a6e8333d0",
+    "tools/export_reference.gd": "50158a40b996c0bb3fea37a566228043da0631559cf08c337f820936d7cd0e60",
+    "tools/merge_tornado_swift_reference.py": "5455847d9884549ca2659bc9c5ed1334dd2efa6e045dccbed36efa42a3acd238",
+    "tools/tornado_swift_reference.gd": "127821e7104ff3a3ce235df096e999777d2980ed824a05efafeb4d17de1bf698",
+    "tools/verify_shade_inward_reference.py": "e05f917569be7a43c6c597560ece88123c957ad767ce3f81dd1b3fe850354cd8"
+  }
+}

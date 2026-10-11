@@ -7,10 +7,10 @@ ROOT = Path(__file__).resolve().parents[1]
 parser = argparse.ArgumentParser()
 parser.add_argument('--support', choices=['swift_projectiles','heavy_projectiles','inward_pull','ambush','lingering_chill'], default='swift_projectiles')
 parser.add_argument('--qa', type=Path, default=ROOT / 'docs/qa/tornado-swift')
-parser.add_argument('--skill', choices=['tornado','cleave','chain','nova','frost'], default='tornado')
+parser.add_argument('--skill', choices=['tornado','cleave','chain','nova','frost','shade_bolt'], default='tornado')
 args = parser.parse_args()
 SKILL = args.skill
-assert (SKILL == 'tornado' and args.support in ['swift_projectiles','heavy_projectiles']) or (SKILL in ['cleave','frost'] and args.support == 'inward_pull') or (SKILL == 'chain' and args.support == 'ambush') or (SKILL == 'nova' and args.support == 'lingering_chill')
+assert (SKILL == 'tornado' and args.support in ['swift_projectiles','heavy_projectiles']) or (SKILL in ['cleave','frost','shade_bolt'] and args.support == 'inward_pull') or (SKILL == 'chain' and args.support == 'ambush') or (SKILL == 'nova' and args.support == 'lingering_chill')
 SUPPORT = args.support
 QA = args.qa
 catalog = ROOT / 'docs/reference/catalog.json'
@@ -64,8 +64,9 @@ for path, value in changes:
         spans.append((start,end,encoded))
         continue
     start, end = member_span(text, path)
-    if path in [('ambush','examples'),('inward_pull','examples')]:
-        old_examples = before[path[0]]['examples']
+    if path in [('ambush','examples'),('inward_pull','examples'),('support_program_examples',SUPPORT,'examples')]:
+        old_examples = before
+        for key in path: old_examples = old_examples[key]
         if old_examples == value: continue
         assert all(value[key] == row for key,row in old_examples.items())
         added = {key:row for key,row in value.items() if key not in old_examples}

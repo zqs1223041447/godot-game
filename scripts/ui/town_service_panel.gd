@@ -518,7 +518,7 @@ func _update_map_description() -> void:
 	var description: String = raw.strip_edges() if raw is String else ""
 	var expanded := _map_notes_toggle.button_pressed
 	_map_notes_toggle.disabled = description.is_empty()
-	_map_notes_toggle.text = "地图手记 · 暂无说明" if description.is_empty() else ("▾ 布局与首领 · 收起" if expanded else "▸ 布局与首领 · 展开")
+	_map_notes_toggle.text = "地图手记 · 暂无说明" if description.is_empty() else ("− 布局与首领 · 收起" if expanded else "+ 布局与首领 · 展开")
 	_map_notes.max_lines_visible = -1 if expanded else 1
 	_map_notes.text_overrun_behavior = TextServer.OVERRUN_NO_TRIMMING if expanded else TextServer.OVERRUN_TRIM_ELLIPSIS
 	_map_notes.text = "这张地图暂时没有可用说明。" if description.is_empty() else (description if expanded else description.get_slice("。", 0) + ("。" if description.contains("。") else ""))

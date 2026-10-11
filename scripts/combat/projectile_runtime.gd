@@ -328,7 +328,7 @@ func _hit_event(events: Array[Dictionary], shot: Dictionary, time: float, target
 		"target_id": target_id, "payload": shot.payload, "snapshot": shot.snapshot,
 		"slow": shot.slow, "direction": Vector2(shot.velocity).normalized(),
 		"color": shot.color, "accuracy_checked": accuracy_checked})
-	if shot.skill_id == "frost" and shot.snapshot.has("area_impulse_policy") and shot.get("impulse_origin") is Vector2:
+	if shot.skill_id in ["frost", "shade_bolt"] and shot.snapshot.has("area_impulse_policy") and shot.get("impulse_origin") is Vector2:
 		events.back()["impulse_origin"] = shot.impulse_origin
 
 

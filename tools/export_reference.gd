@@ -1434,6 +1434,7 @@ static func inward_pull_examples() -> Dictionary:
 		"meteor": {"base": [], "ambush_ember_area": ["ambush", "ember_proliferation", "breadth", "concentrate"]},
 		"cleave": {"base": [], "ring_area": ["encircling_cleave", "breadth", "physical_focus", "efficiency"]},
 		"frost": {"base": [], "pierce_lingering": ["pierce", "heavy_projectiles", "lingering_chill", "efficiency"]},
+		"shade_bolt": {"base": [], "pierce_focus": ["pierce", "heavy_projectiles", "focus", "efficiency"]},
 	}
 	for skill_id: String in selections:
 		var rows: Dictionary = {}
@@ -1450,7 +1451,7 @@ static func inward_pull_examples() -> Dictionary:
 			assert(before.recipe == after.recipe and before.cooldown == after.cooldown and before.packets == after.packets)
 			for field: String in ["trap_profile", "burn_profile", "shock_profile", "critical"]:
 				assert(before.get(field, {}) == after.get(field, {}))
-			var role: String = "projectile" if skill_id == "frost" else "direct"
+			var role: String = "projectile" if skill_id in ["frost", "shade_bolt"] else "direct"
 			assert(Damage.resolve(before.packets[role], before.snapshot.modifiers) == Damage.resolve(after.packets[role], after.snapshot.modifiers))
 			rows[mode] = {"before": _inward_pull_cast_brief(before), "after": _inward_pull_cast_brief(after)}
 		examples[skill_id] = rows
@@ -1465,14 +1466,14 @@ static func inward_pull_examples() -> Dictionary:
 		"normal_reward_pool_includes_support": Canonical.Journey.GEM_DEFINITIONS.has("support:inward_pull"),
 		"normal_reward_definition_count": Canonical.Journey.GEM_DEFINITIONS.size(),
 		"example_scope": "同一新建角色的真实战斗快照，仅在对应辅助组合加入牵引并调用生产Compiler.compile_group；显示非暴击、防御前单次命中与冻结配置，不是DPS或实际战斗位移",
-		"direction": "新星与陨星将原向外冲量反转为朝本次技能中心；新星使用施放圆心、陨星使用实际落点、伏击使用已放置符印位置；裂刃只在原攻击成功命中结算后，朝施放时角色位置施加同速冲量，闪避、出生保护与遮挡均不牵引；冰霜脉冲主投射命中后拉向本次发射时角色位置，不追随后来移动的角色或冰弹位置；目标与原点重合时冲量为零",
-		"movement": "圆形法术替换原190冲量方向，裂刃成功命中新增190牵引，冰霜主投射命中的原45向外冲量替换为190向内冲量；沿用原520/秒衰减、怪物移动、分离和墙体碰撞；没有持续吸附、瞬移、自动追踪或强制汇聚，不保证拉到圆心",
-		"snapshot": "compiled.area_impulse_profile与snapshot.area_impulse_policy保存独立副本；裂刃使用本次冻结策略与施放原点，拆卸不撤销已施加的冲量；冰霜每枚投射物保留本次角色脚下原点，命中事件沿用该原点与冻结策略，拆卸不改变在途冰弹；符印伏击在放置时冻结牵引，之后换装、退款或拆卸辅助不改变已有符印",
-		"scope": "奥能新星、陨星坠落、裂刃斩与冰霜脉冲可装配；占用一个辅助槽，魔力乘1.20，伤害、冷却、弹数、穿透、减速、范围与伏击触发半径不变；裂刃保留前方180度，搭配环斩才覆盖360度；没有牵引时不新增空策略字段，裂刃没有该冲量，原法术向外冲量保持",
+		"direction": "新星与陨星将原向外冲量反转为朝本次技能中心；新星使用施放圆心、陨星使用实际落点、伏击使用已放置符印位置；裂刃只在原攻击成功命中结算后，朝施放时角色位置施加同速冲量，闪避、出生保护与遮挡均不牵引；冰霜脉冲与蚀影飞弹主投射命中后拉向本次发射时角色位置，不追随后来移动的角色或投射物位置；目标与原点重合时冲量为零",
+		"movement": "圆形法术替换原190冲量方向，裂刃成功命中新增190牵引，冰霜与蚀影主投射命中的原45向外冲量替换为190向内冲量；沿用原520/秒衰减、怪物移动、分离和墙体碰撞；没有持续吸附、瞬移、自动追踪或强制汇聚，不保证拉到圆心",
+		"snapshot": "compiled.area_impulse_profile与snapshot.area_impulse_policy保存独立副本；裂刃使用本次冻结策略与施放原点，拆卸不撤销已施加的冲量；冰霜与蚀影每枚投射物保留本次角色脚下原点，命中事件沿用该原点与冻结策略，拆卸不改变在途投射物；符印伏击在放置时冻结牵引，之后换装、退款或拆卸辅助不改变已有符印",
+		"scope": "奥能新星、陨星坠落、裂刃斩、冰霜脉冲与蚀影飞弹可装配；占用一个辅助槽，魔力乘1.20，伤害、冷却、弹数、穿透、减速、范围与伏击触发半径不变；裂刃保留前方180度，搭配环斩才覆盖360度；没有牵引时不新增空策略字段，裂刃没有该冲量，原法术向外冲量保持",
 		"statuses": "冰霜保留原冰缓与霜锁准入／时序，牵引不新增冰霜异常时长；感电、点燃或余烬扩散继续使用原准入与结算顺序；牵引不改变它们的数值，点燃与余烬仍互斥",
-		"damage_scope": "新星与陨星仍是原direct法术、范围、命中；裂刃仍是攻击、近战、范围、命中；冰霜仍是projectile法术、投射物、命中，独立爆炸不牵引；不添加trap伤害标签，不开放陷阱伤害、牵引词族或新的源树消费者",
-		"risk": "自心新星、裂刃与冰霜会把敌人拉向施放位置，也可能增加贴身风险；地形、分离、敌人原移动与离散步长都会影响实际位移",
-		"migration": "牵引原始最低存档版本为43，历史42→43迁移先严格校验并保留原字节备份；本次冰霜兼容扩展保持现行schema61，不赠宝石或碎片，不改既有里程碑奖励身份表"}
+		"damage_scope": "新星与陨星仍是原direct法术、范围、命中；裂刃仍是攻击、近战、范围、命中；冰霜与蚀影仍是projectile法术、投射物、命中，独立爆炸不牵引；不添加trap伤害标签，不开放陷阱伤害、牵引词族或新的源树消费者",
+		"risk": "自心新星、裂刃、冰霜与蚀影会把敌人拉向施放位置，也可能增加贴身风险；地形、分离、敌人原移动与离散步长都会影响实际位移",
+		"migration": "牵引原始最低存档版本为43，历史42→43迁移先严格校验并保留原字节备份；本次蚀影兼容扩展保持现行schema61，不赠宝石或碎片，不改既有里程碑奖励身份表"}
 
 
 static func _inward_pull_cast_brief(cast: Dictionary) -> Dictionary:
@@ -1535,7 +1536,7 @@ static func ambush_examples() -> Dictionary:
 static func _ambush_cast_brief(cast: Dictionary) -> Dictionary:
 	var result: Dictionary = support_cast_brief(cast)
 	result["support_ids"] = cast.support_ids.duplicate()
-	var packet: Dictionary = cast.packets.bounces[0] if cast.skill_id == "chain" else cast.packets.projectile if cast.skill_id == "frost" else cast.packets.direct
+	var packet: Dictionary = cast.packets.bounces[0] if cast.skill_id == "chain" else cast.packets.projectile if cast.skill_id in ["frost", "shade_bolt"] else cast.packets.direct
 	result["packet"] = packet.duplicate(true)
 	result["resolved"] = Damage.resolve(packet, cast.snapshot.modifiers)
 	if cast.skill_id == "chain":

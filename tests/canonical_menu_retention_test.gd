@@ -22,6 +22,19 @@ func _run() -> void:
 	arena.set_process(false)
 	arena.hud.set_process(false)
 	await _frames(6)
+	# Main now starts in formal town, where casting is intentionally forbidden.
+	# Enter real practice before testing menu pause/resume; do not bypass world admission.
+	check(arena.world_context().normal_town, "Fresh canonical Main starts in formal town")
+	check(not arena.cast_group("group_000002"), "Town correctly rejects combat casting")
+	var entered: Dictionary = arena.leave_normal_town(arena.world_context().revision)
+	check(bool(entered.get("ok", false)) and arena.world_context().mode == "normal",
+		"Existing town exit enters actual normal practice for the menu regression")
+	if not bool(entered.get("ok", false)):
+		arena.queue_free()
+		await process_frame
+		quit(1)
+		return
+	await _frames(3)
 	var state = arena.state
 	var original_snapshot: Dictionary = state.snapshot()
 
@@ -41,6 +54,7 @@ func _run() -> void:
 	var before_reopens: Dictionary = state.snapshot()
 	check(arena.hud._active_panel == "skills" and arena.hud.is_blocking(), "K opens the left skills dock")
 	check(arena.hud._menu_routes.snapshot().right_inventory and inventory.is_visible_in_tree(), "I opens the shared bag beside skills")
+	check(not arena.cast_group("group_000002"), "Open docks block actual combat casting in practice")
 	check(skills.find_child("SharedBagGemTray", true, false) == null, "Skills do not build a duplicate bag tray")
 	check(left_content.size.y >= left_scroll.size.y - 1.0 and rows.size.y > 500.0,
 		"Left dock VBox fills its scroll viewport and the skill list receives the remaining height")
@@ -159,8 +173,8 @@ func _run() -> void:
 	skills = arena.hud._skill_support_panel as Control
 	rows = skills._rows as Control
 	var skill_generation: int = int(rows._generation)
-	var character_button: Button = inventory.find_child("CharacterStats", true, false) as Button
-	character_button.pressed.emit()
+	# CharacterStats was removed from the bag header; C is the current character route.
+	arena.hud.handle_menu_key(KEY_C, true, false)
 	await _frames(5)
 	var character: Control = arena.hud._character_panel as Control
 	var character_generation: int = int(character.refresh_generation)
@@ -236,12 +250,12 @@ func _run() -> void:
 	await _frames(5)
 	check(int(rows._generation) == skill_generation + 1 and int(rows._revision) == state.revision(),
 		"Reopening K refreshes the current skill snapshot once")
-	character_button.pressed.emit()
+	arena.hud.handle_menu_key(KEY_C, true, false)
 	await _frames(5)
 	var progress_label: Label = character.find_child("CharacterProgress", true, false) as Label
 	check(int(character.refresh_generation) == character_generation + 1
 		and progress_label.text.contains("Lv.%d" % int(state.level)),
-		"Character button reopens a current derived sheet with the new level")
+		"C reopens a current derived sheet with the new level")
 	arena.hud.open_panel("talents")
 	await _frames(8)
 	var passive_summary: Label = passive.find_child("SourceTreeSummary", true, false) as Label
