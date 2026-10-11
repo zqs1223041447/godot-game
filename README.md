@@ -538,7 +538,7 @@ schema24严格校验旧23并保留原字节备份；新增46个完整普通节�
 
 源树保留3390记录、2387标准位置与2697边。**未完整执行的节点整体锁定，不能分配**；默认起点六首步已执行，当前连通可达608节点不表示123点能全部点出。升华/扩展仅独立浏览；施法动作速度、暴击、格挡、压制、异常等继续列为未实现。所有源数值保持原值，旧181图仅留作研究/怪物机制参考。
 
-[源树执行边界](docs/SOURCE_TREE_RUNTIME.zh-CN.md) · [重构协议](docs/RESTRUCTURE_PROTOCOL.zh-CN.md) · [离线图鉴](docs/reference/index.html) · [全图实景](docs/qa/m3/source-tree-overview-ui110-font120.png)
+[源树执行边界](docs/SOURCE_TREE_RUNTIME.zh-CN.md) · [重构设计约束（历史基线）](docs/RESTRUCTURE_PROTOCOL.zh-CN.md) · [离线图鉴](docs/reference/index.html) · [全图实景](docs/qa/m3/source-tree-overview-ui110-font120.png)
 
 此前已发布v0.21的历史验收：全部111个Godot门槛已通过，计数2,378,485项，另有99项Linux存档路径、21项字体Python与8项源树导入测试通过；3748锚点、16599链接与58张图鉴图片静态核对通过。验收在修正旧夹具后从失败点续跑，保留失败原日志；不是宣称首次整条命令无失败。唯一生产修复是旧BuildState缓存纳入机制注册表修订，已定向重跑182项缓存、14项场景缓存及1365项共享机制，并继续全部后段门槛。600秒历史装备模拟只运行一次，3926有效击杀、118件装备。[最终证据说明](docs/qa/M021_PLAYABLE_VALIDATION.zh-CN.md)。Windows成品鼠键、1440p硬件60FPS/P99目标和HTML浏览器交互尚未完成，不能由软件渲染成绩替代。
 

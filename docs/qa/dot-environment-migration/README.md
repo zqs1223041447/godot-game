@@ -17,6 +17,8 @@
 - 另有两份历史 QA 截图扩展名为 PNG、实际字节为 JPEG，Godot 导入时报错：`docs/qa/v116-ruins-garden-entry/native-entry.png` 与 `docs/qa/v118-ground-dressing/native-map.png`。不是运行时美术资源，本次保留原文件，未声称全量导入无错误。
 - 导入生成的未跟踪 `.uid` / `.import` 文件不作为开发成果提交。
 
-## 尚未完成
+## 迁移时的上传限制（历史记录）
 
-用户已授权在 dot 环境发起 GitHub CLI 登录。设备流程轮询 GitHub API 时被网络策略拒绝；随后获批准的执行通道发生沙箱启动错误。普通本地 `gh auth status` 确认尚未登录，未把账号问题作为已证实原因。没有保存任何登录码或凭据于仓库。未推送新代码，未导出 Windows 程序，未作整体性能通过结论。
+迁移记录时，用户已授权在 dot 环境发起 GitHub CLI 登录。设备流程轮询 GitHub API 时被网络策略拒绝；随后获批准的执行通道发生沙箱启动错误。普通本地 `gh auth status` 确认尚未登录，未把账号问题作为已证实原因。没有保存任何登录码或凭据于仓库。该迁移步骤当时未推送新代码，未导出 Windows 程序，未作整体性能通过结论。
+
+后续源码已通过 GitHub 连接器发布并合入 [PR #1](https://github.com/zqs1223041447/godot-game/pull/1)，合并提交为 `5e62d372dd37775bb042a8b165a2a9bf05249cb8`。这不表示 CLI 登录成功；以上失败记录保留为当时的环境边界，不再列作当前上传待办。
