@@ -21,10 +21,17 @@ func _run() -> void:
 		quit(2)
 		return
 	arena = load("res://scenes/main.tscn").instantiate()
-	arena.state = preload("res://scripts/build_state.gd").new() # Explicit legacy contract fixture.
 	root.add_child(arena)
 	arena.set_process(false)
 	arena.hud.set_process(false)
+	# Main boots in the canonical safe town. Use its real transition so ticks
+	# and the legacy practice demo/reset entrypoints are actually eligible.
+	var admitted: Dictionary = arena.leave_normal_town(arena.world_context().revision)
+	_expect(admitted.ok and arena.world_context().mode == "normal", "Canonical town admits real arena practice")
+	if not admitted.ok:
+		arena.free()
+		quit(1)
+		return
 	_test_admission_and_policy()
 	_test_actual_ticks()
 	_test_motion_and_dodge()
@@ -104,7 +111,11 @@ func _test_actual_ticks() -> void:
 	_expect(arena.incoming_damage_trace.size() == 1 and arena.telegraph_trace.size() == 1, "Exact default warning produces one settled hit")
 	var hit: Dictionary = arena.incoming_damage_trace.back()
 	_near(hit.raw_components.physical, float(enemy.damage) * 0.7, "Actual heavy hit keeps physical half and 1.4 multiplier")
-	_near(hit.raw_components.fire, float(enemy.damage) * 0.7, "Actual heavy hit keeps fire half and 1.4 multiplier")
+	_near(hit.raw_components.fire, float(enemy.damage) * 0.35, "Actual heavy hit keeps half of scaled fire upfront")
+	_expect(arena.attack_admission_trace.size() == 1 and arena.attack_admission_trace.back().hit, "Heavy hit passes canonical accuracy/evasion admission")
+	var burn: Dictionary = arena.burn_runtime.statuses()[0]
+	_expect(burn.target_kind == "player" and burn.source_id == enemy.id, "Actual heavy hit attaches its own player burn")
+	_near(burn.raw_dps * burn.remaining, float(enemy.damage) * 0.35, "Burn retains the other half of scaled fire")
 	_expect(hit.source_id == enemy.id and arena.telegraph_trace.back().applied, "Trace retains actual source and successful consumption")
 	for frame: int in range(71):
 		arena.tick(1.0 / 60.0)
@@ -149,7 +160,13 @@ func _test_boundary_and_snapshot() -> void:
 		arena._advance_enemy_telegraphs(0.7)
 		_expect(arena.incoming_damage_trace.size() == (1 if offset == 105.0 else 0), "Collision includes player radius and exact boundary: " + str(offset))
 		_near(arena.telegraph_trace.back().packet.base.physical, damage * 0.7, "Damage is frozen at start despite source stat mutation")
-		_near(arena.telegraph_trace.back().packet.base.fire, damage * 0.7, "Frozen typed component never turns into new cold damage")
+		_near(arena.telegraph_trace.back().packet.base.fire, damage * 0.35, "Frozen upfront fire never turns into new cold damage")
+		_expect(not arena.telegraph_trace.back().packet.base.has("cold") or arena.telegraph_trace.back().packet.base.cold == 0.0, "Source mutation adds no cold to the frozen packet")
+		if offset == 105.0:
+			var burn: Dictionary = arena.burn_runtime.statuses()[0]
+			_near(burn.raw_dps * burn.remaining, damage * 0.35, "Frozen remaining fire attaches as burn despite source mutation")
+		else:
+			_expect(arena.burn_runtime.is_empty(), "Dodged heavy hit attaches no burn")
 		var count: int = arena.telegraph_trace.size()
 		arena._advance_enemy_telegraphs(99.0)
 		_expect(arena.telegraph_trace.size() == count and arena.telegraphs.active_count() == 0, "Huge recovery step never replays consumed event")
