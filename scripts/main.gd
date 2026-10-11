@@ -1666,7 +1666,10 @@ func _apply_damage_packet(enemy: Dictionary, packet: Dictionary, snapshot: Dicti
 	if snapshot.has("resolute_technique") and Resolute.active(snapshot): critical={}
 	if snapshot.has(Precise.STAT) and Precise.active(snapshot): critical={}
 	var result: Dictionary = Damage.resolve(packet, snapshot.get("modifiers", []), enemy.get("resistances", {}),float(critical.get("multiplier",1.0)))
-	result = Defense.apply_armour(result,float(enemy.get("armour",0.0)))
+	var armour: float = float(enemy.get("armour", 0.0))
+	# Damage.resolve owns this fresh result; only positive finite armour changes it.
+	if armour > 0.0 and is_finite(armour):
+		result = Defense.apply_armour(result, armour)
 	var shock_increase:float=_shock_hit_increase("monster",int(enemy.id),shock_at)
 	if shock_increase>0.0:result=Defense.apply_hit_damage_taken(result,shock_increase)
 	var settlement: Dictionary = Defense.settle_resolved(result, float(enemy.get("shield", 0.0)), float(enemy.health))
