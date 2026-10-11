@@ -4,6 +4,7 @@ var arena:Node
 var checks:=0
 var failures:=0
 var changes:=0
+var reward_suite_finished:=false
 func _initialize()->void:call_deferred("run")
 func check(ok:bool,label:String)->void:
 	checks+=1
@@ -12,7 +13,13 @@ func near(a:float,b:float,label:String)->void:check(is_equal_approx(a,b),label+"
 func run()->void:
 	if not OS.get_environment("XDG_DATA_HOME").begins_with("/tmp/godot-m1-"):quit(78);return
 	arena=load("res://scenes/main.tscn").instantiate();root.add_child(arena);await process_frame
-	arena.set_process(false);arena.hud.set_process(false);arena.auto_fire=false;arena.demo_mode=true;arena.spawn_timer=9999.0;arena.enemies.clear()
+	arena.set_process(false);arena.hud.set_process(false)
+	check(arena.world_context().mode=="town","Fresh character starts in formal town")
+	check(arena.enter_town_test(arena.world_context().revision).ok,"Public entry isolates historical test-profile rewards")
+	var formal_save:PackedByteArray=FileAccess.get_file_as_bytes(arena.NORMAL_BUILD_PATH)
+	check(arena.craft_map("old_garden",[],[],arena.map_draft().revision).ok,"Test town accepts unmodified garden draft")
+	check(arena.start_map(arena.map_draft().revision).ok,"Public map entry admits combat and authentic source records")
+	arena.auto_fire=false;arena.spawn_timer=9999.0
 	while arena.hud.is_blocking():arena.hud.close_panel()
 	check(arena.flask_statuses().size()==5,"Actual main exposes five authoritative slots")
 	var slots:Array=arena.state.flask_slots();var life:String=slots[0].uid;var mana:String=slots[1].uid
@@ -29,7 +36,7 @@ func run()->void:
 	var health_max:float=arena._stats.max_health;var mana_max:float=arena._stats.max_mana
 	arena.tick(1.0)
 	near(arena.health,10.0+health_max*0.35/3.0+float(arena._stats.life_regen),"First real tick combines authored flask rate with unchanged regen")
-	check(arena.state.move_item(life,{"kind":"flask_slot","slot_id":"flask_3"},arena.state.revision(),"user://build_save.json").ok,"True slot move commits")
+	check(arena.state.move_item(life,{"kind":"flask_slot","slot_id":"flask_3"},arena.state.revision(),arena.build_save_path).ok,"True slot move commits")
 	check(arena.flask_runtime.snapshot().charges_by_uid[life]==20 and not arena.use_flask("flask_3").ok,"Slot move preserves charge and active resource debt")
 	var changed_after_move:int=changes;save_count=arena.state.successful_saves
 	arena.tick(1.0);arena.tick(1.0)
@@ -41,11 +48,13 @@ func run()->void:
 	arena._process(1.0);check(arena.flask_runtime.snapshot()==paused,"Pause freezes recovery clock")
 	while arena.hud.is_blocking():arena.hud.close_panel()
 	var bag:Dictionary=arena.state.first_bag_position(life)
-	check(arena.state.move_item(life,bag,arena.state.revision(),"user://build_save.json").ok,"Bottle can be unequipped into real bag")
+	check(arena.state.move_item(life,bag,arena.state.revision(),arena.build_save_path).ok,"Bottle can be unequipped into real bag")
 	arena.flask_runtime.charge_rewarded_kill([mana]);check(arena.flask_runtime.snapshot().charges_by_uid[life]==20,"Unequipped bottle cannot gain charge")
-	check(arena.state.move_item(life,{"kind":"flask_slot","slot_id":"flask_3"},arena.state.revision(),"user://build_save.json").ok,"SameUID can equip again")
+	check(arena.state.move_item(life,{"kind":"flask_slot","slot_id":"flask_3"},arena.state.revision(),arena.build_save_path).ok,"SameUID can equip again")
 	check(arena.flask_runtime.snapshot().charges_by_uid[life]==20,"Unequip/re-equip is not refill")
 	test_root_reward(life,mana)
+	check(reward_suite_finished,"Root reward suite reaches its final assertion without a script exception")
+	check(FileAccess.get_file_as_bytes(arena.NORMAL_BUILD_PATH)==formal_save,"Test-profile combat and item moves leave formal save bytes unchanged")
 	arena.health=10;arena.invulnerable=0;check(arena.use_flask("flask_3").ok,"Recovery can begin again after expiry")
 	arena.hit_player_components({"physical":100000.0},0,["hit","spell"])
 	check(not arena.alive and arena.flask_runtime.snapshot().active_by_resource.is_empty(),"Actual death clears recovery")
@@ -54,9 +63,15 @@ func run()->void:
 	print("Flask gameplay: %d checks, %d failures"%[checks,failures])
 	arena.queue_free();await process_frame;quit(1 if failures else 0)
 func test_root_reward(life:String,mana:String)->void:
-	arena.demo_mode=false;arena.reward_kills=59;arena.enemies.clear();arena.rng.seed=260060
+	arena.reward_kills=59;arena.rng.seed=260060
 	var expected:=Model.new();expected._accept_memory(arena.state.snapshot());var oracle:=RandomNumberGenerator.new();oracle.state=arena.rng.state
-	var enemy:Dictionary=arena.monster_runtime.create_root("crawler",1,arena.player_pos+Vector2(45,0));enemy.spawn=0;arena.enemies.append(enemy)
+	var enemy:Dictionary={}
+	for candidate:Dictionary in arena.enemies:
+		if candidate.rarity=="normal" and candidate.generation==0:
+			enemy=candidate;break
+	check(not enemy.is_empty(),"Reward fixture uses an actual admitted normal map root")
+	if enemy.is_empty():return
+	enemy.spawn=0
 	# Exact old reward path draws and awards, without the new deterministic bottle.
 	for unused:int in 9:oracle.randf()
 	expected.add_xp(enemy.xp_reward);expected.award_jewel(oracle);expected.award_random_gem(oracle)
@@ -75,7 +90,25 @@ func test_root_reward(life:String,mana:String)->void:
 	var locked:Dictionary=arena.flask_runtime.snapshot();var snapshot:Dictionary=arena.state.snapshot();var rng_state:int=arena.rng.state
 	arena._damage_enemy(enemy,1.0,Color.WHITE)
 	check(arena.flask_runtime.snapshot()==locked and arena.state.snapshot()==snapshot and arena.rng.state==rng_state,"Duplicate corpse cannot charge/drop again")
-	var child:Dictionary=arena.monster_runtime.create_root("crawler",1,arena.player_pos+Vector2(55,0),"ordinary","",[],false);child.spawn=0.0;arena.enemies.append(child)
-	arena._begin_progress_transaction();arena._damage_enemy(child,child.health+1.0,Color.WHITE);arena._end_progress_transaction()
-	check(arena.flask_runtime.snapshot()==locked and arena.state.snapshot()==snapshot,"Zero-reward source cannot charge bottles or grant XP/items")
-	var reloaded:=Model.new();check(reloaded.load_build() and reloaded.snapshot()==after,"Actual bottle UID and old rewards persist in same save")
+	var demo_boss:Dictionary={}
+	for candidate:Dictionary in arena.enemies:
+		if candidate.rarity=="boss" and not candidate.death_spawns.is_empty():
+			demo_boss=candidate;break
+	check(not demo_boss.is_empty(),"Rewardless fixture uses the admitted splitting boss")
+	if demo_boss.is_empty():return
+	demo_boss.spawn=0.0;arena.demo_mode=true
+	arena._begin_progress_transaction();arena._damage_enemy(demo_boss,demo_boss.health+demo_boss.shield+1.0,Color.WHITE);arena._end_progress_transaction()
+	check(arena.flask_runtime.snapshot()==locked and arena.state.snapshot()==snapshot,"Demo source cannot charge bottles or grant XP/items")
+	arena.demo_mode=false
+	arena._flush_monster_spawns()
+	var descendants:Array=[]
+	for candidate:Dictionary in arena.enemies:
+		if candidate.root_id==demo_boss.id and candidate.generation>0:descendants.append(candidate)
+	check(demo_boss.death_processed and descendants.size()==4,"Real demo boss death drains its exact four rewardless descendants")
+	for descendant:Dictionary in descendants:
+		check(not descendant.reward_eligible and descendant.xp_reward==0,"Descendant is authoritatively rewardless with demo disabled")
+		descendant.spawn=0.0
+		arena._damage_enemy(descendant,descendant.health+descendant.shield+1.0,Color.WHITE)
+	check(arena.flask_runtime.snapshot()==locked and arena.state.snapshot()==snapshot,"Zero-reward descendants cannot charge bottles or grant XP/items")
+	var reloaded:=Model.new();check(reloaded.load_build(arena.build_save_path) and reloaded.snapshot()==after,"Actual bottle UID and old rewards persist in same save")
+	reward_suite_finished=true
