@@ -4,6 +4,12 @@ const GroundTile = preload("res://assets/environment/garden_ground.png")
 const CampSigns = preload("res://scripts/visuals/map_camp_signs.gd")
 ## Sunlit, weathered flagstone garden. Deterministic marks, never gameplay RNG.
 static func draw(arena: Node2D) -> void:
+	draw_floor(arena)
+	var geometry: Dictionary = arena.world_geometry() if arena.has_method("world_geometry") else {}
+	_draw_routes(arena, geometry.get("landmarks", {}).get("route_segments", []))
+	draw_details(arena)
+
+static func draw_floor(arena: Node2D) -> void:
 	var geometry: Dictionary = arena.world_geometry() if arena.has_method("world_geometry") else {}
 	var broken: bool = not geometry.get("walls",[]).is_empty()
 	var spring: bool = geometry.get("obstacle_style", "") == "spring_basin"
@@ -53,8 +59,13 @@ static func draw(arena: Node2D) -> void:
 		arena.draw_colored_polygon(_stone(Rect2(corner-Vector2(10,14),Vector2(20,18)),3),Color("bdb398"))
 		arena.draw_line(corner+Vector2(-6,-11),corner+Vector2(5,-11),Color("e0ceb0"),1,true)
 		arena.draw_polyline(PackedVector2Array([corner+Vector2(-2,-8),corner+Vector2(3,-4),corner+Vector2(-1,1)]),Color("746e57"),1.3,true)
-	# Dappled daylight is a restrained tint, never an opaque object or gameplay hazard.
-	_draw_routes(arena, geometry.get("landmarks", {}).get("route_segments", []))
+
+static func draw_details(arena: Node2D) -> void:
+	var geometry: Dictionary = arena.world_geometry() if arena.has_method("world_geometry") else {}
+	var broken: bool = not geometry.get("walls",[]).is_empty()
+	var spring: bool = geometry.get("obstacle_style", "") == "spring_basin"
+	var ginkgo: bool = geometry.get("obstacle_style", "") == "ginkgo_planters"
+	var bounds: Rect2=arena.ARENA
 	arena.draw_colored_polygon(PackedVector2Array([bounds.position+Vector2(24,12),bounds.position+Vector2(bounds.size.x*0.25,12),Vector2(bounds.position.x+bounds.size.x*0.55,bounds.end.y-11),Vector2(bounds.position.x+bounds.size.x*0.4,bounds.end.y-11)]),Color(0.96,0.89,0.63,0.035))
 	if broken:
 		var dimensional: Array = geometry.get("dimensional_wall_indices", [])
@@ -103,10 +114,13 @@ static func _draw_routes(canvas: Node2D, segments: Array) -> void:
 	# Worn flagstones mark authored, collision-verified routes. No new obstacles.
 	var index := 0
 	for stone: PackedVector2Array in route_stones(segments):
-		canvas.draw_colored_polygon(stone, Color(0.73,0.66,0.48,0.16) if index%3 else Color(0.67,0.61,0.46,0.12))
-		canvas.draw_line(stone[1],stone[2],Color(0.85,0.77,0.57,0.18),1.2,true)
-		canvas.draw_line(stone[5],stone[6],Color(0.41,0.39,0.29,0.12),1.2,true)
+		draw_route_stone(canvas, stone, index)
 		index += 1
+
+static func draw_route_stone(canvas: Node2D, stone: PackedVector2Array, index: int) -> void:
+	canvas.draw_colored_polygon(stone, Color(0.73,0.66,0.48,0.16) if index%3 else Color(0.67,0.61,0.46,0.12))
+	canvas.draw_line(stone[1],stone[2],Color(0.85,0.77,0.57,0.18),1.2,true)
+	canvas.draw_line(stone[5],stone[6],Color(0.41,0.39,0.29,0.12),1.2,true)
 
 static func _shrub(arena: Node2D, p: Vector2, radius: float) -> void:
 	arena.draw_circle(p,radius,Color("405638"))
