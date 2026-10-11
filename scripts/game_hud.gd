@@ -1741,6 +1741,19 @@ func _build_world_controls() -> void:
 	_town_view.crafter_requested.connect(func():
 		if not _menu_routes.snapshot().right_inventory: open_panel("inventory"))
 	_return_dialog = ConfirmationDialog.new()
+	# Keep the embedded title and focused paper buttons readable without changing
+	# the shared theme (other controls may use their own dark selected surfaces).
+	var return_theme := Theme.new()
+	return_theme.set_color("title_color", "Window", PANEL_LIGHT)
+	for style_name: String in ["embedded_border", "embedded_unfocused_border"]:
+		var frame := ThemeDB.get_default_theme().get_stylebox(style_name, "Window").duplicate() as StyleBoxFlat
+		if frame != null:
+			frame.bg_color = Color("60432f")
+			frame.border_color = BORDER
+			return_theme.set_stylebox(style_name, "Window", frame)
+	for color_name: String in ["font_focus_color", "font_hover_pressed_color"]:
+		return_theme.set_color(color_name, "Button", TEXT)
+	_return_dialog.theme = return_theme
 	_return_dialog.title = "离开地图"
 	_return_dialog.ok_button_text = "确认"
 	_return_dialog.cancel_button_text = "取消"
