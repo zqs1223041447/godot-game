@@ -74,6 +74,7 @@ const Monsters = preload("res://scripts/monsters/monster_catalog.gd")
 const MonsterLifecycle = preload("res://scripts/monsters/monster_runtime.gd")
 const FlaskRuntime = preload("res://scripts/combat/flask_runtime.gd")
 const FlaskCatalog = preload("res://scripts/items/flask_catalog.gd")
+const KillRewards = preload("res://scripts/rewards/kill_reward_policy.gd")
 var flask_runtime = FlaskRuntime.new()
 var _flask_owner_identity: int = -1
 var _flask_synced_revision: int = -1
@@ -1826,9 +1827,9 @@ func _apply_enemy_resources(enemy:Dictionary,settlement:Dictionary)->bool:
 func _finish_enemy_death(enemy:Dictionary,legacy_particles:bool=true,at:float=-1.0,source_burn:Dictionary={})->void:
 	if float(enemy.health)>0.0:return
 	# Select one route before the existing once-only ledger; no unknown fallback.
-	var reward_reason:String=_exploration_reward_reason(enemy)
-	if not reward_reason.is_empty():
-		_encounter_failed(reward_reason)
+	var reward_route:Dictionary=KillRewards.resolve_route(enemy,_world_mode=="map",_map_spawn_records)
+	if not reward_route.ok:
+		_encounter_failed(reward_route.reason)
 		return
 	if not freeze_runtime.is_empty(): freeze_runtime.remove(int(enemy.id))
 	if not shock_runtime.is_empty():shock_runtime.remove("monster",int(enemy.id))
@@ -1847,9 +1848,11 @@ func _finish_enemy_death(enemy:Dictionary,legacy_particles:bool=true,at:float=-1
 	kills += 1
 	# The processed identity advances required roots independently of payout.
 	if _world_mode=="map" and _map_run.record_death(enemy):world_context_changed.emit()
-	var eligible: bool = bool(death.reward) and not demo_mode
-	if eligible:
-		reward_kills += 1
+	var reward_plan: Dictionary = KillRewards.plan(reward_route.route,enemy,bool(death.reward),demo_mode,reward_kills,_is_test_profile())
+	# resolve_route rejected unsupported routes before the once-only death ledger.
+	assert(reward_plan.ok)
+	reward_kills = reward_plan.reward_kills
+	if reward_plan.charge_flasks:
 		_sync_flasks()
 		var equipped_flasks: Array=[]
 		if state.has_method("flask_slots"):
@@ -1857,8 +1860,8 @@ func _finish_enemy_death(enemy:Dictionary,legacy_particles:bool=true,at:float=-1
 				if not slot.uid.is_empty():equipped_flasks.append(slot.uid)
 		flask_runtime.charge_rewarded_kill(equipped_flasks,_stats)
 	var leveled: bool = false
-	if eligible:
-		leveled = state.add_xp(int(enemy.get("xp_reward", 0))) if _is_test_profile() else state.add_normal_root_xp(int(enemy.get("xp_reward", 0)))
+	if reward_plan.eligible:
+		leveled = state.add_normal_root_xp(reward_plan.xp) if reward_plan.normal_xp else state.add_xp(reward_plan.xp)
 	if leveled:
 		health = minf(float(_stats.max_health), health + 25.0)
 		mana = float(_stats.max_mana)
@@ -1866,24 +1869,24 @@ func _finish_enemy_death(enemy:Dictionary,legacy_particles:bool=true,at:float=-1
 		hud.notify("升级！获得 1 点天赋 · 按 T 分配")
 		_add_ring(player_pos, 80.0, Color("e7c98d"), 0.7)
 		_add_text(player_pos + Vector2(0, -46), "LEVEL UP", Color("e7c98d"))
-	if eligible and (reward_kills % 8 == 0 or enemy.get("rarity", "") in ["rare", "boss"]):
+	if reward_plan.equipment:
 		_award_kill_equipment(enemy)
-	if eligible and reward_kills % 20 == 0:
+	if reward_plan.jewel:
 		_award_kill_jewel()
-	if eligible and _is_test_profile() and reward_kills % 30 == 0 and state.has_method("award_random_gem"):
+	if reward_plan.gem and state.has_method("award_random_gem"):
 		var gem_uid:String=state.award_random_gem(rng)
 		hud.notify("获得宝石："+str(state.item_definition(gem_uid).name)+" · 按 K 装配" if not gem_uid.is_empty() else "背包空间不足，无法领取宝石；可在 I 中整理或丢弃重复宝石")
-	if eligible and _is_test_profile() and reward_kills % FlaskCatalog.REWARD_INTERVAL == 0 and state.has_method("award_flask"):
+	if reward_plan.flask and state.has_method("award_flask"):
 		var flask_uid: String = state.award_flask(FlaskCatalog.reward_definition(reward_kills))
 		hud.notify("获得药剂："+str(state.item_definition(flask_uid).name) if not flask_uid.is_empty() else "背包空间不足，未领取药剂；已有物品保留")
-	if eligible and not _is_test_profile() and int(state.normal_journey().normal_root_kills) % 30 == 0:
+	if reward_plan.normal_milestone and KillRewards.milestone_due(reward_plan,int(state.normal_journey().normal_root_kills)):
 		var milestone: Dictionary = state.normal_claim_rewards(state.revision(), build_save_path, false)
 		if milestone.ok: hud.notify("正式击杀里程碑：获得宝石 %d、药剂 %d" % [milestone.claimed_gems, milestone.claimed_flasks])
 		else: hud.notify("里程碑奖励仍待领取，返回正式城镇整理后领取")
 		_world_revision += 1; world_context_changed.emit()
-	if eligible and enemy.get("rarity", "") == "boss":
+	if reward_plan.special_jewel:
 		_award_kill_special_jewel(enemy)
-	if eligible and reward_kills % 4 == 0:
+	if reward_plan.pickup:
 		pickups.append({"pos": Vector2(enemy.pos), "life": 22.0})
 	if legacy_particles:
 		for i: int in range(8):
@@ -2670,11 +2673,7 @@ func map_mechanism_state()->Dictionary:
 	return {"config":_map_mechanism_config.duplicate(true),"optional_encounters":_map_optional_encounters.duplicate(true)}
 
 func _exploration_reward_reason(enemy:Dictionary)->String:
-	if _world_mode!="map":return ""
-	var record:Dictionary=_map_spawn_records.get(int(enemy.get("root_id",0)),{})
-	if record.is_empty() or record.get("spawn_key")!=enemy.get("map_spawn_key"):return "地图怪物来源记录无效，不能结算奖励"
-	if record.get("reward_route")!="standard":return "地图掉落路径尚未实装，不能回退为普通掉落"
-	return ""
+	return KillRewards.resolve_route(enemy,_world_mode=="map",_map_spawn_records).reason
 
 
 func _is_test_profile() -> bool:

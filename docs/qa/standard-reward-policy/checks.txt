@@ -1,0 +1,55 @@
+=== Pure policy, including rewardless short circuit ===
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+KILL_REWARD_POLICY checks=1368 failures=0
+=== Frozen HEAD Main ===
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+godot-game: playable arena ready
+godot-game: playable arena ready
+godot-game: playable arena ready
+godot-game: playable arena ready
+godot-game: playable arena ready
+godot-game: playable arena ready
+godot-game: playable arena ready
+godot-game: playable arena ready
+godot-game: playable arena ready
+godot-game: playable arena ready
+godot-game: playable arena ready
+KILL_REWARD_EQUIVALENCE checks=139 failures=0 observations=65
+=== Candidate Main ===
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+godot-game: playable arena ready
+godot-game: playable arena ready
+godot-game: playable arena ready
+godot-game: playable arena ready
+godot-game: playable arena ready
+godot-game: playable arena ready
+godot-game: playable arena ready
+godot-game: playable arena ready
+godot-game: playable arena ready
+godot-game: playable arena ready
+godot-game: playable arena ready
+KILL_REWARD_EQUIVALENCE checks=144 failures=0 observations=65
+=== Exact oracle equality ===
+eaa09df45fb255f7f4d9e8d0e66bf3b5e979ff0861ce9a02c77a2e2e99ff1b4d  /tmp/reward-policy-qa/short-circuit-fix/baseline.json
+eaa09df45fb255f7f4d9e8d0e66bf3b5e979ff0861ce9a02c77a2e2e99ff1b4d  /tmp/reward-policy-qa/short-circuit-fix/candidate.json
+=== Independent malformed-XP reproduction, fixed ===
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+godot-game: playable arena ready
+INDEPENDENT_DEMO malformed XP: processed=true rng_changed=true kills=1 rewards=0
+=== Focused rerun ===
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+Exploration map plan: 352 checks, 0 failures; scope=complete affected fixture
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+Monster system: 266 checks, 0 failures
+Selected checks passed.
+=== Existing legacy fixture failures, baseline and candidate (initial review run) ===
+/tmp/reward-policy-qa/monster-baseline.log:Monster integration: 85 checks, 18 failures
+/tmp/reward-policy-qa/focused.log:Monster integration: 85 checks, 18 failures
+/tmp/reward-policy-qa/flask-baseline.log:Flask gameplay: 61 checks, 10 failures
+/tmp/reward-policy-qa/flask.log:Flask gameplay: 61 checks, 10 failures
