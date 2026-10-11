@@ -143,6 +143,9 @@ static func _append_state(state: Dictionary, effects: int, fills: Array[Dictiona
 	# Element shape sits clear of the player standing on the locked center.
 	# It remains strictly inside the true radius and does not change collision.
 	var rune_center: Vector2 = state.center if state.element.is_empty() and state.pattern != "ruins_mark" else state.center + Vector2(0, -radius * 0.63)
+	# Keep the existing lightning stroke below the player silhouette, inside the ring.
+	var lightning: bool = state.element == "lightning" and state.pattern.is_empty()
+	if lightning: rune_center = state.center + Vector2(0, radius * 0.58)
 	var rune: PackedVector2Array = _rune(rune_center, minf(13.0, radius * 0.18), -0.13, state.element)
 	if state.pattern == "garden_slam":
 		rune = _boss_rune(rune_center, radius * 0.48, "garden_slam")
@@ -164,11 +167,12 @@ static func _append_state(state: Dictionary, effects: int, fills: Array[Dictiona
 		var p: Vector2 = state.center + Vector2(0, -radius * 0.55)
 		rune = PackedVector2Array([p+Vector2(-15,3),p+Vector2(-8,-4),p+Vector2(0,3),p+Vector2(8,-4),p+Vector2(15,3)])
 	var ember: bool = state.pattern == "ember_burn"
-	marks.append(_line(state, "rune_base", rune, Color(INK, (0.85 if ember else 0.6) * fade), minf(4.5 if ember else 3.0, radius * 0.1)))
+	var supported_rune: bool = ember or lightning
+	marks.append(_line(state, "rune_base", rune, Color(INK, (0.85 if supported_rune else 0.6) * fade), minf(4.5 if supported_rune else 3.0, radius * 0.1)))
 	var charged: PackedVector2Array = _trace(rune, progress if winding else 1.0)
 	if charged.size() >= 2:
 		var rune_pigment: Color = Color("e3bc80") if ember and winding else pigment
-		marks.append(_line(state, "rune_charge", charged, Color(rune_pigment, 0.92 * fade), minf(2.5 if ember else 1.6, radius * 0.06)))
+		marks.append(_line(state, "rune_charge", charged, Color(rune_pigment, 0.92 * fade), minf(2.5 if supported_rune else 1.6, radius * 0.06)))
 	# Sparse, uneven earth cuts stay inside the circle and do not animate or emit RNG.
 	var count: int = 0 if effects == 0 else 1 if effects == 1 else 3
 	if state.pattern == "sunwell_echo":
