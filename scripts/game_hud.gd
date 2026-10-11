@@ -620,6 +620,8 @@ func _build_hotbar() -> void:
 		key_label.position = Vector2(8,6)
 		button.add_child(key_label)
 		_skill_buttons.append(button)
+	# Rebuilt hotbars inherit the current preference before their first frame.
+	PresentationTheme.apply_font_scale(panel, _preferences.font_scale)
 
 
 func _build_hint() -> void:
@@ -1578,6 +1580,10 @@ func _apply_presentation() -> void:
 	_root.scale = Vector2.ONE * _preferences.ui_scale
 	_root.size = get_viewport().get_visible_rect().size / _preferences.ui_scale
 	_root.theme.default_font_size = roundi(16 * _preferences.font_scale)
+	# These persistent roots are outside the window/dock trees below. Include
+	# hidden help too, so revealing it after a viewport change is already scaled.
+	for stable_name: String in ["RunStatus", "PlayerVitals", "Hotbar", "CombatHelp"]:
+		PresentationTheme.apply_font_scale(_root.get_node(stable_name), _preferences.font_scale)
 	if is_instance_valid(_skill_support_panel) and _skill_support_panel.is_visible_in_tree():
 		_skill_support_panel.font_scale = _preferences.font_scale
 	if is_instance_valid(_character_panel) and _character_panel.is_visible_in_tree():
@@ -1720,6 +1726,7 @@ func _build_world_controls() -> void:
 	var box := VBoxContainer.new()
 	box.name = "WorldControls"
 	_place(box, Rect2(20,130,250,84))
+	_root.get_node("RunStatus").resized.connect(_position_world_controls)
 	_world_label = _label("", 12)
 	_world_label.add_theme_color_override("font_color", Color("f8ecd0"))
 	box.add_child(_world_label)
@@ -1760,6 +1767,12 @@ func _build_world_controls() -> void:
 	_return_dialog.dialog_text = "保留已经获得的物品并返回城镇？未完成的地图将放弃。"
 	_return_dialog.confirmed.connect(func(): _world_result(_arena.return_to_town(_return_revision)))
 	_root.add_child(_return_dialog)
+
+
+func _position_world_controls() -> void:
+	# Let larger status text grow without covering the map text below it.
+	var status: Control = _root.get_node("RunStatus")
+	_root.get_node("WorldControls").position.y = maxf(130.0, status.get_rect().end.y + 10.0)
 
 
 func _refresh_world() -> void:
