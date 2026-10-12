@@ -95,14 +95,40 @@ func run()->void:
 	hud.handle_menu_key(KEY_ESCAPE, true, false)
 	check(not hud.is_blocking() and not hud._menu_routes.snapshot().right_inventory,
 		"Second Escape closes the remaining inventory dock and resumes combat")
+	var compiled:Dictionary=model.get_group_cast("group_000002")
+	check(compiled.ok and compiled.initial_count==5 and compiled.mana>0.0 and compiled.cooldown>0.0,"Five-link F1 group compiles to five projectiles with positive mana and cooldown")
 	arena.mana=arena._stats.max_mana
-	var event:=InputEventKey.new()
-	event.physical_keycode=KEY_F1
-	event.keycode=KEY_F1
-	event.pressed=true
-	root.push_input(event,true)
-	await frames()
+	var mana_before:float=arena.mana
+	var ready_debt:Dictionary=arena.group_cooldowns.snapshot()
+	check(arena.world_context().mode=="town","Fixture starts in safe formal town even after both docks close")
+	await press_f1()
+	check(arena.projectiles.is_empty() and arena.mana==mana_before and arena.group_cooldowns.snapshot()==ready_debt,"F1 in safe town cannot spend mana, start cooldown or fire")
+	check(arena.leave_normal_town(arena.world_context().revision).ok and arena.world_context().mode=="normal","Public town exit admits actual arena casting")
+	arena.auto_fire=false
+	mana_before=arena.mana
+	ready_debt=arena.group_cooldowns.snapshot()
+	var saved_build:Dictionary=model.snapshot()
+	var saved_bytes:PackedByteArray=FileAccess.get_file_as_bytes(arena.build_save_path)
+	hud.open_panel("pause")
+	check(hud.is_blocking(),"Pause panel blocks the ready F1 group outside town")
+	await press_f1()
+	check(arena.projectiles.is_empty() and arena.mana==mana_before and arena.group_cooldowns.snapshot()==ready_debt,"Panel-blocked F1 cannot spend mana, start cooldown or fire")
+	hud.close_panel()
+	check(not hud.is_blocking(),"Closing pause panel restores combat input admission")
+	arena.mana=0.0
+	await press_f1()
+	check(arena.projectiles.is_empty() and arena.mana==0.0 and arena.group_cooldowns.snapshot()==ready_debt,"Insufficient-mana F1 cannot start cooldown or fire")
+	arena.mana=arena._stats.max_mana
+	mana_before=arena.mana
+	await press_f1()
 	check(arena.projectiles.size()==5 and arena.group_cooldown_remaining("group_000002")>0,"configured F1 input actually casts same five-link group")
+	check(is_equal_approx(arena.mana,mana_before-float(compiled.mana)),"Admitted F1 pays exactly the compiled five-link mana cost")
+	check(is_equal_approx(arena.group_cooldown_remaining("group_000002"),float(compiled.cooldown)),"Admitted F1 starts exactly the compiled group cooldown")
+	var spent_mana:float=arena.mana
+	var cooling_debt:Dictionary=arena.group_cooldowns.snapshot()
+	await press_f1()
+	check(arena.projectiles.size()==5 and arena.mana==spent_mana and arena.group_cooldowns.snapshot()==cooling_debt,"Repeated F1 during cooldown cannot fire or charge again")
+	check(model.snapshot()==saved_build and FileAccess.get_file_as_bytes(arena.build_save_path)==saved_bytes,"Accepted and rejected F1 inputs preserve persistent build and saved bytes")
 	hud.open_panel("skills")
 	await frames()
 	check(model.skill_group("group_000002").support_ids.size()==5,"menu reopen preserves five owned gems")
@@ -147,6 +173,13 @@ func run()->void:
 	arena.queue_free()
 	await process_frame
 	quit(1 if failures else 0)
+func press_f1()->void:
+	var event:=InputEventKey.new()
+	event.physical_keycode=KEY_F1
+	event.keycode=KEY_F1
+	event.pressed=true
+	root.push_input(event,true)
+	await frames()
 func frames()->void:
 	for i:int in range(6): await process_frame
 func capture(stem:String)->void:
