@@ -36,7 +36,8 @@ func readonly_probe(label: String) -> void:
 func run() -> void:
 	if not OS.get_environment("XDG_DATA_HOME").begins_with("/tmp/godot-map-overview-"):quit(78);return
 	var model := FaultModel.new()
-	check(model.save_build("user://build_save.json")==OK,"Fresh canonical schema59 save")
+	var initial_schema: int = int(model.snapshot().version)
+	check(model.save_build("user://build_save.json")==OK,"Fresh canonical save")
 	arena=load("res://scenes/main.tscn").instantiate();arena.state=model;arena.build_save_path="user://build_save.json"
 	root.add_child(arena);pause();await settle();overview=arena.hud._exploration_overview
 	await key(KEY_TAB);check(not overview.visible,"Town Tab cannot open map")
@@ -65,7 +66,7 @@ func run() -> void:
 		check(not overview.visible,"Leaving map immediately closes previous geometry")
 		await key(KEY_TAB);check(not overview.visible,"No old map reopened from town")
 		if arena.world_context().can_claim_normal_rewards:check(arena.claim_normal_rewards(arena.world_context().revision).ok,"Existing pending reward claim before next entry")
-	check(model.snapshot().version==59,"Schema unchanged")
+	check(int(model.snapshot().version)==initial_schema,"Schema unchanged")
 	finish()
 func boundaries_and_clear() -> void:
 	await key(KEY_TAB);check(not overview.visible,"Second Tab closes overview")
@@ -129,6 +130,6 @@ func boundaries_and_clear() -> void:
 	check(arena.world_context().mode=="map_complete" and overview.visible and overview.context.boss_phase=="defeated" and overview.context.outpost_states.all(func(state:Dictionary)->bool:return state.state=="cleared"),"Completed map retains current overview with authoritative cleared markers")
 	await capture("map-complete")
 func finish() -> void:
-	var output:={"checks":checks,"failures":failures,"failed_labels":labels,"display":DisplayServer.get_name(),"method":"Fresh schema59, five real free formal entries including native geometry. Physical keys; explicit movement tick. Controlled deaths through original settlement, not natural combat footage."}
+	var output:={"checks":checks,"failures":failures,"failed_labels":labels,"display":DisplayServer.get_name(),"method":"Fresh canonical save, five real free formal entries including native geometry. Physical keys; explicit movement tick. Controlled deaths through original settlement, not natural combat footage."}
 	FileAccess.open(OS.get_environment("OVERVIEW_OUTPUT").path_join("report.json"),FileAccess.WRITE).store_string(JSON.stringify(output,"\t")+"\n")
 	print("EXPLORATION_OVERVIEW ",JSON.stringify(output));quit(0 if failures==0 else 1)
