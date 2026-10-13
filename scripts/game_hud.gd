@@ -1580,6 +1580,9 @@ func _apply_presentation() -> void:
 	_root.scale = Vector2.ONE * _preferences.ui_scale
 	_root.size = get_viewport().get_visible_rect().size / _preferences.ui_scale
 	_root.theme.default_font_size = roundi(16 * _preferences.font_scale)
+	# Custom-drawn text needs the same preference even while the map is hidden.
+	if is_instance_valid(_exploration_overview):
+		_exploration_overview.font_scale = _preferences.font_scale
 	# These persistent roots are outside the window/dock trees below. Include
 	# hidden help too, so revealing it after a viewport change is already scaled.
 	for stable_name: String in ["RunStatus", "PlayerVitals", "Hotbar", "CombatHelp"]:

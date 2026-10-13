@@ -10,6 +10,7 @@ var _bounds := Rect2()
 var _walls: Array[Rect2] = []
 var _revision := 0
 var _routes: Dictionary = {}
+var _pursuit_goals: Dictionary = {}
 var _encounter_mode := "legacy"
 var _landmarks: Dictionary = {}
 var _obstacle_style := ""
@@ -18,7 +19,7 @@ func configure(id: String, bounds: Rect2) -> bool:
 	if id not in ["normal", "town", "old_garden", "broken_ruins", "sunwell_terrace", "ginkgo_arcade"] or not bounds.position.is_finite() or not bounds.size.is_finite() or bounds.size.x < 1500.0 or bounds.size.y < 710.0:
 		return false
 	if id == _id and bounds == _bounds and _encounter_mode == "legacy": return true
-	_id = id; _bounds = bounds; _walls.clear(); _routes.clear(); _revision += 1
+	_id = id; _bounds = bounds; _walls.clear(); _routes.clear(); _pursuit_goals.clear(); _revision += 1
 	_encounter_mode = "legacy"; _landmarks.clear(); _obstacle_style = ""
 	if id == "broken_ruins":
 		_walls.assign([Rect2(bounds.position + Vector2(580,100),Vector2(56,400)), Rect2(bounds.position + Vector2(1180,210),Vector2(56,400))])
@@ -35,7 +36,7 @@ func configure_exploration(id: String, bounds: Rect2) -> bool:
 	var planned: Dictionary = ExplorationLayout.layout(id, bounds)
 	if not planned.ok: return false
 	if id == _id and bounds == _bounds and _encounter_mode == "exploration": return true
-	_id = id; _bounds = bounds; _walls.assign(planned.walls); _routes.clear(); _revision += 1
+	_id = id; _bounds = bounds; _walls.assign(planned.walls); _routes.clear(); _pursuit_goals.clear(); _revision += 1
 	_encounter_mode = "exploration"
 	_landmarks = planned.landmarks.duplicate(true)
 	_obstacle_style = planned.obstacle_style
@@ -140,6 +141,12 @@ func move(start: Vector2, desired: Vector2, radius: float, traversed: Variant = 
 ## distances are shared by all actors of that radius until the player moves.
 func direction(start: Vector2, goal: Vector2, radius: float, max_step: float = 0.0) -> Vector2:
 	if not has_walls() or visible(start,goal,radius): return _step_direction(goal-start,max_step)
+	# Preserve the unobstructed fast path. Only blocked goals need a shared
+	# clearance check/projection, once per exact radius and player position.
+	var route_goal := _pursuit_goal(goal,radius)
+	if route_goal != goal:
+		goal = route_goal
+		if visible(start,goal,radius): return _step_direction(goal-start,max_step)
 	if not _routes.has(radius): _routes[radius] = _make_route_graph(radius)
 	var route: Dictionary = _routes[radius]
 	if route.goal != goal: _update_goal(route,goal,radius)
@@ -151,6 +158,53 @@ func direction(start: Vector2, goal: Vector2, radius: float, max_step: float = 0
 		var candidate: float = start.distance_to(point)+float(route.distances[index])
 		if candidate < cost and visible(start,point,radius): best=index; cost=candidate
 	return Vector2.ZERO if best < 0 else _step_direction(Vector2(route.points[best])-start,max_step)
+
+## A player can fit closer to a wall than its pursuer. Route to the nearest
+## legal center for that body, without changing the player's attack/LOS target.
+func _pursuit_goal(goal: Vector2, radius: float) -> Vector2:
+	if _pursuit_goals.has(radius) and _pursuit_goals[radius].goal == goal and _pursuit_goals[radius].revision == _revision:
+		return _pursuit_goals[radius].point
+	var point := goal if is_clear(goal,radius) else _project_pursuit_goal(goal,radius)
+	_pursuit_goals[radius] = {"goal":goal,"point":point,"revision":_revision}
+	return point
+
+func _project_pursuit_goal(goal: Vector2, radius: float) -> Vector2:
+	# Native adapters own legal projection; their boxes are routing hints only.
+	if _encounter_mode == "modular_study": return legal_point(goal,radius)
+	var desired := _clamp(goal,radius)
+	if is_clear(desired,radius): return desired
+	var boxes: Array[Rect2] = []
+	var candidates: Array[Vector2] = []
+	for wall: Rect2 in _walls:
+		var box := wall.grow(radius+SKIN)
+		boxes.append(box)
+		var nearest := Vector2(clampf(desired.x,box.position.x,box.end.x),clampf(desired.y,box.position.y,box.end.y))
+		candidates.append_array([Vector2(box.position.x,nearest.y),Vector2(box.end.x,nearest.y),Vector2(nearest.x,box.position.y),Vector2(nearest.x,box.end.y),box.position,Vector2(box.end.x,box.position.y),box.end,Vector2(box.position.x,box.end.y)])
+	# Exposed corners of overlapping expanded rectangles are not necessarily
+	# corners of either wall. Enumerate their finite boundary intersections;
+	# repeated single-wall pushes can pick a far face or oscillate indefinitely.
+	for first: int in range(boxes.size()):
+		for second: int in range(first+1,boxes.size()):
+			var a := boxes[first]
+			var b := boxes[second]
+			if not a.intersects(b,true): continue
+			for x: float in [a.position.x,a.end.x]:
+				for y: float in [b.position.y,b.end.y]:
+					if x >= b.position.x and x <= b.end.x and y >= a.position.y and y <= a.end.y:
+						candidates.append(Vector2(x,y))
+			for x: float in [b.position.x,b.end.x]:
+				for y: float in [a.position.y,a.end.y]:
+					if x >= a.position.x and x <= a.end.x and y >= b.position.y and y <= b.end.y:
+						candidates.append(Vector2(x,y))
+	var best := desired
+	var distance := INF
+	for candidate: Vector2 in candidates:
+		candidate = _clamp(candidate,radius)
+		var candidate_distance := desired.distance_squared_to(candidate)
+		if candidate_distance < distance and is_clear(candidate,radius):
+			best = candidate
+			distance = candidate_distance
+	return best
 
 static func _step_direction(offset: Vector2, max_step: float) -> Vector2:
 	return offset.normalized() * (minf(1.0,offset.length()/max_step) if max_step > EPS else 1.0)
