@@ -37,10 +37,12 @@ for k in ('XDG_DATA_HOME', 'XDG_CONFIG_HOME', 'XDG_CACHE_HOME'):
 assert 'BINDING_BASELINE_ONLY' not in os.environ
 assert 'SAFE_EXIT_GROUP' not in os.environ
 assert 'RETURN_CASE' not in os.environ
+assert 'STARTUP_CASE' not in os.environ
+assert 'STARTUP_RED_CONTROL' not in os.environ
 assert not (pathlib.Path(os.environ['XDG_DATA_HOME']) / 'build_save.json').exists()
 print('FAKE: 3 checks, 0 failures')
 '''
-        with patch.dict(os.environ, {"BINDING_BASELINE_ONLY": "1", "SAFE_EXIT_GROUP": "unsafe", "RETURN_CASE": "bad"}):
+        with patch.dict(os.environ, {"BINDING_BASELINE_ONLY": "1", "SAFE_EXIT_GROUP": "unsafe", "RETURN_CASE": "bad", "STARTUP_CASE": "bad", "STARTUP_RED_CONTROL": "skip_recovery"}):
             first = self.run_fake(source)
             second = self.run_fake(source)
         self.assertTrue(first["passed"])
@@ -116,11 +118,39 @@ print('FAKE: 3 checks, 0 failures')
 
     def test_matrix_and_baseline_totals(self):
         quick, full = runner.cases(), runner.cases("full")
-        self.assertEqual((len(quick), len(full)), (13, 37))
+        self.assertEqual((len(quick), len(full)), (15, 43))
         self.assertEqual(len({c.name for c in full}), len(full))
         self.assertEqual(sum(c.expected_checks for c in full if c.name.startswith("return_")), 387)
         self.assertEqual(sum(c.expected_checks for c in full if c.name.startswith("f6_")), 163)
         self.assertTrue(set(c.name for c in quick) <= set(c.name for c in full))
+
+    def test_startup_matrix_and_contaminated_environment(self):
+        expected = {"start": 27, "leave": 26, "test": 26,
+                    "completed_start": 25, "completed_leave": 24, "completed_test": 24}
+        startup = [c for c in runner.cases("full") if c.name.startswith("startup_")]
+        self.assertEqual({c.env["STARTUP_CASE"]: c.expected_checks for c in startup}, expected)
+        self.assertEqual(sum(c.expected_checks for c in startup), 152)
+        self.assertEqual([c.env["STARTUP_CASE"] for c in runner.cases() if c.name.startswith("startup_")],
+                         ["start", "completed_test"])
+        for case in startup:
+            with self.subTest(case=case.name):
+                self.assertEqual(case.script, "startup_recovery_failure")
+                self.assertEqual(case.prefix, "godot-startup-recovery.")
+                self.assertEqual(case.env, {"STARTUP_CASE": case.name.removeprefix("startup_")})
+                self.assertEqual(case.marker, "STARTUP_RECOVERY " + case.env["STARTUP_CASE"] + " ")
+                self.case = case
+                source = f"""import os, pathlib
+assert os.environ['STARTUP_CASE'] == {case.env['STARTUP_CASE']!r}
+assert 'STARTUP_RED_CONTROL' not in os.environ
+for key in ('XDG_DATA_HOME', 'XDG_CONFIG_HOME', 'XDG_CACHE_HOME'):
+    assert str(pathlib.Path(os.environ[key])).startswith('/tmp/godot-startup-recovery.')
+print({case.marker!r} + '{case.expected_checks} checks, 0 failures')
+"""
+                with patch.dict(os.environ, {"STARTUP_CASE": "bad", "STARTUP_RED_CONTROL": "skip_recovery"}):
+                    result = self.run_fake(source)
+                    self.assertEqual(os.environ["STARTUP_CASE"], "bad")
+                    self.assertEqual(os.environ["STARTUP_RED_CONTROL"], "skip_recovery")
+                self.assertTrue(result["passed"], result)
 
 
 if __name__ == "__main__":

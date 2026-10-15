@@ -1,0 +1,172 @@
+{
+  "mode": "startup-only",
+  "cases": 6,
+  "passed": 6,
+  "failed": 0,
+  "observed_checks": 152,
+  "accepted_checks": 152,
+  "results": [
+    {
+      "name": "startup_start",
+      "expected_checks": 27,
+      "checks": 27,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-startup-a6v7jza4/startup_start.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/startup_recovery_failure_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-startup-recovery.dkv4_9tu/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-startup-recovery.dkv4_9tu/config",
+        "XDG_CACHE_HOME": "/tmp/godot-startup-recovery.dkv4_9tu/cache"
+      },
+      "scenario": {
+        "STARTUP_CASE": "start"
+      },
+      "warnings": [],
+      "seconds": 4.177
+    },
+    {
+      "name": "startup_leave",
+      "expected_checks": 26,
+      "checks": 26,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-startup-a6v7jza4/startup_leave.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/startup_recovery_failure_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-startup-recovery.twn0jek9/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-startup-recovery.twn0jek9/config",
+        "XDG_CACHE_HOME": "/tmp/godot-startup-recovery.twn0jek9/cache"
+      },
+      "scenario": {
+        "STARTUP_CASE": "leave"
+      },
+      "warnings": [],
+      "seconds": 4.177
+    },
+    {
+      "name": "startup_test",
+      "expected_checks": 26,
+      "checks": 26,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-startup-a6v7jza4/startup_test.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/startup_recovery_failure_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-startup-recovery.ro3ya5yb/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-startup-recovery.ro3ya5yb/config",
+        "XDG_CACHE_HOME": "/tmp/godot-startup-recovery.ro3ya5yb/cache"
+      },
+      "scenario": {
+        "STARTUP_CASE": "test"
+      },
+      "warnings": [],
+      "seconds": 4.078
+    },
+    {
+      "name": "startup_completed_start",
+      "expected_checks": 25,
+      "checks": 25,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-startup-a6v7jza4/startup_completed_start.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/startup_recovery_failure_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-startup-recovery.2fee9kve/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-startup-recovery.2fee9kve/config",
+        "XDG_CACHE_HOME": "/tmp/godot-startup-recovery.2fee9kve/cache"
+      },
+      "scenario": {
+        "STARTUP_CASE": "completed_start"
+      },
+      "warnings": [],
+      "seconds": 3.877
+    },
+    {
+      "name": "startup_completed_leave",
+      "expected_checks": 24,
+      "checks": 24,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-startup-a6v7jza4/startup_completed_leave.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/startup_recovery_failure_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-startup-recovery.pyp09_q7/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-startup-recovery.pyp09_q7/config",
+        "XDG_CACHE_HOME": "/tmp/godot-startup-recovery.pyp09_q7/cache"
+      },
+      "scenario": {
+        "STARTUP_CASE": "completed_leave"
+      },
+      "warnings": [],
+      "seconds": 3.828
+    },
+    {
+      "name": "startup_completed_test",
+      "expected_checks": 24,
+      "checks": 24,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-startup-a6v7jza4/startup_completed_test.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/startup_recovery_failure_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-startup-recovery.mmokk7jf/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-startup-recovery.mmokk7jf/config",
+        "XDG_CACHE_HOME": "/tmp/godot-startup-recovery.mmokk7jf/cache"
+      },
+      "scenario": {
+        "STARTUP_CASE": "completed_test"
+      },
+      "warnings": [],
+      "seconds": 3.776
+    }
+  ]
+}
