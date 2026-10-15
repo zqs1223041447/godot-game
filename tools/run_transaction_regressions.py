@@ -24,6 +24,7 @@ class Case:
     prefix: str = "godot-m1-transactions-"
     env: dict = field(default_factory=dict)
     json_summary: bool = False
+    burn_evidence: bool = False
 
 
 def cases(mode="quick"):
@@ -62,6 +63,14 @@ def cases(mode="quick"):
         result.append(Case("startup_" + action, "startup_recovery_failure",
                            "STARTUP_RECOVERY " + action + " ", startup_counts[action],
                            "godot-startup-recovery.", env={"STARTUP_CASE": action}))
+    if mode == "full":
+        result.extend([
+            Case("burn_state_copy", "burn_state_copy_20261015", "Burn state copy equivalence:",
+                 892, "godot-m1-v050-"),
+            Case("burn_settlement_equivalence", "burn_settlement_equivalence",
+                 "BURN_SETTLEMENT_EQUIVALENCE ", 58593, "godot-m1-v063-",
+                 json_summary=True, burn_evidence=True),
+        ])
     return result
 
 
@@ -97,7 +106,7 @@ def run_case(case, godot, project, output_dir, timeout=90):
         env = os.environ.copy()
         # Never inherit scenario switches or artifact destinations from another run.
         for key in ("RETURN_CASE", "RETURN_FIXTURE", "TORNADO_UNBOUND", "TORNADO_FAIL",
-                    "STARTUP_CASE", "STARTUP_RED_CONTROL",
+                    "STARTUP_CASE", "STARTUP_RED_CONTROL", "BURN_EVIDENCE_DIR",
                     "BINDING_BASELINE_ONLY", "BINDING_REPORT", "BINDING_CAPTURE_DIR",
                     "GEM_PICKER_REPORT", "GEM_PICKER_CAPTURE_DIR", "SAFE_EXIT_GROUP", "SAFE_EXIT_OUTPUT"):
             env.pop(key, None)
@@ -110,6 +119,11 @@ def run_case(case, godot, project, output_dir, timeout=90):
         env["BINDING_REPORT"] = str(output_dir / (case.name + "-binding.json"))
         env["GEM_PICKER_REPORT"] = str(output_dir / (case.name + "-picker.json"))
         env["SAFE_EXIT_OUTPUT"] = str(output_dir / (case.name + "-safe-exit.json"))
+        if case.burn_evidence:
+            # The suite atomically reserves this fresh destination; never mkdir here.
+            # Keep reports beside logs, outside the disposable XDG tree.
+            env["BURN_EVIDENCE_DIR"] = str(output_dir / (case.name + "-evidence"))
+            record["evidence_dir"] = env["BURN_EVIDENCE_DIR"]
         command = [godot, "--headless", "--path", str(project), "--script", f"tests/{case.script}_test.gd"]
         record.update(command=command, environment={key: env[key] for key in ("XDG_DATA_HOME", "XDG_CONFIG_HOME", "XDG_CACHE_HOME")}, scenario=case.env)
         with log_path.open("wb") as log:

@@ -1,0 +1,61 @@
+{
+  "mode": "burn-only",
+  "cases": 2,
+  "passed": 2,
+  "failed": 0,
+  "observed_checks": 59485,
+  "accepted_checks": 59485,
+  "results": [
+    {
+      "name": "burn_state_copy",
+      "expected_checks": 892,
+      "checks": 892,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-burn-hxrk2t_p/burn_state_copy.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/burn_state_copy_20261015_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-v050-lqqhto0c/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-v050-lqqhto0c/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-v050-lqqhto0c/cache"
+      },
+      "scenario": {},
+      "warnings": [],
+      "seconds": 0.717
+    },
+    {
+      "name": "burn_settlement_equivalence",
+      "expected_checks": 58593,
+      "checks": 58593,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-burn-hxrk2t_p/burn_settlement_equivalence.log",
+      "evidence_dir": "/tmp/transaction-regressions-burn-hxrk2t_p/burn_settlement_equivalence-evidence",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/burn_settlement_equivalence_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-v063-5l4n3ez8/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-v063-5l4n3ez8/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-v063-5l4n3ez8/cache"
+      },
+      "scenario": {},
+      "warnings": [],
+      "seconds": 5.932
+    }
+  ]
+}

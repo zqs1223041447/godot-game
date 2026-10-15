@@ -39,10 +39,11 @@ assert 'SAFE_EXIT_GROUP' not in os.environ
 assert 'RETURN_CASE' not in os.environ
 assert 'STARTUP_CASE' not in os.environ
 assert 'STARTUP_RED_CONTROL' not in os.environ
+assert 'BURN_EVIDENCE_DIR' not in os.environ
 assert not (pathlib.Path(os.environ['XDG_DATA_HOME']) / 'build_save.json').exists()
 print('FAKE: 3 checks, 0 failures')
 '''
-        with patch.dict(os.environ, {"BINDING_BASELINE_ONLY": "1", "SAFE_EXIT_GROUP": "unsafe", "RETURN_CASE": "bad", "STARTUP_CASE": "bad", "STARTUP_RED_CONTROL": "skip_recovery"}):
+        with patch.dict(os.environ, {"BINDING_BASELINE_ONLY": "1", "SAFE_EXIT_GROUP": "unsafe", "RETURN_CASE": "bad", "STARTUP_CASE": "bad", "STARTUP_RED_CONTROL": "skip_recovery", "BURN_EVIDENCE_DIR": "/tmp/contaminated-burn"}):
             first = self.run_fake(source)
             second = self.run_fake(source)
         self.assertTrue(first["passed"])
@@ -118,11 +119,52 @@ print('FAKE: 3 checks, 0 failures')
 
     def test_matrix_and_baseline_totals(self):
         quick, full = runner.cases(), runner.cases("full")
-        self.assertEqual((len(quick), len(full)), (15, 43))
+        self.assertEqual((len(quick), len(full)), (15, 45))
         self.assertEqual(len({c.name for c in full}), len(full))
         self.assertEqual(sum(c.expected_checks for c in full if c.name.startswith("return_")), 387)
         self.assertEqual(sum(c.expected_checks for c in full if c.name.startswith("f6_")), 163)
         self.assertTrue(set(c.name for c in quick) <= set(c.name for c in full))
+
+
+    def test_burn_full_only_matrix(self):
+        burn = [c for c in runner.cases("full") if c.name.startswith("burn_")]
+        self.assertEqual(len(burn), 2)
+        self.assertFalse(any(c.name.startswith("burn_") for c in runner.cases()))
+        self.assertEqual([(c.script, c.expected_checks, c.prefix, c.marker, c.json_summary, c.burn_evidence) for c in burn], [
+            ("burn_state_copy_20261015", 892, "godot-m1-v050-", "Burn state copy equivalence:", False, False),
+            ("burn_settlement_equivalence", 58593, "godot-m1-v063-", "BURN_SETTLEMENT_EQUIVALENCE ", True, True),
+        ])
+        self.assertEqual(sum(c.expected_checks for c in runner.cases()), 1414)
+        self.assertEqual(sum(c.expected_checks for c in runner.cases("full")), 61571)
+
+    def test_burn_report_isolation_persistence_and_existing_refusal(self):
+        self.case = next(c for c in runner.cases("full") if c.burn_evidence)
+        source = f"""import os, pathlib, json
+p = pathlib.Path(os.environ['BURN_EVIDENCE_DIR'])
+assert p == pathlib.Path({str(self.root)!r}) / 'burn_settlement_equivalence-evidence'
+assert not p.is_relative_to(pathlib.Path(os.environ['XDG_DATA_HOME']).parent)
+for key in ('XDG_DATA_HOME', 'XDG_CONFIG_HOME', 'XDG_CACHE_HOME'):
+    assert os.environ[key].startswith('/tmp/godot-m1-v063-')
+try:
+    p.mkdir()
+except FileExistsError:
+    raise SystemExit(73)
+report = {{'checks': 58593, 'failures': 0}}
+(p / 'results.json').write_text(json.dumps(report))
+print('BURN_SETTLEMENT_EQUIVALENCE ' + json.dumps(report))
+"""
+        with patch.dict(os.environ, {"BURN_EVIDENCE_DIR": "/tmp/contaminated-burn"}):
+            first = self.run_fake(source)
+            self.assertEqual(os.environ["BURN_EVIDENCE_DIR"], "/tmp/contaminated-burn")
+            self.assertTrue(first["passed"], first)
+            evidence = Path(first["evidence_dir"])
+            original = (evidence / "results.json").read_bytes()
+            self.assertFalse(Path(first["environment"]["XDG_DATA_HOME"]).exists())
+            self.assertEqual(json.loads(original), {"checks": 58593, "failures": 0})
+            second = self.run_fake(source)
+            self.assertFalse(second["passed"])
+            self.assertEqual(second["returncode"], 73)
+            self.assertEqual((evidence / "results.json").read_bytes(), original)
 
     def test_startup_matrix_and_contaminated_environment(self):
         expected = {"start": 27, "leave": 26, "test": 26,
