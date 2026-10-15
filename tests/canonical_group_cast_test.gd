@@ -9,6 +9,7 @@ func run() -> void:
 	if not isolated.begins_with("/tmp/godot-m1-") or not OS.get_user_data_dir().begins_with(isolated + "/"):
 		quit(78)
 		return
+	create_timer(30.0).timeout.connect(func(): push_error("Group cast watchdog expired"); quit(1))
 	arena = load("res://scenes/main.tscn").instantiate()
 	root.add_child(arena)
 	await process_frame
@@ -16,8 +17,8 @@ func run() -> void:
 	arena.hud.set_process(false)
 	arena.enemies.clear()
 	arena.auto_fire = false
-	var state := Model.new()
-	var path := "user://group-cast-%d.json" % Time.get_ticks_usec()
+	var state: Model = arena.state
+	var path: String = arena.build_save_path
 	check(state.save_build(path) == OK,"fixture save")
 	var source := state.snapshot()
 	for id: String in ["swift_projectiles","heavy_projectiles","lingering_chill","efficiency","quickcast"]:
@@ -25,16 +26,21 @@ func run() -> void:
 		for item_uid: String in source.items:
 			if source.items[item_uid].definition_id == "support:"+id: uid = item_uid
 		var index: int = state.skill_group("group_000002").support_ids.size()
+		if not check(not uid.is_empty(),"required owned support exists"): quit(1); return
 		check(state.move_item(uid,{"kind":"skill_support","group_id":"group_000002","index":index},state.revision(),path).ok,"install actual link")
-	# Keep the old HUD as a passive fixture only; no claim that the new menus are integrated.
-	arena.state = state
+	# Enter combat through the current formal map flow; town correctly rejects casts.
+	if not check(arena.craft_normal_map("old_garden",1,[],[],arena.map_draft().revision).ok,"formal map draft accepted"): quit(1); return
+	var entry: Dictionary = arena.start_map(arena.map_draft().revision)
+	if not check(entry.ok,"formal combat map entered: " + JSON.stringify(entry)): quit(1); return
+	arena.enemies.clear()
 	arena._stats = state.get_stats()
 	arena.mana = arena._stats.max_mana
 	arena.hud.close_panel()
 	var recipe := state.get_group_cast("group_000002")
+	if not check(recipe.get("ok",false),"five-link recipe compiles"): quit(1); return
 	var mana_before: float = arena.mana
 	check(arena.cast_group("group_000002"),"real five-link cast admitted")
-	check(arena.projectiles.size() == 5,"real five projectiles created")
+	if not check(arena.projectiles.size() == 5,"real five projectiles created"): quit(1); return
 	check(is_equal_approx(arena.mana,mana_before-recipe.mana),"same recipe mana charged")
 	check(is_equal_approx(arena.group_cooldown_remaining("group_000002"),recipe.cooldown),"same recipe cooldown consumed")
 	check(is_equal_approx(arena.projectiles[0].slow,recipe.recipe.slow) and is_equal_approx(arena.projectiles[0].velocity.length(),recipe.recipe.speed),"actual projectile speed and chill use five-link recipe")
@@ -44,7 +50,7 @@ func run() -> void:
 	check(state.move_item(uid,{"kind":"skill_main","group_id":"group_000009"},state.revision(),path).ok,"same gem moved")
 	check(not arena.cast_group("group_000009") and arena.mana == mana_before,"moving main gem cannot refresh cooldown")
 	var fresh: String = state.award_gem("skill:frost")
-	check(not fresh.is_empty(),"independent same-name gem obtained")
+	if not check(not fresh.is_empty(),"independent same-name gem obtained"): quit(1); return
 	check(state.move_item(fresh,{"kind":"skill_main","group_id":"group_000010"},state.revision(),path).ok,"same-name gem separate group")
 	check(arena.cast_group("group_000010"),"different gem and row have independent cooldown")
 	check(state.move_item(fresh,{"kind":"skill_main","group_id":"group_000002"},state.revision(),path).ok,"fresh gem moves into cooling group")
@@ -56,7 +62,7 @@ func run() -> void:
 	var debt_before: Dictionary = arena.group_cooldowns.snapshot()
 	check(not arena.cast_group("group_000002") and arena.group_cooldowns.snapshot() == debt_before,"mana reject does not start debt")
 	arena.mana = arena._stats.max_mana
-	while arena.projectiles.size() < 180: arena.projectiles.append(arena.projectiles[0].duplicate(true))
+	while arena.projectiles.size() < arena.MAX_PROJECTILES: arena.projectiles.append(arena.projectiles[0].duplicate(true))
 	mana_before = arena.mana
 	check(not arena.cast_group("group_000002") and arena.mana == mana_before and arena.group_cooldowns.snapshot() == debt_before,"capacity reject no mana or cooldown")
 	arena.projectile_runtime.cancel_all(arena.projectiles)
@@ -74,8 +80,9 @@ func run() -> void:
 	arena.queue_free()
 	await process_frame
 	quit(1 if failures else 0)
-func check(ok: bool, label: String) -> void:
+func check(ok: bool, label: String) -> bool:
 	checks += 1
 	if not ok:
 		failures += 1
 		push_error(label)
+	return ok
