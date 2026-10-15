@@ -5,6 +5,15 @@ const Data = preload("res://scripts/game_data.gd")
 const Supports = preload("res://scripts/combat/support_registry.gd")
 const Emblem = preload("res://scripts/visuals/skill_emblem.gd")
 const ICON_ROOT: String = "res://assets/ui/grimoire/"
+const EXPECTED_SKILLS: Array[String] = [
+	"bolt", "chain", "cleave", "dash", "frost", "meteor", "nova", "shade_bolt", "tornado", "ward",
+]
+const EXPECTED_SUPPORTS: Array[String] = [
+	"ambush", "breadth", "chain_extension", "chain_reach", "cold_focus", "concentrate",
+	"efficiency", "ember_proliferation", "encircling_cleave", "fire_focus", "focus", "frost_lock",
+	"heavy_projectiles", "ignite", "inward_pull", "lightning_focus", "lingering_chill", "long_stride",
+	"physical_focus", "pierce", "quickcast", "shock", "swift_projectiles", "volley",
+]
 var checks: int = 0
 var failures: int = 0
 
@@ -19,16 +28,36 @@ func _run() -> void:
 	_check_rejections()
 	_check_copy_isolation_and_determinism()
 	_check_rng_unchanged()
-	print("Gem catalog: 8 skills, 16 supports; %d checks, %d failures" % [checks, failures])
+	print("Gem catalog: 10 skills, 24 supports; %d checks, %d failures" % [checks, failures])
 	quit(0 if failures == 0 else 1)
 
 
 func _check_all_source_definitions() -> void:
 	var catalog: Dictionary = Catalog.definitions()
 	_expect(Data.SKILLS.size() == 10, "Source catalog contains exactly ten skills")
-	_expect(Supports.SUPPORTS.size() == 16, "SupportRegistry contains exactly sixteen supports")
-	_expect(Emblem.ICONS.size() == 26, "SkillEmblem contains exactly twenty-six original icon mappings")
-	_expect(catalog.size() == 26, "Gem catalog exposes exactly twenty-six definitions")
+	_expect(Supports.SUPPORTS.size() == 24, "SupportRegistry contains exactly twenty-four supports")
+	_expect(Emblem.ICONS.size() == 34, "SkillEmblem contains exactly thirty-four original icon mappings")
+	_expect(catalog.size() == 34, "Gem catalog exposes exactly thirty-four definitions")
+	var skill_ids: Array = Data.SKILLS.keys()
+	var support_ids: Array = Supports.SUPPORTS.keys()
+	skill_ids.sort()
+	support_ids.sort()
+	_expect(skill_ids == EXPECTED_SKILLS, "Active skill identities match the reviewed catalog")
+	_expect(support_ids == EXPECTED_SUPPORTS, "Support identities match the reviewed catalog")
+	var expected_icons: Array = EXPECTED_SKILLS + EXPECTED_SUPPORTS
+	var icon_ids: Array = Emblem.ICONS.keys()
+	expected_icons.sort()
+	icon_ids.sort()
+	_expect(icon_ids == expected_icons, "Icon identities exactly cover the reviewed skills and supports")
+	var expected_definitions: Array[String] = []
+	for skill_id: String in EXPECTED_SKILLS:
+		expected_definitions.append("skill:" + skill_id)
+	for support_id: String in EXPECTED_SUPPORTS:
+		expected_definitions.append("support:" + support_id)
+	var definition_ids: Array = catalog.keys()
+	expected_definitions.sort()
+	definition_ids.sort()
+	_expect(definition_ids == expected_definitions, "Gem identities exactly cover the reviewed namespaced catalog")
 	for skill_id: String in Data.SKILLS:
 		var id: String = "skill:" + skill_id
 		var source: Dictionary = Data.SKILLS[skill_id]

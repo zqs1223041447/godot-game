@@ -29,6 +29,8 @@ func choose(group:String,label:String)->void:
 func run()->void:
 	if not OS.get_environment("XDG_DATA_HOME").begins_with("/tmp/godot-skill-binding-") or FileAccess.file_exists(PATH):quit(78);return
 	var model:=FaultModel.new();check(model.save_build(PATH)==OK,"Fresh canonical save")
+	var initial_version:int=model.snapshot().version
+	check(initial_version==Model.Rules.VERSION,"Fresh binding fixture uses current canonical schema")
 	arena=load("res://scenes/main.tscn").instantiate();arena.state=model;arena.build_save_path=PATH
 	root.add_child(arena);arena.set_process(false);arena.set_physics_process(false);arena.hud.set_process(false);arena.auto_fire=false
 	await settle();await key(KEY_K);panel=arena.hud._skill_support_panel
@@ -82,7 +84,7 @@ func run()->void:
 	while arena.hud.is_blocking():arena.hud.close_panel()
 	mana_before=arena.mana;await key(KEY_Z)
 	check(arena.mana==mana_before and arena.group_cooldown_remaining(groups[0])==remaining,"New physical key cannot cast through old cooldown")
-	check(model.snapshot().version==59,"No save schema change")
+	check(model.snapshot().version==initial_version,"Binding operations preserve the initial save schema")
 	finish()
 func finish()->void:
 	var report:={"checks":checks,"failures":failures.size(),"failed_labels":failures,"observed_labels":observed,"display":DisplayServer.get_name()}

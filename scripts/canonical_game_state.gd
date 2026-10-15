@@ -182,14 +182,22 @@ func bind_group(group_id: Variant, keycode: Variant, expected_revision: Variant,
 	if not expected_revision is int or expected_revision != revision(): return _failure("stale_revision", "技能配置已变化")
 	if not group_id is String or group_index(group_id) < 0 or not keycode is int or not Rules.BINDABLE_KEYS.has(keycode): return _failure("invalid_binding", "快捷键不可用")
 	var candidate := snapshot()
+	if not _set_candidate_binding(candidate, group_id, keycode): return _failure("no_change", "")
+	candidate.revision += 1
+	return _commit(candidate, path)
+
+
+# Keep identical mappings (including their order) untouched. Shared by the
+# explicit binding command and the atomic legacy move-and-bind command.
+func _set_candidate_binding(candidate: Dictionary, group_id: String, keycode: int) -> bool:
+	for binding: Dictionary in candidate.bindings:
+		if binding.group_id == group_id and binding.keycode == keycode: return false
 	var bindings: Array = []
 	for binding: Dictionary in candidate.bindings:
 		if binding.group_id != group_id and binding.keycode != keycode: bindings.append(binding)
 	bindings.append({"group_id":group_id,"keycode":keycode})
-	if bindings == candidate.bindings: return _failure("no_change", "")
 	candidate.bindings = bindings
-	candidate.revision += 1
-	return _commit(candidate, path)
+	return true
 
 
 func _prepare_candidate(candidate: Dictionary) -> Dictionary:
@@ -547,17 +555,25 @@ func unequip(slot_id: String) -> bool:
 
 
 func slot_skill(index: int,skill_id: String) -> bool:
-	if index<0 or index>=5 or not Data.SKILLS.has(skill_id):return false
+	if _busy or index<0 or index>=5 or not Data.SKILLS.has(skill_id):return false
 	var group_id:String=group_for_key(KEY_1+index)
 	if group_id.is_empty():group_id=_current.skill_groups[index].id
 	var uid:=""
 	for id:String in _current.items:
 		if _current.items[id].definition_id=="skill:"+skill_id:uid=id;break
 	if uid.is_empty():return false
-	var result:=move_item(uid,{"kind":"skill_main","group_id":group_id},revision(),_command_path())
-	if not result.ok:return false
-	if group_for_key(KEY_1+index)!=group_id:return bool(bind_group(group_id,KEY_1+index,revision(),_command_path()).ok)
-	return true
+	# Plan the same validated transfer as move_item, but persist only after
+	# adding the default binding. A same-location gem can still need repair.
+	var planned: Dictionary = Transfer.move_paged(Items.metadata_for_items(_current.items), _current.locations,
+		Migration.paged_location_context(_current, _socket_ids), uid,
+		{"kind":"skill_main","group_id":group_id}, revision(), revision())
+	if not planned.ok and planned.error_code != "no_change":return false
+	var candidate := snapshot()
+	if planned.ok:candidate.locations = planned.locations
+	var binding_changed := _set_candidate_binding(candidate, group_id, KEY_1+index)
+	if not planned.ok and not binding_changed:return false
+	candidate.revision += 1
+	return bool(_commit(candidate, _command_path()).ok)
 
 
 func _command_path() -> String:
