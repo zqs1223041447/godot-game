@@ -1,0 +1,486 @@
+{
+  "decision": "rejected",
+  "reason": "No-burn control means regressed in both bounded pairs; signed-zero key-preservation premise was false. No production optimization retained.",
+  "baseline_commit": "4e581e223bf012c04c94ec1f1a558021feeea03a",
+  "exact_comparisons": [
+    {
+      "file": "baseline-ember-ember_deaths.bin",
+      "equals": "baseline-ember-ember_deaths.bin",
+      "exact": true
+    },
+    {
+      "file": "candidate-ember-ember_deaths.bin",
+      "equals": "baseline-ember-ember_deaths.bin",
+      "exact": true
+    },
+    {
+      "file": "baseline-repeat-ember-ember_deaths.bin",
+      "equals": "baseline-ember-ember_deaths.bin",
+      "exact": true
+    },
+    {
+      "file": "candidate-repeat-ember-ember_deaths.bin",
+      "equals": "baseline-ember-ember_deaths.bin",
+      "exact": true
+    },
+    {
+      "file": "diagnostic-ember-ember_deaths.bin",
+      "equals": "baseline-ember-ember_deaths.bin",
+      "exact": true
+    },
+    {
+      "file": "baseline-ember-ember_deaths-final.bin",
+      "equals": "baseline-ember-ember_deaths-final.bin",
+      "exact": true
+    },
+    {
+      "file": "candidate-ember-ember_deaths-final.bin",
+      "equals": "baseline-ember-ember_deaths-final.bin",
+      "exact": true
+    },
+    {
+      "file": "baseline-repeat-ember-ember_deaths-final.bin",
+      "equals": "baseline-ember-ember_deaths-final.bin",
+      "exact": true
+    },
+    {
+      "file": "candidate-repeat-ember-ember_deaths-final.bin",
+      "equals": "baseline-ember-ember_deaths-final.bin",
+      "exact": true
+    },
+    {
+      "file": "diagnostic-ember-ember_deaths-final.bin",
+      "equals": "baseline-ember-ember_deaths-final.bin",
+      "exact": true
+    },
+    {
+      "file": "baseline-ember-ember_deaths.save",
+      "equals": "baseline-ember-ember_deaths.save",
+      "exact": true
+    },
+    {
+      "file": "candidate-ember-ember_deaths.save",
+      "equals": "baseline-ember-ember_deaths.save",
+      "exact": true
+    },
+    {
+      "file": "baseline-repeat-ember-ember_deaths.save",
+      "equals": "baseline-ember-ember_deaths.save",
+      "exact": true
+    },
+    {
+      "file": "candidate-repeat-ember-ember_deaths.save",
+      "equals": "baseline-ember-ember_deaths.save",
+      "exact": true
+    },
+    {
+      "file": "diagnostic-ember-ember_deaths.save",
+      "equals": "baseline-ember-ember_deaths.save",
+      "exact": true
+    },
+    {
+      "file": "baseline-no-burn-no_burn.bin",
+      "equals": "baseline-no-burn-no_burn.bin",
+      "exact": true
+    },
+    {
+      "file": "candidate-no-burn-no_burn.bin",
+      "equals": "baseline-no-burn-no_burn.bin",
+      "exact": true
+    },
+    {
+      "file": "baseline-repeat-no-burn-no_burn.bin",
+      "equals": "baseline-no-burn-no_burn.bin",
+      "exact": true
+    },
+    {
+      "file": "candidate-repeat-no-burn-no_burn.bin",
+      "equals": "baseline-no-burn-no_burn.bin",
+      "exact": true
+    },
+    {
+      "file": "baseline-no-burn-no_burn-final.bin",
+      "equals": "baseline-no-burn-no_burn-final.bin",
+      "exact": true
+    },
+    {
+      "file": "candidate-no-burn-no_burn-final.bin",
+      "equals": "baseline-no-burn-no_burn-final.bin",
+      "exact": true
+    },
+    {
+      "file": "baseline-repeat-no-burn-no_burn-final.bin",
+      "equals": "baseline-no-burn-no_burn-final.bin",
+      "exact": true
+    },
+    {
+      "file": "candidate-repeat-no-burn-no_burn-final.bin",
+      "equals": "baseline-no-burn-no_burn-final.bin",
+      "exact": true
+    },
+    {
+      "file": "baseline-no-burn-no_burn.save",
+      "equals": "baseline-no-burn-no_burn.save",
+      "exact": true
+    },
+    {
+      "file": "candidate-no-burn-no_burn.save",
+      "equals": "baseline-no-burn-no_burn.save",
+      "exact": true
+    },
+    {
+      "file": "baseline-repeat-no-burn-no_burn.save",
+      "equals": "baseline-no-burn-no_burn.save",
+      "exact": true
+    },
+    {
+      "file": "candidate-repeat-no-burn-no_burn.save",
+      "equals": "baseline-no-burn-no_burn.save",
+      "exact": true
+    },
+    {
+      "file": "baseline-ignite-ignite.bin",
+      "equals": "baseline-ignite-ignite.bin",
+      "exact": true
+    },
+    {
+      "file": "candidate-ignite-ignite.bin",
+      "equals": "baseline-ignite-ignite.bin",
+      "exact": true
+    },
+    {
+      "file": "baseline-repeat-ignite-ignite.bin",
+      "equals": "baseline-ignite-ignite.bin",
+      "exact": true
+    },
+    {
+      "file": "candidate-repeat-ignite-ignite.bin",
+      "equals": "baseline-ignite-ignite.bin",
+      "exact": true
+    },
+    {
+      "file": "baseline-ignite-ignite-final.bin",
+      "equals": "baseline-ignite-ignite-final.bin",
+      "exact": true
+    },
+    {
+      "file": "candidate-ignite-ignite-final.bin",
+      "equals": "baseline-ignite-ignite-final.bin",
+      "exact": true
+    },
+    {
+      "file": "baseline-repeat-ignite-ignite-final.bin",
+      "equals": "baseline-ignite-ignite-final.bin",
+      "exact": true
+    },
+    {
+      "file": "candidate-repeat-ignite-ignite-final.bin",
+      "equals": "baseline-ignite-ignite-final.bin",
+      "exact": true
+    },
+    {
+      "file": "baseline-ignite-ignite.save",
+      "equals": "baseline-ignite-ignite.save",
+      "exact": true
+    },
+    {
+      "file": "candidate-ignite-ignite.save",
+      "equals": "baseline-ignite-ignite.save",
+      "exact": true
+    },
+    {
+      "file": "baseline-repeat-ignite-ignite.save",
+      "equals": "baseline-ignite-ignite.save",
+      "exact": true
+    },
+    {
+      "file": "candidate-repeat-ignite-ignite.save",
+      "equals": "baseline-ignite-ignite.save",
+      "exact": true
+    }
+  ],
+  "files": {
+    "baseline-ember-ember_deaths.bin": {
+      "sha256": "e3898e8b48f52ab42e4a80c9232bb94271946d908c01fdbdeba82a590e73aaff",
+      "bytes": 30889476
+    },
+    "candidate-ember-ember_deaths.bin": {
+      "sha256": "e3898e8b48f52ab42e4a80c9232bb94271946d908c01fdbdeba82a590e73aaff",
+      "bytes": 30889476
+    },
+    "baseline-repeat-ember-ember_deaths.bin": {
+      "sha256": "e3898e8b48f52ab42e4a80c9232bb94271946d908c01fdbdeba82a590e73aaff",
+      "bytes": 30889476
+    },
+    "candidate-repeat-ember-ember_deaths.bin": {
+      "sha256": "e3898e8b48f52ab42e4a80c9232bb94271946d908c01fdbdeba82a590e73aaff",
+      "bytes": 30889476
+    },
+    "diagnostic-ember-ember_deaths.bin": {
+      "sha256": "e3898e8b48f52ab42e4a80c9232bb94271946d908c01fdbdeba82a590e73aaff",
+      "bytes": 30889476
+    },
+    "baseline-ember-ember_deaths-final.bin": {
+      "sha256": "30347f555598406f413c120209760d72b2b110037f59b47feff4022d049324cc",
+      "bytes": 1491480
+    },
+    "candidate-ember-ember_deaths-final.bin": {
+      "sha256": "30347f555598406f413c120209760d72b2b110037f59b47feff4022d049324cc",
+      "bytes": 1491480
+    },
+    "baseline-repeat-ember-ember_deaths-final.bin": {
+      "sha256": "30347f555598406f413c120209760d72b2b110037f59b47feff4022d049324cc",
+      "bytes": 1491480
+    },
+    "candidate-repeat-ember-ember_deaths-final.bin": {
+      "sha256": "30347f555598406f413c120209760d72b2b110037f59b47feff4022d049324cc",
+      "bytes": 1491480
+    },
+    "diagnostic-ember-ember_deaths-final.bin": {
+      "sha256": "30347f555598406f413c120209760d72b2b110037f59b47feff4022d049324cc",
+      "bytes": 1491480
+    },
+    "baseline-ember-ember_deaths.save": {
+      "sha256": "c821772f8dc7a1ac5732fca1683f179a70153d42565f0b2b37663001426dd9f4",
+      "bytes": 13715
+    },
+    "candidate-ember-ember_deaths.save": {
+      "sha256": "c821772f8dc7a1ac5732fca1683f179a70153d42565f0b2b37663001426dd9f4",
+      "bytes": 13715
+    },
+    "baseline-repeat-ember-ember_deaths.save": {
+      "sha256": "c821772f8dc7a1ac5732fca1683f179a70153d42565f0b2b37663001426dd9f4",
+      "bytes": 13715
+    },
+    "candidate-repeat-ember-ember_deaths.save": {
+      "sha256": "c821772f8dc7a1ac5732fca1683f179a70153d42565f0b2b37663001426dd9f4",
+      "bytes": 13715
+    },
+    "diagnostic-ember-ember_deaths.save": {
+      "sha256": "c821772f8dc7a1ac5732fca1683f179a70153d42565f0b2b37663001426dd9f4",
+      "bytes": 13715
+    },
+    "baseline-no-burn-no_burn.bin": {
+      "sha256": "46f947fce25a8273d2268f13fc48c3d848fe605e920dafe8a4b82323297b60e9",
+      "bytes": 26714556
+    },
+    "candidate-no-burn-no_burn.bin": {
+      "sha256": "46f947fce25a8273d2268f13fc48c3d848fe605e920dafe8a4b82323297b60e9",
+      "bytes": 26714556
+    },
+    "baseline-repeat-no-burn-no_burn.bin": {
+      "sha256": "46f947fce25a8273d2268f13fc48c3d848fe605e920dafe8a4b82323297b60e9",
+      "bytes": 26714556
+    },
+    "candidate-repeat-no-burn-no_burn.bin": {
+      "sha256": "46f947fce25a8273d2268f13fc48c3d848fe605e920dafe8a4b82323297b60e9",
+      "bytes": 26714556
+    },
+    "baseline-no-burn-no_burn-final.bin": {
+      "sha256": "fb2cbed07528ce48fcb73aea0174fa279d545aad15a19ba2045dcb9a8b0334c3",
+      "bytes": 1349116
+    },
+    "candidate-no-burn-no_burn-final.bin": {
+      "sha256": "fb2cbed07528ce48fcb73aea0174fa279d545aad15a19ba2045dcb9a8b0334c3",
+      "bytes": 1349116
+    },
+    "baseline-repeat-no-burn-no_burn-final.bin": {
+      "sha256": "fb2cbed07528ce48fcb73aea0174fa279d545aad15a19ba2045dcb9a8b0334c3",
+      "bytes": 1349116
+    },
+    "candidate-repeat-no-burn-no_burn-final.bin": {
+      "sha256": "fb2cbed07528ce48fcb73aea0174fa279d545aad15a19ba2045dcb9a8b0334c3",
+      "bytes": 1349116
+    },
+    "baseline-no-burn-no_burn.save": {
+      "sha256": "7872189199ad00a611db3921b52bce17868176dca820f51203a7151d75e6dab2",
+      "bytes": 12222
+    },
+    "candidate-no-burn-no_burn.save": {
+      "sha256": "7872189199ad00a611db3921b52bce17868176dca820f51203a7151d75e6dab2",
+      "bytes": 12222
+    },
+    "baseline-repeat-no-burn-no_burn.save": {
+      "sha256": "7872189199ad00a611db3921b52bce17868176dca820f51203a7151d75e6dab2",
+      "bytes": 12222
+    },
+    "candidate-repeat-no-burn-no_burn.save": {
+      "sha256": "7872189199ad00a611db3921b52bce17868176dca820f51203a7151d75e6dab2",
+      "bytes": 12222
+    },
+    "baseline-ignite-ignite.bin": {
+      "sha256": "19cf550a402d948d6052fcb50c44acb7189a2b6b0cad8bcc4603cf3940809bc1",
+      "bytes": 30210888
+    },
+    "candidate-ignite-ignite.bin": {
+      "sha256": "19cf550a402d948d6052fcb50c44acb7189a2b6b0cad8bcc4603cf3940809bc1",
+      "bytes": 30210888
+    },
+    "baseline-repeat-ignite-ignite.bin": {
+      "sha256": "19cf550a402d948d6052fcb50c44acb7189a2b6b0cad8bcc4603cf3940809bc1",
+      "bytes": 30210888
+    },
+    "candidate-repeat-ignite-ignite.bin": {
+      "sha256": "19cf550a402d948d6052fcb50c44acb7189a2b6b0cad8bcc4603cf3940809bc1",
+      "bytes": 30210888
+    },
+    "baseline-ignite-ignite-final.bin": {
+      "sha256": "ca00aedc0452a86890b7af0eeba1116673812d4af329b14a9bc41e7869a3dc47",
+      "bytes": 1524060
+    },
+    "candidate-ignite-ignite-final.bin": {
+      "sha256": "ca00aedc0452a86890b7af0eeba1116673812d4af329b14a9bc41e7869a3dc47",
+      "bytes": 1524060
+    },
+    "baseline-repeat-ignite-ignite-final.bin": {
+      "sha256": "ca00aedc0452a86890b7af0eeba1116673812d4af329b14a9bc41e7869a3dc47",
+      "bytes": 1524060
+    },
+    "candidate-repeat-ignite-ignite-final.bin": {
+      "sha256": "ca00aedc0452a86890b7af0eeba1116673812d4af329b14a9bc41e7869a3dc47",
+      "bytes": 1524060
+    },
+    "baseline-ignite-ignite.save": {
+      "sha256": "7872189199ad00a611db3921b52bce17868176dca820f51203a7151d75e6dab2",
+      "bytes": 12222
+    },
+    "candidate-ignite-ignite.save": {
+      "sha256": "7872189199ad00a611db3921b52bce17868176dca820f51203a7151d75e6dab2",
+      "bytes": 12222
+    },
+    "baseline-repeat-ignite-ignite.save": {
+      "sha256": "7872189199ad00a611db3921b52bce17868176dca820f51203a7151d75e6dab2",
+      "bytes": 12222
+    },
+    "candidate-repeat-ignite-ignite.save": {
+      "sha256": "7872189199ad00a611db3921b52bce17868176dca820f51203a7151d75e6dab2",
+      "bytes": 12222
+    }
+  },
+  "timing": {
+    "ember_deaths": {
+      "baseline-ember": {
+        "max_us": 670881,
+        "mean_us": 156276.95,
+        "n": 20,
+        "over_16_7_ms": 20,
+        "over_33_3_ms": 18,
+        "p50_us": 126127,
+        "p95_us": 670881
+      },
+      "candidate-ember": {
+        "max_us": 520597,
+        "mean_us": 122122.95,
+        "n": 20,
+        "over_16_7_ms": 20,
+        "over_33_3_ms": 18,
+        "p50_us": 110896,
+        "p95_us": 520597
+      },
+      "baseline-repeat-ember": {
+        "max_us": 543004,
+        "mean_us": 123233.1,
+        "n": 20,
+        "over_16_7_ms": 20,
+        "over_33_3_ms": 18,
+        "p50_us": 99822,
+        "p95_us": 543004
+      },
+      "candidate-repeat-ember": {
+        "max_us": 454116,
+        "mean_us": 102799.6,
+        "n": 20,
+        "over_16_7_ms": 19,
+        "over_33_3_ms": 18,
+        "p50_us": 83536,
+        "p95_us": 454116
+      },
+      "diagnostic-ember": {
+        "max_us": 505696,
+        "mean_us": 111821.35,
+        "n": 20,
+        "over_16_7_ms": 19,
+        "over_33_3_ms": 18,
+        "p50_us": 94333,
+        "p95_us": 505696
+      }
+    },
+    "no_burn": {
+      "baseline-no-burn": {
+        "max_us": 56100,
+        "mean_us": 45474.75,
+        "n": 20,
+        "over_16_7_ms": 20,
+        "over_33_3_ms": 20,
+        "p50_us": 46074,
+        "p95_us": 56100
+      },
+      "candidate-no-burn": {
+        "max_us": 83388,
+        "mean_us": 48047.3,
+        "n": 20,
+        "over_16_7_ms": 20,
+        "over_33_3_ms": 20,
+        "p50_us": 44667,
+        "p95_us": 83388
+      },
+      "baseline-repeat-no-burn": {
+        "max_us": 43373,
+        "mean_us": 37059.4,
+        "n": 20,
+        "over_16_7_ms": 20,
+        "over_33_3_ms": 20,
+        "p50_us": 36219,
+        "p95_us": 43373
+      },
+      "candidate-repeat-no-burn": {
+        "max_us": 53080,
+        "mean_us": 41269.2,
+        "n": 20,
+        "over_16_7_ms": 20,
+        "over_33_3_ms": 20,
+        "p50_us": 40344,
+        "p95_us": 53080
+      }
+    },
+    "ignite": {
+      "baseline-ignite": {
+        "max_us": 115217,
+        "mean_us": 92067.45,
+        "n": 20,
+        "over_16_7_ms": 20,
+        "over_33_3_ms": 20,
+        "p50_us": 91909,
+        "p95_us": 115217
+      },
+      "candidate-ignite": {
+        "max_us": 98885,
+        "mean_us": 88143.55,
+        "n": 20,
+        "over_16_7_ms": 20,
+        "over_33_3_ms": 20,
+        "p50_us": 88768,
+        "p95_us": 98885
+      },
+      "baseline-repeat-ignite": {
+        "max_us": 107900,
+        "mean_us": 89656.9,
+        "n": 20,
+        "over_16_7_ms": 20,
+        "over_33_3_ms": 20,
+        "p50_us": 86871,
+        "p95_us": 107900
+      },
+      "candidate-repeat-ignite": {
+        "max_us": 111318,
+        "mean_us": 90249.0,
+        "n": 20,
+        "over_16_7_ms": 20,
+        "over_33_3_ms": 20,
+        "p50_us": 91961,
+        "p95_us": 111318
+      }
+    }
+  },
+  "raw_archive": "/tmp/burn-cache-20261015/observations"
+}

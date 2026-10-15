@@ -1,0 +1,127 @@
+"""Runner tests use tiny fake executables only; no Godot or user save access."""
+import importlib.util
+import json
+import os
+from pathlib import Path
+import sys
+import tempfile
+import unittest
+from unittest.mock import patch
+
+SPEC = importlib.util.spec_from_file_location("transaction_runner", Path(__file__).resolve().parents[1] / "tools/run_transaction_regressions.py")
+runner = importlib.util.module_from_spec(SPEC)
+sys.modules[SPEC.name] = runner
+SPEC.loader.exec_module(runner)
+
+
+class RunnerTests(unittest.TestCase):
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory(prefix="runner-unit-", dir="/tmp")
+        self.root = Path(self.temp.name)
+        self.case = runner.Case("fake", "fake", "FAKE:", 3)
+        self.fake = self.root / "fake-godot"
+
+    def tearDown(self):
+        self.temp.cleanup()
+
+    def run_fake(self, source, timeout=5):
+        self.fake.write_text("#!" + sys.executable + "\n" + source)
+        self.fake.chmod(0o700)
+        return runner.run_case(self.case, str(self.fake), self.root, self.root, timeout)
+
+    def test_success_and_isolation(self):
+        source = '''import os, pathlib
+for k in ('XDG_DATA_HOME', 'XDG_CONFIG_HOME', 'XDG_CACHE_HOME'):
+    p = pathlib.Path(os.environ[k])
+    assert str(p).startswith('/tmp/godot-m1-transactions-') and p.is_dir()
+assert 'BINDING_BASELINE_ONLY' not in os.environ
+assert 'SAFE_EXIT_GROUP' not in os.environ
+assert 'RETURN_CASE' not in os.environ
+assert not (pathlib.Path(os.environ['XDG_DATA_HOME']) / 'build_save.json').exists()
+print('FAKE: 3 checks, 0 failures')
+'''
+        with patch.dict(os.environ, {"BINDING_BASELINE_ONLY": "1", "SAFE_EXIT_GROUP": "unsafe", "RETURN_CASE": "bad"}):
+            first = self.run_fake(source)
+            second = self.run_fake(source)
+        self.assertTrue(first["passed"])
+        self.assertTrue(second["passed"])
+        self.assertNotEqual(first["environment"], second["environment"])
+        self.assertFalse(Path(first["environment"]["XDG_DATA_HOME"]).exists())
+        self.assertTrue(Path(first["log"]).exists())
+
+    def test_error_with_zero_exit_fails(self):
+        for message in ("SCRIPT ERROR: invalid method", "ERROR: assertion"):
+            result = self.run_fake(f"print('FAKE: 3 checks, 0 failures')\nprint({message!r})\n")
+            self.assertFalse(result["passed"])
+            self.assertEqual(result["reason"], "engine_error")
+            self.assertEqual(result["returncode"], 0)
+
+    def test_warning_is_disclosed_without_failing(self):
+        result = self.run_fake("print('FAKE: 3 checks, 0 failures')\nprint('WARNING: sample')\n")
+        self.assertTrue(result["passed"])
+        self.assertEqual(result["warnings"], ["WARNING: sample"])
+
+    def test_guard_exit_does_not_pass(self):
+        result = self.run_fake("print('FAKE: 3 checks, 0 failures')\nraise SystemExit(78)\n")
+        self.assertEqual(result["reason"], "guard_rejected")
+        self.assertFalse(result["passed"])
+
+    def test_guard_without_summary_is_classified(self):
+        result = self.run_fake("raise SystemExit(78)\n")
+        self.assertEqual(result["reason"], "guard_rejected")
+
+    def test_malformed_numeric_suffixes_are_rejected(self):
+        for summary in ("FAKE: -3 checks, 0 failures", "FAKE: checks=3 failures=0.5", "FAKE: 3 checks, 0 failures extra"):
+            with self.assertRaises(ValueError):
+                runner.parse_summary(self.case, summary)
+
+    def test_timeout_even_after_success_output(self):
+        result = self.run_fake("import time\nprint('FAKE: 3 checks, 0 failures', flush=True)\ntime.sleep(10)\n", timeout=0.1)
+        self.assertEqual(result["reason"], "timeout")
+        self.assertFalse(result["passed"])
+        self.assertLess(result["seconds"], 3)
+
+    def test_missing_duplicate_wrong_counts_and_failures(self):
+        for output in ("", "FAKE: 3 checks, 0 failures\nFAKE: 3 checks, 0 failures", "FAKE: 2 checks, 0 failures", "FAKE: 3 checks, 1 failures"):
+            with self.subTest(output=output):
+                self.assertFalse(self.run_fake(f"print({output!r})\n")["passed"])
+
+    def test_nonzero_exit(self):
+        result = self.run_fake("print('FAKE: 3 checks, 0 failures')\nraise SystemExit(1)\n")
+        self.assertEqual(result["reason"], "nonzero_exit")
+
+    def test_missing_executable(self):
+        result = runner.run_case(self.case, str(self.root / "missing"), self.root, self.root)
+        self.assertFalse(result["passed"])
+        self.assertTrue(result["reason"].startswith("launch_error:"))
+
+    def test_timeout_budget_validation(self):
+        for timeout in (0, -1, 91, float("nan"), float("inf")):
+            with self.assertRaises(ValueError):
+                runner.run_case(self.case, str(self.fake), self.root, self.root, timeout)
+
+    def test_json_summary_formats(self):
+        case = runner.Case("fake", "fake", "JSON ", 3, json_summary=True)
+        for failures in (0, []):
+            self.assertEqual(runner.parse_summary(case, 'JSON ' + json.dumps({"checks": 3, "failures": failures})), (3, 0))
+        for checks in (True, "3", 0):
+            with self.assertRaises(ValueError):
+                runner.parse_summary(case, 'JSON ' + json.dumps({"checks": checks, "failures": 0}))
+
+    def test_report_does_not_count_failed_run_as_accepted(self):
+        good = self.run_fake("print('FAKE: 3 checks, 0 failures')\n")
+        bad = self.run_fake("print('FAKE: 3 checks, 0 failures')\nraise SystemExit(78)\n")
+        report = runner.report([good, bad], "quick")
+        self.assertEqual((report["cases"], report["passed"], report["failed"], report["observed_checks"], report["accepted_checks"]), (2, 1, 1, 6, 3))
+
+    def test_matrix_and_baseline_totals(self):
+        quick, full = runner.cases(), runner.cases("full")
+        self.assertEqual((len(quick), len(full)), (13, 37))
+        self.assertEqual(len({c.name for c in full}), len(full))
+        self.assertEqual(sum(c.expected_checks for c in full if c.name.startswith("return_")), 387)
+        self.assertEqual(sum(c.expected_checks for c in full if c.name.startswith("f6_")), 163)
+        self.assertTrue(set(c.name for c in quick) <= set(c.name for c in full))
+
+
+if __name__ == "__main__":
+    unittest.main()
