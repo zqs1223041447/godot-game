@@ -1337,9 +1337,10 @@ func _build_pause_panel() -> void:
 	_panel_title.text = "暂停一下"
 	_panel_subtitle.text = "调整节奏，准备下一轮试炼"
 	_section("操作指南")
-	var row: HBoxContainer = _card(_panel_body, "移动 · 瞄准 · 释放", "WASD / 方向键：移动   ·   按住鼠标左键：瞄准射击   ·   空格：闪避（需装配冲刺）\n1 – 5：释放技能   ·   Q：切换自动攻击\nI / B：装备背包   ·   T：天赋   ·   K：技能   ·   Esc：关闭面板 / 暂停")
+	var row: HBoxContainer = _card(_panel_body, "移动 · 瞄准 · 释放", "WASD / 方向键：移动   ·   按住鼠标左键：瞄准射击   ·   空格：闪避（需装配冲刺）\n按技能行绑定键释放（K 可改键）   ·   Alt + 1 – 5：使用药剂   ·   Q：切换自动攻击\nI / B：装备背包   ·   T：天赋   ·   K：技能   ·   Esc：关闭面板 / 暂停")
 	row.name = "ControlsGuide"
-	_card(_panel_body, "你的构筑，由你决定", "装备、天赋、珠宝与五个主动技能可以随时自由组合。\n升级获得天赋点；每 20 次有效原始怪击杀获得随机珠宝。原始首领另授予寻枝晶玉；T 分配与镶嵌，F8 查看完整图鉴。重试保留构筑。", GOLD)
+	var skill_rows: String = "当前可用 %d 行主动技能" % _state.active_group_capacity() if _state.has_method("active_group_capacity") else "主动技能行"
+	_card(_panel_body, "你的构筑，由你决定", "装备、天赋、珠宝与%s可以自由组合。\n升级获得天赋点；本轮每 20 次有效原始怪击杀可获得随机珠宝。击败原始首领另可获得寻枝晶玉；T 分配与镶嵌，F8 查看完整图鉴。重试保留构筑。" % skill_rows, GOLD)
 	var actions: HBoxContainer = HBoxContainer.new()
 	_panel_body.add_child(actions)
 	var resume: Button = _button("继续战斗", "ResumeButton", close_panel, 180)
@@ -1357,7 +1358,7 @@ func _build_pause_panel() -> void:
 	choices.set_context(_arena.encounter_selection())
 	choices.encounter_requested.connect(_request_encounter)
 	_panel_body.add_child(choices)
-	_panel_footer.text = "游戏仅保存构筑进度；重新开始会重置本轮战斗"
+	_panel_footer.text = "保存构筑与正式旅程进度；重开重置本轮战斗，正式地图重试按当前地图入场费重新扣费"
 
 
 func _build_encounter_confirmation() -> void:
