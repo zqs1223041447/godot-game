@@ -11,12 +11,16 @@ var checks: int = 0
 var failures: int = 0
 var categories: Dictionary = {}
 var timings: Dictionary = {}
+var report_path: String = ""
 
 
 func _initialize() -> void:
 	if OS.get_name() != "Linux" or not OS.get_environment("XDG_DATA_HOME").begins_with("/tmp/godot-m1-v063-"):
 		push_error("Use the isolated v063 pure-rules runner")
 		quit(78)
+		return
+	if not _reserve_report():
+		quit(73)
 		return
 	_verify_oracle()
 	if failures:
@@ -35,14 +39,53 @@ func _initialize() -> void:
 		"typed_byte_comparisons": categories, "baseline_commit": "b93018005413444ad6f988974f4ef3ea09902c5e",
 		"engine": Engine.get_version_info().string, "microbenchmark": timings,
 		"scope": "Pure incoming_burn receipts and unchanged public defense paths. Not a gameplay/frame-rate result."}
-	var report_file := FileAccess.open(EVIDENCE + "results.json", FileAccess.WRITE)
+	var report_file := FileAccess.open(report_path, FileAccess.WRITE)
 	if report_file == null:
 		push_error("Could not write focused rules report")
 		quit(1)
 		return
 	report_file.store_string(JSON.stringify(report, "\t") + "\n")
+	report_file.flush()
+	if report_file.get_error() != OK:
+		push_error("BURN_EVIDENCE_ERROR: report write failed: " + report_path)
+		quit(74)
+		return
+	report_file.close()
+	print("BURN_EVIDENCE_REPORT ", report_path)
 	print("BURN_SETTLEMENT_EQUIVALENCE ", JSON.stringify(report))
 	quit(1 if failures else 0)
+
+
+# Output is deliberately separate from the immutable oracle evidence above.
+# Reserving a new directory is atomic; existing destinations are never reused.
+func _reserve_report() -> bool:
+	var destination: String = OS.get_environment("BURN_EVIDENCE_DIR")
+	if destination.is_empty():
+		destination = "/tmp/godot-burn-evidence-%d-%d" % [OS.get_process_id(), Time.get_ticks_usec()]
+	if not destination.begins_with("/tmp/") or destination != destination.simplify_path() or destination.ends_with("/"):
+		return _report_error("destination must be a normalized absolute directory under /tmp")
+	var project_root: String = ProjectSettings.globalize_path("res://").trim_suffix("/")
+	if destination == project_root or destination.begins_with(project_root + "/"):
+		return _report_error("repository destinations are forbidden")
+	# Reject symbolic-link ancestors, including a destination symlink.
+	var cursor: String = "/"
+	for part: String in destination.trim_prefix("/").split("/"):
+		var parent := DirAccess.open(cursor)
+		if parent == null:
+			return _report_error("parent directory is missing or inaccessible: " + cursor)
+		if parent.is_link(part):
+			return _report_error("symbolic-link destinations are forbidden: " + cursor.path_join(part))
+		cursor = cursor.path_join(part)
+	var error: Error = DirAccess.make_dir_absolute(destination)
+	if error != OK:
+		return _report_error("cannot reserve fresh destination (existing or inaccessible): %s (%d)" % [destination, error])
+	report_path = destination.path_join("results.json")
+	return true
+
+
+func _report_error(message: String) -> bool:
+	push_error("BURN_EVIDENCE_ERROR: " + message)
+	return false
 
 
 func _check(value: bool, label: String) -> void:
