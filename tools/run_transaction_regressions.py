@@ -65,6 +65,8 @@ def cases(mode="quick"):
                            "godot-startup-recovery.", env={"STARTUP_CASE": action}))
     if mode == "full":
         result.extend([
+            Case("current_help_contract", "current_help_contract", "Current Help contract:", 165),
+            Case("encounter_ui_integration", "encounter_ui_integration", "Encounter UI integration:", 88),
             Case("burn_state_copy", "burn_state_copy_20261015", "Burn state copy equivalence:",
                  892, "godot-m1-v050-"),
             Case("burn_settlement_equivalence", "burn_settlement_equivalence",
