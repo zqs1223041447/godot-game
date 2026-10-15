@@ -1778,7 +1778,10 @@ func equip_tornado_example() -> void:
 	for id: String in ["prism_bow", "return_mantle", "detonation_charm"]:
 		if id in state.equipped_items().values(): continue
 		if not state.equip(id):
-			hud.notify("龙卷组合未完成：装备 %s 失败；已完成的设置已保留，请检查存档或装备位置后重试" % id)
+			var item_name: Variant = state.item_definition(id).get("name", "")
+			var item_label: String = item_name.strip_edges() if item_name is String else ""
+			if item_label.is_empty(): item_label = "所需装备"
+			hud.notify("龙卷组合未完成：装备 %s 失败；已完成的设置已保留，请检查存档或装备位置后重试" % item_label)
 			return
 	var compiled: Dictionary = state.get_skill_cast("tornado")
 	var parents: int = int(compiled.get("initial_count", 0))

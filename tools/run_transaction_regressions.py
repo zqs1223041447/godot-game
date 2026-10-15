@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Sequential, isolated PR14/15 acceptance. Standard library only; Linux /tmp."""
+"""Sequential, isolated transaction and startup recovery acceptance. Standard library only; Linux /tmp."""
 import argparse
 from dataclasses import dataclass, field
 import json
@@ -55,6 +55,13 @@ def cases(mode="quick"):
                            env={"TORNADO_UNBOUND": str(unbound), "TORNADO_FAIL": str(fault)}))
     if mode == "full":
         result.append(Case("safe_exit", "safe_map_exit", "SAFE_MAP_EXIT ", 120, "godot-m1-v099-"))
+    startup_counts = {"start": 27, "leave": 26, "test": 26,
+                      "completed_start": 25, "completed_leave": 24, "completed_test": 24}
+    startup_actions = startup_counts if mode == "full" else ("start", "completed_test")
+    for action in startup_actions:
+        result.append(Case("startup_" + action, "startup_recovery_failure",
+                           "STARTUP_RECOVERY " + action + " ", startup_counts[action],
+                           "godot-startup-recovery.", env={"STARTUP_CASE": action}))
     return result
 
 
@@ -90,6 +97,7 @@ def run_case(case, godot, project, output_dir, timeout=90):
         env = os.environ.copy()
         # Never inherit scenario switches or artifact destinations from another run.
         for key in ("RETURN_CASE", "RETURN_FIXTURE", "TORNADO_UNBOUND", "TORNADO_FAIL",
+                    "STARTUP_CASE", "STARTUP_RED_CONTROL",
                     "BINDING_BASELINE_ONLY", "BINDING_REPORT", "BINDING_CAPTURE_DIR",
                     "GEM_PICKER_REPORT", "GEM_PICKER_CAPTURE_DIR", "SAFE_EXIT_GROUP", "SAFE_EXIT_OUTPUT"):
             env.pop(key, None)
