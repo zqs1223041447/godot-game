@@ -176,6 +176,9 @@ func _return_gem(uid: String,revision_value: int)->void:
 func _bind(group_id: String,keycode: int,revision_value: int)->void:
 	_report(model.unbind_group(group_id,revision_value,save_path) if keycode == 0 else model.bind_group(group_id,keycode,revision_value,save_path))
 func _report(result: Dictionary)->void:
-	if not result.get("ok",false) and not str(result.get("reason","")).is_empty(): feedback.emit(result.reason)
+	# Every completed request replaces feedback from the previous request.
+	if result.get("ok", false): feedback.emit("操作已保存")
+	elif result.get("error_code", "") == "no_change": feedback.emit("无需更改")
+	else: feedback.emit(str(result.get("reason", "操作未完成")))
 	# Rejected requests must restore control choices without retaining a request latch.
 	refresh(true)

@@ -1768,9 +1768,18 @@ func _record_attack_admission(actor: String,target_id: int,result: Dictionary) -
 
 
 func equip_tornado_example() -> void:
-	state.slot_skill(0, "tornado")
+	# These are separate persisted operations. Stop on failure and never claim
+	# that a partial build has all effects or a working key binding.
+	var group_id: String = state.group_for_key(KEY_1)
+	var skill_ready: bool = not group_id.is_empty() and state.skill_group(group_id).get("skill_id", "") == "tornado"
+	if not skill_ready and not state.slot_skill(0, "tornado"):
+		hud.notify("龙卷组合未完成：技能或按键 1 设置失败；请检查存档或技能位置后重试")
+		return
 	for id: String in ["prism_bow", "return_mantle", "detonation_charm"]:
-		state.equip(id)
+		if id in state.equipped_items().values(): continue
+		if not state.equip(id):
+			hud.notify("龙卷组合未完成：装备 %s 失败；已完成的设置已保留，请检查存档或装备位置后重试" % id)
+			return
 	var compiled: Dictionary = state.get_skill_cast("tornado")
 	var parents: int = int(compiled.get("initial_count", 0))
 	hud.notify("已装配龙卷组合：%d 母箭 → %d 子箭 → 返回 → 寿命结束爆炸；关闭后按 1 释放" % [parents, parents * 3])
@@ -3085,13 +3094,16 @@ func _finish_normal_map()->Dictionary:
 	return result
 func return_to_town(expected_revision:Variant)->Dictionary:
 	if not _world_revision_ok(expected_revision) or _world_mode not in ["map","map_complete"]:return _world_failure("stale_world","本轮地图已变化")
+	# Flush while the live map still owns its completion identity. Abandonment
+	# must be the last fallible step before leaving the map: a later failed
+	# save would otherwise expose a playable run that can no longer settle.
+	if not save_build():return _world_failure("save_failed","已得进度未保存，暂不能返城")
 	if not _is_test_profile():
 		var finished:Dictionary=_finish_normal_map()
 		if not finished.ok:return _world_failure("save_failed",finished.reason)
 		if not state.normal_journey().active_run.is_empty():
 			var abandoned:Dictionary=state.normal_abandon_map(_normal_run_id,state.revision(),build_save_path)
 			if not abandoned.ok:return _world_failure("save_failed",abandoned.reason)
-	if not save_build():return _world_failure("save_failed","已得进度未保存，暂不能返城")
 	_world_mode="town";_world_revision+=1;_normal_run_id=0;_map_run.clear();_clear_encounter();restart_run();world_context_changed.emit()
 	return _world_ok()
 func claim_normal_rewards(expected_revision:Variant)->Dictionary:

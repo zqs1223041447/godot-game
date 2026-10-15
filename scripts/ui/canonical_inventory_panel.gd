@@ -318,6 +318,10 @@ func refresh() -> void:
 
 
 func _on_model_changed() -> void:
+	if not _pending_discard.is_empty() and int(_pending_discard.revision) != model.revision():
+		# Consume before hiding/notifying: either can synchronously invoke listeners.
+		_cancel_craft()
+		feedback.emit("物品已变化，已取消丢弃，请重新操作")
 	if not _pending_equip.is_empty():
 		_cancel_equipment_choice()
 		feedback.emit("物品已变化，已取消换装选择，请重新操作")
@@ -380,7 +384,10 @@ func _turn_page(delta: int) -> void:
 func _move_requested(uid: String, destination: Dictionary, revision_value: int) -> void:
 	_report(model.move_item(uid,destination,revision_value,save_path))
 func _report(result: Dictionary) -> void:
-	if not result.get("ok",false) and not str(result.get("reason","")).is_empty(): feedback.emit(result.reason)
+	# Every completed request replaces feedback from the previous request.
+	if result.get("ok", false): feedback.emit("操作已保存")
+	elif result.get("error_code", "") == "no_change": feedback.emit("无需更改")
+	else: feedback.emit(str(result.get("reason", "操作未完成")))
 func _return_to_bag(uid: String) -> void:
 	var target: Dictionary = model.first_bag_position(uid)
 	if target.is_empty(): feedback.emit("背包空间不足，物品保持原位置")
