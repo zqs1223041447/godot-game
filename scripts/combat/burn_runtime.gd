@@ -189,7 +189,9 @@ static func _plan_advance(state: Dictionary, to_time: float) -> Dictionary:
 	var expires: float = float(state.provenance.get("ember_expiry", last + float(state.remaining)))
 	var end: float = minf(to_time, expires)
 	var width: float = end - last
-	var next: Dictionary = state.duplicate(true)
+	# Private provenance is scalar-only and never mutated here. Keep public copies detached.
+	# Sharing is safe only while no private planner consumer mutates provenance.
+	var next: Dictionary = state.duplicate(false)
 	var segments: Array[Dictionary] = []
 	if width > 0.0:
 		var amount: float = float(state.raw_dps) * width

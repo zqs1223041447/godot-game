@@ -1,0 +1,599 @@
+{
+  "timing_gate_pass": true,
+  "ember_gate_pass": true,
+  "control_gate_pass": true,
+  "baseline_commit": "461824776e500ea868f72aea58a4f54db40b4423",
+  "exact_comparisons": [
+    {
+      "file": "ember_deaths-pair1-baseline-ember_deaths.bin",
+      "equals": "ember_deaths-pair1-baseline-ember_deaths.bin",
+      "exact": true
+    },
+    {
+      "file": "ember_deaths-pair1-candidate-ember_deaths.bin",
+      "equals": "ember_deaths-pair1-baseline-ember_deaths.bin",
+      "exact": true
+    },
+    {
+      "file": "ember_deaths-pair2-candidate-ember_deaths.bin",
+      "equals": "ember_deaths-pair1-baseline-ember_deaths.bin",
+      "exact": true
+    },
+    {
+      "file": "ember_deaths-pair2-baseline-ember_deaths.bin",
+      "equals": "ember_deaths-pair1-baseline-ember_deaths.bin",
+      "exact": true
+    },
+    {
+      "file": "ember_deaths-pair1-baseline-ember_deaths-final.bin",
+      "equals": "ember_deaths-pair1-baseline-ember_deaths-final.bin",
+      "exact": true
+    },
+    {
+      "file": "ember_deaths-pair1-candidate-ember_deaths-final.bin",
+      "equals": "ember_deaths-pair1-baseline-ember_deaths-final.bin",
+      "exact": true
+    },
+    {
+      "file": "ember_deaths-pair2-candidate-ember_deaths-final.bin",
+      "equals": "ember_deaths-pair1-baseline-ember_deaths-final.bin",
+      "exact": true
+    },
+    {
+      "file": "ember_deaths-pair2-baseline-ember_deaths-final.bin",
+      "equals": "ember_deaths-pair1-baseline-ember_deaths-final.bin",
+      "exact": true
+    },
+    {
+      "file": "ember_deaths-pair1-baseline-ember_deaths.save",
+      "equals": "ember_deaths-pair1-baseline-ember_deaths.save",
+      "exact": true
+    },
+    {
+      "file": "ember_deaths-pair1-candidate-ember_deaths.save",
+      "equals": "ember_deaths-pair1-baseline-ember_deaths.save",
+      "exact": true
+    },
+    {
+      "file": "ember_deaths-pair2-candidate-ember_deaths.save",
+      "equals": "ember_deaths-pair1-baseline-ember_deaths.save",
+      "exact": true
+    },
+    {
+      "file": "ember_deaths-pair2-baseline-ember_deaths.save",
+      "equals": "ember_deaths-pair1-baseline-ember_deaths.save",
+      "exact": true
+    },
+    {
+      "file": "no_burn-pair1-baseline-no_burn.bin",
+      "equals": "no_burn-pair1-baseline-no_burn.bin",
+      "exact": true
+    },
+    {
+      "file": "no_burn-pair1-candidate-no_burn.bin",
+      "equals": "no_burn-pair1-baseline-no_burn.bin",
+      "exact": true
+    },
+    {
+      "file": "no_burn-pair2-candidate-no_burn.bin",
+      "equals": "no_burn-pair1-baseline-no_burn.bin",
+      "exact": true
+    },
+    {
+      "file": "no_burn-pair2-baseline-no_burn.bin",
+      "equals": "no_burn-pair1-baseline-no_burn.bin",
+      "exact": true
+    },
+    {
+      "file": "no_burn-pair1-baseline-no_burn-final.bin",
+      "equals": "no_burn-pair1-baseline-no_burn-final.bin",
+      "exact": true
+    },
+    {
+      "file": "no_burn-pair1-candidate-no_burn-final.bin",
+      "equals": "no_burn-pair1-baseline-no_burn-final.bin",
+      "exact": true
+    },
+    {
+      "file": "no_burn-pair2-candidate-no_burn-final.bin",
+      "equals": "no_burn-pair1-baseline-no_burn-final.bin",
+      "exact": true
+    },
+    {
+      "file": "no_burn-pair2-baseline-no_burn-final.bin",
+      "equals": "no_burn-pair1-baseline-no_burn-final.bin",
+      "exact": true
+    },
+    {
+      "file": "no_burn-pair1-baseline-no_burn.save",
+      "equals": "no_burn-pair1-baseline-no_burn.save",
+      "exact": true
+    },
+    {
+      "file": "no_burn-pair1-candidate-no_burn.save",
+      "equals": "no_burn-pair1-baseline-no_burn.save",
+      "exact": true
+    },
+    {
+      "file": "no_burn-pair2-candidate-no_burn.save",
+      "equals": "no_burn-pair1-baseline-no_burn.save",
+      "exact": true
+    },
+    {
+      "file": "no_burn-pair2-baseline-no_burn.save",
+      "equals": "no_burn-pair1-baseline-no_burn.save",
+      "exact": true
+    },
+    {
+      "file": "ignite-pair1-baseline-ignite.bin",
+      "equals": "ignite-pair1-baseline-ignite.bin",
+      "exact": true
+    },
+    {
+      "file": "ignite-pair1-candidate-ignite.bin",
+      "equals": "ignite-pair1-baseline-ignite.bin",
+      "exact": true
+    },
+    {
+      "file": "ignite-pair2-candidate-ignite.bin",
+      "equals": "ignite-pair1-baseline-ignite.bin",
+      "exact": true
+    },
+    {
+      "file": "ignite-pair2-baseline-ignite.bin",
+      "equals": "ignite-pair1-baseline-ignite.bin",
+      "exact": true
+    },
+    {
+      "file": "ignite-pair1-baseline-ignite-final.bin",
+      "equals": "ignite-pair1-baseline-ignite-final.bin",
+      "exact": true
+    },
+    {
+      "file": "ignite-pair1-candidate-ignite-final.bin",
+      "equals": "ignite-pair1-baseline-ignite-final.bin",
+      "exact": true
+    },
+    {
+      "file": "ignite-pair2-candidate-ignite-final.bin",
+      "equals": "ignite-pair1-baseline-ignite-final.bin",
+      "exact": true
+    },
+    {
+      "file": "ignite-pair2-baseline-ignite-final.bin",
+      "equals": "ignite-pair1-baseline-ignite-final.bin",
+      "exact": true
+    },
+    {
+      "file": "ignite-pair1-baseline-ignite.save",
+      "equals": "ignite-pair1-baseline-ignite.save",
+      "exact": true
+    },
+    {
+      "file": "ignite-pair1-candidate-ignite.save",
+      "equals": "ignite-pair1-baseline-ignite.save",
+      "exact": true
+    },
+    {
+      "file": "ignite-pair2-candidate-ignite.save",
+      "equals": "ignite-pair1-baseline-ignite.save",
+      "exact": true
+    },
+    {
+      "file": "ignite-pair2-baseline-ignite.save",
+      "equals": "ignite-pair1-baseline-ignite.save",
+      "exact": true
+    }
+  ],
+  "direct_paired_comparisons": [
+    {
+      "baseline": "ember_deaths-pair1-baseline-ember_deaths.bin",
+      "candidate": "ember_deaths-pair1-candidate-ember_deaths.bin",
+      "exact": true
+    },
+    {
+      "baseline": "ember_deaths-pair1-baseline-ember_deaths-final.bin",
+      "candidate": "ember_deaths-pair1-candidate-ember_deaths-final.bin",
+      "exact": true
+    },
+    {
+      "baseline": "ember_deaths-pair1-baseline-ember_deaths.save",
+      "candidate": "ember_deaths-pair1-candidate-ember_deaths.save",
+      "exact": true
+    },
+    {
+      "baseline": "ember_deaths-pair2-baseline-ember_deaths.bin",
+      "candidate": "ember_deaths-pair2-candidate-ember_deaths.bin",
+      "exact": true
+    },
+    {
+      "baseline": "ember_deaths-pair2-baseline-ember_deaths-final.bin",
+      "candidate": "ember_deaths-pair2-candidate-ember_deaths-final.bin",
+      "exact": true
+    },
+    {
+      "baseline": "ember_deaths-pair2-baseline-ember_deaths.save",
+      "candidate": "ember_deaths-pair2-candidate-ember_deaths.save",
+      "exact": true
+    },
+    {
+      "baseline": "no_burn-pair1-baseline-no_burn.bin",
+      "candidate": "no_burn-pair1-candidate-no_burn.bin",
+      "exact": true
+    },
+    {
+      "baseline": "no_burn-pair1-baseline-no_burn-final.bin",
+      "candidate": "no_burn-pair1-candidate-no_burn-final.bin",
+      "exact": true
+    },
+    {
+      "baseline": "no_burn-pair1-baseline-no_burn.save",
+      "candidate": "no_burn-pair1-candidate-no_burn.save",
+      "exact": true
+    },
+    {
+      "baseline": "no_burn-pair2-baseline-no_burn.bin",
+      "candidate": "no_burn-pair2-candidate-no_burn.bin",
+      "exact": true
+    },
+    {
+      "baseline": "no_burn-pair2-baseline-no_burn-final.bin",
+      "candidate": "no_burn-pair2-candidate-no_burn-final.bin",
+      "exact": true
+    },
+    {
+      "baseline": "no_burn-pair2-baseline-no_burn.save",
+      "candidate": "no_burn-pair2-candidate-no_burn.save",
+      "exact": true
+    },
+    {
+      "baseline": "ignite-pair1-baseline-ignite.bin",
+      "candidate": "ignite-pair1-candidate-ignite.bin",
+      "exact": true
+    },
+    {
+      "baseline": "ignite-pair1-baseline-ignite-final.bin",
+      "candidate": "ignite-pair1-candidate-ignite-final.bin",
+      "exact": true
+    },
+    {
+      "baseline": "ignite-pair1-baseline-ignite.save",
+      "candidate": "ignite-pair1-candidate-ignite.save",
+      "exact": true
+    },
+    {
+      "baseline": "ignite-pair2-baseline-ignite.bin",
+      "candidate": "ignite-pair2-candidate-ignite.bin",
+      "exact": true
+    },
+    {
+      "baseline": "ignite-pair2-baseline-ignite-final.bin",
+      "candidate": "ignite-pair2-candidate-ignite-final.bin",
+      "exact": true
+    },
+    {
+      "baseline": "ignite-pair2-baseline-ignite.save",
+      "candidate": "ignite-pair2-candidate-ignite.save",
+      "exact": true
+    }
+  ],
+  "comparison_counts": {
+    "artifact_receipts": 36,
+    "baseline_self_checks": 9,
+    "nonself_against_pair1_baseline": 27,
+    "direct_paired_candidate_vs_baseline": 18
+  },
+  "files": {
+    "ember_deaths-pair1-baseline-ember_deaths.bin": {
+      "sha256": "e3898e8b48f52ab42e4a80c9232bb94271946d908c01fdbdeba82a590e73aaff",
+      "bytes": 30889476
+    },
+    "ember_deaths-pair1-candidate-ember_deaths.bin": {
+      "sha256": "e3898e8b48f52ab42e4a80c9232bb94271946d908c01fdbdeba82a590e73aaff",
+      "bytes": 30889476
+    },
+    "ember_deaths-pair2-candidate-ember_deaths.bin": {
+      "sha256": "e3898e8b48f52ab42e4a80c9232bb94271946d908c01fdbdeba82a590e73aaff",
+      "bytes": 30889476
+    },
+    "ember_deaths-pair2-baseline-ember_deaths.bin": {
+      "sha256": "e3898e8b48f52ab42e4a80c9232bb94271946d908c01fdbdeba82a590e73aaff",
+      "bytes": 30889476
+    },
+    "ember_deaths-pair1-baseline-ember_deaths-final.bin": {
+      "sha256": "30347f555598406f413c120209760d72b2b110037f59b47feff4022d049324cc",
+      "bytes": 1491480
+    },
+    "ember_deaths-pair1-candidate-ember_deaths-final.bin": {
+      "sha256": "30347f555598406f413c120209760d72b2b110037f59b47feff4022d049324cc",
+      "bytes": 1491480
+    },
+    "ember_deaths-pair2-candidate-ember_deaths-final.bin": {
+      "sha256": "30347f555598406f413c120209760d72b2b110037f59b47feff4022d049324cc",
+      "bytes": 1491480
+    },
+    "ember_deaths-pair2-baseline-ember_deaths-final.bin": {
+      "sha256": "30347f555598406f413c120209760d72b2b110037f59b47feff4022d049324cc",
+      "bytes": 1491480
+    },
+    "ember_deaths-pair1-baseline-ember_deaths.save": {
+      "sha256": "c821772f8dc7a1ac5732fca1683f179a70153d42565f0b2b37663001426dd9f4",
+      "bytes": 13715
+    },
+    "ember_deaths-pair1-candidate-ember_deaths.save": {
+      "sha256": "c821772f8dc7a1ac5732fca1683f179a70153d42565f0b2b37663001426dd9f4",
+      "bytes": 13715
+    },
+    "ember_deaths-pair2-candidate-ember_deaths.save": {
+      "sha256": "c821772f8dc7a1ac5732fca1683f179a70153d42565f0b2b37663001426dd9f4",
+      "bytes": 13715
+    },
+    "ember_deaths-pair2-baseline-ember_deaths.save": {
+      "sha256": "c821772f8dc7a1ac5732fca1683f179a70153d42565f0b2b37663001426dd9f4",
+      "bytes": 13715
+    },
+    "no_burn-pair1-baseline-no_burn.bin": {
+      "sha256": "46f947fce25a8273d2268f13fc48c3d848fe605e920dafe8a4b82323297b60e9",
+      "bytes": 26714556
+    },
+    "no_burn-pair1-candidate-no_burn.bin": {
+      "sha256": "46f947fce25a8273d2268f13fc48c3d848fe605e920dafe8a4b82323297b60e9",
+      "bytes": 26714556
+    },
+    "no_burn-pair2-candidate-no_burn.bin": {
+      "sha256": "46f947fce25a8273d2268f13fc48c3d848fe605e920dafe8a4b82323297b60e9",
+      "bytes": 26714556
+    },
+    "no_burn-pair2-baseline-no_burn.bin": {
+      "sha256": "46f947fce25a8273d2268f13fc48c3d848fe605e920dafe8a4b82323297b60e9",
+      "bytes": 26714556
+    },
+    "no_burn-pair1-baseline-no_burn-final.bin": {
+      "sha256": "fb2cbed07528ce48fcb73aea0174fa279d545aad15a19ba2045dcb9a8b0334c3",
+      "bytes": 1349116
+    },
+    "no_burn-pair1-candidate-no_burn-final.bin": {
+      "sha256": "fb2cbed07528ce48fcb73aea0174fa279d545aad15a19ba2045dcb9a8b0334c3",
+      "bytes": 1349116
+    },
+    "no_burn-pair2-candidate-no_burn-final.bin": {
+      "sha256": "fb2cbed07528ce48fcb73aea0174fa279d545aad15a19ba2045dcb9a8b0334c3",
+      "bytes": 1349116
+    },
+    "no_burn-pair2-baseline-no_burn-final.bin": {
+      "sha256": "fb2cbed07528ce48fcb73aea0174fa279d545aad15a19ba2045dcb9a8b0334c3",
+      "bytes": 1349116
+    },
+    "no_burn-pair1-baseline-no_burn.save": {
+      "sha256": "7872189199ad00a611db3921b52bce17868176dca820f51203a7151d75e6dab2",
+      "bytes": 12222
+    },
+    "no_burn-pair1-candidate-no_burn.save": {
+      "sha256": "7872189199ad00a611db3921b52bce17868176dca820f51203a7151d75e6dab2",
+      "bytes": 12222
+    },
+    "no_burn-pair2-candidate-no_burn.save": {
+      "sha256": "7872189199ad00a611db3921b52bce17868176dca820f51203a7151d75e6dab2",
+      "bytes": 12222
+    },
+    "no_burn-pair2-baseline-no_burn.save": {
+      "sha256": "7872189199ad00a611db3921b52bce17868176dca820f51203a7151d75e6dab2",
+      "bytes": 12222
+    },
+    "ignite-pair1-baseline-ignite.bin": {
+      "sha256": "19cf550a402d948d6052fcb50c44acb7189a2b6b0cad8bcc4603cf3940809bc1",
+      "bytes": 30210888
+    },
+    "ignite-pair1-candidate-ignite.bin": {
+      "sha256": "19cf550a402d948d6052fcb50c44acb7189a2b6b0cad8bcc4603cf3940809bc1",
+      "bytes": 30210888
+    },
+    "ignite-pair2-candidate-ignite.bin": {
+      "sha256": "19cf550a402d948d6052fcb50c44acb7189a2b6b0cad8bcc4603cf3940809bc1",
+      "bytes": 30210888
+    },
+    "ignite-pair2-baseline-ignite.bin": {
+      "sha256": "19cf550a402d948d6052fcb50c44acb7189a2b6b0cad8bcc4603cf3940809bc1",
+      "bytes": 30210888
+    },
+    "ignite-pair1-baseline-ignite-final.bin": {
+      "sha256": "ca00aedc0452a86890b7af0eeba1116673812d4af329b14a9bc41e7869a3dc47",
+      "bytes": 1524060
+    },
+    "ignite-pair1-candidate-ignite-final.bin": {
+      "sha256": "ca00aedc0452a86890b7af0eeba1116673812d4af329b14a9bc41e7869a3dc47",
+      "bytes": 1524060
+    },
+    "ignite-pair2-candidate-ignite-final.bin": {
+      "sha256": "ca00aedc0452a86890b7af0eeba1116673812d4af329b14a9bc41e7869a3dc47",
+      "bytes": 1524060
+    },
+    "ignite-pair2-baseline-ignite-final.bin": {
+      "sha256": "ca00aedc0452a86890b7af0eeba1116673812d4af329b14a9bc41e7869a3dc47",
+      "bytes": 1524060
+    },
+    "ignite-pair1-baseline-ignite.save": {
+      "sha256": "7872189199ad00a611db3921b52bce17868176dca820f51203a7151d75e6dab2",
+      "bytes": 12222
+    },
+    "ignite-pair1-candidate-ignite.save": {
+      "sha256": "7872189199ad00a611db3921b52bce17868176dca820f51203a7151d75e6dab2",
+      "bytes": 12222
+    },
+    "ignite-pair2-candidate-ignite.save": {
+      "sha256": "7872189199ad00a611db3921b52bce17868176dca820f51203a7151d75e6dab2",
+      "bytes": 12222
+    },
+    "ignite-pair2-baseline-ignite.save": {
+      "sha256": "7872189199ad00a611db3921b52bce17868176dca820f51203a7151d75e6dab2",
+      "bytes": 12222
+    }
+  },
+  "timing": {
+    "ember_deaths": {
+      "ember_deaths-pair1-baseline": {
+        "max_us": 712989,
+        "mean_us": 139301.45,
+        "n": 20,
+        "over_16_7_ms": 20,
+        "over_33_3_ms": 18,
+        "p50_us": 106102,
+        "p95_us": 712989
+      },
+      "ember_deaths-pair1-candidate": {
+        "max_us": 562692,
+        "mean_us": 122709.2,
+        "n": 20,
+        "over_16_7_ms": 20,
+        "over_33_3_ms": 18,
+        "p50_us": 99571,
+        "p95_us": 562692
+      },
+      "ember_deaths-pair2-candidate": {
+        "max_us": 552879,
+        "mean_us": 126579.85,
+        "n": 20,
+        "over_16_7_ms": 20,
+        "over_33_3_ms": 18,
+        "p50_us": 106371,
+        "p95_us": 552879
+      },
+      "ember_deaths-pair2-baseline": {
+        "max_us": 584094,
+        "mean_us": 130206.65,
+        "n": 20,
+        "over_16_7_ms": 20,
+        "over_33_3_ms": 18,
+        "p50_us": 117547,
+        "p95_us": 584094
+      }
+    },
+    "no_burn": {
+      "no_burn-pair1-baseline": {
+        "max_us": 67849,
+        "mean_us": 48751.25,
+        "n": 20,
+        "over_16_7_ms": 20,
+        "over_33_3_ms": 20,
+        "p50_us": 46089,
+        "p95_us": 67849
+      },
+      "no_burn-pair1-candidate": {
+        "max_us": 53979,
+        "mean_us": 47128.95,
+        "n": 20,
+        "over_16_7_ms": 20,
+        "over_33_3_ms": 20,
+        "p50_us": 48823,
+        "p95_us": 53979
+      },
+      "no_burn-pair2-candidate": {
+        "max_us": 60510,
+        "mean_us": 46998.4,
+        "n": 20,
+        "over_16_7_ms": 20,
+        "over_33_3_ms": 20,
+        "p50_us": 47166,
+        "p95_us": 60510
+      },
+      "no_burn-pair2-baseline": {
+        "max_us": 58610,
+        "mean_us": 45016.7,
+        "n": 20,
+        "over_16_7_ms": 20,
+        "over_33_3_ms": 20,
+        "p50_us": 43722,
+        "p95_us": 58610
+      }
+    },
+    "ignite": {
+      "ignite-pair1-baseline": {
+        "max_us": 114506,
+        "mean_us": 93854.25,
+        "n": 20,
+        "over_16_7_ms": 20,
+        "over_33_3_ms": 20,
+        "p50_us": 92754,
+        "p95_us": 114506
+      },
+      "ignite-pair1-candidate": {
+        "max_us": 103984,
+        "mean_us": 79243.75,
+        "n": 20,
+        "over_16_7_ms": 20,
+        "over_33_3_ms": 20,
+        "p50_us": 78498,
+        "p95_us": 103984
+      },
+      "ignite-pair2-candidate": {
+        "max_us": 128854,
+        "mean_us": 98008.95,
+        "n": 20,
+        "over_16_7_ms": 20,
+        "over_33_3_ms": 20,
+        "p50_us": 92053,
+        "p95_us": 128854
+      },
+      "ignite-pair2-baseline": {
+        "max_us": 109012,
+        "mean_us": 85786.0,
+        "n": 20,
+        "over_16_7_ms": 20,
+        "over_33_3_ms": 20,
+        "p50_us": 84371,
+        "p95_us": 109012
+      }
+    }
+  },
+  "ratios": {
+    "ember_deaths": {
+      "mean_us": {
+        "pair_ratios": [
+          0.8808896102660811,
+          0.972145815901108
+        ],
+        "pooled_ratio": 0.9249779505699458
+      },
+      "max_us": {
+        "pair_ratios": [
+          0.7892015164329323,
+          0.9465582594582379
+        ],
+        "pooled_ratio": 0.8600613838898513
+      }
+    },
+    "no_burn": {
+      "mean_us": {
+        "pair_ratios": [
+          0.9667229045409091,
+          1.0440214409319208
+        ],
+        "pooled_ratio": 1.0038328661338976
+      },
+      "max_us": {
+        "pair_ratios": [
+          0.7955754690562867,
+          1.032417676164477
+        ],
+        "pooled_ratio": 0.9053448153156359
+      }
+    },
+    "ignite": {
+      "mean_us": {
+        "pair_ratios": [
+          0.8443277741817765,
+          1.1424818734991724
+        ],
+        "pooled_ratio": 0.9867092703333469
+      },
+      "max_us": {
+        "pair_ratios": [
+          0.9081096187099366,
+          1.1820166587164715
+        ],
+        "pooled_ratio": 1.0416968655768215
+      }
+    }
+  },
+  "raw_archive": "/tmp/burn-state-copy-20261015-observations"
+}
