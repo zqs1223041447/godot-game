@@ -1,6 +1,6 @@
 # 事务隔离回归运行器
 
-`tools/run_transaction_regressions.py` 用 Python 3 标准库顺序运行事务、启动恢复与灼烧正确性的聚焦测试。它不修改生产逻辑，不安装依赖，不导入资源、不启动编辑器、不导出程序，也不运行全仓库历史测试。
+`tools/run_transaction_regressions.py` 用 Python 3 标准库顺序运行事务、启动恢复、灼烧正确性与当前 UI 契约的聚焦测试。它不修改生产逻辑，不安装依赖，不导入资源、不启动编辑器、不导出程序，也不运行全仓库历史测试。
 
 ## 使用
 
@@ -26,13 +26,13 @@ python3 -m unittest discover -s tests -p test_transaction_regression_runner.py -
 - F6 bound/第一次写失败 17、unbound/第二次写失败 17
 - 启动恢复 start 27、completed_test 24
 
-显式 full 共 45 次启动：以上八个基础套件，加三种地图夹具 × 六个返城场景（18 次，387 断言），两种绑定状态 × 四个故障边界与无故障控制（10 次，163 断言），以及 safe exit（120 断言）和六个启动恢复场景（152 断言）：start 27、leave 26、test 26、completed_start 25、completed_leave 24、completed_test 24；另有灼烧状态拷贝等价性（892 断言）和结算等价性（58593 断言），两项仅在 full 中运行。
+显式 full 共 47 次启动：以上八个基础套件，加三种地图夹具 × 六个返城场景（18 次，387 断言），两种绑定状态 × 四个故障边界与无故障控制（10 次，163 断言），以及 safe exit（120 断言）和六个启动恢复场景（152 断言）：start 27、leave 26、test 26、completed_start 25、completed_leave 24、completed_test 24；另有灼烧状态拷贝等价性（892 断言）和结算等价性（58593 断言），以及当前 Help 契约（165 断言）与遭遇 UI 集成（88 断言），这四项仅在 full 中运行。
 
-quick 是代表性检查，不能替代完整故障矩阵。90 秒是每个子进程的硬上限，15/45 个用例分别最多占用约 1350/4050 秒子进程等待时间，另有启动、读日志和写报告开销；它不是整个 quick 的耗时承诺。不并发抢占资源，不调用旧的全仓库 600 秒套件。已有其他 Godot 性能测量运行时应先协调，避免污染测量。
+quick 是代表性检查，不能替代完整故障矩阵。90 秒是每个子进程的硬上限，15/47 个用例分别最多占用约 1350/4230 秒子进程等待时间，另有启动、读日志和写报告开销；它不是整个 quick 的耗时承诺。不并发抢占资源，不调用旧的全仓库 600 秒套件。已有其他 Godot 性能测量运行时应先协调，避免污染测量。
 
 ## 隔离与判定
 
-每次测试通过 `tempfile` 在 `/tmp` 新建专属目录；data/config/cache 均独立。目录前缀遵循真实测试保护契约，包括 `godot-m1-`、`godot-ui-feedback.`、`godot-owned-gem-picker-`、`godot-skill-binding-`、安全退出的 `godot-m1-v099-`、启动恢复的 `godot-startup-recovery.`，以及灼烧两例的 `godot-m1-v050-` / `godot-m1-v063-`。用例结束只删除自己创建的临时存档目录；不接收、更不删除用户指定的存档目录。
+每次测试通过 `tempfile` 在 `/tmp` 新建专属目录；data/config/cache 均独立。目录前缀遵循真实测试保护契约，包括 `godot-m1-`、`godot-ui-feedback.`、`godot-owned-gem-picker-`、`godot-skill-binding-`、安全退出的 `godot-m1-v099-`、启动恢复的 `godot-startup-recovery.`，以及灼烧两例的 `godot-m1-v050-` / `godot-m1-v063-`。当前 Help 与遭遇 UI 的真实保护条件均为 Linux 且 `OS.get_data_dir()` 以 `/tmp/godot-` 开头，因此复用运行器默认 `godot-m1-transactions-` 前缀，并为每例创建全新的 XDG 目录。用例结束只删除自己创建的临时存档目录；不接收、更不删除用户指定的存档目录。
 
 每次启动清除上次可能遗留的返城、F6、binding baseline、safe exit 子组开关及报告/截图目的地，以及 `STARTUP_CASE` / `STARTUP_RED_CONTROL` / `BURN_EVIDENCE_DIR`，再显式指定当前场景与报告路径。启动恢复每例明确设置 `STARTUP_CASE`；外层负向控制 `STARTUP_RED_CONTROL=skip_recovery` 不得泄漏到正向验收。原进程环境不被修改。测试始终 `--headless`，picker 自身负责当前夹具所需的窗口大小和弹窗设置。
 
@@ -98,6 +98,21 @@ quick 是代表性检查，不能替代完整故障矩阵。90 秒是每个子�
 - Python 单元测试 17/17 通过；新增 full-only 配置、精确基准、报告目的地隔离、JSON 保留及拒绝已存在目录的检查，保留原有 15 项测试
 - 当前解析器复核历史 quick 13、full 37、启动恢复 6 份日志，共 56 份，计数、零失败、原退出码及错误日志校验均通过；这是历史证据复核，没有重新执行这 56 个游戏进程
 
-当前 quick/full 配置为 15/45 例，预期累计断言为 1414/61571。本次没有重跑完整 quick 或 full，不把历史日志复核当作当前源码的全矩阵验收。结算测试内置纯规则微基准，但这里仅验收正确性，不作生产性能、帧率或 Windows 实机结论；未运行生产性能基准。
+该次扩展后的 quick/full 配置为 15/45 例，预期累计断言为 1414/61571。本次没有重跑完整 quick 或 full，不把历史日志复核当作当前源码的全矩阵验收。结算测试内置纯规则微基准，但这里仅验收正确性，不作生产性能、帧率或 Windows 实机结论；未运行生产性能基准。
 
 本地证据：`/tmp/transaction-regressions-burn-hxrk2t_p/`，包括两份日志、`report.json`、`historical-log-reparse.json` 及 `burn_settlement_equivalence-evidence/results.json`。临时路径不作为远端永久附件。报告输出保护的独立验收见 `docs/qa/20261015-burn-evidence-isolation.md`。
+
+## 当前 UI 契约扩展验收（2026-10-15 UTC）
+
+本次仅从 `cases("full")` 筛选 `current_help_contract` 和 `encounter_ui_integration`，通过同一 `run_case` 顺序执行两个 Godot 4.6.3 headless 进程，没有资源导入、编辑器启动或性能测量：
+
+- 当前 Help 契约：165 断言、零失败，6.536 秒；唯一摘要前缀为 `Current Help contract:`
+- 遭遇 UI 集成：88 断言、零失败，5.081 秒；唯一摘要前缀为 `Encounter UI integration:`
+- 两例均使用独立 fresh Linux `/tmp/godot-m1-transactions-*` XDG 目录，退出码 0；错误、警告、保护拒绝、超时均为零，共 253 次累计断言
+- 保留原有退出码、错误日志、唯一摘要、精确计数和 90 秒超时规则；遭遇套件自身另有 60 秒失败看门狗，不替代运行器外层硬限制
+- Python 单元测试 18/18 通过；新增两例 full-only、脚本/摘要/精确基准、fresh XDG，以及断言数量减少或增加均拒绝的检查，保留原有 17 项测试
+- 当前解析器复核历史 quick 13、full 37、启动恢复 6、灼烧 2 份日志，共 58 份；精确计数、零失败、原退出码及无错误校验均通过。这是历史证据复核，没有再次执行这 58 个游戏进程
+
+当前 quick/full 配置为 15/47 例，预期累计断言为 1414/61824。本次没有重跑完整 quick 或 full，不把历史日志复核当作当前源码的全矩阵验收。两项 UI 用例验证 headless 信号路径及逻辑布局，不代表 Windows 实机视觉、帧率或性能验收。
+
+本地证据：`/tmp/transaction-regressions-current-ui-yfidjzvd/`，包括两份日志、`report.json` 和 `historical-log-reparse.json`。临时路径不作为远端永久附件。

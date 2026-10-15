@@ -119,7 +119,7 @@ print('FAKE: 3 checks, 0 failures')
 
     def test_matrix_and_baseline_totals(self):
         quick, full = runner.cases(), runner.cases("full")
-        self.assertEqual((len(quick), len(full)), (15, 45))
+        self.assertEqual((len(quick), len(full)), (15, 47))
         self.assertEqual(len({c.name for c in full}), len(full))
         self.assertEqual(sum(c.expected_checks for c in full if c.name.startswith("return_")), 387)
         self.assertEqual(sum(c.expected_checks for c in full if c.name.startswith("f6_")), 163)
@@ -135,7 +135,38 @@ print('FAKE: 3 checks, 0 failures')
             ("burn_settlement_equivalence", 58593, "godot-m1-v063-", "BURN_SETTLEMENT_EQUIVALENCE ", True, True),
         ])
         self.assertEqual(sum(c.expected_checks for c in runner.cases()), 1414)
-        self.assertEqual(sum(c.expected_checks for c in runner.cases("full")), 61571)
+        self.assertEqual(sum(c.expected_checks for c in runner.cases("full")), 61824)
+
+    def test_current_ui_full_only_matrix_and_exact_counts(self):
+        expected = {
+            "current_help_contract": ("Current Help contract:", 165),
+            "encounter_ui_integration": ("Encounter UI integration:", 88),
+        }
+        selected = [c for c in runner.cases("full") if c.name in expected]
+        self.assertEqual({c.name for c in selected}, set(expected))
+        self.assertFalse(any(c.name in expected for c in runner.cases()))
+        for case in selected:
+            with self.subTest(case=case.name):
+                marker, checks = expected[case.name]
+                self.assertEqual((case.script, case.marker, case.expected_checks),
+                                 (case.name, marker, checks))
+                self.assertEqual(case.prefix, "godot-m1-transactions-")
+                self.assertEqual(case.env, {})
+                self.assertFalse(case.json_summary)
+                self.assertFalse(case.burn_evidence)
+                self.case = case
+                source = f"""import os, pathlib
+for key in ('XDG_DATA_HOME', 'XDG_CONFIG_HOME', 'XDG_CACHE_HOME'):
+    path = pathlib.Path(os.environ[key])
+    assert str(path).startswith('/tmp/godot-') and path.is_dir()
+assert not list(pathlib.Path(os.environ['XDG_DATA_HOME']).iterdir())
+print({marker!r} + ' {checks} checks, 0 failures')
+"""
+                self.assertTrue(self.run_fake(source)["passed"])
+                for wrong_count in (checks - 1, checks + 1):
+                    result = self.run_fake(f"print({marker!r} + ' {wrong_count} checks, 0 failures')\n")
+                    self.assertFalse(result["passed"])
+                    self.assertEqual(result["reason"], "assertion_count_or_failure_mismatch")
 
     def test_burn_report_isolation_persistence_and_existing_refusal(self):
         self.case = next(c for c in runner.cases("full") if c.burn_evidence)
