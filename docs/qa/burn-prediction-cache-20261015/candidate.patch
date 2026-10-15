@@ -1,0 +1,38 @@
+diff --git a/scripts/main.gd b/scripts/main.gd
+index b37d23a..18db85b 100644
+--- a/scripts/main.gd
++++ b/scripts/main.gd
+@@ -2170,6 +2170,8 @@ func _ember_event_time(at:float,event:Dictionary)->float:
+ func _advance_proliferating_burns(to_time:float)->void:
+ 	if _ember_advancing:return
+ 	_ember_advancing=true
++	# Per-call scalar predictions only; actual settlement always uses current pools.
++	var prediction_rates:Dictionary={}
+ 	var iterations:int=0
+ 	while true:
+ 		iterations+=1
+@@ -2205,10 +2207,20 @@ func _advance_proliferating_burns(to_time:float)->void:
+ 			var expiry:float=float(status.provenance.get("ember_expiry",float(status.last_time)+float(status.remaining)))
+ 			var end:float=minf(to_time,expiry)
+ 			if end<=float(status.last_time):continue
+-			var rate:Dictionary=Defense.incoming_burn(float(status.raw_dps),target.get("resistances",{}).get("fire",0.0),0.0,1.0,"monster")
+-			assert(rate.ok,"Validated burn defense")
+-			if float(rate.damage_total)<=0.0:continue
+-			var death_at:float=float(status.last_time)+(float(target.get("shield",0.0))+float(target.health))/float(rate.damage_total)
++			var fire_resistance:Variant=target.get("resistances",{}).get("fire",0.0)
++			# Typed bytes preserve signed zero and original resistance validation types.
++			var prediction_key:String=var_to_bytes([float(status.raw_dps),fire_resistance]).hex_encode()
++			var damage_rate:float
++			if prediction_rates.has(prediction_key):
++				damage_rate=float(prediction_rates[prediction_key])
++			else:
++				var rate:Dictionary=Defense.incoming_burn(float(status.raw_dps),fire_resistance,0.0,1.0,"monster")
++				assert(rate.ok,"Validated burn defense")
++				damage_rate=float(rate.damage_total)
++				if rate.ok and is_finite(damage_rate) and prediction_rates.size()<BurnRuntime.MAX_TARGETS:
++					prediction_rates[prediction_key]=damage_rate
++			if damage_rate<=0.0:continue
++			var death_at:float=float(status.last_time)+(float(target.get("shield",0.0))+float(target.health))/damage_rate
+ 			if death_at<=float(status.last_time):
+ 				# A positive lifetime smaller than one clock ULP still needs the
+ 				# next representable instant; never spin at a zero-width boundary.
