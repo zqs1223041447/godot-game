@@ -4,12 +4,13 @@ const Controls = preload("res://scripts/ui/encounter_controls.gd")
 const Catalog = preload("res://scripts/encounters/encounter_catalog.gd")
 const Compiler = preload("res://scripts/encounters/encounter_compiler.gd")
 const Design = preload("res://scripts/visuals/visual_theme.gd")
+const Settings = preload("res://scripts/visuals/visual_settings.gd")
 const Model = preload("res://scripts/build_state.gd")
 
 var checks: int = 0
 var failures: int = 0
 var panel: Control
-var host: VBoxContainer
+var host: ScrollContainer
 var events: Array = []
 var mutate_event: bool = false
 
@@ -19,7 +20,11 @@ func _initialize() -> void:
 
 
 func _run() -> void:
+	create_timer(70.0).timeout.connect(func() -> void:
+		push_error("Encounter controls timed out before completing acceptance")
+		quit(2))
 	root.size = Vector2i(720, 720)
+	root.content_scale_size = Vector2i(720, 720)
 	var state := Model.new()
 	_expect(state.save_build() == OK, "Real save fixture created only in isolated XDG root")
 	var state_before: Dictionary = state._snapshot().duplicate(true)
@@ -32,7 +37,10 @@ func _run() -> void:
 	panel = Controls.new()
 	var ids: Array[String] = ["enemy_max_health_120","enemy_move_speed_110"]
 	_expect(panel.set_context([ids[0]]), "Context can be supplied before embedding")
-	host = VBoxContainer.new()
+	host = ScrollContainer.new()
+	host.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	host.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO
+	host.follow_focus = true
 	host.position = Vector2(24, 24)
 	host.size = Vector2(280, 650)
 	root.add_child(host)
@@ -43,6 +51,7 @@ func _run() -> void:
 	_expect(panel.theme.default_font == Design.create_theme().default_font, "Existing presentation font is reused")
 	_expect(panel.get_theme_stylebox("panel").get_script() == Design.Frame, "Existing paper material is reused")
 	_test_selections(ids)
+	_test_all_previews()
 	_test_copies(ids)
 	_test_invalid(ids)
 	_test_disabled(ids)
@@ -96,8 +105,7 @@ func _test_selections(ids: Array[String]) -> void:
 		for id: String in ids:
 			_expect(_option(id).button_pressed == selection.has(id), "Checkbox reflects actual selected identity: " + id)
 		var preview: String = _label("EncounterPreview").text
-		_expect(preview.contains("最大生命 ×%.2f" % float(profile.multipliers.max_health)) and
-			preview.contains("移速 ×%.2f" % float(profile.multipliers.speed)), "Preview matches the current compiler factors")
+		_expect_preview(selection)
 		_expect(preview.contains("普通遭遇") == selection.is_empty(), "Only empty selection is labelled ordinary")
 		var count: int = events.size()
 		_confirm().pressed.emit()
@@ -113,6 +121,48 @@ func _test_selections(ids: Array[String]) -> void:
 		_option(id).button_pressed = false
 	_expect(panel.get_selected_ids().is_empty(), "Unchecking both restores ordinary draft")
 	_expect(not _confirm().disabled, "Ordinary request remains confirmable")
+
+
+func _expect_preview(selection: Array) -> void:
+	var compiled: Dictionary = Compiler.compile(selection)
+	_expect(compiled.ok, "Preview fixture is a valid catalog selection")
+	if not compiled.ok:
+		return
+	var canonical: Array = compiled.profile.modifier_ids
+	var expected: String = "普通遭遇（无挑战）" if canonical.is_empty() else \
+		"已选择 %d / %d 条" % [canonical.size(), Catalog.MAX_MODIFIERS]
+	# Independently assemble the public contract; never call the UI summary helper.
+	for definition: Dictionary in compiled.profile.definitions:
+		expected += "\n" + str(definition.description)
+	_expect(_label("EncounterPreview").text == expected,
+		"Exact heading and ordered canonical descriptions: " + str(selection))
+
+
+func _test_all_previews() -> void:
+	var all_ids: Array[String] = Catalog.get_ids()
+	_expect(all_ids.size() == 6, "Current encounter catalog has six independently covered options")
+	panel.set_context([])
+	_expect_preview([])
+	for first: String in all_ids:
+		panel.set_context([first])
+		_expect_preview([first])
+		for second: String in all_ids:
+			if first == second:
+				continue
+			panel.set_context([first, second])
+			_expect_preview([first, second])
+			var canonical: Array[String] = [first, second]
+			canonical.sort()
+			_expect(panel.get_selected_ids() == canonical, "Every pair input order resolves canonical IDs")
+	# These units cannot be reconstructed from multiplier-only aggregate fields.
+	panel.set_context(["enemy_shield_from_health_20", "enemy_armour_80"])
+	var preview: String = _label("EncounterPreview").text
+	_expect(preview.contains("怪物护甲 +80") and preview.contains("未附本轮普通词缀前最大生命的20%"),
+		"Armour/shield preview retains flat armour and unmodified-health shield units")
+	panel.set_context(["enemy_shield_from_health_20", "enemy_max_health_120"])
+	preview = _label("EncounterPreview").text
+	_expect(preview.contains("怪物最大生命 ×1.20") and preview.contains("与强健顺序无关"),
+		"Health/shield preview retains the independent shield base rule")
 
 
 func _test_copies(ids: Array[String]) -> void:
@@ -204,25 +254,59 @@ func _test_metadata(ids: Array[String]) -> void:
 
 
 func _test_layout(ids: Array[String]) -> void:
+	_expect(root.get_visible_rect().size == Vector2(720, 720), "Fixture uses verified logical viewport dimensions")
 	for width: int in [220, 280]:
-		for scale: float in [1.0, 1.2]:
-			host.size.x = width
+		for scale: float in Settings.FONT_SCALES:
+			host.size = Vector2(width, 480)
 			panel.font_scale = scale
-			for selection: Array in [[], [ids[0]], ids]:
+			for selection: Array in [[], [ids[0]], ids,
+				["enemy_armour_80", "enemy_shield_from_health_20"],
+				["enemy_max_health_120", "enemy_shield_from_health_20"]]:
 				panel.set_context(selection)
 				await _settle()
-				_expect(panel.size.x <= width + 1.0, "Component fits %d px / %.0f%% font" % [width, scale * 100.0])
+				_expect(panel.size.x <= width + 1.0, "Component fits %d logical px / %.0f%% font" % [width, scale * 100.0])
 				_check_bounds(panel)
+				_expect_preview(selection)
 				_expect(_label("EncounterPreview").get_theme_font_size("font_size") == roundi(14 * scale), "Font scale survives selection refresh")
+				await _reveal_all()
 			panel.set_context(ids, "遭遇进行中，当前无法改变选择。请在本次遭遇结束后再次确认。")
 			await _settle()
 			_check_bounds(panel)
-			_expect(panel.size.y < 500.0, "Locked narrow view stays compact with wrapped text")
+			_expect(panel.size.y > host.size.y and host.get_v_scroll_bar().visible,
+				"Six-option wrapped content overflows into a real vertical scrollbar")
+			await _reveal_all()
+			panel.set_context(["unknown"])
+			await _settle()
+			_check_bounds(panel)
+			await _reveal_all()
 	panel.font_scale = 1.0
-	host.size.x = 280
+	host.size = Vector2(280, 480)
 	panel.set_context(ids)
 	await _settle()
 	_expect(_label("EncounterPreview").get_theme_font_size("font_size") == 14, "Scaling back to 100 percent has no cumulative enlargement")
+
+
+func _reveal_all() -> void:
+	for stable_name: String in ["EncounterTitle", "EncounterIntegration", "EncounterRisk",
+		"EncounterPreview", "EncounterStatus", "EncounterConfirm"]:
+		var widget: Control = panel.find_child(stable_name, true, false) as Control
+		if widget.visible:
+			await _reveal(widget)
+	for id: String in Catalog.get_ids():
+		await _reveal(_option(id))
+		await _reveal(_label("EncounterDescription_" + id))
+
+
+func _reveal(widget: Control) -> void:
+	host.ensure_control_visible(widget)
+	await _settle()
+	var visible_rect: Rect2 = host.get_global_rect()
+	visible_rect.size.x -= host.get_v_scroll_bar().size.x if host.get_v_scroll_bar().visible else 0.0
+	# Scroll offsets are integral; theme layout positions can be fractional.
+	_expect(visible_rect.grow(1.0).encloses(widget.get_global_rect()),
+		"Scrolling fully reveals " + str(widget.name))
+	_expect(root.get_visible_rect().grow(1.0).encloses(widget.get_global_rect()),
+		"Revealed control fits the actual logical viewport: " + str(widget.name))
 
 
 func _check_bounds(node: Node) -> void:
@@ -326,6 +410,7 @@ func _key(keycode: int, pressed: bool, echo: bool = false) -> void:
 
 
 func _click(button: Button) -> void:
+	await _reveal(button)
 	for pressed: bool in [true, false]:
 		var event := InputEventMouseButton.new()
 		event.button_index = MOUSE_BUTTON_LEFT

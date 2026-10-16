@@ -25,6 +25,7 @@ class Case:
     env: dict = field(default_factory=dict)
     json_summary: bool = False
     burn_evidence: bool = False
+    user_args: tuple = ()
 
 
 def cases(mode="quick"):
@@ -67,6 +68,15 @@ def cases(mode="quick"):
         result.extend([
             Case("current_help_contract", "current_help_contract", "Current Help contract:", 165),
             Case("encounter_ui_integration", "encounter_ui_integration", "Encounter UI integration:", 88),
+            Case("encounter_controls", "encounter_controls", "Encounter controls:", 3918),
+            Case("pause_keyboard_scroll", "pause_keyboard_scroll", "Pause keyboard scroll:", 1070),
+            Case("settings_keyboard_scroll", "settings_keyboard_scroll", "Settings keyboard scroll:", 1025),
+            Case("skill_binding_focus_capacity10", "skill_binding_focus", "Skill binding focus:",
+                 3303, "godot-skill-focus-"),
+            Case("skill_binding_focus_capacity11", "skill_binding_focus", "Skill binding focus:",
+                 3629, "godot-skill-focus-", user_args=("--capacity11",)),
+            Case("talent_details_focus", "talent_details_focus", "Talent details focus:",
+                 5219, "godot-talent-focus-"),
             Case("burn_state_copy", "burn_state_copy_20261015", "Burn state copy equivalence:",
                  892, "godot-m1-v050-"),
             Case("burn_settlement_equivalence", "burn_settlement_equivalence",
@@ -127,6 +137,8 @@ def run_case(case, godot, project, output_dir, timeout=90):
             env["BURN_EVIDENCE_DIR"] = str(output_dir / (case.name + "-evidence"))
             record["evidence_dir"] = env["BURN_EVIDENCE_DIR"]
         command = [godot, "--headless", "--path", str(project), "--script", f"tests/{case.script}_test.gd"]
+        if case.user_args:
+            command.extend(["--", *case.user_args])
         record.update(command=command, environment={key: env[key] for key in ("XDG_DATA_HOME", "XDG_CONFIG_HOME", "XDG_CACHE_HOME")}, scenario=case.env)
         with log_path.open("wb") as log:
             try:

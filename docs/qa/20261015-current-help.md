@@ -40,3 +40,7 @@ These are **headless logical-layout checks**, not native-rendered screenshot or 
 3. Ordinary retry keeps active run selection
 
 Both runs also report legacy fixture/Main API mismatches (`normal_journey`, `normal_pending_rewards`, `invalidate_gem_trade_quotes`, and consequent dictionary accesses). All of that suite's layout checks pass. This is a baseline-reproduced legacy integration limitation, not a passing suite; no encounter-flow repair is included in this copy-only change.
+
+## Viewport clarification (2026-10-15 follow-up)
+
+The 1280×720 and 2560×1440 values above are requested physical root-window sizes. Under this project’s canvas_items stretch configuration, the tested Main scene retains a 1280×720 logical viewport (HUD local size also changes with UI scale). These checks do not establish an independent 2560×1440 logical layout or native rendered 2K acceptance. The later keyboard-scroll regression explicitly records and asserts the actual logical viewport.

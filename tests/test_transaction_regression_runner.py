@@ -119,7 +119,7 @@ print('FAKE: 3 checks, 0 failures')
 
     def test_matrix_and_baseline_totals(self):
         quick, full = runner.cases(), runner.cases("full")
-        self.assertEqual((len(quick), len(full)), (15, 47))
+        self.assertEqual((len(quick), len(full)), (15, 53))
         self.assertEqual(len({c.name for c in full}), len(full))
         self.assertEqual(sum(c.expected_checks for c in full if c.name.startswith("return_")), 387)
         self.assertEqual(sum(c.expected_checks for c in full if c.name.startswith("f6_")), 163)
@@ -135,7 +135,7 @@ print('FAKE: 3 checks, 0 failures')
             ("burn_settlement_equivalence", 58593, "godot-m1-v063-", "BURN_SETTLEMENT_EQUIVALENCE ", True, True),
         ])
         self.assertEqual(sum(c.expected_checks for c in runner.cases()), 1414)
-        self.assertEqual(sum(c.expected_checks for c in runner.cases("full")), 61824)
+        self.assertEqual(sum(c.expected_checks for c in runner.cases("full")), 79988)
 
     def test_current_ui_full_only_matrix_and_exact_counts(self):
         expected = {
@@ -167,6 +167,90 @@ print({marker!r} + ' {checks} checks, 0 failures')
                     result = self.run_fake(f"print({marker!r} + ' {wrong_count} checks, 0 failures')\n")
                     self.assertFalse(result["passed"])
                     self.assertEqual(result["reason"], "assertion_count_or_failure_mismatch")
+
+    def test_controls_and_scroll_full_only_matrix_and_positive_arguments(self):
+        expected = {
+            "encounter_controls": ("Encounter controls:", 3918),
+            "pause_keyboard_scroll": ("Pause keyboard scroll:", 1070),
+            "settings_keyboard_scroll": ("Settings keyboard scroll:", 1025),
+        }
+        selected = [c for c in runner.cases("full") if c.name in expected]
+        self.assertEqual({c.name for c in selected}, set(expected))
+        self.assertFalse(any(c.name in expected for c in runner.cases()))
+        self.assertEqual(sum(c.expected_checks for c in selected), 6013)
+        for case in selected:
+            with self.subTest(case=case.name):
+                marker, checks = expected[case.name]
+                self.assertEqual((case.script, case.marker, case.expected_checks),
+                                 (case.name, marker, checks))
+                self.assertEqual(case.prefix, "godot-m1-transactions-")
+                self.assertEqual(case.env, {})
+                self.assertFalse(case.json_summary)
+                self.assertFalse(case.burn_evidence)
+                self.case = case
+                source = f"""import os, pathlib, sys
+assert sys.argv[1:] == ['--headless', '--path', {str(self.root)!r}, '--script', 'tests/{case.script}_test.gd']
+assert '--disable-follow-focus' not in sys.argv
+assert '--' not in sys.argv
+for key in ('XDG_DATA_HOME', 'XDG_CONFIG_HOME', 'XDG_CACHE_HOME'):
+    path = pathlib.Path(os.environ[key])
+    assert str(path).startswith('/tmp/godot-') and path.is_dir()
+assert not list(pathlib.Path(os.environ['XDG_DATA_HOME']).iterdir())
+print({marker!r} + ' {checks} checks, 0 failures')
+"""
+                first, second = self.run_fake(source), self.run_fake(source)
+                self.assertTrue(first["passed"], first)
+                self.assertTrue(second["passed"], second)
+                self.assertNotEqual(first["environment"], second["environment"])
+                self.assertNotIn("--disable-follow-focus", first["command"])
+                for wrong_count in (checks - 1, checks + 1):
+                    result = self.run_fake(f"print({marker!r} + ' {wrong_count} checks, 0 failures')\n")
+                    self.assertFalse(result["passed"])
+                    self.assertEqual(result["reason"], "assertion_count_or_failure_mismatch")
+
+    def test_focus_full_only_matrix_arguments_and_strict_results(self):
+        expected = {
+            "skill_binding_focus_capacity10": ("skill_binding_focus", "Skill binding focus:", 3303, "godot-skill-focus-", ()),
+            "skill_binding_focus_capacity11": ("skill_binding_focus", "Skill binding focus:", 3629, "godot-skill-focus-", ("--capacity11",)),
+            "talent_details_focus": ("talent_details_focus", "Talent details focus:", 5219, "godot-talent-focus-", ()),
+        }
+        selected = [c for c in runner.cases("full") if c.name in expected]
+        self.assertEqual({c.name for c in selected}, set(expected))
+        self.assertFalse(any(c.name in expected for c in runner.cases()))
+        self.assertEqual(sum(c.expected_checks for c in selected), 12151)
+        self.assertTrue(all(not c.user_args for c in runner.cases("full") if c.name != "skill_binding_focus_capacity11"))
+        for case in selected:
+            with self.subTest(case=case.name):
+                self.assertEqual((case.script, case.marker, case.expected_checks, case.prefix, case.user_args), expected[case.name])
+                self.assertEqual(case.env, {})
+                self.assertFalse(case.json_summary)
+                self.assertFalse(case.burn_evidence)
+                self.case = case
+                argv = ['--headless', '--path', str(self.root), '--script', f'tests/{case.script}_test.gd']
+                if case.user_args:
+                    argv += ['--', *case.user_args]
+                source = f"""import os, pathlib, sys
+assert sys.argv[1:] == {argv!r}
+assert '--disable-follow-focus' not in sys.argv
+for key in ('XDG_DATA_HOME', 'XDG_CONFIG_HOME', 'XDG_CACHE_HOME'):
+    path = pathlib.Path(os.environ[key])
+    assert str(path).startswith('/tmp/{case.prefix}') and path.is_dir()
+assert not list(pathlib.Path(os.environ['XDG_DATA_HOME']).iterdir())
+print({case.marker!r} + ' {case.expected_checks} checks, 0 failures')
+"""
+                first, second = self.run_fake(source), self.run_fake(source)
+                self.assertTrue(first["passed"], first)
+                self.assertTrue(second["passed"], second)
+                self.assertNotEqual(first["environment"], second["environment"])
+                self.assertFalse(Path(first["environment"]["XDG_DATA_HOME"]).exists())
+                for wrong_count in (case.expected_checks - 1, case.expected_checks + 1):
+                    result = self.run_fake(f"print({case.marker!r} + ' {wrong_count} checks, 0 failures')\n")
+                    self.assertFalse(result["passed"])
+                    self.assertEqual(result["reason"], "assertion_count_or_failure_mismatch")
+                for code, reason in ((1, "nonzero_exit"), (78, "guard_rejected")):
+                    result = self.run_fake(source + f"raise SystemExit({code})\n")
+                    self.assertFalse(result["passed"])
+                    self.assertEqual(result["reason"], reason)
 
     def test_burn_report_isolation_persistence_and_existing_refusal(self):
         self.case = next(c for c in runner.cases("full") if c.burn_evidence)

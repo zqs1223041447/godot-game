@@ -121,6 +121,7 @@ func _build()->void:
 	_tree.node_hovered.connect(_node_hovered)
 	_tree.hover_left.connect(func():_tree.tooltip_text="")
 	var scroll:=ScrollContainer.new()
+	scroll.follow_focus=true
 	scroll.custom_minimum_size.x=250
 	scroll.size_flags_horizontal=Control.SIZE_EXPAND_FILL
 	scroll.size_flags_stretch_ratio=1.0

@@ -1,0 +1,87 @@
+{
+  "mode": "focus-targeted-only",
+  "cases": 3,
+  "passed": 3,
+  "failed": 0,
+  "observed_checks": 12151,
+  "accepted_checks": 12151,
+  "results": [
+    {
+      "name": "skill_binding_focus_capacity10",
+      "expected_checks": 3303,
+      "checks": 3303,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-focus-6di0zfj3/skill_binding_focus_capacity10.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/skill_binding_focus_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-skill-focus-tfy69f3m/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-skill-focus-tfy69f3m/config",
+        "XDG_CACHE_HOME": "/tmp/godot-skill-focus-tfy69f3m/cache"
+      },
+      "scenario": {},
+      "warnings": [],
+      "seconds": 12.718
+    },
+    {
+      "name": "skill_binding_focus_capacity11",
+      "expected_checks": 3629,
+      "checks": 3629,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-focus-6di0zfj3/skill_binding_focus_capacity11.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/skill_binding_focus_test.gd",
+        "--",
+        "--capacity11"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-skill-focus-ec7em4l6/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-skill-focus-ec7em4l6/config",
+        "XDG_CACHE_HOME": "/tmp/godot-skill-focus-ec7em4l6/cache"
+      },
+      "scenario": {},
+      "warnings": [],
+      "seconds": 12.962
+    },
+    {
+      "name": "talent_details_focus",
+      "expected_checks": 5219,
+      "checks": 5219,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-focus-6di0zfj3/talent_details_focus.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/talent_details_focus_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-talent-focus-thfcln_8/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-talent-focus-thfcln_8/config",
+        "XDG_CACHE_HOME": "/tmp/godot-talent-focus-thfcln_8/cache"
+      },
+      "scenario": {},
+      "warnings": [],
+      "seconds": 26.264
+    }
+  ]
+}

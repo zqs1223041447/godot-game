@@ -1,0 +1,31 @@
+{
+  "scope": "Read-only archive verification, no Godot reruns",
+  "checks": {
+    "frozen_commit_current_and_copied_manifest_files": 239,
+    "instrumentation_hashes_match": true,
+    "patch_reconstructs_executed_main_exactly": true,
+    "twenty_frame_hashes_equal": true
+  },
+  "artifacts": [
+    {
+      "suffix": ".bin",
+      "bytes": 30889476,
+      "sha256": "e3898e8b48f52ab42e4a80c9232bb94271946d908c01fdbdeba82a590e73aaff",
+      "direct_bytes_equal": true
+    },
+    {
+      "suffix": "-final.bin",
+      "bytes": 1491480,
+      "sha256": "30347f555598406f413c120209760d72b2b110037f59b47feff4022d049324cc",
+      "direct_bytes_equal": true
+    },
+    {
+      "suffix": ".save",
+      "bytes": 13715,
+      "sha256": "c821772f8dc7a1ac5732fca1683f179a70153d42565f0b2b37663001426dd9f4",
+      "direct_bytes_equal": true
+    }
+  ],
+  "raw_location": "/tmp/burn-settlement-budget-20261015",
+  "raw_retention": "ephemeral; not in git or bundle"
+}

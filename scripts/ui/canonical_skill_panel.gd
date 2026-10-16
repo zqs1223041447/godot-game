@@ -42,6 +42,7 @@ func _build() -> void:
 	_summary.add_theme_font_size_override("font_size",11)
 	add_child(_summary)
 	_rows = Rows.new()
+	_rows.follow_focus = true
 	_rows.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	_rows.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_rows.font_scale = font_scale

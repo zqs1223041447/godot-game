@@ -1,0 +1,10 @@
+--- scripts/main.gd
++++ temporary/main.gd
+@@ -124 +124,2 @@
+-var enemy_spatial = SpatialTargets.new(64.0)
++var enemy_spatial = preload("/tmp/spatial-diagnostic-20261015/spatial.gd").new(64.0)
++var diagnostic_ai_us: int = 0
+@@ -683,0 +685 @@
++	var diagnostic_ai_start: int = Time.get_ticks_usec()
+@@ -684,0 +687 @@
++	diagnostic_ai_us += Time.get_ticks_usec() - diagnostic_ai_start

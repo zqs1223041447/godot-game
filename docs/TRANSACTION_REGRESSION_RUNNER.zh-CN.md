@@ -26,15 +26,15 @@ python3 -m unittest discover -s tests -p test_transaction_regression_runner.py -
 - F6 bound/第一次写失败 17、unbound/第二次写失败 17
 - 启动恢复 start 27、completed_test 24
 
-显式 full 共 47 次启动：以上八个基础套件，加三种地图夹具 × 六个返城场景（18 次，387 断言），两种绑定状态 × 四个故障边界与无故障控制（10 次，163 断言），以及 safe exit（120 断言）和六个启动恢复场景（152 断言）：start 27、leave 26、test 26、completed_start 25、completed_leave 24、completed_test 24；另有灼烧状态拷贝等价性（892 断言）和结算等价性（58593 断言），以及当前 Help 契约（165 断言）与遭遇 UI 集成（88 断言），这四项仅在 full 中运行。
+显式 full 共 53 次启动：以上八个基础套件，加三种地图夹具 × 六个返城场景（18 次，387 断言），两种绑定状态 × 四个故障边界与无故障控制（10 次，163 断言），以及 safe exit（120 断言）和六个启动恢复场景（152 断言）：start 27、leave 26、test 26、completed_start 25、completed_leave 24、completed_test 24；另有灼烧状态拷贝等价性（892 断言）和结算等价性（58593 断言），以及当前 Help 契约（165 断言）与遭遇 UI 集成（88 断言），再加遭遇独立组件（3918 断言）、暂停菜单键盘滚动（1070 断言）和设置菜单键盘滚动（1025 断言），另加技能绑定焦点默认10行（3303断言）与真实装备11行（3629断言），以及天赋详情焦点（5219断言），这十项仅在 full 中运行。quick/full 预期累计断言为 1414/79988。
 
-quick 是代表性检查，不能替代完整故障矩阵。90 秒是每个子进程的硬上限，15/47 个用例分别最多占用约 1350/4230 秒子进程等待时间，另有启动、读日志和写报告开销；它不是整个 quick 的耗时承诺。不并发抢占资源，不调用旧的全仓库 600 秒套件。已有其他 Godot 性能测量运行时应先协调，避免污染测量。
+quick 是代表性检查，不能替代完整故障矩阵。90 秒是每个子进程的硬上限，15/53 个用例分别最多占用约 1350/4770 秒子进程等待时间，另有启动、读日志和写报告开销；它不是整个 quick 的耗时承诺。不并发抢占资源，不调用旧的全仓库 600 秒套件。已有其他 Godot 性能测量运行时应先协调，避免污染测量。
 
 ## 隔离与判定
 
-每次测试通过 `tempfile` 在 `/tmp` 新建专属目录；data/config/cache 均独立。目录前缀遵循真实测试保护契约，包括 `godot-m1-`、`godot-ui-feedback.`、`godot-owned-gem-picker-`、`godot-skill-binding-`、安全退出的 `godot-m1-v099-`、启动恢复的 `godot-startup-recovery.`，以及灼烧两例的 `godot-m1-v050-` / `godot-m1-v063-`。当前 Help 与遭遇 UI 的真实保护条件均为 Linux 且 `OS.get_data_dir()` 以 `/tmp/godot-` 开头，因此复用运行器默认 `godot-m1-transactions-` 前缀，并为每例创建全新的 XDG 目录。用例结束只删除自己创建的临时存档目录；不接收、更不删除用户指定的存档目录。
+每次测试通过 `tempfile` 在 `/tmp` 新建专属目录；data/config/cache 均独立。目录前缀遵循真实测试保护契约，包括 `godot-m1-`、`godot-ui-feedback.`、`godot-owned-gem-picker-`、`godot-skill-binding-`、安全退出的 `godot-m1-v099-`、启动恢复的 `godot-startup-recovery.`，以及灼烧两例的 `godot-m1-v050-` / `godot-m1-v063-`。当前 Help 与遭遇 UI 的真实保护条件均为 Linux 且 `OS.get_data_dir()` 以 `/tmp/godot-` 开头，因此复用运行器默认 `godot-m1-transactions-` 前缀，并为每例创建全新的 XDG 目录。暂停与设置键盘滚动测试同样要求 Linux 且数据目录以 `/tmp/godot-` 开头；遭遇独立组件测试没有自己的路径拒绝保护，运行器仍以每次 fresh XDG 隔离其实际存档写入，三例均使用默认前缀。技能绑定两例使用其真实保护条件要求的 `godot-skill-focus-` 前缀；天赋详情使用 `godot-talent-focus-` 前缀。用例结束只删除自己创建的临时存档目录；不接收、更不删除用户指定的存档目录。
 
-每次启动清除上次可能遗留的返城、F6、binding baseline、safe exit 子组开关及报告/截图目的地，以及 `STARTUP_CASE` / `STARTUP_RED_CONTROL` / `BURN_EVIDENCE_DIR`，再显式指定当前场景与报告路径。启动恢复每例明确设置 `STARTUP_CASE`；外层负向控制 `STARTUP_RED_CONTROL=skip_recovery` 不得泄漏到正向验收。原进程环境不被修改。测试始终 `--headless`，picker 自身负责当前夹具所需的窗口大小和弹窗设置。
+每次启动清除上次可能遗留的返城、F6、binding baseline、safe exit 子组开关及报告/截图目的地，以及 `STARTUP_CASE` / `STARTUP_RED_CONTROL` / `BURN_EVIDENCE_DIR`，再显式指定当前场景与报告路径。启动恢复每例明确设置 `STARTUP_CASE`；外层负向控制 `STARTUP_RED_CONTROL=skip_recovery` 不得泄漏到正向验收。暂停与设置的负向控制来自 Godot 显式用户参数 `-- --disable-follow-focus`，不是环境变量；正向运行器不传入该用户参数或分隔符，不添加虚构的环境变量清理。技能绑定与天赋详情也使用同一负向用户参数；正向运行器始终不传 `--disable-follow-focus`。新增每例 `user_args` 默认空元组，仅容量11例设置 `("--capacity11",)`，运行器只在参数非空时追加 `--` 分隔符和参数；容量10和天赋不带分隔符，不通过环境变量选择容量。原进程环境不被修改。测试始终 `--headless`，picker 自身负责当前夹具所需的窗口大小和弹窗设置。
 
 仅结算等价性用例显式设置 `BURN_EVIDENCE_DIR` 为保留证据目录下的 `burn_settlement_equivalence-evidence`；运行器不预建该子目录，由测试原子创建并拒绝已存在的目标。生成的 `results.json` 与日志一起保留，不随 XDG 清理。其他用例不继承该变量；外层进程环境不变。重用同一输出目录会被结算测试拒绝，不覆盖先前的 JSON。
 
@@ -113,6 +113,31 @@ quick 是代表性检查，不能替代完整故障矩阵。90 秒是每个子�
 - Python 单元测试 18/18 通过；新增两例 full-only、脚本/摘要/精确基准、fresh XDG，以及断言数量减少或增加均拒绝的检查，保留原有 17 项测试
 - 当前解析器复核历史 quick 13、full 37、启动恢复 6、灼烧 2 份日志，共 58 份；精确计数、零失败、原退出码及无错误校验均通过。这是历史证据复核，没有再次执行这 58 个游戏进程
 
-当前 quick/full 配置为 15/47 例，预期累计断言为 1414/61824。本次没有重跑完整 quick 或 full，不把历史日志复核当作当前源码的全矩阵验收。两项 UI 用例验证 headless 信号路径及逻辑布局，不代表 Windows 实机视觉、帧率或性能验收。
+该次扩展后的 quick/full 配置为 15/47 例，预期累计断言为 1414/61824。本次没有重跑完整 quick 或 full，不把历史日志复核当作当前源码的全矩阵验收。两项 UI 用例验证 headless 信号路径及逻辑布局，不代表 Windows 实机视觉、帧率或性能验收。
 
 本地证据：`/tmp/transaction-regressions-current-ui-yfidjzvd/`，包括两份日志、`report.json` 和 `historical-log-reparse.json`。临时路径不作为远端永久附件。
+
+
+## 组件与菜单键盘滚动扩展验收（2026-10-15 UTC）
+
+本次仅从 `cases("full")` 筛选新增的三例，通过同一 `run_case` 顺序运行 Godot 4.6.3 headless；没有资源导入、编辑器启动或性能测量：
+
+- `encounter_controls`：3918 断言、零失败，28.261 秒；唯一摘要前缀 `Encounter controls:`
+- `pause_keyboard_scroll`：1070 断言、零失败，28.306 秒；唯一摘要前缀 `Pause keyboard scroll:`
+- `settings_keyboard_scroll`：1025 断言、零失败，15.916 秒；唯一摘要前缀 `Settings keyboard scroll:`
+- 三例均在独立 fresh `/tmp/godot-m1-transactions-*` XDG 目录中运行，退出码均为 0，错误、警告、保护拒绝、超时均为零；共 6013 次累计断言、72.483 秒子进程累计时间
+- 保留原有退出码、错误日志、唯一摘要、精确计数与 90 秒超时规则，未更改 `run_case`；套件内组件 70 秒、暂停/设置 75 秒看门狗不替代外层限制
+- Python 单元测试 19/19 通过；新增三例 full-only、脚本/摘要/精确计数、fresh XDG 与重复运行隔离、错误计数拒绝，以及正向命令不携带 `--disable-follow-focus` 或 `--` 用户参数分隔符的检查，保留原有 18 项测试
+
+当前 quick/full 配置为 15/50 例，预期累计断言为 1414/67837。本次只实际运行这三个新增游戏用例与 Python 单元测试，未重跑完整 quick/full，也未重跑负向控制或复核历史日志。新增用例覆盖 headless 组件交互、真实菜单输入与逻辑裁剪，不代表 Windows 实机视觉、帧率或性能验收。
+
+本地证据：`/tmp/transaction-regressions-controls-scroll-7jert6xk/`，包含三份日志和 `report.json`；临时 XDG 已清理。这些临时路径不作为远端永久附件。本次运行器集成仅完成本地修改与验收，未提交或发布。
+
+
+## 技能与天赋焦点扩展验收（2026-10-15 UTC）
+
+仅从 full 配置筛选新增三例，以相同 `run_case`、fresh XDG 和每例90秒限制顺序执行：技能10行3303项（12.718秒）、技能11行3629项（12.962秒）、天赋详情5219项（26.264秒）全部通过；退出码均为0，错误、警告、超时、保护拒绝均为零，共12151次累计断言。Python单元测试20/20通过，新增检查覆盖参数、前缀、精确计数、重复隔离与非零/78假成功拒绝。
+
+当前quick/full配置为15/53例、1414/79988预期断言。本批实际仅执行上述三例，没有完整quick/full重跑或负向Godot控制重跑，不将配置数量当作全套通过。新增每例 `user_args` 默认空，只有容量11追加 `-- --capacity11`，正向不携带负向开关；脚本真实保护前缀分别为 `godot-skill-focus-` 和 `godot-talent-focus-`。
+
+持久核验记录与必要日志见 `docs/qa/focus-runner-20261015/README.zh-CN.md`；原始输出使用fresh临时目录，临时XDG已清理。仅本地修改和验收，未提交或发布；不代表Windows、原生2K、画面像素或性能验收。

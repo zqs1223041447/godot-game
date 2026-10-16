@@ -1,0 +1,633 @@
+{
+  "checks": {
+    "/workspace/scratch/a51485f153de/godot-game": true,
+    "/tmp/burn-settlement-budget-20261015/repo": true,
+    "instrumentation_unchanged": true,
+    "all_20_frames_equal": true
+  },
+  "artifacts": [
+    {
+      "artifact": ".bin",
+      "equal": true,
+      "bytes": 30889476,
+      "sha256": "e3898e8b48f52ab42e4a80c9232bb94271946d908c01fdbdeba82a590e73aaff",
+      "instrumented_sha256": "e3898e8b48f52ab42e4a80c9232bb94271946d908c01fdbdeba82a590e73aaff"
+    },
+    {
+      "artifact": "-final.bin",
+      "equal": true,
+      "bytes": 1491480,
+      "sha256": "30347f555598406f413c120209760d72b2b110037f59b47feff4022d049324cc",
+      "instrumented_sha256": "30347f555598406f413c120209760d72b2b110037f59b47feff4022d049324cc"
+    },
+    {
+      "artifact": ".save",
+      "equal": true,
+      "bytes": 13715,
+      "sha256": "c821772f8dc7a1ac5732fca1683f179a70153d42565f0b2b37663001426dd9f4",
+      "instrumented_sha256": "c821772f8dc7a1ac5732fca1683f179a70153d42565f0b2b37663001426dd9f4"
+    }
+  ],
+  "clean_tick": {
+    "max_us": 511277,
+    "mean_us": 113115.7,
+    "n": 20,
+    "over_16_7_ms": 20,
+    "over_33_3_ms": 18,
+    "p50_us": 96709,
+    "p95_us": 511277
+  },
+  "instrumented_tick": {
+    "max_us": 673476,
+    "mean_us": 142622.9,
+    "n": 20,
+    "over_16_7_ms": 20,
+    "over_33_3_ms": 18,
+    "p50_us": 114405,
+    "p95_us": 673476
+  },
+  "totals": {
+    "bookkeeping_us": 203269,
+    "inclusive_us": 1305406,
+    "phase_calls": {
+      "monster_death": 38382,
+      "monster_defense": 38382,
+      "monster_exact_death": 38382,
+      "monster_feedback": 38382,
+      "monster_resources": 38382,
+      "monster_target": 38382,
+      "segment_setup": 38382,
+      "trace": 38382
+    },
+    "phase_us": {
+      "monster_death": 71564,
+      "monster_defense": 342179,
+      "monster_exact_death": 17895,
+      "monster_feedback": 355167,
+      "monster_resources": 67610,
+      "monster_target": 31932,
+      "segment_setup": 12870,
+      "trace": 149571
+    }
+  },
+  "unattributed_us": 53349,
+  "phase_pct_of_inclusive": {
+    "monster_death": 5.482125867354677,
+    "monster_defense": 26.212458039874186,
+    "monster_exact_death": 1.3708378849185618,
+    "monster_feedback": 27.207397545284763,
+    "monster_resources": 5.1792315953810535,
+    "monster_target": 2.446135531780917,
+    "segment_setup": 0.9859001720537519,
+    "trace": 11.457814656896016
+  },
+  "inclusive_pct_tick": 45.76424964013493,
+  "peak_instrumented": {
+    "inclusive_us": 314182,
+    "bookkeeping_us": 49131,
+    "phase_us": {
+      "monster_death": 10135,
+      "monster_defense": 87979,
+      "monster_exact_death": 4347,
+      "monster_feedback": 87293,
+      "monster_resources": 17792,
+      "monster_target": 8092,
+      "segment_setup": 2995,
+      "trace": 33439
+    },
+    "phase_calls": {
+      "monster_death": 9263,
+      "monster_defense": 9263,
+      "monster_exact_death": 9263,
+      "monster_feedback": 9263,
+      "monster_resources": 9263,
+      "monster_target": 9263,
+      "segment_setup": 9263,
+      "trace": 9263
+    },
+    "frame": 0,
+    "unattributed_us": 12979
+  },
+  "frame_deltas": [
+    {
+      "inclusive_us": 314182,
+      "bookkeeping_us": 49131,
+      "phase_us": {
+        "monster_death": 10135,
+        "monster_defense": 87979,
+        "monster_exact_death": 4347,
+        "monster_feedback": 87293,
+        "monster_resources": 17792,
+        "monster_target": 8092,
+        "segment_setup": 2995,
+        "trace": 33439
+      },
+      "phase_calls": {
+        "monster_death": 9263,
+        "monster_defense": 9263,
+        "monster_exact_death": 9263,
+        "monster_feedback": 9263,
+        "monster_resources": 9263,
+        "monster_target": 9263,
+        "segment_setup": 9263,
+        "trace": 9263
+      },
+      "frame": 0,
+      "unattributed_us": 12979
+    },
+    {
+      "inclusive_us": 3183,
+      "bookkeeping_us": 489,
+      "phase_us": {
+        "monster_death": 103,
+        "monster_defense": 894,
+        "monster_exact_death": 36,
+        "monster_feedback": 836,
+        "monster_resources": 156,
+        "monster_target": 75,
+        "segment_setup": 20,
+        "trace": 467
+      },
+      "phase_calls": {
+        "monster_death": 100,
+        "monster_defense": 100,
+        "monster_exact_death": 100,
+        "monster_feedback": 100,
+        "monster_resources": 100,
+        "monster_target": 100,
+        "segment_setup": 100,
+        "trace": 100
+      },
+      "frame": 1,
+      "unattributed_us": 107
+    },
+    {
+      "inclusive_us": 3566,
+      "bookkeeping_us": 515,
+      "phase_us": {
+        "monster_death": 88,
+        "monster_defense": 828,
+        "monster_exact_death": 34,
+        "monster_feedback": 934,
+        "monster_resources": 153,
+        "monster_target": 155,
+        "segment_setup": 36,
+        "trace": 705
+      },
+      "phase_calls": {
+        "monster_death": 100,
+        "monster_defense": 100,
+        "monster_exact_death": 100,
+        "monster_feedback": 100,
+        "monster_resources": 100,
+        "monster_target": 100,
+        "segment_setup": 100,
+        "trace": 100
+      },
+      "frame": 2,
+      "unattributed_us": 118
+    },
+    {
+      "inclusive_us": 42681,
+      "bookkeeping_us": 7617,
+      "phase_us": {
+        "monster_death": 1238,
+        "monster_defense": 10826,
+        "monster_exact_death": 544,
+        "monster_feedback": 11829,
+        "monster_resources": 2141,
+        "monster_target": 977,
+        "segment_setup": 429,
+        "trace": 5152
+      },
+      "phase_calls": {
+        "monster_death": 1300,
+        "monster_defense": 1300,
+        "monster_exact_death": 1300,
+        "monster_feedback": 1300,
+        "monster_resources": 1300,
+        "monster_target": 1300,
+        "segment_setup": 1300,
+        "trace": 1300
+      },
+      "frame": 3,
+      "unattributed_us": 1928
+    },
+    {
+      "inclusive_us": 72901,
+      "bookkeeping_us": 11889,
+      "phase_us": {
+        "monster_death": 2543,
+        "monster_defense": 18382,
+        "monster_exact_death": 1087,
+        "monster_feedback": 21118,
+        "monster_resources": 3845,
+        "monster_target": 1876,
+        "segment_setup": 671,
+        "trace": 8387
+      },
+      "phase_calls": {
+        "monster_death": 2400,
+        "monster_defense": 2400,
+        "monster_exact_death": 2400,
+        "monster_feedback": 2400,
+        "monster_resources": 2400,
+        "monster_target": 2400,
+        "segment_setup": 2400,
+        "trace": 2400
+      },
+      "frame": 4,
+      "unattributed_us": 3103
+    },
+    {
+      "inclusive_us": 51010,
+      "bookkeeping_us": 8550,
+      "phase_us": {
+        "monster_death": 1564,
+        "monster_defense": 13441,
+        "monster_exact_death": 696,
+        "monster_feedback": 13818,
+        "monster_resources": 2872,
+        "monster_target": 1370,
+        "segment_setup": 423,
+        "trace": 6127
+      },
+      "phase_calls": {
+        "monster_death": 1700,
+        "monster_defense": 1700,
+        "monster_exact_death": 1700,
+        "monster_feedback": 1700,
+        "monster_resources": 1700,
+        "monster_target": 1700,
+        "segment_setup": 1700,
+        "trace": 1700
+      },
+      "frame": 5,
+      "unattributed_us": 2149
+    },
+    {
+      "inclusive_us": 46008,
+      "bookkeeping_us": 7452,
+      "phase_us": {
+        "monster_death": 1362,
+        "monster_defense": 11696,
+        "monster_exact_death": 568,
+        "monster_feedback": 12206,
+        "monster_resources": 2291,
+        "monster_target": 1107,
+        "segment_setup": 357,
+        "trace": 6910
+      },
+      "phase_calls": {
+        "monster_death": 1400,
+        "monster_defense": 1400,
+        "monster_exact_death": 1400,
+        "monster_feedback": 1400,
+        "monster_resources": 1400,
+        "monster_target": 1400,
+        "segment_setup": 1400,
+        "trace": 1400
+      },
+      "frame": 6,
+      "unattributed_us": 2059
+    },
+    {
+      "inclusive_us": 38547,
+      "bookkeeping_us": 6769,
+      "phase_us": {
+        "monster_death": 1417,
+        "monster_defense": 9812,
+        "monster_exact_death": 535,
+        "monster_feedback": 10608,
+        "monster_resources": 2132,
+        "monster_target": 882,
+        "segment_setup": 358,
+        "trace": 3877
+      },
+      "phase_calls": {
+        "monster_death": 1200,
+        "monster_defense": 1200,
+        "monster_exact_death": 1200,
+        "monster_feedback": 1200,
+        "monster_resources": 1200,
+        "monster_target": 1200,
+        "segment_setup": 1200,
+        "trace": 1200
+      },
+      "frame": 7,
+      "unattributed_us": 2157
+    },
+    {
+      "inclusive_us": 20932,
+      "bookkeeping_us": 3574,
+      "phase_us": {
+        "monster_death": 701,
+        "monster_defense": 5684,
+        "monster_exact_death": 269,
+        "monster_feedback": 5814,
+        "monster_resources": 990,
+        "monster_target": 561,
+        "segment_setup": 188,
+        "trace": 2307
+      },
+      "phase_calls": {
+        "monster_death": 700,
+        "monster_defense": 700,
+        "monster_exact_death": 700,
+        "monster_feedback": 700,
+        "monster_resources": 700,
+        "monster_target": 700,
+        "segment_setup": 700,
+        "trace": 700
+      },
+      "frame": 8,
+      "unattributed_us": 844
+    },
+    {
+      "inclusive_us": 17579,
+      "bookkeeping_us": 2508,
+      "phase_us": {
+        "monster_death": 546,
+        "monster_defense": 4092,
+        "monster_exact_death": 239,
+        "monster_feedback": 4782,
+        "monster_resources": 772,
+        "monster_target": 391,
+        "segment_setup": 143,
+        "trace": 3445
+      },
+      "phase_calls": {
+        "monster_death": 500,
+        "monster_defense": 500,
+        "monster_exact_death": 500,
+        "monster_feedback": 500,
+        "monster_resources": 500,
+        "monster_target": 500,
+        "segment_setup": 500,
+        "trace": 500
+      },
+      "frame": 9,
+      "unattributed_us": 661
+    },
+    {
+      "inclusive_us": 61310,
+      "bookkeeping_us": 9896,
+      "phase_us": {
+        "monster_death": 1930,
+        "monster_defense": 15425,
+        "monster_exact_death": 771,
+        "monster_feedback": 18085,
+        "monster_resources": 3121,
+        "monster_target": 1566,
+        "segment_setup": 739,
+        "trace": 7614
+      },
+      "phase_calls": {
+        "monster_death": 1800,
+        "monster_defense": 1800,
+        "monster_exact_death": 1800,
+        "monster_feedback": 1800,
+        "monster_resources": 1800,
+        "monster_target": 1800,
+        "segment_setup": 1800,
+        "trace": 1800
+      },
+      "frame": 10,
+      "unattributed_us": 2163
+    },
+    {
+      "inclusive_us": 101281,
+      "bookkeeping_us": 16650,
+      "phase_us": {
+        "monster_death": 3331,
+        "monster_defense": 27459,
+        "monster_exact_death": 1415,
+        "monster_feedback": 28314,
+        "monster_resources": 5678,
+        "monster_target": 2337,
+        "segment_setup": 1052,
+        "trace": 10826
+      },
+      "phase_calls": {
+        "monster_death": 3300,
+        "monster_defense": 3300,
+        "monster_exact_death": 3300,
+        "monster_feedback": 3300,
+        "monster_resources": 3300,
+        "monster_target": 3300,
+        "segment_setup": 3300,
+        "trace": 3300
+      },
+      "frame": 11,
+      "unattributed_us": 4219
+    },
+    {
+      "inclusive_us": 60520,
+      "bookkeeping_us": 10003,
+      "phase_us": {
+        "monster_death": 1877,
+        "monster_defense": 17186,
+        "monster_exact_death": 838,
+        "monster_feedback": 16521,
+        "monster_resources": 3069,
+        "monster_target": 1468,
+        "segment_setup": 499,
+        "trace": 6402
+      },
+      "phase_calls": {
+        "monster_death": 2000,
+        "monster_defense": 2000,
+        "monster_exact_death": 2000,
+        "monster_feedback": 2000,
+        "monster_resources": 2000,
+        "monster_target": 2000,
+        "segment_setup": 2000,
+        "trace": 2000
+      },
+      "frame": 12,
+      "unattributed_us": 2657
+    },
+    {
+      "inclusive_us": 101478,
+      "bookkeeping_us": 16295,
+      "phase_us": {
+        "monster_death": 3223,
+        "monster_defense": 28080,
+        "monster_exact_death": 1389,
+        "monster_feedback": 28339,
+        "monster_resources": 4775,
+        "monster_target": 2368,
+        "segment_setup": 754,
+        "trace": 12479
+      },
+      "phase_calls": {
+        "monster_death": 2900,
+        "monster_defense": 2900,
+        "monster_exact_death": 2900,
+        "monster_feedback": 2900,
+        "monster_resources": 2900,
+        "monster_target": 2900,
+        "segment_setup": 2900,
+        "trace": 2900
+      },
+      "frame": 13,
+      "unattributed_us": 3776
+    },
+    {
+      "inclusive_us": 64530,
+      "bookkeeping_us": 9553,
+      "phase_us": {
+        "monster_death": 1862,
+        "monster_defense": 18066,
+        "monster_exact_death": 917,
+        "monster_feedback": 17473,
+        "monster_resources": 3066,
+        "monster_target": 1559,
+        "segment_setup": 523,
+        "trace": 8752
+      },
+      "phase_calls": {
+        "monster_death": 1900,
+        "monster_defense": 1900,
+        "monster_exact_death": 1900,
+        "monster_feedback": 1900,
+        "monster_resources": 1900,
+        "monster_target": 1900,
+        "segment_setup": 1900,
+        "trace": 1900
+      },
+      "frame": 14,
+      "unattributed_us": 2759
+    },
+    {
+      "inclusive_us": 51811,
+      "bookkeeping_us": 8101,
+      "phase_us": {
+        "monster_death": 1738,
+        "monster_defense": 13050,
+        "monster_exact_death": 708,
+        "monster_feedback": 15586,
+        "monster_resources": 2739,
+        "monster_target": 1363,
+        "segment_setup": 396,
+        "trace": 5894
+      },
+      "phase_calls": {
+        "monster_death": 1500,
+        "monster_defense": 1500,
+        "monster_exact_death": 1500,
+        "monster_feedback": 1500,
+        "monster_resources": 1500,
+        "monster_target": 1500,
+        "segment_setup": 1500,
+        "trace": 1500
+      },
+      "frame": 15,
+      "unattributed_us": 2236
+    },
+    {
+      "inclusive_us": 132052,
+      "bookkeeping_us": 18220,
+      "phase_us": {
+        "monster_death": 19177,
+        "monster_defense": 30174,
+        "monster_exact_death": 1845,
+        "monster_feedback": 31871,
+        "monster_resources": 6131,
+        "monster_target": 3115,
+        "segment_setup": 2327,
+        "trace": 14124
+      },
+      "phase_calls": {
+        "monster_death": 3312,
+        "monster_defense": 3312,
+        "monster_exact_death": 3312,
+        "monster_feedback": 3312,
+        "monster_resources": 3312,
+        "monster_target": 3312,
+        "segment_setup": 3312,
+        "trace": 3312
+      },
+      "frame": 16,
+      "unattributed_us": 5068
+    },
+    {
+      "inclusive_us": 74388,
+      "bookkeeping_us": 8869,
+      "phase_us": {
+        "monster_death": 17333,
+        "monster_defense": 15914,
+        "monster_exact_death": 1007,
+        "monster_feedback": 16638,
+        "monster_resources": 3453,
+        "monster_target": 1378,
+        "segment_setup": 583,
+        "trace": 6853
+      },
+      "phase_calls": {
+        "monster_death": 1647,
+        "monster_defense": 1647,
+        "monster_exact_death": 1647,
+        "monster_feedback": 1647,
+        "monster_resources": 1647,
+        "monster_target": 1647,
+        "segment_setup": 1647,
+        "trace": 1647
+      },
+      "frame": 17,
+      "unattributed_us": 2360
+    },
+    {
+      "inclusive_us": 26725,
+      "bookkeeping_us": 3827,
+      "phase_us": {
+        "monster_death": 781,
+        "monster_defense": 7291,
+        "monster_exact_death": 379,
+        "monster_feedback": 7618,
+        "monster_resources": 1359,
+        "monster_target": 623,
+        "segment_setup": 201,
+        "trace": 3422
+      },
+      "phase_calls": {
+        "monster_death": 720,
+        "monster_defense": 720,
+        "monster_exact_death": 720,
+        "monster_feedback": 720,
+        "monster_resources": 720,
+        "monster_target": 720,
+        "segment_setup": 720,
+        "trace": 720
+      },
+      "frame": 18,
+      "unattributed_us": 1224
+    },
+    {
+      "inclusive_us": 20722,
+      "bookkeeping_us": 3361,
+      "phase_us": {
+        "monster_death": 615,
+        "monster_defense": 5900,
+        "monster_exact_death": 271,
+        "monster_feedback": 5484,
+        "monster_resources": 1075,
+        "monster_target": 669,
+        "segment_setup": 176,
+        "trace": 2389
+      },
+      "phase_calls": {
+        "monster_death": 640,
+        "monster_defense": 640,
+        "monster_exact_death": 640,
+        "monster_feedback": 640,
+        "monster_resources": 640,
+        "monster_target": 640,
+        "segment_setup": 640,
+        "trace": 640
+      },
+      "frame": 19,
+      "unattributed_us": 782
+    }
+  ]
+}

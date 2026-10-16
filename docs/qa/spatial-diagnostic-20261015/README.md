@@ -1,0 +1,11 @@
+# Rejected spatial membership diagnostic archive
+
+See [REPORT.md](REPORT.md) for the decision and [predeclared-audit.md](predeclared-audit.md) for the gate as recorded before execution. Only the initial clean/instrumentation pair ran; the conditional candidate acceptance plan was never executed.
+
+Current frozen provenance is `7c4b3fd7ddeec9fecd7396c80573c332bb47a4e0`, independently verified against all 239 source manifest entries (238 production scripts and one existing harness). The copied harness and run JSON retain historical `base_commit=4e581e223bf012c04c94ec1f1a558021feeea03a`; that metadata is historical and is not this diagnostic's source provenance. `verification.json` corrects the original production-path count; its original digest is retained in `archive-readback.json`.
+
+`clean.json` and `instrumented.json` retain every measured tick and observation hash. Logs retain completion markers and all cumulative diagnostic samples. `timing-summary.json` is calculated from those files. `archive-readback.json` records direct byte readback for all three clean/instrumented output pairs, not just JSON equality assertions. Original process exit 0 is recorded in the diagnostic report; the saved run.py shows watchdog/isolation setup, while the separate launcher console return-code output is not present here.
+
+`setup.py`/`run.py` are historical recipes with absolute temporary paths. They are not invoked by archiving or CI and must not be run against the existing evidence directory. `instrumented-main.patch` records the temporary Main delta; frozen production Main is available at the commit above. Copies-before hashes identify the actual temporary files. Raw ~54 MiB observation/save pairs are intentionally excluded from Git and bundles; their only current copies are ephemeral /tmp artifacts. Hashes cannot recover omitted bytes. These materials establish the limited diagnostic result, not exhaustive correctness or accepted performance improvement.
+
+No production change, new Godot run, GPU/Windows validation or remote write occurred during archival. Publication cancellation remains in force. The diagnostic rejected further no-op-guard work under its 20% AI gate; PERF-001's residual ~550 ms peaks remain unresolved.

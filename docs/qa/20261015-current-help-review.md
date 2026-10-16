@@ -34,3 +34,7 @@ The worktree already contained many untracked generated .uid/.import sidecars on
 The worker subsequently clarified boss wording to “击败原始首领另可获得” and added two legacy-adapter assertions. Re-reviewed the final source/test. The fallback uses a real `build_state.gd` object only for the HUD state adapter while retaining Main's canonical world API. It checks generic rows instead of inventing a capacity and checks legacy snapshot/canonical save bytes remain unchanged. This deliberately narrow fallback check is meaningful; it does not pretend to exercise a fully legacy Main runtime.
 
 Independently reran the final version with a NEW prefix `/tmp/godot-current-help-review-final-3sCqZx`, the same 90-second timeout, and no editor import. Result: exit 0, `Current Help contract: 165 checks, 0 failures`. Final log: `/tmp/current-help-review-final-test.log`. Final verdict remains PASS with no blocking findings. The earlier 163-check run is superseded, not added to the final assertion count.
+
+## Viewport clarification (2026-10-15 follow-up)
+
+The 1280×720 and 2560×1440 values above are requested physical root-window sizes. Under this project’s canvas_items stretch configuration, the tested Main scene retains a 1280×720 logical viewport (HUD local size also changes with UI scale). These checks do not establish an independent 2560×1440 logical layout or native rendered 2K acceptance. The later keyboard-scroll regression explicitly records and asserts the actual logical viewport.

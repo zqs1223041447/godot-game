@@ -797,6 +797,8 @@ func _build_window(panel_name: String) -> void:
 	var scroll: ScrollContainer = ScrollContainer.new()
 	_panel_scroll = scroll
 	scroll.name = "PanelScroll"
+	# Keep keyboard-focused pause and settings actions visible as menus grow.
+	scroll.follow_focus = panel_name in ["pause", "settings"]
 	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	layout.add_child(scroll)

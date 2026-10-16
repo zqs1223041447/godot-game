@@ -1,0 +1,91 @@
+--- a/scripts/main.gd
++++ b/scripts/main.gd
+@@ -2291,37 +2291,62 @@
+ 	_assert_burn_result(result);_settle_burn_segments(result.segments)
+ 
+ 
++var diagnostic: Dictionary = {"inclusive_us":0,"bookkeeping_us":0,"phase_us":{},"phase_calls":{}}
++func _diag_add(phase: String, started: int) -> int:
++	var stopped: int = Time.get_ticks_usec()
++	diagnostic.phase_us[phase] = diagnostic.phase_us.get(phase, 0) + stopped - started
++	diagnostic.phase_calls[phase] = diagnostic.phase_calls.get(phase, 0) + 1
++	var finished: int = Time.get_ticks_usec()
++	diagnostic.bookkeeping_us += finished - stopped
++	return Time.get_ticks_usec()
++
+ func _settle_burn_segments(segments:Array,targets:Dictionary={},death_states:Dictionary={},exact_deaths:Dictionary={})->void:
++	var diag_total_start: int = Time.get_ticks_usec()
+ 	for segment:Dictionary in segments:
++		var diag_start: int = Time.get_ticks_usec()
+ 		var raw:float=segment.raw_amount
+ 		var settlement:Dictionary={}
++		diag_start = _diag_add("segment_setup", diag_start)
+ 		if segment.target_kind=="player":
+-			if not alive:continue
++			if not alive:
++				diag_start = _diag_add("player_prepare", diag_start)
++				continue
+ 			var immune_until:float=_burn_immunity_until if _burn_step_active else elapsed+invulnerable if invulnerable>0.0 else 0.0
+ 			raw=float(segment.raw_dps)*maxf(0.0,float(segment.to_time)-maxf(float(segment.from_time),immune_until))
+-			if raw<=0.0:continue
++			if raw<=0.0:
++				diag_start = _diag_add("player_prepare", diag_start)
++				continue
+ 			var mana_ratio:Variant=_stats.get("damage_taken_from_mana_before_life",0.0)
+ 			var maximum_fire_bonus:Variant=_stats.get("maximum_fire_resistance_add",0.0)
++			diag_start = _diag_add("player_prepare", diag_start)
+ 			if typeof(maximum_fire_bonus) not in [TYPE_INT,TYPE_FLOAT] or float(maximum_fire_bonus)!=0.0:
+ 				settlement=Defense.incoming_burn(raw,_stats.get("fire_resistance",0.0),shield,health,"player",mana,mana_ratio,maximum_fire_bonus)
+ 			elif typeof(mana_ratio) not in [TYPE_INT,TYPE_FLOAT] or float(mana_ratio)!=0.0:
+ 				settlement=Defense.incoming_burn(raw,_stats.get("fire_resistance",0.0),shield,health,"player",mana,mana_ratio)
+ 			else:
+ 				settlement=Defense.incoming_burn(raw,_stats.get("fire_resistance",0.0),shield,health,"player")
++			diag_start = _diag_add("player_defense", diag_start)
+ 			if not settlement.ok:continue
+ 			if settlement.has("remaining_mana"):mana=float(settlement.remaining_mana)
+ 			shield=settlement.remaining_shield;health=settlement.remaining_health
+ 			if float(settlement.damage_total)>0.0:damage_delay=float(_stats.get("shield_recharge_delay",Defense.RECHARGE_BASE_DELAY))
++			diag_start = _diag_add("player_resources", diag_start)
+ 			_record_damage_feedback("player", 0, "burn", settlement, player_pos)
++			diag_start = _diag_add("player_feedback", diag_start)
+ 			_finish_player_death()
++			diag_start = _diag_add("player_death", diag_start)
+ 		else:
+ 			var target:Dictionary=targets.get(int(segment.target_id),{})
+ 			if target.is_empty():
+ 				for enemy:Dictionary in enemies:
+ 					if int(enemy.id)==int(segment.target_id):target=enemy;break
+ 			if target.is_empty() or float(target.health)<=0.0:
+-				burn_runtime.remove("monster",int(segment.target_id));continue
++				burn_runtime.remove("monster",int(segment.target_id))
++				diag_start = _diag_add("monster_target", diag_start)
++				continue
++			diag_start = _diag_add("monster_target", diag_start)
+ 			settlement=Defense.incoming_burn(raw,target.get("resistances",{}).get("fire",0.0),target.get("shield",0.0),target.health,"monster")
++			diag_start = _diag_add("monster_defense", diag_start)
+ 			if not settlement.ok:continue
+ 			if exact_deaths.has(int(target.id)) and float(settlement.remaining_health)>0.0:
+ 				# The analytic event boundary can round just below the final ULP.
+@@ -2333,13 +2358,21 @@
+ 				settlement.damage_total=float(target.get("shield",0.0))+float(target.health)
+ 				settlement.shield_spent=float(target.get("shield",0.0));settlement.health_lost=float(target.health)
+ 				settlement.remaining_shield=0.0;settlement.remaining_health=0.0;settlement.overkill=0.0
+-			if _apply_enemy_resources(target,settlement):
++			diag_start = _diag_add("monster_exact_death", diag_start)
++			var diag_applied: bool = _apply_enemy_resources(target,settlement)
++			diag_start = _diag_add("monster_resources", diag_start)
++			if diag_applied:
+ 				_record_damage_feedback("monster", int(target.id), "burn", settlement, Vector2(target.pos))
++				diag_start = _diag_add("monster_feedback", diag_start)
+ 				_finish_enemy_death(target,false,float(segment.to_time),death_states.get(int(target.id),{}))
++				diag_start = _diag_add("monster_death", diag_start)
+ 		if settlement.is_empty():continue
+ 		var record:Dictionary=segment.duplicate(true);record.settlement=settlement;record.effective_raw_amount=raw
+ 		burn_trace.append(record)
+ 		if burn_trace.size()>32:burn_trace.pop_front()
++
++		diag_start = _diag_add("trace", diag_start)
++	diagnostic["inclusive_us"] += Time.get_ticks_usec() - diag_total_start
+ 
+ 
+ func _record_damage_feedback(target_kind: String, target_id: int, kind: String, settlement: Dictionary, position: Vector2) -> void:
