@@ -119,7 +119,7 @@ print('FAKE: 3 checks, 0 failures')
 
     def test_matrix_and_baseline_totals(self):
         quick, full = runner.cases(), runner.cases("full")
-        self.assertEqual((len(quick), len(full)), (15, 53))
+        self.assertEqual((len(quick), len(full)), (15, 63))
         self.assertEqual(len({c.name for c in full}), len(full))
         self.assertEqual(sum(c.expected_checks for c in full if c.name.startswith("return_")), 387)
         self.assertEqual(sum(c.expected_checks for c in full if c.name.startswith("f6_")), 163)
@@ -135,7 +135,7 @@ print('FAKE: 3 checks, 0 failures')
             ("burn_settlement_equivalence", 58593, "godot-m1-v063-", "BURN_SETTLEMENT_EQUIVALENCE ", True, True),
         ])
         self.assertEqual(sum(c.expected_checks for c in runner.cases()), 1414)
-        self.assertEqual(sum(c.expected_checks for c in runner.cases("full")), 79988)
+        self.assertEqual(sum(c.expected_checks for c in runner.cases("full")), 82703)
 
     def test_current_ui_full_only_matrix_and_exact_counts(self):
         expected = {
@@ -252,6 +252,58 @@ print({case.marker!r} + ' {case.expected_checks} checks, 0 failures')
                     self.assertFalse(result["passed"])
                     self.assertEqual(result["reason"], reason)
 
+    def test_recovery_crafting_full_only_matrix_and_strict_results(self):
+        expected = {
+            "recovery_currency_compaction": ("Recovery currency compaction:", 308),
+            "jewel_crafting": ("Ordinary jewel crafting:", 1375),
+            "crafting_growth_transactions": ("Crafting growth transactions:", 286),
+            "normal_gem_trade_transactions": ("Normal gem trade transactions:", 330),
+        }
+        selected = [c for c in runner.cases("full") if c.name in expected]
+        self.assertEqual({c.name for c in selected}, set(expected))
+        self.assertEqual(sum(c.expected_checks for c in selected), 2299)
+        self.assertFalse(any(c.name in expected for c in runner.cases()))
+        for case in selected:
+            with self.subTest(case=case.name):
+                self.assertEqual((case.script, case.marker, case.expected_checks),
+                                 (case.name, *expected[case.name]))
+                self.assertEqual(case.prefix, "godot-m1-transactions-")
+                self.assertEqual((case.env, case.user_args, case.json_summary,
+                                  case.burn_evidence, case.evidence_env, case.report_env),
+                                 ({}, (), False, False, "", ""))
+                self.case = case
+                source = f"""import os, pathlib, sys
+assert sys.argv[1:] == ['--headless', '--path', {str(self.root)!r}, '--script', 'tests/{case.script}_test.gd']
+for key in ('XDG_DATA_HOME', 'XDG_CONFIG_HOME', 'XDG_CACHE_HOME'):
+    path = pathlib.Path(os.environ[key])
+    assert str(path).startswith('/tmp/godot-m1-transactions-') and path.is_dir()
+assert not list(pathlib.Path(os.environ['XDG_DATA_HOME']).iterdir())
+for key in ('BURN_EVIDENCE_DIR', 'EQUIPMENT_EVIDENCE_DIR', 'FLASK_TRANSACTION_REPORT',
+            'FLASK_GAMEPLAY_REPORT', 'JEWEL_TRANSACTION_REPORT', 'JEWEL_GAMEPLAY_REPORT'):
+    assert key not in os.environ
+print({case.marker!r} + ' {case.expected_checks} checks, 0 failures')
+"""
+                with patch.dict(os.environ, {"EQUIPMENT_EVIDENCE_DIR": "/tmp/contaminated-recovery"}):
+                    first, second = self.run_fake(source), self.run_fake(source)
+                    self.assertEqual(os.environ["EQUIPMENT_EVIDENCE_DIR"], "/tmp/contaminated-recovery")
+                self.assertTrue(first["passed"], first)
+                self.assertTrue(second["passed"], second)
+                self.assertNotEqual(first["environment"], second["environment"])
+                self.assertFalse(Path(first["environment"]["XDG_DATA_HOME"]).exists())
+                self.assertNotIn("report_path", first)
+                self.assertNotIn("evidence_dir", first)
+                good = case.marker + f" {case.expected_checks} checks, 0 failures"
+                for output in ("", good + "\n" + good,
+                               case.marker + f" {case.expected_checks - 1} checks, 0 failures",
+                               case.marker + f" {case.expected_checks + 1} checks, 0 failures",
+                               case.marker + f" {case.expected_checks} checks, 1 failures",
+                               good + "\nSCRIPT ERROR: invalid method"):
+                    self.assertFalse(self.run_fake(f"print({output!r})\n")["passed"])
+                for code, reason in ((1, "nonzero_exit"), (78, "guard_rejected")):
+                    result = self.run_fake(source + f"raise SystemExit({code})\n")
+                    self.assertFalse(result["passed"])
+                    self.assertEqual(result["reason"], reason)
+
     def test_burn_report_isolation_persistence_and_existing_refusal(self):
         self.case = next(c for c in runner.cases("full") if c.burn_evidence)
         source = f"""import os, pathlib, json
@@ -280,6 +332,77 @@ print('BURN_SETTLEMENT_EQUIVALENCE ' + json.dumps(report))
             self.assertFalse(second["passed"])
             self.assertEqual(second["returncode"], 73)
             self.assertEqual((evidence / "results.json").read_bytes(), original)
+
+    def test_purchase_full_only_matrix_and_strict_counts(self):
+        expected = {
+            "equipment_purchase_transactions": (115, "godot-m1-transactions-", "Equipment purchase transactions:", False, "", ""),
+            "equipment_purchase_gameplay": (73, "godot-m1-transactions-", "Equipment purchase gameplay:", False, "EQUIPMENT_EVIDENCE_DIR", ""),
+            "flask_purchase_transactions": (58, "godot-m1-flask-purchase.", "FLASK_PURCHASE_TRANSACTIONS ", True, "", "FLASK_TRANSACTION_REPORT"),
+            "flask_purchase_gameplay": (79, "godot-m1-flask-purchase.", "FLASK_PURCHASE_GAMEPLAY ", True, "", "FLASK_GAMEPLAY_REPORT"),
+            "jewel_purchase_transactions": (48, "godot-m1-transactions-", "JEWEL_PURCHASE_TRANSACTIONS ", True, "", "JEWEL_TRANSACTION_REPORT"),
+            "jewel_purchase_gameplay": (43, "godot-m1-jewel-purchase.", "JEWEL_PURCHASE_GAMEPLAY ", True, "", "JEWEL_GAMEPLAY_REPORT"),
+        }
+        selected = [c for c in runner.cases("full") if c.name in expected]
+        self.assertEqual(len(selected), 6)
+        self.assertEqual(sum(c.expected_checks for c in selected), 416)
+        self.assertFalse(any(c.name in expected for c in runner.cases()))
+        for case in selected:
+            with self.subTest(case=case.name):
+                self.assertEqual((case.expected_checks, case.prefix, case.marker, case.json_summary,
+                                  case.evidence_env, case.report_env), expected[case.name])
+                self.assertEqual(case.script, case.name)
+                self.assertEqual((case.env, case.user_args, case.burn_evidence), ({}, (), False))
+                self.case = case
+                for count in (case.expected_checks - 1, case.expected_checks, case.expected_checks + 1):
+                    tail = json.dumps({"checks": count, "failures": 0}) if case.json_summary else f"{count} checks, 0 failures"
+                    result = self.run_fake(f"print({case.marker + tail!r})\n")
+                    self.assertEqual(result["passed"], count == case.expected_checks, result)
+
+    def test_purchase_report_environment_isolation_and_persistence(self):
+        keys = ("EQUIPMENT_EVIDENCE_DIR", "FLASK_TRANSACTION_REPORT", "FLASK_GAMEPLAY_REPORT",
+                "JEWEL_TRANSACTION_REPORT", "JEWEL_GAMEPLAY_REPORT")
+        contaminated = {key: str(self.root / (key + "-sentinel")) for key in keys}
+        for value in contaminated.values():
+            Path(value).write_text("must not change")
+        selected = [self.case] + [c for c in runner.cases("full") if "purchase" in c.name]
+        for case in selected:
+            with self.subTest(case=case.name), patch.dict(os.environ, contaminated):
+                self.case = case
+                active = case.report_env or case.evidence_env
+                tail = json.dumps({"checks": case.expected_checks, "failures": 0}) if case.json_summary else f"{case.expected_checks} checks, 0 failures"
+                source = f"""import os, pathlib, json, sys
+assert sys.argv[1:] == ['--headless', '--path', {str(self.root)!r}, '--script', 'tests/{case.script}_test.gd']
+for key in {keys!r}:
+    assert (key in os.environ) == (key == {active!r})
+for key in ('XDG_DATA_HOME', 'XDG_CONFIG_HOME', 'XDG_CACHE_HOME'):
+    assert os.environ[key].startswith('/tmp/{case.prefix}')
+assert not list(pathlib.Path(os.environ['XDG_DATA_HOME']).iterdir())
+if {bool(active)!r}:
+    target = pathlib.Path(os.environ[{active!r}])
+    assert not target.exists()
+    assert not target.is_relative_to(pathlib.Path(os.environ['XDG_DATA_HOME']).parent)
+    if {bool(case.evidence_env)!r}:
+        target.mkdir()
+        target /= 'results.json'
+    target.write_text('retained report')
+print({case.marker + tail!r})
+"""
+                first = self.run_fake(source)
+                self.assertTrue(first["passed"], first)
+                self.assertFalse(Path(first["environment"]["XDG_DATA_HOME"]).exists())
+                if active:
+                    report = Path(first.get("report_path", str(Path(first.get("evidence_dir", "")) / "results.json")))
+                    self.assertEqual(report.read_text(), "retained report")
+                    second = self.run_fake(source)
+                    if case.report_env:
+                        self.assertTrue(second["passed"], second)
+                        self.assertNotEqual(first["report_path"], second["report_path"])
+                    else:
+                        self.assertFalse(second["passed"])
+                    self.assertEqual(report.read_text(), "retained report")
+                for key, value in contaminated.items():
+                    self.assertEqual(os.environ[key], value)
+                    self.assertEqual(Path(value).read_text(), "must not change")
 
     def test_startup_matrix_and_contaminated_environment(self):
         expected = {"start": 27, "leave": 26, "test": 26,

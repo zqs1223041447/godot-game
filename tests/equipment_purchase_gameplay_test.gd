@@ -2,6 +2,7 @@ extends SceneTree
 ## Bounded real-map earned-money flow plus the actual new merchant controls.
 const Model = preload("res://scripts/canonical_game_state.gd")
 const Purchase = preload("res://scripts/items/equipment_purchase.gd")
+var report_path: String = ""
 var arena: Node
 var checks := 0
 var failures := 0
@@ -31,7 +32,8 @@ func complete_map() -> void:
 	var claim: Dictionary = arena.claim_normal_rewards(arena.world_context().revision)
 	check(claim.ok and claim.claimed_shards==4,"Existing claim puts four physical shards in bag")
 func run() -> void:
-	if not OS.get_environment("XDG_DATA_HOME").begins_with("/tmp/godot-m1-"): quit(78);return
+	if OS.get_name() != "Linux" or not OS.get_environment("XDG_DATA_HOME").begins_with("/tmp/godot-m1-"): quit(78);return
+	if not _reserve_report(): quit(73);return
 	arena=load("res://scenes/main.tscn").instantiate();root.add_child(arena);await process_frame
 	arena.set_process(false);arena.hud.set_process(false);arena.auto_fire=false
 	check(arena.save_build() and arena.world_context().normal_town and arena.state.crafting_balance()==0,"Fresh actual formal town starts without free currency")
@@ -69,7 +71,7 @@ func run() -> void:
 	check(observe()==before,"Opening confirmation allocates no item, money or RNG")
 	if DisplayServer.get_name()!="headless":
 		await process_frame;await RenderingServer.frame_post_draw
-		check(root.get_texture().get_image().save_png("res://docs/qa/equipment-purchase/merchant-confirmation.png")==OK,"Capture one native merchant confirmation")
+		check(root.get_texture().get_image().save_png(report_path.get_base_dir().path_join("merchant-confirmation.png"))==OK,"Capture one native merchant confirmation")
 	var cancelled: String = panel._gem_pending.quote.handle
 	panel._gem_dialog.canceled.emit()
 	check(panel._gem_pending.is_empty() and observe()==before,"Actual cancel signal preserves earned money and inventory")
@@ -130,6 +132,44 @@ func run() -> void:
 	var reloaded:=Model.new();check(reloaded.load_build(arena.NORMAL_BUILD_PATH) and reloaded.snapshot()==arena.state.snapshot(),"Current version reload preserves complete purchase/crafting/equip state")
 	var report: Dictionary = {"checks":checks,"failures":failures,"renderer":DisplayServer.get_name(),"evidence":evidence,"save_version":arena.state.snapshot().version,
 		"source_sha256":{"purchase":FileAccess.get_sha256("res://scripts/items/equipment_purchase.gd"),"main":FileAccess.get_sha256("res://scripts/main.gd"),"panel":FileAccess.get_sha256("res://scripts/ui/town_service_panel.gd")}}
-	var output:=FileAccess.open("res://docs/qa/equipment-purchase/"+("headless" if DisplayServer.get_name()=="headless" else "native")+"-report.json",FileAccess.WRITE)
-	output.store_string(JSON.stringify(report,"\t",true,true)+"\n");output.close()
+	var output:=FileAccess.open(report_path,FileAccess.WRITE)
+	if output == null:
+		_report_error("could not open report: " + report_path);quit(74);return
+	output.store_string(JSON.stringify(report,"\t",true,true)+"\n");output.flush()
+	if output.get_error() != OK:
+		_report_error("report write failed: " + report_path);quit(74);return
+	output.close()
+	print("EQUIPMENT_EVIDENCE_REPORT ", report_path)
 	print("Equipment purchase gameplay: %d checks, %d failures" % [checks,failures]);arena.queue_free();await process_frame;quit(1 if failures else 0)
+
+
+# Output is deliberately separate from the historical repository evidence.
+# Reserving a new directory is atomic; existing destinations are never reused.
+func _reserve_report() -> bool:
+	var destination: String = OS.get_environment("EQUIPMENT_EVIDENCE_DIR")
+	if destination.is_empty():
+		destination = "/tmp/godot-equipment-evidence-%d-%d" % [OS.get_process_id(), Time.get_ticks_usec()]
+	if not destination.begins_with("/tmp/") or destination != destination.simplify_path() or destination.ends_with("/"):
+		return _report_error("destination must be a normalized absolute directory under /tmp")
+	var project_root: String = ProjectSettings.globalize_path("res://").trim_suffix("/")
+	if destination == project_root or destination.begins_with(project_root + "/"):
+		return _report_error("repository destinations are forbidden")
+	# Reject symbolic-link ancestors, including a destination symlink.
+	var cursor: String = "/"
+	for part: String in destination.trim_prefix("/").split("/"):
+		var parent := DirAccess.open(cursor)
+		if parent == null:
+			return _report_error("parent directory is missing or inaccessible: " + cursor)
+		if parent.is_link(part):
+			return _report_error("symbolic-link destinations are forbidden: " + cursor.path_join(part))
+		cursor = cursor.path_join(part)
+	var error: Error = DirAccess.make_dir_absolute(destination)
+	if error != OK:
+		return _report_error("cannot reserve fresh destination (existing or inaccessible): %s (%d)" % [destination, error])
+	report_path = destination.path_join("results.json")
+	return true
+
+
+func _report_error(message: String) -> bool:
+	push_error("EQUIPMENT_EVIDENCE_ERROR: " + message)
+	return false

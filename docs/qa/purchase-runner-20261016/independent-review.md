@@ -1,0 +1,3 @@
+# Independent integration review — 2026-10-16 UTC
+
+Root reviewed the complete runner and Python-test diff. Six cases use their actual guard prefixes, exact counts and summary formats. All five inherited report destinations are cleared. Existing legacy JSON writers receive uniquely reserved report parents; equipment suite reserves its own fresh evidence directory and refuses reuse. Existing defaults and quick cases are unchanged. Root independently reran all 22 Python tests: OK. Worker ran only the six new Godot cases (416 assertions); no complete full/quick rerun claimed. Underlying fixture modifications were independently reviewed in the preceding batch. No blocking findings. Native/Windows validation is outside this acceptance.

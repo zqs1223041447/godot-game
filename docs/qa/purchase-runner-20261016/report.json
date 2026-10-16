@@ -1,0 +1,165 @@
+{
+  "mode": "purchase-full-only",
+  "cases": 6,
+  "passed": 6,
+  "failed": 0,
+  "observed_checks": 416,
+  "accepted_checks": 416,
+  "results": [
+    {
+      "name": "equipment_purchase_transactions",
+      "expected_checks": 115,
+      "checks": 115,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/purchase-runner-20261016-pbl6wc5u/equipment_purchase_transactions.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/equipment_purchase_transactions_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-transactions-e9i_onua/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-transactions-e9i_onua/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-transactions-e9i_onua/cache"
+      },
+      "scenario": {},
+      "warnings": [],
+      "seconds": 10.545
+    },
+    {
+      "name": "equipment_purchase_gameplay",
+      "expected_checks": 73,
+      "checks": 73,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/purchase-runner-20261016-pbl6wc5u/equipment_purchase_gameplay.log",
+      "evidence_dir": "/tmp/purchase-runner-20261016-pbl6wc5u/equipment_purchase_gameplay-evidence",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/equipment_purchase_gameplay_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-transactions-07ati81k/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-transactions-07ati81k/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-transactions-07ati81k/cache"
+      },
+      "scenario": {},
+      "warnings": [],
+      "seconds": 6.185
+    },
+    {
+      "name": "flask_purchase_transactions",
+      "expected_checks": 58,
+      "checks": 58,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/purchase-runner-20261016-pbl6wc5u/flask_purchase_transactions.log",
+      "report_path": "/tmp/purchase-runner-20261016-pbl6wc5u/flask_purchase_transactions-report-3asyzhea/results.json",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/flask_purchase_transactions_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-flask-purchase.mmfd5fqk/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-flask-purchase.mmfd5fqk/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-flask-purchase.mmfd5fqk/cache"
+      },
+      "scenario": {},
+      "warnings": [],
+      "seconds": 10.295
+    },
+    {
+      "name": "flask_purchase_gameplay",
+      "expected_checks": 79,
+      "checks": 79,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/purchase-runner-20261016-pbl6wc5u/flask_purchase_gameplay.log",
+      "report_path": "/tmp/purchase-runner-20261016-pbl6wc5u/flask_purchase_gameplay-report-yrln5lu0/results.json",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/flask_purchase_gameplay_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-flask-purchase.iptfgoq8/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-flask-purchase.iptfgoq8/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-flask-purchase.iptfgoq8/cache"
+      },
+      "scenario": {},
+      "warnings": [],
+      "seconds": 6.535
+    },
+    {
+      "name": "jewel_purchase_transactions",
+      "expected_checks": 48,
+      "checks": 48,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/purchase-runner-20261016-pbl6wc5u/jewel_purchase_transactions.log",
+      "report_path": "/tmp/purchase-runner-20261016-pbl6wc5u/jewel_purchase_transactions-report-vtw1rgom/results.json",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/jewel_purchase_transactions_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-transactions-nx2r8opl/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-transactions-nx2r8opl/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-transactions-nx2r8opl/cache"
+      },
+      "scenario": {},
+      "warnings": [],
+      "seconds": 9.794
+    },
+    {
+      "name": "jewel_purchase_gameplay",
+      "expected_checks": 43,
+      "checks": 43,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/purchase-runner-20261016-pbl6wc5u/jewel_purchase_gameplay.log",
+      "report_path": "/tmp/purchase-runner-20261016-pbl6wc5u/jewel_purchase_gameplay-report-0mh9tynz/results.json",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/jewel_purchase_gameplay_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-jewel-purchase.bq702yl_/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-jewel-purchase.bq702yl_/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-jewel-purchase.bq702yl_/cache"
+      },
+      "scenario": {},
+      "warnings": [],
+      "seconds": 5.483
+    }
+  ]
+}

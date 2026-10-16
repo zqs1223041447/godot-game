@@ -26,6 +26,8 @@ class Case:
     json_summary: bool = False
     burn_evidence: bool = False
     user_args: tuple = ()
+    evidence_env: str = ""
+    report_env: str = ""
 
 
 def cases(mode="quick"):
@@ -77,6 +79,29 @@ def cases(mode="quick"):
                  3629, "godot-skill-focus-", user_args=("--capacity11",)),
             Case("talent_details_focus", "talent_details_focus", "Talent details focus:",
                  5219, "godot-talent-focus-"),
+            Case("equipment_purchase_transactions", "equipment_purchase_transactions",
+                 "Equipment purchase transactions:", 115),
+            Case("equipment_purchase_gameplay", "equipment_purchase_gameplay",
+                 "Equipment purchase gameplay:", 73, evidence_env="EQUIPMENT_EVIDENCE_DIR"),
+            Case("flask_purchase_transactions", "flask_purchase_transactions",
+                 "FLASK_PURCHASE_TRANSACTIONS ", 58, "godot-m1-flask-purchase.",
+                 json_summary=True, report_env="FLASK_TRANSACTION_REPORT"),
+            Case("flask_purchase_gameplay", "flask_purchase_gameplay",
+                 "FLASK_PURCHASE_GAMEPLAY ", 79, "godot-m1-flask-purchase.",
+                 json_summary=True, report_env="FLASK_GAMEPLAY_REPORT"),
+            Case("jewel_purchase_transactions", "jewel_purchase_transactions",
+                 "JEWEL_PURCHASE_TRANSACTIONS ", 48,
+                 json_summary=True, report_env="JEWEL_TRANSACTION_REPORT"),
+            Case("jewel_purchase_gameplay", "jewel_purchase_gameplay",
+                 "JEWEL_PURCHASE_GAMEPLAY ", 43, "godot-m1-jewel-purchase.",
+                 json_summary=True, report_env="JEWEL_GAMEPLAY_REPORT"),
+            Case("recovery_currency_compaction", "recovery_currency_compaction",
+                 "Recovery currency compaction:", 308),
+            Case("jewel_crafting", "jewel_crafting", "Ordinary jewel crafting:", 1375),
+            Case("crafting_growth_transactions", "crafting_growth_transactions",
+                 "Crafting growth transactions:", 286),
+            Case("normal_gem_trade_transactions", "normal_gem_trade_transactions",
+                 "Normal gem trade transactions:", 330),
             Case("burn_state_copy", "burn_state_copy_20261015", "Burn state copy equivalence:",
                  892, "godot-m1-v050-"),
             Case("burn_settlement_equivalence", "burn_settlement_equivalence",
@@ -119,6 +144,8 @@ def run_case(case, godot, project, output_dir, timeout=90):
         # Never inherit scenario switches or artifact destinations from another run.
         for key in ("RETURN_CASE", "RETURN_FIXTURE", "TORNADO_UNBOUND", "TORNADO_FAIL",
                     "STARTUP_CASE", "STARTUP_RED_CONTROL", "BURN_EVIDENCE_DIR",
+                    "EQUIPMENT_EVIDENCE_DIR", "FLASK_TRANSACTION_REPORT", "FLASK_GAMEPLAY_REPORT",
+                    "JEWEL_TRANSACTION_REPORT", "JEWEL_GAMEPLAY_REPORT",
                     "BINDING_BASELINE_ONLY", "BINDING_REPORT", "BINDING_CAPTURE_DIR",
                     "GEM_PICKER_REPORT", "GEM_PICKER_CAPTURE_DIR", "SAFE_EXIT_GROUP", "SAFE_EXIT_OUTPUT"):
             env.pop(key, None)
@@ -136,6 +163,16 @@ def run_case(case, godot, project, output_dir, timeout=90):
             # Keep reports beside logs, outside the disposable XDG tree.
             env["BURN_EVIDENCE_DIR"] = str(output_dir / (case.name + "-evidence"))
             record["evidence_dir"] = env["BURN_EVIDENCE_DIR"]
+        if case.evidence_env:
+            # Like burn evidence, the suite reserves this directory and rejects reuse.
+            env[case.evidence_env] = str(output_dir / (case.name + "-evidence"))
+            record["evidence_dir"] = env[case.evidence_env]
+        if case.report_env:
+            # These legacy writers do not reject existing files. Reserve a fresh
+            # parent on every invocation, even when the caller reuses output_dir.
+            report_dir = Path(tempfile.mkdtemp(prefix=case.name + "-report-", dir=output_dir))
+            env[case.report_env] = str(report_dir / "results.json")
+            record["report_path"] = env[case.report_env]
         command = [godot, "--headless", "--path", str(project), "--script", f"tests/{case.script}_test.gd"]
         if case.user_args:
             command.extend(["--", *case.user_args])

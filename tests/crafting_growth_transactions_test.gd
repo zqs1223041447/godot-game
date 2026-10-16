@@ -63,9 +63,9 @@ func run()->void:
 		for uid:String in before.items:
 			if uid in [source.id,"shards_a","shards_b"]:continue
 			check(after.items[uid]==before.items[uid] and after.locations[uid]==before.locations[uid],"Other UID/payload/location preserved: "+uid)
-		check(after.next_item_serial==before.next_item_serial and after.crafting.revision==before.crafting.revision+1 and after.version==18,"No new UID or schema; crafting revision once")
+		check(after.next_item_serial==before.next_item_serial and after.crafting.revision==before.crafting.revision+1 and after.version==before.version and after.version==Rules.VERSION,"No new UID or schema; crafting revision once")
 		check(not state.execute_crafting(quote.handle,source).ok and state.snapshot()==after,"Repeated confirmation cannot pay twice")
-		var restored:=Model.new();check(restored.load_build(path) and restored.snapshot()==after,"Full schema18 roundtrip")
+		var restored:=Model.new();check(restored.load_build(path) and restored.snapshot()==after,"Full current-schema roundtrip")
 		var fresh:=fixture(source,cost,"user://stale-"+operation+".json")
 		var q:=fresh.crafting_quote(operation,source.id,"user://stale-"+operation+".json")
 		fresh.add_xp(1);var current:=fresh.snapshot()

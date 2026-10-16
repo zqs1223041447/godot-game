@@ -284,7 +284,10 @@ func _legacy() -> void:
 	var uid := "item_%06d" % int(model.snapshot().next_item_serial)
 	check(model._admit_reward_item(Items.calibration_shard(uid, 1000)), "Existing gear funded")
 	var path := "user://jewel-legacy-gear.json"; check(model.save_build(path) == OK, "Save legacy gear control")
-	check(model.crafting_operations(id, path).size() == 10, "Six released and four targeted gear operations remain")
+	var gear_operations: Array[String] = []
+	for metadata: Dictionary in model.crafting_operations(id, path):
+		gear_operations.append(metadata.operation)
+	check(gear_operations == GearCraft.operation_ids(), "All current gear operations remain in authoritative catalog order")
 	for op: String in ["recalibrate", "reforge", "targeted_reforge_damage"]:
 		var src: Dictionary = model.item(id).payload
 		var q := model.crafting_quote(op, id, path)
