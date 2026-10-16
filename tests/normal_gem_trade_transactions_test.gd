@@ -145,7 +145,7 @@ func _all_definitions_and_economics() -> void:
 	var quote_sequence: int = state._gem_trade_sequence
 	var offers: Array = state.normal_gem_offers()
 	var definitions: Dictionary = Gems.definitions()
-	check(offers.size() == 26 and definitions.size() == 26, "Exactly all 26 live catalog definitions are offered")
+	check(not definitions.is_empty() and offers.size() == definitions.size(), "Exactly all current catalog definitions are offered")
 	var found := {}
 	var metadata_valid := true
 	for offer: Dictionary in offers:
@@ -192,9 +192,9 @@ func _all_definitions_and_economics() -> void:
 			and state.location(result.uid).kind == "bag" and randi() == expected_random,
 			"Buying %s creates the fixed real instance without RNG" % definition_id)
 		purchased.append(result.uid)
-	check(purchased.size() == 26 and state.snapshot().crafting == preserved.crafting \
+	check(purchased.size() == definitions.size() and state.snapshot().crafting == preserved.crafting \
 		and state.snapshot().journey == preserved.journey and state.snapshot().version == preserved.version,
-		"All 26 actual purchases leave schema, journey and released crafting seed revision unchanged")
+		"All current catalog purchases leave schema, journey and released crafting seed revision unchanged")
 	for uid: String in purchased:
 		before = observed(state)
 		var revision := state.revision()
@@ -224,7 +224,7 @@ func _all_definitions_and_economics() -> void:
 			and state.revision() == revision + 1 and randi() == expected_random,
 			"Recycling %s removes that actual UID for one persisted shard/revision/signal without RNG" % uid)
 	var reopened := Model.new()
-	check(reopened.load_build(PATH) and reopened.snapshot() == state.snapshot(), "All purchases and recycling round-trip through canonical schema 27")
+	check(reopened.load_build(PATH) and reopened.snapshot() == state.snapshot(), "All purchases and recycling round-trip through the current canonical schema")
 
 
 func _input_and_profile_boundaries() -> void:

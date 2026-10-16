@@ -1,0 +1,110 @@
+{
+  "mode": "targeted_recovery_crafting",
+  "cases": 4,
+  "passed": 4,
+  "failed": 0,
+  "observed_checks": 2299,
+  "accepted_checks": 2299,
+  "results": [
+    {
+      "name": "recovery_currency_compaction",
+      "expected_checks": 308,
+      "checks": 308,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/recovery-runner-20261016-9aul524k/recovery_currency_compaction.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/recovery_currency_compaction_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-transactions-x9c3y7m1/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-transactions-x9c3y7m1/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-transactions-x9c3y7m1/cache"
+      },
+      "scenario": {},
+      "warnings": [],
+      "seconds": 6.233
+    },
+    {
+      "name": "jewel_crafting",
+      "expected_checks": 1375,
+      "checks": 1375,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/recovery-runner-20261016-9aul524k/jewel_crafting.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/jewel_crafting_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-transactions-3kqurhdv/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-transactions-3kqurhdv/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-transactions-3kqurhdv/cache"
+      },
+      "scenario": {},
+      "warnings": [],
+      "seconds": 14.157
+    },
+    {
+      "name": "crafting_growth_transactions",
+      "expected_checks": 286,
+      "checks": 286,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/recovery-runner-20261016-9aul524k/crafting_growth_transactions.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/crafting_growth_transactions_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-transactions-skpvy5gr/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-transactions-skpvy5gr/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-transactions-skpvy5gr/cache"
+      },
+      "scenario": {},
+      "warnings": [],
+      "seconds": 10.846
+    },
+    {
+      "name": "normal_gem_trade_transactions",
+      "expected_checks": 330,
+      "checks": 330,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/recovery-runner-20261016-9aul524k/normal_gem_trade_transactions.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/normal_gem_trade_transactions_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-transactions-wo96gwxc/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-transactions-wo96gwxc/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-transactions-wo96gwxc/cache"
+      },
+      "scenario": {},
+      "warnings": [],
+      "seconds": 31.411
+    }
+  ]
+}

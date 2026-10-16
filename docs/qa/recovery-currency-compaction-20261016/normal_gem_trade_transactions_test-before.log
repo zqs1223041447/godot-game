@@ -1,0 +1,15 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+ERROR: Exactly all 26 live catalog definitions are offered
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/normal_gem_trade_transactions_test.gd:54)
+       [1] _all_definitions_and_economics (res://tests/normal_gem_trade_transactions_test.gd:148)
+       [2] run (res://tests/normal_gem_trade_transactions_test.gd:129)
+ERROR: All 26 actual purchases leave schema, journey and released crafting seed revision unchanged
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/normal_gem_trade_transactions_test.gd:54)
+       [1] _all_definitions_and_economics (res://tests/normal_gem_trade_transactions_test.gd:195)
+       [2] run (res://tests/normal_gem_trade_transactions_test.gd:129)
+Normal gem trade transactions: 330 checks, 2 failures

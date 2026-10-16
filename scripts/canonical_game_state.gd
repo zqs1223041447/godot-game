@@ -1089,6 +1089,9 @@ func _set_bag_currency_balance(candidate: Dictionary, target_balance: int,
 	var total: Dictionary = ShardCatalog.total_quantity(candidate.items)
 	if not total.ok or int(total.quantity) > ShardCatalog.INVENTORY_LIMIT:
 		return {"ok": false, "error_code": "currency_limit", "reason": "全库存校准碎片总量超出上限"}
+	# Callers may have consumed an item, and debits may remove empty stacks.
+	# Restore bounded recovery indices without changing queue identities/order.
+	candidate.locations = Transfer.compact_recovery(candidate.locations)
 	return {"ok": true, "error_code": "", "reason": ""}
 
 

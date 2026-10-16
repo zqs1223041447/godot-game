@@ -1,0 +1,3 @@
+# Independent integration review
+
+Root reviewed the final diff: four full-only entries, exact scripts/markers/counts and default guard prefix; run_case behavior and quick profile remain unchanged. New Python checks cover exact argv, fresh XDG, report environment contamination, malformed/missing/duplicate summaries, count changes, failures, script errors and nonzero/guard exits. Independently reran23 Python tests: OK. Targeted four Godot cases passed2299 assertions per persisted worker evidence; source hashes stable and historical QA unchanged. No whole-profile rerun, native or Windows claim. No blocking findings.

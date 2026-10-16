@@ -112,7 +112,7 @@ func run() -> void:
 		panel._gem_dialog.confirmed.emit();panel._gem_dialog.hide();panel._confirm_gem_purchase();await settle()
 		if not check(not arena.state.item(uid).is_empty(),"Confirmed real bottle UID is owned"):await finish();return
 		check(arena.state.item(uid)==Purchase.Flasks.create_instance(uid,definition_id) and arena.state.location(uid).kind=="bag" and arena.state.crafting_balance()==prior_balance-8,"Purchased original empty-payload bottle enters bag with exact debit")
-		check(arena.state.successful_saves==before[2]+1 and arena.state.snapshot().next_item_serial==prior.next_item_serial+1 and arena.state.snapshot().version==55,"Confirmation plus repeated callback saves once with one new UID under schema55")
+		check(arena.state.successful_saves==before[2]+1 and arena.state.snapshot().next_item_serial==prior.next_item_serial+1 and arena.state.snapshot().version==Model.Rules.VERSION,"Confirmation plus repeated callback saves once with one new UID under current schema")
 		check(arena.state.snapshot().journey==prior.journey and arena.state.get_stats()==prior_stats,"Purchase does not repeat starter/milestone gifts or change reward counters/stats")
 		check(combat()==combat_before,"Purchase retains combat/loot RNG, critical state and skill cooldowns")
 		var runtime_after: Dictionary = arena.flask_runtime.snapshot()

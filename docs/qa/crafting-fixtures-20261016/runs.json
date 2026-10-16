@@ -1,0 +1,47 @@
+[
+  {
+    "test": "jewel_crafting_test",
+    "command": [
+      "timeout",
+      "90",
+      "godot",
+      "--headless",
+      "--path",
+      "/workspace/scratch/a51485f153de/godot-game",
+      "--script",
+      "res://tests/jewel_crafting_test.gd"
+    ],
+    "xdg_data_home": "/tmp/godot-m1-crafting-fixtures-n3jnxy0y",
+    "exit_code": 0
+  },
+  {
+    "test": "crafting_growth_transactions_test",
+    "command": [
+      "timeout",
+      "90",
+      "godot",
+      "--headless",
+      "--path",
+      "/workspace/scratch/a51485f153de/godot-game",
+      "--script",
+      "res://tests/crafting_growth_transactions_test.gd"
+    ],
+    "xdg_data_home": "/tmp/godot-m1-crafting-fixtures-fg2fi6db",
+    "exit_code": 0
+  },
+  {
+    "test": "normal_gem_trade_transactions_test",
+    "command": [
+      "timeout",
+      "90",
+      "godot",
+      "--headless",
+      "--path",
+      "/workspace/scratch/a51485f153de/godot-game",
+      "--script",
+      "res://tests/normal_gem_trade_transactions_test.gd"
+    ],
+    "xdg_data_home": "/tmp/godot-m1-crafting-fixtures-h0atxy4q",
+    "exit_code": 0
+  }
+]
