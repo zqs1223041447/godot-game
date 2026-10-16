@@ -28,6 +28,7 @@ class Case:
     user_args: tuple = ()
     evidence_env: str = ""
     report_env: str = ""
+    fresh_evidence_env: str = ""
 
 
 def cases(mode="quick"):
@@ -68,6 +69,15 @@ def cases(mode="quick"):
                            "godot-startup-recovery.", env={"STARTUP_CASE": action}))
     if mode == "full":
         result.extend([
+            Case("map_pending_death_boundary", "map_pending_death_boundary",
+                 "MAP_PENDING_DEATH_BOUNDARY ", 107, "godot-m1-map-death-boundary-",
+                 fresh_evidence_env="EXPLORATION_MAIN_OUTPUT"),
+            Case("canonical_game_state", "canonical_game_state", "Canonical game state:", 27),
+            Case("combat_pipeline", "combat_pipeline", "Combat pipeline:", 305),
+            Case("ember_event_clock", "ember_event_clock", "Ember event clock:",
+                 45, "godot-m1-v050-"),
+            Case("burn_same_time_cleanup", "burn_same_time_cleanup", "Burn same-time cleanup:",
+                 19, "godot-m1-v050-"),
             Case("current_help_contract", "current_help_contract", "Current Help contract:", 165),
             Case("encounter_ui_integration", "encounter_ui_integration", "Encounter UI integration:", 88),
             Case("encounter_controls", "encounter_controls", "Encounter controls:", 3918),
@@ -146,6 +156,7 @@ def run_case(case, godot, project, output_dir, timeout=90):
                     "STARTUP_CASE", "STARTUP_RED_CONTROL", "BURN_EVIDENCE_DIR",
                     "EQUIPMENT_EVIDENCE_DIR", "FLASK_TRANSACTION_REPORT", "FLASK_GAMEPLAY_REPORT",
                     "JEWEL_TRANSACTION_REPORT", "JEWEL_GAMEPLAY_REPORT",
+                    "EXPLORATION_MAIN_OUTPUT", "EXPLORATION_MAIN_INPUT_ONLY", "EXPLORATION_MAIN_SAVE_ONLY",
                     "BINDING_BASELINE_ONLY", "BINDING_REPORT", "BINDING_CAPTURE_DIR",
                     "GEM_PICKER_REPORT", "GEM_PICKER_CAPTURE_DIR", "SAFE_EXIT_GROUP", "SAFE_EXIT_OUTPUT"):
             env.pop(key, None)
@@ -167,6 +178,12 @@ def run_case(case, godot, project, output_dir, timeout=90):
             # Like burn evidence, the suite reserves this directory and rejects reuse.
             env[case.evidence_env] = str(output_dir / (case.name + "-evidence"))
             record["evidence_dir"] = env[case.evidence_env]
+        if case.fresh_evidence_env:
+            # Legacy directory writers expect an existing parent and overwrite files.
+            # Reserve a unique retained directory, even when output_dir is reused.
+            evidence_dir = Path(tempfile.mkdtemp(prefix=case.name + "-evidence-", dir=output_dir))
+            env[case.fresh_evidence_env] = str(evidence_dir)
+            record["evidence_dir"] = str(evidence_dir)
         if case.report_env:
             # These legacy writers do not reject existing files. Reserve a fresh
             # parent on every invocation, even when the caller reuses output_dir.

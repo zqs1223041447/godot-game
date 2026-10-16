@@ -1,0 +1,1689 @@
+{
+  "mode": "full",
+  "cases": 63,
+  "passed": 63,
+  "failed": 0,
+  "observed_checks": 82703,
+  "accepted_checks": 82703,
+  "results": [
+    {
+      "name": "atomic",
+      "expected_checks": 108,
+      "checks": 108,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-x3h728fh/atomic.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/skill_transaction_atomicity_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-transactions-9eqm3rg4/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-transactions-9eqm3rg4/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-transactions-9eqm3rg4/cache"
+      },
+      "scenario": {},
+      "warnings": [],
+      "seconds": 6.135
+    },
+    {
+      "name": "ui_feedback",
+      "expected_checks": 19,
+      "checks": 19,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-x3h728fh/ui_feedback.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/canonical_ui_feedback_recovery_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-ui-feedback.e2fzwzhk/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-ui-feedback.e2fzwzhk/config",
+        "XDG_CACHE_HOME": "/tmp/godot-ui-feedback.e2fzwzhk/cache"
+      },
+      "scenario": {},
+      "warnings": [],
+      "seconds": 4.629
+    },
+    {
+      "name": "group_cast",
+      "expected_checks": 35,
+      "checks": 35,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-x3h728fh/group_cast.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/canonical_group_cast_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-transactions-2v0qwl03/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-transactions-2v0qwl03/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-transactions-2v0qwl03/cache"
+      },
+      "scenario": {},
+      "warnings": [],
+      "seconds": 3.779
+    },
+    {
+      "name": "support_ui",
+      "expected_checks": 368,
+      "checks": 368,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-x3h728fh/support_ui.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/skill_support_ui_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-transactions-3n44c86b/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-transactions-3n44c86b/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-transactions-3n44c86b/cache"
+      },
+      "scenario": {},
+      "warnings": [],
+      "seconds": 10.252
+    },
+    {
+      "name": "picker",
+      "expected_checks": 39,
+      "checks": 39,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-x3h728fh/picker.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/owned_gem_picker_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-owned-gem-picker-8kabns66/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-owned-gem-picker-8kabns66/config",
+        "XDG_CACHE_HOME": "/tmp/godot-owned-gem-picker-8kabns66/cache"
+      },
+      "scenario": {},
+      "warnings": [],
+      "seconds": 6.338
+    },
+    {
+      "name": "store",
+      "expected_checks": 40,
+      "checks": 40,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-x3h728fh/store.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/canonical_build_store_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-transactions-6oe9k58x/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-transactions-6oe9k58x/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-transactions-6oe9k58x/cache"
+      },
+      "scenario": {},
+      "warnings": [],
+      "seconds": 4.882
+    },
+    {
+      "name": "catalog",
+      "expected_checks": 598,
+      "checks": 598,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-x3h728fh/catalog.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/gem_catalog_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-transactions-bvnlzxnk/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-transactions-bvnlzxnk/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-transactions-bvnlzxnk/cache"
+      },
+      "scenario": {},
+      "warnings": [],
+      "seconds": 0.817
+    },
+    {
+      "name": "binding",
+      "expected_checks": 57,
+      "checks": 57,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-x3h728fh/binding.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/skill_binding_keys_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-skill-binding-cl5l0ttz/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-skill-binding-cl5l0ttz/config",
+        "XDG_CACHE_HOME": "/tmp/godot-skill-binding-cl5l0ttz/cache"
+      },
+      "scenario": {},
+      "warnings": [],
+      "seconds": 6.087
+    },
+    {
+      "name": "return_free_first_clear",
+      "expected_checks": 22,
+      "checks": 22,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-x3h728fh/return_free_first_clear.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/return_transaction_failure_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-transactions-zku3v1yf/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-transactions-zku3v1yf/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-transactions-zku3v1yf/cache"
+      },
+      "scenario": {
+        "RETURN_FIXTURE": "free",
+        "RETURN_CASE": "first_clear"
+      },
+      "warnings": [],
+      "seconds": 5.536
+    },
+    {
+      "name": "return_free_second_clear",
+      "expected_checks": 22,
+      "checks": 22,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-x3h728fh/return_free_second_clear.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/return_transaction_failure_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-transactions-boxxv2x0/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-transactions-boxxv2x0/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-transactions-boxxv2x0/cache"
+      },
+      "scenario": {
+        "RETURN_FIXTURE": "free",
+        "RETURN_CASE": "second_clear"
+      },
+      "warnings": [],
+      "seconds": 5.485
+    },
+    {
+      "name": "return_free_second_retry",
+      "expected_checks": 17,
+      "checks": 17,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-x3h728fh/return_free_second_retry.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/return_transaction_failure_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-transactions-f1zbpgrf/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-transactions-f1zbpgrf/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-transactions-f1zbpgrf/cache"
+      },
+      "scenario": {
+        "RETURN_FIXTURE": "free",
+        "RETURN_CASE": "second_retry"
+      },
+      "warnings": [],
+      "seconds": 5.587
+    },
+    {
+      "name": "return_free_second_kill",
+      "expected_checks": 18,
+      "checks": 18,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-x3h728fh/return_free_second_kill.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/return_transaction_failure_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-transactions-o5b3usuv/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-transactions-o5b3usuv/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-transactions-o5b3usuv/cache"
+      },
+      "scenario": {
+        "RETURN_FIXTURE": "free",
+        "RETURN_CASE": "second_kill"
+      },
+      "warnings": [],
+      "seconds": 5.385
+    },
+    {
+      "name": "return_free_second_reload",
+      "expected_checks": 16,
+      "checks": 16,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-x3h728fh/return_free_second_reload.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/return_transaction_failure_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-transactions-urkhafvr/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-transactions-urkhafvr/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-transactions-urkhafvr/cache"
+      },
+      "scenario": {
+        "RETURN_FIXTURE": "free",
+        "RETURN_CASE": "second_reload"
+      },
+      "warnings": [],
+      "seconds": 6.139
+    },
+    {
+      "name": "return_free_control",
+      "expected_checks": 18,
+      "checks": 18,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-x3h728fh/return_free_control.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/return_transaction_failure_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-transactions-esh4ml5e/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-transactions-esh4ml5e/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-transactions-esh4ml5e/cache"
+      },
+      "scenario": {
+        "RETURN_FIXTURE": "free",
+        "RETURN_CASE": "control"
+      },
+      "warnings": [],
+      "seconds": 5.282
+    },
+    {
+      "name": "return_paid_first_clear",
+      "expected_checks": 26,
+      "checks": 26,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-x3h728fh/return_paid_first_clear.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/return_transaction_failure_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-transactions-nrj1ddaf/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-transactions-nrj1ddaf/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-transactions-nrj1ddaf/cache"
+      },
+      "scenario": {
+        "RETURN_FIXTURE": "paid",
+        "RETURN_CASE": "first_clear"
+      },
+      "warnings": [],
+      "seconds": 5.281
+    },
+    {
+      "name": "return_paid_second_clear",
+      "expected_checks": 26,
+      "checks": 26,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-x3h728fh/return_paid_second_clear.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/return_transaction_failure_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-transactions-gjon4ja_/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-transactions-gjon4ja_/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-transactions-gjon4ja_/cache"
+      },
+      "scenario": {
+        "RETURN_FIXTURE": "paid",
+        "RETURN_CASE": "second_clear"
+      },
+      "warnings": [],
+      "seconds": 5.435
+    },
+    {
+      "name": "return_paid_second_retry",
+      "expected_checks": 21,
+      "checks": 21,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-x3h728fh/return_paid_second_retry.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/return_transaction_failure_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-transactions-y2blglzt/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-transactions-y2blglzt/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-transactions-y2blglzt/cache"
+      },
+      "scenario": {
+        "RETURN_FIXTURE": "paid",
+        "RETURN_CASE": "second_retry"
+      },
+      "warnings": [],
+      "seconds": 5.182
+    },
+    {
+      "name": "return_paid_second_kill",
+      "expected_checks": 22,
+      "checks": 22,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-x3h728fh/return_paid_second_kill.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/return_transaction_failure_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-transactions-cll1vn1x/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-transactions-cll1vn1x/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-transactions-cll1vn1x/cache"
+      },
+      "scenario": {
+        "RETURN_FIXTURE": "paid",
+        "RETURN_CASE": "second_kill"
+      },
+      "warnings": [],
+      "seconds": 4.981
+    },
+    {
+      "name": "return_paid_second_reload",
+      "expected_checks": 20,
+      "checks": 20,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-x3h728fh/return_paid_second_reload.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/return_transaction_failure_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-transactions-mnmojpbc/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-transactions-mnmojpbc/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-transactions-mnmojpbc/cache"
+      },
+      "scenario": {
+        "RETURN_FIXTURE": "paid",
+        "RETURN_CASE": "second_reload"
+      },
+      "warnings": [],
+      "seconds": 5.982
+    },
+    {
+      "name": "return_paid_control",
+      "expected_checks": 22,
+      "checks": 22,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-x3h728fh/return_paid_control.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/return_transaction_failure_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-transactions-leasqe1c/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-transactions-leasqe1c/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-transactions-leasqe1c/cache"
+      },
+      "scenario": {
+        "RETURN_FIXTURE": "paid",
+        "RETURN_CASE": "control"
+      },
+      "warnings": [],
+      "seconds": 4.377
+    },
+    {
+      "name": "return_affixed_first_clear",
+      "expected_checks": 26,
+      "checks": 26,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-x3h728fh/return_affixed_first_clear.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/return_transaction_failure_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-transactions-a_d4dgjo/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-transactions-a_d4dgjo/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-transactions-a_d4dgjo/cache"
+      },
+      "scenario": {
+        "RETURN_FIXTURE": "affixed",
+        "RETURN_CASE": "first_clear"
+      },
+      "warnings": [],
+      "seconds": 4.879
+    },
+    {
+      "name": "return_affixed_second_clear",
+      "expected_checks": 26,
+      "checks": 26,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-x3h728fh/return_affixed_second_clear.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/return_transaction_failure_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-transactions-50ex_9wg/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-transactions-50ex_9wg/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-transactions-50ex_9wg/cache"
+      },
+      "scenario": {
+        "RETURN_FIXTURE": "affixed",
+        "RETURN_CASE": "second_clear"
+      },
+      "warnings": [],
+      "seconds": 4.678
+    },
+    {
+      "name": "return_affixed_second_retry",
+      "expected_checks": 21,
+      "checks": 21,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-x3h728fh/return_affixed_second_retry.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/return_transaction_failure_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-transactions-xir5c_r0/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-transactions-xir5c_r0/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-transactions-xir5c_r0/cache"
+      },
+      "scenario": {
+        "RETURN_FIXTURE": "affixed",
+        "RETURN_CASE": "second_retry"
+      },
+      "warnings": [],
+      "seconds": 4.829
+    },
+    {
+      "name": "return_affixed_second_kill",
+      "expected_checks": 22,
+      "checks": 22,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-x3h728fh/return_affixed_second_kill.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/return_transaction_failure_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-transactions-a9b9kqnv/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-transactions-a9b9kqnv/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-transactions-a9b9kqnv/cache"
+      },
+      "scenario": {
+        "RETURN_FIXTURE": "affixed",
+        "RETURN_CASE": "second_kill"
+      },
+      "warnings": [],
+      "seconds": 4.779
+    },
+    {
+      "name": "return_affixed_second_reload",
+      "expected_checks": 20,
+      "checks": 20,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-x3h728fh/return_affixed_second_reload.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/return_transaction_failure_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-transactions-mleuu1i8/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-transactions-mleuu1i8/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-transactions-mleuu1i8/cache"
+      },
+      "scenario": {
+        "RETURN_FIXTURE": "affixed",
+        "RETURN_CASE": "second_reload"
+      },
+      "warnings": [],
+      "seconds": 6.335
+    },
+    {
+      "name": "return_affixed_control",
+      "expected_checks": 22,
+      "checks": 22,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-x3h728fh/return_affixed_control.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/return_transaction_failure_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-transactions-3ur_yled/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-transactions-3ur_yled/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-transactions-3ur_yled/cache"
+      },
+      "scenario": {
+        "RETURN_FIXTURE": "affixed",
+        "RETURN_CASE": "control"
+      },
+      "warnings": [],
+      "seconds": 5.381
+    },
+    {
+      "name": "f6_0_0",
+      "expected_checks": 14,
+      "checks": 14,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-x3h728fh/f6_0_0.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/tornado_example_failure_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-transactions-e48k5dsu/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-transactions-e48k5dsu/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-transactions-e48k5dsu/cache"
+      },
+      "scenario": {
+        "TORNADO_UNBOUND": "0",
+        "TORNADO_FAIL": "0"
+      },
+      "warnings": [],
+      "seconds": 3.88
+    },
+    {
+      "name": "f6_0_1",
+      "expected_checks": 17,
+      "checks": 17,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-x3h728fh/f6_0_1.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/tornado_example_failure_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-transactions-i6aix0h8/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-transactions-i6aix0h8/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-transactions-i6aix0h8/cache"
+      },
+      "scenario": {
+        "TORNADO_UNBOUND": "0",
+        "TORNADO_FAIL": "1"
+      },
+      "warnings": [],
+      "seconds": 4.028
+    },
+    {
+      "name": "f6_0_2",
+      "expected_checks": 16,
+      "checks": 16,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-x3h728fh/f6_0_2.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/tornado_example_failure_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-transactions-tia4r7tb/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-transactions-tia4r7tb/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-transactions-tia4r7tb/cache"
+      },
+      "scenario": {
+        "TORNADO_UNBOUND": "0",
+        "TORNADO_FAIL": "2"
+      },
+      "warnings": [],
+      "seconds": 4.231
+    },
+    {
+      "name": "f6_0_3",
+      "expected_checks": 16,
+      "checks": 16,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-x3h728fh/f6_0_3.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/tornado_example_failure_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-transactions-evqzmk37/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-transactions-evqzmk37/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-transactions-evqzmk37/cache"
+      },
+      "scenario": {
+        "TORNADO_UNBOUND": "0",
+        "TORNADO_FAIL": "3"
+      },
+      "warnings": [],
+      "seconds": 3.981
+    },
+    {
+      "name": "f6_0_4",
+      "expected_checks": 16,
+      "checks": 16,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-x3h728fh/f6_0_4.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/tornado_example_failure_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-transactions-s7nrk47_/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-transactions-s7nrk47_/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-transactions-s7nrk47_/cache"
+      },
+      "scenario": {
+        "TORNADO_UNBOUND": "0",
+        "TORNADO_FAIL": "4"
+      },
+      "warnings": [],
+      "seconds": 4.08
+    },
+    {
+      "name": "f6_1_0",
+      "expected_checks": 15,
+      "checks": 15,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-x3h728fh/f6_1_0.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/tornado_example_failure_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-transactions-7978_wn_/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-transactions-7978_wn_/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-transactions-7978_wn_/cache"
+      },
+      "scenario": {
+        "TORNADO_UNBOUND": "1",
+        "TORNADO_FAIL": "0"
+      },
+      "warnings": [],
+      "seconds": 3.876
+    },
+    {
+      "name": "f6_1_1",
+      "expected_checks": 18,
+      "checks": 18,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-x3h728fh/f6_1_1.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/tornado_example_failure_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-transactions-yv16fxym/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-transactions-yv16fxym/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-transactions-yv16fxym/cache"
+      },
+      "scenario": {
+        "TORNADO_UNBOUND": "1",
+        "TORNADO_FAIL": "1"
+      },
+      "warnings": [],
+      "seconds": 4.081
+    },
+    {
+      "name": "f6_1_2",
+      "expected_checks": 17,
+      "checks": 17,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-x3h728fh/f6_1_2.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/tornado_example_failure_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-transactions-_6i16hqf/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-transactions-_6i16hqf/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-transactions-_6i16hqf/cache"
+      },
+      "scenario": {
+        "TORNADO_UNBOUND": "1",
+        "TORNADO_FAIL": "2"
+      },
+      "warnings": [],
+      "seconds": 4.178
+    },
+    {
+      "name": "f6_1_3",
+      "expected_checks": 17,
+      "checks": 17,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-x3h728fh/f6_1_3.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/tornado_example_failure_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-transactions-hk7_5jgx/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-transactions-hk7_5jgx/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-transactions-hk7_5jgx/cache"
+      },
+      "scenario": {
+        "TORNADO_UNBOUND": "1",
+        "TORNADO_FAIL": "3"
+      },
+      "warnings": [],
+      "seconds": 4.03
+    },
+    {
+      "name": "f6_1_4",
+      "expected_checks": 17,
+      "checks": 17,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-x3h728fh/f6_1_4.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/tornado_example_failure_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-transactions-0fp4wxk6/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-transactions-0fp4wxk6/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-transactions-0fp4wxk6/cache"
+      },
+      "scenario": {
+        "TORNADO_UNBOUND": "1",
+        "TORNADO_FAIL": "4"
+      },
+      "warnings": [],
+      "seconds": 4.181
+    },
+    {
+      "name": "safe_exit",
+      "expected_checks": 120,
+      "checks": 120,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-x3h728fh/safe_exit.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/safe_map_exit_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-v099-c134cct5/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-v099-c134cct5/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-v099-c134cct5/cache"
+      },
+      "scenario": {},
+      "warnings": [],
+      "seconds": 12.959
+    },
+    {
+      "name": "startup_start",
+      "expected_checks": 27,
+      "checks": 27,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-x3h728fh/startup_start.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/startup_recovery_failure_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-startup-recovery.rxcm_x8x/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-startup-recovery.rxcm_x8x/config",
+        "XDG_CACHE_HOME": "/tmp/godot-startup-recovery.rxcm_x8x/cache"
+      },
+      "scenario": {
+        "STARTUP_CASE": "start"
+      },
+      "warnings": [],
+      "seconds": 3.775
+    },
+    {
+      "name": "startup_leave",
+      "expected_checks": 26,
+      "checks": 26,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-x3h728fh/startup_leave.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/startup_recovery_failure_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-startup-recovery.r5s06f6q/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-startup-recovery.r5s06f6q/config",
+        "XDG_CACHE_HOME": "/tmp/godot-startup-recovery.r5s06f6q/cache"
+      },
+      "scenario": {
+        "STARTUP_CASE": "leave"
+      },
+      "warnings": [],
+      "seconds": 3.876
+    },
+    {
+      "name": "startup_test",
+      "expected_checks": 26,
+      "checks": 26,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-x3h728fh/startup_test.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/startup_recovery_failure_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-startup-recovery.an6mld2t/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-startup-recovery.an6mld2t/config",
+        "XDG_CACHE_HOME": "/tmp/godot-startup-recovery.an6mld2t/cache"
+      },
+      "scenario": {
+        "STARTUP_CASE": "test"
+      },
+      "warnings": [],
+      "seconds": 3.928
+    },
+    {
+      "name": "startup_completed_start",
+      "expected_checks": 25,
+      "checks": 25,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-x3h728fh/startup_completed_start.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/startup_recovery_failure_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-startup-recovery.kxkjktnh/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-startup-recovery.kxkjktnh/config",
+        "XDG_CACHE_HOME": "/tmp/godot-startup-recovery.kxkjktnh/cache"
+      },
+      "scenario": {
+        "STARTUP_CASE": "completed_start"
+      },
+      "warnings": [],
+      "seconds": 3.375
+    },
+    {
+      "name": "startup_completed_leave",
+      "expected_checks": 24,
+      "checks": 24,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-x3h728fh/startup_completed_leave.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/startup_recovery_failure_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-startup-recovery.jw9h6x_o/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-startup-recovery.jw9h6x_o/config",
+        "XDG_CACHE_HOME": "/tmp/godot-startup-recovery.jw9h6x_o/cache"
+      },
+      "scenario": {
+        "STARTUP_CASE": "completed_leave"
+      },
+      "warnings": [],
+      "seconds": 3.475
+    },
+    {
+      "name": "startup_completed_test",
+      "expected_checks": 24,
+      "checks": 24,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-x3h728fh/startup_completed_test.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/startup_recovery_failure_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-startup-recovery.pss_jwig/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-startup-recovery.pss_jwig/config",
+        "XDG_CACHE_HOME": "/tmp/godot-startup-recovery.pss_jwig/cache"
+      },
+      "scenario": {
+        "STARTUP_CASE": "completed_test"
+      },
+      "warnings": [],
+      "seconds": 3.776
+    },
+    {
+      "name": "current_help_contract",
+      "expected_checks": 165,
+      "checks": 165,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-x3h728fh/current_help_contract.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/current_help_contract_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-transactions-u4g8lo20/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-transactions-u4g8lo20/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-transactions-u4g8lo20/cache"
+      },
+      "scenario": {},
+      "warnings": [],
+      "seconds": 5.682
+    },
+    {
+      "name": "encounter_ui_integration",
+      "expected_checks": 88,
+      "checks": 88,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-x3h728fh/encounter_ui_integration.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/encounter_ui_integration_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-transactions-27v6ccma/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-transactions-27v6ccma/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-transactions-27v6ccma/cache"
+      },
+      "scenario": {},
+      "warnings": [],
+      "seconds": 4.779
+    },
+    {
+      "name": "encounter_controls",
+      "expected_checks": 3918,
+      "checks": 3918,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-x3h728fh/encounter_controls.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/encounter_controls_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-transactions-d75ld58z/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-transactions-d75ld58z/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-transactions-d75ld58z/cache"
+      },
+      "scenario": {},
+      "warnings": [],
+      "seconds": 28.247
+    },
+    {
+      "name": "pause_keyboard_scroll",
+      "expected_checks": 1070,
+      "checks": 1070,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-x3h728fh/pause_keyboard_scroll.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/pause_keyboard_scroll_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-transactions-genwsdxd/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-transactions-genwsdxd/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-transactions-genwsdxd/cache"
+      },
+      "scenario": {},
+      "warnings": [],
+      "seconds": 27.84
+    },
+    {
+      "name": "settings_keyboard_scroll",
+      "expected_checks": 1025,
+      "checks": 1025,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-x3h728fh/settings_keyboard_scroll.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/settings_keyboard_scroll_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-transactions-hwgjy7uw/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-transactions-hwgjy7uw/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-transactions-hwgjy7uw/cache"
+      },
+      "scenario": {},
+      "warnings": [],
+      "seconds": 15.867
+    },
+    {
+      "name": "skill_binding_focus_capacity10",
+      "expected_checks": 3303,
+      "checks": 3303,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-x3h728fh/skill_binding_focus_capacity10.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/skill_binding_focus_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-skill-focus-uguek87w/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-skill-focus-uguek87w/config",
+        "XDG_CACHE_HOME": "/tmp/godot-skill-focus-uguek87w/cache"
+      },
+      "scenario": {},
+      "warnings": [],
+      "seconds": 11.602
+    },
+    {
+      "name": "skill_binding_focus_capacity11",
+      "expected_checks": 3629,
+      "checks": 3629,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-x3h728fh/skill_binding_focus_capacity11.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/skill_binding_focus_test.gd",
+        "--",
+        "--capacity11"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-skill-focus-3z7jwdhc/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-skill-focus-3z7jwdhc/config",
+        "XDG_CACHE_HOME": "/tmp/godot-skill-focus-3z7jwdhc/cache"
+      },
+      "scenario": {},
+      "warnings": [],
+      "seconds": 12.56
+    },
+    {
+      "name": "talent_details_focus",
+      "expected_checks": 5219,
+      "checks": 5219,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-x3h728fh/talent_details_focus.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/talent_details_focus_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-talent-focus-mtxndq6m/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-talent-focus-mtxndq6m/config",
+        "XDG_CACHE_HOME": "/tmp/godot-talent-focus-mtxndq6m/cache"
+      },
+      "scenario": {},
+      "warnings": [],
+      "seconds": 25.742
+    },
+    {
+      "name": "equipment_purchase_transactions",
+      "expected_checks": 115,
+      "checks": 115,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-x3h728fh/equipment_purchase_transactions.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/equipment_purchase_transactions_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-transactions-bwnstdgq/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-transactions-bwnstdgq/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-transactions-bwnstdgq/cache"
+      },
+      "scenario": {},
+      "warnings": [],
+      "seconds": 11.049
+    },
+    {
+      "name": "equipment_purchase_gameplay",
+      "expected_checks": 73,
+      "checks": 73,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-x3h728fh/equipment_purchase_gameplay.log",
+      "evidence_dir": "/tmp/transaction-regressions-x3h728fh/equipment_purchase_gameplay-evidence",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/equipment_purchase_gameplay_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-transactions-d9q1temi/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-transactions-d9q1temi/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-transactions-d9q1temi/cache"
+      },
+      "scenario": {},
+      "warnings": [],
+      "seconds": 7.089
+    },
+    {
+      "name": "flask_purchase_transactions",
+      "expected_checks": 58,
+      "checks": 58,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-x3h728fh/flask_purchase_transactions.log",
+      "report_path": "/tmp/transaction-regressions-x3h728fh/flask_purchase_transactions-report-qdzic4qq/results.json",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/flask_purchase_transactions_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-flask-purchase.13zspa9w/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-flask-purchase.13zspa9w/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-flask-purchase.13zspa9w/cache"
+      },
+      "scenario": {},
+      "warnings": [],
+      "seconds": 11.351
+    },
+    {
+      "name": "flask_purchase_gameplay",
+      "expected_checks": 79,
+      "checks": 79,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-x3h728fh/flask_purchase_gameplay.log",
+      "report_path": "/tmp/transaction-regressions-x3h728fh/flask_purchase_gameplay-report-6axv06s5/results.json",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/flask_purchase_gameplay_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-flask-purchase.lz5wz01c/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-flask-purchase.lz5wz01c/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-flask-purchase.lz5wz01c/cache"
+      },
+      "scenario": {},
+      "warnings": [],
+      "seconds": 7.187
+    },
+    {
+      "name": "jewel_purchase_transactions",
+      "expected_checks": 48,
+      "checks": 48,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-x3h728fh/jewel_purchase_transactions.log",
+      "report_path": "/tmp/transaction-regressions-x3h728fh/jewel_purchase_transactions-report-f2c9625a/results.json",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/jewel_purchase_transactions_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-transactions-oyj1tgi5/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-transactions-oyj1tgi5/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-transactions-oyj1tgi5/cache"
+      },
+      "scenario": {},
+      "warnings": [],
+      "seconds": 9.997
+    },
+    {
+      "name": "jewel_purchase_gameplay",
+      "expected_checks": 43,
+      "checks": 43,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-x3h728fh/jewel_purchase_gameplay.log",
+      "report_path": "/tmp/transaction-regressions-x3h728fh/jewel_purchase_gameplay-report-9tzk0kdi/results.json",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/jewel_purchase_gameplay_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-jewel-purchase.cj4l7xfp/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-jewel-purchase.cj4l7xfp/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-jewel-purchase.cj4l7xfp/cache"
+      },
+      "scenario": {},
+      "warnings": [],
+      "seconds": 5.431
+    },
+    {
+      "name": "recovery_currency_compaction",
+      "expected_checks": 308,
+      "checks": 308,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-x3h728fh/recovery_currency_compaction.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/recovery_currency_compaction_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-transactions-30xljfg1/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-transactions-30xljfg1/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-transactions-30xljfg1/cache"
+      },
+      "scenario": {},
+      "warnings": [],
+      "seconds": 6.887
+    },
+    {
+      "name": "jewel_crafting",
+      "expected_checks": 1375,
+      "checks": 1375,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-x3h728fh/jewel_crafting.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/jewel_crafting_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-transactions-4ppcjvr0/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-transactions-4ppcjvr0/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-transactions-4ppcjvr0/cache"
+      },
+      "scenario": {},
+      "warnings": [],
+      "seconds": 15.166
+    },
+    {
+      "name": "crafting_growth_transactions",
+      "expected_checks": 286,
+      "checks": 286,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-x3h728fh/crafting_growth_transactions.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/crafting_growth_transactions_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-transactions-qeptz854/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-transactions-qeptz854/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-transactions-qeptz854/cache"
+      },
+      "scenario": {},
+      "warnings": [],
+      "seconds": 10.747
+    },
+    {
+      "name": "normal_gem_trade_transactions",
+      "expected_checks": 330,
+      "checks": 330,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-x3h728fh/normal_gem_trade_transactions.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/normal_gem_trade_transactions_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-transactions-gimyvp38/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-transactions-gimyvp38/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-transactions-gimyvp38/cache"
+      },
+      "scenario": {},
+      "warnings": [],
+      "seconds": 31.623
+    },
+    {
+      "name": "burn_state_copy",
+      "expected_checks": 892,
+      "checks": 892,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-x3h728fh/burn_state_copy.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/burn_state_copy_20261015_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-v050-3aiqa9th/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-v050-3aiqa9th/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-v050-3aiqa9th/cache"
+      },
+      "scenario": {},
+      "warnings": [],
+      "seconds": 0.616
+    },
+    {
+      "name": "burn_settlement_equivalence",
+      "expected_checks": 58593,
+      "checks": 58593,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-x3h728fh/burn_settlement_equivalence.log",
+      "evidence_dir": "/tmp/transaction-regressions-x3h728fh/burn_settlement_equivalence-evidence",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/burn_settlement_equivalence_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-v063-bqpp5cmk/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-v063-bqpp5cmk/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-v063-bqpp5cmk/cache"
+      },
+      "scenario": {},
+      "warnings": [],
+      "seconds": 5.281
+    }
+  ]
+}

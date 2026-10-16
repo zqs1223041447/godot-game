@@ -119,7 +119,7 @@ print('FAKE: 3 checks, 0 failures')
 
     def test_matrix_and_baseline_totals(self):
         quick, full = runner.cases(), runner.cases("full")
-        self.assertEqual((len(quick), len(full)), (15, 63))
+        self.assertEqual((len(quick), len(full)), (15, 68))
         self.assertEqual(len({c.name for c in full}), len(full))
         self.assertEqual(sum(c.expected_checks for c in full if c.name.startswith("return_")), 387)
         self.assertEqual(sum(c.expected_checks for c in full if c.name.startswith("f6_")), 163)
@@ -127,7 +127,7 @@ print('FAKE: 3 checks, 0 failures')
 
 
     def test_burn_full_only_matrix(self):
-        burn = [c for c in runner.cases("full") if c.name.startswith("burn_")]
+        burn = [c for c in runner.cases("full") if c.name in ("burn_state_copy", "burn_settlement_equivalence")]
         self.assertEqual(len(burn), 2)
         self.assertFalse(any(c.name.startswith("burn_") for c in runner.cases()))
         self.assertEqual([(c.script, c.expected_checks, c.prefix, c.marker, c.json_summary, c.burn_evidence) for c in burn], [
@@ -135,7 +135,7 @@ print('FAKE: 3 checks, 0 failures')
             ("burn_settlement_equivalence", 58593, "godot-m1-v063-", "BURN_SETTLEMENT_EQUIVALENCE ", True, True),
         ])
         self.assertEqual(sum(c.expected_checks for c in runner.cases()), 1414)
-        self.assertEqual(sum(c.expected_checks for c in runner.cases("full")), 82703)
+        self.assertEqual(sum(c.expected_checks for c in runner.cases("full")), 83206)
 
     def test_current_ui_full_only_matrix_and_exact_counts(self):
         expected = {
@@ -403,6 +403,83 @@ print({case.marker + tail!r})
                 for key, value in contaminated.items():
                     self.assertEqual(os.environ[key], value)
                     self.assertEqual(Path(value).read_text(), "must not change")
+
+    def test_live_combat_full_only_contracts_and_strict_results(self):
+        expected = {
+            "map_pending_death_boundary": ("MAP_PENDING_DEATH_BOUNDARY ", 107, "godot-m1-map-death-boundary-", "EXPLORATION_MAIN_OUTPUT"),
+            "canonical_game_state": ("Canonical game state:", 27, "godot-m1-transactions-", ""),
+            "combat_pipeline": ("Combat pipeline:", 305, "godot-m1-transactions-", ""),
+            "ember_event_clock": ("Ember event clock:", 45, "godot-m1-v050-", ""),
+            "burn_same_time_cleanup": ("Burn same-time cleanup:", 19, "godot-m1-v050-", ""),
+        }
+        selected = [c for c in runner.cases("full") if c.name in expected]
+        self.assertEqual({c.name for c in selected}, set(expected))
+        self.assertEqual(sum(c.expected_checks for c in selected), 503)
+        self.assertFalse(any(c.name in expected for c in runner.cases()))
+        for case in selected:
+            with self.subTest(case=case.name):
+                self.assertEqual((case.marker, case.expected_checks, case.prefix,
+                                  case.fresh_evidence_env), expected[case.name])
+                self.assertEqual(case.script, case.name)
+                self.assertEqual((case.env, case.user_args, case.json_summary,
+                                  case.burn_evidence, case.evidence_env, case.report_env),
+                                 ({}, (), False, False, "", ""))
+                self.case = case
+                good = case.marker + f"checks={case.expected_checks} failures=0"
+                source = f"""import os, pathlib, sys
+assert sys.argv[1:] == ['--headless', '--path', {str(self.root)!r}, '--script', 'tests/{case.script}_test.gd']
+for key in ('XDG_DATA_HOME', 'XDG_CONFIG_HOME', 'XDG_CACHE_HOME'):
+    path = pathlib.Path(os.environ[key])
+    assert str(path).startswith('/tmp/{case.prefix}') and path.is_dir()
+assert not list(pathlib.Path(os.environ['XDG_DATA_HOME']).iterdir())
+assert 'EXPLORATION_MAIN_INPUT_ONLY' not in os.environ
+assert 'EXPLORATION_MAIN_SAVE_ONLY' not in os.environ
+assert ('EXPLORATION_MAIN_OUTPUT' in os.environ) == {bool(case.fresh_evidence_env)!r}
+print({good!r})
+"""
+                with patch.dict(os.environ, {"EXPLORATION_MAIN_OUTPUT": "/tmp/unsafe-history",
+                                             "EXPLORATION_MAIN_INPUT_ONLY": "1",
+                                             "EXPLORATION_MAIN_SAVE_ONLY": "1"}):
+                    result = self.run_fake(source)
+                    self.assertTrue(result["passed"], result)
+                for output in ("", good + "\n" + good,
+                               case.marker + f"checks={case.expected_checks - 1} failures=0",
+                               case.marker + f"checks={case.expected_checks + 1} failures=0",
+                               case.marker + f"checks={case.expected_checks} failures=1",
+                               good + " trailing", good + "\nERROR: invalid state"):
+                    self.assertFalse(self.run_fake(f"print({output!r})\n")["passed"])
+                for code, reason in ((1, "nonzero_exit"), (78, "guard_rejected")):
+                    result = self.run_fake(source + f"raise SystemExit({code})\n")
+                    self.assertFalse(result["passed"])
+                    self.assertEqual(result["reason"], reason)
+
+    def test_map_evidence_is_fresh_existing_retained_and_never_overwrites(self):
+        self.case = next(c for c in runner.cases("full") if c.name == "map_pending_death_boundary")
+        historical = self.root / "historical"
+        historical.mkdir()
+        sentinel = historical / "pending-death-boundary.json"
+        sentinel.write_text("historical evidence")
+        source = f"""import os, pathlib
+p = pathlib.Path(os.environ['EXPLORATION_MAIN_OUTPUT'])
+assert p.is_dir() and not list(p.iterdir())
+assert p.parent == pathlib.Path({str(self.root)!r})
+assert p.name.startswith('map_pending_death_boundary-evidence-')
+assert not p.is_relative_to(pathlib.Path(os.environ['XDG_DATA_HOME']).parent)
+(p / 'pending-death-boundary.json').write_text('new evidence')
+print('MAP_PENDING_DEATH_BOUNDARY checks=107 failures=0')
+"""
+        with patch.dict(os.environ, {"EXPLORATION_MAIN_OUTPUT": str(historical)}):
+            first = self.run_fake(source)
+            second = self.run_fake(source)
+            self.assertEqual(os.environ["EXPLORATION_MAIN_OUTPUT"], str(historical))
+        self.assertTrue(first["passed"], first)
+        self.assertTrue(second["passed"], second)
+        self.assertNotEqual(first["evidence_dir"], second["evidence_dir"])
+        self.assertNotEqual(first["environment"], second["environment"])
+        for result in (first, second):
+            self.assertEqual((Path(result["evidence_dir"]) / sentinel.name).read_text(), "new evidence")
+            self.assertFalse(Path(result["environment"]["XDG_DATA_HOME"]).exists())
+        self.assertEqual(sentinel.read_text(), "historical evidence")
 
     def test_startup_matrix_and_contaminated_environment(self):
         expected = {"start": 27, "leave": 26, "test": 26,
