@@ -48,3 +48,7 @@ Results:
 ## Adjacent-suite finding, outside this patch
 
 An additional `encounter_controls_test.gd` run exits 1 with **1023 checks, 9 assertion failures**: five `Preview matches the current compiler factors` assertions and four `Locked narrow view stays compact with wrapped text` assertions. The former requires both aggregate factor strings even for empty/single selections; the current component renders selected definition descriptions. The latter hard-codes a total component height under 500 pixels. This independent test and all its production dependencies are unchanged by this patch; it does not load the repaired integration test. No claim of a fully green encounter test family is made, and these separate expectations are not repaired here.
+
+## Viewport clarification (2026-10-15 follow-up)
+
+The 1280×720 and 2560×1440 values above are requested physical root-window sizes. Under this project’s canvas_items stretch configuration, the tested Main scene retains a 1280×720 logical viewport (HUD local size also changes with UI scale). These checks do not establish an independent 2560×1440 logical layout or native rendered 2K acceptance. The later keyboard-scroll regression explicitly records and asserts the actual logical viewport.

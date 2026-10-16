@@ -1,0 +1,85 @@
+{
+  "mode": "full-only-controls-scroll-subset",
+  "cases": 3,
+  "passed": 3,
+  "failed": 0,
+  "observed_checks": 6013,
+  "accepted_checks": 6013,
+  "results": [
+    {
+      "name": "encounter_controls",
+      "expected_checks": 3918,
+      "checks": 3918,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-controls-scroll-7jert6xk/encounter_controls.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/encounter_controls_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-transactions-irjzxsy9/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-transactions-irjzxsy9/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-transactions-irjzxsy9/cache"
+      },
+      "scenario": {},
+      "warnings": [],
+      "seconds": 28.261
+    },
+    {
+      "name": "pause_keyboard_scroll",
+      "expected_checks": 1070,
+      "checks": 1070,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-controls-scroll-7jert6xk/pause_keyboard_scroll.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/pause_keyboard_scroll_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-transactions-5w50eh5g/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-transactions-5w50eh5g/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-transactions-5w50eh5g/cache"
+      },
+      "scenario": {},
+      "warnings": [],
+      "seconds": 28.306
+    },
+    {
+      "name": "settings_keyboard_scroll",
+      "expected_checks": 1025,
+      "checks": 1025,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/tmp/transaction-regressions-controls-scroll-7jert6xk/settings_keyboard_scroll.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/settings_keyboard_scroll_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-transactions-gd70ipr9/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-transactions-gd70ipr9/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-transactions-gd70ipr9/cache"
+      },
+      "scenario": {},
+      "warnings": [],
+      "seconds": 15.916
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+--- a/scripts/main.gd
++++ b/scripts/main.gd
+@@ -2170,35 +2170,53 @@
+ 
+ ## Only the new mechanism needs a shared monster burn clock. Ordinary ignite
+ ## keeps its historical per-target path byte for byte when no ember is active.
++var diagnostic: Dictionary = {"inclusive_us":0,"bookkeeping_us":0,"phase_us":{},"phase_calls":{}}
++func _diag_add(phase: String, started: int) -> int:
++	var stopped: int = Time.get_ticks_usec()
++	diagnostic.phase_us[phase] = diagnostic.phase_us.get(phase, 0) + stopped - started
++	diagnostic.phase_calls[phase] = diagnostic.phase_calls.get(phase, 0) + 1
++	var finished: int = Time.get_ticks_usec()
++	diagnostic.bookkeeping_us += finished - stopped
++	return Time.get_ticks_usec()
++
+ func _advance_proliferating_burns(to_time:float)->void:
+ 	if _ember_advancing:return
++	var diag_total_start: int = Time.get_ticks_usec()
+ 	_ember_advancing=true
+ 	var iterations:int=0
+ 	while true:
+ 		iterations+=1
+ 		assert(iterations<=BurnRuntime.MAX_TARGETS+1,"One burn-death boundary per living target")
++		var diag_start: int = Time.get_ticks_usec()
+ 		var targets:Dictionary={}
+ 		for enemy:Dictionary in enemies:targets[int(enemy.id)]=enemy
++		diag_start = _diag_add("target_map", diag_start)
+ 		# A complete current-clock proof avoids copying/sorting every status for
+ 		# repeated contacts at the same instant. Still remove stale bodies and
+ 		# retain the original empty-settlement/deferred-death flush sequence.
+ 		var current_ids:Array[int]=burn_runtime.monster_ids_at_time(to_time)
++		diag_start = _diag_add("clock_proof", diag_start)
+ 		if not current_ids.is_empty():
+ 			var living:bool=false
+ 			for id:int in current_ids:
+ 				var body:Dictionary=targets.get(id,{})
+ 				if body.is_empty() or float(body.health)<=0.0:burn_runtime.remove("monster",id)
+ 				else:living=true
++			diag_start = _diag_add("same_time_cleanup", diag_start)
+ 			if living:
+ 				_ember_defer_deaths=true
+ 				_settle_burn_segments([],targets)
+ 				_ember_defer_deaths=false
++				diag_start = _diag_add("settlement", diag_start)
+ 				_flush_ember_deaths()
++				diag_start = _diag_add("death_transfer", diag_start)
+ 			break
+ 		var states:Array[Dictionary]=[]
+ 		var death_times:Dictionary={}
+ 		var cut:float=to_time
+-		for status:Dictionary in burn_runtime.statuses():
++		var diag_statuses: Array[Dictionary] = burn_runtime.statuses()
++		diag_start = _diag_add("status_snapshot", diag_start)
++		for status:Dictionary in diag_statuses:
+ 			if status.target_kind!="monster":continue
+ 			var target:Dictionary=targets.get(int(status.target_id),{})
+ 			if target.is_empty() or float(target.health)<=0.0:
+@@ -2220,6 +2238,7 @@
+ 			if death_at<=end:
+ 				death_times[int(status.target_id)]=death_at
+ 				cut=minf(cut,death_at)
++		diag_start = _diag_add("death_prediction", diag_start)
+ 		if states.is_empty():break
+ 		var segments:Array[Dictionary]=[]
+ 		var sources:Dictionary={}
+@@ -2234,12 +2253,16 @@
+ 			segments.append_array(advanced.segments)
+ 			sources[int(status.target_id)]=status
+ 			if death_times.get(int(status.target_id),-1.0)==cut:exact[int(status.target_id)]=true
++		diag_start = _diag_add("advance_assembly", diag_start)
+ 		_ember_defer_deaths=true
+ 		_settle_burn_segments(segments,targets,sources,exact)
+ 		_ember_defer_deaths=false
++		diag_start = _diag_add("settlement", diag_start)
+ 		_flush_ember_deaths()
++		diag_start = _diag_add("death_transfer", diag_start)
+ 		if cut>=to_time:break
+ 	_ember_advancing=false
++	diagnostic["inclusive_us"] += Time.get_ticks_usec() - diag_total_start
+ 
+ 
+ func _flush_ember_deaths()->void:

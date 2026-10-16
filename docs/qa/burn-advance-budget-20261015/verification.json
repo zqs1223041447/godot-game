@@ -1,0 +1,633 @@
+{
+  "checks": {
+    "/workspace/scratch/a51485f153de/godot-game": true,
+    "/tmp/burn-advance-budget-20261015/repo": true,
+    "instrumentation_unchanged": true,
+    "all_20_frames_equal": true
+  },
+  "artifacts": [
+    {
+      "artifact": ".bin",
+      "equal": true,
+      "bytes": 30889476,
+      "sha256": "e3898e8b48f52ab42e4a80c9232bb94271946d908c01fdbdeba82a590e73aaff",
+      "instrumented_sha256": "e3898e8b48f52ab42e4a80c9232bb94271946d908c01fdbdeba82a590e73aaff"
+    },
+    {
+      "artifact": "-final.bin",
+      "equal": true,
+      "bytes": 1491480,
+      "sha256": "30347f555598406f413c120209760d72b2b110037f59b47feff4022d049324cc",
+      "instrumented_sha256": "30347f555598406f413c120209760d72b2b110037f59b47feff4022d049324cc"
+    },
+    {
+      "artifact": ".save",
+      "equal": true,
+      "bytes": 13715,
+      "sha256": "c821772f8dc7a1ac5732fca1683f179a70153d42565f0b2b37663001426dd9f4",
+      "instrumented_sha256": "c821772f8dc7a1ac5732fca1683f179a70153d42565f0b2b37663001426dd9f4"
+    }
+  ],
+  "clean_tick": {
+    "max_us": 543088,
+    "mean_us": 119659.8,
+    "n": 20,
+    "over_16_7_ms": 20,
+    "over_33_3_ms": 18,
+    "p50_us": 107278,
+    "p95_us": 543088
+  },
+  "instrumented_tick": {
+    "max_us": 512040,
+    "mean_us": 120934.35,
+    "n": 20,
+    "over_16_7_ms": 20,
+    "over_33_3_ms": 18,
+    "p50_us": 100307,
+    "p95_us": 512040
+  },
+  "totals": {
+    "bookkeeping_us": 6169,
+    "inclusive_us": 1853770,
+    "phase_calls": {
+      "advance_assembly": 394,
+      "clock_proof": 948,
+      "death_prediction": 394,
+      "death_transfer": 948,
+      "same_time_cleanup": 554,
+      "settlement": 948,
+      "status_snapshot": 394,
+      "target_map": 948
+    },
+    "phase_us": {
+      "advance_assembly": 348686,
+      "clock_proof": 39669,
+      "death_prediction": 393076,
+      "death_transfer": 3578,
+      "same_time_cleanup": 14391,
+      "settlement": 921299,
+      "status_snapshot": 76864,
+      "target_map": 22624
+    }
+  },
+  "unattributed_us": 27414,
+  "phase_pct_of_inclusive": {
+    "advance_assembly": 18.809561056657515,
+    "clock_proof": 2.139909481758794,
+    "death_prediction": 21.204140751010105,
+    "death_transfer": 0.1930120780895149,
+    "same_time_cleanup": 0.7763098982074368,
+    "settlement": 49.69866811956176,
+    "status_snapshot": 4.146361199070004,
+    "target_map": 1.2204318766621534
+  },
+  "inclusive_pct_tick": 76.64365004649216,
+  "peak_instrumented": {
+    "inclusive_us": 421352,
+    "bookkeeping_us": 1731,
+    "phase_us": {
+      "advance_assembly": 77588,
+      "clock_proof": 20381,
+      "death_prediction": 88999,
+      "death_transfer": 373,
+      "same_time_cleanup": 5494,
+      "settlement": 197940,
+      "status_snapshot": 15537,
+      "target_map": 7571
+    },
+    "phase_calls": {
+      "advance_assembly": 94,
+      "clock_proof": 343,
+      "death_prediction": 94,
+      "death_transfer": 343,
+      "same_time_cleanup": 249,
+      "settlement": 343,
+      "status_snapshot": 94,
+      "target_map": 343
+    },
+    "frame": 0,
+    "unattributed_us": 5738
+  },
+  "frame_deltas": [
+    {
+      "inclusive_us": 421352,
+      "bookkeeping_us": 1731,
+      "phase_us": {
+        "advance_assembly": 77588,
+        "clock_proof": 20381,
+        "death_prediction": 88999,
+        "death_transfer": 373,
+        "same_time_cleanup": 5494,
+        "settlement": 197940,
+        "status_snapshot": 15537,
+        "target_map": 7571
+      },
+      "phase_calls": {
+        "advance_assembly": 94,
+        "clock_proof": 343,
+        "death_prediction": 94,
+        "death_transfer": 343,
+        "same_time_cleanup": 249,
+        "settlement": 343,
+        "status_snapshot": 94,
+        "target_map": 343
+      },
+      "frame": 0,
+      "unattributed_us": 5738
+    },
+    {
+      "inclusive_us": 4689,
+      "bookkeeping_us": 16,
+      "phase_us": {
+        "advance_assembly": 835,
+        "clock_proof": 11,
+        "death_prediction": 946,
+        "death_transfer": 3,
+        "same_time_cleanup": 0,
+        "settlement": 2297,
+        "status_snapshot": 345,
+        "target_map": 19
+      },
+      "phase_calls": {
+        "advance_assembly": 1,
+        "clock_proof": 1,
+        "death_prediction": 1,
+        "death_transfer": 1,
+        "same_time_cleanup": 0,
+        "settlement": 1,
+        "status_snapshot": 1,
+        "target_map": 1
+      },
+      "frame": 1,
+      "unattributed_us": 217
+    },
+    {
+      "inclusive_us": 5009,
+      "bookkeeping_us": 13,
+      "phase_us": {
+        "advance_assembly": 912,
+        "clock_proof": 12,
+        "death_prediction": 1056,
+        "death_transfer": 3,
+        "same_time_cleanup": 0,
+        "settlement": 2618,
+        "status_snapshot": 323,
+        "target_map": 20
+      },
+      "phase_calls": {
+        "advance_assembly": 1,
+        "clock_proof": 1,
+        "death_prediction": 1,
+        "death_transfer": 1,
+        "same_time_cleanup": 0,
+        "settlement": 1,
+        "status_snapshot": 1,
+        "target_map": 1
+      },
+      "frame": 2,
+      "unattributed_us": 52
+    },
+    {
+      "inclusive_us": 65009,
+      "bookkeeping_us": 181,
+      "phase_us": {
+        "advance_assembly": 11970,
+        "clock_proof": 413,
+        "death_prediction": 14619,
+        "death_transfer": 41,
+        "same_time_cleanup": 226,
+        "settlement": 33090,
+        "status_snapshot": 3054,
+        "target_map": 471
+      },
+      "phase_calls": {
+        "advance_assembly": 13,
+        "clock_proof": 21,
+        "death_prediction": 13,
+        "death_transfer": 21,
+        "same_time_cleanup": 8,
+        "settlement": 21,
+        "status_snapshot": 13,
+        "target_map": 21
+      },
+      "frame": 3,
+      "unattributed_us": 944
+    },
+    {
+      "inclusive_us": 124268,
+      "bookkeeping_us": 525,
+      "phase_us": {
+        "advance_assembly": 24470,
+        "clock_proof": 1008,
+        "death_prediction": 30936,
+        "death_transfer": 59,
+        "same_time_cleanup": 509,
+        "settlement": 58939,
+        "status_snapshot": 4708,
+        "target_map": 1071
+      },
+      "phase_calls": {
+        "advance_assembly": 24,
+        "clock_proof": 42,
+        "death_prediction": 24,
+        "death_transfer": 42,
+        "same_time_cleanup": 18,
+        "settlement": 42,
+        "status_snapshot": 24,
+        "target_map": 42
+      },
+      "frame": 4,
+      "unattributed_us": 2043
+    },
+    {
+      "inclusive_us": 76572,
+      "bookkeeping_us": 203,
+      "phase_us": {
+        "advance_assembly": 15394,
+        "clock_proof": 863,
+        "death_prediction": 16327,
+        "death_transfer": 42,
+        "same_time_cleanup": 403,
+        "settlement": 38078,
+        "status_snapshot": 3512,
+        "target_map": 715
+      },
+      "phase_calls": {
+        "advance_assembly": 17,
+        "clock_proof": 32,
+        "death_prediction": 17,
+        "death_transfer": 32,
+        "same_time_cleanup": 15,
+        "settlement": 32,
+        "status_snapshot": 17,
+        "target_map": 32
+      },
+      "frame": 5,
+      "unattributed_us": 1035
+    },
+    {
+      "inclusive_us": 72878,
+      "bookkeeping_us": 193,
+      "phase_us": {
+        "advance_assembly": 14449,
+        "clock_proof": 669,
+        "death_prediction": 14854,
+        "death_transfer": 39,
+        "same_time_cleanup": 276,
+        "settlement": 37586,
+        "status_snapshot": 2963,
+        "target_map": 768
+      },
+      "phase_calls": {
+        "advance_assembly": 14,
+        "clock_proof": 24,
+        "death_prediction": 14,
+        "death_transfer": 24,
+        "same_time_cleanup": 10,
+        "settlement": 24,
+        "status_snapshot": 14,
+        "target_map": 24
+      },
+      "frame": 6,
+      "unattributed_us": 1081
+    },
+    {
+      "inclusive_us": 61811,
+      "bookkeeping_us": 169,
+      "phase_us": {
+        "advance_assembly": 11832,
+        "clock_proof": 547,
+        "death_prediction": 13196,
+        "death_transfer": 33,
+        "same_time_cleanup": 263,
+        "settlement": 30662,
+        "status_snapshot": 3366,
+        "target_map": 496
+      },
+      "phase_calls": {
+        "advance_assembly": 12,
+        "clock_proof": 21,
+        "death_prediction": 12,
+        "death_transfer": 21,
+        "same_time_cleanup": 9,
+        "settlement": 21,
+        "status_snapshot": 12,
+        "target_map": 21
+      },
+      "frame": 7,
+      "unattributed_us": 1247
+    },
+    {
+      "inclusive_us": 31949,
+      "bookkeeping_us": 83,
+      "phase_us": {
+        "advance_assembly": 5934,
+        "clock_proof": 256,
+        "death_prediction": 7016,
+        "death_transfer": 19,
+        "same_time_cleanup": 128,
+        "settlement": 16490,
+        "status_snapshot": 1413,
+        "target_map": 244
+      },
+      "phase_calls": {
+        "advance_assembly": 7,
+        "clock_proof": 12,
+        "death_prediction": 7,
+        "death_transfer": 12,
+        "same_time_cleanup": 5,
+        "settlement": 12,
+        "status_snapshot": 7,
+        "target_map": 12
+      },
+      "frame": 8,
+      "unattributed_us": 366
+    },
+    {
+      "inclusive_us": 27997,
+      "bookkeeping_us": 140,
+      "phase_us": {
+        "advance_assembly": 4816,
+        "clock_proof": 1298,
+        "death_prediction": 5591,
+        "death_transfer": 29,
+        "same_time_cleanup": 715,
+        "settlement": 13140,
+        "status_snapshot": 1290,
+        "target_map": 636
+      },
+      "phase_calls": {
+        "advance_assembly": 5,
+        "clock_proof": 30,
+        "death_prediction": 5,
+        "death_transfer": 30,
+        "same_time_cleanup": 25,
+        "settlement": 30,
+        "status_snapshot": 5,
+        "target_map": 30
+      },
+      "frame": 9,
+      "unattributed_us": 342
+    },
+    {
+      "inclusive_us": 87041,
+      "bookkeeping_us": 280,
+      "phase_us": {
+        "advance_assembly": 16654,
+        "clock_proof": 1801,
+        "death_prediction": 19443,
+        "death_transfer": 52,
+        "same_time_cleanup": 869,
+        "settlement": 42018,
+        "status_snapshot": 3278,
+        "target_map": 1062
+      },
+      "phase_calls": {
+        "advance_assembly": 18,
+        "clock_proof": 44,
+        "death_prediction": 18,
+        "death_transfer": 44,
+        "same_time_cleanup": 26,
+        "settlement": 44,
+        "status_snapshot": 18,
+        "target_map": 44
+      },
+      "frame": 10,
+      "unattributed_us": 1584
+    },
+    {
+      "inclusive_us": 159929,
+      "bookkeeping_us": 427,
+      "phase_us": {
+        "advance_assembly": 29808,
+        "clock_proof": 1872,
+        "death_prediction": 35634,
+        "death_transfer": 86,
+        "same_time_cleanup": 992,
+        "settlement": 78983,
+        "status_snapshot": 7568,
+        "target_map": 1744
+      },
+      "phase_calls": {
+        "advance_assembly": 33,
+        "clock_proof": 71,
+        "death_prediction": 33,
+        "death_transfer": 71,
+        "same_time_cleanup": 38,
+        "settlement": 71,
+        "status_snapshot": 33,
+        "target_map": 71
+      },
+      "frame": 11,
+      "unattributed_us": 2815
+    },
+    {
+      "inclusive_us": 91938,
+      "bookkeeping_us": 266,
+      "phase_us": {
+        "advance_assembly": 18102,
+        "clock_proof": 1354,
+        "death_prediction": 20413,
+        "death_transfer": 51,
+        "same_time_cleanup": 907,
+        "settlement": 44483,
+        "status_snapshot": 3769,
+        "target_map": 1081
+      },
+      "phase_calls": {
+        "advance_assembly": 20,
+        "clock_proof": 46,
+        "death_prediction": 20,
+        "death_transfer": 46,
+        "same_time_cleanup": 26,
+        "settlement": 46,
+        "status_snapshot": 20,
+        "target_map": 46
+      },
+      "frame": 12,
+      "unattributed_us": 1512
+    },
+    {
+      "inclusive_us": 130630,
+      "bookkeeping_us": 467,
+      "phase_us": {
+        "advance_assembly": 24592,
+        "clock_proof": 1974,
+        "death_prediction": 27902,
+        "death_transfer": 97,
+        "same_time_cleanup": 972,
+        "settlement": 65434,
+        "status_snapshot": 5627,
+        "target_map": 1737
+      },
+      "phase_calls": {
+        "advance_assembly": 29,
+        "clock_proof": 63,
+        "death_prediction": 29,
+        "death_transfer": 63,
+        "same_time_cleanup": 34,
+        "settlement": 63,
+        "status_snapshot": 29,
+        "target_map": 63
+      },
+      "frame": 13,
+      "unattributed_us": 1828
+    },
+    {
+      "inclusive_us": 93741,
+      "bookkeeping_us": 288,
+      "phase_us": {
+        "advance_assembly": 18847,
+        "clock_proof": 1018,
+        "death_prediction": 19436,
+        "death_transfer": 62,
+        "same_time_cleanup": 568,
+        "settlement": 46930,
+        "status_snapshot": 4300,
+        "target_map": 847
+      },
+      "phase_calls": {
+        "advance_assembly": 19,
+        "clock_proof": 38,
+        "death_prediction": 19,
+        "death_transfer": 38,
+        "same_time_cleanup": 19,
+        "settlement": 38,
+        "status_snapshot": 19,
+        "target_map": 38
+      },
+      "frame": 14,
+      "unattributed_us": 1445
+    },
+    {
+      "inclusive_us": 68108,
+      "bookkeeping_us": 203,
+      "phase_us": {
+        "advance_assembly": 13176,
+        "clock_proof": 730,
+        "death_prediction": 14639,
+        "death_transfer": 46,
+        "same_time_cleanup": 544,
+        "settlement": 34257,
+        "status_snapshot": 2897,
+        "target_map": 581
+      },
+      "phase_calls": {
+        "advance_assembly": 15,
+        "clock_proof": 28,
+        "death_prediction": 15,
+        "death_transfer": 28,
+        "same_time_cleanup": 13,
+        "settlement": 28,
+        "status_snapshot": 15,
+        "target_map": 28
+      },
+      "frame": 15,
+      "unattributed_us": 1035
+    },
+    {
+      "inclusive_us": 171806,
+      "bookkeeping_us": 419,
+      "phase_us": {
+        "advance_assembly": 30137,
+        "clock_proof": 2590,
+        "death_prediction": 31867,
+        "death_transfer": 1641,
+        "same_time_cleanup": 681,
+        "settlement": 93631,
+        "status_snapshot": 6597,
+        "target_map": 2267
+      },
+      "phase_calls": {
+        "advance_assembly": 35,
+        "clock_proof": 62,
+        "death_prediction": 35,
+        "death_transfer": 62,
+        "same_time_cleanup": 27,
+        "settlement": 62,
+        "status_snapshot": 35,
+        "target_map": 62
+      },
+      "frame": 16,
+      "unattributed_us": 1976
+    },
+    {
+      "inclusive_us": 98168,
+      "bookkeeping_us": 373,
+      "phase_us": {
+        "advance_assembly": 16331,
+        "clock_proof": 2344,
+        "death_prediction": 16784,
+        "death_transfer": 865,
+        "same_time_cleanup": 588,
+        "settlement": 55173,
+        "status_snapshot": 3716,
+        "target_map": 827
+      },
+      "phase_calls": {
+        "advance_assembly": 20,
+        "clock_proof": 40,
+        "death_prediction": 20,
+        "death_transfer": 40,
+        "same_time_cleanup": 20,
+        "settlement": 40,
+        "status_snapshot": 20,
+        "target_map": 40
+      },
+      "frame": 17,
+      "unattributed_us": 1167
+    },
+    {
+      "inclusive_us": 33060,
+      "bookkeeping_us": 103,
+      "phase_us": {
+        "advance_assembly": 7265,
+        "clock_proof": 272,
+        "death_prediction": 7165,
+        "death_transfer": 20,
+        "same_time_cleanup": 136,
+        "settlement": 15844,
+        "status_snapshot": 1466,
+        "target_map": 243
+      },
+      "phase_calls": {
+        "advance_assembly": 9,
+        "clock_proof": 15,
+        "death_prediction": 9,
+        "death_transfer": 15,
+        "same_time_cleanup": 6,
+        "settlement": 15,
+        "status_snapshot": 9,
+        "target_map": 15
+      },
+      "frame": 18,
+      "unattributed_us": 546
+    },
+    {
+      "inclusive_us": 27815,
+      "bookkeeping_us": 89,
+      "phase_us": {
+        "advance_assembly": 5574,
+        "clock_proof": 256,
+        "death_prediction": 6253,
+        "death_transfer": 17,
+        "same_time_cleanup": 120,
+        "settlement": 13706,
+        "status_snapshot": 1135,
+        "target_map": 224
+      },
+      "phase_calls": {
+        "advance_assembly": 8,
+        "clock_proof": 14,
+        "death_prediction": 8,
+        "death_transfer": 14,
+        "same_time_cleanup": 6,
+        "settlement": 14,
+        "status_snapshot": 8,
+        "target_map": 14
+      },
+      "frame": 19,
+      "unattributed_us": 441
+    }
+  ]
+}
