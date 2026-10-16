@@ -1,0 +1,28 @@
+{
+	"checks": 120,
+	"failed_labels": [],
+	"failures": 0,
+	"groups": [
+		{
+			"checks": 32,
+			"failures": 0,
+			"group": "town_and_reentry"
+		},
+		{
+			"checks": 14,
+			"failures": 0,
+			"group": "unfinished_map"
+		},
+		{
+			"checks": 35,
+			"failures": 0,
+			"group": "completion_recovery"
+		},
+		{
+			"checks": 38,
+			"failures": 0,
+			"group": "partial_commit"
+		}
+	],
+	"method": "Actual Main/HUD/CanonicalGameState; isolated filesystem faults and bounded real Old Garden deaths; exit-only spy"
+}

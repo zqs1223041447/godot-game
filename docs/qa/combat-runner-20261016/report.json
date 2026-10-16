@@ -1,0 +1,136 @@
+{
+  "mode": "full-new-combat-cases-only",
+  "cases": 5,
+  "passed": 5,
+  "failed": 0,
+  "observed_checks": 503,
+  "accepted_checks": 503,
+  "results": [
+    {
+      "name": "map_pending_death_boundary",
+      "expected_checks": 107,
+      "checks": 107,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/workspace/scratch/a51485f153de/godot-game/docs/qa/combat-runner-20261016/map_pending_death_boundary.log",
+      "evidence_dir": "/workspace/scratch/a51485f153de/godot-game/docs/qa/combat-runner-20261016/map_pending_death_boundary-evidence-9ko4g5bc",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/map_pending_death_boundary_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-map-death-boundary-c5ump1bo/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-map-death-boundary-c5ump1bo/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-map-death-boundary-c5ump1bo/cache"
+      },
+      "scenario": {},
+      "warnings": [],
+      "seconds": 3.677
+    },
+    {
+      "name": "canonical_game_state",
+      "expected_checks": 27,
+      "checks": 27,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/workspace/scratch/a51485f153de/godot-game/docs/qa/combat-runner-20261016/canonical_game_state.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/canonical_game_state_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-transactions-jm89oplz/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-transactions-jm89oplz/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-transactions-jm89oplz/cache"
+      },
+      "scenario": {},
+      "warnings": [],
+      "seconds": 2.272
+    },
+    {
+      "name": "combat_pipeline",
+      "expected_checks": 305,
+      "checks": 305,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/workspace/scratch/a51485f153de/godot-game/docs/qa/combat-runner-20261016/combat_pipeline.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/combat_pipeline_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-transactions-_3tnj8en/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-transactions-_3tnj8en/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-transactions-_3tnj8en/cache"
+      },
+      "scenario": {},
+      "warnings": [],
+      "seconds": 0.717
+    },
+    {
+      "name": "ember_event_clock",
+      "expected_checks": 45,
+      "checks": 45,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/workspace/scratch/a51485f153de/godot-game/docs/qa/combat-runner-20261016/ember_event_clock.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/ember_event_clock_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-v050-88eagio6/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-v050-88eagio6/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-v050-88eagio6/cache"
+      },
+      "scenario": {},
+      "warnings": [],
+      "seconds": 3.979
+    },
+    {
+      "name": "burn_same_time_cleanup",
+      "expected_checks": 19,
+      "checks": 19,
+      "failures": 0,
+      "passed": true,
+      "returncode": 0,
+      "log": "/workspace/scratch/a51485f153de/godot-game/docs/qa/combat-runner-20261016/burn_same_time_cleanup.log",
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/burn_same_time_cleanup_test.gd"
+      ],
+      "environment": {
+        "XDG_DATA_HOME": "/tmp/godot-m1-v050-jwkgbb7t/data",
+        "XDG_CONFIG_HOME": "/tmp/godot-m1-v050-jwkgbb7t/config",
+        "XDG_CACHE_HOME": "/tmp/godot-m1-v050-jwkgbb7t/cache"
+      },
+      "scenario": {},
+      "warnings": [],
+      "seconds": 3.533
+    }
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "head": "6d3d5755c59c8bdeabdc2f586a070096880bb496",
+  "tracked_files": 8780,
+  "changed": [],
+  "results": [
+    {
+      "name": "map_pending_death_boundary",
+      "expected_checks": 107,
+      "returncode": 0,
+      "timeout": false,
+      "seconds": 3.827,
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/map_pending_death_boundary_test.gd"
+      ],
+      "xdg": "/tmp/godot-m1-map-death-boundary-2pdtwbox",
+      "log": "map_pending_death_boundary.log",
+      "summary": [
+        "MAP_PENDING_DEATH_BOUNDARY checks=107 failures=0"
+      ]
+    },
+    {
+      "name": "canonical_game_state",
+      "expected_checks": 27,
+      "returncode": 0,
+      "timeout": false,
+      "seconds": 2.276,
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/canonical_game_state_test.gd"
+      ],
+      "xdg": "/tmp/godot-m1-combat-audit-fxoqesxg",
+      "log": "canonical_game_state.log",
+      "summary": [
+        "Canonical game state: 27 checks, 0 failures"
+      ]
+    },
+    {
+      "name": "combat_pipeline",
+      "expected_checks": 305,
+      "returncode": 0,
+      "timeout": false,
+      "seconds": 0.666,
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/combat_pipeline_test.gd"
+      ],
+      "xdg": "/tmp/godot-m1-combat-audit-7siuwrn_",
+      "log": "combat_pipeline.log",
+      "summary": [
+        "Combat pipeline: 305 checks, 0 failures"
+      ]
+    },
+    {
+      "name": "ember_event_clock",
+      "expected_checks": 45,
+      "returncode": 0,
+      "timeout": false,
+      "seconds": 4.079,
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/ember_event_clock_test.gd"
+      ],
+      "xdg": "/tmp/godot-m1-v050-psp22hdc",
+      "log": "ember_event_clock.log",
+      "summary": [
+        "Ember event clock: 45 checks, 0 failures"
+      ]
+    },
+    {
+      "name": "burn_same_time_cleanup",
+      "expected_checks": 19,
+      "returncode": 0,
+      "timeout": false,
+      "seconds": 3.124,
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "command": [
+        "/usr/local/bin/godot",
+        "--headless",
+        "--path",
+        "/workspace/scratch/a51485f153de/godot-game",
+        "--script",
+        "tests/burn_same_time_cleanup_test.gd"
+      ],
+      "xdg": "/tmp/godot-m1-v050-5rrs416w",
+      "log": "burn_same_time_cleanup.log",
+      "summary": [
+        "Burn same-time cleanup: 19 checks, 0 failures"
+      ]
+    }
+  ]
+}
