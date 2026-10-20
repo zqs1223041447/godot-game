@@ -1,0 +1,93 @@
+name: Publish accepted browser build
+on:
+  push:
+    branches: [dot/20261020-web-release]
+    paths: ['web-release/**', '.github/workflows/publish-web.yml']
+  workflow_dispatch:
+permissions: {}
+concurrency:
+  group: accepted-web-release-20261020
+  cancel-in-progress: false
+jobs:
+  release:
+    if: github.repository == 'zqs1223041447/godot-game' && github.ref == 'refs/heads/dot/20261020-web-release'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Rebuild and verify accepted bytes
+        run: python3 web-release/rebuild.py release-output
+      - name: Publish immutable release asset
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_TARGET: ${{ github.sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          tag=web-playable-20261020-065913e8
+          if gh release view "$tag" > /dev/null 2>&1; then
+            mkdir existing-release
+            gh release download "$tag" --pattern godot-game-web.zip --dir existing-release
+            cmp release-output/godot-game-web.zip existing-release/godot-game-web.zip
+            echo 'Existing release contains the identical accepted ZIP.'
+          else
+            gh release create "$tag" release-output/godot-game-web.zip release-output/SHA256SUMS \
+              --target "$RELEASE_TARGET" --title 'Browser build 2026-10-20 (065913e8)' \
+              --notes-file web-release/RELEASE_NOTES.md
+          fi
+          gh release view "$tag" --json url --jq .url >> "$GITHUB_STEP_SUMMARY"
+  pages:
+    if: github.repository == 'zqs1223041447/godot-game' && github.ref == 'refs/heads/dot/20261020-web-release'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Rebuild and verify accepted bytes
+        run: python3 web-release/rebuild.py release-output
+      - name: Inspect or enable Pages; preserve API errors
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if gh api "repos/$GH_REPO/pages" > pages-status.json 2> pages-read-error.log; then
+            cat pages-status.json
+            python3 -c 'import json; d=json.load(open("pages-status.json")); assert d.get("build_type")=="workflow", "Pages exists but is not configured for workflow deployment; do not overwrite existing configuration"'
+          else
+            cat pages-read-error.log >&2
+            grep -q "HTTP 404" pages-read-error.log || exit 1
+            gh api --method POST "repos/$GH_REPO/pages" -f build_type=workflow
+          fi
+      - name: Package verified Pages artifact
+        run: tar --directory release-output/web -cf "$RUNNER_TEMP/artifact.tar" .
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: github-pages
+          path: ${{ runner.temp }}/artifact.tar
+          retention-days: 1
+          if-no-files-found: error
+      - name: Deploy Pages
+        id: deployment
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e
+      - name: Record Pages outcome
+        if: always()
+        env:
+          PAGE_URL: ${{ steps.deployment.outputs.page_url }}
+          JOB_STATUS: ${{ job.status }}
+        run: |
+          printf 'Pages job status: %s\nPublished URL (only if successful): %s\n' "$JOB_STATUS" "$PAGE_URL" >> "$GITHUB_STEP_SUMMARY"
