@@ -10,11 +10,10 @@ New release: web-playable-20261020-startup-fix. The old release is retained. Exi
 
 Official actions pinned to commits verified on GitHub:
 - https://github.com/actions/checkout/commit/11bd71901bbe5b1630ceea73d27597364c9af683
-- https://github.com/actions/setup-go/commit/d35c59abb061a4a6fb18e82ac0862c26744d6ab5
 - https://github.com/actions/upload-artifact/commit/ea165f8d65b6e75b540449e92b4886f43607fa02
 - https://github.com/actions/download-artifact/commit/d3f86a106a0bac45b974a628896c90dbdf5c8093
 
-The setup action selects official Go 1.27.3, matching the independently verified local toolchain, and records go version in its test logs. Go launcher source uses only the standard library. No credentials are stored; checkout persist-credentials is false. Only release has contents:write.
+The workflow uses only Go already installed on the GitHub-hosted runner; it does not download a toolchain. It records go version and go env in logs and embeds the actual toolchain version/environment and runner OS in build-manifest.json. A missing toolchain fails the job. Go launcher source uses only the standard library. No credentials are stored; checkout persist-credentials is false. Only release has contents:write.
 
 Successful Windows server/process testing is not Windows browser rendering or gameplay visual acceptance.
 

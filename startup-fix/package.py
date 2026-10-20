@@ -1,9 +1,9 @@
 """Package verified game files and the native Windows build after smoke tests."""
-import hashlib,json,pathlib,struct,sys,zipfile
+import hashlib,json,os,pathlib,struct,subprocess,sys,zipfile
 root=pathlib.Path(__file__).resolve().parent
 stage=pathlib.Path(sys.argv[1]).resolve();bundle=stage/'bundle'
-m=json.loads((root/'manifest.json').read_text())
-original=json.loads((root.parent/'web-release/manifest.json').read_text())['web_files']
+m=json.loads((root/'manifest.json').read_text(encoding='utf-8'))
+original=json.loads((root.parent/'web-release/manifest.json').read_text(encoding='utf-8'))['web_files']
 expected=set(original)|{'Start-Game.exe','README.zh-CN.txt'}
 assert {p.name for p in bundle.iterdir()}==expected
 for n,v in original.items():
@@ -21,6 +21,6 @@ with zipfile.ZipFile(archive) as z:
  assert set(z.namelist())==expected and len(z.namelist())==12
  for n in expected: assert z.read(n)==(bundle/n).read_bytes()
 sha=hashlib.sha256(archive.read_bytes()).hexdigest()
-(out/'SHA256SUMS').write_text(f'{sha}  {archive.name}\n')
-(out/'build-manifest.json').write_text(json.dumps({'archive_sha256':sha,'files':{n:hashlib.sha256((bundle/n).read_bytes()).hexdigest() for n in sorted(expected)},'source':m},indent=2)+'\n')
+(out/'SHA256SUMS').write_text(f'{sha}  {archive.name}\n',encoding='utf-8')
+(out/'build-manifest.json').write_text(json.dumps({'archive_sha256':sha,'files':{n:hashlib.sha256((bundle/n).read_bytes()).hexdigest() for n in sorted(expected)},'source':m,'build_toolchain':{'go_version':subprocess.check_output(['go','version'],text=True).strip(),'go_env':json.loads(subprocess.check_output(['go','env','-json','GOVERSION','GOOS','GOARCH','GOROOT'],text=True)),'runner_os':os.environ.get('RUNNER_OS','local-unreported')}},indent=2)+'\n',encoding='utf-8')
 print(sha,archive.name)
